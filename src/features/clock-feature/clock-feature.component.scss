@@ -1,0 +1,44 @@
+
+.clock-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__face {
+    background: url("../../assets/svg/bg-clock.svg");
+    width: 56px;
+    height: 56px;
+    margin-inline-end: 3px;
+
+    &-time {
+      width: fit-content;
+      margin: 6px auto 0;
+      font-size: 24px;
+      font-family: FredokaSemiExpandedMedium, sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 32px;
+    }
+
+    &-text {
+      margin: 0 auto;
+      font-size: 12px;
+      font-family: FredokaSemiExpandedMedium, sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 14px;
+      width: fit-content;
+    }
+  }
+
+  &__divider {
+    margin-inline-end: 3px;
+
+    &-item {
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      margin: 3px;
+    }
+  }
+}
