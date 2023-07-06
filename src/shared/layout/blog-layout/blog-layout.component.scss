@@ -1,0 +1,69 @@
+.blog-heading {
+  display: inline-block;
+  width: 100%;
+  height: 944px;
+}
+
+.blog {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 103px;
+
+  &__item {
+    width: 398px;
+    height: 504px;
+    border-radius: 16px;
+    box-shadow: 4px 16px 40px 2px rgba(99, 118, 148, 0.24);
+    display: flex;
+    flex-direction: column;
+
+    &-text {
+      margin: 16px;
+      text-align: start;
+      font-size: 32px;
+      font-family: FredokaSemiExpandedMedium, sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 40px;
+      height: 160px;
+    }
+
+    &-button {
+      text-align: center;
+      font-size: 24px;
+      font-family: FredokaSemiExpandedMedium, sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 32px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-inline-start: 16px;
+      margin-top: 8px;
+    }
+
+    &__img-first {
+      background: url("../../../assets/img/pension-simple.png");
+      width: 398px;
+      height: 256px;
+    }
+
+    &__img-second {
+      background: url("../../../assets/img/techological-system.png");
+      width: 398px;
+      height: 256px;
+    }
+
+    &__img-third {
+      background: url("../../../assets/img/setting-out-your-own.png");
+      width: 398px;
+      height: 256px;
+    }
+  }
+}
+
+.icon-arrow-left-fill {
+  background: url("../../../assets/svg/arrow-left-fill-icon.svg");
+  width: 24px;
+  height: 24px;
+}

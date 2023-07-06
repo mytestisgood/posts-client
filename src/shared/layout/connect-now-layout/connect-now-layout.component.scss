@@ -1,0 +1,20 @@
+.connect-now-block {
+  margin: 49px 140px 0;
+  background: url("../../../assets/img/gradient-rounded.png");
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 336px;
+
+  &__text {
+    text-align: center;
+    font-size: 32px;
+    font-family: FredokaSemiExpandedMedium, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 40px;
+    margin: 0 138px 64px;
+  }
+}

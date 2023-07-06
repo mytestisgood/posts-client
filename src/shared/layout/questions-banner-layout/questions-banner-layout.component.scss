@@ -1,0 +1,18 @@
+.question-banner-block {
+  background: url("../../../assets/img/gradient-full.png");
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 360px;
+
+  &__text {
+    text-align: center;
+    font-size: 32px;
+    font-family: FredokaSemiExpandedMedium, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 40px;
+    width: 297px;
+    margin: 104px auto 72px;
+  }
+}

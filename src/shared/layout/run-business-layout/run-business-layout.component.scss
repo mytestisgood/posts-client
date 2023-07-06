@@ -1,0 +1,51 @@
+.run-business {
+  display: inline-block;
+  width: 100%;
+  height: 744px;
+  margin-top: 160px;
+
+  &__block {
+    margin: 160px 140px 0;
+    background: url("../../../assets/img/gradient-rounded.png");
+    border-radius: 16px;
+    display: flex;
+    gap: 12px;
+    height: 424px;
+    position: relative;
+
+    &__left {
+      background: url("../../../assets/img/application-image.png");
+      width: 613px;
+      height: 476px;
+      position: relative;
+      left: -80px;
+      top: -60px;
+    }
+
+    &__right {
+      width: 1088px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 32px;
+
+      &-header {
+        margin-top: 55px;
+        text-align: center;
+        font-size: 44px;
+        font-family: FredokaSemiExpandedMedium, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 48px;
+      }
+
+      &-text {
+        text-align: center;
+        font-size: 24px;
+        font-family: FredokaSemiExpandedMedium, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 32px;
+      }
+    }
+  }
+}
