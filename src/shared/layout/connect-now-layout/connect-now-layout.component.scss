@@ -11,10 +11,21 @@
   &__text {
     text-align: center;
     font-size: 32px;
-    font-family: FredokaSemiExpandedMedium, sans-serif;
+    font-family: RubikMedium, sans-serif;
     font-style: normal;
     font-weight: 500;
     line-height: 40px;
-    margin: 0 138px 64px;
+    margin: 0 138px;
+  }
+
+  &__header {
+    text-align: center;
+    font-family: RubikMedium, sans-serif;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
+    margin-bottom: 32px;
+    margin-top: 32px;
   }
 }
