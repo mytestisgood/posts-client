@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,7 +6,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './start-day-with-smarti-layout.component.html',
-  styleUrls: ['./start-day-with-smarti-layout.component.scss']
+  styleUrls: ['./start-day-with-smarti-layout.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StartDayWithSmartiLayoutComponent {
 

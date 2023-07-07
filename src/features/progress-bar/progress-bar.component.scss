@@ -1,0 +1,41 @@
+.progress-bar {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+
+  &__text {
+    font-family: RubikMedium, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  &__content {
+    width: 100%;
+    height: 16px;
+    border-radius: 16px;
+    display: flex;
+
+    &__item {
+      background: url("../../assets/svg/progress.svg");
+      width: 108px;
+      height: 16px;
+    }
+
+    &__item-fill {
+      background: url("../../assets/svg/progress-fill.svg");
+      width: 108px;
+      height: 16px;
+    }
+  }
+}
+
+.right-side-progress-bar {
+  border-radius: 0 20px 20px 0;
+}
+
+.left-side-progress-bar {
+  border-radius: 20px 0 0 20px;
+}

@@ -1,0 +1,22 @@
+.registration-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 32px 140px 0;
+
+  &__left {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: RubikMedium, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    direction: rtl;
+  }
+
+  &__right {
+    background: url("../../../assets/svg/logo-small-dark.svg");
+    width: 147px;
+    height: 33px;
+  }
+}

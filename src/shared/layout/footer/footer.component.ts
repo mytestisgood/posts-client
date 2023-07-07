@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SharedModule} from "../../shared.module";
 
@@ -7,7 +7,8 @@ import {SharedModule} from "../../shared.module";
   standalone: true,
   imports: [CommonModule, SharedModule],
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
 

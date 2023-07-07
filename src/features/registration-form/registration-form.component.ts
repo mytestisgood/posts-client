@@ -2,13 +2,13 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'smarti-company-slider-layout',
+  selector: 'smarti-registration-form',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './company-slider-layout.component.html',
-  styleUrls: ['./company-slider-layout.component.scss'],
+  templateUrl: './registration-form.component.html',
+  styleUrls: ['./registration-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CompanySliderLayoutComponent {
+export class RegistrationFormComponent {
 
 }

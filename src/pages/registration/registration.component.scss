@@ -1,0 +1,25 @@
+.registration {
+  width: 1080px;
+  margin: 0 auto;
+
+  &__info-block {
+    display: flex;
+    justify-content: space-between;
+
+    &__left {
+      background: url("../../assets/svg/seated-woman.svg");
+      width: 182px;
+      height: 160px;
+    }
+
+    &__right {
+      text-align: right;
+      font-family: RubikMedium, sans-serif;
+      font-size: 44px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 48px;
+      align-self: center;
+    }
+  }
+}

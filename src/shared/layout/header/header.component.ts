@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SharedModule} from "../../shared.module";
 import {ClockFeatureComponent} from "../../../features/clock-feature/clock-feature.component";
@@ -8,7 +8,8 @@ import {ClockFeatureComponent} from "../../../features/clock-feature/clock-featu
   standalone: true,
   imports: [CommonModule, SharedModule, ClockFeatureComponent],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
 

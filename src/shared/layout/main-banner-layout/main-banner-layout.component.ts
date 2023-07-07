@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {SharedModule} from "../../shared.module";
 
@@ -7,7 +7,8 @@ import {SharedModule} from "../../shared.module";
   standalone: true,
   imports: [CommonModule, SharedModule],
   templateUrl: './main-banner-layout.component.html',
-  styleUrls: ['./main-banner-layout.component.scss']
+  styleUrls: ['./main-banner-layout.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainBannerLayoutComponent {
 

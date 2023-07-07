@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,7 +6,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './run-business-layout.component.html',
-  styleUrls: ['./run-business-layout.component.scss']
+  styleUrls: ['./run-business-layout.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RunBusinessLayoutComponent {
 

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MainBannerLayoutComponent} from "../main-banner-layout/main-banner-layout.component";
 import {AboutLayoutComponent} from "../about-layout/about-layout.component";
@@ -26,7 +26,8 @@ import {CompanySliderLayoutComponent} from "../company-slider-layout/company-sli
     QuestionsBannerLayoutComponent
   ],
   templateUrl: './landing-layout.component.html',
-  styleUrls: ['./landing-layout.component.scss']
+  styleUrls: ['./landing-layout.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LandingLayoutComponent {
 

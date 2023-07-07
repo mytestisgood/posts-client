@@ -2,13 +2,13 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'smarti-company-slider-layout',
+  selector: 'smarti-not-found',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './company-slider-layout.component.html',
-  styleUrls: ['./company-slider-layout.component.scss'],
+  templateUrl: './not-found.component.html',
+  styleUrls: ['./not-found.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CompanySliderLayoutComponent {
+export class NotFoundComponent {
 
 }
