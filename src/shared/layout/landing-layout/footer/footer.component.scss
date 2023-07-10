@@ -1,0 +1,76 @@
+.footer {
+  margin: 0 140px;
+
+  &__logo {
+    display: flex;
+  }
+
+  &__logo-image {
+    margin-top: 64px;
+    background: url("../../../../assets/svg/logo-big.svg");
+    width: 156px;
+    height: 33px;
+    margin-inline-start: auto;
+  }
+
+  &__info {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  &__info-item {
+    &__header {
+      text-align: end;
+      font-size: 24px;
+      font-family: RubikMedium, sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 32px;
+    }
+
+    &__text {
+      text-align: end;
+      font-size: 16px;
+      font-family: RubikMedium, sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+    }
+  }
+
+  &__links {
+    margin: 16px 0 56px 70px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    float: left;
+
+    &__items {
+      display: flex;
+      justify-content: flex-end;
+      gap: 24px;
+      margin-top: 8px;
+    }
+  }
+}
+
+.twitter-link {
+  background: url("../../../../assets/svg/twitter-icon.svg");
+  width: 32px;
+  height: 32px;
+}
+
+.facebook-link {
+  background: url("../../../../assets/svg/facebook-icon.svg");
+  width: 32px;
+  height: 32px;
+}
+
+.linkedin-link {
+  background: url("../../../../assets/svg/linkedin-icon.svg");
+  width: 32px;
+  height: 32px;
+}
+

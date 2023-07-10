@@ -1,0 +1,66 @@
+<form class="personal-info" [formGroup]="personalInfoForm">
+  <div class="personal-info__header dark-text">Create account fast and easy!</div>
+  <div class="personal-info__item">
+    <smarti-input-field
+      [customClass]="'input-text'"
+      [placeholder]="'Company name*'"
+      [type]="'text'"
+      [minLength]="1"
+    ></smarti-input-field>
+  </div>
+  <div class="personal-info__item">
+    <smarti-input-field
+      [customClass]="'input-text'"
+      [placeholder]="'Company ID*'"
+      [type]="'text'"
+      [minLength]="1"
+    ></smarti-input-field>
+  </div>
+  <div class="personal-info__item">
+    <smarti-input-field
+      [customClass]="'input-text'"
+      [placeholder]="'Your Name'"
+      [type]="'text'"
+      [minLength]="1"
+    ></smarti-input-field>
+  </div>
+  <div class="personal-info__item">
+    <smarti-input-field
+      [placeholder]="'Email Address*'"
+      [customClass]="'input-text'"
+      [type]="'text'"
+      [minLength]="1"
+    ></smarti-input-field>
+  </div>
+  <div class="personal-info__item">
+    <smarti-input-field
+      [customClass]="'input-text'"
+      [placeholder]="'Phone Number*'"
+      [type]="'text'"
+      [minLength]="1"
+    ></smarti-input-field>
+  </div>
+  <div class="personal-info__item flex gap-4">
+    <div class="personal-info__item-text dark-text margin-left-160">
+      I have read and agree to the Smarti<br/>
+      Terms of Services and Privacy Policy.
+    </div>
+    <div class="personal-info__item-checkbox">
+      <!--need to add in ui-->
+      <label class="input-checkbox">
+        <input
+          type="checkbox"
+          [required]="true"/>
+        <span class="input-checkmark"></span>
+      </label>
+    </div>
+  </div>
+  <div class="personal-info__button-block">
+    <button
+      class="personal-info__button-block__button"
+      type="submit"
+      [disabled]="checkDisabled()"
+      (click)="doChangeStep('forward')"
+    >Register</button>
+  </div>
+</form>

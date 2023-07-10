@@ -1,0 +1,14 @@
+<ng-container [ngSwitch]="currentStep$ | async">
+  <smarti-personal-info
+    *ngSwitchCase="'personalInfo'"
+    [startingForm]="userForm.get('personalInfo')?.value"
+    (subformInitialized)="subformInitialized('personalInfo', $event)"
+    (changeStep)="changeStep('personalInfoStep', $event)"
+  ></smarti-personal-info>
+  <smarti-select-year-and-month
+    *ngSwitchCase="'loginInfo'"
+    [startingForm]="userForm.get('loginInfo')?.value"
+    (subformInitialized)="subformInitialized('loginInfo', $event)"
+    (changeStep)="changeStep('loginInfoStep', 'back')"
+  ></smarti-select-year-and-month>
+</ng-container>

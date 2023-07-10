@@ -1,0 +1,44 @@
+.company-list {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+
+  &__item {
+    width: 260px;
+    height: 288px;
+    border-radius: 16px;
+    border: 1px solid #323948;
+
+    &__image {
+      background: url("../../../../assets/img/cafe-first.png");
+      border-radius: 16px 16px 0 0;
+      width: 260px;
+      height: 200px;
+    }
+
+    &__info {
+      display: flex;
+      justify-content: flex-end;
+      gap: 14px;
+
+      &-name {
+        font-size: 20px;
+        font-family: RubikMedium, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 28px;
+        margin-top: 8px;
+        text-align: end;
+      }
+
+      &-logo {
+        background: url("../../../../assets/img/ikea-logo.png");
+        width: 96px;
+        height: 96px;
+        border-radius: 16px;
+        margin-inline-end: 8px;
+        margin-bottom: 8px;
+      }
+    }
+  }
+}

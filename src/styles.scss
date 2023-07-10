@@ -5,6 +5,7 @@
 @import "assets/styles/margins";
 @import "assets/styles/buttons";
 @import "assets/styles/text";
+@import "assets/styles/inputs";
 
 body {
   margin: 0;
@@ -12,4 +13,12 @@ body {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.flex {
+  display: flex;
+}
+
+.gap-4 {
+  gap: 16px;
 }

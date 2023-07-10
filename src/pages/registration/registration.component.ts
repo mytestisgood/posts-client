@@ -1,6 +1,6 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RegistrationHeaderComponent} from "../../shared/layout/registration-header/registration-header.component";
+import {RegistrationHeaderComponent} from "../../shared/layout/registration-layout/registration-header/registration-header.component";
 import {ProgressBarComponent} from "../../features/progress-bar/progress-bar.component";
 import {RegistrationFormComponent} from "../../features/registration-form/registration-form.component";
 
