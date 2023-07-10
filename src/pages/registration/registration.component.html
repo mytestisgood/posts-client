@@ -3,12 +3,17 @@
   <div class="registration">
     <smarti-progress-bar></smarti-progress-bar>
     <div class="registration__info-block margin-t-2">
-      <div class="registration__info-block__left"></div>
+      <div
+        class="registration__info-block__left"
+        [ngClass]="changeImage ? 'registration__info-block__left-new' : 'registration__info-block__left'"
+      ></div>
       <div class="registration__info-block__right dark-text">
         תודה שבחרתם<br/>
         Smarti
       </div>
     </div>
-    <smarti-registration-form></smarti-registration-form>
+    <smarti-registration-form
+      (changingImage)="doChangingImage($event)"
+    ></smarti-registration-form>
   </div>
 </div>

@@ -1,3 +1,5 @@
 <div class="registration-form margin-t-2 bg-white">
-  <smarti-form-container></smarti-form-container>
+  <smarti-form-container
+    (changingStep)="changingImage.next($event)"
+  ></smarti-form-container>
 </div>

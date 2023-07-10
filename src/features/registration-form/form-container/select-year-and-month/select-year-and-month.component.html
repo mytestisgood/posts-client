@@ -1,1 +1,13 @@
-<p>select-year-and-month works!</p>
+<div class="personal-info">
+  <div class="personal-info__header dark-text">
+    Please select the year and month for which you<br/>
+    want to make a transaction
+  </div>
+  <div class="personal-info__button-block">
+    <button
+      class="personal-info__button-block__button"
+      type="submit"
+      (click)="doChangeStep('forward')"
+    >Confirm</button>
+  </div>
+</div>

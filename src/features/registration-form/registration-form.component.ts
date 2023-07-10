@@ -1,7 +1,8 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {InputFieldComponent} from "../../shared/ui/input-field/input-field.component";
-import {FormContainerComponent} from "./form-container/form-container.component";
+import { BehaviorSubject } from 'rxjs';
+import { InputFieldComponent } from '../../shared/ui/input-field/input-field.component';
+import { FormContainerComponent } from './form-container/form-container.component';
 
 @Component({
   selector: 'smarti-registration-form',
@@ -12,5 +13,5 @@ import {FormContainerComponent} from "./form-container/form-container.component"
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationFormComponent {
-
+  @Output() changingImage: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 }

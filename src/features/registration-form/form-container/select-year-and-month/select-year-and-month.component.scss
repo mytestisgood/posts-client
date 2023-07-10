@@ -1,0 +1,50 @@
+.personal-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  align-items: center;
+
+  &__header {
+    text-align: center;
+    font-family: RubikMedium, sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 40px;
+    margin-top: 40px;
+  }
+  &__button-block {
+    margin-top: 40px;
+    margin-bottom: 64px;
+    display: flex;
+    justify-content: center;
+
+    &__button {
+      width: 242px;
+      height: 56px;
+      border-radius: 8px;
+      background: #02CAB3;
+      border-color: #02CAB3;
+
+      color: #FFF;
+      text-align: center;
+      font-family: RubikMedium, sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+    }
+
+    &__button:hover, &__button:active{
+      background: #00A393;
+      border-color: #00A393;
+    }
+
+    &__button:disabled {
+      background: #D4DAE3;
+      border-color: #D4DAE3;
+    }
+  }
+}
