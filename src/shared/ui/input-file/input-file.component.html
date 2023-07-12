@@ -1,0 +1,33 @@
+<tui-input-files
+  class="control"
+  [formControl]="control"
+  [style.width]="customWidth"
+  [style.height]="customHeight"
+>
+  <ng-template let-dragged>
+    <div
+      *ngIf="dragged; else base"
+      class="content"
+    >
+      <div class="content__dnd">
+        <div class="content__dnd__svg"></div>
+        <div class="content__dnd__text">Drag & Drop file</div>
+      </div>
+      <div class="content__dnd__divider-text">or</div>
+      <button class="content__dnd__upload-button">Browse files</button>
+    </div>
+  </ng-template>
+  <ng-template #base>
+    <div class="content">
+      <div class="content__dnd">
+        <div class="content__dnd__svg"></div>
+        <div class="content__dnd__text">Drag & Drop file</div>
+      </div>
+      <div class="content__dnd__divider-text">or</div>
+      <button class="content__dnd__upload-button">
+        <div class="svg-uploaded"></div>
+        <div>Browse files</div>
+      </button>
+    </div>
+  </ng-template>
+</tui-input-files>

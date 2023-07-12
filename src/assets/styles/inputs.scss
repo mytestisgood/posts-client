@@ -1,67 +1,38 @@
-.input-text {
-  border-radius: 8px;
-  border: 1px solid #ECEEF2;
-  background: #FFF;
-  width: 536px;
-  padding: 12px 16px;
-  direction: rtl;
-}
+tui-input {
+  direction: rtl!important;
+  text-align: right!important;
+  border-radius: 8px!important;
 
-input:focus {
-  outline: none !important;
-  border: 1px solid #02CAB3;
-  box-shadow: 0 0 1px 1px #02CAB3;
-  background: #FFF;
-}
+  tui-primitive-textfield[data-size=m] {
+    min-height: 48px!important;
+  }
 
-.input-checkbox {
-  display: block;
-  position: relative;
-  padding-left: 26px;
-  margin-bottom: 18px;
-  font-size: 22px;
-  user-select: none;
-  cursor: pointer;
+  .t-content {
+    .t-placeholder{
+      color: #4F5F7A!important;
+      text-align: right!important;
+      font-family: RubikMedium, sans-serif !important;
+      font-size: 16px!important;
+      font-style: normal!important;
+      font-weight: 400!important;
+      line-height: 24px!important;
+    }
+  }
 
-  & input {
-    height: 0;
-    width: 0;
-    visibility: hidden;
+  input {
+    color: #4F5F7A!important;
+    text-align: right!important;
+    font-family: RubikMedium, sans-serif !important;
+    font-size: 16px!important;
+    font-style: normal!important;
+    font-weight: 400!important;
+    line-height: 24px!important;
   }
 }
 
-.input-checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  border: 1px solid #ECEEF2;
-  background: #fff;
+tui-input-files {
+  .t-description {
+    padding-top: 8px!important;
+    padding-bottom: 8px!important;
+  }
 }
-//.input-checkbox:hover input ~ .input-checkmark {
-//  background: #00A393;
-//}
-.input-checkbox input:checked ~ .input-checkmark {
-  background: #02CAB3;
-}
-
-.input-checkbox .input-checkmark:after {
-  top: -5px;
-  width: 5px;
-  height: 10px;
-  left: 2px;
-  color: white;
-}
-
-.input-checkbox input:checked ~ .input-checkmark:after {
-  display: block;
-}
-
-.input-checkmark:after {
-  content:'✓';
-  position: absolute;
-  display: none;
-}
-
-

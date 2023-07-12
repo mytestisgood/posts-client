@@ -1,11 +1,26 @@
-<div class="personal-info">
-  <div class="personal-info__header dark-text">
+<div class="year-and-month-info">
+  <div class="year-and-month-info__header dark-text">
     Please select the year and month for which you<br/>
     want to make a transaction
   </div>
-  <div class="personal-info__button-block">
+  <div class="flex gap-4">
+    <div class="year-and-month-info__item">
+      <smarti-select
+        [customWidth]="'336px'"
+        [options]="monthsSelect"
+        [placeholder]="'Month'"
+      >></smarti-select>
+    </div>
+    <div class="year-and-month-info__item">
+      <smarti-date-picker
+        [customWidth]="'336px'"
+        [placeholder]="'Year'"
+      ></smarti-date-picker>
+    </div>
+  </div>
+  <div class="year-and-month-info__button-block">
     <button
-      class="personal-info__button-block__button"
+      class="year-and-month-info__button-block__button"
       type="submit"
       (click)="doChangeStep('forward')"
     >Confirm</button>

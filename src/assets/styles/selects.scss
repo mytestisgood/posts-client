@@ -1,0 +1,33 @@
+tui-select-option {
+  .t-content {
+    color: #4F5F7A!important;
+    text-align: right!important;
+    font-family: RubikMedium, sans-serif !important;
+    font-size: 16px!important;
+    font-style: normal!important;
+    font-weight: 400!important;
+    line-height: 24px!important;
+  }
+}
+
+tui-select {
+  border-radius: 8px!important;
+  direction: rtl!important;
+  tui-primitive-textfield {
+    input {
+      margin-right: 0!important;
+      padding-right: 0!important;
+      color: #4F5F7A!important;
+      text-align: right!important;
+      font-family: RubikMedium, sans-serif !important;
+      font-size: 16px!important;
+      font-style: normal!important;
+      font-weight: 400!important;
+      line-height: 24px!important;
+    }
+  }
+
+  tui-primitive-textfield[data-size=m] {
+    min-height: 48px!important;
+  }
+}

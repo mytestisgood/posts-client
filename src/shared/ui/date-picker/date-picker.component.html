@@ -1,0 +1,13 @@
+<ng-container [formGroup]="dateForm">
+  <tui-input-date
+    [style.width]="customWidth"
+    [style.text-align]="'right'"
+    [style.height]="'56px'"
+    [pseudoInvalid]="invalid"
+    [tuiTextfieldLabelOutside]="true"
+    [formControl]="dateForm.controls.dateValue"
+    [tuiTextfieldSize]="'m'"
+  >
+    Year
+  </tui-input-date>
+</ng-container>

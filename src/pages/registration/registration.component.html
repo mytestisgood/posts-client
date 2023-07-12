@@ -1,7 +1,9 @@
 <div class="bg-neutral">
   <smarti-registration-header></smarti-registration-header>
   <div class="registration">
-    <smarti-progress-bar></smarti-progress-bar>
+    <smarti-progress-bar
+    [counter]="changeImage ? newCounter : standardCounter"
+    ></smarti-progress-bar>
     <div class="registration__info-block margin-t-2">
       <div
         class="registration__info-block__left"
@@ -13,7 +15,11 @@
       </div>
     </div>
     <smarti-registration-form
+      style="display: inline-block; margin-bottom: 54px"
       (changingImage)="doChangingImage($event)"
     ></smarti-registration-form>
   </div>
+  <ng-container *ngIf="changeImage">
+    <smarti-registration-footer></smarti-registration-footer>
+  </ng-container>
 </div>

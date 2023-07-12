@@ -1,33 +1,31 @@
-import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiInputModule } from '@taiga-ui/kit';
 
 @Component({
   selector: 'smarti-input-field',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TuiInputModule, TuiTextfieldControllerModule],
   templateUrl: './input-field.component.html',
   styleUrls: ['./input-field.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputFieldComponent implements OnInit, AfterViewInit {
+export class InputFieldComponent {
   @Input() public isRequired: boolean = false;
   @Input() public placeholder: string = '';
   @Input() public type: string = 'text';
-  @Input() public customClass: string = '';
-  @Input() public minLength!: string | number | null;
-  public formInput: FormControl<string | null> = new FormControl('');
+  @Input() public customWidth: string = '';
+  readonly formInput = new FormGroup({
+    inputValue: new FormControl(''),
+  });
 
-  constructor(
-    private readonly changeDetectorRef: ChangeDetectorRef
-  ) {
+  constructor() {
   }
 
-  ngOnInit(): void {
-    this.changeDetectorRef.detectChanges();
-  }
-
-  ngAfterViewInit() {
-    this.changeDetectorRef.detectChanges();
-  }
 }

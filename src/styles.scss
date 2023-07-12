@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@ng-select/ng-select/themes/default.theme.css";
 @import "assets/fonts/fonts.scss";
 @import "assets/styles/bg-colors";
 @import "assets/styles/colors";
@@ -6,6 +7,9 @@
 @import "assets/styles/buttons";
 @import "assets/styles/text";
 @import "assets/styles/inputs";
+@import "assets/styles/selects";
+@import "assets/styles/date-picker";
+@import "assets/styles/variables";
 
 body {
   margin: 0;

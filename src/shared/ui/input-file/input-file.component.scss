@@ -1,0 +1,64 @@
+.control {
+  box-shadow: 4px 16px 40px 2px rgba(99, 118, 148, 0.24);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+
+  &__dnd {
+    display: flex;
+    gap: 4px;
+
+    &__svg {
+      background: url("../../../assets/svg/drag-and-drop.svg");
+      width: 40px;
+      height: 32px;
+    }
+
+    &__text {
+      color: #171A21;
+      font-family: RubikMedium, sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+      align-self: center;
+    }
+
+    &__divider-text {
+      color: #4F5F7A;
+      font-family: RubikMedium, sans-serif;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+    }
+
+    &__upload-button {
+      margin-top: 8px;
+      width: 181px;
+      height: 42px;
+      border-radius: 8px;
+      border: 1px solid #F7F9FC;
+      background: #F7F9FC;
+      color: #02CAB3;
+      text-align: center;
+      font-family: RubikMedium, sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 18px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+
+      .svg-uploaded {
+        background: url("../../../assets/svg/upload-file.svg");
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}

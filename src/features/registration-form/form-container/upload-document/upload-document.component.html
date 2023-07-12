@@ -1,0 +1,40 @@
+<div class="upload-document">
+  <div class="flex gap-4">
+    <div class="upload-document__item">
+      <smarti-select
+        [customWidth]="'336px'"
+        [options]="monthsSelect"
+        [placeholder]="'Month'"
+      >></smarti-select>
+    </div>
+    <div class="upload-document__item">
+      <smarti-date-picker
+        [customWidth]="'336px'"
+        [placeholder]="'Year'"
+      ></smarti-date-picker>
+    </div>
+  </div>
+  <div class="upload-document__header">
+    We don’t want to waste your time, so please<br/>
+    Start our service right away
+  </div>
+  <div class="file-upload">
+    <div class="attach-file-type">Attach XML file</div>
+    <smarti-input-file
+      [customWidth]="'536px'"
+      [customHeight]="'120px'"
+    ></smarti-input-file>
+  </div>
+  <div class="upload-document__text">
+    If you don’t have XML file you can fill it in manually or
+    forward a request to a person in your organization who have it
+  </div>
+  <div class="upload-document__button-block">
+    <button class="upload-document__button-block__button cursor-pointer">
+      Download XML Example
+    </button>
+    <button class="upload-document__button-block__button cursor-pointer">
+      Forward
+    </button>
+  </div>
+</div>

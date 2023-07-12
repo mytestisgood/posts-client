@@ -1,1 +1,19 @@
-<p>select works!</p>
+<ng-container>
+  <tui-select
+    tuiTextfieldSize="m"
+    [style.width]="customWidth"
+    [formControl]="selectValue"
+    [tuiDropdownDirection]="'bottom'"
+    [tuiTextfieldLabelOutside]="true"
+    [style.text-align]="'right'"
+  >
+    {{ placeholder }}
+    <input
+      tuiTextfield
+    />
+    <tui-data-list-wrapper
+      *tuiDataList
+      [items]="options"
+    ></tui-data-list-wrapper>
+  </tui-select>
+</ng-container>

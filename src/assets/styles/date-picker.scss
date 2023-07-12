@@ -1,0 +1,21 @@
+tui-input-date {
+  border-radius: 8px!important;
+
+  tui-primitive-textfield[data-size=m] {
+    min-height: 48px!important;
+  }
+
+  tui-primitive-textfield {
+    input {
+      margin-right: 0!important;
+      padding-right: 0!important;
+    }
+    .t-icon, .t-wrapper-value-decoration {
+      display: none !important;
+    }
+  }
+
+}
+
+
+

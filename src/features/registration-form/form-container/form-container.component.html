@@ -9,6 +9,12 @@
     *ngSwitchCase="'loginInfo'"
     [startingForm]="userForm.get('loginInfo')?.value"
     (subformInitialized)="subformInitialized('loginInfo', $event)"
-    (changeStep)="changeStep('loginInfoStep', 'back')"
+    (changeStep)="changeStep('loginInfoStep', $event)"
   ></smarti-select-year-and-month>
+  <smarti-upload-document
+    *ngSwitchCase="'uploadDocumentInfo'"
+    [startingForm]="userForm.get('uploadDocumentInfo')?.value"
+    (subformInitialized)="subformInitialized('uploadDocumentInfo', $event)"
+    (changeStep)="changeStep('uploadDocumentInfo', $event)"
+  ></smarti-upload-document>
 </ng-container>

@@ -6,13 +6,17 @@ import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import {
   SelectYearAndMonthComponent,
 } from './select-year-and-month/select-year-and-month.component';
+import { UploadDocumentComponent } from './upload-document/upload-document.component';
 
-type Step = 'personalInfo' | 'loginInfo';
+type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo';
 
 @Component({
   selector: 'smarti-form-container',
   standalone: true,
-  imports: [CommonModule, PersonalInfoComponent, SelectYearAndMonthComponent],
+  imports: [
+    CommonModule, PersonalInfoComponent, SelectYearAndMonthComponent,
+    UploadDocumentComponent,
+  ],
   templateUrl: './form-container.component.html',
   styleUrls: ['./form-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,8 +51,15 @@ export class FormContainerComponent implements OnInit {
         }
         break;
       case 'loginInfoStep':
-        if (direction === 'back') {
+        if (direction === 'forward') {
+          this.currentStepBs.next('uploadDocumentInfo');
+          this.changingStep.next(true);
+        }
+        break;
+      case 'uploadDocumentStep':
+        if (direction === 'forward') {
           this.currentStepBs.next('personalInfo');
+          this.changingStep.next(true);
         }
         break;
     }
