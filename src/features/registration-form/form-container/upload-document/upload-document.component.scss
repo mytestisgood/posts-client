@@ -78,3 +78,30 @@
   font-weight: 400;
   line-height: 24px;
 }
+
+.confirm-block {
+  margin-top: 26px;
+  display: flex;
+  margin-bottom: 64px;
+}
+
+.go-next-button {
+  margin: 21px auto 64px;
+  width: 276px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+  border: #02CAB3;
+  background: #02CAB3;
+  color: #FFF;
+  text-align: center;
+  font-family: RubikMedium, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.4px;
+}

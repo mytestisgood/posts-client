@@ -1,0 +1,19 @@
+tui-dialog{
+  width: 814px!important;
+  .t-content {
+    background: #F7F9FC!important;
+    tui-input .t-content {
+      background: #FFF!important;
+    }
+  }
+}
+
+.close-dialog {
+  background: url("../../assets/svg/close-cross.svg");
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  border: 0;
+}

@@ -36,3 +36,22 @@ tui-input-files {
     padding-bottom: 8px!important;
   }
 }
+
+tui-files .file-uploaded {
+  .t-preview {
+    height: 32px!important;
+    width: 32px!important;
+    margin-right: 28px!important;
+  }
+}
+
+tui-files .file-uploaded {
+  padding-right: 28px!important;
+  padding-left: 28px!important;
+}
+
+tui-files {
+  tui-file {
+    border: 1px solid #02CAB3!important;
+  }
+}

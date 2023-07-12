@@ -62,3 +62,19 @@
     }
   }
 }
+.file-uploaded {
+  width: 536px;
+  height: 88px;
+  padding: 28px;
+}
+
+.document-icon {
+  background: url("../../../assets/svg/document-text.svg");
+  width: 32px;
+  height: 32px;
+}
+
+.remove-file-icon {
+  position: absolute;
+  right: 28px;
+}

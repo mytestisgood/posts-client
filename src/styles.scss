@@ -10,6 +10,7 @@
 @import "assets/styles/selects";
 @import "assets/styles/date-picker";
 @import "assets/styles/variables";
+@import "assets/styles/dialogs";
 
 body {
   margin: 0;
@@ -25,4 +26,8 @@ body {
 
 .gap-4 {
   gap: 16px;
+}
+
+.relative {
+  position: relative;
 }

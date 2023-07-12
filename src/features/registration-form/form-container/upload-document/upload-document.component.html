@@ -19,22 +19,62 @@
     Start our service right away
   </div>
   <div class="file-upload">
-    <div class="attach-file-type">Attach XML file</div>
+    <div class="attach-file-type">Attach XL file</div>
     <smarti-input-file
       [customWidth]="'536px'"
       [customHeight]="'120px'"
+      (fileUploaded)="fileUploaded($event)"
     ></smarti-input-file>
   </div>
   <div class="upload-document__text">
-    If you don’t have XML file you can fill it in manually or
+    If you don’t have XL file you can fill it in manually or
     forward a request to a person in your organization who have it
   </div>
-  <div class="upload-document__button-block">
-    <button class="upload-document__button-block__button cursor-pointer">
-      Download XML Example
+  <div
+    *ngIf="!isSendRequest; else requestSendTemplate"
+    class="upload-document__button-block"
+  >
+    <button
+      class="upload-document__button-block__button cursor-pointer"
+      (click)="downloadXlExample()"
+    >Download XL Example
     </button>
-    <button class="upload-document__button-block__button cursor-pointer">
-      Forward
+    <button
+      class="upload-document__button-block__button cursor-pointer"
+      (click)="openForwardModal(dialogTemplate)"
+    >Forward
     </button>
   </div>
+  <div
+    *ngIf="documentUploaded"
+    class="confirm-block"
+  >
+    <button class="confirm-button">Confirm</button>
+  </div>
 </div>
+
+<ng-template
+  #dialogTemplate
+  let-observer
+>
+  <smarti-forward-request-dialog
+    [haveCloseIcon]="true"
+    [observer]="observer"
+    (requestSend)="requestSend($event)"
+  ></smarti-forward-request-dialog>
+</ng-template>
+
+<ng-template #requestSendTemplate>
+  <div>
+    <smarti-notification
+      *ngIf="!isNotificationClosed"
+      class="relative"
+      [header]="'Your request is successfully send!'"
+      [description]="'As soon as we receive a file we will let you know to go to the next stage of process.<br/>Go to next step'"
+      (closeNotification)="closeNotification($event)"
+    ></smarti-notification>
+    <button class="go-next-button">
+      Go to next step
+    </button>
+  </div>
+</ng-template>

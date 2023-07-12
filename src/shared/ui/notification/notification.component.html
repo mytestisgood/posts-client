@@ -1,0 +1,18 @@
+<div
+  class="notification"
+  [style.width]="width"
+  [style.height]="height"
+>
+  <div class="notification__header">{{ header }}</div>
+  <div class="notification__status">
+    <div
+      class="notification__status-text"
+      [innerHTML]="description"
+    ></div>
+    <div class="notification__status-icon"></div>
+  </div>
+</div>
+<button
+  class="close-notification cursor-pointer"
+  (click)="onCloseNotification()"
+></button>

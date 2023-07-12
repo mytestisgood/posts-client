@@ -1,4 +1,5 @@
 <tui-input-files
+  *ngIf="!control.value"
   class="control"
   [formControl]="control"
   [style.width]="customWidth"
@@ -31,3 +32,21 @@
     </div>
   </ng-template>
 </tui-input-files>
+<tui-files>
+  <tui-file
+    *ngIf="control.valueChanges | async as file"
+    class="file-uploaded"
+    [file]="file"
+    [leftContent]="icon"
+    [showDelete]="false"
+  >
+    <div
+      class="button-close remove-file-icon cursor-pointer"
+      (click)="removeFile()"
+    ></div>
+  </tui-file>
+</tui-files>
+
+<ng-template #icon>
+  <div class="document-icon"></div>
+</ng-template>

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TuiDay } from '@taiga-ui/cdk';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiInputDateModule } from '@taiga-ui/kit';
 
@@ -28,6 +27,5 @@ export class DatePickerComponent {
     dateValue: new FormControl(),
   });
 
-  
-  
+
 }

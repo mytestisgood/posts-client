@@ -1,0 +1,32 @@
+<div class="forward-request">
+  <div class="forward-request__header">
+    Forward a request to a person<br/>
+    in your organization who have it
+  </div>
+  <div class="forward-request__form">
+    <smarti-input-field
+      [customWidth]="'536px'"
+      [placeholder]="'Your name'"
+      [type]="'text'"
+    ></smarti-input-field>
+    <smarti-input-field
+      [customWidth]="'536px'"
+      [placeholder]="'Email address*'"
+      [type]="'text'"
+    ></smarti-input-field>
+    <smarti-input-field
+      [customWidth]="'536px'"
+      [placeholder]="'Phone number*'"
+      [type]="'text'"
+    ></smarti-input-field>
+  </div>
+  <button
+    class="forward-request__button cursor-pointer"
+    (click)="sendRequest()"
+  >Forward</button>
+</div>
+<button
+  *ngIf="haveCloseIcon"
+  class="close-dialog cursor-pointer"
+  (click)="closeDialog()"
+></button>
