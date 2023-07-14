@@ -1,0 +1,22 @@
+<div
+  class="flex justify-center"
+  [style.margin]="customMargin"
+  [style.width]="customWidth"
+  [ngClass]="{
+    'disabled': disabled,
+    'haveIcon': haveIcon,
+  }"
+>
+  <button
+    class="smarti-button rounded-m text-center smarti-button-text"
+    [ngClass]="{
+      'confirm-button': typeClass === 'confirm',
+      'button-interaction': typeClass === 'interaction',
+      'dark-button': typeClass === 'dark',
+    }"
+    [style.border]="customBorder"
+    [style.color]="textColor"
+    [style.height]="customHeight"
+    (click)="clicked()"
+  >{{ text }}</button>
+</div>

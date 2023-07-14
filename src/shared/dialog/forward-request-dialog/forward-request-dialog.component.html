@@ -1,5 +1,5 @@
 <div class="forward-request">
-  <div class="forward-request__header">
+  <div class="forward-request__header neutrals-text-950">
     Forward a request to a person<br/>
     in your organization who have it
   </div>
@@ -20,10 +20,12 @@
       [type]="'text'"
     ></smarti-input-field>
   </div>
-  <button
-    class="forward-request__button cursor-pointer"
-    (click)="sendRequest()"
-  >Forward</button>
+  <smarti-button
+    [typeClass]="'confirm'"
+    [text]="'Forward'"
+    [customMargin]="'80px auto 0'"
+    (buttonClicked)="sendRequest()"
+  ></smarti-button>
 </div>
 <button
   *ngIf="haveCloseIcon"

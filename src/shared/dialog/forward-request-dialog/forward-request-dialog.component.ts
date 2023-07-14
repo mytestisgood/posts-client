@@ -1,14 +1,16 @@
-import { Component, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ButtonComponent } from '../../ui/button/button.component';
 import { InputFieldComponent } from '../../ui/input-field/input-field.component';
 
 @Component({
   selector: 'smarti-forward-request-dialog',
   standalone: true,
-  imports: [CommonModule, InputFieldComponent],
+  imports: [CommonModule, InputFieldComponent, ButtonComponent],
   templateUrl: './forward-request-dialog.component.html',
-  styleUrls: ['./forward-request-dialog.component.scss']
+  styleUrls: ['./forward-request-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForwardRequestDialogComponent {
   @Input() public haveCloseIcon: boolean = false;

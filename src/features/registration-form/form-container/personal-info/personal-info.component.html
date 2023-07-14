@@ -1,60 +1,53 @@
-<form class="personal-info" [formGroup]="personalInfoForm">
-  <div class="personal-info__header dark-text">Create account fast and easy!</div>
-  <div class="personal-info__item">
+<form class="flex flex-col items-center mt-10" [formGroup]="personalInfoForm">
+  <h3
+    class="medium mt-10 mb-0 text-center neutrals-text-950"
+  >Create account fast and easy!</h3>
+  <div class="personal-info mt-8">
     <smarti-input-field
       [customWidth]="'536px'"
       [placeholder]="'Company name*'"
       [type]="'text'"
     ></smarti-input-field>
   </div>
-  <div class="personal-info__item">
+  <div class="personal-info mt-8">
     <smarti-input-field
       [customWidth]="'536px'"
       [placeholder]="'Company ID*'"
       [type]="'text'"
     ></smarti-input-field>
   </div>
-  <div class="personal-info__item">
+  <div class="personal-info mt-8">
     <smarti-input-field
       [customWidth]="'536px'"
       [placeholder]="'Your Name'"
       [type]="'text'"
     ></smarti-input-field>
   </div>
-  <div class="personal-info__item">
+  <div class="personal-info mt-8">
     <smarti-input-field
       [placeholder]="'Email Address*'"
       [customWidth]="'536px'"
       [type]="'text'"
     ></smarti-input-field>
   </div>
-  <div class="personal-info__item">
+  <div class="personal-info mt-8">
     <smarti-input-field
       [customWidth]="'536px'"
       [placeholder]="'Phone Number*'"
       [type]="'text'"
     ></smarti-input-field>
   </div>
-  <div class="personal-info__item flex gap-4">
-    <div class="personal-info__item-text dark-text margin-left-160">
+  <div class="personal-info mt-8 flex gap-4">
+    <div class="personal-info__text paragraph-text-medium text-right neutrals-text-950 margin-left-160">
       I have read and agree to the Smarti<br/>
       Terms of Services and Privacy Policy.
     </div>
-    <div class="personal-info__item-checkbox">
-      <!--need to add in ui-->
-      <label class="input-checkbox">
-        <input
-          type="checkbox"
-          [required]="true"/>
-        <span class="input-checkmark"></span>
-      </label>
-    </div>
+    <smarti-input-checkbox></smarti-input-checkbox>
   </div>
-  <div class="personal-info__button-block">
-    <button
-      class="personal-info__button-block__button"
-      type="submit"
-      (click)="doChangeStep('forward')"
-    >Register</button>
-  </div>
+  <smarti-button
+    [customMargin]="'40px 0 64px'"
+    [text]="'Register'"
+    [typeClass]="'confirm'"
+    (buttonClicked)="doChangeStep('forward')"
+  ></smarti-button>
 </form>

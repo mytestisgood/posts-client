@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { DatePickerComponent } from '../../../../shared/ui/date-picker/date-picker.component';
 import { InputFieldComponent } from '../../../../shared/ui/input-field/input-field.component';
 import { SelectComponent } from '../../../../shared/ui/select/select.component';
@@ -10,7 +11,10 @@ type Direction = 'forward' | 'back';
 @Component({
   selector: 'smarti-select-year-and-month',
   standalone: true,
-  imports: [CommonModule, InputFieldComponent, SelectComponent, DatePickerComponent],
+  imports: [
+    CommonModule, InputFieldComponent, SelectComponent, DatePickerComponent,
+    ButtonComponent,
+  ],
   templateUrl: './select-year-and-month.component.html',
   styleUrls: ['./select-year-and-month.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

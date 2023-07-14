@@ -6,11 +6,9 @@
   &__item {
     width: 260px;
     height: 288px;
-    border-radius: 16px;
-    border: 1px solid #323948;
 
     &__image {
-      background: url("../../../../assets/img/cafe-first.png");
+      background: url("/assets/img/cafe-first.png");
       border-radius: 16px 16px 0 0;
       width: 260px;
       height: 200px;
@@ -32,10 +30,9 @@
       }
 
       &-logo {
-        background: url("../../../../assets/img/ikea-logo.png");
+        background: url("/assets/img/ikea-logo.png");
         width: 96px;
         height: 96px;
-        border-radius: 16px;
         margin-inline-end: 8px;
         margin-bottom: 8px;
       }

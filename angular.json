@@ -8,6 +8,9 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "style": "scss"
         }
       },
       "root": "",
@@ -17,6 +20,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules", "src/assets/styles", "src/assets/fonts"]
+            },
+            "allowedCommonJsDependencies": [
+              "text-mask-core",
+              "dompurify"
+            ],
             "outputPath": "dist/smarti-client",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -28,6 +38,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/assets/svg/*",
+              "src/assets/img/*",
               {
                 "glob": "**/*",
                 "input": "node_modules/@taiga-ui/icons/src",

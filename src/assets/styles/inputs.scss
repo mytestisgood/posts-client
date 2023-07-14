@@ -9,7 +9,7 @@ tui-input {
 
   .t-content {
     .t-placeholder{
-      color: #4F5F7A!important;
+      color: $neutrals-500!important;
       text-align: right!important;
       font-family: RubikMedium, sans-serif !important;
       font-size: 16px!important;
@@ -20,7 +20,7 @@ tui-input {
   }
 
   input {
-    color: #4F5F7A!important;
+    color: $neutrals-500!important;
     text-align: right!important;
     font-family: RubikMedium, sans-serif !important;
     font-size: 16px!important;
@@ -52,6 +52,28 @@ tui-files .file-uploaded {
 
 tui-files {
   tui-file {
-    border: 1px solid #02CAB3!important;
+    border: 1px solid $bright-turquoise-500!important;
+  }
+}
+
+tui-checkbox {
+  width: 20px!important;
+  height: 20px!important;
+
+  tui-primitive-checkbox {
+    width: 20px!important;
+    height: 20px!important;
+  }
+}
+
+tui-input-number {
+  input.center-verify {
+    color: $neutrals-500!important;
+    text-align: center!important;
+    font-family: RubikMedium, sans-serif !important;
+    font-size: 32px!important;
+    font-style: normal!important;
+    font-weight: 500!important;
+    line-height: 40px!important;
   }
 }

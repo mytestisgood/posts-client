@@ -4,7 +4,7 @@
     <div class="special-header">
       <div class="special-header__left">
         <div class="button-close"></div>
-        <div class="button-trial">
+        <div class="button-trial rounded-m border-neutrals-950">
           <div class="button-trial__icon-arrow-left"></div>
           <div class="button-trial__text">התחילו מסלול חינם</div>
         </div>
@@ -16,11 +16,23 @@
     </div>
   </div>
 
-  <div class="bg-header white-text bg-dark">
+  <div class="bg-header white-text bg-neutrals-950">
     <div class="header">
       <div class="header__left">
-        <button class="header__left-login bg-bright-turquoise white-text">התחברות</button>
-        <button class="header__left-free white-text bg-dark">הרשמה חינם</button>
+        <smarti-button
+          [typeClass]="'confirm'"
+          [text]="'התחברות'"
+          [customWidth]="'168px'"
+          [customHeight]="'42px'"
+        ></smarti-button>
+        <smarti-button
+          style="margin-inline-start: 24px;"
+          [typeClass]="'dark'"
+          [text]="'הרשמה חינם'"
+          [customWidth]="'168px'"
+          [customHeight]="'42px'"
+          [customBorder]="'1px solid white'"
+        ></smarti-button>
       </div>
       <nav class="header__right">
         <!--      contact-->

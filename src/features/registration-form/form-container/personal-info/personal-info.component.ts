@@ -8,6 +8,10 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ButtonComponent } from '../../../../shared/ui/button/button.component';
+import {
+  InputCheckboxComponent
+} from '../../../../shared/ui/input-checkbox/input-checkbox.component';
 import { InputFieldComponent } from '../../../../shared/ui/input-field/input-field.component';
 
 type Direction = 'forward' | 'back';
@@ -24,7 +28,10 @@ interface PersonalInfoControls {
 @Component({
   selector: 'smarti-personal-info',
   standalone: true,
-  imports: [CommonModule, InputFieldComponent, ReactiveFormsModule],
+  imports: [
+    CommonModule, InputFieldComponent, ReactiveFormsModule, InputCheckboxComponent,
+    ButtonComponent,
+  ],
   templateUrl: './personal-info.component.html',
   styleUrls: ['./personal-info.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

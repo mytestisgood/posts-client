@@ -1,5 +1,5 @@
 <div class="run-business bg-white">
-  <div class="run-business__block">
+  <div class="run-business__block rounded-l">
     <div class="run-business__block__left"></div>
     <div class="run-business__block__right">
       <div class="run-business__block__right-header white-text">
@@ -10,11 +10,11 @@
         ממשק נגיש שעוזר לכם לנהל את סליקה הפנסיונית<br/>
         בצורה פשוטה ומהירה בכמה צעדים פשוטים
       </div>
-      <div class="button-interaction">
-        <button class="button-interaction-button white-text bg-pumpkin">
-          הצטרפו עכשיו
-        </button>
-      </div>
+      <smarti-button
+        [text]="'הצטרפו עכשיו'"
+        [typeClass]="'interaction'"
+        [textColor]="'white'"
+      ></smarti-button>
     </div>
   </div>
 </div>

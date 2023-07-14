@@ -4,7 +4,7 @@
   justify-content: space-between;
 
   &__image {
-    background: url("../../../../assets/img/happy-user.png");
+    background: url("/assets/img/happy-user.png");
     width: 610px;
     height: 676px;
   }
@@ -20,19 +20,19 @@
       gap: 50px;
 
       &__img-first {
-        background: url("../../../../assets/img/mask-group-97.png");
+        background: url("/assets/img/mask-group-97.png");
         width: 88px;
         height: 88px;
       }
 
       &__img-second {
-        background: url("../../../../assets/img/mask-group-98.png");
+        background: url("/assets/img/mask-group-98.png");
         width: 88px;
         height: 88px;
       }
 
       &__img-third {
-        background: url("../../../../assets/img/mask-group-99.png");
+        background: url("/assets/img/mask-group-99.png");
         width: 88px;
         height: 88px;
       }

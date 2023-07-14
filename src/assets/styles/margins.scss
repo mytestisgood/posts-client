@@ -1,51 +1,117 @@
-.margin-t-0 {
+/* margin-top */
+.mt-0 {
   margin-top: 0;
 }
 
-.margin-t-1 {
+.mt-1 {
   margin-top: 4px;
 }
 
-.margin-t-2 {
+.mt-2 {
   margin-top: 8px;
 }
 
-.margin-t-3 {
+.mt-4 {
   margin-top: 16px;
 }
 
-.margin-t-4 {
+.mt-6 {
   margin-top: 24px;
 }
 
-.margin-t-9 {
+.mt-7 {
+  margin-top: 28px;
+}
+
+.mt-8 {
+  margin-top: 32px;
+}
+
+.mt-10 {
+  margin-top: 40px;
+}
+
+.mt-12 {
+  margin-top: 48px;
+}
+.mt-14 {
+  margin-top: 56px;
+}
+
+.mt-16 {
+  margin-top: 64px;
+}
+
+.mt-20 {
   margin-top: 80px;
 }
 
-.margin-t-10 {
+.mt-24 {
   margin-top: 96px;
 }
 
-.margin-t-12 {
+.mt-32 {
   margin-top: 128px;
 }
 
-.margin-t-14 {
+.mt-40 {
   margin-top: 160px;
 }
 
-.margin-t-18 {
+.mt-60 {
   margin-top: 240px;
 }
 
-.margin-t-104 {
+.mt-104 {
   margin-top: 104px;
 }
 
+.mt-32 {
+  margin-bottom: 128px;
+}
+
+/* margin-bottom */
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.mb-12 {
+  margin-bottom: 48px;
+}
+
+.mb-16 {
+  margin-bottom: 64px;
+}
+
+.mb-32 {
+  margin-bottom: 128px;
+}
+
+/* margin-right */
+
+.mr-0 {
+  margin-right: 0;
+}
+
+.mr-8 {
+  margin-right: 32px;
+}
+
+/* margin-inline */
 .margin-start-auto {
   margin-inline-start: auto;
 }
 
+/* margin-left*/
+.margin-left-160 {
+  margin-left: 160px;
+}
+
+/* usual cases with margin */
 .margin-0-auto {
   margin: 0 auto;
 }

@@ -1,5 +1,3 @@
-//TODO need to rewrite to global css
-
 .about-block-forms {
   display: flex;
   justify-content: space-between;
@@ -19,25 +17,25 @@
 }
 
 .first-about-form-image {
-  background: url("../../../../assets/img/an-admirable-factor.png");
+  background: url("/assets/img/an-admirable-factor.png");
   width: 398px;
   height: 224px;
 }
 
 .second-about-form-image {
-  background: url("../../../../assets/img/yearly-reports.png");
+  background: url("/assets/img/yearly-reports.png");
   width: 398px;
   height: 224px;
 }
 
 .third-about-form-image {
-  background: url("../../../../assets/img/161-form.png");
+  background: url("/assets/img/161-form.png");
   width: 398px;
   height: 224px;
 }
 
 .fourth-about-form-image {
-  background: url("../../../../assets/img/pension-settlement.png");
+  background: url("/assets/img/pension-settlement.png");
   width: 398px;
   height: 224px;
 }

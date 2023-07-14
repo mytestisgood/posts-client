@@ -33,7 +33,11 @@ export class InputFileComponent implements OnInit {
 
   public ngOnInit(): void {
     this.control.valueChanges.pipe().subscribe(value => {
-      this.fileUploaded.next(true);
+      if (value) {
+        this.fileUploaded.next(true);
+      } else {
+        this.fileUploaded.next(false);
+      }
     })
   }
 

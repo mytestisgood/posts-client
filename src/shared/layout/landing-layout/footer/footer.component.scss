@@ -1,5 +1,6 @@
 .footer {
   margin: 0 140px;
+  height: 440px;
 
   &__logo {
     display: flex;
@@ -7,7 +8,7 @@
 
   &__logo-image {
     margin-top: 64px;
-    background: url("../../../../assets/svg/logo-big.svg");
+    background: url("/assets/svg/logo-big.svg");
     width: 156px;
     height: 33px;
     margin-inline-start: auto;
@@ -57,19 +58,19 @@
 }
 
 .twitter-link {
-  background: url("../../../../assets/svg/twitter-icon.svg");
+  background: url("/assets/svg/twitter-icon.svg");
   width: 32px;
   height: 32px;
 }
 
 .facebook-link {
-  background: url("../../../../assets/svg/facebook-icon.svg");
+  background: url("/assets/svg/facebook-icon.svg");
   width: 32px;
   height: 32px;
 }
 
 .linkedin-link {
-  background: url("../../../../assets/svg/linkedin-icon.svg");
+  background: url("/assets/svg/linkedin-icon.svg");
   width: 32px;
   height: 32px;
 }

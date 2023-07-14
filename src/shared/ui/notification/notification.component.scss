@@ -1,48 +1,19 @@
 .notification {
   margin-top: 21px;
-  border-radius: 16px;
-  border: 1px solid #3EC92C;
-  background: #F3FCF1;
-  box-shadow: 4px 16px 40px 2px rgba(99, 118, 148, 0.24);
 
   &__header {
-    color: #3EC92C;
-    text-align: right;
-    font-family: RubikMedium, sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    margin-top: 8px;
     margin-right: 72px;
   }
 
-  &__status {
-    display: flex;
-    gap: 16px;
-    margin-right: 32px;justify-content: end;
-
-    &-text {
-      color: #171A21;
-      text-align: right;
-      font-family: RubikMedium, sans-serif;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 24px;
-      direction: rtl;
-    }
-
-    &-icon {
-      background: url("../../../assets/svg/success-notification.svg");
-      height: 24px;
-      width: 24px;
-    }
+  &__icon {
+    background: url("/assets/svg/success-notification.svg");
+    height: 24px;
+    width: 24px;
   }
 }
 
 .close-notification {
-  background: url("../../../assets/svg/close-cross.svg");
+  background: url("/assets/svg/close-cross.svg");
   width: 24px;
   height: 24px;
   position: absolute;

@@ -1,27 +1,31 @@
-.bg-dark {
-  background: #171A21;
+.bg-white {
+  background: $white;
 }
 
-.bg-dark-1 {
-  background: #1C1F27;
+.bg-neutral-20 {
+  background: $neutral-20;
+}
+
+.bg-neutrals-950 {
+  background: $neutrals-950;
+}
+
+.bg-neutrals-900 {
+  background: $neutrals-900;
 }
 
 .bg-green {
-  background: #24ED33;
+  background: $green;
 }
 
-.bg-bright-turquoise {
-  background: #02CAB3;
+.bg-green-success-50 {
+  background: $green-success-50;
 }
 
-.bg-pumpkin {
-  background: #FB8A3C;
+.bg-bright-turquoise-500 {
+  background: $bright-turquoise-500;
 }
 
-.bg-neutral {
-  background: #F7F9FC;
-}
-
-.bg-white {
-  background: #FFFFFF;
+.bg-pumpkin-400 {
+  background: $pumpkin-base-400;
 }

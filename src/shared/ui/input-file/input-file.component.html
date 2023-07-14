@@ -1,31 +1,45 @@
 <tui-input-files
   *ngIf="!control.value"
-  class="control"
+  class="box-shadow-big"
   [formControl]="control"
   [style.width]="customWidth"
   [style.height]="customHeight"
+  [accessKey]="'xl'"
 >
+  <input
+    tuiInputFiles
+    type="file"
+    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
   <ng-template let-dragged>
     <div
       *ngIf="dragged; else base"
-      class="content"
+      class="flex flex-col"
     >
-      <div class="content__dnd">
-        <div class="content__dnd__svg"></div>
-        <div class="content__dnd__text">Drag & Drop file</div>
+      <div class="flex gap-1">
+        <div class="drag-and-drop__svg"></div>
+        <div class="paragraph-text self-center neutrals-text-950">Drag & Drop file</div>
       </div>
-      <div class="content__dnd__divider-text">or</div>
-      <button class="content__dnd__upload-button">Browse files</button>
+      <div class="caption-text neutrals-text-500">or</div>
+      <button
+        class="upload-button mt-2 text-center paragraph-text-extra rounded-l
+        bright-turquoise-text-500 bg-neutral-20 items-center flex gap-2 justify-center"
+      >
+        <div class="svg-uploaded"></div>
+        <div>Browse files</div>
+      </button>
     </div>
   </ng-template>
   <ng-template #base>
-    <div class="content">
-      <div class="content__dnd">
-        <div class="content__dnd__svg"></div>
-        <div class="content__dnd__text">Drag & Drop file</div>
+    <div class="flex flex-col">
+      <div class="flex gap-1">
+        <div class="drag-and-drop__svg"></div>
+        <div class="paragraph-text self-center neutrals-text-950">Drag & Drop file</div>
       </div>
-      <div class="content__dnd__divider-text">or</div>
-      <button class="content__dnd__upload-button">
+      <div class="caption-text  neutrals-text-500">or</div>
+      <button
+        class="upload-button mt-2 text-center paragraph-text-extra rounded-l
+        bright-turquoise-text-500 bg-neutral-20 items-center flex gap-2 justify-center"
+      >
         <div class="svg-uploaded"></div>
         <div>Browse files</div>
       </button>

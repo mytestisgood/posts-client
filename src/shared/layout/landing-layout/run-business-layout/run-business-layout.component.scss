@@ -6,15 +6,14 @@
 
   &__block {
     margin: 160px 140px 0;
-    background: url("../../../../assets/img/gradient-rounded.png");
-    border-radius: 16px;
+    background: url("/assets/img/gradient-rounded.png");
     display: flex;
     gap: 12px;
     height: 424px;
     position: relative;
 
     &__left {
-      background: url("../../../../assets/img/application-image.png");
+      background: url("/assets/img/application-image.png");
       width: 613px;
       height: 476px;
       position: relative;

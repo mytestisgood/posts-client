@@ -6,9 +6,14 @@
         פנסיות ספקים לעובדים
       </div>
       <div class="main-banner__block__interaction">
-        <button class="main-banner__block__interaction-button bg-pumpkin white-text">הרשמה מהירה</button>
+        <smarti-button
+          [text]="'הרשמה מהירה'"
+          [typeClass]="'interaction'"
+          [customWidth]="'232px'"
+          [textColor]="'white'"
+        ></smarti-button>
         <div class="main-banner__block__interaction-text white-text">להמלצה לחברים
-          <span class="bright-turquoise-text">לחצו כאן</span>
+          <span class="bright-turquoise-text-500 cursor-pointer">לחצו כאן</span>
         </div>
       </div>
     </div>

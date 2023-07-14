@@ -13,5 +13,5 @@ import { FormContainerComponent } from './form-container/form-container.componen
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationFormComponent {
-  @Output() changingImage: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  @Output() changingImage: BehaviorSubject<string> = new BehaviorSubject<string>('personalInfo');
 }

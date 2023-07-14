@@ -1,8 +1,30 @@
 <div class="question-banner-block">
-  <div class="question-banner-block__text white-text">
+  <div class="question-banner-block__text mt-12 white-text margin-rl-auto">
     לשאולות ומידע נוסף
   </div>
-  <div class="button-interaction">
-    <button class="button-interaction-button white-text bg-pumpkin">צרו קשר</button>
+
+  <div class="flex gap-4 mt-8">
+    <smarti-input-field
+      [placeholder]="'Phone number'"
+      [customWidth]="'536px'"
+      [type]="'phone'"
+    ></smarti-input-field>
+    <smarti-input-field
+      [placeholder]="'*Email address'"
+      [customWidth]="'536px'"
+      [type]="'email'"
+    ></smarti-input-field>
+    <smarti-input-field
+      [placeholder]="'Your name'"
+      [customWidth]="'536px'"
+      [type]="'text'"
+    ></smarti-input-field>
   </div>
+
+  <smarti-button
+    class="mt-12"
+    [text]="'צרו קשר'"
+    [typeClass]="'interaction'"
+    [textColor]="'white'"
+  ></smarti-button>
 </div>

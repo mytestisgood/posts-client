@@ -1,15 +1,15 @@
 tui-dialog{
   width: 814px!important;
   .t-content {
-    background: #F7F9FC!important;
+    background: $neutral-20!important;
     tui-input .t-content {
-      background: #FFF!important;
+      background: $white!important;
     }
   }
 }
 
 .close-dialog {
-  background: url("../../assets/svg/close-cross.svg");
+  background: url("/assets/svg/close-cross.svg");
   width: 24px;
   height: 24px;
   position: absolute;

@@ -1,28 +1,23 @@
-<div class="year-and-month-info">
-  <div class="year-and-month-info__header dark-text">
+<div class="mt-10 flex flex-col items-center">
+  <h3 class="medium mt-10 mb-0 text-center neutrals-text-950">
     Please select the year and month for which you<br/>
     want to make a transaction
+  </h3>
+  <div class="flex gap-4 mt-10">
+    <smarti-select
+      [customWidth]="'336px'"
+      [options]="monthsSelect"
+      [placeholder]="'Month'"
+    ></smarti-select>
+    <smarti-date-picker
+      [customWidth]="'336px'"
+      [placeholder]="'Year*'"
+    ></smarti-date-picker>
   </div>
-  <div class="flex gap-4">
-    <div class="year-and-month-info__item">
-      <smarti-select
-        [customWidth]="'336px'"
-        [options]="monthsSelect"
-        [placeholder]="'Month'"
-      >></smarti-select>
-    </div>
-    <div class="year-and-month-info__item">
-      <smarti-date-picker
-        [customWidth]="'336px'"
-        [placeholder]="'Year'"
-      ></smarti-date-picker>
-    </div>
-  </div>
-  <div class="year-and-month-info__button-block">
-    <button
-      class="confirm-button"
-      type="submit"
-      (click)="doChangeStep('forward')"
-    >Confirm</button>
-  </div>
+  <smarti-button
+    [text]="'Confirm'"
+    [typeClass]="'confirm'"
+    [customMargin]="'40px 0 64px'"
+    (buttonClicked)="doChangeStep('forward')"
+  ></smarti-button>
 </div>

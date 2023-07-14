@@ -13,6 +13,7 @@ import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import {
   ForwardRequestDialogComponent
 } from '../../../../shared/dialog/forward-request-dialog/forward-request-dialog.component';
+import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { DatePickerComponent } from '../../../../shared/ui/date-picker/date-picker.component';
 import { InputFileComponent } from '../../../../shared/ui/input-file/input-file.component';
 import { NotificationComponent } from '../../../../shared/ui/notification/notification.component';
@@ -25,7 +26,7 @@ type Direction = 'forward' | 'back';
   standalone: true,
   imports: [
     CommonModule, DatePickerComponent, SelectComponent, InputFileComponent,
-    ForwardRequestDialogComponent, NotificationComponent,
+    ForwardRequestDialogComponent, NotificationComponent, ButtonComponent,
   ],
   templateUrl: './upload-document.component.html',
   styleUrls: ['./upload-document.component.scss'],

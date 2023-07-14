@@ -15,6 +15,12 @@
     *ngSwitchCase="'uploadDocumentInfo'"
     [startingForm]="userForm.get('uploadDocumentInfo')?.value"
     (subformInitialized)="subformInitialized('uploadDocumentInfo', $event)"
-    (changeStep)="changeStep('uploadDocumentInfo', $event)"
+    (changeStep)="changeStep('uploadDocumentStep', $event)"
   ></smarti-upload-document>
+  <smarti-verify-email
+    *ngSwitchCase="'verifyEmailInfo'"
+    [startingForm]="userForm.get('verifyEmailInfo')?.value"
+    (subformInitialized)="subformInitialized('verifyEmailInfo', $event)"
+    (changeStep)="changeStep('verifyEmailStep', $event)"
+  ></smarti-verify-email>
 </ng-container>

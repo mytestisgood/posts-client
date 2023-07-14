@@ -1,23 +1,31 @@
 .white-text {
-  color: #FFFFFF;
+  color: $white;
 }
 
-.dark-text {
-  color: #171A21;
+.neutrals-text-500 {
+  color: $neutrals-500;
 }
 
-.rose-text {
-  color: #FF4ECD;
+.neutrals-text-950 {
+  color: $neutrals-950;
 }
 
-.blue-text {
-  color: #0D9AFF;
+.rose-text-base-500 {
+  color: $rose-base-500;
 }
 
-.pumpkin-text {
-  color: #FB8A3C;
+.blue-text-base-400 {
+  color: $blue-base-600;
 }
 
-.bright-turquoise-text {
-  color: #02CAB3;
+.pumpkin-text-400 {
+  color: $pumpkin-base-400;
+}
+
+.bright-turquoise-text-500 {
+  color: $bright-turquoise-500;
+}
+
+.green-success-500-text {
+  color: $green-success-500;
 }

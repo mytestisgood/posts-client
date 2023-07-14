@@ -7,22 +7,23 @@ import {
   SelectYearAndMonthComponent,
 } from './select-year-and-month/select-year-and-month.component';
 import { UploadDocumentComponent } from './upload-document/upload-document.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
-type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo';
+type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailInfo';
 
 @Component({
   selector: 'smarti-form-container',
   standalone: true,
   imports: [
     CommonModule, PersonalInfoComponent, SelectYearAndMonthComponent,
-    UploadDocumentComponent,
+    UploadDocumentComponent, VerifyEmailComponent,
   ],
   templateUrl: './form-container.component.html',
   styleUrls: ['./form-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormContainerComponent implements OnInit {
-  @Output() public changingStep: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  @Output() public changingStep: BehaviorSubject<string> = new BehaviorSubject<string>('personalInfo');
 
   private currentStepBs: BehaviorSubject<Step> = new BehaviorSubject<Step>('personalInfo');
   public currentStep$: Observable<Step> = this.currentStepBs.asObservable();
@@ -47,21 +48,26 @@ export class FormContainerComponent implements OnInit {
       case 'personalInfoStep':
         if (direction === 'forward') {
           this.currentStepBs.next('loginInfo');
-          this.changingStep.next(true);
+          this.changingStep.next('loginInfo');
         }
         break;
       case 'loginInfoStep':
         if (direction === 'forward') {
           this.currentStepBs.next('uploadDocumentInfo');
-          this.changingStep.next(true);
+          this.changingStep.next('uploadDocumentInfo');
         }
         break;
       case 'uploadDocumentStep':
         if (direction === 'forward') {
-          this.currentStepBs.next('personalInfo');
-          this.changingStep.next(true);
+          this.currentStepBs.next('verifyEmailInfo');
+          this.changingStep.next('verifyEmailInfo');
         }
         break;
+      case 'verifyEmailStep':
+        if (direction === 'forward') {
+          this.currentStepBs.next('verifyEmailInfo');
+          this.changingStep.next('verifyEmailInfo');
+        }
     }
   }
 

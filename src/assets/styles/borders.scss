@@ -1,0 +1,31 @@
+/* colors */
+
+.border-green-success-500 {
+  border: 1px solid $green-success-500;
+}
+
+.border-neutrals-800 {
+  border: 1px solid $neutrals-800;
+}
+
+.border-neutrals-950 {
+  border: 1px solid $neutrals-950;
+}
+
+.border-white {
+  border: 1px solid $white;
+}
+
+/* radius */
+
+.rounded-m {
+  border-radius: 8px;
+}
+
+.rounded-l {
+  border-radius: 16px;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}

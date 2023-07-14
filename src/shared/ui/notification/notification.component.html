@@ -1,15 +1,17 @@
 <div
-  class="notification"
+  class="notification bg-green-success-50 border-green-success-500 box-shadow-big rounded-l"
   [style.width]="width"
   [style.height]="height"
 >
-  <div class="notification__header">{{ header }}</div>
-  <div class="notification__status">
+  <div
+    class="notification__header text-right mt-2 paragraph-text-medium green-success-500-text"
+  >{{ header }}</div>
+  <div class="flex justify-end gap-4 mr-8">
     <div
-      class="notification__status-text"
+      class="text-right paragraph-text dir-rtl neutrals-text-950"
       [innerHTML]="description"
     ></div>
-    <div class="notification__status-icon"></div>
+    <div class="notification__icon"></div>
   </div>
 </div>
 <button

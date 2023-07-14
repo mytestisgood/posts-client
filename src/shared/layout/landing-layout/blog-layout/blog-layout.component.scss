@@ -12,8 +12,6 @@
   &__item {
     width: 398px;
     height: 504px;
-    border-radius: 16px;
-    box-shadow: 4px 16px 40px 2px rgba(99, 118, 148, 0.24);
     display: flex;
     flex-direction: column;
 
@@ -43,19 +41,19 @@
     }
 
     &__img-first {
-      background: url("../../../../assets/img/pension-simple.png");
+      background: url("/assets/img/pension-simple.png");
       width: 398px;
       height: 256px;
     }
 
     &__img-second {
-      background: url("../../../../assets/img/techological-system.png");
+      background: url("/assets/img/techological-system.png");
       width: 398px;
       height: 256px;
     }
 
     &__img-third {
-      background: url("../../../../assets/img/setting-out-your-own.png");
+      background: url("/assets/img/setting-out-your-own.png");
       width: 398px;
       height: 256px;
     }
@@ -63,7 +61,7 @@
 }
 
 .icon-arrow-left-fill {
-  background: url("../../../../assets/svg/arrow-left-fill-icon.svg");
+  background: url("/assets/svg/arrow-left-fill-icon.svg");
   width: 24px;
   height: 24px;
 }

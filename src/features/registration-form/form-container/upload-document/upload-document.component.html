@@ -1,56 +1,57 @@
-<div class="upload-document">
+<div class="flex flex-col items-center mt-10">
   <div class="flex gap-4">
-    <div class="upload-document__item">
+    <div class="mt-10">
       <smarti-select
         [customWidth]="'336px'"
         [options]="monthsSelect"
         [placeholder]="'Month'"
       >></smarti-select>
     </div>
-    <div class="upload-document__item">
+    <div class="mt-10">
       <smarti-date-picker
         [customWidth]="'336px'"
-        [placeholder]="'Year'"
+        [placeholder]="'Year*'"
       ></smarti-date-picker>
     </div>
   </div>
-  <div class="upload-document__header">
+  <h3 class="medium text-center mt-6">
     We don’t want to waste your time, so please<br/>
     Start our service right away
-  </div>
-  <div class="file-upload">
-    <div class="attach-file-type">Attach XL file</div>
+  </h3>
+  <div class="file-upload mt-10 mb-16">
+    <div class="paragraph-text neutrals-text-950">Attach XL file</div>
     <smarti-input-file
       [customWidth]="'536px'"
       [customHeight]="'120px'"
       (fileUploaded)="fileUploaded($event)"
     ></smarti-input-file>
   </div>
-  <div class="upload-document__text">
+  <div class="paragraph-text text-center margin-0-auto neutrals-text-950">
     If you don’t have XL file you can fill it in manually or
     forward a request to a person in your organization who have it
   </div>
   <div
     *ngIf="!isSendRequest; else requestSendTemplate"
-    class="upload-document__button-block"
+    class="upload-document-button-block flex mt-10 mb-16"
   >
     <button
-      class="upload-document__button-block__button cursor-pointer"
+      class="usual-button cursor-pointer paragraph-text-extra rounded-m text-center"
       (click)="downloadXlExample()"
     >Download XL Example
     </button>
     <button
-      class="upload-document__button-block__button cursor-pointer"
+      class="usual-button cursor-pointer paragraph-text-extra rounded-m text-center"
       (click)="openForwardModal(dialogTemplate)"
     >Forward
     </button>
   </div>
-  <div
+  <smarti-button
     *ngIf="documentUploaded"
-    class="confirm-block"
-  >
-    <button class="confirm-button">Confirm</button>
-  </div>
+    [typeClass]="'confirm'"
+    [customMargin]="'26px 0 64px'"
+    [text]="'Confirm'"
+    (buttonClicked)="doChangeStep('forward')"
+  ></smarti-button>
 </div>
 
 <ng-template
@@ -73,8 +74,13 @@
       [description]="'As soon as we receive a file we will let you know to go to the next stage of process.<br/>Go to next step'"
       (closeNotification)="closeNotification($event)"
     ></smarti-notification>
-    <button class="go-next-button">
-      Go to next step
-    </button>
+    <smarti-button
+      class="block"
+      [typeClass]="'confirm'"
+      [text]="'Go to next step'"
+      [customMargin]="'21px auto 64px'"
+      [customWidth]="'276px'"
+      (buttonClicked)="doChangeStep('forward')"
+    ></smarti-button>
   </div>
 </ng-template>

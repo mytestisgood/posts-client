@@ -1,19 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
-@import "@ng-select/ng-select/themes/default.theme.css";
-@import "assets/fonts/fonts.scss";
-@import "assets/styles/bg-colors";
-@import "assets/styles/colors";
-@import "assets/styles/margins";
-@import "assets/styles/buttons";
-@import "assets/styles/text";
-@import "assets/styles/inputs";
-@import "assets/styles/selects";
-@import "assets/styles/date-picker";
-@import "assets/styles/variables";
-@import "assets/styles/dialogs";
+@import "variables";
+@import "fonts";
+@import "bg-colors";
+@import "colors";
+@import "margins";
+@import "borders";
+@import "text";
+@import "box-shadows";
+@import "buttons";
+@import "inputs";
+@import "selects";
+@import "date-picker";
+@import "dialogs";
 
 body {
   margin: 0;
+  font-family: RubikMedium, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
 }
 
 .cursor-pointer {
@@ -24,10 +29,54 @@ body {
   display: flex;
 }
 
+.gap-1 {
+  gap: 4px;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
 .gap-4 {
   gap: 16px;
 }
 
+.flex-col {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.self-center {
+  align-self: center;
+}
+
 .relative {
   position: relative;
+}
+
+.block {
+  display: block;
+}
+
+.fit-content {
+  width: fit-content;
+}
+
+.dir-rtl {
+  direction: rtl;
 }

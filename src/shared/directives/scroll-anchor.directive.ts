@@ -11,7 +11,6 @@ export class ScrollAnchorDirective {
 
   @HostListener('click')
   scroll() {
-    console.log('clock')
     this.manager.scroll(this.id);
   }
 }

@@ -1,0 +1,44 @@
+<div class="mt-10 flex flex-col items-center">
+  <h3 class="medium mt-10 mb-0 text-center neutrals-text-950">
+    To continue using Smarti, please verify your email address
+  </h3>
+  <div class="email-text-block mt-20 neutrals-text-950 text-center margin-rl-auto">
+    <div class="regular-text">
+      Account activation code has been sent to the e-mail address you provided
+    </div>
+    <div class="medium-text neutrals-text-950">name@email.com</div>
+  </div>
+  <div class="margin-rl-auto neutrals-text-950 text-center mt-10">
+    <div class="regular-text mb-4">Please enter verification code</div>
+    <smarti-input-number
+      [centerVerify]="true"
+      [customWidth]="'536px'"
+      [maximumValue]="999999"
+    ></smarti-input-number>
+  </div>
+  <div class="mt-10 margin-rl-auto">
+    <div class="paragraph-text neutrals-text-950 text-center">
+      If you did not receive an email or if it<br/>
+      expired, you can resend one.
+    </div>
+    <div
+      class=" mt-4 paragraph-text-medium text-underline bright-turquoise-text-500 text-center cursor-pointer"
+    >Resend Verification code</div>
+  </div>
+  <smarti-button
+    class="mt-20 mb-16"
+    [typeClass]="'confirm'"
+    (buttonClicked)="openSuccessDialog(successDialogTemplate)"
+    [text]="'Confirm'"
+    [customWidth]="'232px'"
+  ></smarti-button>
+</div>
+
+<ng-template
+  #successDialogTemplate
+  let-observer
+>
+  <smarti-registration-success-dialog
+    [observer]="observer"
+  ></smarti-registration-success-dialog>
+</ng-template>

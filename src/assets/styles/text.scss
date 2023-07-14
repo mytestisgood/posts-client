@@ -1,3 +1,14 @@
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+.text-underline {
+  text-decoration-line: underline;
+}
+
 .smarti-heading-text {
   text-align: center;
   font-size: 44px;
@@ -17,4 +28,149 @@
   line-height: 32px;
   width: 955px;
   margin: 0 auto;
+}
+
+.display-text {
+  font-family: RubikMedium, sans-serif;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 68px;
+}
+
+h1 {
+  font-family: Rubik, sans-serif;
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 48px;
+}
+
+h2 {
+  font-family: Rubik, sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 44px;
+}
+
+h3 {
+  font-family: Rubik, sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+h4 {
+  font-family: Rubik, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.medium {
+  font-weight: 500;
+  font-family: RubikMedium, sans-serif;
+}
+
+.light {
+  font-weight: 300;
+}
+.medium-text {
+  font-family: RubikMedium, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.regular-text {
+  font-family: Rubik, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.light-text {
+  font-family: RubikMedium, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 28px;
+}
+
+.smarti-button-text {
+  font-size: 20px;
+  font-family: RubikMedium, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.paragraph-text {
+  font-family: Rubik, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.paragraph-text-medium {
+  font-family: RubikMedium, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.paragraph-text-light  {
+  font-family: Rubik, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 24px;
+}
+
+.paragraph-text-extra {
+  font-family: RubikMedium, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+
+.caption-text {
+  font-family: Rubik, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.caption-text-medium {
+  font-family: RubikMedium, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.extra-small-text {
+  font-family: Rubik, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.extra-small-text-medium {
+  font-family: RubikMedium, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
 }

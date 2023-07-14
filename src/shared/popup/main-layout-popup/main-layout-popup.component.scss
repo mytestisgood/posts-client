@@ -1,66 +1,29 @@
 .left-popup-block {
-  background: url("../../../assets/svg/small-banner-left.svg");
+  background: url("/assets/svg/small-banner-left.svg");
   width: 280px;
   height: 198px;
   position: absolute;
   top: 500px;
 
   &__header {
-    text-align: center;
-    font-size: 24px;
-    font-family: RubikMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 32px;
     margin: 31px;
-  }
-
-  &__text {
-    text-align: center;
-    font-size: 16px;
-    font-family: RubikMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
   }
 
   &__button {
     padding: 12px 32px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    border-radius: 8px;
   }
 }
 
 .right-popup-block {
-  background: url("../../../assets/svg/small-banner-right.svg");
+  background: url("/assets/svg/small-banner-right.svg");
   width: 280px;
   height: 198px;
 
   &__header {
-    text-align: center;
     font-size: 24px;
-    font-family: RubikMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 32px;
-  }
-
-  &__text {
-    text-align: center;
-    font-size: 16px;
-    font-family: RubikMedium, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
   }
 
   &__button {
     padding: 12px 32px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    border-radius: 8px;
   }
 }

@@ -1,31 +1,21 @@
 .registration {
   width: 1080px;
-  margin: 0 auto;
+}
 
-  &__info-block {
-    display: flex;
-    justify-content: space-between;
+.first-header-image {
+  background: url("/assets/svg/seated-woman.svg");
+  width: 182px;
+  height: 160px;
+}
 
-    &__left {
-      background: url("../../assets/svg/seated-woman.svg");
-      width: 182px;
-      height: 160px;
-    }
+.second-header-image {
+  background: url("/assets/svg/work-with-documents.svg");
+  width: 218px;
+  height: 160px;
+}
 
-    &__left-new {
-      background: url("../../assets/svg/work-with-documents.svg");
-      width: 218px;
-      height: 160px;
-    }
-
-    &__right {
-      text-align: right;
-      font-family: RubikMedium, sans-serif;
-      font-size: 44px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 48px;
-      align-self: center;
-    }
-  }
+.third-header-image {
+  background: url("/assets/svg/post-box.svg");
+  width: 220px;
+  height: 160px;
 }
