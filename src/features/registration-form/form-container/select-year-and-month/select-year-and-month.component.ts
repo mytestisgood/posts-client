@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ButtonComponent } from '../../../../shared/ui/button/button.component';
-import { DatePickerComponent } from '../../../../shared/ui/date-picker/date-picker.component';
-import { InputFieldComponent } from '../../../../shared/ui/input-field/input-field.component';
-import { SelectComponent } from '../../../../shared/ui/select/select.component';
+import { ButtonComponent, DatePickerComponent, InputFieldComponent, SelectComponent } from '@shared/ui';
 
 type Direction = 'forward' | 'back';
 

@@ -1,13 +1,13 @@
 <div class="bg-neutral-20">
   <smarti-registration-header></smarti-registration-header>
-  <div class="registration margin-0-auto">
+  <div class="width-full-hd margin-0-auto">
     <smarti-progress-bar
       [counter]="stepCounter"
     ></smarti-progress-bar>
     <div class="flex justify-between mt-2">
       <div
         [ngClass]="{
-          'first-header-image': changeImageStep === 'personalInfo',
+          'first-head er-image': changeImageStep === 'personalInfo',
           'second-header-image': changeImageStep === 'loginInfo' || changeImageStep === 'uploadDocumentInfo',
           'third-header-image': changeImageStep === 'verifyEmailInfo',
         }"

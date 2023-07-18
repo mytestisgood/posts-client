@@ -1,29 +1,34 @@
 <!-- header for special offer -->
-<div class="all-header">
+<div class="all-headers">
   <div class="bg-green">
-    <div class="special-header">
-      <div class="special-header__left">
+    <div class="special-header flex justify-between items-center">
+      <div class="flex justify-between gap-143px">
         <div class="button-close"></div>
-        <div class="button-trial rounded-m border-neutrals-950">
+        <div
+          class="button-trial flex gap-2 items-center rounded-m border-neutrals-950 cursor-pointer"
+          (click)="navigateToRegistrationPage()"
+        >
           <div class="button-trial__icon-arrow-left"></div>
-          <div class="button-trial__text">התחילו מסלול חינם</div>
+          <div class="paragraph-text-extra">התחילו מסלול חינם</div>
         </div>
       </div>
 
      <smarti-clock-feature></smarti-clock-feature>
 
-      <div class="special-header__right">מבצע: חודש ניסיון חינם</div>
+      <h4 class="medium">מבצע: חודש ניסיון חינם</h4>
     </div>
   </div>
 
   <div class="bg-header white-text bg-neutrals-950">
-    <div class="header">
-      <div class="header__left">
+    <div class="header flex justify-between items-center">
+      <div class="flex">
         <smarti-button
           [typeClass]="'confirm'"
           [text]="'התחברות'"
           [customWidth]="'168px'"
           [customHeight]="'42px'"
+          [paragraphTextExtra]="true"
+          (buttonClicked)="navigateToLoginPage()"
         ></smarti-button>
         <smarti-button
           style="margin-inline-start: 24px;"
@@ -32,18 +37,35 @@
           [customWidth]="'168px'"
           [customHeight]="'42px'"
           [customBorder]="'1px solid white'"
+          [paragraphTextExtra]="true"
+          (buttonClicked)="navigateToRegistrationPage()"
         ></smarti-button>
       </div>
-      <nav class="header__right">
+      <nav class="flex">
         <!--      contact-->
-        <a class="header__right-block cursor-pointer" appScrollAnchor="footer">צרו קשר</a>
+        <a
+          class="nav-block paragraph-text-light self-center cursor-pointer"
+          appScrollAnchor="footer"
+        >צרו קשר</a>
         <!--      blog-->
-        <a class="header__right-block cursor-pointer" appScrollAnchor="blog">בלוג</a>
+        <a
+          class="nav-block paragraph-text-light self-center cursor-pointer"
+          appScrollAnchor="blog"
+        >בלוג</a>
         <!--      about-->
-        <a class="header__right-block cursor-pointer" appScrollAnchor="banner">אודות</a>
+        <a
+          class="nav-block paragraph-text-light self-center cursor-pointer"
+          appScrollAnchor="banner"
+        >אודות</a>
         <!--      solution-->
-        <a class="header__right-block cursor-pointer" appScrollAnchor="about">פתרונות</a>
-        <a class="header__right-block-img cursor-pointer" appScrollAnchor="banner"></a>
+        <a
+          class="nav-block paragraph-text-light self-center cursor-pointer"
+          appScrollAnchor="about"
+        >פתרונות</a>
+        <a
+          class="nav-block__img cursor-pointer"
+          appScrollAnchor="banner"
+        ></a>
       </nav>
     </div>
   </div>

@@ -14,6 +14,7 @@ export class ButtonComponent {
   @Input() public typeClass!: 'confirm' | 'interaction' | 'dark';
   @Input() public disabled: boolean = false;
   @Input() public haveIcon: boolean = false;
+  @Input() public paragraphTextExtra: boolean = false;
   @Input() public text!: string;
   @Input() public iconName!: string;
   @Input() public customMargin!: string;

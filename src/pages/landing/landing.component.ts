@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {HeaderComponent} from "../../shared/layout/landing-layout/header/header.component";
-import {FooterComponent} from "../../shared/layout/landing-layout/footer/footer.component";
-import {LandingLayoutComponent} from "../../shared/layout/landing-layout/landing-layout.component";
-import {SharedModule} from "../../shared/shared.module";
-import {MainLayoutPopupComponent} from "../../shared/popup/main-layout-popup/main-layout-popup.component";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { HeaderComponent, FooterComponent, LandingLayoutComponent } from '@shared/layout';
+import { SharedModule } from '@shared/module';
+import {
+  MainLayoutPopupComponent,
+} from '@shared/popup';
 
 @Component({
   selector: 'smarti-landing',
@@ -16,8 +16,8 @@ import {MainLayoutPopupComponent} from "../../shared/popup/main-layout-popup/mai
     FooterComponent,
     LandingLayoutComponent,
     SharedModule,
-    MainLayoutPopupComponent
-  ]
+    MainLayoutPopupComponent,
+  ],
 })
 export class LandingComponent {
 

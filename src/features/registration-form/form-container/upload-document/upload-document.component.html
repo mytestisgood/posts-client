@@ -19,7 +19,7 @@
     Start our service right away
   </h3>
   <div class="file-upload mt-10 mb-16">
-    <div class="paragraph-text neutrals-text-950">Attach XL file</div>
+    <div class="paragraph-text neutrals-text-950">Attach XML file</div>
     <smarti-input-file
       [customWidth]="'536px'"
       [customHeight]="'120px'"
@@ -27,17 +27,17 @@
     ></smarti-input-file>
   </div>
   <div class="paragraph-text text-center margin-0-auto neutrals-text-950">
-    If you don’t have XL file you can fill it in manually or
+    If you don’t have XML file you can fill it in manually or
     forward a request to a person in your organization who have it
   </div>
   <div
     *ngIf="!isSendRequest; else requestSendTemplate"
-    class="upload-document-button-block flex mt-10 mb-16"
+    class="flex mt-10 mb-16 gap-217px"
   >
     <button
       class="usual-button cursor-pointer paragraph-text-extra rounded-m text-center"
       (click)="downloadXlExample()"
-    >Download XL Example
+    >Download Excel Example
     </button>
     <button
       class="usual-button cursor-pointer paragraph-text-extra rounded-m text-center"
@@ -46,7 +46,7 @@
     </button>
   </div>
   <smarti-button
-    *ngIf="documentUploaded"
+    *ngIf="documentUploaded && !isSendRequest"
     [typeClass]="'confirm'"
     [customMargin]="'26px 0 64px'"
     [text]="'Confirm'"

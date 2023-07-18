@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ButtonComponent } from '../../ui/button/button.component';
-import { InputFieldComponent } from '../../ui/input-field/input-field.component';
+import { ButtonComponent, InputFieldComponent } from '@shared/ui';
 
 @Component({
   selector: 'smarti-forward-request-dialog',

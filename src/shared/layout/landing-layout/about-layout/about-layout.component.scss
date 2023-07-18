@@ -1,19 +1,5 @@
 .about-block-forms {
-  display: flex;
-  justify-content: space-between;
   margin: 104px 140px 0;
-
-  &__item {
-    &-text {
-      margin-top: 8px;
-      text-align: center;
-      font-size: 24px;
-      font-family: RubikMedium, sans-serif;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 32px;
-    }
-  }
 }
 
 .first-about-form-image {

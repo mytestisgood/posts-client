@@ -1,8 +1,9 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {SharedModule} from "../../../shared.module";
-import {ClockFeatureComponent} from "../../../../features/clock-feature/clock-feature.component";
-import { ButtonComponent } from '../../../ui/button/button.component';
+import { Router } from '@angular/router';
+import { SharedModule } from '@shared/module';
+import { ClockFeatureComponent } from '@feature';
+import { ButtonComponent } from '@shared/ui';
 
 @Component({
   selector: 'smarti-header',
@@ -14,4 +15,16 @@ import { ButtonComponent } from '../../../ui/button/button.component';
 })
 export class HeaderComponent {
 
+  constructor(
+    private readonly router: Router,
+  ) {
+  }
+
+  public navigateToRegistrationPage(): void {
+    this.router.navigate(['/registration'])
+  }
+
+  public navigateToLoginPage(): void {
+    this.router.navigate(['/login'])
+  }
 }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ButtonComponent } from '../../ui/button/button.component';
+import { ButtonComponent } from '@shared/ui';
 
 @Component({
   selector: 'smarti-registration-success-dialog',

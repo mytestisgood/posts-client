@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
-import { InputFieldComponent } from '../../shared/ui/input-field/input-field.component';
+import { InputFieldComponent } from '@shared/ui';
 import { FormContainerComponent } from './form-container/form-container.component';
 
 @Component({

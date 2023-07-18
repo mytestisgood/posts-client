@@ -5,12 +5,12 @@
       Top of them
     </div>
   </div>
-  <div class="company-list mt-32">
-    <div class="company-list__item rounded-l border-neutrals-800 bg-neutrals-950" *ngFor="let _ of ' '.repeat(6).split('');">
-      <div class="company-list__item__image"></div>
-      <div class="company-list__item__info">
-        <div class="company-list__item__info-name white-text">Company name</div>
-        <div class="company-list__item__info-logo rounded-l"></div>
+  <div class="flex justify-between gap-3-5 mt-32">
+    <div class="company-list-item rounded-l border-neutrals-800 bg-neutrals-950" *ngFor="let _ of ' '.repeat(6).split('');">
+      <div class="company-list-item__image"></div>
+      <div class="flex justify-end gap-3-5">
+        <div class="medium-text mt-2 dir-rtl white-text">Company name</div>
+        <div class="company-list-item__logo rounded-l"></div>
       </div>
     </div>
   </div>

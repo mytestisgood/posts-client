@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {SharedModule} from "../../../shared.module";
-import { ButtonComponent } from '../../../ui/button/button.component';
+import { SharedModule } from '@shared/module';
+import { ButtonComponent } from '@shared/ui';
 
 @Component({
   selector: 'smarti-main-banner-layout',

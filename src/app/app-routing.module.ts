@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegistrationComponent } from '../pages/registration/registration.component';
-import { LandingComponent } from '../pages/landing/landing.component';
-import { NotFoundComponent } from '../pages/not-found/not-found.component';
+import { LoginComponent, LandingComponent, RegistrationComponent, NotFoundComponent } from '@pages';
 import { BrowserModule } from '@angular/platform-browser';
 
 const routes: Routes = [
   {path: '', component: LandingComponent},
   {path: 'registration', component: RegistrationComponent},
+  {path: 'login', component: LoginComponent},
   {path: '**', component: NotFoundComponent},
 ];
 

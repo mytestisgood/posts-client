@@ -1,4 +1,4 @@
-tui-input {
+tui-input, tui-input-password {
   direction: rtl!important;
   text-align: right!important;
   border-radius: 8px!important;
@@ -66,7 +66,7 @@ tui-checkbox {
   }
 }
 
-tui-input-number {
+tui-input {
   input.center-verify {
     color: $neutrals-500!important;
     text-align: center!important;

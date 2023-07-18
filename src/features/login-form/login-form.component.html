@@ -1,0 +1,38 @@
+<div class="login-form mt-2 bg-white rounded-l box-shadow-big">
+  <form class="flex flex-col items-center mt-10" [formGroup]="loginForm">
+    <h3
+      class="medium mt-10 mb-0 text-center neutrals-text-950"
+    >Create account fast and easy!</h3>
+    <div class="mt-24">
+      <smarti-input-field
+        [customWidth]="'536px'"
+        [placeholder]="'Email Address*'"
+        [type]="'text'"
+      ></smarti-input-field>
+    </div>
+    <div class="mt-14">
+      <smarti-input-password
+        [customWidth]="'536px'"
+        [placeholder]="'Password*'"
+      ></smarti-input-password>
+    </div>
+    <div class="mt-6 flex justify-between width-input-full-hd">
+      <div
+        class="bright-turquoise-text-500 text-underline paragraph-text-medium cursor-pointer"
+        (click)="navigateToRestorePassword()"
+      >Forgot password?</div>
+      <div class="flex gap-4">
+        <div class="paragraph-text text-right neutrals-text-950">
+          Remember me
+        </div>
+        <smarti-input-checkbox></smarti-input-checkbox>
+      </div>
+    </div>
+    <smarti-button
+      [customMargin]="'120px 0 64px'"
+      [text]="'Log In'"
+      [typeClass]="'confirm'"
+      (buttonClicked)="dologin()"
+    ></smarti-button>
+  </form>
+</div>

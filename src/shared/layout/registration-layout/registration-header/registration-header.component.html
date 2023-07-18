@@ -1,6 +1,10 @@
-<div class="registration-header">
-  <div class="registration-header__left">
-      יש לך חשבון?<span class="bright-turquoise-text-500 neutrals-text-950"> התחברות</span>
-  </div>
-  <div class="registration-header__right"></div>
+<div class="registration-header flex justify-between">
+  <h4 class="mt-0 medium truncate dir-rtl">
+      יש לך חשבון?
+    <span
+      class="bright-turquoise-text-500 neutrals-text-950 cursor-pointer"
+      (click)="navigateToLoginPage()"
+    > התחברות</span>
+  </h4>
+  <div class="registration-header__img"></div>
 </div>

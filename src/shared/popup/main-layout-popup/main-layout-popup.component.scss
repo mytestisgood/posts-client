@@ -4,26 +4,10 @@
   height: 198px;
   position: absolute;
   top: 500px;
-
-  &__header {
-    margin: 31px;
-  }
-
-  &__button {
-    padding: 12px 32px;
-  }
 }
 
 .right-popup-block {
   background: url("/assets/svg/small-banner-right.svg");
   width: 280px;
   height: 198px;
-
-  &__header {
-    font-size: 24px;
-  }
-
-  &__button {
-    padding: 12px 32px;
-  }
 }

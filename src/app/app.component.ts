@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { environment } from '../environment/environment';
+import { environment } from '@environment';
 
 @Component({
   selector: 'app-root',

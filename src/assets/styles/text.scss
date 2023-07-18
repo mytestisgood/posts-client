@@ -5,8 +5,19 @@
 .text-right {
   text-align: right;
 }
+
 .text-underline {
   text-decoration-line: underline;
+}
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .smarti-heading-text {

@@ -2,19 +2,20 @@
   class="b-form"
   [formGroup]="formInput"
 >
-  <tui-input-number
+  <tui-input
     tuiTextfieldSize="m"
     formControlName="inputValue"
     [tuiTextfieldLabelOutside]="true"
     [style.width]="customWidth"
-    [max]="maximumValue"
   >
     {{ placeholder }}
     <input
-      [ngClass]="{
-        'center-verify': centerVerify,
-      }"
       tuiTextfield
+      inputmode="numeric"
+      [maskito]="maxLengthMask"
+      [ngClass]="{
+      'center-verify': centerVerify,
+    }"
     />
-  </tui-input-number>
+  </tui-input>
 </form>

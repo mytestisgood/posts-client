@@ -1,9 +1,37 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "@shared/ui": [
+        "src/shared/ui"
+      ],
+      "@shared/dialog": [
+        "src/shared/dialog"
+      ],
+      "@shared/layout": [
+        "src/shared/layout"
+      ],
+      "@shared/popup": [
+        "src/shared/popup"
+      ],
+      "@shared/directives": [
+        "src/shared/directives"
+      ],
+      "@shared/module": [
+        "src/shared/module"
+      ],
+      "@feature": [
+        "src/features"
+      ],
+      "@pages": [
+        "src/pages"
+      ],
+      "@environment": [
+        "src/environment"
+      ]
+    },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,

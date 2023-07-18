@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MainBannerLayoutComponent} from "./main-banner-layout/main-banner-layout.component";
 import {AboutLayoutComponent} from "./about-layout/about-layout.component";
-import {StartDayWithSmartiLayoutComponent} from "./start-day-with-smart-layouti/start-day-with-smarti-layout.component";
+import {StartDayWithSmartiLayoutComponent} from "./start-day-with-smarti-layout/start-day-with-smarti-layout.component";
 import {ConnectNowLayoutComponent} from "./connect-now-layout/connect-now-layout.component";
 import {RunBusinessLayoutComponent} from "./run-business-layout/run-business-layout.component";
 import {EmployeeManagementLayoutComponent} from "./employee-management-layout/employee-management-layout.component";

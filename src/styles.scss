@@ -1,5 +1,6 @@
 @import "variables";
 @import "fonts";
+@import "flex";
 @import "bg-colors";
 @import "colors";
 @import "margins";
@@ -14,7 +15,7 @@
 
 body {
   margin: 0;
-  font-family: RubikMedium, sans-serif;
+  font-family: Rubik, sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -25,36 +26,8 @@ body {
   cursor: pointer;
 }
 
-.flex {
-  display: flex;
-}
-
-.gap-1 {
-  gap: 4px;
-}
-
-.gap-2 {
-  gap: 8px;
-}
-
-.gap-4 {
-  gap: 16px;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.justify-end {
-  justify-content: flex-end;
-}
-
-.justify-between {
-  justify-content: space-between;
+.inline-block {
+  display: inline-block;
 }
 
 .items-center {
@@ -79,4 +52,12 @@ body {
 
 .dir-rtl {
   direction: rtl;
+}
+
+.width-full-hd {
+  width: 1080px;
+}
+
+.width-input-full-hd {
+  width: 536px;
 }

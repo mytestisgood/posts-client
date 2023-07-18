@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from '../../../ui/button/button.component';
+import { Router } from '@angular/router';
+import { ButtonComponent } from '@shared/ui';
 
 @Component({
   selector: 'smarti-connect-now-layout',
@@ -11,5 +12,12 @@ import { ButtonComponent } from '../../../ui/button/button.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConnectNowLayoutComponent {
+  constructor(
+    private readonly router: Router,
+  ) {
+  }
 
+  public navigateToRegistrationPage(): void {
+    this.router.navigate(['/registration'])
+  }
 }

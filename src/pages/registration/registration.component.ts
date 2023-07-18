@@ -1,15 +1,9 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  RegistrationFooterComponent
-} from '../../shared/layout/registration-layout/registration-footer/registration-footer.component';
-import {
-  RegistrationHeaderComponent,
-} from '../../shared/layout/registration-layout/registration-header/registration-header.component';
-import { ProgressBarComponent } from '../../features/progress-bar/progress-bar.component';
-import {
-  RegistrationFormComponent,
-} from '../../features/registration-form/registration-form.component';
+  RegistrationFooterComponent, RegistrationHeaderComponent
+} from '@shared/layout';
+import { ProgressBarComponent, RegistrationFormComponent } from '@feature';
 
 type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailInfo';
 

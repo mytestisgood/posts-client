@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'smarti-registration-header',
@@ -10,5 +11,9 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationHeaderComponent {
-
+  constructor(private readonly router: Router) {
+  }
+  public navigateToLoginPage(): void {
+    this.router.navigate(['/login'])
+  }
 }

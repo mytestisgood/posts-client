@@ -13,9 +13,8 @@ import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import {
   RegistrationSuccessDialogComponent
-} from '../../../../shared/dialog/registration-success-dialog/registration-success-dialog.component';
-import { ButtonComponent } from '../../../../shared/ui/button/button.component';
-import { InputNumberComponent } from '../../../../shared/ui/input-number/input-number.component';
+} from '@shared/dialog';
+import { ButtonComponent, InputNumberComponent } from '@shared/ui';
 
 type Direction = 'forward' | 'back';
 

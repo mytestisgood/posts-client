@@ -8,11 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ButtonComponent } from '../../../../shared/ui/button/button.component';
-import {
-  InputCheckboxComponent
-} from '../../../../shared/ui/input-checkbox/input-checkbox.component';
-import { InputFieldComponent } from '../../../../shared/ui/input-field/input-field.component';
+import { ButtonComponent, InputCheckboxComponent, InputFieldComponent } from '@shared/ui';
 
 type Direction = 'forward' | 'back';
 
