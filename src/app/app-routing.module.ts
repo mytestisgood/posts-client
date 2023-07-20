@@ -8,31 +8,31 @@ const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
-    pathMatch: 'full'
   },
   {
     path: 'registration',
     component: RegistrationComponent,
-    pathMatch: 'full'
   },
   {
     path: 'login',
     component: LoginComponent,
-    pathMatch: 'full'
   },
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
-    pathMatch: 'full'
   },
   {
     path: '**',
-    component: NotFoundComponent
+    component: LandingComponent,
+    pathMatch: 'full',
+    children: [{ path: '', component: NotFoundComponent }],
   },
 ];
 
 @NgModule({
-  imports: [BrowserModule, RouterModule.forRoot(routes)],
+  imports: [BrowserModule, RouterModule.forRoot(
+    routes, { scrollPositionRestoration: 'enabled', useHash: true }
+  )],
   exports: [RouterModule],
 })
 export class AppRoutingModule {
