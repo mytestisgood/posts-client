@@ -7,6 +7,7 @@
       [customWidth]="'536px'"
       [placeholder]="'Company name*'"
       [type]="'text'"
+      [control]="personalInfoForm.controls.companyName"
     ></smarti-input-field>
   </div>
   <div class="personal-info mt-8">
@@ -14,6 +15,7 @@
       [customWidth]="'536px'"
       [placeholder]="'Company ID*'"
       [type]="'text'"
+      [control]="personalInfoForm.controls.companyId"
     ></smarti-input-field>
   </div>
   <div class="personal-info mt-8">
@@ -21,6 +23,7 @@
       [customWidth]="'536px'"
       [placeholder]="'Your Name'"
       [type]="'text'"
+      [control]="personalInfoForm.controls.yourName"
     ></smarti-input-field>
   </div>
   <div class="personal-info mt-8">
@@ -28,6 +31,7 @@
       [placeholder]="'Email Address*'"
       [customWidth]="'536px'"
       [type]="'text'"
+      [control]="personalInfoForm.controls.email"
     ></smarti-input-field>
   </div>
   <div class="personal-info mt-8">
@@ -35,6 +39,7 @@
       [customWidth]="'536px'"
       [placeholder]="'Phone Number*'"
       [type]="'text'"
+      [control]="personalInfoForm.controls.phone"
     ></smarti-input-field>
   </div>
   <div class="personal-info mt-8 flex gap-4">
@@ -42,12 +47,15 @@
       I have read and agree to the Smarti<br/>
       Terms of Services and Privacy Policy.
     </div>
-    <smarti-input-checkbox></smarti-input-checkbox>
+    <smarti-input-checkbox
+      [control]="personalInfoForm.controls.acceptPrivacy"
+    ></smarti-input-checkbox>
   </div>
   <smarti-button
     [customMargin]="'40px 0 64px'"
     [text]="'Register'"
     [typeClass]="'confirm'"
     (buttonClicked)="doChangeStep('forward')"
+    [disabled]="isDisabled"
   ></smarti-button>
 </form>

@@ -13,15 +13,15 @@ export class ScrollSectionDirective implements OnInit, OnDestroy {
   ) {
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.manager.register(this);
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.manager.remove(this);
   }
 
-  scroll() {
+  public scroll(): void {
     this.host.nativeElement.scrollIntoView({
       behavior: 'smooth',
     });

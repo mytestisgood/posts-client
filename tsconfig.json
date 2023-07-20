@@ -30,6 +30,9 @@
       ],
       "@environment": [
         "src/environment"
+      ],
+      "@shared/services": [
+        "src/shared/services"
       ]
     },
     "forceConsistentCasingInFileNames": true,

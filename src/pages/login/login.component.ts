@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LoginFormComponent } from '@feature';
 import {
-  LoginFooterComponent, LoginHeaderComponent
+  ContactUsFooterLayoutComponent, HeaderAuthLayoutComponent
 } from '@shared/layout';
 
 @Component({
@@ -10,8 +10,8 @@ import {
   standalone: true,
   imports: [
     CommonModule,
-    LoginHeaderComponent,
-    LoginFooterComponent,
+    HeaderAuthLayoutComponent,
+    ContactUsFooterLayoutComponent,
     LoginFormComponent,
   ],
   templateUrl: './login.component.html',

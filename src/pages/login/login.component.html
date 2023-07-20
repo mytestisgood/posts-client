@@ -1,5 +1,10 @@
 <div class="bg-neutral-20">
-  <smarti-login-header></smarti-login-header>
+  <smarti-header-auth-layout
+    [haveLeftBLock]="true"
+    [leftBlockText]="'Don’t have an account?'"
+    [leftBlockClickedText]="'Register Now'"
+    [redirectLink]="'/registration'"
+  ></smarti-header-auth-layout>
   <div class="width-full-hd margin-0-auto">
     <div class="flex justify-between">
       <div class="seated-working-woman-img"></div>
@@ -10,5 +15,5 @@
     </div>
     <smarti-login-form></smarti-login-form>
   </div>
-  <smarti-login-footer></smarti-login-footer>
+  <smarti-contact-us-footer-layout></smarti-contact-us-footer-layout>
 </div>

@@ -10,7 +10,7 @@ export class ScrollAnchorDirective {
   constructor(private manager: ScrollManagerDirective) {}
 
   @HostListener('click')
-  scroll() {
+  public scroll(): void {
     this.manager.scroll(this.id);
   }
 }

@@ -4,7 +4,7 @@ import {
   Input,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/kit';
 
@@ -21,9 +21,8 @@ export class InputFieldComponent {
   @Input() public placeholder: string = '';
   @Input() public type: string = 'text';
   @Input() public customWidth: string = '';
-  readonly formInput = new FormGroup({
-    inputValue: new FormControl(''),
-  });
+  @Input() public control: FormControl<string | null> = new FormControl<string>('');
+
 
   constructor() {
   }

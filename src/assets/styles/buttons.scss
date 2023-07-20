@@ -45,6 +45,12 @@
   background: $white;
 }
 
+.usual-button-no-size {
+  border: 1px solid $neutrals-950;
+  color: $neutrals-950;
+  background: $white;
+}
+
 .button-close {
   background: url("/assets/svg/close-circle.svg");
   width: 24px;

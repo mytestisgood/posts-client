@@ -9,6 +9,7 @@
 @import "box-shadows";
 @import "buttons";
 @import "inputs";
+@import "radio";
 @import "selects";
 @import "date-picker";
 @import "dialogs";
@@ -58,6 +59,14 @@ body {
   width: 1080px;
 }
 
+.width-form-full-hd {
+  width: 1088px;
+}
+
 .width-input-full-hd {
   width: 536px;
+}
+
+.width-header-leads {
+  width: 398px;
 }

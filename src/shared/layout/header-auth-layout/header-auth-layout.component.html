@@ -1,0 +1,19 @@
+<div
+  *ngIf="haveLeftBLock; else onlyLogoTemplate"
+  class="auth-header flex justify-between"
+>
+  <h4 class="mt-0 medium truncate dir-rtl">
+    {{ leftBlockText }}
+    <span
+      class="bright-turquoise-text-500 neutrals-text-950 cursor-pointer"
+      (click)="navigateToRegistrationPage()"
+    >{{ leftBlockClickedText }}</span>
+  </h4>
+  <div class="auth-header__img"></div>
+</div>
+
+<ng-template #onlyLogoTemplate>
+  <div class="auth-header flex justify-end">
+    <div class="auth-header__img"></div>
+  </div>
+</ng-template>

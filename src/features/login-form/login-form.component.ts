@@ -43,7 +43,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   public navigateToRestorePassword(): void {
-    this.router.navigate(['/restore-password']);
+    this.router.navigate(['/reset-password']);
   }
 
   public dologin(): void {

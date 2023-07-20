@@ -1,10 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Output } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MaskitoModule } from '@maskito/angular';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiInputModule, TuiInputMonthModule, TuiInputNumberModule } from '@taiga-ui/kit';
 import { MaskitoOptions } from '@maskito/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'smarti-input-number',
@@ -24,10 +31,9 @@ export class InputNumberComponent implements OnInit{
   @Input() public type: string = 'text';
   @Input() public customWidth: string = '';
   @Input() public maxLength: number = 10;
+  @Output() public inputFilled: Subject<boolean> = new Subject<boolean>();
 
-  readonly formInput = new FormGroup({
-    inputValue: new FormControl(),
-  });
+  public formInput!: FormGroup<{inputValue: FormControl<null>}>;
   public maxLengthMask!: MaskitoOptions;
 
   public ngOnInit(): void {
@@ -36,5 +42,19 @@ export class InputNumberComponent implements OnInit{
         ...Array(this.maxLength).fill(/\d/)
       ],
     };
+    this.formInput = new FormGroup({
+      inputValue: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(this.maxLength)
+      ]),
+    });
+  }
+
+  public changeValue(): void {
+    if (this.formInput.controls.inputValue.valid) {
+      this.inputFilled.next(true);
+    } else {
+      this.inputFilled.next(false);
+    }
   }
 }

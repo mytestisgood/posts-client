@@ -9,19 +9,21 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DestroyService } from '@shared/services';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import {
-  RegistrationSuccessDialogComponent
+  SuccessDialogComponent
 } from '@shared/dialog';
 import { ButtonComponent, InputNumberComponent } from '@shared/ui';
+import { takeUntil } from 'rxjs';
 
 type Direction = 'forward' | 'back';
 
 @Component({
   selector: 'smarti-verify-email',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, InputNumberComponent, RegistrationSuccessDialogComponent],
+  imports: [CommonModule, ButtonComponent, InputNumberComponent, SuccessDialogComponent],
   templateUrl: './verify-email.component.html',
   styleUrls: ['./verify-email.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,10 +38,11 @@ export class VerifyEmailComponent implements OnInit {
     @Inject(TuiDialogService)
     private readonly dialogs: TuiDialogService,
     private _fb: FormBuilder,
+    private destroy$: DestroyService,
   ) {
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     if (this.startingForm) {
       this.personalInfoForm = this.startingForm;
     } else {
@@ -51,11 +54,14 @@ export class VerifyEmailComponent implements OnInit {
     }
     this.subformInitialized.emit(this.personalInfoForm);
   }
-  doChangeStep(direction: 'forward') {
+
+  public doChangeStep(direction: 'forward'): void {
     this.changeStep.emit(direction);
   }
 
   public openSuccessDialog(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.dialogs.open(content).subscribe();
+    this.dialogs.open(content, {
+      closeable: false
+    }).pipe(takeUntil(this.destroy$)).subscribe();
   }
 }

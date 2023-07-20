@@ -22,6 +22,7 @@ export class ButtonComponent {
   @Input() public textColor!: string;
   @Input() public customHeight!: string;
   @Input() public customBorder!: string;
+  @Input() public customButtonWidth!: string;
   @Output() public buttonClicked: Subject<void> = new Subject();
 
   public clicked(): void {

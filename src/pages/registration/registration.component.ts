@@ -1,7 +1,8 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  RegistrationFooterComponent, RegistrationHeaderComponent
+  HeaderAuthLayoutComponent,
+  RegistrationFooterComponent,
 } from '@shared/layout';
 import { ProgressBarComponent, RegistrationFormComponent } from '@feature';
 
@@ -12,10 +13,10 @@ type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailIn
   standalone: true,
   imports: [
     CommonModule,
-    RegistrationHeaderComponent,
     ProgressBarComponent,
     RegistrationFormComponent,
     RegistrationFooterComponent,
+    HeaderAuthLayoutComponent,
   ],
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
@@ -79,7 +80,7 @@ export class RegistrationComponent implements AfterViewInit {
   constructor(private elementRef: ElementRef) {
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit(): void {
     this.elementRef.nativeElement.ownerDocument
       .body.style.backgroundColor = '#F7F9FC';
   }

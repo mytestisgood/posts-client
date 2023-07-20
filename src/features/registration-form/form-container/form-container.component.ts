@@ -23,7 +23,7 @@ type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailIn
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormContainerComponent implements OnInit {
-  @Output() public changingStep: BehaviorSubject<string> = new BehaviorSubject<string>('personalInfo');
+  @Output() public changingStep: BehaviorSubject<Step> = new BehaviorSubject<Step>('personalInfo');
 
   private currentStepBs: BehaviorSubject<Step> = new BehaviorSubject<Step>('personalInfo');
   public currentStep$: Observable<Step> = this.currentStepBs.asObservable();
@@ -32,18 +32,18 @@ export class FormContainerComponent implements OnInit {
   constructor(private _fb: FormBuilder) {
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.userForm = this._fb.group({
       personalInfo: null,
       loginInfo: null,
     });
   }
 
-  subformInitialized(name: string, group: FormGroup) {
+  public subformInitialized(name: string, group: FormGroup): void {
     this.userForm.setControl(name, group);
   }
 
-  changeStep(currentStep: string, direction: 'forward' | 'back') {
+  public changeStep(currentStep: string, direction: 'forward' | 'back'): void {
     switch (currentStep) {
       case 'personalInfoStep':
         if (direction === 'forward') {
@@ -71,8 +71,7 @@ export class FormContainerComponent implements OnInit {
     }
   }
 
-  submitForm() {
-    const formValues = this.userForm.value;
+  public submitForm(): void {
     // submit the form with a service
   }
 }

@@ -7,3 +7,7 @@ export * from './registration-form/form-container/personal-info/personal-info.co
 export * from './registration-form/form-container/select-year-and-month/select-year-and-month.component';
 export * from './registration-form/form-container/verify-email/verify-email.component';
 export * from './registration-form/form-container/upload-document/upload-document.component';
+export * from './reset-password-form/reset-password-form.component';
+export * from './reset-password-form/form-container-reset-password/form-container-reset-password.component';
+export * from './reset-password-form/form-container-reset-password/verify-step/verify-step.component';
+export * from './reset-password-form/form-container-reset-password/set-new-password/set-new-password.component';

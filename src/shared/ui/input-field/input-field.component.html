@@ -1,17 +1,12 @@
-<form
-  class="b-form"
-  [formGroup]="formInput"
+<tui-input
+  tuiTextfieldSize="m"
+  [formControl]="control"
+  [tuiTextfieldLabelOutside]="true"
+  [style.width]="customWidth"
 >
-  <tui-input
-    tuiTextfieldSize="m"
-    formControlName="inputValue"
-    [tuiTextfieldLabelOutside]="true"
-    [style.width]="customWidth"
-  >
-    {{ placeholder }}
-    <input
-      tuiTextfield
-      type="{{ type }}"
-    />
-  </tui-input>
-</form>
+  {{ placeholder }}
+  <input
+    tuiTextfield
+    type="{{ type }}"
+  />
+</tui-input>

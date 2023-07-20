@@ -1,5 +1,9 @@
 .about-block-forms {
   margin: 104px 140px 0;
+
+  &__item:hover {
+    opacity: 0.9;
+  }
 }
 
 .first-about-form-image {

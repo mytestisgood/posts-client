@@ -5,5 +5,6 @@ export * from './select/select.component';
 export * from './input-file/input-file.component';
 export * from './input-field/input-field.component';
 export * from './input-number/input-number.component';
-export * from './notification/notification.component';
 export * from './input-password/input-password.component';
+export * from './notification/notification.component';
+export * from './radio/radio.component';

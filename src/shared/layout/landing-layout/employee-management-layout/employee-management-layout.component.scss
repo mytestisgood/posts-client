@@ -12,6 +12,10 @@
     width: 674px;
     height: 88px;
 
+    &:hover {
+      opacity: 0.9;
+    }
+
     &__button {
       margin: 16px 0 16px 16px;
       width: 124px;

@@ -1,0 +1,49 @@
+<div class="margin-rl-auto flex flex-col">
+  <h3 class="mt-10 medium text-center neutrals-text-950">In order to reset the password, send me a code using</h3>
+  <div class="mt-20 flex justify-center">
+    <smarti-radio
+      [labelFirstText]="'Email address <b>name@mail.com</b>'"
+      [labelSecondText]="'Phone Number <b>050****565</b>'"
+      [items]="items"
+      (chosenValue)="doChangeContent($event)"
+    ></smarti-radio>
+  </div>
+
+  <div
+    *ngIf="isModeChosen"
+    class="flex justify-center flex-col mt-12"
+  >
+    <div class="regular-text text-center neutrals-text-950 mb-4">Please enter OTP code</div>
+    <div class="self-center">
+      <smarti-input-number
+        [centerVerify]="true"
+        [customWidth]="'536px'"
+        [maxLength]="6"
+        (inputFilled)="changeButtonStatus($event)"
+      ></smarti-input-number>
+    </div>
+    <div
+      class="mt-14 bright-turquoise-text-500 text-underline text-center paragraph-text-medium cursor-pointer"
+    >Resend OTP code</div>
+  </div>
+
+  <div
+    class="mb-16 mt-10 flex justify-end gap-70 mr-14"
+    [ngClass]="isModeChosen ? 'mt-10' : 'mt-64'"
+  >
+    <smarti-button
+      [customButtonWidth]="'431px'"
+      [typeClass]="'confirm'"
+      [text]="'Confirm and Reset your Password'"
+      [disabled]="isDisabled"
+      (buttonClicked)="doChangeStep('forward')"
+    ></smarti-button>
+    <button
+      class="usual-button-no-size go-back cursor-pointer smarti-button-text rounded-m flex gap-2 items-center justify-center"
+      (click)="redirectToLogin()"
+    >
+      <div>Go Back</div>
+      <div class="arrow-left-icon"></div>
+    </button>
+  </div>
+</div>

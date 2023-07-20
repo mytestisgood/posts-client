@@ -7,15 +7,15 @@ import {ScrollSectionDirective} from "./scroll-section.directive";
 export class ScrollManagerDirective {
   private sections = new Map<string | number, ScrollSectionDirective>();
 
-  scroll(id: string | number) {
+  public scroll(id: string | number): void {
     this.sections.get(id)!.scroll();
   }
 
-  register(section: ScrollSectionDirective) {
+  public register(section: ScrollSectionDirective): void {
     this.sections.set(section.id, section);
   }
 
-  remove(section: ScrollSectionDirective) {
+  public remove(section: ScrollSectionDirective): void {
     this.sections.delete(section.id);
   }
 }

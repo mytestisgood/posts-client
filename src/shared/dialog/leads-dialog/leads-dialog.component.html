@@ -1,0 +1,57 @@
+<button
+  *ngIf="haveCloseIcon"
+  class="close-dialog-left cursor-pointer"
+  (click)="closeDialog()"
+></button>
+<div class="flex gap-12-5">
+  <div class="flex flex-col leads-form-block-width bg-white mb-6 mt-8">
+    <h3
+      class="medium mt-20 dir-rtl neutrals-text-950 mb-1 margin-rl-auto width-header-leads"
+      [innerHTML]="headerFormText"
+    ></h3>
+    <div
+      class="neutrals-text-950 mt-8 dir-rtl regular-text mb-1 margin-rl-auto width-header-leads"
+      [innerHTML]="descriptionFormText"
+    ></div>
+    <div class="mt-12 margin-rl-auto">
+      <smarti-input-field
+        [customWidth]="'398px'"
+        [placeholder]="'Your Name'"
+      ></smarti-input-field>
+    </div>
+    <div class="mt-8 margin-rl-auto">
+      <smarti-input-field
+        [customWidth]="'398px'"
+        [placeholder]="'Email Address*'"
+      ></smarti-input-field>
+    </div>
+    <div class="mt-8 margin-rl-auto">
+      <smarti-input-field
+        [customWidth]="'398px'"
+        [placeholder]="'Phone Number*'"
+      ></smarti-input-field>
+    </div>
+    <div class="mt-20 mb-14 flex justify-center">
+      <smarti-button
+        [typeClass]="'confirm'"
+        [text]="'Send'"
+        [customButtonWidth]="'232px'"
+        (buttonClicked)="sendRequest()"
+      ></smarti-button>
+    </div>
+  </div>
+  <div class="mt-16 mr-18">
+    <div
+      class="right-side-img"
+      [style.background]="'url('+ backgroundImage +')'"
+    ></div>
+    <h1
+      class="medium neutrals-text-950 text-center mt-10 mb-8 width-input-full-hd margin-rl-auto"
+      [innerHTML]="headerText"
+    ></h1>
+    <div
+      class="paragraph-text-medium neutrals-text-950 text-center width-input-full-hd margin-rl-auto"
+      [innerHTML]="descriptionText"
+    ></div>
+  </div>
+</div>

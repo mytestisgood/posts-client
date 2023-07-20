@@ -4,7 +4,7 @@ import {
   Component,
   EventEmitter,
   Inject,
-  Input,
+  Input, OnInit,
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -20,6 +20,8 @@ import {
   NotificationComponent,
   SelectComponent,
 } from '@shared/ui';
+import { DestroyService } from '@shared/services';
+import { takeUntil } from 'rxjs';
 
 type Direction = 'forward' | 'back';
 
@@ -34,7 +36,7 @@ type Direction = 'forward' | 'back';
   styleUrls: ['./upload-document.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UploadDocumentComponent {
+export class UploadDocumentComponent implements OnInit {
   @Input() startingForm!: FormGroup;
   @Output() subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
@@ -63,10 +65,11 @@ export class UploadDocumentComponent {
     private readonly dialogs: TuiDialogService,
     private _fb: FormBuilder,
     private changeDetectionRef: ChangeDetectorRef,
+    private destroy$: DestroyService,
   ) {
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     if (this.startingForm) {
       this.personalInfoForm = this.startingForm;
     } else {
@@ -79,7 +82,7 @@ export class UploadDocumentComponent {
     this.subformInitialized.emit(this.personalInfoForm);
   }
 
-  doChangeStep(direction: 'forward') {
+  public doChangeStep(direction: 'forward'): void {
     this.changeStep.emit(direction);
   }
 
@@ -94,7 +97,9 @@ export class UploadDocumentComponent {
   }
 
   public openForwardModal(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.dialogs.open(content).subscribe();
+    this.dialogs.open(content, {
+      closeable: false
+    }).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
   public fileUploaded(isUploaded: boolean): void {

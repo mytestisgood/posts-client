@@ -3,7 +3,6 @@
   [style.margin]="customMargin"
   [style.width]="customWidth"
   [ngClass]="{
-    'disabled': disabled,
     'haveIcon': haveIcon,
   }"
 >
@@ -18,6 +17,8 @@
     [style.border]="customBorder"
     [style.color]="textColor"
     [style.height]="customHeight"
+    [style.width]="customButtonWidth"
+    [disabled]="disabled"
     (click)="clicked()"
   >{{ text }}</button>
 </div>

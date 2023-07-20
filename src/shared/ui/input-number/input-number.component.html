@@ -12,6 +12,7 @@
     <input
       tuiTextfield
       inputmode="numeric"
+      (keyup)="changeValue()"
       [maskito]="maxLengthMask"
       [ngClass]="{
       'center-verify': centerVerify,

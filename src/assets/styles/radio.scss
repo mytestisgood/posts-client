@@ -1,0 +1,26 @@
+tui-radio-labeled {
+  .t-wrapper {
+    align-items: center!important;
+  }
+
+  .t-content {
+    color: $neutrals-500!important;
+    text-align: right!important;
+    font-family: Rubik, sans-serif !important;
+    font-size: 20px!important;
+    font-style: normal!important;
+    font-weight: 400!important;
+    line-height: 28px!important;
+  }
+}
+
+tui-radio {
+  width: 20px!important;
+  height: 20px!important;
+
+  .t-mark {
+    margin: 5px!important;
+    width: 10px!important;
+    height: 10px!important;
+  }
+}

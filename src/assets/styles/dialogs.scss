@@ -1,5 +1,4 @@
 tui-dialog{
-  width: 814px!important;
   .t-content {
     background: $neutral-20!important;
     tui-input .t-content {
@@ -15,5 +14,15 @@ tui-dialog{
   position: absolute;
   top: 24px;
   right: 24px;
+  border: 0;
+}
+
+.close-dialog-left {
+  background: url("/assets/svg/close-cross.svg");
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 24px;
+  left: 24px;
   border: 0;
 }

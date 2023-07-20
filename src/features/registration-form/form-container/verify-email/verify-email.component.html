@@ -38,7 +38,11 @@
   #successDialogTemplate
   let-observer
 >
-  <smarti-registration-success-dialog
+  <smarti-success-dialog
+    [headerText]="'Congratulations!<br/>Registration success!'"
+    [descriptionText]="'Dear User Name, now you can<br/>use Smarti panel'"
+    [buttonText]="'Let\'s Start!'"
+    [redirectLink]="'/'"
     [observer]="observer"
-  ></smarti-registration-success-dialog>
+  ></smarti-success-dialog>
 </ng-template>

@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ButtonComponent, DatePickerComponent, InputFieldComponent, SelectComponent } from '@shared/ui';
 
@@ -16,7 +23,7 @@ type Direction = 'forward' | 'back';
   styleUrls: ['./select-year-and-month.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectYearAndMonthComponent {
+export class SelectYearAndMonthComponent implements OnInit {
   @Input() startingForm!: FormGroup;
   @Output() subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
@@ -37,7 +44,8 @@ export class SelectYearAndMonthComponent {
     'December',
   ]
   constructor(private _fb: FormBuilder) {}
-  ngOnInit() {
+
+  public ngOnInit(): void {
     if (this.startingForm) {
       this.personalInfoForm = this.startingForm;
     } else {
@@ -49,7 +57,8 @@ export class SelectYearAndMonthComponent {
     }
     this.subformInitialized.emit(this.personalInfoForm);
   }
-  doChangeStep(direction: 'forward') {
+
+  public doChangeStep(direction: 'forward'): void {
     this.changeStep.emit(direction);
   }
 }
