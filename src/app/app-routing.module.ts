@@ -31,7 +31,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [BrowserModule, RouterModule.forRoot(
-    routes, { scrollPositionRestoration: 'enabled', useHash: true }
+    routes, { scrollPositionRestoration: 'enabled' }
   )],
   exports: [RouterModule],
 })
