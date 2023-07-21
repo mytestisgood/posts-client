@@ -17,6 +17,8 @@ export class SuccessDialogComponent {
   @Input() public descriptionText!: string;
   @Input() public buttonText!: string;
   @Input() public redirectLink: string = '/';
+  @Input() public customHeaderHeight!: string;
+  @Input() public customDescriptionHeight!: string;
   constructor(private router: Router) {
   }
   public redirectToPage(): void {

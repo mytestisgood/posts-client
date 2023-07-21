@@ -1,19 +1,27 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DestroyService } from '@shared/services';
 import {
   ButtonComponent,
   InputCheckboxComponent,
   InputFieldComponent,
   InputPasswordComponent,
 } from '@shared/ui';
+import { takeUntil, tap } from 'rxjs';
+
+interface LoginForm {
+  email: FormControl<string | null>
+  password: FormControl<string | null>
+  isRemember: FormControl<boolean | null>
+}
 
 @Component({
   selector: 'smarti-login-form',
@@ -27,26 +35,36 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent implements OnInit {
-  public loginForm!: FormGroup;
+  public loginForm: FormGroup<LoginForm> = new FormGroup<LoginForm>({
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+    isRemember: new FormControl(false),
+  });
+  public isDisabled: boolean = true;
+  public loginFormChange$ = this.loginForm.statusChanges.pipe(
+    tap(isValid => this.isDisabled = !(isValid === 'VALID')),
+    takeUntil(this.destroy$),
+  )
 
   constructor(
-    private formBuilder: FormBuilder,
     private readonly router: Router,
-  ) {
+    private readonly destroy$: DestroyService,
+    ) {
   }
 
   public ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-    });
+    this.loginFormChange$.subscribe();
   }
 
   public navigateToRestorePassword(): void {
     this.router.navigate(['/reset-password']);
   }
 
-  public dologin(): void {
+  public doLogin(): void {
     this.router.navigate(['/']);
+  }
+
+  public changeButtonStatus(isFilled: boolean): void {
+    this.isDisabled = !isFilled;
   }
 }

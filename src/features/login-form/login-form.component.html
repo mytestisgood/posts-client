@@ -8,12 +8,14 @@
         [customWidth]="'536px'"
         [placeholder]="'Email Address*'"
         [type]="'text'"
+        [control]="loginForm.controls.email"
       ></smarti-input-field>
     </div>
     <div class="mt-14">
       <smarti-input-password
         [customWidth]="'536px'"
         [placeholder]="'Password*'"
+        [control]="loginForm.controls.password"
       ></smarti-input-password>
     </div>
     <div class="mt-6 flex justify-between width-input-full-hd">
@@ -25,14 +27,17 @@
         <div class="paragraph-text text-right neutrals-text-950">
           Remember me
         </div>
-        <smarti-input-checkbox></smarti-input-checkbox>
+        <smarti-input-checkbox
+          [control]="loginForm.controls.isRemember"
+        ></smarti-input-checkbox>
       </div>
     </div>
     <smarti-button
       [customMargin]="'120px 0 64px'"
       [text]="'Log In'"
+      [disabled]="isDisabled"
       [typeClass]="'confirm'"
-      (buttonClicked)="dologin()"
+      (buttonClicked)="doLogin()"
     ></smarti-button>
   </form>
 </div>

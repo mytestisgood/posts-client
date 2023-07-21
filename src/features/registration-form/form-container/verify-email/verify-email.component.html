@@ -17,8 +17,8 @@
     ></smarti-input-number>
   </div>
   <div class="mt-10 margin-rl-auto">
-    <div class="paragraph-text neutrals-text-950 text-center">
-      If you did not receive an email or if it<br/>
+    <div class="paragraph-text neutrals-text-950 text-center verify-email-text-block">
+      If you did not receive an email or if it
       expired, you can resend one.
     </div>
     <div
@@ -39,8 +39,10 @@
   let-observer
 >
   <smarti-success-dialog
-    [headerText]="'Congratulations!<br/>Registration success!'"
-    [descriptionText]="'Dear User Name, now you can<br/>use Smarti panel'"
+    [headerText]="'Congratulations! Registration success!'"
+    [descriptionText]="'Dear User Name, now you can use Smarti panel'"
+    [customHeaderHeight]="'333px'"
+    [customDescriptionHeight]="'276px'"
     [buttonText]="'Let\'s Start!'"
     [redirectLink]="'/'"
     [observer]="observer"

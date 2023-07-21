@@ -8,13 +8,14 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  FormControl,
+  FormControl, FormControlStatus,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { DestroyService } from '@shared/services';
 import { ButtonComponent, InputCheckboxComponent, InputFieldComponent } from '@shared/ui';
-import { tap } from 'rxjs';
+import { Observable, takeUntil, tap } from 'rxjs';
 
 type Direction = 'forward' | 'back';
 
@@ -52,26 +53,20 @@ export class PersonalInfoComponent implements OnInit {
     phone: new FormControl('', [Validators.required, Validators.minLength(3)]),
     acceptPrivacy: new FormControl(false, [Validators.requiredTrue]),
   });
-  public personalInfoFormChange$ = this.personalInfoForm.statusChanges.pipe(
+  public personalInfoFormChange$: Observable<FormControlStatus> = this.personalInfoForm.statusChanges.pipe(
     tap(isValid => this.isDisabled = !(isValid === 'VALID')),
+    takeUntil(this.destroy$),
   );
 
-  constructor() {
+  constructor(private readonly destroy$: DestroyService) {
   }
 
   public ngOnInit(): void {
-    // if (this.startingForm) {
-    //   this.personalInfoForm = this.startingForm;
-    // }
     this.subformInitialized.emit(this.personalInfoForm);
     this.personalInfoFormChange$.subscribe();
   }
 
   public doChangeStep(direction: 'forward'): void {
     this.changeStep.emit(direction);
-  }
-
-  public changeButtonDisableStatus(): void {
-    this.isDisabled = false;
   }
 }

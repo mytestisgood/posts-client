@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiInputModule, TuiInputPasswordModule } from '@taiga-ui/kit';
 import { Subject } from 'rxjs';
@@ -20,18 +20,15 @@ export class InputPasswordComponent {
   @Input() public isRequired: boolean = false;
   @Input() public placeholder: string = '';
   @Input() public customWidth: string = '';
+  @Input() public control: FormControl<string | null> = new FormControl<string>('', [
+    Validators.minLength(6)
+  ]);
   @Output() public outputValue: Subject<string> = new Subject<string>();
 
-  public readonly formInputPassword = new FormGroup({
-    inputValue: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-  });
 
   public onValidatePasswordValue() {
-    if (this.formInputPassword.controls.inputValue.valid) {
-      this.outputValue.next(this.formInputPassword.controls.inputValue.value as string);
+    if (this.control.valid) {
+      this.outputValue.next(this.control.value as string);
     } else {
       this.outputValue.next('invalid' + Math.random())
     }

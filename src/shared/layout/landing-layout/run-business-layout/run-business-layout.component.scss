@@ -22,6 +22,14 @@
     &__right {
       width: 1088px;
       margin-top: 55px;
+
+      &__header {
+        width: 400px;
+      }
+
+      &__description {
+        width: 520px;
+      }
     }
   }
 }

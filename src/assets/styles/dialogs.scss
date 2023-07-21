@@ -7,6 +7,10 @@ tui-dialog{
   }
 }
 
+tui-dialog[data-size='m'] {
+  width: 814px!important;
+}
+
 .close-dialog {
   background: url("/assets/svg/close-cross.svg");
   width: 24px;

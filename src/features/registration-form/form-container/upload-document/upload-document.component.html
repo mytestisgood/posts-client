@@ -15,8 +15,8 @@
     </div>
   </div>
   <h3 class="medium text-center mt-6">
-    We don’t want to waste your time, so please<br/>
-    Start our service right away
+    <div>We don’t want to waste your time, so please</div>
+    <div>Start our service right away</div>
   </h3>
   <div class="file-upload mt-10 mb-16">
     <div class="paragraph-text neutrals-text-950">Attach XML file</div>
@@ -71,7 +71,7 @@
       *ngIf="!isNotificationClosed"
       class="relative"
       [header]="'Your request is successfully send!'"
-      [description]="'As soon as we receive a file we will let you know to go to the next stage of process.<br/>Go to next step'"
+      [description]="'As soon as we receive a file we will let you know to go to the next stage of process. Go to next step'"
       (closeNotification)="closeNotification($event)"
     ></smarti-notification>
     <smarti-button
