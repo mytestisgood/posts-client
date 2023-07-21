@@ -21,10 +21,18 @@ export class HeaderComponent {
   }
 
   public navigateToRegistrationPage(): void {
-    this.router.navigate(['/registration'])
+    this.router.navigate(['/registration']);
   }
 
   public navigateToLoginPage(): void {
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
+  }
+
+  public navigateToContactPage(): void {
+    this.router.navigate(['/contact']);
+  }
+
+  public navigateToMainPage(): void {
+    this.router.navigate(['/main']);
   }
 }

@@ -42,10 +42,9 @@
         ></smarti-button>
       </div>
       <nav class="flex">
-        <!--      contact-->
         <a
           class="nav-block paragraph-text-light self-center cursor-pointer"
-          appScrollAnchor="footer"
+          (click)="navigateToContactPage()"
         >צרו קשר</a>
         <!--      blog-->
         <a
@@ -64,6 +63,7 @@
         >פתרונות</a>
         <a
           class="nav-block__img cursor-pointer"
+          (click)="navigateToMainPage()"
           appScrollAnchor="banner"
         ></a>
       </nav>

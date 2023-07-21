@@ -4,6 +4,7 @@
 @import "bg-colors";
 @import "colors";
 @import "margins";
+@import "paddings";
 @import "borders";
 @import "text";
 @import "box-shadows";
@@ -37,6 +38,10 @@ body {
 
 .self-center {
   align-self: center;
+}
+
+.self-end {
+  align-self: flex-end;
 }
 
 .relative {

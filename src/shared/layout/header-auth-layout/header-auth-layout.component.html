@@ -9,11 +9,17 @@
       (click)="navigateToRegistrationPage()"
     >{{ leftBlockClickedText }}</span>
   </h4>
-  <div class="auth-header__img"></div>
+  <div
+    class="auth-header__img cursor-pointer"
+    (click)="navigateToMainPage()"
+  ></div>
 </div>
 
 <ng-template #onlyLogoTemplate>
   <div class="auth-header flex justify-end">
-    <div class="auth-header__img"></div>
+    <div
+      class="auth-header__img"
+      (click)="navigateToMainPage()"
+    ></div>
   </div>
 </ng-template>

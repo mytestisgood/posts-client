@@ -1,0 +1,84 @@
+<section appScrollManager>
+  <smarti-header></smarti-header>
+  <div class="margin-rl-auto">
+    <h1 class="mt-20 medium mt-0 mb-0 bright-turquoise-text-500 text-center">צרו קשר</h1>
+    <div class="flex gap-136px justify-center">
+      <div class="contact-manager-img mt-8 mb-34"></div>
+      <div class="mt-24 flex flex-col">
+        <h3 class="medium dir-rtl neutrals-text-950 contact-header mt-0 mb-1 self-end">
+          Are you interested
+          in a Smarti platform?
+        </h3>
+        <div class="neutrals-text-950 dir-rtl regular-text mt-8">איך נוח לך לדבר איתנו?</div>
+
+        <div class="bg-white mt-16 contact-block rounded-l flex justify-between p-6 box-shadow-regular">
+          <div class="neutrals-text-950 regular-text self-center mt-2">03-6549300 | 03-5228825</div>
+          <h3 class="medium neutrals-text-950 neutrals-text-950 self-center mt-0 mb-0">יצירת קשר בטלפון</h3>
+          <div class="phone-fill-icon rounded-m self-center"></div>
+        </div>
+
+        <div class="bg-white mt-8 mb-39 contact-block rounded-l flex wrap justify-between p-6 box-shadow-regular">
+          <div class="self-center">
+            <smarti-button
+              *ngIf="!isExpanded"
+              [customButtonWidth]="'141px'"
+              [customHeight]="'42px'"
+              [text]="'שליחת מייל'"
+              [typeClass]="'confirm'"
+              (buttonClicked)="toggleExpandedContent()"
+            ></smarti-button>
+            <smarti-button
+              *ngIf="isExpanded"
+              [customButtonWidth]="'107px'"
+              [customHeight]="'42px'"
+              [text]="'Close'"
+              [typeClass]="'dark'"
+              (buttonClicked)="toggleExpandedContent()"
+            ></smarti-button>
+          </div>
+          <h3 class="medium neutrals-text-950 neutrals-text-950 self-center mt-0 mb-0">שליחת פניה במייל</h3>
+          <div class="mail-fill-icon rounded-m self-center"></div>
+          <div class="break"></div>
+          <smarti-expand
+            [isExpanded]="isExpanded"
+            [expandContentTemplate]="expandedTemplate"
+          ></smarti-expand>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-neutrals-950">
+    <smarti-footer></smarti-footer>
+  </div>
+</section>
+
+<ng-template #expandedTemplate>
+  <div class="flex flex-col justify-center contact-block items-center">
+    <div class="mt-6">
+      <smarti-input-field
+        [placeholder]="'Your Name'"
+        [customWidth]="'536px'"
+      ></smarti-input-field>
+    </div>
+    <div class="mt-8">
+      <smarti-input-field
+        [placeholder]="'Email Address*'"
+        [customWidth]="'536px'"
+      ></smarti-input-field>
+    </div>
+    <div class="mt-8">
+      <smarti-input-field
+        [placeholder]="'Phone Number*'"
+        [customWidth]="'536px'"
+      ></smarti-input-field>
+    </div>
+    <div class="mt-20 mb-14">
+      <smarti-button
+        [typeClass]="'confirm'"
+        [text]="'Send'"
+        [customButtonWidth]="'232px'"
+        (buttonClicked)="sendContactRequest()"
+      ></smarti-button>
+    </div>
+  </div>
+</ng-template>

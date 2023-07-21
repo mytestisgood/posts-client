@@ -1,4 +1,5 @@
 export * from './button/button.component';
+export * from './expand/expand.component';
 export * from './date-picker/date-picker.component';
 export * from './input-checkbox/input-checkbox.component';
 export * from './select/select.component';

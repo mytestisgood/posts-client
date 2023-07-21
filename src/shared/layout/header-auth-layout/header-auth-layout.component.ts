@@ -21,4 +21,8 @@ export class HeaderAuthLayoutComponent {
   public navigateToRegistrationPage(): void {
     this.router.navigate([this.redirectLink]);
   }
+
+  public navigateToMainPage(): void {
+    this.router.navigate(['/']);
+  }
 }
