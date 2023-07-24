@@ -16,6 +16,7 @@ import {
 import { DestroyService } from '@shared/services';
 import { ButtonComponent, InputCheckboxComponent, InputFieldComponent } from '@shared/ui';
 import { Observable, takeUntil, tap } from 'rxjs';
+import { SignInService } from '@shared/api';
 
 type Direction = 'forward' | 'back';
 
@@ -58,7 +59,10 @@ export class PersonalInfoComponent implements OnInit {
     takeUntil(this.destroy$),
   );
 
-  constructor(private readonly destroy$: DestroyService) {
+  constructor(
+    private readonly destroy$: DestroyService,
+    private readonly signInService: SignInService,
+    ) {
   }
 
   public ngOnInit(): void {
@@ -67,6 +71,13 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   public doChangeStep(direction: 'forward'): void {
+    this.signInService.apiEmployersCreateEmployerOutPost({
+      email: this.personalInfoForm.controls.email.value as string,
+      phone: this.personalInfoForm.controls.phone.value as string,
+      company_name: this.personalInfoForm.controls.companyName.value as string,
+      identifier: this.personalInfoForm.controls.companyId.value as string,
+      user_name: this.personalInfoForm.controls.yourName.value as string,
+    }).pipe(takeUntil(this.destroy$)).subscribe();
     this.changeStep.emit(direction);
   }
 }

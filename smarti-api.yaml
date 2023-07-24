@@ -1,0 +1,187 @@
+---
+openapi: 3.0.0
+info:
+  title: Smarti
+  description: Smarti1
+  contact:
+    email: dinav@smarti-saas.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: https://virtserver.swaggerhub.com/smarti/smarti/1.0.0
+    description: SwaggerHub API Auto Mocking
+  - url: https://api.xsmart-staging.com/api/leads/createLead
+    description: SwaggerHub API Auto Mocking
+tags:
+  - name: Sign In
+  - name: Lead
+  - name: Enum
+paths:
+  /api/leads/createLead:
+    post:
+      tags:
+        - Lead
+      description: create a lead from landing page
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/leads_createLead_body'
+            examples:
+              "0":
+                description: create a lead from landing page
+                value:
+                  phone: "0586598745"
+                  email: moshe@gmail.com
+                  name: moshe levi
+                  friend_name: avi choen
+                  friend_email: avi@gmail.com
+                  src: FORM_161
+      responses:
+        "200":
+          description: create a new lead
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: ok
+        "400":
+          description: bad request
+      servers:
+        - url: https://api.xsmart-staging.com
+    servers:
+      - url: https://api.xsmart-staging.com
+  /api/employers/createEmployerOut:
+    post:
+      tags:
+        - Sign In
+      description: create a employer from sign in page
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/employers_createEmployerOut_body'
+            examples:
+              "0":
+                description: create a employer from sign in page
+                value:
+                  company_name: smarti
+                  identifier: 358659874
+                  user_name: moshe levi
+                  phone: "0586598745"
+                  email: moshe@gmail.com
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: success
+        "204":
+          description: no_content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: identifier exist
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error
+      servers:
+        - url: https://api.xsmart-staging.com
+    servers:
+      - url: https://api.xsmart-staging.com
+  /api/src:
+    get:
+      tags:
+        - Enums
+      description: src
+      responses:
+        "200":
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+              examples:
+                "0":
+                  value:
+                    "1": PENSION_SETTLEMENT
+                    "2": PERSONAL_PORTFOLIO_MANAGER
+                    "3": FORM_161
+                    "4": PRIVATE_AREA
+                    "5": CONTACT_US
+                    "6": FRIEND
+      servers:
+        - url: https://xsmart-staging.com
+    servers:
+      - url: https://xsmart-staging.com
+components:
+  schemas:
+    leads_createLead_body:
+      type: object
+      properties:
+        phone:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        friend_name:
+          type: string
+        friend_email:
+          type: string
+        src:
+          type: string
+    inline_response_200:
+      type: object
+      properties:
+        message:
+          type: string
+    employers_createEmployerOut_body:
+      type: object
+      properties:
+        company_name:
+          type: string
+        identifier:
+          type: string
+        user_name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+    inline_response_200_1:
+      type: object
+      properties:
+        "1":
+          type: string
+        "2":
+          type: string
+        "3":
+          type: string
+        "4":
+          type: string
+        "5":
+          type: string
+        "6":
+          type: string

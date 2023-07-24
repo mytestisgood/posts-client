@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
+import { ApiModule } from '@shared/api';
 import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
 import { TuiRootModule, TuiDialogModule, TuiAlertModule, TUI_SANITIZER } from "@taiga-ui/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -18,10 +20,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     LandingComponent,
     SharedModule,
     ReactiveFormsModule,
-      BrowserAnimationsModule,
-      TuiRootModule,
-      TuiDialogModule,
-      TuiAlertModule
+    BrowserAnimationsModule,
+    TuiRootModule,
+    TuiDialogModule,
+    TuiAlertModule,
+    ApiModule,
+    HttpClientModule,
 ],
   bootstrap: [AppComponent],
         providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}]

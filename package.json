@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build cross-env NODE_OPTIONS=--max-old-space-size=4096",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate:api": "openapi-generator-cli generate -i ./smarti-api.yaml -g typescript-angular -o src/shared/api/v1"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +36,7 @@
     "@angular-devkit/build-angular": "^16.1.2",
     "@angular/cli": "~16.1.2",
     "@angular/compiler-cli": "^16.1.0",
+    "@openapitools/openapi-generator-cli": "^2.7.0",
     "@types/dompurify": "2.2.3",
     "@types/jasmine": "~4.3.0",
     "cross-env": "^7.0.3",
