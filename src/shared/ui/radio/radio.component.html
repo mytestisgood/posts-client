@@ -4,7 +4,7 @@
     [item]="items[0]"
     (change)="changeValue(items[0].name)"
   >
-    <div [innerHTML]="labelFirstText"></div>
+    <div class="dir-rtl" [innerHTML]="labelFirstText"></div>
   </tui-radio-labeled>
   <tui-radio-labeled
     class="mt-6"
@@ -12,6 +12,6 @@
     [item]="items[1]"
     (change)="changeValue(items[1].name)"
   >
-    <div [innerHTML]="labelSecondText"></div>
+    <div class="dir-rtl" [innerHTML]="labelSecondText"></div>
   </tui-radio-labeled>
 </form>

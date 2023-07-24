@@ -49,7 +49,7 @@ export class PersonalInfoComponent implements OnInit {
     companyName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     companyId: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    yourName: new FormControl(''),
+    yourName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     phone: new FormControl('', [Validators.required, Validators.minLength(3)]),
     acceptPrivacy: new FormControl(false, [Validators.requiredTrue]),
   });

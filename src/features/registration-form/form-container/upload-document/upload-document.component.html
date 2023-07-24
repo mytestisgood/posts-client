@@ -4,22 +4,22 @@
       <smarti-select
         [customWidth]="'336px'"
         [options]="monthsSelect"
-        [placeholder]="'Month'"
+        [placeholder]="'חודש'"
       >></smarti-select>
     </div>
     <div class="mt-10">
       <smarti-date-picker
         [customWidth]="'336px'"
-        [placeholder]="'Year*'"
+        [placeholder]="'שנה*'"
       ></smarti-date-picker>
     </div>
   </div>
-  <h3 class="medium text-center mt-6">
-    <div>We don’t want to waste your time, so please</div>
-    <div>Start our service right away</div>
+  <h3 class="medium text-center mt-6 mb-0">
+    <div>התחילו את חווית השימוש</div>
+    <div>העלו את הקובץ</div>
   </h3>
   <div class="file-upload mt-10 mb-16">
-    <div class="paragraph-text neutrals-text-950">Attach XML file</div>
+    <div class="paragraph-text neutrals-text-950">העלה קובץ XML</div>
     <smarti-input-file
       [customWidth]="'536px'"
       [customHeight]="'120px'"
@@ -27,8 +27,7 @@
     ></smarti-input-file>
   </div>
   <div class="paragraph-text text-center margin-0-auto neutrals-text-950">
-    If you don’t have XML file you can fill it in manually or
-    forward a request to a person in your organization who have it
+    אם אין לכם קובץ XML תוכלו למלא אותו או לשלוח בקשה לגורם המורשה
   </div>
   <div
     *ngIf="!isSendRequest; else requestSendTemplate"
@@ -37,19 +36,17 @@
     <button
       class="usual-button cursor-pointer paragraph-text-extra rounded-m text-center"
       (click)="downloadXlExample()"
-    >Download Excel Example
-    </button>
+    >הורד קובץ לדוגמא</button>
     <button
       class="usual-button cursor-pointer paragraph-text-extra rounded-m text-center"
       (click)="openForwardModal(dialogTemplate)"
-    >Forward
-    </button>
+    >העבר בקשה לגורם מורשה</button>
   </div>
   <smarti-button
     *ngIf="documentUploaded && !isSendRequest"
     [typeClass]="'confirm'"
     [customMargin]="'26px 0 64px'"
-    [text]="'Confirm'"
+    [text]="'אישור'"
     (buttonClicked)="doChangeStep('forward')"
   ></smarti-button>
 </div>
@@ -70,14 +67,14 @@
     <smarti-notification
       *ngIf="!isNotificationClosed"
       class="relative"
-      [header]="'Your request is successfully send!'"
-      [description]="'As soon as we receive a file we will let you know to go to the next stage of process. Go to next step'"
+      [header]="'בקשתך נשלחה בהצלחה!'"
+      [description]="'ברגע שנקבל את הקובץ נודיע לך להמשיך לשלב הבא בתהליך'"
       (closeNotification)="closeNotification($event)"
     ></smarti-notification>
     <smarti-button
       class="block"
       [typeClass]="'confirm'"
-      [text]="'Go to next step'"
+      [text]="'המשך לשלב הבא'"
       [customMargin]="'21px auto 64px'"
       [customWidth]="'276px'"
       (buttonClicked)="doChangeStep('forward')"

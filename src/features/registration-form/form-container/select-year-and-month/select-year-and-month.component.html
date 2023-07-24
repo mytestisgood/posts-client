@@ -1,21 +1,21 @@
 <div class="mt-10 flex flex-col items-center">
   <h3 class="medium mt-10 mb-0 text-center neutrals-text-950">
-    <div>Please select the year and month for which you</div>
-    <div>want to make a transaction</div>
+    <div>בחר את השנה והחודש בו תרצה לבצע את</div>
+    <div>העברה</div>
   </h3>
   <div class="flex gap-4 mt-10">
     <smarti-select
       [customWidth]="'336px'"
       [options]="monthsSelect"
-      [placeholder]="'Month'"
+      [placeholder]="'חודש'"
     ></smarti-select>
     <smarti-date-picker
       [customWidth]="'336px'"
-      [placeholder]="'Year*'"
+      [placeholder]="'שנה*'"
     ></smarti-date-picker>
   </div>
   <smarti-button
-    [text]="'Confirm'"
+    [text]="'אישור'"
     [typeClass]="'confirm'"
     [customMargin]="'40px 0 64px'"
     (buttonClicked)="doChangeStep('forward')"

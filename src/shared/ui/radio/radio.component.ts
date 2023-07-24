@@ -13,8 +13,8 @@ import { Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RadioComponent {
-  @Input() public labelFirstText: any;
-  @Input() public labelSecondText: any;
+  @Input() public labelFirstText!: string;
+  @Input() public labelSecondText!: string;
   @Input() public items!: {name: string}[];
   @Output() public chosenValue: Subject<string> = new Subject<string>();
 

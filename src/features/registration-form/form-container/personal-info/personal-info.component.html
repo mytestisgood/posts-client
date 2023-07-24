@@ -1,11 +1,11 @@
 <form class="flex flex-col items-center mt-10" [formGroup]="personalInfoForm">
   <h3
     class="medium mt-10 mb-0 text-center neutrals-text-950"
-  >Create account fast and easy!</h3>
+  >צור חשבון!</h3>
   <div class="personal-info mt-8">
     <smarti-input-field
       [customWidth]="'536px'"
-      [placeholder]="'Company name*'"
+      [placeholder]="'שם החברה*'"
       [type]="'text'"
       [control]="personalInfoForm.controls.companyName"
     ></smarti-input-field>
@@ -13,7 +13,7 @@
   <div class="personal-info mt-8">
     <smarti-input-field
       [customWidth]="'536px'"
-      [placeholder]="'Company ID*'"
+      [placeholder]="'ח.פ.*'"
       [type]="'text'"
       [control]="personalInfoForm.controls.companyId"
     ></smarti-input-field>
@@ -21,14 +21,14 @@
   <div class="personal-info mt-8">
     <smarti-input-field
       [customWidth]="'536px'"
-      [placeholder]="'Your Name'"
+      [placeholder]="'שם מלא*'"
       [type]="'text'"
       [control]="personalInfoForm.controls.yourName"
     ></smarti-input-field>
   </div>
   <div class="personal-info mt-8">
     <smarti-input-field
-      [placeholder]="'Email Address*'"
+      [placeholder]="'כתובת אימייל*'"
       [customWidth]="'536px'"
       [type]="'text'"
       [control]="personalInfoForm.controls.email"
@@ -37,15 +37,16 @@
   <div class="personal-info mt-8">
     <smarti-input-field
       [customWidth]="'536px'"
-      [placeholder]="'Phone Number*'"
+      [placeholder]="'מספר טלפון*'"
       [type]="'text'"
       [control]="personalInfoForm.controls.phone"
     ></smarti-input-field>
   </div>
   <div class="personal-info mt-8 flex gap-4">
     <div class="personal-info__text paragraph-text-medium text-right neutrals-text-950 margin-left-160">
-      <div>I have read and agree to the Smarti</div>
-      <div>Terms of Services and Privacy Policy.</div>
+      <div>קראתי והסכמתי לתנאי השימוש ומדיניות</div>
+      <div>הפרטיות של Smarti</div>
+
     </div>
     <smarti-input-checkbox
       [control]="personalInfoForm.controls.acceptPrivacy"
@@ -53,7 +54,7 @@
   </div>
   <smarti-button
     [customMargin]="'40px 0 64px'"
-    [text]="'Register'"
+    [text]="'הירשם'"
     [typeClass]="'confirm'"
     (buttonClicked)="doChangeStep('forward')"
     [disabled]="isDisabled"

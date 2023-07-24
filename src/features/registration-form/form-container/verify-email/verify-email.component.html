@@ -1,15 +1,15 @@
 <div class="mt-10 flex flex-col items-center">
   <h3 class="medium mt-10 mb-0 text-center neutrals-text-950">
-    To continue using Smarti, please verify your email address
+    להמשך התהליך אמת את חשבונך
   </h3>
   <div class="email-text-block mt-20 neutrals-text-950 text-center margin-rl-auto">
     <div class="regular-text">
-      Account activation code has been sent to the e-mail address you provided
+      קוד אימות נשלח לכתובת המייל שלך
     </div>
     <div class="medium-text neutrals-text-950">name@email.com</div>
   </div>
   <div class="margin-rl-auto neutrals-text-950 text-center mt-10">
-    <div class="regular-text mb-4">Please enter verification code</div>
+    <div class="regular-text mb-4">הכנס את קוד האימות</div>
     <smarti-input-number
       [centerVerify]="true"
       [customWidth]="'536px'"
@@ -18,18 +18,17 @@
   </div>
   <div class="mt-10 margin-rl-auto">
     <div class="paragraph-text neutrals-text-950 text-center verify-email-text-block">
-      If you did not receive an email or if it
-      expired, you can resend one.
+      לא קיבלת מיילֿ?
     </div>
     <div
       class=" mt-4 paragraph-text-medium text-underline bright-turquoise-text-500 text-center cursor-pointer"
-    >Resend Verification code</div>
+    >שלח שוב</div>
   </div>
   <smarti-button
     class="mt-20 mb-16"
     [typeClass]="'confirm'"
     (buttonClicked)="openSuccessDialog(successDialogTemplate)"
-    [text]="'Confirm'"
+    [text]="'אישור'"
     [customWidth]="'232px'"
   ></smarti-button>
 </div>
@@ -39,11 +38,11 @@
   let-observer
 >
   <smarti-success-dialog
-    [headerText]="'Congratulations! Registration success!'"
+    [headerText]="'הרישום בוצע בהצלחה!'"
     [descriptionText]="'Dear User Name, now you can use Smarti panel'"
     [customHeaderHeight]="'333px'"
     [customDescriptionHeight]="'276px'"
-    [buttonText]="'Let\'s Start!'"
+    [buttonText]="'בוא נתחיל!'"
     [redirectLink]="'/'"
     [observer]="observer"
   ></smarti-success-dialog>

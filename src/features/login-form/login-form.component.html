@@ -2,11 +2,11 @@
   <form class="flex flex-col items-center mt-10" [formGroup]="loginForm">
     <h3
       class="medium mt-10 mb-0 text-center neutrals-text-950"
-    >Create account fast and easy!</h3>
+    >הכניסו כתובת מייל וסיסמא</h3>
     <div class="mt-24">
       <smarti-input-field
         [customWidth]="'536px'"
-        [placeholder]="'Email Address*'"
+        [placeholder]="'מייל*'"
         [type]="'text'"
         [control]="loginForm.controls.email"
       ></smarti-input-field>
@@ -14,7 +14,7 @@
     <div class="mt-14">
       <smarti-input-password
         [customWidth]="'536px'"
-        [placeholder]="'Password*'"
+        [placeholder]="'סיסמא*'"
         [control]="loginForm.controls.password"
       ></smarti-input-password>
     </div>
@@ -22,10 +22,10 @@
       <div
         class="bright-turquoise-text-500 text-underline paragraph-text-medium cursor-pointer"
         (click)="navigateToRestorePassword()"
-      >Forgot password?</div>
+      >שכחתי סיסמא</div>
       <div class="flex gap-4">
         <div class="paragraph-text text-right neutrals-text-950">
-          Remember me
+          זכור אותי
         </div>
         <smarti-input-checkbox
           [control]="loginForm.controls.isRemember"
@@ -34,7 +34,7 @@
     </div>
     <smarti-button
       [customMargin]="'120px 0 64px'"
-      [text]="'Log In'"
+      [text]="'התחברות '"
       [disabled]="isDisabled"
       [typeClass]="'confirm'"
       (buttonClicked)="doLogin()"

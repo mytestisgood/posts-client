@@ -1,28 +1,27 @@
 <div class="mt-14 mb-16 margin-0-auto">
   <h3 class="medium neutrals-text-950 text-center forward-request-header margin-rl-auto">
-    Forward a request to a person
-    in your organization who have it
+    העברת בקשה לגורם מורשה בארגון מלא את פרטי איש הקשר
   </h3>
   <div class="flex flex-col items-center mt-14 gap-8">
     <smarti-input-field
       [customWidth]="'536px'"
-      [placeholder]="'Your name'"
+      [placeholder]="'שם מלא'"
       [type]="'text'"
     ></smarti-input-field>
     <smarti-input-field
       [customWidth]="'536px'"
-      [placeholder]="'Email address*'"
+      [placeholder]="'אימייל*'"
       [type]="'text'"
     ></smarti-input-field>
     <smarti-input-field
       [customWidth]="'536px'"
-      [placeholder]="'Phone number*'"
+      [placeholder]="'מספר טלפון*'"
       [type]="'text'"
     ></smarti-input-field>
   </div>
   <smarti-button
     [typeClass]="'confirm'"
-    [text]="'Forward'"
+    [text]="'העבר'"
     [customMargin]="'80px auto 0'"
     (buttonClicked)="sendRequest()"
   ></smarti-button>

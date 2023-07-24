@@ -17,10 +17,18 @@
           'third-header-image': changeImageStep === 'verifyEmailInfo',
         }"
       ></div>
-      <h1 class="medium text-right self-center neutrals-text-950">
+      <h1
+        *ngIf="changeImageStep !== 'verifyEmailInfo'; else verifyEmailInfoHeaderTemplate"
+        class="medium text-right self-center neutrals-text-950">
         <div>תודה שבחרתם</div>
         <div>Smarti</div>
       </h1>
+      <ng-template #verifyEmailInfoHeaderTemplate>
+        <h1
+          class="medium text-right self-center neutrals-text-950">
+          אימות חשבון
+        </h1>
+      </ng-template>
     </div>
     <smarti-registration-form
       style="display: inline-block; margin-bottom: 54px"
