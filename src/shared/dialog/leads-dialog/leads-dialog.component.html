@@ -3,7 +3,7 @@
   class="close-dialog-left cursor-pointer"
   (click)="closeDialog()"
 ></button>
-<div class="flex gap-12-5">
+<div class="flex gap-12-5" [formGroup]="leadsForm">
   <div class="flex flex-col leads-form-block-width bg-white mb-6 mt-8">
     <h3
       class="medium mt-20 dir-rtl neutrals-text-950 mb-1 margin-rl-auto width-header-leads"
@@ -17,18 +17,21 @@
       <smarti-input-field
         [customWidth]="'398px'"
         [placeholder]="'Your Name'"
+        [control]="leadsForm.controls.name"
       ></smarti-input-field>
     </div>
     <div class="mt-8 margin-rl-auto">
       <smarti-input-field
         [customWidth]="'398px'"
         [placeholder]="'Email Address*'"
+        [control]="leadsForm.controls.email"
       ></smarti-input-field>
     </div>
     <div class="mt-8 margin-rl-auto">
       <smarti-input-field
         [customWidth]="'398px'"
         [placeholder]="'Phone Number*'"
+        [control]="leadsForm.controls.phone"
       ></smarti-input-field>
     </div>
     <div class="mt-20 mb-14 flex justify-center">

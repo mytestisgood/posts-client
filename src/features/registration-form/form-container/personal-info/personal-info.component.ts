@@ -77,7 +77,6 @@ export class PersonalInfoComponent implements OnInit {
       company_name: this.personalInfoForm.controls.companyName.value as string,
       identifier: this.personalInfoForm.controls.companyId.value as string,
       user_name: this.personalInfoForm.controls.yourName.value as string,
-    }).pipe(takeUntil(this.destroy$)).subscribe();
-    this.changeStep.emit(direction);
+    }).pipe(takeUntil(this.destroy$)).subscribe(() => this.changeStep.emit(direction));
   }
 }
