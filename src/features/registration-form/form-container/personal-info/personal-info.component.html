@@ -6,23 +6,21 @@
     <smarti-input-field
       [customWidth]="'536px'"
       [placeholder]="'שם החברה*'"
-      [type]="'text'"
       [control]="personalInfoForm.controls.companyName"
     ></smarti-input-field>
   </div>
   <div class="personal-info mt-8">
-    <smarti-input-field
-      [customWidth]="'536px'"
+    <smarti-input-number
       [placeholder]="'ח.פ.*'"
-      [type]="'text'"
       [control]="personalInfoForm.controls.companyId"
-    ></smarti-input-field>
+      [maxLength]="10"
+      [customWidth]="'536px'"
+    ></smarti-input-number>
   </div>
   <div class="personal-info mt-8">
     <smarti-input-field
       [customWidth]="'536px'"
       [placeholder]="'שם מלא*'"
-      [type]="'text'"
       [control]="personalInfoForm.controls.yourName"
     ></smarti-input-field>
   </div>
@@ -30,17 +28,15 @@
     <smarti-input-field
       [placeholder]="'כתובת אימייל*'"
       [customWidth]="'536px'"
-      [type]="'text'"
       [control]="personalInfoForm.controls.email"
     ></smarti-input-field>
   </div>
   <div class="personal-info mt-8">
-    <smarti-input-field
+    <smarti-input-number
       [customWidth]="'536px'"
       [placeholder]="'מספר טלפון*'"
-      [type]="'text'"
       [control]="personalInfoForm.controls.phone"
-    ></smarti-input-field>
+    ></smarti-input-number>
   </div>
   <div class="personal-info mt-8 flex gap-4">
     <div class="personal-info__text paragraph-text-medium text-right neutrals-text-950 margin-left-160">

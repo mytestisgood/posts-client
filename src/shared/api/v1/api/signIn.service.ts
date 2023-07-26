@@ -21,7 +21,11 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { EmployersCreateEmployerOutBody } from '../model/employersCreateEmployerOutBody';
 // @ts-ignore
+import { EmployersCreateUserOutBody } from '../model/employersCreateUserOutBody';
+// @ts-ignore
 import { InlineResponse200 } from '../model/inlineResponse200';
+// @ts-ignore
+import { InlineResponse2001 } from '../model/inlineResponse2001';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -99,9 +103,9 @@ export class SignInService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiEmployersCreateEmployerOutPost(employersCreateEmployerOutBody?: EmployersCreateEmployerOutBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse200>;
-    public apiEmployersCreateEmployerOutPost(employersCreateEmployerOutBody?: EmployersCreateEmployerOutBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse200>>;
-    public apiEmployersCreateEmployerOutPost(employersCreateEmployerOutBody?: EmployersCreateEmployerOutBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse200>>;
+    public apiEmployersCreateEmployerOutPost(employersCreateEmployerOutBody?: EmployersCreateEmployerOutBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse2001>;
+    public apiEmployersCreateEmployerOutPost(employersCreateEmployerOutBody?: EmployersCreateEmployerOutBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse2001>>;
+    public apiEmployersCreateEmployerOutPost(employersCreateEmployerOutBody?: EmployersCreateEmployerOutBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse2001>>;
     public apiEmployersCreateEmployerOutPost(employersCreateEmployerOutBody?: EmployersCreateEmployerOutBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -145,10 +149,75 @@ export class SignInService {
         }
 
         let localVarPath = `/api/employers/createEmployerOut`;
-        return this.httpClient.request<InlineResponse200>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse2001>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: employersCreateEmployerOutBody,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * create user from sign in page
+     * @param employersCreateUserOutBody 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiEmployersCreateUserOutPost(employersCreateUserOutBody?: EmployersCreateUserOutBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse200>;
+    public apiEmployersCreateUserOutPost(employersCreateUserOutBody?: EmployersCreateUserOutBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse200>>;
+    public apiEmployersCreateUserOutPost(employersCreateUserOutBody?: EmployersCreateUserOutBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse200>>;
+    public apiEmployersCreateUserOutPost(employersCreateUserOutBody?: EmployersCreateUserOutBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/employers/createUserOut`;
+        return this.httpClient.request<InlineResponse200>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: employersCreateUserOutBody,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

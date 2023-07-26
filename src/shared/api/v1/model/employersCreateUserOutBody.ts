@@ -11,8 +11,9 @@
  */
 
 
-export interface InlineResponse2001 { 
-    message?: string;
-    token?: string;
+export interface EmployersCreateUserOutBody { 
+    user_name?: string;
+    phone?: string;
+    email?: string;
 }
 

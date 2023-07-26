@@ -2,22 +2,22 @@
   <h3 class="medium neutrals-text-950 text-center forward-request-header margin-rl-auto">
     העברת בקשה לגורם מורשה בארגון מלא את פרטי איש הקשר
   </h3>
-  <div class="flex flex-col items-center mt-14 gap-8">
+  <div class="flex flex-col items-center mt-14 gap-8" [formGroup]="forwardRequestForm">
     <smarti-input-field
       [customWidth]="'536px'"
       [placeholder]="'שם מלא'"
-      [type]="'text'"
+      [control]="forwardRequestForm.controls.userName"
     ></smarti-input-field>
     <smarti-input-field
       [customWidth]="'536px'"
       [placeholder]="'אימייל*'"
-      [type]="'text'"
+      [control]="forwardRequestForm.controls.email"
     ></smarti-input-field>
-    <smarti-input-field
+    <smarti-input-number
       [customWidth]="'536px'"
       [placeholder]="'מספר טלפון*'"
-      [type]="'text'"
-    ></smarti-input-field>
+      [control]="forwardRequestForm.controls.phone"
+    ></smarti-input-number>
   </div>
   <smarti-button
     [typeClass]="'confirm'"

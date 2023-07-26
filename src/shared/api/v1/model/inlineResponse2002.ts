@@ -11,8 +11,12 @@
  */
 
 
-export interface InlineResponse2001 { 
-    message?: string;
-    token?: string;
+export interface InlineResponse2002 { 
+    _1?: string;
+    _2?: string;
+    _3?: string;
+    _4?: string;
+    _5?: string;
+    _6?: string;
 }
 

@@ -68,10 +68,63 @@ paths:
               $ref: '#/components/schemas/employers_createEmployerOut_body'
             examples:
               "0":
-                description: create a employer from sign in page
+                description: create employer from sign in page
                 value:
                   company_name: smarti
                   identifier: 358659874
+                  user_name: moshe levi
+                  phone: "0586598745"
+                  email: moshe@gmail.com
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+              examples:
+                "0":
+                  value:
+                    message: success
+                    token: eyJ0eXAiOiJKV1QiLCJh
+        "204":
+          description: no_content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: identifier exist
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error
+      servers:
+        - url: https://api.xsmart-staging.com
+    servers:
+      - url: https://api.xsmart-staging.com
+  /api/employers/createUserOut:
+    post:
+      tags:
+        - Sign In
+      description: create user from sign in page
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/employers_createUserOut_body'
+            examples:
+              "0":
+                description: create user from sign in page
+                value:
                   user_name: moshe levi
                   phone: "0586598745"
                   email: moshe@gmail.com
@@ -95,7 +148,7 @@ paths:
               examples:
                 "0":
                   value:
-                    message: identifier exist
+                    message: user exist
         "400":
           description: bad request
           content:
@@ -121,7 +174,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/inline_response_200_2'
               examples:
                 "0":
                   value:
@@ -171,6 +224,22 @@ components:
         email:
           type: string
     inline_response_200_1:
+      type: object
+      properties:
+        message:
+          type: string
+        token:
+          type: string
+    employers_createUserOut_body:
+      type: object
+      properties:
+        user_name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+    inline_response_200_2:
       type: object
       properties:
         "1":
