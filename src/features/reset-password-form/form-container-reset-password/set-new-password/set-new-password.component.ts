@@ -20,7 +20,9 @@ type Direction = 'forward' | 'back';
   selector: 'smarti-set-new-password',
   standalone: true,
   imports: [
-    CommonModule, InputPasswordComponent, ButtonComponent,
+    CommonModule,
+    InputPasswordComponent,
+    ButtonComponent,
     SuccessDialogComponent,
   ],
   templateUrl: './set-new-password.component.html',

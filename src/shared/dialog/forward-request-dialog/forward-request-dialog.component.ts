@@ -17,7 +17,10 @@ interface ForwardRequestForm {
   selector: 'smarti-forward-request-dialog',
   standalone: true,
   imports: [
-    CommonModule, InputFieldComponent, ButtonComponent, ReactiveFormsModule,
+    CommonModule,
+    InputFieldComponent,
+    ButtonComponent,
+    ReactiveFormsModule,
     InputNumberComponent,
   ],
   templateUrl: './forward-request-dialog.component.html',

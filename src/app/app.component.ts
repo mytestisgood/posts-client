@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { environment } from '@environment';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +8,4 @@ import { environment } from '@environment';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class AppComponent {
-  constructor() {
-    console.log(environment.production, 'environment')
-  }
 }

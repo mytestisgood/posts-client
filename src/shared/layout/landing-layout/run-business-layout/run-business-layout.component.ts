@@ -12,9 +12,7 @@ import { ButtonComponent } from '@shared/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RunBusinessLayoutComponent {
-  constructor(
-    private readonly router: Router,
-  ) {
+  constructor(private readonly router: Router) {
   }
 
   public navigateToRegistrationPage(): void {

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TuiRadioLabeledModule } from '@taiga-ui/kit';
 import { Subject } from 'rxjs';
 
@@ -18,9 +18,7 @@ export class RadioComponent {
   @Input() public items!: {name: string}[];
   @Output() public chosenValue: Subject<string> = new Subject<string>();
 
-  public radioForm = new FormGroup({
-    radioValue: new FormControl(),
-  });
+  public radioValue: FormControl<string> = new FormControl();
 
   public changeValue(name: string): void {
     this.chosenValue.next(name)

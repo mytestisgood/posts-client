@@ -15,8 +15,11 @@ type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailIn
   selector: 'smarti-form-container',
   standalone: true,
   imports: [
-    CommonModule, PersonalInfoComponent, SelectYearAndMonthComponent,
-    UploadDocumentComponent, VerifyEmailComponent,
+    CommonModule,
+    PersonalInfoComponent,
+    SelectYearAndMonthComponent,
+    UploadDocumentComponent,
+    VerifyEmailComponent,
   ],
   templateUrl: './form-container.component.html',
   styleUrls: ['./form-container.component.scss'],
@@ -68,10 +71,7 @@ export class FormContainerComponent implements OnInit {
           this.currentStepBs.next('verifyEmailInfo');
           this.changingStep.next('verifyEmailInfo');
         }
+        break;
     }
-  }
-
-  public submitForm(): void {
-    // submit the form with a service
   }
 }

@@ -38,8 +38,12 @@ interface PersonalInfoControls {
   selector: 'smarti-personal-info',
   standalone: true,
   imports: [
-    CommonModule, InputFieldComponent, ReactiveFormsModule, InputCheckboxComponent,
-    ButtonComponent, InputNumberComponent,
+    CommonModule,
+    InputFieldComponent,
+    ReactiveFormsModule,
+    InputCheckboxComponent,
+    ButtonComponent,
+    InputNumberComponent,
   ],
   templateUrl: './personal-info.component.html',
   styleUrls: ['./personal-info.component.scss'],
@@ -73,7 +77,6 @@ export class PersonalInfoComponent implements OnInit {
     this.personalInfoForm.updateValueAndValidity({ emitEvent: true });
     this.personalInfoFormChange$.subscribe((isValid: FormControlStatus) => {
       this.isDisabled = !(isValid === 'VALID')
-      console.log(this.personalInfoForm.value);
     });
   }
 

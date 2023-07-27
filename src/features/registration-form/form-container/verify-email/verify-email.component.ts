@@ -23,7 +23,12 @@ type Direction = 'forward' | 'back';
 @Component({
   selector: 'smarti-verify-email',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, InputNumberComponent, SuccessDialogComponent],
+  imports: [
+    CommonModule,
+    ButtonComponent,
+    InputNumberComponent,
+    SuccessDialogComponent
+  ],
   templateUrl: './verify-email.component.html',
   styleUrls: ['./verify-email.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,14 +54,9 @@ export class VerifyEmailComponent implements OnInit {
       this.personalInfoForm = this._fb.group({
         firstName: '',
         lastName: '',
-        // ... continue with the other fields
       })
     }
     this.subformInitialized.emit(this.personalInfoForm);
-  }
-
-  public doChangeStep(direction: 'forward'): void {
-    this.changeStep.emit(direction);
   }
 
   public openSuccessDialog(content: PolymorpheusContent<TuiDialogContext>): void {

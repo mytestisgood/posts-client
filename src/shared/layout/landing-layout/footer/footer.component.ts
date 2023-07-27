@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {SharedModule} from '@shared/module';
+import { SharedModule } from '@shared/module';
 
 @Component({
   selector: 'smarti-footer',

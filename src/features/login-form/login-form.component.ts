@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  FormControl,
+  FormControl, FormControlStatus,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -15,7 +15,7 @@ import {
   InputFieldComponent,
   InputPasswordComponent,
 } from '@shared/ui';
-import { takeUntil, tap } from 'rxjs';
+import { Observable, takeUntil, tap } from 'rxjs';
 
 interface LoginForm {
   email: FormControl<string | null>
@@ -27,8 +27,13 @@ interface LoginForm {
   selector: 'smarti-login-form',
   standalone: true,
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule, InputFieldComponent,
-    InputPasswordComponent, InputCheckboxComponent, ButtonComponent,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputFieldComponent,
+    InputPasswordComponent,
+    InputCheckboxComponent,
+    ButtonComponent,
   ],
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
@@ -41,8 +46,8 @@ export class LoginFormComponent implements OnInit {
     isRemember: new FormControl(false),
   });
   public isDisabled: boolean = true;
-  public loginFormChange$ = this.loginForm.statusChanges.pipe(
-    tap(isValid => this.isDisabled = !(isValid === 'VALID')),
+  public loginFormChange$:Observable<FormControlStatus> = this.loginForm.statusChanges.pipe(
+    tap((isValid: FormControlStatus) => this.isDisabled = !(isValid === 'VALID')),
     takeUntil(this.destroy$),
   )
 
@@ -62,9 +67,5 @@ export class LoginFormComponent implements OnInit {
 
   public doLogin(): void {
     this.router.navigate(['/']);
-  }
-
-  public changeButtonStatus(isFilled: boolean): void {
-    this.isDisabled = !isFilled;
   }
 }

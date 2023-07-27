@@ -29,8 +29,13 @@ type Direction = 'forward' | 'back';
   selector: 'smarti-upload-document',
   standalone: true,
   imports: [
-    CommonModule, DatePickerComponent, SelectComponent, InputFileComponent,
-    ForwardRequestDialogComponent, NotificationComponent, ButtonComponent,
+    CommonModule,
+    DatePickerComponent,
+    SelectComponent,
+    InputFileComponent,
+    ForwardRequestDialogComponent,
+    NotificationComponent,
+    ButtonComponent,
   ],
   templateUrl: './upload-document.component.html',
   styleUrls: ['./upload-document.component.scss'],
@@ -76,7 +81,6 @@ export class UploadDocumentComponent implements OnInit {
       this.personalInfoForm = this._fb.group({
         firstName: '',
         lastName: '',
-        // ... continue with the other fields
       })
     }
     this.subformInitialized.emit(this.personalInfoForm);

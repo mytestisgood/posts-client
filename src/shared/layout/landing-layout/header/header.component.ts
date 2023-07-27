@@ -15,9 +15,7 @@ import { ButtonComponent } from '@shared/ui';
 })
 export class HeaderComponent {
 
-  constructor(
-    private readonly router: Router,
-  ) {
+  constructor(private readonly router: Router) {
   }
 
   public navigateToRegistrationPage(): void {

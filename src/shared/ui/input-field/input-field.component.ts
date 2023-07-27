@@ -11,7 +11,12 @@ import { TuiInputModule } from '@taiga-ui/kit';
 @Component({
   selector: 'smarti-input-field',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TuiInputModule, TuiTextfieldControllerModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TuiInputModule,
+    TuiTextfieldControllerModule
+  ],
   templateUrl: './input-field.component.html',
   styleUrls: ['./input-field.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

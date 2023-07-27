@@ -8,8 +8,13 @@ import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
   selector: 'smarti-select',
   standalone: true,
   imports: [
-    CommonModule, ReactiveFormsModule, FormsModule, TuiSelectModule,
-    TuiTextfieldControllerModule, TuiDataListWrapperModule, TuiHostedDropdownModule,
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    TuiSelectModule,
+    TuiTextfieldControllerModule,
+    TuiDataListWrapperModule,
+    TuiHostedDropdownModule,
   ],
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
@@ -21,6 +26,5 @@ export class SelectComponent {
   @Input() public selectMode!: string;
   @Input() public placeholder!: string;
 
-  public selectedOption!: number;
-  selectValue = new FormControl();
+  public selectValue: FormControl<string> = new FormControl();
 }

@@ -9,7 +9,10 @@ import { Subject } from 'rxjs';
   selector: 'smarti-input-password',
   standalone: true,
   imports: [
-    CommonModule, ReactiveFormsModule, TuiInputPasswordModule, TuiTextfieldControllerModule,
+    CommonModule,
+    ReactiveFormsModule,
+    TuiInputPasswordModule,
+    TuiTextfieldControllerModule,
     TuiInputModule,
   ],
   templateUrl: './input-password.component.html',
@@ -26,7 +29,7 @@ export class InputPasswordComponent {
   @Output() public outputValue: Subject<string> = new Subject<string>();
 
 
-  public onValidatePasswordValue() {
+  public onValidatePasswordValue(): void {
     if (this.control.valid) {
       this.outputValue.next(this.control.value as string);
     } else {

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiInputDateModule } from '@taiga-ui/kit';
 
@@ -8,7 +8,10 @@ import { TuiInputDateModule } from '@taiga-ui/kit';
   selector: 'smarti-date-picker',
   standalone: true,
   imports: [
-    CommonModule, FormsModule, TuiInputDateModule, TuiTextfieldControllerModule,
+    CommonModule,
+    FormsModule,
+    TuiInputDateModule,
+    TuiTextfieldControllerModule,
     ReactiveFormsModule,
   ],
   templateUrl: './date-picker.component.html',
@@ -18,14 +21,7 @@ import { TuiInputDateModule } from '@taiga-ui/kit';
 export class DatePickerComponent {
   @Input() public customWidth!: string
   @Input() public placeholder!: string
-  @Input() public noLabel = false;
+  @Input() public noLabel: boolean = false;
   @Input() public invalid: boolean | null = null;
-
-  public selectedDate: any;
-  public datePickerConfig: any;
-  readonly dateForm = new FormGroup({
-    dateValue: new FormControl(),
-  });
-
-
+  @Input() public control: FormControl<string> = new FormControl();
 }

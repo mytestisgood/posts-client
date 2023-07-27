@@ -16,7 +16,10 @@ type Direction = 'forward' | 'back';
   selector: 'smarti-select-year-and-month',
   standalone: true,
   imports: [
-    CommonModule, InputFieldComponent, SelectComponent, DatePickerComponent,
+    CommonModule,
+    InputFieldComponent,
+    SelectComponent,
+    DatePickerComponent,
     ButtonComponent,
   ],
   templateUrl: './select-year-and-month.component.html',
@@ -52,7 +55,6 @@ export class SelectYearAndMonthComponent implements OnInit {
       this.personalInfoForm = this._fb.group({
         firstName: '',
         lastName: '',
-        // ... continue with the other fields
       })
     }
     this.subformInitialized.emit(this.personalInfoForm);

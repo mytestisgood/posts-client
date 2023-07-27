@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '@shared/ui';
@@ -12,9 +12,7 @@ import { ButtonComponent } from '@shared/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConnectNowLayoutComponent {
-  constructor(
-    private readonly router: Router,
-  ) {
+  constructor(private readonly router: Router) {
   }
 
   public navigateToRegistrationPage(): void {
