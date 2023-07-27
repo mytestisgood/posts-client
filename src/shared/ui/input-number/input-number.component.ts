@@ -26,7 +26,6 @@ export class InputNumberComponent implements OnInit{
   @Input() public isRequired: boolean = false;
   @Input() public centerVerify: boolean = false;
   @Input() public placeholder: string = '';
-  @Input() public type: string = 'text';
   @Input() public customWidth: string = '';
   @Input() public maxLength: number = 10;
   @Input() public control: FormControl<string | null> = new FormControl<string>('');
