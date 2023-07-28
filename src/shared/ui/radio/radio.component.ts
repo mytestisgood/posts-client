@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
   imports: [CommonModule, ReactiveFormsModule, TuiRadioLabeledModule],
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioComponent {
   @Input() public labelFirstText!: string;
@@ -21,6 +21,6 @@ export class RadioComponent {
   public radioValue: FormControl<string> = new FormControl();
 
   public changeValue(name: string): void {
-    this.chosenValue.next(name)
+    this.chosenValue.next(name);
   }
 }

@@ -24,16 +24,15 @@ export class InputPasswordComponent {
   @Input() public placeholder: string = '';
   @Input() public customWidth: string = '';
   @Input() public control: FormControl<string | null> = new FormControl<string>('', [
-    Validators.minLength(6)
+    Validators.minLength(6),
   ]);
   @Output() public outputValue: Subject<string> = new Subject<string>();
-
 
   public onValidatePasswordValue(): void {
     if (this.control.valid) {
       this.outputValue.next(this.control.value as string);
     } else {
-      this.outputValue.next('invalid' + Math.random())
+      this.outputValue.next('invalid' + Math.random());
     }
   }
 }

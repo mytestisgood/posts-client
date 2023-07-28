@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LeadsDialogComponent } from '@shared/dialog';
 
 describe('LeadsDialogComponent', () => {
@@ -8,7 +7,7 @@ describe('LeadsDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [LeadsDialogComponent]
+      imports: [LeadsDialogComponent],
     });
     fixture = TestBed.createComponent(LeadsDialogComponent);
     component = fixture.componentInstance;

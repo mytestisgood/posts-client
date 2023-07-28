@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ProgressBarComponent } from './progress-bar.component';
+import { ProgressBarComponent } from '@feature';
 
 describe('ProgressBarComponent', () => {
   let component: ProgressBarComponent;
@@ -8,7 +7,7 @@ describe('ProgressBarComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ProgressBarComponent]
+      imports: [ProgressBarComponent],
     });
     fixture = TestBed.createComponent(ProgressBarComponent);
     component = fixture.componentInstance;

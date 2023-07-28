@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ExpandComponent } from '@shared/ui';
 
 describe('ExpandComponent', () => {
@@ -8,7 +7,7 @@ describe('ExpandComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ExpandComponent]
+      imports: [ExpandComponent],
     });
     fixture = TestBed.createComponent(ExpandComponent);
     component = fixture.componentInstance;

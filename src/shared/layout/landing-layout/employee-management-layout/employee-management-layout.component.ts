@@ -15,11 +15,14 @@ import { takeUntil } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeeManagementLayoutComponent {
+  public firstLeadsDialogDescription: string = 'Pension settlements provide a reliable source of ' +
+    'income during your golden years, allowing you to maintain your standard of living and enjoy ' +
+    'the fruits of your labor.';
 
   constructor(
     @Inject(TuiDialogService)
     private readonly dialogs: TuiDialogService,
-    private destroy$: DestroyService,
+    private readonly destroy$: DestroyService,
   ) {
   }
 

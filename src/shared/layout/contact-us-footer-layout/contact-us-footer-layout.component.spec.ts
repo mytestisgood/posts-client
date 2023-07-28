@@ -1,14 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ContactUsFooterLayoutComponent } from '@shared/layout';
 
-describe('LoginFooterComponent', () => {
+describe('ContactUsFooterLayoutComponent', () => {
   let component: ContactUsFooterLayoutComponent;
   let fixture: ComponentFixture<ContactUsFooterLayoutComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ContactUsFooterLayoutComponent]
+      imports: [ContactUsFooterLayoutComponent],
     });
     fixture = TestBed.createComponent(ContactUsFooterLayoutComponent);
     component = fixture.componentInstance;

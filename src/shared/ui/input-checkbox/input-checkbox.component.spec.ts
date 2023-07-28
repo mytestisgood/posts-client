@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { InputCheckboxComponent } from './input-checkbox.component';
+import { InputCheckboxComponent } from '@shared/ui';
 
 describe('InputCheckboxComponent', () => {
   let component: InputCheckboxComponent;
@@ -8,7 +7,7 @@ describe('InputCheckboxComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [InputCheckboxComponent]
+      imports: [InputCheckboxComponent],
     });
     fixture = TestBed.createComponent(InputCheckboxComponent);
     component = fixture.componentInstance;

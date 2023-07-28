@@ -27,9 +27,9 @@ type Direction = 'forward' | 'back';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectYearAndMonthComponent implements OnInit {
-  @Input() startingForm!: FormGroup;
-  @Output() subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  @Output() changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
+  @Input() public startingForm!: FormGroup;
+  @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
   public personalInfoForm!: FormGroup;
 
   public monthsSelect: string[] = [
@@ -45,17 +45,18 @@ export class SelectYearAndMonthComponent implements OnInit {
     'October',
     'November',
     'December',
-  ]
-  constructor(private _fb: FormBuilder) {}
+  ];
+
+  constructor(private readonly fb: FormBuilder) {}
 
   public ngOnInit(): void {
     if (this.startingForm) {
       this.personalInfoForm = this.startingForm;
     } else {
-      this.personalInfoForm = this._fb.group({
+      this.personalInfoForm = this.fb.group({
         firstName: '',
         lastName: '',
-      })
+      });
     }
     this.subformInitialized.emit(this.personalInfoForm);
   }

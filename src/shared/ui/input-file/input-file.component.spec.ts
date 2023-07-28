@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { InputFileComponent } from './input-file.component';
+import { InputFileComponent } from '@shared/ui';
 
 describe('InputFileComponent', () => {
   let component: InputFileComponent;
@@ -8,7 +7,7 @@ describe('InputFileComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [InputFileComponent]
+      imports: [InputFileComponent],
     });
     fixture = TestBed.createComponent(InputFileComponent);
     component = fixture.componentInstance;

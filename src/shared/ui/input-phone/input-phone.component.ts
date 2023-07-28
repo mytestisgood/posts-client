@@ -9,7 +9,7 @@ import { TuiInputPhoneModule } from '@taiga-ui/kit';
   imports: [CommonModule, TuiInputPhoneModule, ReactiveFormsModule],
   templateUrl: './input-phone.component.html',
   styleUrls: ['./input-phone.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputPhoneComponent {
   @Input() public control: FormControl<string | null> = new FormControl<string>('', [

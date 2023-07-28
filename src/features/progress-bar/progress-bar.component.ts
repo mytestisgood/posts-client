@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-interface ProgressBarObject {
+export interface ProgressBarObject {
   one?: 'fill' | 'none';
   two?: 'fill' | 'none';
   three?: 'fill' | 'none';
@@ -23,7 +23,7 @@ interface ProgressBarObject {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressBarComponent {
-  @Input() counter: ProgressBarObject = {
+  @Input() public counter: ProgressBarObject = {
     one: 'fill',
     two: 'fill',
     three: 'none',

@@ -1,14 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MainBannerLayoutComponent } from '@shared/layout';
 
-import { MainBannerLayoutComponent } from './main-banner-layout.component';
-
-describe('MainBannerComponent', () => {
+describe('MainBannerLayoutComponent', () => {
   let component: MainBannerLayoutComponent;
   let fixture: ComponentFixture<MainBannerLayoutComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MainBannerLayoutComponent]
+      imports: [MainBannerLayoutComponent],
     });
     fixture = TestBed.createComponent(MainBannerLayoutComponent);
     component = fixture.componentInstance;

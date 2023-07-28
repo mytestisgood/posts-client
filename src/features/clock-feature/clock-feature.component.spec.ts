@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ClockFeatureComponent } from './clock-feature.component';
+import { ClockFeatureComponent } from '@feature';
 
 describe('ClockFeatureComponent', () => {
   let component: ClockFeatureComponent;
@@ -8,7 +7,7 @@ describe('ClockFeatureComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ClockFeatureComponent]
+      imports: [ClockFeatureComponent],
     });
     fixture = TestBed.createComponent(ClockFeatureComponent);
     component = fixture.componentInstance;

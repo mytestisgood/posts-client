@@ -12,5 +12,5 @@ import { FormContainerComponent } from './form-container/form-container.componen
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationFormComponent {
-  @Output() changingStep: BehaviorSubject<string> = new BehaviorSubject<string>('personalInfo');
+  @Output() public changingStep: BehaviorSubject<string> = new BehaviorSubject<string>('personalInfo');
 }

@@ -27,14 +27,13 @@ type Direction = 'forward' | 'back';
   ],
   templateUrl: './set-new-password.component.html',
   styleUrls: ['./set-new-password.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SetNewPasswordComponent {
-  @Input() startingForm!: FormGroup;
-  @Output() subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  @Output() changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
+  @Input() public startingForm!: FormGroup;
+  @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
 
-  public setNewPassword!: FormGroup;
   public isDisabled: boolean = true;
   public firstPasswordValue!: string;
   public secondPasswordValue!: string;
@@ -42,18 +41,14 @@ export class SetNewPasswordComponent {
   constructor(
     @Inject(TuiDialogService)
     private readonly dialogs: TuiDialogService,
-    private formBuilder: FormBuilder,
-    private destroy$: DestroyService,
+    private readonly formBuilder: FormBuilder,
+    private readonly destroy$: DestroyService,
   ) {
-  }
-
-  public ngOnInit(): void {
-    this.setNewPassword = this.formBuilder.group({});
   }
 
   public openSuccessDialog(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogs.open(content, {
-      closeable: false
+      closeable: false,
     }).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
@@ -66,7 +61,7 @@ export class SetNewPasswordComponent {
     this.secondPasswordValue = value;
     this.comparePasswords();
   }
-  public comparePasswords() {
+  public comparePasswords(): void {
     this.isDisabled = this.firstPasswordValue !== this.secondPasswordValue;
   }
 }

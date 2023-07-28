@@ -1,8 +1,9 @@
 <div class="login-form mt-2 bg-white rounded-l box-shadow-big">
-  <form class="flex flex-col items-center mt-10" [formGroup]="loginForm">
-    <h3
-      class="medium mt-10 mb-0 text-center neutrals-text-950"
-    >הכניסו כתובת מייל וסיסמא</h3>
+  <form
+    class="flex flex-col items-center mt-10"
+    [formGroup]="loginForm"
+  >
+    <h3 class="medium mt-10 mb-0 text-center neutrals-text-950">הכניסו כתובת מייל וסיסמא</h3>
     <div class="mt-24">
       <smarti-input-field
         [customWidth]="'536px'"
@@ -21,14 +22,12 @@
       <div
         class="bright-turquoise-text-500 text-underline paragraph-text-medium cursor-pointer"
         (click)="navigateToRestorePassword()"
-      >שכחתי סיסמא</div>
+      >
+        שכחתי סיסמא
+      </div>
       <div class="flex gap-4">
-        <div class="paragraph-text text-right neutrals-text-950">
-          זכור אותי
-        </div>
-        <smarti-input-checkbox
-          [control]="loginForm.controls.isRemember"
-        ></smarti-input-checkbox>
+        <div class="paragraph-text text-right neutrals-text-950">זכור אותי</div>
+        <smarti-input-checkbox [control]="loginForm.controls.isRemember"></smarti-input-checkbox>
       </div>
     </div>
     <smarti-button

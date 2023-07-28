@@ -28,15 +28,15 @@ type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailIn
 export class FormContainerComponent implements OnInit {
   @Output() public changingStep: BehaviorSubject<Step> = new BehaviorSubject<Step>('personalInfo');
 
-  private currentStepBs: BehaviorSubject<Step> = new BehaviorSubject<Step>('personalInfo');
-  public currentStep$: Observable<Step> = this.currentStepBs.asObservable();
   public userForm!: FormGroup;
+  public readonly currentStepBs: BehaviorSubject<Step> = new BehaviorSubject<Step>('personalInfo');
+  public readonly currentStep$: Observable<Step> = this.currentStepBs.asObservable();
 
-  constructor(private _fb: FormBuilder) {
+  constructor(private readonly fb: FormBuilder) {
   }
 
   public ngOnInit(): void {
-    this.userForm = this._fb.group({
+    this.userForm = this.fb.group({
       personalInfo: null,
       loginInfo: null,
     });

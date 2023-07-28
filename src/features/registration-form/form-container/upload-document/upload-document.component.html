@@ -5,7 +5,7 @@
         [customWidth]="'336px'"
         [options]="monthsSelect"
         [placeholder]="'חודש'"
-      >></smarti-select>
+      ></smarti-select>
     </div>
     <div class="mt-10">
       <smarti-date-picker
@@ -36,11 +36,15 @@
     <button
       class="usual-button cursor-pointer paragraph-text-extra rounded-m text-center"
       (click)="downloadXlExample()"
-    >הורד קובץ לדוגמא</button>
+    >
+      הורד קובץ לדוגמא
+    </button>
     <button
       class="usual-button cursor-pointer paragraph-text-extra rounded-m text-center"
       (click)="openForwardModal(dialogTemplate)"
-    >העבר בקשה לגורם מורשה</button>
+    >
+      העבר בקשה לגורם מורשה
+    </button>
   </div>
   <smarti-button
     *ngIf="documentUploaded && !isSendRequest"

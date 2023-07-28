@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { InputPhoneComponent } from '@shared/ui';
 
 describe('InputPhoneComponent', () => {
@@ -8,7 +7,7 @@ describe('InputPhoneComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [InputPhoneComponent]
+      imports: [InputPhoneComponent],
     });
     fixture = TestBed.createComponent(InputPhoneComponent);
     component = fixture.componentInstance;

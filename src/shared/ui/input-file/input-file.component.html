@@ -9,7 +9,8 @@
   <input
     tuiInputFiles
     type="file"
-    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+  />
   <ng-template let-dragged>
     <div
       *ngIf="dragged; else base"
@@ -21,8 +22,7 @@
       </div>
       <div class="caption-text neutrals-text-500">or</div>
       <button
-        class="upload-button mt-2 text-center paragraph-text-extra rounded-l
-        bright-turquoise-text-500 bg-neutral-20 items-center flex gap-2 justify-center"
+        class="upload-button mt-2 text-center paragraph-text-extra rounded-l bright-turquoise-text-500 bg-neutral-20 items-center flex gap-2 justify-center"
       >
         <div class="svg-uploaded"></div>
         <div>Browse files</div>
@@ -35,10 +35,9 @@
         <div class="drag-and-drop__svg"></div>
         <div class="paragraph-text self-center neutrals-text-950">Drag & Drop file</div>
       </div>
-      <div class="caption-text  neutrals-text-500">or</div>
+      <div class="caption-text neutrals-text-500">or</div>
       <button
-        class="upload-button mt-2 text-center paragraph-text-extra rounded-l
-        bright-turquoise-text-500 bg-neutral-20 items-center flex gap-2 justify-center"
+        class="upload-button mt-2 text-center paragraph-text-extra rounded-l bright-turquoise-text-500 bg-neutral-20 items-center flex gap-2 justify-center"
       >
         <div class="svg-uploaded"></div>
         <div>Browse files</div>

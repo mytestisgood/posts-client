@@ -15,7 +15,7 @@ import { TuiInputModule } from '@taiga-ui/kit';
     CommonModule,
     ReactiveFormsModule,
     TuiInputModule,
-    TuiTextfieldControllerModule
+    TuiTextfieldControllerModule,
   ],
   templateUrl: './input-field.component.html',
   styleUrls: ['./input-field.component.scss'],

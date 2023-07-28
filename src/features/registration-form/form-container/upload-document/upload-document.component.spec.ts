@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { UploadDocumentComponent } from './upload-document.component';
+import { UploadDocumentComponent } from '@feature';
 
 describe('UploadDocumentComponent', () => {
   let component: UploadDocumentComponent;
@@ -8,7 +7,7 @@ describe('UploadDocumentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [UploadDocumentComponent]
+      imports: [UploadDocumentComponent],
     });
     fixture = TestBed.createComponent(UploadDocumentComponent);
     component = fixture.componentInstance;

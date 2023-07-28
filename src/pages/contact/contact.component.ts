@@ -18,12 +18,12 @@ import { ButtonComponent, ExpandComponent, InputFieldComponent } from '@shared/u
   ],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactComponent implements AfterViewInit {
   public isExpanded: boolean = false;
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private readonly elementRef: ElementRef) {
   }
   public ngAfterViewInit(): void {
     this.elementRef.nativeElement.ownerDocument

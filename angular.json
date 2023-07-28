@@ -23,7 +23,11 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules", "src/assets/styles", "src/assets/fonts"]
+              "includePaths": [
+                "node_modules",
+                "src/assets/styles",
+                "src/assets/fonts"
+              ]
             },
             "allowedCommonJsDependencies": [
               "text-mask-core",
@@ -125,8 +129,22 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

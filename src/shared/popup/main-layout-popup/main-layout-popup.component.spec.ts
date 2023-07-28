@@ -1,16 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MainLayoutPopupComponent } from '@shared/popup';
 
-import { MainLayotPopupComponent } from './main-layout-popup.component';
-
-describe('MainLayotPopupComponent', () => {
-  let component: MainLayotPopupComponent;
-  let fixture: ComponentFixture<MainLayotPopupComponent>;
+describe('MainLayoutPopupComponent', () => {
+  let component: MainLayoutPopupComponent;
+  let fixture: ComponentFixture<MainLayoutPopupComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MainLayotPopupComponent]
+      declarations: [MainLayoutPopupComponent],
     });
-    fixture = TestBed.createComponent(MainLayotPopupComponent);
+    fixture = TestBed.createComponent(MainLayoutPopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

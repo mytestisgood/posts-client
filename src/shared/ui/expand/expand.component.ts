@@ -8,9 +8,9 @@ import { TuiExpandModule } from '@taiga-ui/core';
   imports: [CommonModule, TuiExpandModule],
   templateUrl: './expand.component.html',
   styleUrls: ['./expand.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExpandComponent {
-  @Input() public expandContentTemplate!: TemplateRef<any>;
+  @Input() public expandContentTemplate!: TemplateRef<Element>;
   @Input() public isExpanded: boolean = false;
 }

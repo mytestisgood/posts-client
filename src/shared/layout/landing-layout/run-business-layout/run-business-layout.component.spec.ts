@@ -1,14 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RunBusinessLayoutComponent } from '@shared/layout';
 
-import { RunBusinessLayoutComponent } from './run-business-layout.component';
-
-describe('RunBusinessBannerComponent', () => {
+describe('RunBusinessLayoutComponent', () => {
   let component: RunBusinessLayoutComponent;
   let fixture: ComponentFixture<RunBusinessLayoutComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RunBusinessLayoutComponent]
+      imports: [RunBusinessLayoutComponent],
     });
     fixture = TestBed.createComponent(RunBusinessLayoutComponent);
     component = fixture.componentInstance;

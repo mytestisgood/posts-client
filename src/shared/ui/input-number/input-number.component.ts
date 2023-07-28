@@ -28,7 +28,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./input-number.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputNumberComponent implements OnInit{
+export class InputNumberComponent implements OnInit {
   @Input() public isRequired: boolean = false;
   @Input() public centerVerify: boolean = false;
   @Input() public placeholder: string = '';
@@ -41,9 +41,7 @@ export class InputNumberComponent implements OnInit{
 
   public ngOnInit(): void {
     this.maxLengthMask = {
-      mask: [
-        ...Array(this.maxLength).fill(/\d/)
-      ],
+      mask: [ ...Array(this.maxLength).fill(/\d/) ],
     };
   }
 

@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { LandingComponent } from './landing.component';
+import { LandingComponent } from '@pages';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -8,7 +7,7 @@ describe('LandingComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LandingComponent]
+      declarations: [LandingComponent],
     });
     fixture = TestBed.createComponent(LandingComponent);
     component = fixture.componentInstance;

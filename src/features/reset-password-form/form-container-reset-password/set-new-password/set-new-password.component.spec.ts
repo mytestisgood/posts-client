@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SetNewPasswordComponent } from '@feature';
 
 describe('SetNewPasswordComponent', () => {
@@ -8,7 +7,7 @@ describe('SetNewPasswordComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SetNewPasswordComponent]
+      imports: [SetNewPasswordComponent],
     });
     fixture = TestBed.createComponent(SetNewPasswordComponent);
     component = fixture.componentInstance;

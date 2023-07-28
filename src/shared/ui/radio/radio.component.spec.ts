@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RadioComponent } from '@shared/ui';
 
 describe('RadioComponent', () => {
@@ -8,7 +7,7 @@ describe('RadioComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RadioComponent]
+      imports: [RadioComponent],
     });
     fixture = TestBed.createComponent(RadioComponent);
     component = fixture.componentInstance;

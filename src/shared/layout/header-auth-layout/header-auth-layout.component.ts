@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
   imports: [CommonModule],
   templateUrl: './header-auth-layout.component.html',
   styleUrls: ['./header-auth-layout.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderAuthLayoutComponent {
-  @Input() haveLeftBLock: boolean = false;
-  @Input() leftBlockText!: string;
-  @Input() leftBlockClickedText!: string;
-  @Input() redirectLink: string = '/';
+  @Input() public haveLeftBLock: boolean = false;
+  @Input() public leftBlockText!: string;
+  @Input() public leftBlockClickedText!: string;
+  @Input() public redirectLink: string = '/';
 
   constructor(private readonly router: Router) {
   }

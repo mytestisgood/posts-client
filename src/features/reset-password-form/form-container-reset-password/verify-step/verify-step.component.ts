@@ -18,21 +18,21 @@ type Direction = 'forward' | 'back';
   imports: [CommonModule, RadioComponent, ButtonComponent, InputNumberComponent],
   templateUrl: './verify-step.component.html',
   styleUrls: ['./verify-step.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerifyStepComponent implements OnInit {
-  @Input() startingForm!: FormGroup;
-  @Output() subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  @Output() changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
+  @Input() public startingForm!: FormGroup;
+  @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
 
   public verifyStepForm!: FormGroup;
-  public items: { name: string }[] = [{ name: 'email' }, { name: 'phone' }]
+  public items: { name: string }[] = [{ name: 'email' }, { name: 'phone' }];
   public isModeChosen: boolean = false;
   public isDisabled: boolean = true;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
+    private readonly formBuilder: FormBuilder,
+    private readonly router: Router,
   ) {
   }
 
@@ -51,7 +51,7 @@ export class VerifyStepComponent implements OnInit {
   }
 
   public redirectToLogin(): void {
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 
   public changeButtonStatus(isFilled: boolean): void {

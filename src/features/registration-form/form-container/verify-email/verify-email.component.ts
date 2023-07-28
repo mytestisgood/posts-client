@@ -13,7 +13,7 @@ import { DestroyService } from '@shared/services';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import {
-  SuccessDialogComponent
+  SuccessDialogComponent,
 } from '@shared/dialog';
 import { ButtonComponent, InputNumberComponent } from '@shared/ui';
 import { takeUntil } from 'rxjs';
@@ -27,23 +27,23 @@ type Direction = 'forward' | 'back';
     CommonModule,
     ButtonComponent,
     InputNumberComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
   ],
   templateUrl: './verify-email.component.html',
   styleUrls: ['./verify-email.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerifyEmailComponent implements OnInit {
-  @Input() startingForm!: FormGroup;
-  @Output() subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  @Output() changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
+  @Input() public startingForm!: FormGroup;
+  @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
 
   public personalInfoForm!: FormGroup;
   constructor(
     @Inject(TuiDialogService)
     private readonly dialogs: TuiDialogService,
-    private _fb: FormBuilder,
-    private destroy$: DestroyService,
+    private readonly fb: FormBuilder,
+    private readonly destroy$: DestroyService,
   ) {
   }
 
@@ -51,17 +51,17 @@ export class VerifyEmailComponent implements OnInit {
     if (this.startingForm) {
       this.personalInfoForm = this.startingForm;
     } else {
-      this.personalInfoForm = this._fb.group({
+      this.personalInfoForm = this.fb.group({
         firstName: '',
         lastName: '',
-      })
+      });
     }
     this.subformInitialized.emit(this.personalInfoForm);
   }
 
   public openSuccessDialog(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogs.open(content, {
-      closeable: false
+      closeable: false,
     }).pipe(takeUntil(this.destroy$)).subscribe();
   }
 }

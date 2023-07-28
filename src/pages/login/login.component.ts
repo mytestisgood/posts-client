@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LoginFormComponent } from '@feature';
 import {
-  ContactUsFooterLayoutComponent, HeaderAuthLayoutComponent
+  ContactUsFooterLayoutComponent, HeaderAuthLayoutComponent,
 } from '@shared/layout';
 
 @Component({

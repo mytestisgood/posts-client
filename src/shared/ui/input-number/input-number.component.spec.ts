@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { InputNumberComponent } from './input-number.component';
+import { InputNumberComponent } from '@shared/ui';
 
 describe('InputNumberComponent', () => {
   let component: InputNumberComponent;
@@ -8,7 +7,7 @@ describe('InputNumberComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [InputNumberComponent]
+      imports: [InputNumberComponent],
     });
     fixture = TestBed.createComponent(InputNumberComponent);
     component = fixture.componentInstance;

@@ -10,8 +10,6 @@
     inputmode="numeric"
     (keyup)="changeValue()"
     [maskito]="maxLengthMask"
-    [ngClass]="{
-    'center-verify': centerVerify,
-  }"
+    [ngClass]="{ 'center-verify': centerVerify }"
   />
 </tui-input>

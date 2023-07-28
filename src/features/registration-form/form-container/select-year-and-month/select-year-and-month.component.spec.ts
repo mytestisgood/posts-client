@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SelectYearAndMonthComponent } from './select-year-and-month.component';
+import { SelectYearAndMonthComponent } from '@feature';
 
 describe('SelectYearAndMonthComponent', () => {
   let component: SelectYearAndMonthComponent;
@@ -8,7 +7,7 @@ describe('SelectYearAndMonthComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SelectYearAndMonthComponent]
+      imports: [SelectYearAndMonthComponent],
     });
     fixture = TestBed.createComponent(SelectYearAndMonthComponent);
     component = fixture.componentInstance;

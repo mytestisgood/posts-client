@@ -16,6 +16,6 @@ export class ConnectNowLayoutComponent {
   }
 
   public navigateToRegistrationPage(): void {
-    this.router.navigate(['/registration'])
+    this.router.navigate(['/registration']);
   }
 }

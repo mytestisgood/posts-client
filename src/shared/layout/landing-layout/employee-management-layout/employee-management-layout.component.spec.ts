@@ -1,14 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EmployeeManagementLayoutComponent } from '@shared/layout';
 
-import { EmployeeManagementLayoutComponent } from './employee-management-layout.component';
-
-describe('EmployeeManagementComponent', () => {
+describe('EmployeeManagementLayoutComponent', () => {
   let component: EmployeeManagementLayoutComponent;
   let fixture: ComponentFixture<EmployeeManagementLayoutComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [EmployeeManagementLayoutComponent]
+      imports: [EmployeeManagementLayoutComponent],
     });
     fixture = TestBed.createComponent(EmployeeManagementLayoutComponent);
     component = fixture.componentInstance;

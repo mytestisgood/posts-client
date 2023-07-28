@@ -6,9 +6,9 @@ import {
   RegistrationComponent,
   NotFoundComponent,
   ContactComponent,
+  ResetPasswordComponent,
 } from '@pages';
 import { BrowserModule } from '@angular/platform-browser';
-import { ResetPasswordComponent } from '@pages';
 
 const routes: Routes = [
   {
@@ -35,14 +35,14 @@ const routes: Routes = [
     path: '**',
     component: LandingComponent,
     pathMatch: 'full',
-    children: [{path: '', component: NotFoundComponent}],
+    children: [{ path: '', component: NotFoundComponent }],
   },
 ];
 
 @NgModule({
   imports: [
     BrowserModule, RouterModule.forRoot(
-      routes, {scrollPositionRestoration: 'enabled'},
+      routes, { scrollPositionRestoration: 'enabled' },
     ),
   ],
   exports: [RouterModule],

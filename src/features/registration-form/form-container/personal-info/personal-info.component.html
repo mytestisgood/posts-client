@@ -1,7 +1,8 @@
-<form class="flex flex-col items-center mt-10" [formGroup]="personalInfoForm">
-  <h3
-    class="medium mt-10 mb-0 text-center neutrals-text-950"
-  >צור חשבון!</h3>
+<form
+  class="flex flex-col items-center mt-10"
+  [formGroup]="personalInfoForm"
+>
+  <h3 class="medium mt-10 mb-0 text-center neutrals-text-950">צור חשבון!</h3>
   <div class="personal-info mt-8">
     <smarti-input-field
       [customWidth]="'536px'"
@@ -42,11 +43,8 @@
     <div class="personal-info__text paragraph-text-medium text-right neutrals-text-950 margin-left-160">
       <div>קראתי והסכמתי לתנאי השימוש ומדיניות</div>
       <div>הפרטיות של Smarti</div>
-
     </div>
-    <smarti-input-checkbox
-      [control]="personalInfoForm.controls.acceptPrivacy"
-    ></smarti-input-checkbox>
+    <smarti-input-checkbox [control]="personalInfoForm.controls.acceptPrivacy"></smarti-input-checkbox>
   </div>
   <smarti-button
     [customMargin]="'40px 0 64px'"

@@ -18,7 +18,7 @@ interface LeadsForm {
   imports: [CommonModule, InputFieldComponent, ButtonComponent, ReactiveFormsModule],
   templateUrl: './leads-dialog.component.html',
   styleUrls: ['./leads-dialog.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeadsDialogComponent {
   @Input() public observer!: { complete: () => void };
@@ -32,12 +32,12 @@ export class LeadsDialogComponent {
   public leadsForm: FormGroup<LeadsForm> = new FormGroup({
     name: new FormControl(''),
     email: new FormControl('', Validators.required),
-    phone: new FormControl('', [Validators.required])
-  })
+    phone: new FormControl('', [Validators.required]),
+  });
 
   constructor(
-    private leadService: LeadService,
-    private destroy$: DestroyService,
+    private readonly leadService: LeadService,
+    private readonly destroy$: DestroyService,
   ) {
   }
 

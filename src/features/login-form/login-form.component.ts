@@ -49,7 +49,7 @@ export class LoginFormComponent implements OnInit {
   public loginFormChange$:Observable<FormControlStatus> = this.loginForm.statusChanges.pipe(
     tap((isValid: FormControlStatus) => this.isDisabled = !(isValid === 'VALID')),
     takeUntil(this.destroy$),
-  )
+  );
 
   constructor(
     private readonly router: Router,

@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { AboutLayoutComponent } from './about-layout.component';
+import { AboutLayoutComponent } from '@shared/layout';
 
 describe('AboutComponent', () => {
   let component: AboutLayoutComponent;
@@ -8,7 +7,7 @@ describe('AboutComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AboutLayoutComponent]
+      imports: [AboutLayoutComponent],
     });
     fixture = TestBed.createComponent(AboutLayoutComponent);
     component = fixture.componentInstance;

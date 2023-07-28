@@ -2,9 +2,7 @@
   class="flex justify-center"
   [style.margin]="customMargin"
   [style.width]="customWidth"
-  [ngClass]="{
-    'haveIcon': haveIcon,
-  }"
+  [class.haveIcon]="haveIcon"
 >
   <button
     class="smarti-button rounded-m text-center smarti-button-text"
@@ -12,7 +10,7 @@
       'confirm-button': typeClass === 'confirm',
       'button-interaction': typeClass === 'interaction',
       'dark-button': typeClass === 'dark',
-      'paragraph-text-extra': paragraphTextExtra,
+      'paragraph-text-extra': paragraphTextExtra
     }"
     [style.border]="customBorder"
     [style.color]="textColor"
@@ -20,5 +18,7 @@
     [style.width]="customButtonWidth"
     [disabled]="disabled"
     (click)="clicked()"
-  >{{ text }}</button>
+  >
+    {{ text }}
+  </button>
 </div>

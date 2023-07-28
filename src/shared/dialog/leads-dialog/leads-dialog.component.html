@@ -3,7 +3,10 @@
   class="close-dialog-left cursor-pointer"
   (click)="closeDialog()"
 ></button>
-<div class="flex gap-12-5" [formGroup]="leadsForm">
+<div
+  class="flex gap-12-5"
+  [formGroup]="leadsForm"
+>
   <div class="flex flex-col leads-form-block-width bg-white mb-6 mt-8">
     <h3
       class="medium mt-20 dir-rtl neutrals-text-950 mb-1 margin-rl-auto width-header-leads"
@@ -46,7 +49,7 @@
   <div class="mt-16 mr-18">
     <div
       class="right-side-img"
-      [style.background]="'url('+ backgroundImage +')'"
+      [style.background]="'url(' + backgroundImage + ')'"
     ></div>
     <h1
       class="medium neutrals-text-950 text-center mt-10 mb-8 width-input-full-hd margin-rl-auto"

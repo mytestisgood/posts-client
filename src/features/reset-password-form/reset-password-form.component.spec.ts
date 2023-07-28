@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ResetPasswordFormComponent } from '@feature';
 
 describe('ResetPasswordFormComponent', () => {
@@ -8,7 +7,7 @@ describe('ResetPasswordFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ResetPasswordFormComponent]
+      imports: [ResetPasswordFormComponent],
     });
     fixture = TestBed.createComponent(ResetPasswordFormComponent);
     component = fixture.componentInstance;

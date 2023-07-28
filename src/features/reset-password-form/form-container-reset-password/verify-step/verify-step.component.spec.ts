@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { VerifyStepComponent } from '@feature';
 
 describe('VerifyStepComponent', () => {
@@ -8,7 +7,7 @@ describe('VerifyStepComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [VerifyStepComponent]
+      imports: [VerifyStepComponent],
     });
     fixture = TestBed.createComponent(VerifyStepComponent);
     component = fixture.componentInstance;

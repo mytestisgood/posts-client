@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ForwardRequestDialogComponent } from './forward-request-dialog.component';
+import { ForwardRequestDialogComponent } from '@shared/dialog';
 
 describe('ForwardRequestDialogComponent', () => {
   let component: ForwardRequestDialogComponent;
@@ -8,7 +7,7 @@ describe('ForwardRequestDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ForwardRequestDialogComponent]
+      imports: [ForwardRequestDialogComponent],
     });
     fixture = TestBed.createComponent(ForwardRequestDialogComponent);
     component = fixture.componentInstance;

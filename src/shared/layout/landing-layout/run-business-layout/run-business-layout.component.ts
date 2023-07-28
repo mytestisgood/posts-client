@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '@shared/ui';
@@ -16,6 +16,6 @@ export class RunBusinessLayoutComponent {
   }
 
   public navigateToRegistrationPage(): void {
-    this.router.navigate(['/registration'])
+    this.router.navigate(['/registration']);
   }
 }

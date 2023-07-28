@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { RegistrationFooterComponent } from './registration-footer.component';
+import { RegistrationFooterComponent } from '@shared/layout';
 
 describe('RegistrationFooterComponent', () => {
   let component: RegistrationFooterComponent;
@@ -8,7 +7,7 @@ describe('RegistrationFooterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RegistrationFooterComponent]
+      imports: [RegistrationFooterComponent],
     });
     fixture = TestBed.createComponent(RegistrationFooterComponent);
     component = fixture.componentInstance;

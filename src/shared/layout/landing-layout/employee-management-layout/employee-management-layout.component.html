@@ -1,14 +1,11 @@
 <div class="mt-104">
-  <div class="smarti-heading-text bright-turquoise-text-500">
-    רוצים ליעל את ניהול העובדים שלכם?
-  </div>
+  <div class="smarti-heading-text bright-turquoise-text-500">רוצים ליעל את ניהול העובדים שלכם?</div>
   <div class="smarti-describing-text white-text">
     <div>קבלו את כל הכלים המתאימים שיאפשרו לכם זאת.</div>
     <div>ניהולי משאבי אנוש בתהליכים דיגיטליים מתקדמים ביותר</div>
   </div>
   <div class="flex justify-center gap-171px">
     <div class="employee-management-left">
-
       <div
         class="employee-management-left__item flex gap-136px rounded-l border-neutrals-800 bg-neutrals-900 cursor-pointer"
         (click)="openLeadsDialog(firstLeadsDialogTemplate)"
@@ -40,9 +37,7 @@
         <div class="employee-management-left__item__button flex justify-center rounded-m bg-pumpkin-400">
           <div class="icon-arrow-left-top"></div>
         </div>
-        <h4 class="employee-management-left__item__text dir-rtl medium white-text">
-          העלאת תלושי שכר לכלל העובדים
-        </h4>
+        <h4 class="employee-management-left__item__text dir-rtl medium white-text">העלאת תלושי שכר לכלל העובדים</h4>
       </div>
     </div>
     <div class="employee-management-right"></div>
@@ -56,9 +51,7 @@
   <smarti-leads-dialog
     [observer]="observer"
     [headerText]="'שליחת טפסי 101 ישירות לעובדים לנייד'"
-    [descriptionText]="'Pension settlements provide a reliable source of income during your\n'+
-      'golden years, allowing you to maintain your standard of living and\n'+
-      'enjoy the fruits of your labor.'"
+    [descriptionText]="firstLeadsDialogDescription"
     [headerFormText]="'מעוניינים לשלוח טפסי 101 ישירות לעובדים ניידים?'"
     [descriptionFormText]="'Send us your contact information and we will contact you as soon as possible'"
     [backgroundImage]="'/assets/img/rounded-send-101-form-img.png'"
@@ -73,9 +66,7 @@
   <smarti-leads-dialog
     [observer]="observer"
     [headerText]="'אפשרות לעובדים לבחור מוצרים פנסיונים'"
-    [descriptionText]="'Pension settlements provide a reliable source of income during your\n'+
-      'golden years, allowing you to maintain your standard of living and\n'+
-      'enjoy the fruits of your labor.'"
+    [descriptionText]="firstLeadsDialogDescription"
     [headerFormText]="'האם אתה מעוניין באפשרות של עובדים לבחור מוצרים פנסיוניים?'"
     [descriptionFormText]="'Send us your contact information and we will contact you as soon as possible'"
     [backgroundImage]="'/assets/img/rounded-pension-products-img.png'"
@@ -90,9 +81,7 @@
   <smarti-leads-dialog
     [observer]="observer"
     [headerText]="'העלאת תלושי שכר לכלל העובדים'"
-    [descriptionText]="'Pension settlements provide a reliable source of income during your\n'+
-      'golden years, allowing you to maintain your standard of living and\n'+
-      'enjoy the fruits of your labor.'"
+    [descriptionText]="firstLeadsDialogDescription"
     [headerFormText]="'מעוניינים להעלות תלושי שכר לכל העובדים?'"
     [descriptionFormText]="'Send us your contact information and we will contact you as soon as possible'"
     [backgroundImage]="'/assets/img/rounded-payslips-employees-img.png'"

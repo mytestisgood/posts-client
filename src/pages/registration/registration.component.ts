@@ -4,7 +4,7 @@ import {
   HeaderAuthLayoutComponent,
   RegistrationFooterComponent,
 } from '@shared/layout';
-import { ProgressBarComponent, RegistrationFormComponent } from '@feature';
+import { ProgressBarComponent, ProgressBarObject, RegistrationFormComponent } from '@feature';
 
 type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailInfo';
 
@@ -25,7 +25,7 @@ type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailIn
 export class RegistrationComponent implements AfterViewInit {
   public changeImageStep: Step  = 'personalInfo';
 
-  public stepCounter: {} = {
+  public stepCounter: ProgressBarObject = {
     one: 'fill',
     two: 'fill',
     three: 'none',
@@ -38,7 +38,7 @@ export class RegistrationComponent implements AfterViewInit {
     ten: 'none',
   };
 
-  public secondStepCounter: {} = {
+  public secondStepCounter: ProgressBarObject = {
     one: 'fill',
     two: 'fill',
     three: 'fill',
@@ -51,7 +51,7 @@ export class RegistrationComponent implements AfterViewInit {
     ten: 'none',
   };
 
-  public thirdStepCounter: {} = {
+  public thirdStepCounter: ProgressBarObject = {
     one: 'fill',
     two: 'fill',
     three: 'fill',
@@ -64,7 +64,7 @@ export class RegistrationComponent implements AfterViewInit {
     ten: 'none',
   };
 
-  public fourthStepCounter: {} = {
+  public fourthStepCounter: ProgressBarObject = {
     one: 'fill',
     two: 'fill',
     three: 'fill',
@@ -77,7 +77,7 @@ export class RegistrationComponent implements AfterViewInit {
     ten: 'fill',
   };
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private readonly elementRef: ElementRef) {
   }
 
   public ngAfterViewInit(): void {

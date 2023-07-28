@@ -13,10 +13,9 @@ import { BehaviorSubject } from 'rxjs';
 export class NotificationComponent {
   @Input() public header!: string;
   @Input() public description!: string;
-  @Input() public width: string = '812px'
-  @Input() public height: string = '120px'
+  @Input() public width: string = '812px';
+  @Input() public height: string = '120px';
   @Output() public closeNotification: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
 
   public onCloseNotification(): void {
     this.closeNotification.next(true);

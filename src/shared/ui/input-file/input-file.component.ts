@@ -24,7 +24,7 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
 export class InputFileComponent implements OnInit {
   @Input() public customWidth!: string;
   @Input() public customHeight!: string;
-  @Output() fileUploaded: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  @Output() public fileUploaded: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public control: FormControl<TuiFileLike | null> = new FormControl();
 
@@ -32,7 +32,7 @@ export class InputFileComponent implements OnInit {
     name: 'custom.txt',
   };
 
-  constructor(private destroy$: DestroyService) {
+  constructor(private readonly destroy$: DestroyService) {
   }
 
   public ngOnInit(): void {
@@ -43,10 +43,10 @@ export class InputFileComponent implements OnInit {
         } else {
           this.fileUploaded.next(false);
         }
-      })
+      });
   }
 
-  removeFile(): void {
+  public removeFile(): void {
     this.control.setValue(null);
   }
 }

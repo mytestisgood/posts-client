@@ -12,7 +12,6 @@ interface ForwardRequestForm {
   userName: FormControl<string | null>;
 }
 
-
 @Component({
   selector: 'smarti-forward-request-dialog',
   standalone: true,
@@ -39,8 +38,8 @@ export class ForwardRequestDialogComponent {
   });
 
   constructor(
-    private destroy$: DestroyService,
-    private signInService: SignInService,
+    private readonly destroy$: DestroyService,
+    private readonly signInService: SignInService,
   ) {
   }
 
@@ -56,6 +55,6 @@ export class ForwardRequestDialogComponent {
     }).pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.requestSend.next(true);
       this.observer.complete();
-    })
+    });
   }
 }

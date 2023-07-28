@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import {
-  FormContainerResetPasswordComponent
+  FormContainerResetPasswordComponent,
 } from './form-container-reset-password/form-container-reset-password.component';
 
 @Component({
@@ -11,8 +11,8 @@ import {
   imports: [CommonModule, FormContainerResetPasswordComponent],
   templateUrl: './reset-password-form.component.html',
   styleUrls: ['./reset-password-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResetPasswordFormComponent {
-  @Output() changingStep: BehaviorSubject<string> = new BehaviorSubject<string>('verifyStep');
+  @Output() public changingStep: BehaviorSubject<string> = new BehaviorSubject<string>('verifyStep');
 }

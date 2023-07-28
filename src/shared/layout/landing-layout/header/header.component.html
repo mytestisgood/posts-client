@@ -13,7 +13,7 @@
         </div>
       </div>
 
-     <smarti-clock-feature></smarti-clock-feature>
+      <smarti-clock-feature></smarti-clock-feature>
 
       <h4 class="medium">מבצע: חודש ניסיון חינם</h4>
     </div>
@@ -31,7 +31,7 @@
           (buttonClicked)="navigateToLoginPage()"
         ></smarti-button>
         <smarti-button
-          style="margin-inline-start: 24px;"
+          class="margin-start-6"
           [typeClass]="'dark'"
           [text]="'הרשמה חינם'"
           [customWidth]="'168px'"
@@ -45,26 +45,34 @@
         <a
           class="nav-block paragraph-text-light self-center cursor-pointer"
           (click)="navigateToContactPage()"
-        >צרו קשר</a>
+        >
+          צרו קשר
+        </a>
         <!--      blog-->
         <a
           class="nav-block paragraph-text-light self-center cursor-pointer"
-          appScrollAnchor="blog"
-        >בלוג</a>
+          smartiScrollAnchor="blog"
+        >
+          בלוג
+        </a>
         <!--      about-->
         <a
           class="nav-block paragraph-text-light self-center cursor-pointer"
-          appScrollAnchor="banner"
-        >אודות</a>
+          smartiScrollAnchor="banner"
+        >
+          אודות
+        </a>
         <!--      solution-->
         <a
           class="nav-block paragraph-text-light self-center cursor-pointer"
-          appScrollAnchor="about"
-        >פתרונות</a>
+          smartiScrollAnchor="about"
+        >
+          פתרונות
+        </a>
         <a
           class="nav-block__img cursor-pointer"
           (click)="navigateToMainPage()"
-          appScrollAnchor="banner"
+          smartiScrollAnchor="banner"
         ></a>
       </nav>
     </div>

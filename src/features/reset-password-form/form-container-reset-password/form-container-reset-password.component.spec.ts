@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FormContainerResetPasswordComponent } from '@feature';
 
 describe('FormContainerResetPasswordComponent', () => {
@@ -8,7 +7,7 @@ describe('FormContainerResetPasswordComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormContainerResetPasswordComponent]
+      imports: [FormContainerResetPasswordComponent],
     });
     fixture = TestBed.createComponent(FormContainerResetPasswordComponent);
     component = fixture.componentInstance;

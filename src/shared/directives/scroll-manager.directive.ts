@@ -1,14 +1,15 @@
-import {Directive} from "@angular/core";
-import {ScrollSectionDirective} from "./scroll-section.directive";
+import { Directive } from '@angular/core';
+import { ScrollSectionDirective } from './scroll-section.directive';
 
 @Directive({
-  selector: '[appScrollManager]',
+  selector: '[smartiScrollManager]',
 })
 export class ScrollManagerDirective {
-  private sections = new Map<string | number, ScrollSectionDirective>();
+  private readonly sections: Map<string | number, ScrollSectionDirective> =
+    new Map<string | number, ScrollSectionDirective>();
 
   public scroll(id: string | number): void {
-    this.sections.get(id)!.scroll();
+    this.sections.get(id)?.scroll();
   }
 
   public register(section: ScrollSectionDirective): void {

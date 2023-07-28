@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { InputPasswordComponent } from './input-password.component';
+import { InputPasswordComponent } from '@shared/ui';
 
 describe('InputPasswordComponent', () => {
   let component: InputPasswordComponent;
@@ -8,7 +7,7 @@ describe('InputPasswordComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [InputPasswordComponent]
+      imports: [InputPasswordComponent],
     });
     fixture = TestBed.createComponent(InputPasswordComponent);
     component = fixture.componentInstance;

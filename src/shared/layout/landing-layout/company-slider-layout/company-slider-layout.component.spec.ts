@@ -1,16 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CompanySliderLayoutComponent } from '@shared/layout';
 
-import { CompanyCaruselLayoutComponent } from './company-slider-layout.component';
-
-describe('CompanyCaruselComponent', () => {
-  let component: CompanyCaruselLayoutComponent;
-  let fixture: ComponentFixture<CompanyCaruselLayoutComponent>;
+describe('CompanySliderLayoutComponent', () => {
+  let component: CompanySliderLayoutComponent;
+  let fixture: ComponentFixture<CompanySliderLayoutComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CompanyCaruselLayoutComponent]
+      imports: [CompanySliderLayoutComponent],
     });
-    fixture = TestBed.createComponent(CompanyCaruselLayoutComponent);
+    fixture = TestBed.createComponent(CompanySliderLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

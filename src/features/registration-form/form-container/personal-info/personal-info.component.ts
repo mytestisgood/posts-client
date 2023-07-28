@@ -50,9 +50,9 @@ interface PersonalInfoControls {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonalInfoComponent implements OnInit {
-  @Input() startingForm!: FormGroup;
-  @Output() subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  @Output() changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
+  @Input() public startingForm!: FormGroup;
+  @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
 
   public isDisabled: boolean = true;
   public personalInfoForm: FormGroup<PersonalInfoControls> = new FormGroup({
@@ -75,9 +75,9 @@ export class PersonalInfoComponent implements OnInit {
   public ngOnInit(): void {
     this.subformInitialized.emit(this.personalInfoForm);
     this.personalInfoForm.updateValueAndValidity({ emitEvent: true });
-    this.personalInfoFormChange$.subscribe((isValid: FormControlStatus) => {
-      this.isDisabled = !(isValid === 'VALID')
-    });
+    this.personalInfoFormChange$.subscribe((isValid: FormControlStatus) =>
+      this.isDisabled = !(isValid === 'VALID'),
+    );
   }
 
   public doChangeStep(direction: 'forward'): void {

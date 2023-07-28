@@ -6,28 +6,24 @@
     [redirectLink]="'/login'"
   ></smarti-header-auth-layout>
   <div class="width-full-hd margin-0-auto">
-    <smarti-progress-bar
-      [counter]="stepCounter"
-    ></smarti-progress-bar>
+    <smarti-progress-bar [counter]="stepCounter"></smarti-progress-bar>
     <div class="flex justify-between mt-2">
       <div
         [ngClass]="{
           'first-head er-image': changeImageStep === 'personalInfo',
           'second-header-image': changeImageStep === 'loginInfo' || changeImageStep === 'uploadDocumentInfo',
-          'third-header-image': changeImageStep === 'verifyEmailInfo',
+          'third-header-image': changeImageStep === 'verifyEmailInfo'
         }"
       ></div>
       <h1
         *ngIf="changeImageStep !== 'verifyEmailInfo'; else verifyEmailInfoHeaderTemplate"
-        class="medium text-right self-center neutrals-text-950">
+        class="medium text-right self-center neutrals-text-950"
+      >
         <div>תודה שבחרתם</div>
         <div>Smarti</div>
       </h1>
       <ng-template #verifyEmailInfoHeaderTemplate>
-        <h1
-          class="medium text-right self-center neutrals-text-950">
-          אימות חשבון
-        </h1>
+        <h1 class="medium text-right self-center neutrals-text-950">אימות חשבון</h1>
       </ng-template>
     </div>
     <smarti-registration-form

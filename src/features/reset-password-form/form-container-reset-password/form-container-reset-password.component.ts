@@ -13,19 +13,20 @@ type Step = 'verifyStep' | 'setPasswordStep';
   imports: [CommonModule, VerifyStepComponent, SetNewPasswordComponent],
   templateUrl: './form-container-reset-password.component.html',
   styleUrls: ['./form-container-reset-password.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormContainerResetPasswordComponent implements OnInit {
   @Output() public changingStep: BehaviorSubject<Step> = new BehaviorSubject<Step>('verifyStep');
 
-  private currentStepBs: BehaviorSubject<Step> = new BehaviorSubject<Step>('verifyStep');
+  public readonly currentStepBs: BehaviorSubject<Step> = new BehaviorSubject<Step>('verifyStep');
   public currentStep$: Observable<Step> = this.currentStepBs.asObservable();
   public userForm!: FormGroup;
-  constructor(private _fb: FormBuilder) {
+
+  constructor(private readonly fb: FormBuilder) {
   }
 
   public ngOnInit(): void {
-    this.userForm = this._fb.group({
+    this.userForm = this.fb.group({
       verifyStep: null,
       setPasswordStep: null,
     });

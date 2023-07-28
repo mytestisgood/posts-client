@@ -20,7 +20,7 @@ export class SuccessDialogComponent {
   @Input() public customHeaderHeight!: string;
   @Input() public customDescriptionHeight!: string;
 
-  constructor(private router: Router) {
+  constructor(private readonly router: Router) {
   }
 
   public redirectToPage(): void {

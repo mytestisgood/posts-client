@@ -1,15 +1,15 @@
-import {ScrollManagerDirective} from './scroll-manager.directive';
-import {Directive, ElementRef, Input, OnDestroy, OnInit} from "@angular/core";
+import { ScrollManagerDirective } from './scroll-manager.directive';
+import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[appScrollSection]',
+  selector: '[smartiScrollSection]',
 })
 export class ScrollSectionDirective implements OnInit, OnDestroy {
-  @Input('appScrollSection') id!: string | number;
+  @Input('smartiScrollSection') public id!: string | number;
 
   constructor(
-    private host: ElementRef<HTMLElement>,
-    private manager: ScrollManagerDirective
+    private readonly host: ElementRef<HTMLElement>,
+    private readonly manager: ScrollManagerDirective,
   ) {
   }
 
@@ -22,8 +22,6 @@ export class ScrollSectionDirective implements OnInit, OnDestroy {
   }
 
   public scroll(): void {
-    this.host.nativeElement.scrollIntoView({
-      behavior: 'smooth',
-    });
+    this.host.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
 }

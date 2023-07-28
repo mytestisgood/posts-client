@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ConnectNowLayoutComponent } from './connect-now-layout.component';
+import { ConnectNowLayoutComponent } from '@shared/layout';
 
 describe('ConnectNowBannerComponent', () => {
   let component: ConnectNowLayoutComponent;
@@ -8,7 +7,7 @@ describe('ConnectNowBannerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ConnectNowLayoutComponent]
+      imports: [ConnectNowLayoutComponent],
     });
     fixture = TestBed.createComponent(ConnectNowLayoutComponent);
     component = fixture.componentInstance;
