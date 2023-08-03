@@ -7,7 +7,9 @@ import {
   Input, OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { SignInService } from '@shared/api';
+import { LocalStorageService } from '@shared/web-api';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import {
@@ -22,8 +24,12 @@ import {
 } from '@shared/ui';
 import { DestroyService } from '@shared/services';
 import { takeUntil } from 'rxjs';
-
-type Direction = 'forward' | 'back';
+import { uploadingDocumentsFormMapper } from '../../entities/registration-mapper';
+import {
+  DEPARTMENT_ID,
+  Direction, REGISTRATION_TOKEN, RegistrationFormValueType,
+  UploadDocumentsControls,
+} from '../../entities/registration.models';
 
 @Component({
   selector: 'smarti-upload-document',
@@ -36,6 +42,7 @@ type Direction = 'forward' | 'back';
     ForwardRequestDialogComponent,
     NotificationComponent,
     ButtonComponent,
+    ReactiveFormsModule,
   ],
   templateUrl: './upload-document.component.html',
   styleUrls: ['./upload-document.component.scss'],
@@ -43,27 +50,16 @@ type Direction = 'forward' | 'back';
 })
 export class UploadDocumentComponent implements OnInit {
   @Input() public startingForm!: FormGroup;
+  @Input() public currentFormStateValue!: RegistrationFormValueType;
   @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
-  public personalInfoForm!: FormGroup;
+  public uploadDocumentsForm: FormGroup<UploadDocumentsControls> = uploadingDocumentsFormMapper();
   public documentUploaded: boolean = false;
   public isSendRequest: boolean = false;
-
-  public monthsSelect: string[] = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
   public isNotificationClosed: boolean = false;
+  public departmentId: number = Number(this.localStorageService.getItem(DEPARTMENT_ID));
+  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
+  public identifier!: string;
 
   constructor(
     @Inject(TuiDialogService)
@@ -71,23 +67,23 @@ export class UploadDocumentComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly changeDetectionRef: ChangeDetectorRef,
     private readonly destroy$: DestroyService,
-  ) {
-  }
+    private readonly localStorageService: LocalStorageService,
+    private readonly signInService: SignInService,
+  ) {}
 
   public ngOnInit(): void {
     if (this.startingForm) {
-      this.personalInfoForm = this.startingForm;
-    } else {
-      this.personalInfoForm = this.fb.group({
-        firstName: '',
-        lastName: '',
-      });
+      this.uploadDocumentsForm = this.startingForm;
     }
-    this.subformInitialized.emit(this.personalInfoForm);
+    this.subformInitialized.emit(this.uploadDocumentsForm);
+    this.identifier = this.currentFormStateValue.personalInfo.companyId;
   }
 
-  public doChangeStep(direction: 'forward'): void {
-    this.changeStep.emit(direction);
+  public doChangeStep(direction: Direction): void {
+    this.subformInitialized.emit(this.uploadDocumentsForm);
+    this.signInService.apiUsersSendVerifyCodePost(this.token).pipe(
+      takeUntil(this.destroy$),
+    ).subscribe(() => this.changeStep.emit(direction));
   }
 
   public downloadXlExample(): void {

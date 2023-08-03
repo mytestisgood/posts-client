@@ -29,6 +29,8 @@ interface ForwardRequestForm {
 export class ForwardRequestDialogComponent {
   @Input() public haveCloseIcon: boolean = false;
   @Input() public observer!: { complete: () => void };
+  @Input() public identifier!: string;
+  @Input() public departmentId!: number;
   @Output() public requestSend: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public forwardRequestForm: FormGroup<ForwardRequestForm> = new FormGroup({
@@ -48,10 +50,12 @@ export class ForwardRequestDialogComponent {
   }
 
   public sendRequest(): void {
-    this.signInService.apiEmployersCreateUserOutPost({
+    this.signInService.apiEmployersCreateUserOutPost('1', {
       email: this.forwardRequestForm.controls.email.value as string,
       phone: this.forwardRequestForm.controls.phone.value as string,
       user_name: this.forwardRequestForm.controls.userName.value as string,
+      identifier: this.identifier,
+      departmentId: this.departmentId,
     }).pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.requestSend.next(true);
       this.observer.complete();

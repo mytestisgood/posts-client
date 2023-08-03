@@ -90,12 +90,8 @@ export class RegistrationComponent implements AfterViewInit {
       case 'personalInfo':
         this.changeImageStep = changingStep;
         break;
-      case 'loginInfo':
-        this.stepCounter = this.secondStepCounter;
-        this.changeImageStep = changingStep;
-      break;
       case 'uploadDocumentInfo':
-        this.stepCounter = this.thirdStepCounter;
+        this.stepCounter = this.secondStepCounter;
         this.changeImageStep = changingStep;
       break;
       case 'verifyEmailInfo':

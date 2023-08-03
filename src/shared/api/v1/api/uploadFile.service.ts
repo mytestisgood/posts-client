@@ -19,7 +19,11 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { InlineResponse2003 } from '../model/inlineResponse2003';
+import { InlineResponse200 } from '../model/inlineResponse200';
+// @ts-ignore
+import { InlineResponse2002 } from '../model/inlineResponse2002';
+// @ts-ignore
+import { ProcessesUploadFileBody } from '../model/processesUploadFileBody';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -30,7 +34,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class EnumsService {
+export class UploadFileService {
 
     protected basePath = 'https://virtserver.swaggerhub.com/smarti/smarti/1.0.0';
     public defaultHeaders = new HttpHeaders();
@@ -92,16 +96,21 @@ export class EnumsService {
     }
 
     /**
-     * src
+     * upload file
+     * @param token 
+     * @param processesUploadFileBody 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiSrcGet(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse2003>;
-    public apiSrcGet(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse2003>>;
-    public apiSrcGet(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse2003>>;
-    public apiSrcGet(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public apiProcessesUploadFilePost(token?: string, processesUploadFileBody?: ProcessesUploadFileBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse2002>;
+    public apiProcessesUploadFilePost(token?: string, processesUploadFileBody?: ProcessesUploadFileBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse2002>>;
+    public apiProcessesUploadFilePost(token?: string, processesUploadFileBody?: ProcessesUploadFileBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse2002>>;
+    public apiProcessesUploadFilePost(token?: string, processesUploadFileBody?: ProcessesUploadFileBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
+        if (token !== undefined && token !== null) {
+            localVarHeaders = localVarHeaders.set('Token', String(token));
+        }
 
         let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
         if (localVarHttpHeaderAcceptSelected === undefined) {
@@ -121,6 +130,15 @@ export class EnumsService {
         }
 
 
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
             if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -132,10 +150,11 @@ export class EnumsService {
             }
         }
 
-        let localVarPath = `/api/src`;
-        return this.httpClient.request<InlineResponse2003>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/processes/uploadFile`;
+        return this.httpClient.request<InlineResponse2002>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                body: processesUploadFileBody,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

@@ -11,11 +11,8 @@
  */
 
 
-export interface EmployersCreateUserOutBody { 
-    user_name?: string;
-    phone?: string;
-    identifier?: string;
-    email?: string;
+export interface UsersCheckVerifyCodeBody { 
+    code?: string;
     departmentId?: number;
 }
 

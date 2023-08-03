@@ -2,13 +2,23 @@
   <h3 class="medium mt-10 mb-0 text-center neutrals-text-950">להמשך התהליך אמת את חשבונך</h3>
   <div class="email-text-block mt-20 neutrals-text-950 text-center margin-rl-auto">
     <div class="regular-text">קוד אימות נשלח לכתובת המייל שלך</div>
-    <div class="medium-text neutrals-text-950">name@email.com</div>
+    <div class="medium-text neutrals-text-950">{{ currentEmail }}</div>
+    <div
+      class="mt-4 paragraph-text-medium text-underline bright-turquoise-text-500 text-center cursor-pointer"
+      (click)="openModalChangeEmail(changeEmailDialogTemplate)"
+    >
+      Change your email
+    </div>
   </div>
-  <div class="margin-rl-auto neutrals-text-950 text-center mt-10">
+  <div
+    class="margin-rl-auto neutrals-text-950 text-center mt-10"
+    [formGroup]="verifyEmailInfo"
+  >
     <div class="regular-text mb-4">הכנס את קוד האימות</div>
     <smarti-input-number
       [centerVerify]="true"
       [customWidth]="'536px'"
+      [control]="verifyEmailInfo.controls.emailVerifyCode"
       [maxLength]="6"
     ></smarti-input-number>
   </div>
@@ -23,6 +33,7 @@
     [typeClass]="'confirm'"
     (buttonClicked)="openSuccessDialog(successDialogTemplate)"
     [text]="'אישור'"
+    [disabled]="isDisabled"
     [customWidth]="'232px'"
   ></smarti-button>
 </div>
@@ -40,4 +51,15 @@
     [redirectLink]="'/'"
     [observer]="observer"
   ></smarti-success-dialog>
+</ng-template>
+
+<ng-template
+  #changeEmailDialogTemplate
+  let-observer
+>
+  <smarti-change-email-dialog
+    [observer]="observer"
+    [control]="control"
+    (sendRequest)="sendChangeEmailRequest()"
+  ></smarti-change-email-dialog>
 </ng-template>

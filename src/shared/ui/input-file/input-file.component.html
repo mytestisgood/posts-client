@@ -1,13 +1,41 @@
+<tui-files>
+  <tui-file
+    *ngFor="let file of control.valueChanges | async"
+    class="file-uploaded"
+    [file]="file"
+    [leftContent]="icon"
+    [showDelete]="false"
+    [state]="isLoading"
+  >
+    <div
+      class="button-close remove-file-icon cursor-pointer"
+      (click)="removeFile(file)"
+    ></div>
+  </tui-file>
+</tui-files>
+
+<div
+  *ngIf="fileUploaded.value"
+  class="mt-10 paragraph-text text-center"
+>
+  You can upload multi files here
+</div>
+<div
+  *ngIf="fileUploaded.value"
+  class="paragraph-text neutrals-text-950"
+>
+  Attach more XML files
+</div>
 <tui-input-files
-  *ngIf="!control.value"
+  *ngIf="!fileUploaded.value || multiple"
   class="box-shadow-big"
   [formControl]="control"
   [style.width]="customWidth"
   [style.height]="customHeight"
-  [accessKey]="'xl'"
 >
   <input
     tuiInputFiles
+    [multiple]="multiple"
     type="file"
     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
   />
@@ -45,20 +73,12 @@
     </div>
   </ng-template>
 </tui-input-files>
-<tui-files>
-  <tui-file
-    *ngIf="control.valueChanges | async as file"
-    class="file-uploaded"
-    [file]="file"
-    [leftContent]="icon"
-    [showDelete]="false"
-  >
-    <div
-      class="button-close remove-file-icon cursor-pointer"
-      (click)="removeFile()"
-    ></div>
-  </tui-file>
-</tui-files>
+<div
+  *ngIf="!fileUploaded.value"
+  class="mt-10 paragraph-text text-center"
+>
+  You can upload multi files here
+</div>
 
 <ng-template #icon>
   <div class="document-icon"></div>

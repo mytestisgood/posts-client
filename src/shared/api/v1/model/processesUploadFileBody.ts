@@ -11,11 +11,14 @@
  */
 
 
-export interface EmployersCreateUserOutBody { 
-    user_name?: string;
-    phone?: string;
-    identifier?: string;
-    email?: string;
-    departmentId?: number;
+export interface ProcessesUploadFileBody { 
+    departmentId?: string;
+    isDirect?: boolean;
+    month?: string;
+    processName?: string;
+    year?: string;
+    isEmployer?: boolean;
+    isDepartmentLink?: boolean;
+    opswatIds?: Array<string>;
 }
 

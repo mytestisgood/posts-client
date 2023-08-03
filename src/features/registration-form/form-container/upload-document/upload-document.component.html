@@ -1,28 +1,18 @@
 <div class="flex flex-col items-center mt-10">
-  <div class="flex gap-4">
-    <div class="mt-10">
-      <smarti-select
-        [customWidth]="'336px'"
-        [options]="monthsSelect"
-        [placeholder]="'חודש'"
-      ></smarti-select>
-    </div>
-    <div class="mt-10">
-      <smarti-date-picker
-        [customWidth]="'336px'"
-        [placeholder]="'שנה*'"
-      ></smarti-date-picker>
-    </div>
-  </div>
-  <h3 class="medium text-center mt-6 mb-0">
+  <h3 class="medium text-center mt-10 mb-0">
     <div>התחילו את חווית השימוש</div>
     <div>העלו את הקובץ</div>
   </h3>
-  <div class="file-upload mt-10 mb-16">
+  <div
+    class="file-upload mt-10 mb-16"
+    [formGroup]="uploadDocumentsForm"
+  >
     <div class="paragraph-text neutrals-text-950">העלה קובץ XML</div>
     <smarti-input-file
       [customWidth]="'536px'"
       [customHeight]="'120px'"
+      [control]="uploadDocumentsForm.controls.files"
+      [multiple]="true"
       (fileUploaded)="fileUploaded($event)"
     ></smarti-input-file>
   </div>
@@ -62,6 +52,8 @@
   <smarti-forward-request-dialog
     [haveCloseIcon]="true"
     [observer]="observer"
+    [departmentId]="departmentId"
+    [identifier]="identifier"
     (requestSend)="requestSend($event)"
   ></smarti-forward-request-dialog>
 </ng-template>

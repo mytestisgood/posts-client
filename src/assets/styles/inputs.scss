@@ -46,11 +46,13 @@ tui-files .file-uploaded {
 }
 
 tui-files .file-uploaded {
-  padding-right: 28px!important;
-  padding-left: 28px!important;
+  padding: 0 28px !important;
+  margin-bottom: 8px!important;
+  border-radius: 12px!important;
 }
 
 tui-files {
+  width: 536px!important;
   tui-file {
     border: 1px solid $bright-turquoise-500!important;
   }

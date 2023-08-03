@@ -36,6 +36,9 @@
       ],
       "@shared/api": [
         "src/shared/api/v1"
+      ],
+      "@shared/web-api": [
+        "src/shared/api/web-api"
       ]
     },
     "forceConsistentCasingInFileNames": true,

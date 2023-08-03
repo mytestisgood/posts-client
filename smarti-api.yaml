@@ -12,12 +12,12 @@ info:
 servers:
   - url: https://virtserver.swaggerhub.com/smarti/smarti/1.0.0
     description: SwaggerHub API Auto Mocking
-  - url: https://api.xsmart-staging.com/api/leads/createLead
-    description: SwaggerHub API Auto Mocking
+  - url: https://api.xsmart-staging.com
 tags:
   - name: Sign In
   - name: Lead
   - name: Enum
+  - name: UploadFile
 paths:
   /api/leads/createLead:
     post:
@@ -87,6 +87,7 @@ paths:
                   value:
                     message: success
                     token: eyJ0eXAiOiJKV1QiLCJh
+                    departmentId: 6848
         "204":
           description: no_content
           content:
@@ -116,6 +117,15 @@ paths:
       tags:
         - Sign In
       description: create user from sign in page
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
       requestBody:
         content:
           application/json:
@@ -127,7 +137,9 @@ paths:
                 value:
                   user_name: moshe levi
                   phone: "0586598745"
+                  identifier: 322758627
                   email: moshe@gmail.com
+                  departmentId: 6848
       responses:
         "200":
           description: ok
@@ -163,6 +175,149 @@ paths:
         - url: https://api.xsmart-staging.com
     servers:
       - url: https://api.xsmart-staging.com
+  /api/users/sendVerifyCode:
+    post:
+      tags:
+        - Sign In
+      description: Email verification after registration.
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: succes
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error
+      servers:
+        - url: https://api.xsmart-staging.com
+    servers:
+      - url: https://api.xsmart-staging.com
+  /api/users/checkVerifyCode:
+    post:
+      tags:
+        - Sign In
+      description: check the code from email.
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users_checkVerifyCode_body'
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    code: 304340
+                    departmentId: 6848
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error
+      servers:
+        - url: https://api.xsmart-staging.com
+    servers:
+      - url: https://api.xsmart-staging.com
+  /api/processes/uploadFile:
+    post:
+      tags:
+        - UploadFile
+      description: upload file
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/processes_uploadFile_body'
+            examples:
+              "0":
+                description: upload file
+                value:
+                  departmentId: 2
+                  isDirect: false
+                  month: 6
+                  processName: upload file from
+                  year: 2023
+                  isEmployer: true
+                  isDepartmentLink: false
+                  opswatIds:
+                    - 74c32c54dcc84fd7a125496e32b755f2
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+              examples:
+                "0":
+                  value:
+                    processId: "74901,"
+                    date: "2023-06-01T00:00:00,"
+                    allowed: false
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error
+      servers:
+        - url: https://api.xsmart-staging.com
+    servers:
+      - url: https://api.xsmart-staging.com
   /api/src:
     get:
       tags:
@@ -174,7 +329,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_2'
+                $ref: '#/components/schemas/inline_response_200_3'
               examples:
                 "0":
                   value:
@@ -237,9 +392,50 @@ components:
           type: string
         phone:
           type: string
+        identifier:
+          type: string
         email:
           type: string
+        departmentId:
+          type: number
+    users_checkVerifyCode_body:
+      type: object
+      properties:
+        code:
+          type: string
+        departmentId:
+          type: number
+    processes_uploadFile_body:
+      type: object
+      properties:
+        departmentId:
+          type: string
+        isDirect:
+          type: boolean
+        month:
+          type: string
+        processName:
+          type: string
+        year:
+          type: string
+        isEmployer:
+          type: boolean
+        isDepartmentLink:
+          type: boolean
+        opswatIds:
+          type: array
+          items:
+            type: string
     inline_response_200_2:
+      type: object
+      properties:
+        processId:
+          type: string
+        date:
+          type: string
+        allowd:
+          type: boolean
+    inline_response_200_3:
       type: object
       properties:
         "1":

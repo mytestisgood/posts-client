@@ -2,14 +2,16 @@ import { ChangeDetectionStrategy, Component, OnInit, Output } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import {
-  SelectYearAndMonthComponent,
-} from './select-year-and-month/select-year-and-month.component';
+  Step,
+  Direction,
+  RegistrationFormTypeEnum,
+  DirectionEnum,
+  StepEnum,
+} from '../entities/registration.models';
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { UploadDocumentComponent } from './upload-document/upload-document.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
-
-type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailInfo';
 
 @Component({
   selector: 'smarti-form-container',
@@ -17,7 +19,6 @@ type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailIn
   imports: [
     CommonModule,
     PersonalInfoComponent,
-    SelectYearAndMonthComponent,
     UploadDocumentComponent,
     VerifyEmailComponent,
   ],
@@ -26,50 +27,46 @@ type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailIn
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormContainerComponent implements OnInit {
-  @Output() public changingStep: BehaviorSubject<Step> = new BehaviorSubject<Step>('personalInfo');
+  @Output() public changingStep: BehaviorSubject<Step> =
+    new BehaviorSubject<Step>(RegistrationFormTypeEnum.PersonalInfo);
 
-  public userForm!: FormGroup;
-  public readonly currentStepBs: BehaviorSubject<Step> = new BehaviorSubject<Step>('personalInfo');
+  public registrationForm!: FormGroup;
+  public readonly currentStepBs: BehaviorSubject<Step> =
+    new BehaviorSubject<Step>(RegistrationFormTypeEnum.PersonalInfo);
   public readonly currentStep$: Observable<Step> = this.currentStepBs.asObservable();
 
-  constructor(private readonly fb: FormBuilder) {
-  }
+  constructor(private readonly fb: FormBuilder) {}
 
   public ngOnInit(): void {
-    this.userForm = this.fb.group({
+    this.registrationForm = this.fb.group({
       personalInfo: null,
-      loginInfo: null,
+      uploadDocumentInfo: null,
+      verifyEmailInfo: null,
     });
   }
 
-  public subformInitialized(name: string, group: FormGroup): void {
-    this.userForm.setControl(name, group);
+  public subformInitialized(name: Step, group: FormGroup): void {
+    this.registrationForm.setControl<Step>(name, group);
   }
 
-  public changeStep(currentStep: string, direction: 'forward' | 'back'): void {
+  public changeStep(currentStep: string, direction: Direction): void {
     switch (currentStep) {
-      case 'personalInfoStep':
-        if (direction === 'forward') {
-          this.currentStepBs.next('loginInfo');
-          this.changingStep.next('loginInfo');
+      case StepEnum.PersonalInfoStep:
+        if (direction === DirectionEnum.Forward) {
+          this.currentStepBs.next(RegistrationFormTypeEnum.UploadDocumentInfo);
+          this.changingStep.next(RegistrationFormTypeEnum.UploadDocumentInfo);
         }
         break;
-      case 'loginInfoStep':
-        if (direction === 'forward') {
-          this.currentStepBs.next('uploadDocumentInfo');
-          this.changingStep.next('uploadDocumentInfo');
+      case StepEnum.UploadDocumentStep:
+        if (direction === DirectionEnum.Forward) {
+          this.currentStepBs.next(RegistrationFormTypeEnum.VerifyEmailInfo);
+          this.changingStep.next(RegistrationFormTypeEnum.VerifyEmailInfo);
         }
         break;
-      case 'uploadDocumentStep':
-        if (direction === 'forward') {
-          this.currentStepBs.next('verifyEmailInfo');
-          this.changingStep.next('verifyEmailInfo');
-        }
-        break;
-      case 'verifyEmailStep':
-        if (direction === 'forward') {
-          this.currentStepBs.next('verifyEmailInfo');
-          this.changingStep.next('verifyEmailInfo');
+      case StepEnum.VerifyEmailStep:
+        if (direction === DirectionEnum.Forward) {
+          this.currentStepBs.next(RegistrationFormTypeEnum.VerifyEmailInfo);
+          this.changingStep.next(RegistrationFormTypeEnum.VerifyEmailInfo);
         }
         break;
     }

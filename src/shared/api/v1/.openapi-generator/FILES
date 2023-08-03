@@ -5,6 +5,7 @@ api/api.ts
 api/enums.service.ts
 api/lead.service.ts
 api/signIn.service.ts
+api/uploadFile.service.ts
 configuration.ts
 encoder.ts
 git_push.sh
@@ -14,7 +15,10 @@ model/employersCreateUserOutBody.ts
 model/inlineResponse200.ts
 model/inlineResponse2001.ts
 model/inlineResponse2002.ts
+model/inlineResponse2003.ts
 model/leadsCreateLeadBody.ts
 model/models.ts
+model/processesUploadFileBody.ts
+model/usersCheckVerifyCodeBody.ts
 param.ts
 variables.ts

@@ -12,11 +12,8 @@
 
 
 export interface InlineResponse2002 { 
-    _1?: string;
-    _2?: string;
-    _3?: string;
-    _4?: string;
-    _5?: string;
-    _6?: string;
+    processId?: string;
+    date?: string;
+    allowd?: boolean;
 }
 
