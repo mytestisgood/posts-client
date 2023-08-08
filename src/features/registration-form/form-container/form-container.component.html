@@ -13,6 +13,13 @@
     (subformInitialized)="subformInitialized('uploadDocumentInfo', $event)"
     (changeStep)="changeStep('uploadDocumentStep', $event)"
   ></smarti-upload-document>
+  <smarti-payment-method
+    *ngSwitchCase="'paymentMethodInfo'"
+    [startingForm]="registrationForm.get('paymentMethodInfo')?.value"
+    [currentFormStateValue]="registrationForm.value"
+    (subformInitialized)="subformInitialized('paymentMethodInfo', $event)"
+    (changeStep)="changeStep('paymentMethodStep', $event)"
+  ></smarti-payment-method>
   <smarti-verify-email
     *ngSwitchCase="'verifyEmailInfo'"
     [startingForm]="registrationForm.get('verifyEmailInfo')?.value"

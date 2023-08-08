@@ -41,3 +41,62 @@ tui-select {
     min-height: 48px!important;
   }
 }
+
+.big-mode {
+  tui-select {
+    tui-primitive-textfield {
+      margin-right: 0!important;
+      padding-right: 0!important;
+      color: $neutrals-950!important;
+      text-align: right!important;
+      font-family: Rubik, sans-serif!important;
+      font-size: 32px!important;
+      font-style: normal!important;
+      font-weight: 500!important;
+      line-height: 40px!important;
+
+      input {
+        margin-right: 0!important;
+        padding-right: 0!important;
+        color: $neutrals-950!important;
+        text-align: right!important;
+        font-family: Rubik, sans-serif!important;
+        font-size: 32px!important;
+        font-style: normal!important;
+        font-weight: 500!important;
+        line-height: 40px!important;
+      }
+    }
+
+    tui-primitive-textfield[data-size=m] {
+      min-height: 96px!important;
+    }
+  }
+
+  tui-select-option .big-mode {
+    .t-content {
+      color: $neutrals-500!important;
+      text-align: right!important;
+      font-family: Rubik, sans-serif !important;
+      font-size: 32px!important;
+      font-style: normal!important;
+      font-weight: 500!important;
+      line-height: 40px!important;
+    }
+  }
+
+  tui-data-list {
+    button {
+      min-height: 96px!important;
+      span {
+        color: $neutrals-500!important;
+        text-align: right!important;
+        font-family: Rubik, sans-serif !important;
+        font-size: 32px!important;
+        font-style: normal!important;
+        font-weight: 500!important;
+        line-height: 40px!important;
+      }
+    }
+  }
+}

@@ -23,8 +23,7 @@ import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
 export class SelectComponent {
   @Input() public customWidth!: string;
   @Input() public options!: string[];
-  @Input() public selectMode!: string;
+  @Input() public selectMode!: 'big';
   @Input() public placeholder!: string;
-
-  public selectValue: FormControl<string> = new FormControl();
+  @Input() public control: FormControl<string | null> = new FormControl();
 }

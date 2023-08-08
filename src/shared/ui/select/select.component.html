@@ -2,7 +2,7 @@
   <tui-select
     tuiTextfieldSize="m"
     [style.width]="customWidth"
-    [formControl]="selectValue"
+    [formControl]="control"
     [tuiDropdownDirection]="'bottom'"
     [tuiTextfieldLabelOutside]="true"
     [style.text-align]="'right'"
@@ -10,6 +10,9 @@
     {{ placeholder }}
     <input tuiTextfield />
     <tui-data-list-wrapper
+      [ngClass]="{
+        'big-mode': selectMode === 'big'
+      }"
       *tuiDataList
       [items]="options"
     ></tui-data-list-wrapper>

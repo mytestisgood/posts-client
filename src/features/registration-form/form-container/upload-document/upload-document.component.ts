@@ -1,20 +1,27 @@
 import { CommonModule } from '@angular/common';
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Inject,
-  Input, OnInit,
+  Input,
+  OnInit,
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SignInService } from '@shared/api';
-import { LocalStorageService } from '@shared/web-api';
-import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { ForwardRequestDialogComponent } from '@shared/dialog';
 import {
-  ForwardRequestDialogComponent,
-} from '@shared/dialog';
+  DEPARTMENT_ID,
+  Direction,
+  REGISTRATION_TOKEN,
+  RegistrationFormValueType,
+  UploadDocumentsControls,
+  uploadingDocumentsFormMapper,
+} from '@shared/entities';
+import { downloadFileHelper } from '@shared/helpers';
+import { DestroyService } from '@shared/services';
 import {
   ButtonComponent,
   DatePickerComponent,
@@ -22,14 +29,10 @@ import {
   NotificationComponent,
   SelectComponent,
 } from '@shared/ui';
-import { DestroyService } from '@shared/services';
+import { LocalStorageService } from '@shared/web-api';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { takeUntil } from 'rxjs';
-import { uploadingDocumentsFormMapper } from '../../entities/registration-mapper';
-import {
-  DEPARTMENT_ID,
-  Direction, REGISTRATION_TOKEN, RegistrationFormValueType,
-  UploadDocumentsControls,
-} from '../../entities/registration.models';
 
 @Component({
   selector: 'smarti-upload-document',
@@ -69,7 +72,8 @@ export class UploadDocumentComponent implements OnInit {
     private readonly destroy$: DestroyService,
     private readonly localStorageService: LocalStorageService,
     private readonly signInService: SignInService,
-  ) {}
+  ) {
+  }
 
   public ngOnInit(): void {
     if (this.startingForm) {
@@ -87,14 +91,7 @@ export class UploadDocumentComponent implements OnInit {
   }
 
   public downloadXlExample(): void {
-    const link = document.createElement('a');
-
-    link.setAttribute('type', 'hidden');
-    link.href = '/assets/files/דוגמה.xlsx';
-    link.download = 'דוגמה.xlsx';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    downloadFileHelper('/assets/files/דוגמה.xlsx', 'דוגמה.xlsx');
   }
 
   public openForwardModal(content: PolymorpheusContent<TuiDialogContext>): void {

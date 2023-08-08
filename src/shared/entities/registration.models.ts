@@ -7,6 +7,7 @@ export const DEPARTMENT_ID: string = 'departmentId';
 export enum RegistrationFormTypeEnum {
   PersonalInfo = 'personalInfo',
   UploadDocumentInfo = 'uploadDocumentInfo',
+  PaymentMethodInfo = 'paymentMethodInfo',
   VerifyEmailInfo = 'verifyEmailInfo',
 }
 
@@ -18,14 +19,16 @@ export enum DirectionEnum {
 export enum StepEnum {
   PersonalInfoStep = 'personalInfoStep',
   UploadDocumentStep = 'uploadDocumentStep',
+  PaymentMethodStep = 'paymentMethodStep',
   VerifyEmailStep = 'verifyEmailStep',
 }
 
-export type Step = 'personalInfo' | 'uploadDocumentInfo' | 'verifyEmailInfo';
+export type Step = 'personalInfo' | 'uploadDocumentInfo' | 'paymentMethodInfo' | 'verifyEmailInfo';
 export type Direction = 'forward' | 'back';
 export type RegistrationFormValueType = {
   personalInfo: PersonalInfoFormValue,
   uploadDocumentInfo: UploadDocumentFormValue,
+  paymentMethodInfo: PaymentMethodFormValue,
   verifyEmailInfo: VerificationEmailFormValue,
 };
 
@@ -40,6 +43,13 @@ export interface PersonalInfoControls {
 
 export interface UploadDocumentsControls {
   files: FormControl<TuiFileLike[] | null>;
+}
+
+export interface PaymentMethodControls {
+  accountNumber: FormControl<string | null>;
+  bankName: FormControl<string | null>;
+  branchNumber: FormControl<string | null>;
+  codeNumber: FormControl<string | null>;
 }
 
 export interface VerificationEmailControls {
@@ -59,6 +69,18 @@ export interface UploadDocumentFormValue {
   files: TuiFileLike[] | null;
 }
 
+export interface PaymentMethodFormValue {
+  accountNumber: string;
+  bankName: string;
+  branchNumber: string;
+  codeNumber: string;
+}
+
 export interface VerificationEmailFormValue {
   emailVerifyCode: string;
+}
+
+export enum PaymentMethodTabs {
+  Bank = 0,
+  InstitutionalNumber = 1,
 }

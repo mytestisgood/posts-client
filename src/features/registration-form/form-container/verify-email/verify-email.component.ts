@@ -9,27 +9,28 @@ import {
   Output,
 } from '@angular/core';
 import {
-  FormBuilder, FormControl, FormControlStatus,
+  FormBuilder,
+  FormControl,
+  FormControlStatus,
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { InlineResponse200, SignInService } from '@shared/api';
+import { ChangeEmailDialogComponent, SuccessDialogComponent } from '@shared/dialog';
+import {
+  DEPARTMENT_ID,
+  Direction,
+  REGISTRATION_TOKEN,
+  RegistrationFormValueType,
+  VerificationEmailControls,
+  verifyEmailFormMapper,
+} from '@shared/entities';
 import { DestroyService } from '@shared/services';
+import { ButtonComponent, InputNumberComponent } from '@shared/ui';
 import { LocalStorageService } from '@shared/web-api';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import {
-  SuccessDialogComponent,
-  ChangeEmailDialogComponent,
-} from '@shared/dialog';
-import { ButtonComponent, InputNumberComponent } from '@shared/ui';
 import { concatMap, of, takeUntil, tap } from 'rxjs';
-import { verifyEmailFormMapper } from '../../entities/registration-mapper';
-import {
-  DEPARTMENT_ID,
-  Direction, REGISTRATION_TOKEN, RegistrationFormValueType,
-  VerificationEmailControls,
-} from '../../entities/registration.models';
 
 @Component({
   selector: 'smarti-verify-email',
@@ -67,7 +68,8 @@ export class VerifyEmailComponent implements OnInit {
     private readonly destroy$: DestroyService,
     private readonly signInService: SignInService,
     private readonly localStorageService: LocalStorageService,
-  ) {}
+  ) {
+  }
 
   public ngOnInit(): void {
     if (this.startingForm) {

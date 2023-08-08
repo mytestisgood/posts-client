@@ -1,0 +1,62 @@
+<div class="border-bright-turquoise-500 payment-radio-block rounded-l mt-24 mb-34">
+  <div class="mt-8 mr-6 ml-6">
+    <smarti-radio
+      [items]="radioItems"
+      (chosenValue)="doChangeContent($event)"
+      [labelFirstText]="'Institutional number'"
+      [labelSecondText]="'Bank Transfer'"
+      [customClass]="'big'"
+      [radioValue]="radioValue"
+      [isHorizontal]="true"
+    ></smarti-radio>
+  </div>
+  <div
+    class="flex wrap flex-row"
+    [formGroup]="paymentForm"
+  >
+    <div class="m-6">
+      <smarti-input-field
+        [customWidth]="'360px'"
+        [placeholder]="'מספר חשבון'"
+        [control]="paymentForm.controls.accountNumber"
+      ></smarti-input-field>
+    </div>
+    <div class="m-6">
+      <smarti-input-field
+        [customWidth]="'360px'"
+        [placeholder]="'שם בנק'"
+        [control]="paymentForm.controls.bankName"
+      ></smarti-input-field>
+    </div>
+    <div
+      class="m-6"
+      [ngSwitch]="activeTabIndex"
+    >
+      <div *ngSwitchCase="paymentMethodTabs.Bank">
+        <div class="width-360"></div>
+      </div>
+      <div *ngSwitchCase="paymentMethodTabs.InstitutionalNumber">
+        <smarti-input-field
+          [customWidth]="'360px'"
+          [placeholder]="'קוד מס״ב (8)'"
+          [control]="paymentForm.controls.codeNumber"
+        ></smarti-input-field>
+      </div>
+    </div>
+    <div class="m-6">
+      <smarti-input-field
+        [customWidth]="'360px'"
+        [placeholder]="'מספר סניף'"
+        [control]="paymentForm.controls.branchNumber"
+      ></smarti-input-field>
+    </div>
+  </div>
+</div>
+<div class="flex justify-center mb-16">
+  <smarti-button
+    [customButtonWidth]="'342px'"
+    [typeClass]="'confirm'"
+    [text]="'Confirm and Continue'"
+    (buttonClicked)="doChangeStep('forward')"
+  ></smarti-button>
+</div>

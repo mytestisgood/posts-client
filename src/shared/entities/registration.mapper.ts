@@ -1,5 +1,6 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
+  PaymentMethodControls,
   PersonalInfoControls,
   UploadDocumentsControls,
   VerificationEmailControls,
@@ -29,5 +30,14 @@ export function uploadingDocumentsFormMapper(): FormGroup<UploadDocumentsControl
 export function verifyEmailFormMapper(): FormGroup<VerificationEmailControls> {
   return new FormGroup<VerificationEmailControls>({
     emailVerifyCode: new FormControl('', [Validators.required, Validators.minLength(6)]),
+  });
+}
+
+export function paymentMethodFormMapper(): FormGroup<PaymentMethodControls> {
+  return new FormGroup<PaymentMethodControls>({
+    accountNumber: new FormControl('', [Validators.required]),
+    bankName: new FormControl('', [Validators.required]),
+    branchNumber: new FormControl('', [Validators.required]),
+    codeNumber: new FormControl('', [Validators.required]),
   });
 }

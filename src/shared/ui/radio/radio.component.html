@@ -1,21 +1,26 @@
-<tui-radio-labeled
-  [formControl]="radioValue"
-  [item]="items[0]"
-  (change)="changeValue(items[0].name)"
->
-  <div
-    class="dir-rtl"
-    [innerHTML]="labelFirstText"
-  ></div>
-</tui-radio-labeled>
-<tui-radio-labeled
-  class="mt-6"
-  [formControl]="radioValue"
-  [item]="items[1]"
-  (change)="changeValue(items[1].name)"
->
-  <div
-    class="dir-rtl"
-    [innerHTML]="labelSecondText"
-  ></div>
-</tui-radio-labeled>
+<div [ngClass]="{ 'flex justify-between': isHorizontal, 'big-radio': customClass === 'big' }">
+  <tui-radio-labeled
+    [formControl]="radioValue"
+    [item]="items[0]"
+    (change)="changeValue(items[0].name)"
+  >
+    <div
+      class="dir-rtl"
+      [innerHTML]="labelFirstText"
+    ></div>
+  </tui-radio-labeled>
+  <tui-radio-labeled
+    [ngClass]="{
+      'mt-0': isHorizontal,
+      'mt-6': !isHorizontal
+    }"
+    [formControl]="radioValue"
+    [item]="items[1]"
+    (change)="changeValue(items[1].name)"
+  >
+    <div
+      class="dir-rtl"
+      [innerHTML]="labelSecondText"
+    ></div>
+  </tui-radio-labeled>
+</div>

@@ -6,6 +6,10 @@
   flex-direction: column;
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -92,4 +96,8 @@
 
 .gap-217px {
   gap: 217px;
+}
+
+.gap-270px {
+  gap: 270px;
 }

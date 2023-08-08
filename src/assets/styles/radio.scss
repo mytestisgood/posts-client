@@ -24,3 +24,34 @@ tui-radio {
     height: 10px!important;
   }
 }
+
+.big-radio {
+  tui-radio-labeled {
+    .t-wrapper {
+      align-items: center!important;
+      flex-direction: row-reverse!important;
+      gap: 16px!important;
+    }
+
+    .t-content {
+      color: $neutrals-950!important;
+      text-align: right!important;
+      font-family: Rubik, sans-serif !important;
+      font-size: 32px!important;
+      font-style: normal!important;
+      font-weight: 500!important;
+      line-height: 40px!important;
+    }
+  }
+
+  tui-radio {
+    width: 20px!important;
+    height: 20px!important;
+
+    .t-mark {
+      margin: 5px!important;
+      width: 10px!important;
+      height: 10px!important;
+    }
+  }
+}

@@ -22,6 +22,12 @@
       "@shared/module": [
         "src/shared/module"
       ],
+      "@shared/entities": [
+        "src/shared/entities"
+      ],
+      "@shared/helpers": [
+        "src/shared/helpers"
+      ],
       "@feature": [
         "src/features"
       ],

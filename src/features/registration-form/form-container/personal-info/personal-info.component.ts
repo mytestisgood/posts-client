@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,12 +7,15 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { InlineResponse2001, SignInService } from '@shared/api';
 import {
-  FormControlStatus,
-  FormGroup,
-  ReactiveFormsModule,
-} from '@angular/forms';
+  Direction,
+  PersonalInfoControls,
+  personalInfoFormMapper,
+  REGISTRATION_TOKEN,
+  RegistrationFormValueType,
+} from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import {
   ButtonComponent,
@@ -19,15 +23,8 @@ import {
   InputFieldComponent,
   InputNumberComponent,
 } from '@shared/ui';
-import { Observable, takeUntil } from 'rxjs';
-import { InlineResponse2001, SignInService } from '@shared/api';
 import { LocalStorageService } from '@shared/web-api';
-import { personalInfoFormMapper } from '../../entities/registration-mapper';
-import {
-  Direction,
-  PersonalInfoControls,
-  REGISTRATION_TOKEN, RegistrationFormValueType,
-} from '../../entities/registration.models';
+import { Observable, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-personal-info',
@@ -58,8 +55,9 @@ export class PersonalInfoComponent implements OnInit {
   constructor(
     private readonly destroy$: DestroyService,
     private readonly signInService: SignInService,
-    private readonly localStorageService:LocalStorageService,
-  ) {}
+    private readonly localStorageService: LocalStorageService,
+  ) {
+  }
 
   public ngOnInit(): void {
     if (this.startingForm) {
