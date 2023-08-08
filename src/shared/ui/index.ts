@@ -10,3 +10,5 @@ export * from './input-password/input-password.component';
 export * from './input-phone/input-phone.component';
 export * from './notification/notification.component';
 export * from './radio/radio.component';
+export * from './custom-group-select/custom-group-select.component';
+export * from './custom-user-accordion/custom-user-accordion.component';

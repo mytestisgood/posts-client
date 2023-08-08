@@ -1,0 +1,37 @@
+<div class="dashboard-notifications">
+  <h3 class="medium neutrals-text-950 mt-10 mb-0 mr-8 dir-rtl">Notifications:</h3>
+  <div class="flex flex-col items-flex-end">
+    <smarti-dashboard-notification-item
+      [isNotificationRead]="false"
+      [hasFile]="true"
+    ></smarti-dashboard-notification-item>
+    <smarti-dashboard-notification-item
+      [isNotificationRead]="true"
+      [hasFile]="false"
+    ></smarti-dashboard-notification-item>
+    <smarti-dashboard-notification-item
+      [isNotificationRead]="false"
+      [hasFile]="false"
+    ></smarti-dashboard-notification-item>
+    <smarti-dashboard-notification-item
+      [isNotificationRead]="true"
+      [hasFile]="true"
+    ></smarti-dashboard-notification-item>
+  </div>
+  <div class="need-help-block bg-neutrals-950 rounded-l">
+    <h3 class="medium text-center white-text mt-6 mb-0 inline-block w-full">Need Help</h3>
+    <div class="paragraph-text-medium white-text text-center mt-4 mr-4 ml-4">
+      <div>Do you have a question or concern?</div>
+      <div>Your personal assistant is always there for you</div>
+    </div>
+    <div class="mt-4">
+      <smarti-button
+        [typeClass]="'interaction'"
+        [text]="'Contact Agent'"
+        [customButtonWidth]="'177px'"
+        [customHeight]="'42px'"
+        [paragraphTextExtra]="true"
+      ></smarti-button>
+    </div>
+  </div>
+</div>

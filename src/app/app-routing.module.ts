@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import {
-  LoginComponent,
-  LandingComponent,
-  RegistrationComponent,
-  NotFoundComponent,
   ContactComponent,
+  DashboardComponent,
+  LandingComponent,
+  LoginComponent,
+  NotFoundComponent,
+  RegistrationComponent,
   ResetPasswordComponent,
 } from '@pages';
-import { BrowserModule } from '@angular/platform-browser';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
     component: ContactComponent,
   },
   {
+    path: 'dashboard',
+    component: DashboardComponent,
+  },
+  {
     path: '**',
     component: LandingComponent,
     pathMatch: 'full',
@@ -47,5 +52,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

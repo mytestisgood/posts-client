@@ -13,3 +13,4 @@ export * from './landing-layout/main-banner-layout/main-banner-layout.component'
 export * from './landing-layout/questions-banner-layout/questions-banner-layout.component';
 export * from './landing-layout/run-business-layout/run-business-layout.component';
 export * from './landing-layout/start-day-with-smarti-layout/start-day-with-smarti-layout.component';
+export * from './dashboard-layout';

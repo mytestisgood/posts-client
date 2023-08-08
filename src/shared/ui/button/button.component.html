@@ -2,17 +2,18 @@
   class="flex justify-center"
   [style.margin]="customMargin"
   [style.width]="customWidth"
-  [class.haveIcon]="haveIcon"
 >
   <button
-    class="smarti-button rounded-m text-center smarti-button-text"
+    class="smarti-button rounded-m text-center smarti-button-text flex justify-center items-center"
     [ngClass]="{
       'confirm-button': typeClass === 'confirm',
       'button-interaction': typeClass === 'interaction',
       'dark-button': typeClass === 'dark',
-      'paragraph-text-extra': paragraphTextExtra
+      'paragraph-text-extra': paragraphTextExtra,
+      'button-text-small': buttonTextSmall
     }"
     [style.border]="customBorder"
+    [style.border-radius]="customBorderRadius"
     [style.color]="textColor"
     [style.height]="customHeight"
     [style.width]="customButtonWidth"
@@ -20,5 +21,9 @@
     (click)="clicked()"
   >
     {{ text }}
+    <div
+      *ngIf="hasFileIcon"
+      class="file-icon"
+    ></div>
   </button>
 </div>

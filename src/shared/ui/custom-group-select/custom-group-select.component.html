@@ -1,0 +1,56 @@
+<form [formGroup]="groupSelectedForm">
+  <div
+    tuiGroup
+    class="group group-items"
+    [rounded]="false"
+  >
+    <div>
+      <tui-multi-select
+        [formControlName]="groupSelectedForm.controls.department.value"
+        class="tui-group__inherit-item multiselect dir-rtl"
+        [tuiTextfieldLabelOutside]="true"
+        [editable]="false"
+        [expandable]="false"
+        [tuiTextfieldSize]="'m'"
+      >
+        Department
+        <tui-data-list-wrapper
+          *tuiDataList
+          tuiMultiSelectGroup
+        ></tui-data-list-wrapper>
+      </tui-multi-select>
+    </div>
+    <div>
+      <tui-multi-select
+        [formControlName]="groupSelectedForm.controls.employer.value"
+        class="tui-group__inherit-item multiselect dir-rtl"
+        [tuiTextfieldLabelOutside]="true"
+        [editable]="false"
+        [expandable]="false"
+        [tuiTextfieldSize]="'m'"
+      >
+        מעסיק
+        <tui-data-list-wrapper
+          *tuiDataList
+          tuiMultiSelectGroup
+        ></tui-data-list-wrapper>
+      </tui-multi-select>
+    </div>
+    <div>
+      <tui-multi-select
+        [formControlName]="groupSelectedForm.controls.organization.value"
+        class="tui-group__inherit-item multiselect dir-rtl"
+        [tuiTextfieldLabelOutside]="true"
+        [editable]="false"
+        [expandable]="false"
+        [tuiTextfieldSize]="'m'"
+      >
+        ארגון
+        <tui-data-list-wrapper
+          *tuiDataList
+          tuiMultiSelectGroup
+        ></tui-data-list-wrapper>
+      </tui-multi-select>
+    </div>
+  </div>
+</form>
