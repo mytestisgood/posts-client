@@ -1,6 +1,7 @@
 @import "variables";
 @import "fonts";
 @import "flex";
+@import "grid";
 @import "bg-colors";
 @import "colors";
 @import "margins";
@@ -81,6 +82,10 @@ body {
   width: 100%;
 }
 
+.w-inherit {
+  width: inherit;
+}
+
 .width-full-hd {
   width: 1080px;
 }
@@ -95,4 +100,8 @@ body {
 
 .width-header-leads {
   width: 398px;
+}
+
+.z-10 {
+  z-index: 10;
 }

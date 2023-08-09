@@ -1,0 +1,29 @@
+.vertical-menu {
+  height: 736px;
+  width: 96px;
+
+  &:first-child {
+    margin-top: 8px;
+  }
+
+  &:last-child {
+    margin-bottom: 8px;
+  }
+
+  &__icon-block {
+    width: 80px;
+    height: 80px;
+    margin: 0 8px;
+  }
+}
+
+.information-black-icon {
+  background: url("/assets/svg/information-black-icon.svg");
+  width: 48px;
+  height: 48px;
+}
+
+.menu-icon-size {
+  width: 40px;
+  height: 40px;
+}

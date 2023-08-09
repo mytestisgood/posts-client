@@ -8,6 +8,10 @@
   border: 1px solid $bright-turquoise-500;
 }
 
+.border-neutrals-100 {
+  border: 1px solid $neutrals-100;
+}
+
 .border-neutrals-800 {
   border: 1px solid $neutrals-800;
 }
@@ -30,8 +34,24 @@
   border-radius: 16px;
 }
 
+.rounded-ls {
+  border-radius: 20px;
+}
+
+.rounded-2ls {
+  border-radius: 24px;
+}
+
+.rounded-xl {
+  border-radius: 32px;
+}
+
 .rounded-xls {
   border-radius: 36px;
+}
+
+.rounded-2xl {
+  border-radius: 48px;
 }
 
 .rounded-full {

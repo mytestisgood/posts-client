@@ -25,6 +25,7 @@ export class ButtonComponent {
   @Input() public paragraphTextExtra: boolean = false;
   @Input() public buttonTextSmall: boolean = false;
   @Input() public hasFileIcon: boolean = false;
+  @Input() public isNeedZIndex: boolean = false;
   @Output() public buttonClicked: Subject<void> = new Subject();
 
   public clicked(): void {

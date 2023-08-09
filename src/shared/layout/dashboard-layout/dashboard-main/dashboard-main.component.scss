@@ -1,0 +1,50 @@
+.switcher-block {
+  width: 324px;
+  height: 64px;
+
+  &__item {
+    width: 150px;
+    height: 48px;
+    margin-top: 8px;
+    margin-left: 8px;
+
+    &__circle {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.info-block {
+  grid-template-rows: 192px;
+  grid-template-columns: 450px auto;
+
+  &__image {
+    position: absolute;
+    background: url("/assets/svg/dashboard-background.svg");
+    width: 292px;
+    height: 192px;
+  }
+
+  &__text {
+    width: 335px;
+  }
+}
+
+.successful-icon {
+  background: url("/assets/svg/success-notification.svg");
+  width: 24px;
+  height: 24px;
+}
+
+.amount {
+  width: 236px;
+}
+
+.date {
+  width: 110px;
+}
+
+.year {
+  width: 268px;
+}

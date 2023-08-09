@@ -1,11 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
-import { DashboardHeaderComponent, DashboardNotificationComponent } from '@shared/layout';
+import {
+  DashboardMenuComponent,
+  DashboardHeaderComponent,
+  DashboardMainComponent,
+  DashboardNotificationComponent,
+} from '@shared/layout';
 
 @Component({
   selector: 'smarti-dashboard',
   standalone: true,
-  imports: [CommonModule, DashboardHeaderComponent, DashboardNotificationComponent],
+  imports: [
+    CommonModule, DashboardHeaderComponent, DashboardNotificationComponent,
+    DashboardMainComponent, DashboardMenuComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
