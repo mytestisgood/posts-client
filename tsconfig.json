@@ -28,6 +28,9 @@
       "@shared/helpers": [
         "src/shared/helpers"
       ],
+      "@shared/tables": [
+        "src/shared/tables"
+      ],
       "@feature": [
         "src/features"
       ],

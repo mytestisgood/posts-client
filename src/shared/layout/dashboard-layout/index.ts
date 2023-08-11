@@ -3,3 +3,7 @@ export * from './dashboard-notification/dashboard-notification.component';
 export * from './dashboard-notification/dashboard-notification-item/dashboard-notification-item.component';
 export * from './dashboard-menu/dashboard-menu.component';
 export * from './dashboard-main/dashboard-main.component';
+export * from './dashboard-main/last-payment/last-payment.component';
+export * from './dashboard-main/inquiries/inquiries.component';
+export * from './dashboard-main/feeds/feeds.component';
+export * from './dashboard-main/balance-for-compensation/balance-for-compensation.component';

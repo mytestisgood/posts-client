@@ -1,0 +1,22 @@
+.last-payment-grid {
+  grid-template-rows: 192px;
+  grid-template-columns: 450px auto;
+
+  &__image {
+    position: absolute;
+    background: url("/assets/svg/dashboard-background.svg");
+    width: 292px;
+    height: 192px;
+  }
+
+  &__text {
+    width: 335px;
+  }
+
+  &__successful-icon {
+    background: url("/assets/svg/success-notification.svg");
+    width: 24px;
+    height: 24px;
+  }
+
+}

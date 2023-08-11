@@ -1,0 +1,46 @@
+<div class="h-110 w-full mt-6 mb-12 box-shadow-big rounded-l bg-white inline-block">
+  <div class="flex flex-col mt-4 mr-6 ml-4">
+    <div class="flex flex-row justify-between">
+      <div class="py-2 px-4 button-text-small bg-neutrals-20 rounded-m bright-turquoise-text-500 text-center">
+        בקשה חדשה
+      </div>
+      <div class="medium-text neutrals-text-950">בקשות פתוחות ליתרות לפיצוייםבקשה חדשה</div>
+    </div>
+  </div>
+  <div class="flex flex-row justify-end mt-7 gap-7 mr-6">
+    <smarti-input-year
+      [customWidth]="'262px'"
+      [placeholder]="'Year'"
+    ></smarti-input-year>
+    <smarti-select
+      [customWidth]="'262px'"
+      [options]="months"
+      [placeholder]="'Months'"
+    ></smarti-select>
+  </div>
+  <div class="mt-12 mr-6 ml-4 mb-6">
+    <table class="tui-table tui-table_layout_fixed">
+      <tbody>
+        <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-2">
+          <th class="tui-table__th text-right caption-text neutrals-text-500">סטטוס</th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500">סוג מוצר</th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500">חודש</th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500">חברה מנהלת</th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500">שם התהליך</th>
+        </tr>
+        <tr
+          *ngFor="let _ of ' '.repeat(5).split('')"
+          class="tui-table__tr tui-table__tr_border_none mb-1"
+        >
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">—</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">אפריל 2023</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">04-2023</td>
+          <td class="tui-table__td text-right paragraph-text neutrals-text-500 h-10 p-2">
+            אלטשולר שחם גמל ופנסיה בע”מ
+          </td>
+          <td class="tui-table__td text-right paragraph-text neutrals-text-500 h-10 p-2">אפריל 2023</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

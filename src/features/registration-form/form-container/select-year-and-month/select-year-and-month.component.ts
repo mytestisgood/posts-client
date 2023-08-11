@@ -8,6 +8,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { months } from '@shared/entities';
 import { ButtonComponent, DatePickerComponent, InputFieldComponent, SelectComponent } from '@shared/ui';
 
 type Direction = 'forward' | 'back';
@@ -32,20 +33,7 @@ export class SelectYearAndMonthComponent implements OnInit {
   @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
   public personalInfoForm!: FormGroup;
 
-  public monthsSelect: string[] = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+  public monthsSelect: string[] = months;
 
   constructor(private readonly fb: FormBuilder) {}
 
