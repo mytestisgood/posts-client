@@ -21,7 +21,7 @@ export const verticalMenuArray: VerticalMenuItem[] = [
     itemInactive: 'url("/assets/svg/inactive-home-icon.svg")',
   },
   {
-    item: 'process',
+    item: 'processes',
     isActive: false,
     itemActive: 'url("/assets/svg/active-process-icon.svg")',
     itemInactive: 'url("/assets/svg/inactive-process-icon.svg")',

@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import {
   DashboardMenuComponent,
   DashboardHeaderComponent,
-  DashboardMainComponent,
+  DashboardHomeComponent,
   DashboardNotificationComponent,
 } from '@shared/layout';
 
@@ -12,7 +13,7 @@ import {
   standalone: true,
   imports: [
     CommonModule, DashboardHeaderComponent, DashboardNotificationComponent,
-    DashboardMainComponent, DashboardMenuComponent,
+    DashboardHomeComponent, DashboardMenuComponent, RouterOutlet,
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],

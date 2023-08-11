@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { verticalMenuArray, VerticalMenuItem } from '../../../entities/dashboard.models';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { verticalMenuArray, VerticalMenuItem } from '@shared/entities';
 
 @Component({
   selector: 'smarti-dashboard-menu',
@@ -12,6 +13,13 @@ import { verticalMenuArray, VerticalMenuItem } from '../../../entities/dashboard
 })
 export class DashboardMenuComponent {
   public menuItems: VerticalMenuItem[] = verticalMenuArray;
+  public dashboard: string = '/dashboard/';
+
+  constructor(private readonly router: Router) {
+    const currentChildRoute: string = this.router.url.split(this.dashboard).pop() as string;
+
+    this.getActiveState(currentChildRoute);
+  }
 
   public changeActiveState(menuItem: VerticalMenuItem): void {
     if (menuItem.isActive) {
@@ -22,6 +30,19 @@ export class DashboardMenuComponent {
         item.isActive = false;
       }
     });
+
     menuItem.isActive = true;
+    this.router.navigate([this.dashboard + menuItem.item]);
+  }
+
+  private getActiveState(currentUrl: string): void {
+    this.menuItems.map(item => {
+      if (item.isActive) {
+        item.isActive = false;
+      }
+      if (item.item === currentUrl) {
+        item.isActive = true;
+      }
+    });
   }
 }

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashboardMainComponent } from '@shared/layout';
+import { DashboardHomeComponent } from '@shared/layout';
 
 describe('DashboardMainComponent', () => {
-  let component: DashboardMainComponent;
-  let fixture: ComponentFixture<DashboardMainComponent>;
+  let component: DashboardHomeComponent;
+  let fixture: ComponentFixture<DashboardHomeComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [DashboardMainComponent],
+      imports: [DashboardHomeComponent],
     });
-    fixture = TestBed.createComponent(DashboardMainComponent);
+    fixture = TestBed.createComponent(DashboardHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

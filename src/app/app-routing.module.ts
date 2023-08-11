@@ -10,6 +10,16 @@ import {
   RegistrationComponent,
   ResetPasswordComponent,
 } from '@pages';
+import {
+  DashboardBalanceComponent,
+  DashboardCashRegisterComponent,
+  DashboardDocumentsComponent,
+  DashboardDownloadDocumentsComponent, DashboardEmployerComponent,
+  DashboardHomeComponent,
+  DashboardInquiriesComponent,
+  DashboardProcessesComponent,
+  DashboardShieldComponent,
+} from '@shared/layout';
 
 const routes: Routes = [
   {
@@ -35,6 +45,49 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+      {
+        path: 'home',
+        component: DashboardHomeComponent,
+      },
+      {
+        path: 'processes',
+        component: DashboardProcessesComponent,
+      },
+      {
+        path: 'employer',
+        component: DashboardEmployerComponent,
+      },
+      {
+        path: 'balance',
+        component: DashboardBalanceComponent,
+      },
+      {
+        path: 'documents',
+        component: DashboardDocumentsComponent,
+      },
+      {
+        path: 'cash-register',
+        component: DashboardCashRegisterComponent,
+      },
+      {
+        path: 'inquiries',
+        component: DashboardInquiriesComponent,
+      },
+      {
+        path: 'shield',
+        component: DashboardShieldComponent,
+      },
+      {
+        path: 'download-documents',
+        component: DashboardDownloadDocumentsComponent,
+      },
+    ],
   },
   {
     path: '**',
