@@ -1,0 +1,97 @@
+<div class="flex flex-col">
+  <h3 class="medium neutrals-text-950 mt-7 mb-0 text-center">הנחיות לתשלום</h3>
+  <div class="paragraph-text text-center neutrals-text-950 margin-rl-auto">
+    כעת עליך לציין את תאריך הערך בו בוצע התשלום ולטעון את האסמכתא על התשלום
+  </div>
+  <div class="medium-text neutrals-text-950 mt-5 mb-0 text-center mt-7">אנא בחרו בפעולה הרצויה כדי להתקדם לשלב הבא</div>
+  <div class="mt-6 self-center">
+    <smarti-input-date
+      [customWidth]="'252px'"
+      [placeholder]="'Date'"
+      [control]="date"
+    ></smarti-input-date>
+  </div>
+  <div class="mt-9 self-center">
+    <smarti-radio-block-payment
+      [firstRadioBlockTemplate]="firstRadioBlockTemplate"
+      [secondRadioBlockTemplate]="secondRadioBlockTemplate"
+      [thirdRadioBlockTemplate]="thirdRadioBlockThird"
+    ></smarti-radio-block-payment>
+    <div class="mt-6 flex flex-row justify-end items-center">
+      <div class="paragraph-text text-right neutrals-text-950 mr-4">
+        הנני מאשר כי פרטי התשלום המוצגים נבדקו מול תוכנות השכר והינם תקינים, הסכום: 0.00
+      </div>
+      <smarti-input-checkbox></smarti-input-checkbox>
+    </div>
+  </div>
+  <div class="flex flex-row gap-426px self-center mt-11 mb-12">
+    <smarti-button
+      [text]="'המשך'"
+      [typeClass]="'confirm'"
+      [customButtonWidth]="'168px'"
+      [customHeight]="'42px'"
+      (buttonClicked)="doChangeStep('forward')"
+    ></smarti-button>
+    <smarti-button
+      [text]="'חזור'"
+      [typeClass]="'white'"
+      [customBorder]="'1px solid black'"
+      [customButtonWidth]="'168px'"
+      [customHeight]="'42px'"
+      (buttonClicked)="doChangeStep('back')"
+    ></smarti-button>
+  </div>
+</div>
+
+<ng-template #firstRadioBlockTemplate>
+  <div class="flex flex-row items-center justify-between h-full">
+    <smarti-button
+      [customButtonWidth]="'164px'"
+      [customHeight]="'56px'"
+      [text]="'Edit'"
+      [typeClass]="'confirm'"
+      [hasEditIcon]="true"
+      (buttonClicked)="onClickEditPayment('first')"
+    ></smarti-button>
+    <div class="flex flex-col">
+      <h4 class="medium neutrals-text-950 mt-0 mb-0">Bank account</h4>
+      <div class="regular-text neutrals-text-950">4 בנק יהב לעובדי המדינה בע”מ</div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #secondRadioBlockTemplate>
+  <div class="flex flex-row items-center justify-between h-full">
+    <smarti-button
+      [customButtonWidth]="'164px'"
+      [customHeight]="'56px'"
+      [text]="'Edit'"
+      [typeClass]="'confirm'"
+      [hasEditIcon]="true"
+      [disabled]="true"
+      (buttonClicked)="onClickEditPayment('second')"
+    ></smarti-button>
+    <div class="flex flex-col">
+      <h4 class="medium neutrals-text-950 mt-0 mb-0">Bank account</h4>
+      <div class="regular-text neutrals-text-950">4 בנק יהב לעובדי המדינה בע”מ</div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #thirdRadioBlockThird>
+  <div class="flex flex-row items-center justify-between h-full">
+    <smarti-button
+      [customButtonWidth]="'164px'"
+      [customHeight]="'56px'"
+      [text]="'Edit'"
+      [typeClass]="'confirm'"
+      [hasEditIcon]="true"
+      [disabled]="true"
+      (buttonClicked)="onClickEditPayment('third')"
+    ></smarti-button>
+    <div class="flex flex-col">
+      <h4 class="medium neutrals-text-950 mt-0 mb-0">Bank account</h4>
+      <div class="regular-text neutrals-text-950">4 בנק יהב לעובדי המדינה בע”מ</div>
+    </div>
+  </div>
+</ng-template>

@@ -8,6 +8,10 @@
   border: 1px solid $bright-turquoise-500;
 }
 
+.border-neutrals-20 {
+  border: 1px solid $neutrals-20;
+}
+
 .border-neutrals-50 {
   border: 1px solid $neutrals-50;
 }
@@ -38,6 +42,14 @@
   border-radius: 16px;
 }
 
+.rounded-left-l {
+  border-radius: 16px 0 0 16px;
+}
+
+.rounded-right-l {
+  border-radius: 0 16px 16px 0;
+}
+
 .rounded-ls {
   border-radius: 20px;
 }
@@ -60,4 +72,8 @@
 
 .rounded-full {
   border-radius: 9999px;
+}
+
+.border-none {
+  border: none;
 }

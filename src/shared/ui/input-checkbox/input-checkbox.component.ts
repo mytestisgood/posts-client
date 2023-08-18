@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TuiCheckboxModule } from '@taiga-ui/kit';
 
@@ -12,5 +12,11 @@ import { TuiCheckboxModule } from '@taiga-ui/kit';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputCheckboxComponent {
+  @Input() public checked: boolean = false;
   @Input() public control: FormControl<boolean | null> = new FormControl<boolean | null>(null);
+  @Output() public changeEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  public change(event: Event): void {
+    this.changeEvent.emit((event.target as HTMLInputElement).checked);
+  }
 }

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { Direction } from '@shared/entities';
+import { RegistrationDirection } from '@shared/entities';
 import { downloadFileHelper } from '@shared/helpers';
 import { ButtonComponent } from '@shared/ui';
 
@@ -13,7 +13,7 @@ import { ButtonComponent } from '@shared/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PayDirectlyComponent {
-  @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
+  @Output() public changeStep: EventEmitter<RegistrationDirection> = new EventEmitter<RegistrationDirection>();
   public isFirstStep: boolean = true;
   public isFileUploaded: boolean = false;
 

@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Input() public typeClass!: 'confirm' | 'interaction' | 'dark';
+  @Input() public typeClass!: 'confirm' | 'interaction' | 'dark' | 'white';
   @Input() public text!: string;
   @Input() public iconName!: string;
   @Input() public customMargin!: string;
@@ -25,6 +25,7 @@ export class ButtonComponent {
   @Input() public paragraphTextExtra: boolean = false;
   @Input() public buttonTextSmall: boolean = false;
   @Input() public hasFileIcon: boolean = false;
+  @Input() public hasEditIcon: boolean = false;
   @Input() public isNeedZIndex: boolean = false;
   @Output() public buttonClicked: Subject<void> = new Subject();
 

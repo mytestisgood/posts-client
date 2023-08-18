@@ -19,7 +19,7 @@ import { InlineResponse200, SignInService } from '@shared/api';
 import { ChangeEmailDialogComponent, SuccessDialogComponent } from '@shared/dialog';
 import {
   DEPARTMENT_ID,
-  Direction,
+  RegistrationDirection,
   REGISTRATION_TOKEN,
   RegistrationFormValueType,
   VerificationEmailControls,
@@ -52,7 +52,7 @@ export class VerifyEmailComponent implements OnInit {
   @Input() public currentFormStateValue!: RegistrationFormValueType;
   @Output() public subformInitialized: EventEmitter<FormGroup<VerificationEmailControls>> =
     new EventEmitter<FormGroup<VerificationEmailControls>>();
-  @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
+  @Output() public changeStep: EventEmitter<RegistrationDirection> = new EventEmitter<RegistrationDirection>();
 
   public verifyEmailInfo: FormGroup<VerificationEmailControls> = verifyEmailFormMapper();
   public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;

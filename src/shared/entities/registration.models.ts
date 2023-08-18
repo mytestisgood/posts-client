@@ -11,20 +11,20 @@ export enum RegistrationFormTypeEnum {
   VerifyEmailInfo = 'verifyEmailInfo',
 }
 
-export enum DirectionEnum {
+export enum RegistrationDirectionEnum {
   Forward = 'forward',
   Back = 'back',
 }
 
-export enum StepEnum {
+export enum RegistrationStepEnum {
   PersonalInfoStep = 'personalInfoStep',
   UploadDocumentStep = 'uploadDocumentStep',
   PaymentMethodStep = 'paymentMethodStep',
   VerifyEmailStep = 'verifyEmailStep',
 }
 
-export type Step = 'personalInfo' | 'uploadDocumentInfo' | 'paymentMethodInfo' | 'verifyEmailInfo';
-export type Direction = 'forward' | 'back';
+export type RegistrationStep = 'personalInfo' | 'uploadDocumentInfo' | 'paymentMethodInfo' | 'verifyEmailInfo';
+export type RegistrationDirection = 'forward' | 'back';
 export type RegistrationFormValueType = {
   personalInfo: PersonalInfoFormValue,
   uploadDocumentInfo: UploadDocumentFormValue,

@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
-  Direction,
-  DirectionEnum,
+  RegistrationDirection,
+  RegistrationDirectionEnum,
   RegistrationFormTypeEnum,
-  Step,
-  StepEnum,
+  RegistrationStep,
+  RegistrationStepEnum,
 } from '@shared/entities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PaymentMethodComponent } from './payment-method/payment-method.component';
@@ -29,13 +29,15 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormContainerComponent implements OnInit {
-  @Output() public changingStep: BehaviorSubject<Step> =
-    new BehaviorSubject<Step>(RegistrationFormTypeEnum.PersonalInfo);
+  @Output() public changingStep: BehaviorSubject<RegistrationStep> =
+    new BehaviorSubject<RegistrationStep>(RegistrationFormTypeEnum.PersonalInfo);
 
   public registrationForm!: FormGroup;
-  public readonly currentStepBs: BehaviorSubject<Step> =
-    new BehaviorSubject<Step>(RegistrationFormTypeEnum.PersonalInfo);
-  public readonly currentStep$: Observable<Step> = this.currentStepBs.asObservable();
+  public readonly currentStepBs: BehaviorSubject<RegistrationStep> =
+    new BehaviorSubject<RegistrationStep>(RegistrationFormTypeEnum.PersonalInfo);
+  public readonly currentStep$: Observable<RegistrationStep> = this.currentStepBs.asObservable();
+  public registrationStepEnum = RegistrationStepEnum;
+  public registrationFormTypeEnum = RegistrationFormTypeEnum;
 
   constructor(private readonly fb: FormBuilder) {
   }
@@ -49,32 +51,32 @@ export class FormContainerComponent implements OnInit {
     });
   }
 
-  public subformInitialized(name: Step, group: FormGroup): void {
-    this.registrationForm.setControl<Step>(name, group);
+  public subformInitialized(name: RegistrationStep, group: FormGroup): void {
+    this.registrationForm.setControl<RegistrationStep>(name, group);
   }
 
-  public changeStep(currentStep: string, direction: Direction): void {
+  public changeStep(currentStep: string, direction: RegistrationDirection): void {
     switch (currentStep) {
-      case StepEnum.PersonalInfoStep:
-        if (direction === DirectionEnum.Forward) {
+      case RegistrationStepEnum.PersonalInfoStep:
+        if (direction === RegistrationDirectionEnum.Forward) {
           this.currentStepBs.next(RegistrationFormTypeEnum.UploadDocumentInfo);
           this.changingStep.next(RegistrationFormTypeEnum.UploadDocumentInfo);
         }
         break;
-      case StepEnum.UploadDocumentStep:
-        if (direction === DirectionEnum.Forward) {
+      case RegistrationStepEnum.UploadDocumentStep:
+        if (direction === RegistrationDirectionEnum.Forward) {
           this.currentStepBs.next(RegistrationFormTypeEnum.PaymentMethodInfo);
           this.changingStep.next(RegistrationFormTypeEnum.PaymentMethodInfo);
         }
         break;
-      case StepEnum.PaymentMethodStep:
-        if (direction === DirectionEnum.Forward) {
+      case RegistrationStepEnum.PaymentMethodStep:
+        if (direction === RegistrationDirectionEnum.Forward) {
           this.currentStepBs.next(RegistrationFormTypeEnum.VerifyEmailInfo);
           this.changingStep.next(RegistrationFormTypeEnum.VerifyEmailInfo);
         }
         break;
-      case StepEnum.VerifyEmailStep:
-        if (direction === DirectionEnum.Forward) {
+      case RegistrationStepEnum.VerifyEmailStep:
+        if (direction === RegistrationDirectionEnum.Forward) {
           this.currentStepBs.next(RegistrationFormTypeEnum.VerifyEmailInfo);
           this.changingStep.next(RegistrationFormTypeEnum.VerifyEmailInfo);
         }

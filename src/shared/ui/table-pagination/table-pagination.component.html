@@ -1,0 +1,20 @@
+<div class="flex flex-row gap-3 items-center">
+  <div
+    class="flex flex-row paragraph-text cursor-pointer"
+    [ngClass]="isFirstPage ? 'neutrals-text-300' : 'neutrals-text-950'"
+    (click)="onPrevPage()"
+  >
+    <div class="pagination-arrow-left-icon"></div>
+    <div>Prev</div>
+  </div>
+  <div class="bg-neutrals-20 paragraph-text neutrals-text-300 p-2">{{ minValue }} &mdash; {{ maxValue }}</div>
+  <div
+    class="flex flex-row paragraph-text cursor-pointer"
+    [ngClass]="isLastPage ? 'neutrals-text-300' : 'neutrals-text-950'"
+    (click)="onNextPage()"
+  >
+    <div>Next</div>
+    <div class="pagination-arrow-right-icon"></div>
+  </div>
+  <div class="paragraph-text neutrals-text-950">of {{ total }}</div>
+</div>

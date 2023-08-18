@@ -1,4 +1,4 @@
-tui-input, tui-input-password, tui-input-phone, tui-input-year {
+tui-input, tui-input-password, tui-input-phone, tui-input-year, tui-input-date {
   direction: rtl!important;
   text-align: right!important;
   border-radius: 8px!important;
@@ -77,5 +77,18 @@ tui-input {
     font-style: normal!important;
     font-weight: 500!important;
     line-height: 40px!important;
+  }
+}
+
+tui-input-date {
+  .t-value-decoration {
+    color: $neutrals-500!important;
+    text-align: right!important;
+    font-family: RubikMedium, sans-serif !important;
+    font-size: 16px!important;
+    font-style: normal!important;
+    font-weight: 400!important;
+    line-height: 24px!important;
+    top: 10px!important;
   }
 }

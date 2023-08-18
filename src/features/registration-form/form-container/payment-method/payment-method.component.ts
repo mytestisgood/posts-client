@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
-  Direction,
+  RegistrationDirection,
   PaymentMethodControls,
   paymentMethodFormMapper,
   RegistrationFormValueType,
@@ -41,7 +41,7 @@ export class PaymentMethodComponent implements OnInit {
   @Input() public startingForm!: FormGroup;
   @Input() public currentFormStateValue!: RegistrationFormValueType;
   @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
+  @Output() public changeStep: EventEmitter<RegistrationDirection> = new EventEmitter<RegistrationDirection>();
 
   public paymentMethodInfoForm: FormGroup<PaymentMethodControls> = paymentMethodFormMapper();
   public payBySmartiOption: string = 'Pay by Smarti';
@@ -67,7 +67,7 @@ export class PaymentMethodComponent implements OnInit {
     this.isPayBySmarti = this.selectControl.value === this.payBySmartiOption;
   }
 
-  public doChangeStep(direction: Direction): void {
+  public doChangeStep(direction: RegistrationDirection): void {
     this.subformInitialized.emit(this.paymentMethodInfoForm);
     this.changeStep.emit(direction);
   }

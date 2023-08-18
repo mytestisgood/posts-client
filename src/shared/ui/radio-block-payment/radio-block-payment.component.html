@@ -1,0 +1,38 @@
+<form
+  class="control"
+  [formGroup]="radioBlocksForm"
+>
+  <div class="block-w812-h96">
+    <tui-radio-block
+      id="first-tui-radio-block"
+      class="w-full h-full border-bright-turquoise-500"
+      formControlName="radioBlockValue"
+      item="first"
+      size="l"
+    >
+      <ng-container *ngTemplateOutlet="firstRadioBlockTemplate"></ng-container>
+    </tui-radio-block>
+  </div>
+  <div class="block-w812-h96 mt-4">
+    <tui-radio-block
+      id="second-tui-radio-block"
+      class="w-full h-full"
+      formControlName="radioBlockValue"
+      item="second"
+      size="l"
+    >
+      <ng-container *ngTemplateOutlet="secondRadioBlockTemplate"></ng-container>
+    </tui-radio-block>
+  </div>
+  <div class="block-w812-h96 mt-4">
+    <tui-radio-block
+      id="third-tui-radio-block"
+      class="w-full h-full"
+      formControlName="radioBlockValue"
+      item="third"
+      size="l"
+    >
+      <ng-container *ngTemplateOutlet="thirdRadioBlockTemplate"></ng-container>
+    </tui-radio-block>
+  </div>
+</form>

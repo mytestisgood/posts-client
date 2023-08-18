@@ -1,0 +1,31 @@
+.pay-directly-block {
+  width: 674px;
+  height: 112px;
+
+  &__text {
+    width: 364px;
+  }
+}
+
+.payment-instruction-block {
+  width: 64px;
+  height: 64px;
+
+  &__icon {
+    background: url("/assets/svg/payment-instructions-icon.svg");
+    width: 48px;
+    height: 48px;
+  }
+
+  &__icon-second {
+    background: url("/assets/svg/send-2-icon.svg");
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.arrow-left-icon-process {
+  background: url("/assets/svg/arrow-left-icon-green-12.svg");
+  width: 12px;
+  height: 12px;
+}

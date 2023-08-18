@@ -1,0 +1,71 @@
+<div class="flex flex-col">
+  <h3 class="medium neutrals-text-950 mt-7 mb-0 text-center">היזונים</h3>
+  <div class="paragraph-text text-center neutrals-text-950 margin-rl-auto">
+    בשלב זה תוכל לצפות בהיזונים החוזרים שקיבלת מהקופות
+  </div>
+  <div class="mt-6 block-w328-h68 box-shadow-big rounded-l flex flex-row self-center items-center justify-between">
+    <div class="block-w64-h28 px-4 py-2 text-center rounded-2ls neutrals-text-950 bg-neutrals-20 ml-6 medium-text">
+      20
+    </div>
+    <div class="neutrals-text-950 paragraph-text">סה"כ היזונים</div>
+    <div class="sum-icon mr-4"></div>
+  </div>
+  <div class="mt-4 block-w328-h108 box-shadow-big rounded-l flex flex-col self-center">
+    <div class="flex flex-row justify-end mt-3">
+      <div class="neutrals-text-300 paragraph-text mr-6">היזונים תקולים</div>
+      <div class="accept-icon mr-4"></div>
+    </div>
+    <div class="flex flex-row justify-start items-center mt-4 ml-6">
+      <smarti-button
+        [typeClass]="'confirm'"
+        [text]="'See details'"
+        [customButtonWidth]="'102px'"
+        [customHeight]="'32px'"
+        [buttonTextSmall]="true"
+      ></smarti-button>
+      <div
+        class="block-w64-h28 px-4 py-2 text-center rounded-2ls bright-turquoise-text-500 bg-neutrals-20 ml-11 medium-text"
+      >
+        15
+      </div>
+    </div>
+  </div>
+  <div class="mt-4 block-w328-h108 box-shadow-big rounded-l flex flex-col self-center">
+    <div class="flex flex-row justify-end mt-3">
+      <div class="neutrals-text-300 paragraph-text mr-6">היזונים תקינים</div>
+      <div class="error-icon mr-4"></div>
+    </div>
+    <div class="flex flex-row justify-start items-center mt-4 ml-6">
+      <smarti-button
+        [typeClass]="'confirm'"
+        [text]="'See details'"
+        [customButtonWidth]="'102px'"
+        [customHeight]="'32px'"
+        [buttonTextSmall]="true"
+      ></smarti-button>
+      <div class="block-w64-h28 px-4 py-2 text-center rounded-2ls red-error-500-text bg-neutrals-20 ml-11 medium-text">
+        15
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-row mt-6 w-82 justify-between self-center">
+    <div class="py-2 px-4 bg-neutrals-20 rounded-m flex flex-row items-center w-fit-content self-end cursor-pointer">
+      <div class="arrow-left-icon-process mr-1"></div>
+      <div class="button-text-small bright-turquoise-text-500">ברמת עובד</div>
+    </div>
+    <div class="py-2 px-4 bg-neutrals-20 rounded-m flex flex-row items-center w-fit-content self-end cursor-pointer">
+      <div class="arrow-left-icon-process mr-1"></div>
+      <div class="button-text-small bright-turquoise-text-500">ברמת קובץ</div>
+    </div>
+  </div>
+  <div class="flex self-center mt-8 mb-13">
+    <smarti-button
+      [customHeight]="'42px'"
+      [customButtonWidth]="'168px'"
+      [text]="'חזור'"
+      [typeClass]="'white'"
+      [customBorder]="'1px solid black'"
+      (buttonClicked)="doChangeStep(dashboardDirectionEnum.Back)"
+    ></smarti-button>
+  </div>
+</div>

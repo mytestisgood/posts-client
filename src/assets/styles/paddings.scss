@@ -6,6 +6,11 @@
   padding: 24px;
 }
 
+.py-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .py-1 {
   padding-top: 4px;
   padding-bottom: 4px;
@@ -16,6 +21,11 @@
   padding-bottom: 8px;
 }
 
+.px-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .px-2 {
   padding-right: 8px;
   padding-left: 8px;
@@ -24,4 +34,16 @@
 .px-4 {
   padding-right: 16px;
   padding-left: 16px;
+}
+
+.pr-2 {
+  padding-right: 8px;
+}
+
+.pr-6 {
+  padding-right: 24px;
+}
+
+.pb-6 {
+  padding-bottom: 24px;
 }

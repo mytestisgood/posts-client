@@ -14,7 +14,7 @@ import { SignInService } from '@shared/api';
 import { ForwardRequestDialogComponent } from '@shared/dialog';
 import {
   DEPARTMENT_ID,
-  Direction,
+  RegistrationDirection,
   REGISTRATION_TOKEN,
   RegistrationFormValueType,
   UploadDocumentsControls,
@@ -55,7 +55,7 @@ export class UploadDocumentComponent implements OnInit {
   @Input() public startingForm!: FormGroup;
   @Input() public currentFormStateValue!: RegistrationFormValueType;
   @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
+  @Output() public changeStep: EventEmitter<RegistrationDirection> = new EventEmitter<RegistrationDirection>();
   public uploadDocumentsForm: FormGroup<UploadDocumentsControls> = uploadingDocumentsFormMapper();
   public documentUploaded: boolean = false;
   public isSendRequest: boolean = false;
@@ -83,7 +83,7 @@ export class UploadDocumentComponent implements OnInit {
     this.identifier = this.currentFormStateValue.personalInfo.companyId;
   }
 
-  public doChangeStep(direction: Direction): void {
+  public doChangeStep(direction: RegistrationDirection): void {
     this.subformInitialized.emit(this.uploadDocumentsForm);
     this.signInService.apiUsersSendVerifyCodePost(this.token).pipe(
       takeUntil(this.destroy$),

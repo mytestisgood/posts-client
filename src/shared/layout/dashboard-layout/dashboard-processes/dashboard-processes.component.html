@@ -1,1 +1,67 @@
-<p>dashboard-processes works!</p>
+<div>
+  <div class="flex flex-row justify-between mt-12">
+    <div class="flex flex-row gap-6">
+      <smarti-input-year
+        [customWidth]="'262px'"
+        [placeholder]="'Year'"
+      ></smarti-input-year>
+      <smarti-select
+        [customWidth]="'262px'"
+        [options]="months"
+        [placeholder]="'חודש שכר'"
+      ></smarti-select>
+    </div>
+    <h2 class="medium neutrals-text-950 mt-0 mb-0 pr-6">תהליכים</h2>
+  </div>
+  <div class="flex flex-row justify-between mt-4">
+    <div>
+      <smarti-button
+        [text]="'תהליך חדש'"
+        [customButtonWidth]="'232px'"
+        [customHeight]="'56px'"
+        [typeClass]="'confirm'"
+      ></smarti-button>
+    </div>
+    <div class="flex flex-row self-end gap-6">
+      <smarti-custom-dropdown [customContent]="customDropdownContent">
+        <div class="block-w172-h42 flex flex-row justify-center items-center gap-3 cursor-pointer">
+          <div class="green-left-arrow-icon"></div>
+          <div class="paragraph-text-extra bright-turquoise-text-500">תהליך חדש</div>
+        </div>
+      </smarti-custom-dropdown>
+      <div class="self-end">
+        <smarti-input-search
+          [placeholder]="'Search'"
+          [customWidth]="'450px'"
+          [customBorderBottom]="'1px solid #4F5F7A'"
+        ></smarti-input-search>
+      </div>
+    </div>
+  </div>
+  <div class="w-full h-672 bg-white box-shadow-big mt-4 rounded-l mb-34">
+    <smarti-dashboard-process-table></smarti-dashboard-process-table>
+  </div>
+</div>
+
+<ng-template #customDropdownContent>
+  <div class="block-w608-h178 flex flex-col mt-6">
+    <div class="flex flex-row margin-rl-auto gap-6">
+      <smarti-select
+        [customWidth]="'252px'"
+        [placeholder]="'Process type'"
+      ></smarti-select>
+      <smarti-select
+        [customWidth]="'252px'"
+        [placeholder]="'משנה*'"
+      ></smarti-select>
+    </div>
+    <div class="flex flex-row justify-center mt-10">
+      <smarti-button
+        [typeClass]="'confirm'"
+        [customButtonWidth]="'168px'"
+        [customHeight]="'42px'"
+        [text]="'חפש'"
+      ></smarti-button>
+    </div>
+  </div>
+</ng-template>

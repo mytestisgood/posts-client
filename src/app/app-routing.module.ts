@@ -10,16 +10,6 @@ import {
   RegistrationComponent,
   ResetPasswordComponent,
 } from '@pages';
-import {
-  DashboardBalanceComponent,
-  DashboardCashRegisterComponent,
-  DashboardDocumentsComponent,
-  DashboardDownloadDocumentsComponent, DashboardEmployerComponent,
-  DashboardHomeComponent,
-  DashboardInquiriesComponent,
-  DashboardProcessesComponent,
-  DashboardShieldComponent,
-} from '@shared/layout';
 
 const routes: Routes = [
   {
@@ -53,39 +43,43 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        component: DashboardHomeComponent,
+        loadComponent: () => import('@shared/layout').then(m => m.DashboardHomeComponent),
       },
       {
         path: 'processes',
-        component: DashboardProcessesComponent,
+        loadComponent: () => import('@shared/layout').then(m => m.DashboardProcessesComponent),
+      },
+      {
+        path: 'processes/:id',
+        loadComponent: () => import('@shared/layout').then(m => m.ProcessesDetailComponent),
       },
       {
         path: 'employer',
-        component: DashboardEmployerComponent,
+        loadComponent: () => import('@shared/layout').then(m => m.DashboardEmployerComponent),
       },
       {
         path: 'balance',
-        component: DashboardBalanceComponent,
+        loadComponent: () => import('@shared/layout').then(m => m.DashboardBalanceComponent),
       },
       {
         path: 'documents',
-        component: DashboardDocumentsComponent,
+        loadComponent: () => import('@shared/layout').then(m => m.DashboardDocumentsComponent),
       },
       {
         path: 'cash-register',
-        component: DashboardCashRegisterComponent,
+        loadComponent: () => import('@shared/layout').then(m => m.DashboardCashRegisterComponent),
       },
       {
         path: 'inquiries',
-        component: DashboardInquiriesComponent,
+        loadComponent: () => import('@shared/layout').then(m => m.DashboardInquiriesComponent),
       },
       {
         path: 'shield',
-        component: DashboardShieldComponent,
+        loadComponent: () => import('@shared/layout').then(m => m.DashboardShieldComponent),
       },
       {
         path: 'download-documents',
-        component: DashboardDownloadDocumentsComponent,
+        loadComponent: () => import('@shared/layout').then(m => m.DashboardDownloadDocumentsComponent),
       },
     ],
   },

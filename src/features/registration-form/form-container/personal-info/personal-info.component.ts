@@ -10,7 +10,7 @@ import {
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { InlineResponse2001, SignInService } from '@shared/api';
 import {
-  Direction,
+  RegistrationDirection,
   PersonalInfoControls,
   personalInfoFormMapper,
   REGISTRATION_TOKEN,
@@ -45,7 +45,7 @@ export class PersonalInfoComponent implements OnInit {
   @Input() public startingForm!: FormGroup;
   @Input() public currentFormStateValue!: RegistrationFormValueType;
   @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
+  @Output() public changeStep: EventEmitter<RegistrationDirection> = new EventEmitter<RegistrationDirection>();
 
   public isDisabled: boolean = true;
   public personalInfoForm: FormGroup<PersonalInfoControls> = personalInfoFormMapper();
@@ -70,7 +70,7 @@ export class PersonalInfoComponent implements OnInit {
     );
   }
 
-  public doChangeStep(direction: Direction): void {
+  public doChangeStep(direction: RegistrationDirection): void {
     this.signInService.apiEmployersCreateEmployerOutPost({
       email: this.personalInfoForm.controls.email.value as string,
       phone: this.personalInfoForm.controls.phone.value as string,

@@ -1,0 +1,13 @@
+<tui-input-inline
+  class="input-search"
+  tuiTextfieldSize="m"
+  [tuiTextfieldIcon]="tuiIconSearchLarge"
+  [style.height]="'28px'"
+  [style.width]="customWidth"
+  [style.border-bottom]="customBorderBottom"
+  [tuiTextfieldLabelOutside]="true"
+  [(ngModel)]="search"
+>
+  {{ placeholder }}
+  <div class="search-icon"></div>
+</tui-input-inline>

@@ -18,6 +18,10 @@
   text-overflow: ellipsis;
 }
 
+.bold-text {
+  font-weight: bold !important;
+}
+
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -197,4 +201,12 @@ h4 {
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
+}
+
+.extra-small-8px-text {
+  font-family: Rubik, sans-serif;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
 }

@@ -120,7 +120,7 @@
             "maxEOF": 0
           }
         ],
-        "quote-props": ["error", "as-needed"],
+        "quote-props": ["off"],
         "@typescript-eslint/naming-convention": [
           "error",
           {

@@ -24,6 +24,19 @@
   background: $neutrals-100;
 }
 
+.white-button {
+  background: $white;
+  color: $neutrals-950;
+}
+
+.white-button:hover, .dark-button:active{
+  background: $neutrals-20;
+}
+
+.white-button:disabled {
+  background: $neutrals-100;
+}
+
 .dark-button {
   background: $neutrals-950;
   color: $white;

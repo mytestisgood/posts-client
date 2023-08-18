@@ -1,0 +1,16 @@
+<div
+  [tuiDropdown]="dropdownContent"
+  [tuiDropdownManual]="open"
+  (tuiObscured)="onObscured($event)"
+  (click)="onClick()"
+  (tuiActiveZoneChange)="onActiveZone($event)"
+>
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</div>
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>
+
+<ng-template #dropdownContent>
+  <ng-container *ngTemplateOutlet="customContent"></ng-container>
+</ng-template>

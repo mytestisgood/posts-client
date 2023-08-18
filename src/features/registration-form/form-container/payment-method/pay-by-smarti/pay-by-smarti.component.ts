@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent, InputFieldComponent, RadioComponent } from '@shared/ui';
 import {
-  Direction,
+  RegistrationDirection,
   PaymentMethodControls,
   PaymentMethodTabs,
 } from '@shared/entities';
@@ -24,7 +24,7 @@ import {
 })
 export class PayBySmartiComponent {
   @Input() public paymentForm!: FormGroup<PaymentMethodControls>;
-  @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
+  @Output() public changeStep: EventEmitter<RegistrationDirection> = new EventEmitter<RegistrationDirection>();
 
   public institutionalNumber: string = 'Institutional number';
   public bankTransfer: string = 'Bank Transfer';
@@ -47,7 +47,7 @@ export class PayBySmartiComponent {
     }
   }
 
-  public doChangeStep(forward: Direction): void {
+  public doChangeStep(forward: RegistrationDirection): void {
     this.changeStep.emit(forward);
   }
 }

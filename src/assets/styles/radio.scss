@@ -1,57 +1,76 @@
 tui-radio-labeled {
   .t-wrapper {
-    align-items: center!important;
+    align-items: center !important;
   }
 
   .t-content {
-    color: $neutrals-500!important;
-    text-align: right!important;
+    color: $neutrals-500 !important;
+    text-align: right !important;
     font-family: Rubik, sans-serif !important;
-    font-size: 20px!important;
-    font-style: normal!important;
-    font-weight: 400!important;
-    line-height: 28px!important;
+    font-size: 20px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 28px !important;
   }
 }
 
 tui-radio {
-  width: 20px!important;
-  height: 20px!important;
+  width: 20px !important;
+  height: 20px !important;
 
   .t-mark {
-    margin: 5px!important;
-    width: 10px!important;
-    height: 10px!important;
+    margin: 5px !important;
+    width: 10px !important;
+    height: 10px !important;
   }
 }
 
 .big-radio {
   tui-radio-labeled {
     .t-wrapper {
-      align-items: center!important;
-      flex-direction: row-reverse!important;
-      gap: 16px!important;
+      align-items: center !important;
+      flex-direction: row-reverse !important;
+      gap: 16px !important;
     }
 
     .t-content {
-      color: $neutrals-950!important;
-      text-align: right!important;
+      color: $neutrals-950 !important;
+      text-align: right !important;
       font-family: Rubik, sans-serif !important;
-      font-size: 32px!important;
-      font-style: normal!important;
-      font-weight: 500!important;
-      line-height: 40px!important;
+      font-size: 32px !important;
+      font-style: normal !important;
+      font-weight: 500 !important;
+      line-height: 40px !important;
     }
   }
 
   tui-radio {
-    width: 20px!important;
-    height: 20px!important;
+    width: 20px !important;
+    height: 20px !important;
 
     .t-mark {
-      margin: 5px!important;
-      width: 10px!important;
-      height: 10px!important;
+      margin: 5px !important;
+      width: 10px !important;
+      height: 10px !important;
+    }
+  }
+}
+
+tui-radio-block {
+  &:active {
+    border: 1px solid $bright-turquoise-500;
+  }
+
+  .t-wrapper {
+    align-items: center !important;
+
+    .t-label {
+      height: 100% !important;
+      display: block !important;
+
+      .t-content {
+        height: 100% !important;
+      }
     }
   }
 }

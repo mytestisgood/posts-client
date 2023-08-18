@@ -37,7 +37,7 @@ export class InputFileComponent implements OnInit {
     this.control.statusChanges.pipe(
       takeUntil(this.destroy$),
     ).subscribe((status: FormControlStatus) => {
-      if (status === 'VALID') {
+      if (status === 'VALID' && this.control.value?.length) {
         this.fileUploaded.next(true);
       } else {
         this.fileUploaded.next(false);

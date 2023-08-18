@@ -1,0 +1,73 @@
+<div class="flex flex-col">
+  <h3 class="medium neutrals-text-950 mt-7 mb-0 text-center">הנחיות לתשלום</h3>
+  <div class="paragraph-text text-center neutrals-text-950 margin-rl-auto w-920px">
+    כעת ניתן להוריד הנחיות תשלום לקופות המכיל פירוט עבור סכום התשלום לכל קופה ומס’ החשבון שלה. בנוסף, ניתן לשלוח הנחיות
+    תשלום לאנשי קשר *החיוב בגין דמי שירות הסליקה מופיע כשורת חיוב נוספת
+  </div>
+  <div class="medium-text neutrals-text-950 mt-7 mb-0 text-center mt-7">אנא בחרו בפעולה הרצויה כדי להתקדם לשלב הבא</div>
+  <div class="mt-6 pay-directly-block box-shadow-regular rounded-l flex flex-row self-center">
+    <div class="ml-10 self-center mr-14">
+      <smarti-button
+        [text]="'הורידו'"
+        [typeClass]="'confirm'"
+        [customButtonWidth]="'105px'"
+        [customHeight]="'42px'"
+        (buttonClicked)="downloadPaymentExample()"
+      ></smarti-button>
+    </div>
+    <div class="self-center mr-6 pay-directly-block__text">
+      <div class="medium-text neutrals-text-950 dir-rtl">הורידו הנחיות לתשלום</div>
+      <div class="paragraph-text neutrals-text-300 dir-rtl">
+        בכדי לצפות בפרטי התשלום לחברות המנהלות וסכומי התשלום יש להוריד את הקובץ.
+      </div>
+    </div>
+    <div class="bg-bright-turquoise-100 payment-instruction-block flex items-center self-center justify-center mr-6">
+      <div class="payment-instruction-block__icon"></div>
+    </div>
+  </div>
+  <div class="mt-2 pay-directly-block box-shadow-regular rounded-l flex flex-row self-center">
+    <div class="ml-10 self-center mr-14">
+      <smarti-button
+        [text]="'שלחו'"
+        [typeClass]="'confirm'"
+        [customButtonWidth]="'105px'"
+        [customHeight]="'42px'"
+        (buttonClicked)="uploadPaymentExample()"
+      ></smarti-button>
+    </div>
+    <div class="self-center mr-6 pay-directly-block__text">
+      <div class="medium-text neutrals-text-950 dir-rtl">שלחו הנחיות לתשלום</div>
+      <div class="paragraph-text neutrals-text-300 dir-rtl">בפעולה זו תוכלו לשלוח את ההנחיות לאנשי קשר</div>
+    </div>
+    <div class="bg-bright-turquoise-100 payment-instruction-block flex items-center self-center justify-center mr-6">
+      <div class="payment-instruction-block__icon-second"></div>
+    </div>
+  </div>
+  <div class="flex flex-row mt-6 w-674px justify-between self-center">
+    <div class="py-2 px-4 bg-neutrals-20 rounded-m flex flex-row items-center w-fit-content self-end cursor-pointer">
+      <div class="arrow-left-icon-process mr-1"></div>
+      <div class="button-text-small bright-turquoise-text-500">לצפייה בפירוט קופות</div>
+    </div>
+    <div class="py-2 px-4 bg-neutrals-20 rounded-m flex flex-row items-center w-fit-content self-end cursor-pointer">
+      <div class="arrow-left-icon-process mr-1"></div>
+      <div class="button-text-small bright-turquoise-text-500">לצפייה בפירוט קופות</div>
+    </div>
+  </div>
+  <div class="flex flex-row gap-426px self-center mt-10 mb-15">
+    <smarti-button
+      [text]="'המשך'"
+      [typeClass]="'confirm'"
+      [customButtonWidth]="'168px'"
+      [customHeight]="'42px'"
+      (buttonClicked)="doChangeStep(dashboardDirectionEnum.Forward)"
+    ></smarti-button>
+    <smarti-button
+      [text]="' עבור להיזונים'"
+      [typeClass]="'white'"
+      [customBorder]="'1px solid black'"
+      [customButtonWidth]="'168px'"
+      [customHeight]="'42px'"
+      (buttonClicked)="doChangeStep(dashboardDirectionEnum.Back)"
+    ></smarti-button>
+  </div>
+</div>

@@ -6,6 +6,45 @@ export interface DashboardHeaderGroupControls {
   department: FormControl<string | number | null>;
 }
 
+export type DashboardDirection = 'forward' | 'back';
+
+export type DashboardStep = 'firstStep' | 'secondStep' | 'thirdStep' | 'fourthStep' | 'fifthStep';
+
+export enum DashboardStepEnum {
+  FirstStep = 'firstStep',
+  SecondStep = 'secondStep',
+  ThirdStep = 'thirdStep',
+  FourthStep = 'fourthStep',
+  FifthStep = 'fifthStep',
+}
+
+export enum DashboardDirectionEnum {
+  Forward = 'forward',
+  Back = 'back'
+}
+
+export interface DashboardHeaderBackgroundClass {
+  ['bgNeutrals950']: boolean;
+  ['bgBrightTurquoise500']: boolean;
+  ['bgNeutrals100']: boolean;
+}
+
+export interface DashboardHeaderCountClass {
+  ['acceptBorderedIcon']: boolean;
+  ['secondRoundedIcon']?: boolean;
+  ['secondRoundedFillIcon']?: boolean,
+  ['thirdRoundedIcon']?: boolean;
+  ['thirdRoundedFillIcon']?: boolean,
+  ['fourthRoundedIcon']?: boolean;
+  ['fourthRoundedFillIcon']?: boolean,
+}
+
+export interface DashboardTriangleClass {
+  ['blackTriangleLeft']: boolean;
+  ['brightTurquoiseTriangleLeft']: boolean;
+  ['brightTurquoiseTriangleLeftDisabled']: boolean;
+}
+
 export interface VerticalMenuItem {
   item: string;
   isActive: boolean;

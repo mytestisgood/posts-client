@@ -9,6 +9,7 @@
       'confirm-button': typeClass === 'confirm',
       'button-interaction': typeClass === 'interaction',
       'dark-button': typeClass === 'dark',
+      'white-button': typeClass === 'white',
       'paragraph-text-extra': paragraphTextExtra,
       'button-text-small': buttonTextSmall,
       'z-10': isNeedZIndex
@@ -25,6 +26,10 @@
     <div
       *ngIf="hasFileIcon"
       class="file-icon"
+    ></div>
+    <div
+      *ngIf="hasEditIcon"
+      class="edit-icon"
     ></div>
   </button>
 </div>
