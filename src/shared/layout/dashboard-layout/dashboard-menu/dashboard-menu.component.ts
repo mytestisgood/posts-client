@@ -36,11 +36,13 @@ export class DashboardMenuComponent {
   }
 
   private getActiveState(currentUrl: string): void {
+    const parentUrl = currentUrl.split('/')[0];
+
     this.menuItems.map(item => {
       if (item.isActive) {
         item.isActive = false;
       }
-      if (item.item === currentUrl) {
+      if (item.item === currentUrl || item.item === parentUrl) {
         item.isActive = true;
       }
     });

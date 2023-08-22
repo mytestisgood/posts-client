@@ -1,0 +1,31 @@
+.balance-table {
+  border-collapse: separate;
+  border-spacing: 0 16px;
+
+  th, td {
+    width: fit-content;
+  }
+
+  th.full-width, td.full-width {
+    width: 144px;
+  }
+
+}
+
+.message-notify-icon {
+  background: url("/assets/svg/message-notify-icon.svg");
+  width: 24px;
+  height: 24px;
+}
+
+.arrow-down-icon {
+  background: url("/assets/svg/arrow-down-16.svg");
+  width: 16px;
+  height: 16px;
+}
+
+.laying-down-image {
+  background: url("/assets/svg/layng-with-legs-on-table.svg");
+  width: 392px;
+  height: 336px;
+}

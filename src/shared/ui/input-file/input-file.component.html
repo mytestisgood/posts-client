@@ -15,13 +15,13 @@
 </tui-files>
 
 <div
-  *ngIf="fileUploaded.value"
+  *ngIf="fileUploaded.value && multiple"
   class="mt-10 paragraph-text text-center"
 >
   You can upload multi files here
 </div>
 <div
-  *ngIf="fileUploaded.value"
+  *ngIf="fileUploaded.value && multiple"
   class="paragraph-text neutrals-text-950"
 >
   Attach more XML files
@@ -35,7 +35,7 @@
 >
   <input
     tuiInputFiles
-    [multiple]="multiple"
+    [multiple]="true"
     type="file"
     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
   />
@@ -74,7 +74,7 @@
   </ng-template>
 </tui-input-files>
 <div
-  *ngIf="!fileUploaded.value"
+  *ngIf="!fileUploaded.value && multiple"
   class="mt-10 paragraph-text text-center"
 >
   You can upload multi files here

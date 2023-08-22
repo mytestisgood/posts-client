@@ -22,5 +22,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardProcessesComponent {
+  public isCustomDropdownActive: boolean = false;
   protected readonly months: string[] = months;
+
+  public onCustomDropdownClick(): void {
+    this.isCustomDropdownActive = !this.isCustomDropdownActive;
+  }
 }

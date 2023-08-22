@@ -1,0 +1,20 @@
+.documents-table {
+  border-collapse: separate;
+  border-spacing: 0 16px;
+
+  th:first-child, td:first-child {
+    width: 250px;
+  }
+}
+
+.direct-inbox-icon {
+  background: url("/assets/svg/direct-inbox-icon.svg");
+  width: 24px;
+  height: 24px;
+}
+
+.arrow-down-icon {
+  background: url("/assets/svg/arrow-down-16.svg");
+  width: 16px;
+  height: 16px;
+}
