@@ -1,0 +1,24 @@
+tui-tabs {
+  width: 100% !important;
+  height: 24px !important;
+  gap: 24px !important;
+
+  button {
+    min-width: 100px !important;
+    justify-content: center !important;
+    color: $neutrals-950 !important;
+    width: fit-content !important;
+    height: 24px !important;
+    font-size: 16px !important;
+    font-style: normal !important;
+    line-height: 24px !important;
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+    border-radius: 8px !important;
+  }
+
+  button._active {
+    background: $bright-turquoise-500 !important;
+    color: $white !important;
+  }
+}

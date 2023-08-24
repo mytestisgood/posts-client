@@ -1,1 +1,52 @@
-<p>dashboard-inquiries works!</p>
+<div>
+  <div class="flex flex-row justify-end mt-12">
+    <div class="pr-6">
+      <h2 class="medium neutrals-text-950 mt-0 mb-0 text-right">פניות</h2>
+      <div class="neutrals-text-950 paragraph-text">במסך זה תוכל ליצור ולצפות בפניות מול הגורמים המתפעלים</div>
+    </div>
+  </div>
+  <div class="flex flex-row justify-between mt-4">
+    <div>
+      <smarti-button
+        [text]="'New chat'"
+        [customButtonWidth]="'260px'"
+        [customHeight]="'56px'"
+        [typeClass]="'confirm'"
+        [hasMessageIcon]="true"
+      ></smarti-button>
+    </div>
+    <div>
+      <smarti-custom-dropdown
+        [customContent]="customDropdownContent"
+        (clickEvent)="onCustomDropdownClick()"
+      >
+        <div
+          *ngIf="!isCustomDropdownActive; else activeDropdownButtonTemplate"
+          class="block-w172-h42 flex flex-row justify-center items-center gap-3 cursor-pointer"
+        >
+          <div class="green-left-arrow-icon"></div>
+          <div class="paragraph-text-extra bright-turquoise-text-500">תהליך חדש</div>
+        </div>
+        <ng-template #activeDropdownButtonTemplate>
+          <div class="block-w172-h42 flex flex-row justify-center items-center gap-3 cursor-pointer">
+            <div class="green-right-arrow-icon"></div>
+            <div class="paragraph-text-extra bright-turquoise-text-500">נקה</div>
+          </div>
+        </ng-template>
+      </smarti-custom-dropdown>
+    </div>
+  </div>
+  <div class="flex flex-row gap-6">
+    <div class="w-full h-744 bg-white box-shadow-big mt-4 rounded-l mb-34">
+      <smarti-dashboard-chat-window [chat]="currentActiveChat()"></smarti-dashboard-chat-window>
+    </div>
+    <div class="block-w632-h744 bg-white box-shadow-big mt-4 rounded-l mb-34">
+      <smarti-dashboard-chat-list
+        [chatItems]="chatItems"
+        (changeCurrentChatId)="changeCurrentChatId($event)"
+      ></smarti-dashboard-chat-list>
+    </div>
+  </div>
+</div>
+
+<ng-template #customDropdownContent></ng-template>

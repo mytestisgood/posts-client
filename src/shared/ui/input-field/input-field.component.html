@@ -1,8 +1,9 @@
 <tui-input
-  tuiTextfieldSize="m"
+  [tuiTextfieldSize]="inputTextFieldSize"
   [formControl]="control"
   [tuiTextfieldLabelOutside]="true"
   [style.width]="customWidth"
+  [style.height]="customHeight"
 >
   {{ placeholder }}
   <input tuiTextfield />

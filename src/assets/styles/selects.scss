@@ -13,6 +13,7 @@ tui-select-option {
 tui-select {
   border-radius: 8px!important;
   direction: rtl!important;
+
   tui-primitive-textfield {
     margin-right: 0!important;
     padding-right: 0!important;
@@ -25,6 +26,7 @@ tui-select {
     line-height: 24px!important;
 
     input {
+      background: $white!important;
       margin-right: 0!important;
       padding-right: 0!important;
       color: $neutrals-500!important;
@@ -34,6 +36,10 @@ tui-select {
       font-style: normal!important;
       font-weight: 400!important;
       line-height: 24px!important;
+    }
+
+    .t-content {
+      background: $white!important;
     }
   }
 

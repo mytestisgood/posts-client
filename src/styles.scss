@@ -19,6 +19,8 @@
 @import "date-picker";
 @import "dialogs";
 @import "accordion";
+@import "tabs";
+@import "other-taigaui";
 
 body {
   margin: 0;
@@ -77,4 +79,11 @@ router-outlet.router-flex + * {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
+}
+
+.small-vertical-line {
+  width: 4px;
+  height: 16px;
+  margin-top: 2px;
+  border-radius: 16px;
 }

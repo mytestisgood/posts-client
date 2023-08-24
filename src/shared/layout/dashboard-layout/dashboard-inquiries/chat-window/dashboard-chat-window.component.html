@@ -1,0 +1,90 @@
+<div *ngIf="chat">
+  <div class="flex flex-row gap-2 mt-4 mr-8 justify-end">
+    <div class="neutrals-text-950 caption-text">{{ chat.smallHeader }}</div>
+    <div
+      class="small-vertical-line"
+      [ngClass]="setLineColorClass(chat.smallHeader)"
+    ></div>
+  </div>
+  <div class="flex flex-row justify-between mt-4 mr-8 ml-6">
+    <div class="neutrals-text-500 paragraph-text">מספר פניה: 14</div>
+    <div class="neutrals-text-950 paragraph-text-medium">הילוך שישי יפו בע"מ</div>
+  </div>
+  <!-- block with chat window -->
+  <div class="mt-9 chat-window-block ml-3-5 mr-6">
+    <tui-scrollbar class="h-550">
+      <div
+        *ngFor="let messagesItem of chat.messagesItems"
+        class="mt-9"
+      >
+        <div class="bg-blue-base-600 caption-text px-4 py-1 rounded-l margin-rl-auto w-fit-content white-text">
+          {{ dateChatMessages(messagesItem.date) }}
+        </div>
+        <div
+          *ngFor="let message of messagesItem.messages"
+          class="flex flex-col mt-10 w-576px ml-4"
+          [ngClass]="{
+            'ml-auto': message.isUserMessage,
+            'ml-4': !message.isUserMessage
+          }"
+        >
+          <div
+            class="h-28 rounded-m flex flex-row"
+            [ngClass]="{
+              'bg-bright-turquoise-50': message.isUserMessage,
+              'bg-neutrals-20': !message.isUserMessage,
+              'justify-end': !message.haveFile,
+              'justify-between': message.haveFile
+            }"
+          >
+            <div class="bg-bright-turquoise-100 rounded-m m-6 cursor-pointer">
+              <div
+                *ngIf="message.haveFile"
+                class="direct-inbox-icon m-5"
+                (click)="downloadPaymentExample(message.file)"
+              ></div>
+            </div>
+            <div class="mt-4 mr-6 ml-4">
+              <div class="neutrals-text-950 paragraph-text-medium text-end">{{ message.title }}</div>
+              <div class="neutrals-text-950 paragraph-text text-end mt-2">{{ message.text }}</div>
+            </div>
+          </div>
+          <div class="mt-2 flex flex-row gap-2-5 items-center">
+            <div class="clock-icon"></div>
+            <div class="neutrals-text-300 caption-text">{{ message.time }}</div>
+          </div>
+        </div>
+      </div>
+    </tui-scrollbar>
+  </div>
+  <div class="chat-menu-block bg-neutrals-950 rounded-l h-14 ml-2 mr-2 flex flex-row gap-4">
+    <div class="flex items-center justify-center bg-neutrals-20 block-w86-h40 rounded-m mt-2 ml-5">
+      <div class="send-message-icon"></div>
+    </div>
+    <smarti-input-field
+      class="mt-2"
+      [placeholder]="'הקלד כאן...'"
+      [customWidth]="'772px'"
+      [customHeight]="'40px'"
+      [inputTextFieldSize]="'s'"
+    ></smarti-input-field>
+    <div
+      class="block-w112-h40 bg-neutrals-20 rounded-m h-10 mt-2 mr-5 flex flex-row gap-1 items-center justify-center cursor-pointer"
+      (click)="openAddFileDialog(addFileDialogTemplate)"
+    >
+      <div class="button-text-small bright-turquoise-text-500">צרף קבצים</div>
+      <div class="attach-icon-12"></div>
+    </div>
+  </div>
+</div>
+
+<ng-template
+  #addFileDialogTemplate
+  let-observer
+>
+  <smarti-add-file-chat-dialog
+    [observer]="observer"
+    (sendRequest)="onAddFileSendRequest()"
+    [form]="addAddFileForm"
+  ></smarti-add-file-chat-dialog>
+</ng-template>

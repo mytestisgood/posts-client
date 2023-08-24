@@ -5,7 +5,8 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiSizeM, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiSizeL, TuiSizeS } from '@taiga-ui/core/types';
 import { TuiInputModule } from '@taiga-ui/kit';
 
 @Component({
@@ -26,4 +27,6 @@ export class InputFieldComponent {
   @Input() public placeholder: string = '';
   @Input() public customWidth: string = '';
   @Input() public control: FormControl<string | null> = new FormControl<string>('');
+  @Input() public customHeight: string = '';
+  @Input() public inputTextFieldSize: TuiSizeL | TuiSizeS | TuiSizeM = 'm';
 }

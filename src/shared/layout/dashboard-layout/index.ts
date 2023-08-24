@@ -13,5 +13,8 @@ export * from './dashboard-balance/dashboard-balance.component';
 export * from './dashboard-documents/dashboard-documents.component';
 export * from './dashboard-cash-register/dashboard-cash-register.component';
 export * from './dashboard-inquiries/dashboard-inquiries.component';
+export * from './dashboard-inquiries/chat-list/dashboard-chat-list.component';
+export * from './dashboard-inquiries/chat-list-item/dashboard-chat-list-item.component';
+export * from './dashboard-inquiries/chat-window/dashboard-chat-window.component';
 export * from './dashboard-shield/dashboard-shield.component';
 export * from './dashboard-download-documents/dashboard-download-documents.component';

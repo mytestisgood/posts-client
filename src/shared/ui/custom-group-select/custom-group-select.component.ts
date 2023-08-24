@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { DashboardHeaderGroupControls, dashboardHeaderGroupMapper } from '@shared/entities';
 import { TuiGroupModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiDataListWrapperModule, TuiMultiSelectModule } from '@taiga-ui/kit';
-import { dashboardHeaderGroupMapper } from '../../entities/dashboard.mapper';
-import { DashboardHeaderGroupControls } from '../../entities/dashboard.models';
 
 @Component({
   selector: 'smarti-custom-group-select',
@@ -19,5 +18,4 @@ import { DashboardHeaderGroupControls } from '../../entities/dashboard.models';
 })
 export class CustomGroupSelectComponent {
   @Input() public groupSelectedForm: FormGroup<DashboardHeaderGroupControls> = dashboardHeaderGroupMapper();
-
 }

@@ -1,0 +1,31 @@
+.chat-menu-block {
+  width: calc(100% - 16px);
+}
+
+.chat-window-block {
+  width: calc(100% - 38px);
+}
+
+.send-message-icon {
+  background: url("/assets/svg/send-message-Icon.svg");
+  width: 30px;
+  height: 30px;
+}
+
+.attach-icon-12 {
+  background: url("/assets/svg/attach-icon-horizontal-12.svg");
+  width: 12px;
+  height: 12px;
+}
+
+.direct-inbox-icon {
+  background: url("/assets/svg/direct-inbox-icon.svg");
+  width: 24px;
+  height: 24px;
+}
+
+.clock-icon {
+  background: url("/assets/svg/clock.svg");
+  width: 16px;
+  height: 16px;
+}

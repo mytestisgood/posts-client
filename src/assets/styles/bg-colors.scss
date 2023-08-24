@@ -6,6 +6,10 @@
   background: $neutrals-20;
 }
 
+.bg-neutrals-50 {
+  background: $neutrals-50;
+}
+
 .bg-neutrals-100 {
   background: $neutrals-100;
 }
@@ -26,6 +30,14 @@
   background: $green-success-50;
 }
 
+.bg-green-success-100 {
+  background: $green-success-100;
+}
+
+.bg-green-success-500 {
+  background: $green-success-500;
+}
+
 .bg-bright-turquoise-50 {
   background: $bright-turquoise-50;
 }
@@ -38,10 +50,56 @@
   background: $bright-turquoise-500;
 }
 
+.bg-bright-turquoise-600 {
+  background: $bright-turquoise-600;
+}
+
 .bg-pumpkin-400 {
   background: $pumpkin-base-400;
 }
 
+.bg-pumpkin-500 {
+  background: $pumpkin-500;
+}
+
+.bg-blue-base-50 {
+  background: $blue-base-50;
+}
+
 .bg-blue-base-600 {
   background: $blue-base-600;
+}
+
+.bg-rose-600 {
+  background: $rose-600;
+}
+
+.bg-yellow-warning-400 {
+  background: $yellow-warning-400;
+}
+
+//for ngClass
+
+.bgYellowWarning400 {
+  background: $yellow-warning-400;
+}
+
+.bgBlueBase600 {
+  background: $blue-base-600;
+}
+
+.bgRose600 {
+  background: $rose-600;
+}
+
+.bgBrightTurquoise500 {
+  background: $bright-turquoise-500;
+}
+
+.bgBrightTurquoise600 {
+  background: $bright-turquoise-600;
+}
+
+.bgPumpkin500 {
+  background: $pumpkin-500;
 }
