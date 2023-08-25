@@ -2,75 +2,77 @@
   <div class="mt-4 ml-7-5 mr-10 inline-block flex-1">
     <table class="tui-table tui-table_layout_fixed cash-register-table">
       <tbody>
-      <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-6">
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-between">
-            <div class="arrow-down-icon-16"></div>
-            <div class="pr-4">חשבון</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-between">
-            <div class="arrow-down-icon-16"></div>
-            <div class="pr-4">סניף</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-between">
-            <div class="arrow-down-icon-16"></div>
-            <div class="pr-4">בנק</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 pr-6">
-          <div class="flex flex-row cursor-pointer justify-between">
-            <div class="arrow-down-icon-16"></div>
-            <div>ח.פ. חברה מנהלת</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-between">
-            <div class="arrow-down-icon-16"></div>
-            <div class="pr-4">מספר קופה באוצר</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-between">
-            <div class="arrow-down-icon-16"></div>
-            <div class="pr-4">סוג קופה</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-between">
-            <div class="arrow-down-icon-16"></div>
-            <div class="pr-4">שם קופה</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-between">
-            <div class="arrow-down-icon-16"></div>
-            <div class="pr-4">שם חברה מנהלת</div>
-          </div>
-        </th>
-      </tr>
-      <tr
-        *ngFor="let _ of ' '.repeat(7).split(''); let index = index"
-        class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
-      >
-        <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">29920657</td>
-        <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">800</td>
-        <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">
-          בנק לאומי לישראל בע"מ
-        </td>
-        <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">512237744</td>
-        <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">1304</td>
-        <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">קופת גמל</td>
-        <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">
-          מקפת תקציבית
-        </td>
-        <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">
-          מגדל מקפת קרנות פנסיה וקופות גמל בע"מ
-        </td>
-      </tr>
+        <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-6">
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-between">
+              <div class="arrow-down-icon-16"></div>
+              <div class="pr-4">חשבון</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-between">
+              <div class="arrow-down-icon-16"></div>
+              <div class="pr-4">סניף</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-between">
+              <div class="arrow-down-icon-16"></div>
+              <div class="pr-4">בנק</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 pr-6">
+            <div class="flex flex-row cursor-pointer justify-between">
+              <div class="arrow-down-icon-16"></div>
+              <div>ח.פ. חברה מנהלת</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-between">
+              <div class="arrow-down-icon-16"></div>
+              <div class="pr-4">מספר קופה באוצר</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-between">
+              <div class="arrow-down-icon-16"></div>
+              <div class="pr-4">סוג קופה</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-between">
+              <div class="arrow-down-icon-16"></div>
+              <div class="pr-4">שם קופה</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-between">
+              <div class="arrow-down-icon-16"></div>
+              <div class="pr-4">שם חברה מנהלת</div>
+            </div>
+          </th>
+        </tr>
+        <tr
+          *ngFor="let _ of ' '.repeat(7).split(''); let index = index"
+          class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
+        >
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">29920657</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">800</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">
+            בנק לאומי לישראל בע"מ
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">
+            512237744
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">1304</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">קופת גמל</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">
+            מקפת תקציבית
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">
+            מגדל מקפת קרנות פנסיה וקופות גמל בע"מ
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

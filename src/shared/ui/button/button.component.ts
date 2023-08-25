@@ -24,7 +24,8 @@ export class ButtonComponent {
   @Input() public disabled: boolean = false;
   @Input() public paragraphTextExtra: boolean = false;
   @Input() public buttonTextSmall: boolean = false;
-  @Input() public hasFileIcon: boolean = false;
+  @Input() public hasFileIconRight: boolean = false;
+  @Input() public hasFileIconLeft: boolean = false;
   @Input() public hasEditIcon: boolean = false;
   @Input() public hasAddIcon: boolean = false;
   @Input() public hasArrowDownIconFromLeft: boolean = false;

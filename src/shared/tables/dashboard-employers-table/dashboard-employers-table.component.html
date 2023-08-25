@@ -1,1 +1,110 @@
-<p>employers-table works!</p>
+<div class="flex flex-col justify-between h-full">
+  <div class="mt-10 ml-7-5 mr-10 inline-block flex-1">
+    <table class="tui-table tui-table_layout_fixed employee-table">
+      <tbody>
+        <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-6">
+          <th class="tui-table__th text-center caption-text neutrals-text-500 h-6 py-0 px-4 w-20">פעולות</th>
+          <th class="tui-table__th text-center caption-text neutrals-text-500 h-6 py-0 px-4 w-20">הערות</th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0 w-36">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>סטטוס פניה</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0 w-36">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>תאריך עדכון אחרון</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0 w-36">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>תאריך יצירה</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0 w-36">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>סכום</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0 w-36">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>קוד אוצר</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0 w-36">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>סוג מוצר</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0 w-36">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>חברה מנהלת</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0 w-36">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>חודש שכר</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0 w-36">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>ת"ז</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0 w-36">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>עובד</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-2 w-9">
+            <smarti-input-checkbox
+              [checked]="isSelectedAll"
+              (changeEvent)="checkAll($event)"
+            ></smarti-input-checkbox>
+          </th>
+        </tr>
+        <tr
+          *ngFor="let _ of ' '.repeat(4).split(''); let index = index"
+          class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
+        >
+          <td class="tui-table__td h-10 p-2 px-0 w-20">
+            <div class="message-notify-icon-24 cursor-pointer margin-rl-auto"></div>
+          </td>
+          <td class="tui-table__td h-10 p-2 px-0 w-20">
+            <div class="info-circle-icon-24 cursor-pointer margin-rl-auto"></div>
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">נפרע במלאו</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">22-07-22</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">245.66</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">1328</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">פנסיה</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            אלטשולר שחם גמל ופנסיה בע"מ
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">04-23</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">300948304</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">סזי מזרחי</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">סמי עבד אלהאדי</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 w-9 px-2">
+            <smarti-input-checkbox (changeEvent)="checkRow($event, index)"></smarti-input-checkbox>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="flex flex-row justify-center mb-4">
+    <smarti-table-pagination
+      [total]="140"
+      [items]="4"
+    ></smarti-table-pagination>
+  </div>
+</div>

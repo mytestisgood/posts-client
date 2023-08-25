@@ -2,127 +2,129 @@
   <div class="mt-4 ml-7-5 mr-10 inline-block flex-1">
     <table class="tui-table tui-table_layout_fixed balance-table">
       <tbody>
-      <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-6">
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-4">הורדה</th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-4">הערות</th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>סטטוס</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>מקור המידע</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>תאריך נכונות</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>מ"ה</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>סוג מוצר</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0 full-width">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>חברה מנהלת</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>ת"ז</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>עובד</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>מחלקה</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>מעסיק</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>יוצר הבקשה</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>תאריך עדכון</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
-          <div class="flex flex-row cursor-pointer justify-around">
-            <div class="arrow-down-icon-16"></div>
-            <div>תאריך הבקשה</div>
-          </div>
-        </th>
-        <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-2 w-9">
-          <smarti-input-checkbox
-            class="flex justify-center"
-            [checked]="isSelectedAll"
-            (changeEvent)="checkAll($event)"
-          ></smarti-input-checkbox>
-        </th>
-      </tr>
-      <ng-container *ngIf="isHaveData; else emptyDataTableTemplate">
-        <tr
-          *ngFor="let _ of ' '.repeat(7).split(''); let index = index"
-          class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
-        >
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">טרם</td>
-          <td class="tui-table__td h-10 p-2 px-0">
-            <div class="message-notify-icon-24 cursor-pointer margin-rl-auto"></div>
-          </td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">פתוח</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">כספת</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">22-07-22</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">--</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">פנסיה</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0 full-width">
-            מנורה מבטחים פנסיה וגמל בע"מ
-          </td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">312539190</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">יעקב לוי</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">כללי</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">הילוך שישי יפו בע"מ</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">סזי מזרחי</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">10-06-23</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">10-05-23</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 w-9 px-2">
+        <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-6">
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-4">הורדה</th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-4">הערות</th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>סטטוס</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>מקור המידע</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>תאריך נכונות</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>מ"ה</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>סוג מוצר</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0 full-width">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>חברה מנהלת</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>ת"ז</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>עובד</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>מחלקה</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>מעסיק</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>יוצר הבקשה</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>תאריך עדכון</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
+            <div class="flex flex-row cursor-pointer justify-around">
+              <div class="arrow-down-icon-16"></div>
+              <div>תאריך הבקשה</div>
+            </div>
+          </th>
+          <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-2 w-9">
             <smarti-input-checkbox
               class="flex justify-center"
-              (changeEvent)="checkRow($event, index)"
+              [checked]="isSelectedAll"
+              (changeEvent)="checkAll($event)"
             ></smarti-input-checkbox>
-          </td>
+          </th>
         </tr>
-      </ng-container>
+        <ng-container *ngIf="isHaveData; else emptyDataTableTemplate">
+          <tr
+            *ngFor="let _ of ' '.repeat(7).split(''); let index = index"
+            class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
+          >
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">טרם</td>
+            <td class="tui-table__td h-10 p-2 px-0">
+              <div class="message-notify-icon-24 cursor-pointer margin-rl-auto"></div>
+            </td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">פתוח</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">כספת</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">22-07-22</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">--</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">פנסיה</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0 full-width">
+              מנורה מבטחים פנסיה וגמל בע"מ
+            </td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">312539190</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">יעקב לוי</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">כללי</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+              הילוך שישי יפו בע"מ
+            </td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">סזי מזרחי</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">10-06-23</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">10-05-23</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 w-9 px-2">
+              <smarti-input-checkbox
+                class="flex justify-center"
+                (changeEvent)="checkRow($event, index)"
+              ></smarti-input-checkbox>
+            </td>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>
