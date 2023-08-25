@@ -43,7 +43,7 @@ tui-select {
     }
   }
 
-  tui-primitive-textfield[data-size=ы] {
+  tui-primitive-textfield[data-size=s] {
     min-height: 40px!important;
   }
 
@@ -108,5 +108,12 @@ tui-select {
         line-height: 40px!important;
       }
     }
+  }
+}
+
+tui-select.no-border {
+  div.tui-autofill::after {
+    border: none!important;
+    outline: none!important;
   }
 }

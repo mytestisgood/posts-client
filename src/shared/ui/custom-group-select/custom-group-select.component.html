@@ -5,52 +5,49 @@
     [rounded]="false"
   >
     <div>
-      <tui-multi-select
-        formControlName="department"
-        class="tui-group__inherit-item multiselect dir-rtl"
+      <tui-select
+        class="no-border"
+        [tuiTextfieldSize]="textFieldSize"
+        [style.width]="customWidth"
+        [formControl]="control"
+        [tuiDropdownDirection]="'bottom'"
         [tuiTextfieldLabelOutside]="true"
-        [editable]="false"
-        [expandable]="false"
-        [tuiTextfieldSize]="'m'"
+        [style.text-align]="'right'"
       >
         Department
-        <tui-data-list-wrapper
-          *tuiDataList
-          tuiMultiSelectGroup
-        ></tui-data-list-wrapper>
-      </tui-multi-select>
+        <input tuiTextfield />
+        <tui-data-list-wrapper *tuiDataList></tui-data-list-wrapper>
+      </tui-select>
     </div>
     <div>
-      <tui-multi-select
-        formControlName="employer"
-        class="tui-group__inherit-item multiselect dir-rtl"
+      <tui-select
+        class="no-border"
+        [tuiTextfieldSize]="textFieldSize"
+        [style.width]="customWidth"
+        [formControl]="control"
+        [tuiDropdownDirection]="'bottom'"
         [tuiTextfieldLabelOutside]="true"
-        [editable]="false"
-        [expandable]="false"
-        [tuiTextfieldSize]="'m'"
+        [style.text-align]="'right'"
       >
         מעסיק
-        <tui-data-list-wrapper
-          *tuiDataList
-          tuiMultiSelectGroup
-        ></tui-data-list-wrapper>
-      </tui-multi-select>
+        <input tuiTextfield />
+        <tui-data-list-wrapper *tuiDataList></tui-data-list-wrapper>
+      </tui-select>
     </div>
     <div>
-      <tui-multi-select
-        formControlName="organization"
-        class="tui-group__inherit-item multiselect dir-rtl"
+      <tui-select
+        class="no-border"
+        [tuiTextfieldSize]="textFieldSize"
+        [style.width]="customWidth"
+        [formControl]="control"
+        [tuiDropdownDirection]="'bottom'"
         [tuiTextfieldLabelOutside]="true"
-        [editable]="false"
-        [expandable]="false"
-        [tuiTextfieldSize]="'m'"
+        [style.text-align]="'right'"
       >
         ארגון
-        <tui-data-list-wrapper
-          *tuiDataList
-          tuiMultiSelectGroup
-        ></tui-data-list-wrapper>
-      </tui-multi-select>
+        <input tuiTextfield />
+        <tui-data-list-wrapper *tuiDataList></tui-data-list-wrapper>
+      </tui-select>
     </div>
   </div>
 </form>
