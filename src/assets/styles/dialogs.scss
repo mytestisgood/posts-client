@@ -11,10 +11,7 @@ tui-dialog[data-size='m'] {
   width: 814px!important;
 }
 
-.close-dialog {
-  background: url("/assets/svg/close-cross.svg");
-  width: 24px;
-  height: 24px;
+.close-dialog-position {
   position: absolute;
   top: 24px;
   right: 24px;
@@ -22,9 +19,6 @@ tui-dialog[data-size='m'] {
 }
 
 .close-dialog-left {
-  background: url("/assets/svg/close-cross.svg");
-  width: 24px;
-  height: 24px;
   position: absolute;
   top: 24px;
   left: 24px;

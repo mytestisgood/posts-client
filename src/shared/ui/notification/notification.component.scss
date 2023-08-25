@@ -5,21 +5,12 @@
     margin-right: 72px;
   }
 
-  &__icon {
-    background: url("/assets/svg/success-notification.svg");
-    height: 24px;
-    width: 24px;
-  }
-
   &__description {
     width: 590px;
   }
 }
 
 .close-notification {
-  background: url("/assets/svg/close-cross.svg");
-  width: 24px;
-  height: 24px;
   position: absolute;
   top: 8px;
   left: 8px;

@@ -27,7 +27,9 @@ export class ButtonComponent {
   @Input() public hasFileIcon: boolean = false;
   @Input() public hasEditIcon: boolean = false;
   @Input() public hasAddIcon: boolean = false;
+  @Input() public hasArrowDownIconFromLeft: boolean = false;
   @Input() public hasMessageIcon: boolean = false;
+  @Input() public hasSaveIcon: boolean = false;
   @Input() public isNeedZIndex: boolean = false;
   @Output() public buttonClicked: Subject<void> = new Subject();
 

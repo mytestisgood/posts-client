@@ -12,12 +12,6 @@
 .button-trial {
   padding: 0 32px;
   height: 42px;
-
-  &__icon-arrow-left {
-    background: url("/assets/svg/arrow-left-dark.svg");
-    width: 16px;
-    height: 16px;
-  }
 }
 
 .header {
@@ -27,11 +21,4 @@
 
 .nav-block {
   margin: 0 40px;
-
-  &__img {
-    margin-inline-start: 100px;
-    width: 157px;
-    height: 33px;
-    background: url("/assets/svg/logo-big.svg");
-  }
 }

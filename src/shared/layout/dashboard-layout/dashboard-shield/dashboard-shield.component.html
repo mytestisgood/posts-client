@@ -1,1 +1,17 @@
-<p>dashboard-shield works!</p>
+<div>
+  <div class="flex flex-row justify-end mt-12">
+    <h2 class="medium neutrals-text-950 mt-0 mb-0 pr-6">עובדים שבחרו בקרן הפנסיה מנורה מבטחים</h2>
+  </div>
+  <div class="flex justify-start">
+    <smarti-button
+      [text]="'שמור שינויים'"
+      [typeClass]="'confirm'"
+      [customButtonWidth]="'260px'"
+      [customHeight]="'56px'"
+      [hasSaveIcon]="true"
+    ></smarti-button>
+  </div>
+  <div class="w-full h-752 bg-white box-shadow-big mt-4 rounded-l mb-34">
+    <smarti-dashboard-shield-table></smarti-dashboard-shield-table>
+  </div>
+</div>

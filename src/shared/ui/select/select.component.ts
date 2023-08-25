@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TuiHostedDropdownModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiHostedDropdownModule, TuiSizeM, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiSizeL, TuiSizeS } from '@taiga-ui/core/types';
 import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
 
 @Component({
@@ -26,4 +27,5 @@ export class SelectComponent {
   @Input() public selectMode!: 'big';
   @Input() public placeholder!: string;
   @Input() public control: FormControl<string | null> = new FormControl();
+  @Input() public textFieldSize: TuiSizeM | TuiSizeS | TuiSizeL = 'm';
 }

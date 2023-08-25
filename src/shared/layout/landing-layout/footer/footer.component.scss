@@ -2,33 +2,8 @@
   margin: 0 140px;
   height: 440px;
 
-  &__logo-image {
-    background: url("/assets/svg/logo-big.svg");
-    width: 156px;
-    height: 33px;
-  }
-
   &__links {
     margin: 16px 0 56px 40px;
     float: left;
   }
 }
-
-.twitter-link {
-  background: url("/assets/svg/twitter-icon.svg");
-  width: 32px;
-  height: 32px;
-}
-
-.facebook-link {
-  background: url("/assets/svg/facebook-icon.svg");
-  width: 32px;
-  height: 32px;
-}
-
-.linkedin-link {
-  background: url("/assets/svg/linkedin-icon.svg");
-  width: 32px;
-  height: 32px;
-}
-

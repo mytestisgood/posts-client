@@ -43,6 +43,10 @@ tui-select {
     }
   }
 
+  tui-primitive-textfield[data-size=ы] {
+    min-height: 40px!important;
+  }
+
   tui-primitive-textfield[data-size=m] {
     min-height: 48px!important;
   }

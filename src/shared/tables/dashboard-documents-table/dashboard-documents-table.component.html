@@ -1,23 +1,24 @@
-<div class="mt-4 ml-7-5 mr-10 inline-block">
-  <table class="tui-table tui-table_layout_fixed documents-table">
-    <tbody>
+<div class="flex flex-col justify-between h-full">
+  <div class="mt-4 ml-7-5 mr-10 inline-block flex-1">
+    <table class="tui-table tui-table_layout_fixed documents-table">
+      <tbody>
       <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-6">
         <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-4">פעולות</th>
         <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
           <div class="flex flex-row cursor-pointer justify-between">
-            <div class="arrow-down-icon"></div>
+            <div class="arrow-down-icon-16"></div>
             <div class="pr-4">סוג</div>
           </div>
         </th>
         <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-0">
           <div class="flex flex-row cursor-pointer justify-between">
-            <div class="arrow-down-icon"></div>
+            <div class="arrow-down-icon-16"></div>
             <div class="pr-4">תאור</div>
           </div>
         </th>
         <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 pr-6">
           <div class="flex flex-row cursor-pointer justify-between">
-            <div class="arrow-down-icon"></div>
+            <div class="arrow-down-icon-16"></div>
             <div>תאריך העלאה</div>
           </div>
         </th>
@@ -29,7 +30,7 @@
         class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
       >
         <td class="tui-table__td h-10 p-2 px-0">
-          <div class="direct-inbox-icon cursor-pointer"></div>
+          <div class="direct-inbox-icon-24 cursor-pointer"></div>
         </td>
         <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-left">יפוי כח</td>
         <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-left">--</td>
@@ -41,12 +42,13 @@
           הילוך שישי יפו בע"מ
         </td>
       </tr>
-    </tbody>
-  </table>
-</div>
-<div class="flex flex-row justify-center mt-6">
-  <smarti-table-pagination
-    [total]="140"
-    [items]="6"
-  ></smarti-table-pagination>
+      </tbody>
+    </table>
+  </div>
+  <div class="flex flex-row justify-center mb-4">
+    <smarti-table-pagination
+      [total]="140"
+      [items]="10"
+    ></smarti-table-pagination>
+  </div>
 </div>

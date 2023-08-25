@@ -22,22 +22,30 @@
     [disabled]="disabled"
     (click)="clicked()"
   >
+    <div
+      *ngIf="hasArrowDownIconFromLeft"
+      class="arrow-down-icon-20 mr-2"
+    ></div>
     {{ text }}
     <div
       *ngIf="hasFileIcon"
-      class="file-icon"
+      class="document-download-small-icon-12 ml-1"
     ></div>
     <div
       *ngIf="hasEditIcon"
-      class="edit-icon"
+      class="edit-icon-20 ml-2"
     ></div>
     <div
       *ngIf="hasAddIcon"
-      class="add-square-icon"
+      class="add-square-icon-20 ml-2"
     ></div>
     <div
       *ngIf="hasMessageIcon"
-      class="message-notify-icon"
+      class="message-notify-icon-20 ml-2"
+    ></div>
+    <div
+      *ngIf="hasSaveIcon"
+      class="save-icon-20 ml-2"
     ></div>
   </button>
 </div>

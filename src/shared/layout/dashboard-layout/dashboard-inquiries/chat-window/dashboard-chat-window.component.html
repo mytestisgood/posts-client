@@ -40,7 +40,7 @@
             <div class="bg-bright-turquoise-100 rounded-m m-6 cursor-pointer">
               <div
                 *ngIf="message.haveFile"
-                class="direct-inbox-icon m-5"
+                class="direct-inbox-icon-24 m-5"
                 (click)="downloadPaymentExample(message.file)"
               ></div>
             </div>
@@ -50,7 +50,7 @@
             </div>
           </div>
           <div class="mt-2 flex flex-row gap-2-5 items-center">
-            <div class="clock-icon"></div>
+            <div class="clock-icon-16"></div>
             <div class="neutrals-text-300 caption-text">{{ message.time }}</div>
           </div>
         </div>
@@ -59,7 +59,7 @@
   </div>
   <div class="chat-menu-block bg-neutrals-950 rounded-l h-14 ml-2 mr-2 flex flex-row gap-4">
     <div class="flex items-center justify-center bg-neutrals-20 block-w86-h40 rounded-m mt-2 ml-5">
-      <div class="send-message-icon"></div>
+      <div class="send-message-icon-30"></div>
     </div>
     <smarti-input-field
       class="mt-2"
@@ -73,7 +73,7 @@
       (click)="openAddFileDialog(addFileDialogTemplate)"
     >
       <div class="button-text-small bright-turquoise-text-500">צרף קבצים</div>
-      <div class="attach-icon-12"></div>
+      <div class="attach-icon-horizontal-12"></div>
     </div>
   </div>
 </div>
