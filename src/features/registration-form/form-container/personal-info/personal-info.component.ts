@@ -8,13 +8,14 @@ import {
   Output,
 } from '@angular/core';
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { InlineResponse2001, SignInService } from '@shared/api';
+import { InlineResponse2001, RegisterService, SignInService } from '@shared/api';
 import {
   RegistrationDirection,
   PersonalInfoControls,
   personalInfoFormMapper,
   REGISTRATION_TOKEN,
   RegistrationFormValueType,
+  DEPARTMENT_ID,
 } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import {
@@ -24,7 +25,7 @@ import {
   InputNumberComponent,
 } from '@shared/ui';
 import { LocalStorageService } from '@shared/web-api';
-import { Observable, takeUntil } from 'rxjs';
+import { Observable, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-personal-info',
@@ -54,10 +55,10 @@ export class PersonalInfoComponent implements OnInit {
 
   constructor(
     private readonly destroy$: DestroyService,
+    private readonly registerService: RegisterService,
     private readonly signInService: SignInService,
     private readonly localStorageService: LocalStorageService,
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
     if (this.startingForm) {
@@ -71,16 +72,24 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   public doChangeStep(direction: RegistrationDirection): void {
-    this.signInService.apiEmployersCreateEmployerOutPost({
+    this.registerService.apiEmployersCreateEmployerOutPost({
       email: this.personalInfoForm.controls.email.value as string,
       phone: this.personalInfoForm.controls.phone.value as string,
       company_name: this.personalInfoForm.controls.companyName.value as string,
       identifier: this.personalInfoForm.controls.companyId.value as string,
       user_name: this.personalInfoForm.controls.yourName.value as string,
-    }).pipe(takeUntil(this.destroy$)).subscribe((response: InlineResponse2001) => {
-      this.localStorageService.setItem(REGISTRATION_TOKEN, response.token as string);
-      // this.localStorageService.setItem(DEPARTMENT_ID, response?.departmentId as string);
-      this.subformInitialized.emit(this.personalInfoForm);
+    }).pipe(
+      switchMap((tokenResponse: InlineResponse2001) => {
+        this.localStorageService.setItem(REGISTRATION_TOKEN, tokenResponse?.token as string);
+        this.localStorageService.setItem(DEPARTMENT_ID, tokenResponse?.departmentId as string);
+        this.subformInitialized.emit(this.personalInfoForm);
+
+        return this.signInService.apiUsersSendVerifyCodePost(tokenResponse?.token).pipe(
+          takeUntil(this.destroy$),
+        );
+      }),
+      takeUntil(this.destroy$),
+    ).subscribe(() => {
       this.changeStep.emit(direction);
     });
   }

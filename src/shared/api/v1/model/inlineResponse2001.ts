@@ -14,5 +14,6 @@
 export interface InlineResponse2001 { 
     message?: string;
     token?: string;
+    departmentId?: string;
 }
 

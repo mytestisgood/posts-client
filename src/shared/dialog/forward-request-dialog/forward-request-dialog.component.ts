@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SignInService } from '@shared/api';
+import { RegisterService } from '@shared/api';
 import { DestroyService } from '@shared/services';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 import { ButtonComponent, InputFieldComponent, InputNumberComponent } from '@shared/ui';
@@ -41,7 +41,7 @@ export class ForwardRequestDialogComponent {
 
   constructor(
     private readonly destroy$: DestroyService,
-    private readonly signInService: SignInService,
+    private readonly registerService: RegisterService,
   ) {
   }
 
@@ -50,7 +50,7 @@ export class ForwardRequestDialogComponent {
   }
 
   public sendRequest(): void {
-    this.signInService.apiEmployersCreateUserOutPost('1', {
+    this.registerService.apiEmployersCreateUserOutPost('1', {
       email: this.forwardRequestForm.controls.email.value as string,
       phone: this.forwardRequestForm.controls.phone.value as string,
       user_name: this.forwardRequestForm.controls.userName.value as string,

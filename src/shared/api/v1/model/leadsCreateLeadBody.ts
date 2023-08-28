@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Src } from './src';
 
 
 export interface LeadsCreateLeadBody { 
@@ -17,6 +18,9 @@ export interface LeadsCreateLeadBody {
     name?: string;
     friend_name?: string;
     friend_email?: string;
-    src?: string;
+    src?: Src;
 }
+export namespace LeadsCreateLeadBody {
+}
+
 

@@ -10,7 +10,6 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { SignInService } from '@shared/api';
 import { ForwardRequestDialogComponent } from '@shared/dialog';
 import {
   DEPARTMENT_ID,
@@ -71,7 +70,6 @@ export class UploadDocumentComponent implements OnInit {
     private readonly changeDetectionRef: ChangeDetectorRef,
     private readonly destroy$: DestroyService,
     private readonly localStorageService: LocalStorageService,
-    private readonly signInService: SignInService,
   ) {
   }
 
@@ -85,9 +83,7 @@ export class UploadDocumentComponent implements OnInit {
 
   public doChangeStep(direction: RegistrationDirection): void {
     this.subformInitialized.emit(this.uploadDocumentsForm);
-    this.signInService.apiUsersSendVerifyCodePost(this.token).pipe(
-      takeUntil(this.destroy$),
-    ).subscribe(() => this.changeStep.emit(direction));
+    this.changeStep.emit(direction);
   }
 
   public downloadXlExample(): void {
