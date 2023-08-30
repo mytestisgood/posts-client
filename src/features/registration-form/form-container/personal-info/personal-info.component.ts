@@ -84,13 +84,10 @@ export class PersonalInfoComponent implements OnInit {
         this.localStorageService.setItem(DEPARTMENT_ID, tokenResponse?.departmentId as string);
         this.subformInitialized.emit(this.personalInfoForm);
 
-        return this.signInService.apiUsersSendVerifyCodePost(tokenResponse?.token).pipe(
-          takeUntil(this.destroy$),
-        );
+        return this.signInService.apiUsersSendVerifyCodePost(tokenResponse?.token)
+          .pipe(takeUntil(this.destroy$));
       }),
       takeUntil(this.destroy$),
-    ).subscribe(() => {
-      this.changeStep.emit(direction);
-    });
+    ).subscribe(() => this.changeStep.emit(direction));
   }
 }

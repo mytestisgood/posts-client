@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ProcessesService } from '@shared/api';
+import { ProcessTableItems } from '@shared/entities';
+import { DestroyService } from '@shared/services';
 import { InputCheckboxComponent, TablePaginationComponent } from '@shared/ui';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-dashboard-process-table',
@@ -12,9 +16,15 @@ import { InputCheckboxComponent, TablePaginationComponent } from '@shared/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardProcessTableComponent {
-  public items!: { isSelected: boolean }[] | null;
+  @Input() public items!: ProcessTableItems[] | null;
+  @Input() public token!: string;
+  @Input() public departmentId!: string;
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly processesService: ProcessesService,
+    private readonly destroy$: DestroyService,
+  ) {}
 
   public get isSelectedAll(): boolean {
     return this.items?.every(item => item.isSelected) ?? false;
@@ -36,5 +46,28 @@ export class DashboardProcessTableComponent {
     const randomId = 'id' + Math.floor(Math.random() * 100);
 
     this.router.navigate(['/dashboard/processes/' + randomId]);
+  }
+
+  public preventParentClick($event: Event): void {
+    $event.stopPropagation();
+  }
+
+  public separateWordsBySpace(word: string | undefined): string {
+    if (!word) {
+      return '';
+    }
+    const newWord: string[]  = word.split(" ");
+
+    return `<b>` + newWord[1] + `</b> <span>` + newWord[0] + `</span>`;
+  }
+
+  public deleteProcessItem($event: Event, id: number | undefined): void {
+    if (!id) {
+      return;
+    }
+
+    this.processesService.apiProcessesProcessIdDelete(id, this.departmentId, this.token).pipe(
+      takeUntil(this.destroy$),
+    ).subscribe();
   }
 }

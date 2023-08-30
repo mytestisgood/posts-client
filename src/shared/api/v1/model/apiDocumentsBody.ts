@@ -9,12 +9,17 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { DocumentTypes } from './documentTypes';
 
 
 export interface ApiDocumentsBody { 
     opswatIds?: string;
-    message?: string;
-    chat_id?: number;
+    description?: string;
+    date?: number;
     employer_id?: number;
+    documentType?: DocumentTypes;
 }
+export namespace ApiDocumentsBody {
+}
+
 

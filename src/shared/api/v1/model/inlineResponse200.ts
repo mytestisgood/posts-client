@@ -13,5 +13,6 @@
 
 export interface InlineResponse200 { 
     message?: string;
+    code?: number;
 }
 

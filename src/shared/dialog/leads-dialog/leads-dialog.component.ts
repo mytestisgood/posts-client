@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LeadService } from '@shared/api';
+import { LeadService, Src } from '@shared/api';
+import { emailValidatorPattern } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { ButtonComponent, InputFieldComponent } from '@shared/ui';
 import { takeUntil } from 'rxjs';
@@ -28,10 +29,16 @@ export class LeadsDialogComponent {
   @Input() public headerText!: string;
   @Input() public descriptionText!: string;
   @Input() public backgroundImage!: string;
+  @Input() public leadType!: Src;
+  @Input() public friendName!: string;
+  @Input() public friendEmail!: string;
 
   public leadsForm: FormGroup<LeadsForm> = new FormGroup({
     name: new FormControl(''),
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(emailValidatorPattern),
+    ]),
     phone: new FormControl('', [Validators.required]),
   });
 
@@ -50,6 +57,9 @@ export class LeadsDialogComponent {
       email: this.leadsForm.controls.email.value as string,
       name: this.leadsForm.controls.name.value as string,
       phone: this.leadsForm.controls.phone.value as string,
+      src: this.leadType,
+      friend_name: this.friendName,
+      friend_email: this.friendEmail,
     })
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.observer.complete());

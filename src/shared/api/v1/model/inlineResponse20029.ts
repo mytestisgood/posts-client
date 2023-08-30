@@ -9,14 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { InlineResponse20029Items } from './inlineResponse20029Items';
-import { InlineResponse20029Other } from './inlineResponse20029Other';
 
 
 export interface InlineResponse20029 { 
-    items?: Array<InlineResponse20029Items>;
-    total?: number;
-    lastPage?: number;
-    other?: InlineResponse20029Other;
+    message?: string;
+    opswatId?: string;
 }
 

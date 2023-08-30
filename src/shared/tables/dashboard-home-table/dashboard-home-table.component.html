@@ -11,11 +11,13 @@
     <smarti-input-year
       [customWidth]="'262px'"
       [placeholder]="'Year'"
+      [control]="yearControl"
     ></smarti-input-year>
     <smarti-select
       [customWidth]="'262px'"
       [options]="months"
       [placeholder]="'Months'"
+      [control]="monthControl"
     ></smarti-select>
   </div>
   <div class="mt-12 mr-6 ml-4 mb-6">
@@ -29,16 +31,22 @@
           <th class="tui-table__th text-right caption-text neutrals-text-500">שם התהליך</th>
         </tr>
         <tr
-          *ngFor="let _ of ' '.repeat(5).split('')"
+          *ngFor="let compensation of compensationReport?.reportsCompensation"
           class="tui-table__tr tui-table__tr_border_none mb-1"
         >
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">—</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">אפריל 2023</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">04-2023</td>
-          <td class="tui-table__td text-right paragraph-text neutrals-text-500 h-10 p-2">
-            אלטשולר שחם גמל ופנסיה בע”מ
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">
+            {{ compensation.product_type }}
           </td>
-          <td class="tui-table__td text-right paragraph-text neutrals-text-500 h-10 p-2">אפריל 2023</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">
+            {{ getMonthsFromDate(compensation.created_at) }}
+          </td>
+          <td class="tui-table__td text-right paragraph-text neutrals-text-500 h-10 p-2">
+            {{ compensation.employee_first_name + ' ' + compensation.employee_last_name }}
+          </td>
+          <td class="tui-table__td text-right paragraph-text neutrals-text-500 h-10 p-2">
+            {{ compensation.created_at }}
+          </td>
         </tr>
       </tbody>
     </table>

@@ -9,11 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { InlineResponse20010Items } from './inlineResponse20010Items';
+import { ApiproductsfullCompanyProduct } from './apiproductsfullCompanyProduct';
 
 
 export interface InlineResponse20025 { 
-    ok?: boolean;
-    data?: Array<InlineResponse20010Items>;
+    id?: string;
+    name?: string;
+    code?: string;
+    product?: Array<ApiproductsfullCompanyProduct>;
 }
 

@@ -12,6 +12,6 @@
 
 
 export interface InlineResponse400 { 
-    result?: string;
+    message?: string;
 }
 

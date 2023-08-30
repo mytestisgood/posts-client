@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import {
   CustomGroupSelectComponent,
   CustomUserAccordionComponent,
@@ -14,5 +15,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardHeaderComponent {
+  constructor(private readonly router: Router) {}
 
+
+  public redirectToMainPage(): void {
+    this.router.navigate(['/']);
+  }
 }

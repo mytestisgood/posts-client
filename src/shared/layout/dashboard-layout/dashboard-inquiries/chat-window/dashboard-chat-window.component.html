@@ -58,7 +58,10 @@
     </tui-scrollbar>
   </div>
   <div class="chat-menu-block bg-neutrals-950 rounded-l h-14 ml-2 mr-2 flex flex-row gap-4">
-    <div class="flex items-center justify-center bg-neutrals-20 block-w86-h40 rounded-m mt-2 ml-5">
+    <div
+      class="flex items-center justify-center bg-neutrals-20 block-w86-h40 rounded-m mt-2 ml-5 cursor-pointer"
+      (click)="onSendMessage()"
+    >
       <div class="send-message-icon-30"></div>
     </div>
     <smarti-input-field
@@ -67,6 +70,7 @@
       [customWidth]="'772px'"
       [customHeight]="'40px'"
       [inputTextFieldSize]="'s'"
+      [control]="messageControl"
     ></smarti-input-field>
     <div
       class="block-w112-h40 bg-neutrals-20 rounded-m h-10 mt-2 mr-5 flex flex-row gap-1 items-center justify-center cursor-pointer"

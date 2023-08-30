@@ -1,4 +1,5 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { emailValidatorPattern } from './common.models';
 import {
   PaymentMethodControls,
   PersonalInfoControls,
@@ -12,8 +13,7 @@ export function personalInfoFormMapper(): FormGroup<PersonalInfoControls> {
     companyId: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [
       Validators.required,
-      Validators.pattern('^(?!^-)[\\w-]+(?:[\\.-][\\w-]+)*(?:[\\.+][\\w-]+)*@\\w+(?:[\\.-]' +
-        '\\w+)*(?:\\.[A-Za-z]{2,4})+$'),
+      Validators.pattern(emailValidatorPattern),
     ]),
     yourName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     phone: new FormControl('', [Validators.required, Validators.minLength(3)]),

@@ -9,10 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { InlineResponse20018Result } from './inlineResponse20018Result';
 
 
 export interface InlineResponse20018 { 
-    result?: InlineResponse20018Result;
+    ok?: boolean;
 }
 

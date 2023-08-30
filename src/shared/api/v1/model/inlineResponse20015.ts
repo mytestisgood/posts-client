@@ -9,11 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { InlineResponse20015Items } from './inlineResponse20015Items';
 
 
 export interface InlineResponse20015 { 
-    file_name?: string;
-    file_type?: string;
-    file_date?: string;
+    items?: Array<InlineResponse20015Items>;
+    total?: number;
+    lastPage?: number;
 }
 

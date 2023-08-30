@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { InlineResponse20027Items } from './inlineResponse20027Items';
 
 
 export interface InlineResponse20027 { 
-    message?: string;
-    is_called?: boolean;
+    items?: Array<InlineResponse20027Items>;
 }
 

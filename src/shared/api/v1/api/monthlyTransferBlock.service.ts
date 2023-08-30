@@ -19,15 +19,15 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { InlineResponse200 } from '../model/inlineResponse200';
+import { InlineResponse20034 } from '../model/inlineResponse20034';
 // @ts-ignore
-import { InlineResponse20030 } from '../model/inlineResponse20030';
+import { InlineResponse20035 } from '../model/inlineResponse20035';
 // @ts-ignore
-import { InlineResponse20031 } from '../model/inlineResponse20031';
+import { InlineResponse20036 } from '../model/inlineResponse20036';
 // @ts-ignore
-import { InlineResponse20032 } from '../model/inlineResponse20032';
+import { InlineResponse20037 } from '../model/inlineResponse20037';
 // @ts-ignore
-import { InlineResponse20033 } from '../model/inlineResponse20033';
+import { InlineResponse400 } from '../model/inlineResponse400';
 // @ts-ignore
 import { MtbCreateOrUpdateMtbGroupBody } from '../model/mtbCreateOrUpdateMtbGroupBody';
 // @ts-ignore
@@ -112,9 +112,9 @@ export class MonthlyTransferBlockService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiMtbCreateOrUpdateMtbGroupPost(token?: string, mtbCreateOrUpdateMtbGroupBody?: MtbCreateOrUpdateMtbGroupBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20032>;
-    public apiMtbCreateOrUpdateMtbGroupPost(token?: string, mtbCreateOrUpdateMtbGroupBody?: MtbCreateOrUpdateMtbGroupBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20032>>;
-    public apiMtbCreateOrUpdateMtbGroupPost(token?: string, mtbCreateOrUpdateMtbGroupBody?: MtbCreateOrUpdateMtbGroupBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20032>>;
+    public apiMtbCreateOrUpdateMtbGroupPost(token?: string, mtbCreateOrUpdateMtbGroupBody?: MtbCreateOrUpdateMtbGroupBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20036>;
+    public apiMtbCreateOrUpdateMtbGroupPost(token?: string, mtbCreateOrUpdateMtbGroupBody?: MtbCreateOrUpdateMtbGroupBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20036>>;
+    public apiMtbCreateOrUpdateMtbGroupPost(token?: string, mtbCreateOrUpdateMtbGroupBody?: MtbCreateOrUpdateMtbGroupBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20036>>;
     public apiMtbCreateOrUpdateMtbGroupPost(token?: string, mtbCreateOrUpdateMtbGroupBody?: MtbCreateOrUpdateMtbGroupBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -161,7 +161,7 @@ export class MonthlyTransferBlockService {
         }
 
         let localVarPath = `/api/mtb/createOrUpdateMtbGroup`;
-        return this.httpClient.request<InlineResponse20032>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20036>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: mtbCreateOrUpdateMtbGroupBody,
@@ -183,9 +183,9 @@ export class MonthlyTransferBlockService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiMtbEntityGet(processId?: string, departmentId?: string, recordsId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20030>;
-    public apiMtbEntityGet(processId?: string, departmentId?: string, recordsId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20030>>;
-    public apiMtbEntityGet(processId?: string, departmentId?: string, recordsId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20030>>;
+    public apiMtbEntityGet(processId?: string, departmentId?: string, recordsId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20034>;
+    public apiMtbEntityGet(processId?: string, departmentId?: string, recordsId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20034>>;
+    public apiMtbEntityGet(processId?: string, departmentId?: string, recordsId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20034>>;
     public apiMtbEntityGet(processId?: string, departmentId?: string, recordsId?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -237,7 +237,7 @@ export class MonthlyTransferBlockService {
         }
 
         let localVarPath = `/api/mtb/entity`;
-        return this.httpClient.request<InlineResponse20030>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20034>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -261,9 +261,9 @@ export class MonthlyTransferBlockService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiMtbGet(processId?: string, departmentId?: string, recordsId?: string, limit?: string, page?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20031>;
-    public apiMtbGet(processId?: string, departmentId?: string, recordsId?: string, limit?: string, page?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20031>>;
-    public apiMtbGet(processId?: string, departmentId?: string, recordsId?: string, limit?: string, page?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20031>>;
+    public apiMtbGet(processId?: string, departmentId?: string, recordsId?: string, limit?: string, page?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20035>;
+    public apiMtbGet(processId?: string, departmentId?: string, recordsId?: string, limit?: string, page?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20035>>;
+    public apiMtbGet(processId?: string, departmentId?: string, recordsId?: string, limit?: string, page?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20035>>;
     public apiMtbGet(processId?: string, departmentId?: string, recordsId?: string, limit?: string, page?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -323,7 +323,7 @@ export class MonthlyTransferBlockService {
         }
 
         let localVarPath = `/api/mtb`;
-        return this.httpClient.request<InlineResponse20031>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20035>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -343,9 +343,9 @@ export class MonthlyTransferBlockService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiMtbGroupEmployeesPost(token?: string, mtbGroupEmployeesBody?: MtbGroupEmployeesBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse200>;
-    public apiMtbGroupEmployeesPost(token?: string, mtbGroupEmployeesBody?: MtbGroupEmployeesBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse200>>;
-    public apiMtbGroupEmployeesPost(token?: string, mtbGroupEmployeesBody?: MtbGroupEmployeesBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse200>>;
+    public apiMtbGroupEmployeesPost(token?: string, mtbGroupEmployeesBody?: MtbGroupEmployeesBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse400>;
+    public apiMtbGroupEmployeesPost(token?: string, mtbGroupEmployeesBody?: MtbGroupEmployeesBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse400>>;
+    public apiMtbGroupEmployeesPost(token?: string, mtbGroupEmployeesBody?: MtbGroupEmployeesBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse400>>;
     public apiMtbGroupEmployeesPost(token?: string, mtbGroupEmployeesBody?: MtbGroupEmployeesBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -392,7 +392,7 @@ export class MonthlyTransferBlockService {
         }
 
         let localVarPath = `/api/mtb/groupEmployees`;
-        return this.httpClient.request<InlineResponse200>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse400>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: mtbGroupEmployeesBody,
@@ -413,9 +413,9 @@ export class MonthlyTransferBlockService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiMtbGroupHistoryProcessIdGet(processId: string, departmentId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20033>>;
-    public apiMtbGroupHistoryProcessIdGet(processId: string, departmentId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20033>>>;
-    public apiMtbGroupHistoryProcessIdGet(processId: string, departmentId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20033>>>;
+    public apiMtbGroupHistoryProcessIdGet(processId: string, departmentId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20037>>;
+    public apiMtbGroupHistoryProcessIdGet(processId: string, departmentId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20037>>>;
+    public apiMtbGroupHistoryProcessIdGet(processId: string, departmentId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20037>>>;
     public apiMtbGroupHistoryProcessIdGet(processId: string, departmentId?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (processId === null || processId === undefined) {
             throw new Error('Required parameter processId was null or undefined when calling apiMtbGroupHistoryProcessIdGet.');
@@ -462,7 +462,7 @@ export class MonthlyTransferBlockService {
         }
 
         let localVarPath = `/api/mtb/groupHistory/${this.configuration.encodeParam({name: "processId", value: processId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
-        return this.httpClient.request<Array<InlineResponse20033>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<InlineResponse20037>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -482,9 +482,9 @@ export class MonthlyTransferBlockService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiMtbUploadEmployeeDeclarationPost(token?: string, mtbUploadEmployeeDeclarationBody?: MtbUploadEmployeeDeclarationBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse200>;
-    public apiMtbUploadEmployeeDeclarationPost(token?: string, mtbUploadEmployeeDeclarationBody?: MtbUploadEmployeeDeclarationBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse200>>;
-    public apiMtbUploadEmployeeDeclarationPost(token?: string, mtbUploadEmployeeDeclarationBody?: MtbUploadEmployeeDeclarationBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse200>>;
+    public apiMtbUploadEmployeeDeclarationPost(token?: string, mtbUploadEmployeeDeclarationBody?: MtbUploadEmployeeDeclarationBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse400>;
+    public apiMtbUploadEmployeeDeclarationPost(token?: string, mtbUploadEmployeeDeclarationBody?: MtbUploadEmployeeDeclarationBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse400>>;
+    public apiMtbUploadEmployeeDeclarationPost(token?: string, mtbUploadEmployeeDeclarationBody?: MtbUploadEmployeeDeclarationBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse400>>;
     public apiMtbUploadEmployeeDeclarationPost(token?: string, mtbUploadEmployeeDeclarationBody?: MtbUploadEmployeeDeclarationBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -531,7 +531,7 @@ export class MonthlyTransferBlockService {
         }
 
         let localVarPath = `/api/mtb/uploadEmployeeDeclaration`;
-        return this.httpClient.request<InlineResponse200>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse400>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: mtbUploadEmployeeDeclarationBody,

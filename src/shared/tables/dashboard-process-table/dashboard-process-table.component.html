@@ -72,11 +72,14 @@
           </th>
         </tr>
         <tr
-          *ngFor="let _ of ' '.repeat(6).split(''); let index = index"
+          *ngFor="let item of items; let index = index"
           class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
           (click)="openDetailInformation()"
         >
-          <td class="tui-table__td h-10 p-2 px-0">
+          <td
+            class="tui-table__td h-10 p-2 px-0"
+            (click)="deleteProcessItem($event, item.id)"
+          >
             <div class="trash-icon-24 cursor-pointer margin-rl-auto"></div>
           </td>
           <td class="tui-table__td h-10 p-2 px-0">
@@ -85,35 +88,53 @@
           <td class="tui-table__td h-10 p-2 px-0">
             <div class="message-notify-icon-24 cursor-pointer margin-rl-auto"></div>
           </td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">5-5 חלקי</td>
-          <td class="tui-table__td text-center paragraph-text bold-text neutrals-text-500 h-10 p-2 px-0">196,434.81</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">04-2023</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">סזי מזרחי</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">כללי</td>
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
-            הילוך שישי יפו בע”מ...
+            {{ item.status_process }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text bold-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.total }}
           </td>
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
-            <b>2023</b>
-            <span>אפריל</span>
+            {{ item.transmit_date ?? '--' }}
           </td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">18-05-2023</td>
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
-            <div class="flex flex-row gap-4">
-              <div>10-05-2023</div>
+            {{ item.operator_name }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.department_name }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.organization_name }}
+          </td>
+          <td
+            class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0"
+            [innerHTML]="separateWordsBySpace(item.name)"
+          ></td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.created_at }}
+          </td>
+          <td class="tui-table__td paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            <div class="flex flex-row justify-end gap-4 mr-2">
+              <div>{{ item.date }}</div>
               <div class="briefcase-icon-16"></div>
             </div>
           </td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 w-9 px-2">
+          <td
+            class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 w-9 px-2"
+            (click)="preventParentClick($event)"
+          >
             <smarti-input-checkbox (changeEvent)="checkRow($event, index)"></smarti-input-checkbox>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="flex flex-row justify-center mb-4">
+  <div
+    class="flex flex-row justify-center mb-4"
+    *ngIf="!!items && items.length > 6"
+  >
     <smarti-table-pagination
-      [total]="140"
+      [total]="items.length"
       [items]="6"
     ></smarti-table-pagination>
   </div>

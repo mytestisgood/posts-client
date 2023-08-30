@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterService } from '@shared/api';
+import { emailValidatorPattern } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 import { ButtonComponent, InputFieldComponent, InputNumberComponent } from '@shared/ui';
@@ -34,7 +35,10 @@ export class ForwardRequestDialogComponent {
   @Output() public requestSend: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public forwardRequestForm: FormGroup<ForwardRequestForm> = new FormGroup({
-    email: new FormControl('', [Validators.required]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(emailValidatorPattern),
+    ]),
     phone: new FormControl('', [Validators.required]),
     userName: new FormControl(''),
   });

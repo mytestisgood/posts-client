@@ -12,9 +12,7 @@
 
 
 export interface InlineResponse20032 { 
-    success?: boolean;
     message?: string;
-    groups_count?: number;
-    mtbs_count?: number;
+    is_called?: boolean;
 }
 

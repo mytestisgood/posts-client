@@ -9,20 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { StatusProcess } from './statusProcess';
+import { InlineResponse20028 } from './inlineResponse20028';
 
 
 export interface InlineResponse20019 { 
-    reason_refund?: boolean;
-    group_things_ids?: Array<number>;
-    num_file?: number;
-    sum?: number;
-    sent?: boolean;
-    error_details?: string;
-    is_null_company?: boolean;
-    status?: StatusProcess;
+    result?: InlineResponse20028;
 }
-export namespace InlineResponse20019 {
-}
-
 

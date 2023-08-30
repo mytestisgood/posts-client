@@ -15,5 +15,6 @@ export interface InlineResponse20012 {
     blobs?: Array<string>;
     fileNames?: Array<string>;
     ok?: boolean;
+    code?: number;
 }
 

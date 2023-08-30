@@ -27,7 +27,7 @@ import { GeneralsGetCommentsBody } from '../model/generalsGetCommentsBody';
 // @ts-ignore
 import { IdDeleteCommentBody } from '../model/idDeleteCommentBody';
 // @ts-ignore
-import { InlineResponse200 } from '../model/inlineResponse200';
+import { InlineResponse400 } from '../model/inlineResponse400';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -106,9 +106,9 @@ export class CommentService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiGeneralsCommentPost(token?: string, generalsCommentBody?: GeneralsCommentBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse200>;
-    public apiGeneralsCommentPost(token?: string, generalsCommentBody?: GeneralsCommentBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse200>>;
-    public apiGeneralsCommentPost(token?: string, generalsCommentBody?: GeneralsCommentBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse200>>;
+    public apiGeneralsCommentPost(token?: string, generalsCommentBody?: GeneralsCommentBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse400>;
+    public apiGeneralsCommentPost(token?: string, generalsCommentBody?: GeneralsCommentBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse400>>;
+    public apiGeneralsCommentPost(token?: string, generalsCommentBody?: GeneralsCommentBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse400>>;
     public apiGeneralsCommentPost(token?: string, generalsCommentBody?: GeneralsCommentBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -155,7 +155,7 @@ export class CommentService {
         }
 
         let localVarPath = `/api/generals/comment`;
-        return this.httpClient.request<InlineResponse200>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse400>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: generalsCommentBody,
@@ -245,9 +245,9 @@ export class CommentService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiGeneralsIdDeleteCommentPost(id: number, token?: string, idDeleteCommentBody?: IdDeleteCommentBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse200>;
-    public apiGeneralsIdDeleteCommentPost(id: number, token?: string, idDeleteCommentBody?: IdDeleteCommentBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse200>>;
-    public apiGeneralsIdDeleteCommentPost(id: number, token?: string, idDeleteCommentBody?: IdDeleteCommentBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse200>>;
+    public apiGeneralsIdDeleteCommentPost(id: number, token?: string, idDeleteCommentBody?: IdDeleteCommentBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse400>;
+    public apiGeneralsIdDeleteCommentPost(id: number, token?: string, idDeleteCommentBody?: IdDeleteCommentBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse400>>;
+    public apiGeneralsIdDeleteCommentPost(id: number, token?: string, idDeleteCommentBody?: IdDeleteCommentBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse400>>;
     public apiGeneralsIdDeleteCommentPost(id: number, token?: string, idDeleteCommentBody?: IdDeleteCommentBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling apiGeneralsIdDeleteCommentPost.');
@@ -297,7 +297,7 @@ export class CommentService {
         }
 
         let localVarPath = `/api/generals/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}/deleteComment`;
-        return this.httpClient.request<InlineResponse200>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse400>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: idDeleteCommentBody,

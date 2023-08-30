@@ -12,17 +12,8 @@
 
 
 export interface InlineResponse20023 { 
+    code?: string;
     id?: string;
     name?: string;
-    code?: string;
-    type?: string;
-    number_a_max?: string;
-    is_active?: boolean;
-    company_name?: string;
-    company_code?: string;
-    full_name?: string;
-    bank_name?: string;
-    bank_number?: string;
-    account?: string;
 }
 

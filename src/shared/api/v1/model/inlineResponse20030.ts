@@ -9,12 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { InlineResponse20030Employees } from './inlineResponse20030Employees';
 
 
 export interface InlineResponse20030 { 
-    employees?: Array<InlineResponse20030Employees>;
-    products?: Array<InlineResponse20030Employees>;
-    employer_products?: Array<InlineResponse20030Employees>;
+    message?: string;
+    opswatId?: string;
+    percentage?: number;
 }
 

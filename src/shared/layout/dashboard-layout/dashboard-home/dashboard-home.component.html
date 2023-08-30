@@ -28,10 +28,10 @@
       <smarti-last-payment></smarti-last-payment>
       <div class="dashboard-info-grid grid mt-6 gap-6 bg-white">
         <div class="dashboard-info-grid__main box-shadow-big rounded-l">
-          <smarti-inquiries></smarti-inquiries>
+          <smarti-inquiries [chats]="chats$ | async"></smarti-inquiries>
         </div>
         <div class="dashboard-info-grid__left box-shadow-big rounded-l">
-          <smarti-feeds></smarti-feeds>
+          <smarti-feeds [employerReport]="employerReport | async"></smarti-feeds>
         </div>
         <div class="dashboard-info-grid__right box-shadow-big rounded-l">
           <smarti-balance-for-compensation></smarti-balance-for-compensation>
@@ -40,7 +40,11 @@
           <smarti-dashboard-home-small-table></smarti-dashboard-home-small-table>
         </div>
       </div>
-      <smarti-dashboard-home-table></smarti-dashboard-home-table>
+      <smarti-dashboard-home-table
+        [compensationReport]="compensationReport$ | async"
+        (changeMonth)="onChangeMonth($event)"
+        (changeYear)="onChangeYear($event)"
+      ></smarti-dashboard-home-table>
     </div>
   </div>
 </div>

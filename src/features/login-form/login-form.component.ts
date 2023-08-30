@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { emailValidatorPattern } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import {
   ButtonComponent,
@@ -41,7 +42,10 @@ interface LoginForm {
 })
 export class LoginFormComponent implements OnInit {
   public loginForm: FormGroup<LoginForm> = new FormGroup<LoginForm>({
-    email: new FormControl('', [Validators.required]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(emailValidatorPattern),
+    ]),
     password: new FormControl('', [Validators.required]),
     isRemember: new FormControl(false),
   });

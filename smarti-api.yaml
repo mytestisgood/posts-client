@@ -29,6 +29,7 @@ tags:
   - name: Compensations
   - name: Products
   - name: Files
+  - name: FilesMyHr
   - name: Chat
   - name: FeedBack
   - name: GroupThing
@@ -65,8 +66,18 @@ paths:
                 "0":
                   value:
                     message: ok
+                    code: 200
         "400":
           description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: יצירה נכשלה
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
     servers:
@@ -103,6 +114,7 @@ paths:
                     message: success
                     token: eyJ0eXAiOiJKV1QiLCJh
                     departmentId: 6848
+                    code: 200
         "204":
           description: no_content
           content:
@@ -113,6 +125,7 @@ paths:
                 "0":
                   value:
                     message: identifier exist
+                    code: 204
         "400":
           description: bad request
           content:
@@ -123,6 +136,7 @@ paths:
                 "0":
                   value:
                     message: error
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
     servers:
@@ -166,6 +180,7 @@ paths:
                 "0":
                   value:
                     message: success
+                    code: 200
         "204":
           description: no_content
           content:
@@ -176,6 +191,7 @@ paths:
                 "0":
                   value:
                     message: user exist
+                    code: 204
         "400":
           description: bad request
           content:
@@ -186,6 +202,7 @@ paths:
                 "0":
                   value:
                     message: error
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
     servers:
@@ -215,6 +232,7 @@ paths:
                 "0":
                   value:
                     message: succes
+                    code: 200
         "400":
           description: bad request
           content:
@@ -225,6 +243,7 @@ paths:
                 "0":
                   value:
                     message: error
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
     servers:
@@ -248,6 +267,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/users_checkVerifyCode_body'
+            examples:
+              "0":
+                value:
+                  code: 304340
+                  departmentId: 6848
       responses:
         "200":
           description: ok
@@ -258,8 +282,8 @@ paths:
               examples:
                 "0":
                   value:
-                    code: 304340
-                    departmentId: 6848
+                    message: success
+                    code: 200
         "400":
           description: bad request
           content:
@@ -270,11 +294,56 @@ paths:
                 "0":
                   value:
                     message: error
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
     servers:
       - url: https://api.xsmart-staging.com
   /api/processes/uploadFile:
+    get:
+      tags:
+        - UploadFile
+      description: get reques by process id
+      parameters:
+        - name: department_id
+          in: query
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 2
+        - name: processId
+          in: query
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 74891
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              example:
+                - desk@smarti.co.il
+        "400":
+          description: bad request
+      servers:
+        - url: https://api.xsmart-staging.com
     post:
       tags:
         - UploadFile
@@ -322,15 +391,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
                     message: error----
-      servers:
-        - url: https://api.xsmart-staging.com
-    servers:
-      - url: https://api.xsmart-staging.com
   /api/reports/employerReport:
     post:
       tags:
@@ -390,7 +455,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -468,7 +533,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -567,7 +632,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -702,7 +767,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -713,6 +778,7 @@ paths:
     get:
       tags:
         - Home
+        - Chat
       description: get employer chats
       parameters:
         - name: status
@@ -810,7 +876,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -853,7 +919,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -972,7 +1038,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -1020,7 +1086,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -1030,7 +1096,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -1040,7 +1106,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -1091,7 +1157,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -1133,7 +1199,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               example:
                 message: true
         "400":
@@ -1141,7 +1207,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               example:
                 message: failure
       servers:
@@ -1190,7 +1256,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               example:
                 message: failure
       servers:
@@ -1249,6 +1315,7 @@ paths:
                 $ref: '#/components/schemas/inline_response_200'
               example:
                 message: true
+                code: 200
         "400":
           description: bad request
           content:
@@ -1257,6 +1324,7 @@ paths:
                 $ref: '#/components/schemas/inline_response_200'
               example:
                 message: failure
+                code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/updateTypeProcess:
@@ -1293,6 +1361,7 @@ paths:
                 $ref: '#/components/schemas/inline_response_200'
               example:
                 message: true
+                code: 200
         "400":
           description: bad request
           content:
@@ -1301,6 +1370,7 @@ paths:
                 $ref: '#/components/schemas/inline_response_200'
               example:
                 message: failure
+                code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/updateDateAndReference:
@@ -1340,6 +1410,7 @@ paths:
               example:
                 ok: true
                 message: יעודכן בהצלחה
+                code: 200
         "400":
           description: bad request
           content:
@@ -1349,6 +1420,7 @@ paths:
               example:
                 ok: false
                 message: יש לבדוק האם כל הקבצים בסטטוס נטען בהצלחה והאם נשלחו הנחיות
+                code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/{processId}/downloadFileProcess:
@@ -1394,6 +1466,7 @@ paths:
                 fileNames:
                   - 003000580057529EMPONG000004202307040951480001.DAT
                 ok: true
+                code: 200
         "400":
           description: bad request
           content:
@@ -1405,13 +1478,14 @@ paths:
                   value:
                     message: error----
                     ok: false
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/{processId}:
     delete:
       tags:
         - Processes
-      description: get employer processes
+      description: delete process by processId
       parameters:
         - name: processId
           in: path
@@ -1443,15 +1517,28 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-              example: Success
+                $ref: '#/components/schemas/inline_response_200'
+              example:
+                message: success
+                code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                type: string
-              example: Not Found
+                $ref: '#/components/schemas/inline_response_400_1'
+              example:
+                message: false
+                code: 400
+        "404":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              example:
+                message: not Found
+                code: 404
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/update:
@@ -1585,21 +1672,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/inline_response_200_14'
               example:
                 success: Message_Sent
                 authorized: false
                 part: false
+                code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/inline_response_200_14'
               example:
                 success: false
                 authorized: false
                 part: false
+                code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/filesList:
@@ -1670,7 +1759,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_14'
+                $ref: '#/components/schemas/inline_response_200_15'
               example:
                 items:
                   - file_type: ongoing_payment
@@ -1712,7 +1801,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
+                $ref: '#/components/schemas/inline_response_400_2'
               examples:
                 "0":
                   value:
@@ -1784,7 +1873,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_15'
+                  $ref: '#/components/schemas/inline_response_200_16'
               example:
                 - file_name: offer_monthly_payment august 2023.pdf
                   file_type: .pdf
@@ -1794,7 +1883,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               example:
                 message: failure
       servers:
@@ -1841,6 +1930,7 @@ paths:
                 "0":
                   value:
                     message: success
+                    code: 200
         "400":
           description: bad request
           content:
@@ -1851,13 +1941,14 @@ paths:
                 "0":
                   value:
                     message: failure
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/{processId}/downloadRefDocument:
     post:
       tags:
         - Processes
-      description: uploads ref document
+      description: download ref document
       parameters:
         - name: processId
           in: path
@@ -1889,10 +1980,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_16'
+                $ref: '#/components/schemas/inline_response_200_17'
               example:
+                blob: ywOYQa9D64rP9mwy9QSwM
                 ok: true
-                message: יעודכן בהצלחה
+                code: 200
         "400":
           description: bad request
           content:
@@ -1902,6 +1994,7 @@ paths:
               example:
                 message: Problem downloading file
                 ok: false
+                code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/{processId}/deleteRefDocument:
@@ -1940,7 +2033,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_17'
+                $ref: '#/components/schemas/inline_response_200_18'
               example:
                 ok: true
         "400":
@@ -1948,7 +2041,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
+                $ref: '#/components/schemas/inline_response_400_2'
               example:
                 message: Problem downloading file
                 ok: false
@@ -1990,7 +2083,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_18'
+                $ref: '#/components/schemas/inline_response_200_19'
               example:
                 result:
                   data: UEsDBB
@@ -2009,7 +2102,7 @@ paths:
     post:
       tags:
         - Processes
-      description: download payments instruction
+      description: send payments instruction
       parameters:
         - name: Token
           in: header
@@ -2043,7 +2136,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2053,7 +2146,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2094,7 +2187,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_19'
+                $ref: '#/components/schemas/inline_response_200_20'
               example:
                 reason_refund: false
                 group_things_ids:
@@ -2110,7 +2203,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2145,7 +2238,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_20'
+                $ref: '#/components/schemas/inline_response_200_21'
               example:
                 result: false
         "400":
@@ -2153,7 +2246,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_400_3'
               examples:
                 "0":
                   value:
@@ -2206,7 +2299,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2216,7 +2309,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2276,7 +2369,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2322,7 +2415,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2332,7 +2425,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2387,7 +2480,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2397,7 +2490,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2440,7 +2533,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_21'
+                  $ref: '#/components/schemas/inline_response_200_22'
               examples:
                 "0":
                   value:
@@ -2457,7 +2550,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2486,7 +2579,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_22'
+                  $ref: '#/components/schemas/inline_response_200_23'
               examples:
                 "0":
                   value:
@@ -2498,7 +2591,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2543,7 +2636,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_23'
+                  $ref: '#/components/schemas/inline_response_200_24'
               examples:
                 "0":
                   value:
@@ -2564,7 +2657,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2619,7 +2712,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2682,7 +2775,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2711,7 +2804,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_24'
+                  $ref: '#/components/schemas/inline_response_200_25'
               example:
                 - id: "1"
                   name: null company
@@ -2744,7 +2837,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2786,7 +2879,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_25'
+                $ref: '#/components/schemas/inline_response_200_26'
               examples:
                 "0":
                   value:
@@ -2799,7 +2892,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2911,7 +3004,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_26'
+                $ref: '#/components/schemas/inline_response_200_27'
               example:
                 items:
                   - id: "3746,"
@@ -2927,7 +3020,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -2953,37 +3046,210 @@ paths:
             schema:
               $ref: '#/components/schemas/api_documents_body'
             example:
-              description: Save message chat
-              value:
-                opswatIds:
-                  - 2402e762316049f98479d42f4eff36bb
-                message: 12
-                chat_id: 8
-                employer_id: 2
+              opswatIds:
+                - 2402e762316049f98479d42f4eff36bb
+              employer_id: 2
+              date: 2023-08-21
+              documentType: employer_deposition
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_27'
-              examples:
-                "0":
-                  value:
-                    message: success
-                    is_called: false
+                type: string
+              example: uploaded document successfully.
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
                     message: error----
       servers:
         - url: https://api.xsmart-staging.com
+  /api/documents{documentId}:
+    get:
+      tags:
+        - Files
+      description: get document by id
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: 1
+        - name: employer_id
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 2
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_28'
+              example:
+                data: UEsDBB
+                filename: aa.xlsx
+                ext: xlsx
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+              examples:
+                "0":
+                  value:
+                    message: error----
+      servers:
+        - url: https://api.xsmart-staging.com
+    delete:
+      tags:
+        - Files
+      description: delete document by id
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: 1
+        - name: employer_id
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 2
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: string
+              example: Successfully deleted
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                type: string
+              example: Successfully deleted
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/upload:
+    post:
+      tags:
+        - FilesMyHr
+      description: upload file to myHr get the opswatId
+      parameters:
+        - name: Project
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: smarti-dev
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_upload_body'
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_29'
+              example:
+                message: success
+                opswatId: bf4fded72a1542b6a3eb0d516630db6
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+              example: Unauthorized
+      servers:
+        - url: https://obh.meku-app.co.il
+  /api/status:
+    get:
+      tags:
+        - FilesMyHr
+      description: check status upload file to myHr
+      parameters:
+        - name: opswatId
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 11ef19fa506d40dfb35d18a9ed18de17
+        - name: Project
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: smarti-dev
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_30'
+              example:
+                message: success
+                percentage: 100
+                opswatId: 11ef19fa506d40dfb35d18a9ed18de17
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+              example: Unauthorized
+      servers:
+        - url: https://obh.meku-app.co.il
   /api/chats/{chatId}:
     get:
       tags:
@@ -3012,7 +3278,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_28'
+                $ref: '#/components/schemas/inline_response_200_31'
               example:
                 messages:
                   - id: 10
@@ -3039,7 +3305,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -3079,7 +3345,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_27'
+                $ref: '#/components/schemas/inline_response_200_32'
               examples:
                 "0":
                   value:
@@ -3090,7 +3356,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -3165,7 +3431,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_29'
+                $ref: '#/components/schemas/inline_response_200_33'
               example:
                 items:
                   - id: 10056454
@@ -3215,7 +3481,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -3257,7 +3523,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_18'
+                $ref: '#/components/schemas/inline_response_200_19'
               example:
                 result:
                   data: UEsDBB
@@ -3316,7 +3582,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_30'
+                $ref: '#/components/schemas/inline_response_200_34'
               example:
                 employees:
                   - id: 568301
@@ -3332,7 +3598,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -3399,7 +3665,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_31'
+                $ref: '#/components/schemas/inline_response_200_35'
               example:
                 items:
                   - id: 10038422
@@ -3448,7 +3714,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -3493,7 +3759,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_32'
+                $ref: '#/components/schemas/inline_response_200_36'
               example:
                 success: true
                 message: updated finish
@@ -3504,7 +3770,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               example:
                 message: NoneType object has no attribute department_bank_account_id
       servers:
@@ -3543,7 +3809,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               example:
                 message: success
         "400":
@@ -3551,7 +3817,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               example:
                 message: error
       servers:
@@ -3594,7 +3860,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_33'
+                  $ref: '#/components/schemas/inline_response_200_37'
               example:
                 - id: 92999
                   employee_chr_id: 513425
@@ -3618,7 +3884,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               example:
                 message: error----
       servers:
@@ -3659,7 +3925,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               example:
                 message: ok
         "400":
@@ -3667,7 +3933,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               example:
                 message: error
       servers:
@@ -3708,7 +3974,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_34'
+                $ref: '#/components/schemas/inline_response_200_38'
               example:
                 num_file: 0
                 group_things_ids:
@@ -3719,7 +3985,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/inline_response_400'
               examples:
                 "0":
                   value:
@@ -4091,6 +4357,8 @@ components:
       properties:
         message:
           type: string
+        code:
+          type: integer
     employers_createEmployerOut_body:
       type: object
       properties:
@@ -4111,6 +4379,10 @@ components:
           type: string
         token:
           type: string
+        departmentId:
+          type: string
+        code:
+          type: integer
     employers_createUserOut_body:
       type: object
       properties:
@@ -4161,6 +4433,11 @@ components:
           type: string
         allowd:
           type: boolean
+    inline_response_400:
+      type: object
+      properties:
+        message:
+          type: string
     reports_employerReport_body:
       type: object
       properties:
@@ -4447,6 +4724,8 @@ components:
           type: string
         ok:
           type: boolean
+        code:
+          type: integer
     inline_response_200_12:
       type: object
       properties:
@@ -4461,6 +4740,15 @@ components:
             type: string
         ok:
           type: boolean
+        code:
+          type: integer
+    inline_response_400_1:
+      type: object
+      properties:
+        message:
+          type: boolean
+        code:
+          type: integer
     processes_update_body:
       type: object
       properties:
@@ -4521,15 +4809,33 @@ components:
     inline_response_200_14:
       type: object
       properties:
+        success:
+          type: string
+        authorized:
+          type: boolean
+        part:
+          type: boolean
+        code:
+          type: integer
+    inline_response_200_15:
+      type: object
+      properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_14_items'
+            $ref: '#/components/schemas/inline_response_200_15_items'
         total:
           type: integer
         lastPage:
           type: integer
-    inline_response_200_15:
+    inline_response_400_2:
+      type: object
+      properties:
+        message:
+          type: string
+        ok:
+          type: boolean
+    inline_response_200_16:
       type: object
       properties:
         file_name:
@@ -4554,14 +4860,16 @@ components:
           type: string
         department_id:
           type: string
-    inline_response_200_16:
+    inline_response_200_17:
       type: object
       properties:
         blob:
           type: string
-          format: byte
+          format: base64
         ok:
           type: boolean
+        code:
+          type: integer
     processId_deleteRefDocument_body:
       type: object
       properties:
@@ -4569,7 +4877,7 @@ components:
           type: string
         department_id:
           type: string
-    inline_response_200_17:
+    inline_response_200_18:
       type: object
       properties:
         ok:
@@ -4589,11 +4897,11 @@ components:
           type: string
         criteria:
           $ref: '#/components/schemas/apiprocessesunlockProcessFiles_criteria'
-    inline_response_200_18:
+    inline_response_200_19:
       type: object
       properties:
         result:
-          $ref: '#/components/schemas/inline_response_200_18_result'
+          $ref: '#/components/schemas/inline_response_200_28'
     processes_sendPaymentsInstruction_body:
       type: object
       properties:
@@ -4622,7 +4930,7 @@ components:
           $ref: '#/components/schemas/apiprocessesunlockProcessFiles_criteria'
         processId:
           type: integer
-    inline_response_200_19:
+    inline_response_200_20:
       type: object
       properties:
         reason_refund:
@@ -4650,12 +4958,12 @@ components:
           type: integer
         department_id:
           type: string
-    inline_response_200_20:
+    inline_response_200_21:
       type: object
       properties:
         result:
           type: boolean
-    inline_response_400:
+    inline_response_400_3:
       type: object
       properties:
         result:
@@ -4795,7 +5103,7 @@ components:
       properties:
         email:
           type: string
-    inline_response_200_21:
+    inline_response_200_22:
       type: object
       properties:
         id:
@@ -4814,7 +5122,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/apigenerals1inquiries_receivers'
-    inline_response_200_22:
+    inline_response_200_23:
       type: object
       properties:
         code:
@@ -4823,7 +5131,7 @@ components:
           type: string
         name:
           type: string
-    inline_response_200_23:
+    inline_response_200_24:
       type: object
       properties:
         id:
@@ -4902,7 +5210,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/apiproductsfullCompany_bank_account'
-    inline_response_200_24:
+    inline_response_200_25:
       type: object
       properties:
         id:
@@ -4930,7 +5238,7 @@ components:
           type: array
           items:
             type: string
-    inline_response_200_25:
+    inline_response_200_26:
       type: object
       properties:
         ok:
@@ -4939,40 +5247,68 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/inline_response_200_10_items'
-    inline_response_200_26:
+    inline_response_200_27:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_26_items'
+            $ref: '#/components/schemas/inline_response_200_27_items'
     api_documents_body:
       type: object
       properties:
         opswatIds:
           type: string
-        message:
+        description:
           type: string
-        chat_id:
+        date:
           type: integer
+          format: date
         employer_id:
           type: integer
-    inline_response_200_27:
+        documentType:
+          $ref: '#/components/schemas/DocumentTypes'
+    inline_response_200_28:
+      type: object
+      properties:
+        data:
+          type: string
+          format: binary
+        filename:
+          type: string
+        ext:
+          type: string
+    api_upload_body:
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+    inline_response_200_29:
       type: object
       properties:
         message:
           type: string
-        is_called:
-          type: boolean
-    inline_response_200_28:
+        opswatId:
+          type: string
+    inline_response_200_30:
+      type: object
+      properties:
+        message:
+          type: string
+        opswatId:
+          type: string
+        percentage:
+          type: integer
+    inline_response_200_31:
       type: object
       properties:
         messages:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_28_messages'
+            $ref: '#/components/schemas/inline_response_200_31_messages'
         chat:
-          $ref: '#/components/schemas/inline_response_200_28_chat'
+          $ref: '#/components/schemas/inline_response_200_31_chat'
         messages_count:
           type: integer
     chats_saveMessageChat_body:
@@ -4986,19 +5322,26 @@ components:
           type: integer
         employer_id:
           type: integer
-    inline_response_200_29:
+    inline_response_200_32:
+      type: object
+      properties:
+        message:
+          type: string
+        is_called:
+          type: boolean
+    inline_response_200_33:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_29_items'
+            $ref: '#/components/schemas/inline_response_200_33_items'
         total:
           type: integer
         lastPage:
           type: integer
         other:
-          $ref: '#/components/schemas/inline_response_200_29_other'
+          $ref: '#/components/schemas/inline_response_200_33_other'
     feedbacks_feedback_body:
       type: object
       properties:
@@ -5012,28 +5355,28 @@ components:
           type: string
         criteria:
           $ref: '#/components/schemas/CriteriaProcess'
-    inline_response_200_30:
+    inline_response_200_34:
       type: object
       properties:
         employees:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_30_employees'
+            $ref: '#/components/schemas/inline_response_200_34_employees'
         products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_30_employees'
+            $ref: '#/components/schemas/inline_response_200_34_employees'
         employer_products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_30_employees'
-    inline_response_200_31:
+            $ref: '#/components/schemas/inline_response_200_34_employees'
+    inline_response_200_35:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_31_items'
+            $ref: '#/components/schemas/inline_response_200_35_items'
         total:
           type: integer
         lastPage:
@@ -5057,7 +5400,7 @@ components:
           type: string
         confirmation:
           type: integer
-    inline_response_200_32:
+    inline_response_200_36:
       type: object
       properties:
         success:
@@ -5077,7 +5420,7 @@ components:
             type: integer
         criteria:
           $ref: '#/components/schemas/CriteriaProcess'
-    inline_response_200_33:
+    inline_response_200_37:
       type: object
       properties:
         id:
@@ -5135,7 +5478,7 @@ components:
             type: integer
         criteria:
           $ref: '#/components/schemas/apimtbuploadEmployeeDeclaration_criteria'
-    inline_response_200_34:
+    inline_response_200_38:
       type: object
       properties:
         block_sum:
@@ -5279,14 +5622,14 @@ components:
           type: integer
         name:
           type: string
-    inline_response_200_14_employer_products:
+    inline_response_200_15_employer_products:
       type: object
       properties:
         code:
           type: string
         name:
           type: string
-    inline_response_200_14_items:
+    inline_response_200_15_items:
       type: object
       properties:
         file_type:
@@ -5298,7 +5641,7 @@ components:
         employer_products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_14_employer_products'
+            $ref: '#/components/schemas/inline_response_200_15_employer_products'
         product_type:
           $ref: '#/components/schemas/ProductType'
         product_code:
@@ -5337,17 +5680,7 @@ components:
           type: boolean
         request_open:
           type: string
-    inline_response_200_18_result:
-      type: object
-      properties:
-        data:
-          type: string
-          format: binary
-        filename:
-          type: string
-        ext:
-          type: string
-    inline_response_200_26_items:
+    inline_response_200_27_items:
       type: object
       properties:
         id:
@@ -5366,7 +5699,7 @@ components:
           type: string
         document_type:
           $ref: '#/components/schemas/DocumentTypes'
-    inline_response_200_28_messages:
+    inline_response_200_31_messages:
       type: object
       properties:
         id:
@@ -5383,7 +5716,7 @@ components:
           type: string
         is_files:
           type: boolean
-    inline_response_200_28_chat:
+    inline_response_200_31_chat:
       type: object
       properties:
         id:
@@ -5408,7 +5741,7 @@ components:
           type: string
         employer_id:
           type: integer
-    inline_response_200_29_items:
+    inline_response_200_33_items:
       type: object
       properties:
         id:
@@ -5505,21 +5838,21 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ProcessType'
-    inline_response_200_29_other:
+    inline_response_200_33_other:
       type: object
       properties:
         error_types:
           type: array
           items:
             type: integer
-    inline_response_200_30_employees:
+    inline_response_200_34_employees:
       type: object
       properties:
         id:
           type: string
         name:
           type: string
-    inline_response_200_31_transfer_clause:
+    inline_response_200_35_transfer_clause:
       type: object
       properties:
         clause_type:
@@ -5532,7 +5865,7 @@ components:
           type: integer
         id:
           type: integer
-    inline_response_200_31_items:
+    inline_response_200_35_items:
       type: object
       properties:
         id:
@@ -5613,7 +5946,7 @@ components:
         transfer_clause:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_31_transfer_clause'
+            $ref: '#/components/schemas/inline_response_200_35_transfer_clause'
         process_type:
           $ref: '#/components/schemas/ProcessType'
         is_change:

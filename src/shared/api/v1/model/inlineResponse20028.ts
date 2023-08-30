@@ -9,13 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { InlineResponse20028Messages } from './inlineResponse20028Messages';
-import { InlineResponse20028Chat } from './inlineResponse20028Chat';
 
 
 export interface InlineResponse20028 { 
-    messages?: Array<InlineResponse20028Messages>;
-    chat?: InlineResponse20028Chat;
-    messages_count?: number;
+    data?: Blob;
+    filename?: string;
+    ext?: string;
 }
 

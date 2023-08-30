@@ -19,13 +19,13 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { InlineResponse200 } from '../model/inlineResponse200';
-// @ts-ignore
 import { InlineResponse2003 } from '../model/inlineResponse2003';
 // @ts-ignore
 import { InlineResponse2004 } from '../model/inlineResponse2004';
 // @ts-ignore
 import { InlineResponse2005 } from '../model/inlineResponse2005';
+// @ts-ignore
+import { InlineResponse400 } from '../model/inlineResponse400';
 // @ts-ignore
 import { ReportsEmployerReportBody } from '../model/reportsEmployerReportBody';
 // @ts-ignore

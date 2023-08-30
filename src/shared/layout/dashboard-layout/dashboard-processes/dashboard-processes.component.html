@@ -51,7 +51,11 @@
     </div>
   </div>
   <div class="w-full h-672 bg-white box-shadow-big mt-4 rounded-l mb-34">
-    <smarti-dashboard-process-table></smarti-dashboard-process-table>
+    <smarti-dashboard-process-table
+      [items]="dashboardProcessItems$ | async"
+      [token]="token"
+      [departmentId]="departmentId"
+    ></smarti-dashboard-process-table>
   </div>
 </div>
 

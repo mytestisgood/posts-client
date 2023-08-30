@@ -19,13 +19,13 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { InlineResponse200 } from '../model/inlineResponse200';
-// @ts-ignore
-import { InlineResponse20022 } from '../model/inlineResponse20022';
-// @ts-ignore
 import { InlineResponse20023 } from '../model/inlineResponse20023';
 // @ts-ignore
 import { InlineResponse20024 } from '../model/inlineResponse20024';
+// @ts-ignore
+import { InlineResponse20025 } from '../model/inlineResponse20025';
+// @ts-ignore
+import { InlineResponse400 } from '../model/inlineResponse400';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -180,9 +180,9 @@ export class ProductsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProductsAllProductsGet(page?: string, limit?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20023>>;
-    public apiProductsAllProductsGet(page?: string, limit?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20023>>>;
-    public apiProductsAllProductsGet(page?: string, limit?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20023>>>;
+    public apiProductsAllProductsGet(page?: string, limit?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20024>>;
+    public apiProductsAllProductsGet(page?: string, limit?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20024>>>;
+    public apiProductsAllProductsGet(page?: string, limit?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20024>>>;
     public apiProductsAllProductsGet(page?: string, limit?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -230,7 +230,7 @@ export class ProductsService {
         }
 
         let localVarPath = `/api/products/allProducts`;
-        return this.httpClient.request<Array<InlineResponse20023>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<InlineResponse20024>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -249,9 +249,9 @@ export class ProductsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProductsCompaniesGet(token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20022>>;
-    public apiProductsCompaniesGet(token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20022>>>;
-    public apiProductsCompaniesGet(token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20022>>>;
+    public apiProductsCompaniesGet(token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20023>>;
+    public apiProductsCompaniesGet(token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20023>>>;
+    public apiProductsCompaniesGet(token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20023>>>;
     public apiProductsCompaniesGet(token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -289,7 +289,7 @@ export class ProductsService {
         }
 
         let localVarPath = `/api/products/companies`;
-        return this.httpClient.request<Array<InlineResponse20022>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<InlineResponse20023>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -307,9 +307,9 @@ export class ProductsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProductsFullCompanyGet(token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20024>>;
-    public apiProductsFullCompanyGet(token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20024>>>;
-    public apiProductsFullCompanyGet(token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20024>>>;
+    public apiProductsFullCompanyGet(token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20025>>;
+    public apiProductsFullCompanyGet(token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20025>>>;
+    public apiProductsFullCompanyGet(token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20025>>>;
     public apiProductsFullCompanyGet(token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -347,7 +347,7 @@ export class ProductsService {
         }
 
         let localVarPath = `/api/products/fullCompany`;
-        return this.httpClient.request<Array<InlineResponse20024>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<InlineResponse20025>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

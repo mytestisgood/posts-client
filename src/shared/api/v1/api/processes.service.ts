@@ -41,9 +41,17 @@ import { InlineResponse20019 } from '../model/inlineResponse20019';
 // @ts-ignore
 import { InlineResponse20020 } from '../model/inlineResponse20020';
 // @ts-ignore
+import { InlineResponse20021 } from '../model/inlineResponse20021';
+// @ts-ignore
 import { InlineResponse2006 } from '../model/inlineResponse2006';
 // @ts-ignore
 import { InlineResponse400 } from '../model/inlineResponse400';
+// @ts-ignore
+import { InlineResponse4001 } from '../model/inlineResponse4001';
+// @ts-ignore
+import { InlineResponse4002 } from '../model/inlineResponse4002';
+// @ts-ignore
+import { InlineResponse4003 } from '../model/inlineResponse4003';
 // @ts-ignore
 import { ProcessIdDeleteRefDocumentBody } from '../model/processIdDeleteRefDocumentBody';
 // @ts-ignore
@@ -148,9 +156,9 @@ export class ProcessesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesDownloadPaymentsInstructionPost(token?: string, processesDownloadPaymentsInstructionBody?: ProcessesDownloadPaymentsInstructionBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20018>;
-    public apiProcessesDownloadPaymentsInstructionPost(token?: string, processesDownloadPaymentsInstructionBody?: ProcessesDownloadPaymentsInstructionBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20018>>;
-    public apiProcessesDownloadPaymentsInstructionPost(token?: string, processesDownloadPaymentsInstructionBody?: ProcessesDownloadPaymentsInstructionBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20018>>;
+    public apiProcessesDownloadPaymentsInstructionPost(token?: string, processesDownloadPaymentsInstructionBody?: ProcessesDownloadPaymentsInstructionBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20019>;
+    public apiProcessesDownloadPaymentsInstructionPost(token?: string, processesDownloadPaymentsInstructionBody?: ProcessesDownloadPaymentsInstructionBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20019>>;
+    public apiProcessesDownloadPaymentsInstructionPost(token?: string, processesDownloadPaymentsInstructionBody?: ProcessesDownloadPaymentsInstructionBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20019>>;
     public apiProcessesDownloadPaymentsInstructionPost(token?: string, processesDownloadPaymentsInstructionBody?: ProcessesDownloadPaymentsInstructionBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -197,7 +205,7 @@ export class ProcessesService {
         }
 
         let localVarPath = `/api/processes/downloadPaymentsInstruction`;
-        return this.httpClient.request<InlineResponse20018>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20019>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: processesDownloadPaymentsInstructionBody,
@@ -284,9 +292,9 @@ export class ProcessesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesFilesListGet(departmentId?: string, processId?: string, isReference?: boolean, isCheckAll?: boolean, page?: string, limit?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20014>;
-    public apiProcessesFilesListGet(departmentId?: string, processId?: string, isReference?: boolean, isCheckAll?: boolean, page?: string, limit?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20014>>;
-    public apiProcessesFilesListGet(departmentId?: string, processId?: string, isReference?: boolean, isCheckAll?: boolean, page?: string, limit?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20014>>;
+    public apiProcessesFilesListGet(departmentId?: string, processId?: string, isReference?: boolean, isCheckAll?: boolean, page?: string, limit?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20015>;
+    public apiProcessesFilesListGet(departmentId?: string, processId?: string, isReference?: boolean, isCheckAll?: boolean, page?: string, limit?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20015>>;
+    public apiProcessesFilesListGet(departmentId?: string, processId?: string, isReference?: boolean, isCheckAll?: boolean, page?: string, limit?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20015>>;
     public apiProcessesFilesListGet(departmentId?: string, processId?: string, isReference?: boolean, isCheckAll?: boolean, page?: string, limit?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -350,7 +358,7 @@ export class ProcessesService {
         }
 
         let localVarPath = `/api/processes/filesList`;
-        return this.httpClient.request<InlineResponse20014>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20015>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -465,16 +473,16 @@ export class ProcessesService {
     }
 
     /**
-     * get employer processes
+     * delete process by processId
      * @param processId 
      * @param departmentId 
      * @param token 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesProcessIdDelete(processId: number, departmentId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<string>;
-    public apiProcessesProcessIdDelete(processId: number, departmentId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<string>>;
-    public apiProcessesProcessIdDelete(processId: number, departmentId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<string>>;
+    public apiProcessesProcessIdDelete(processId: number, departmentId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse200>;
+    public apiProcessesProcessIdDelete(processId: number, departmentId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse200>>;
+    public apiProcessesProcessIdDelete(processId: number, departmentId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse200>>;
     public apiProcessesProcessIdDelete(processId: number, departmentId?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (processId === null || processId === undefined) {
             throw new Error('Required parameter processId was null or undefined when calling apiProcessesProcessIdDelete.');
@@ -521,7 +529,7 @@ export class ProcessesService {
         }
 
         let localVarPath = `/api/processes/${this.configuration.encodeParam({name: "processId", value: processId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}`;
-        return this.httpClient.request<string>('delete', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse200>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -542,9 +550,9 @@ export class ProcessesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesProcessIdDeleteRefDocumentPost(processId: string, token?: string, processIdDeleteRefDocumentBody?: ProcessIdDeleteRefDocumentBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20017>;
-    public apiProcessesProcessIdDeleteRefDocumentPost(processId: string, token?: string, processIdDeleteRefDocumentBody?: ProcessIdDeleteRefDocumentBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20017>>;
-    public apiProcessesProcessIdDeleteRefDocumentPost(processId: string, token?: string, processIdDeleteRefDocumentBody?: ProcessIdDeleteRefDocumentBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20017>>;
+    public apiProcessesProcessIdDeleteRefDocumentPost(processId: string, token?: string, processIdDeleteRefDocumentBody?: ProcessIdDeleteRefDocumentBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20018>;
+    public apiProcessesProcessIdDeleteRefDocumentPost(processId: string, token?: string, processIdDeleteRefDocumentBody?: ProcessIdDeleteRefDocumentBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20018>>;
+    public apiProcessesProcessIdDeleteRefDocumentPost(processId: string, token?: string, processIdDeleteRefDocumentBody?: ProcessIdDeleteRefDocumentBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20018>>;
     public apiProcessesProcessIdDeleteRefDocumentPost(processId: string, token?: string, processIdDeleteRefDocumentBody?: ProcessIdDeleteRefDocumentBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (processId === null || processId === undefined) {
             throw new Error('Required parameter processId was null or undefined when calling apiProcessesProcessIdDeleteRefDocumentPost.');
@@ -594,7 +602,7 @@ export class ProcessesService {
         }
 
         let localVarPath = `/api/processes/${this.configuration.encodeParam({name: "processId", value: processId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/deleteRefDocument`;
-        return this.httpClient.request<InlineResponse20017>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20018>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: processIdDeleteRefDocumentBody,
@@ -678,16 +686,16 @@ export class ProcessesService {
     }
 
     /**
-     * uploads ref document
+     * download ref document
      * @param processId 
      * @param token 
      * @param processIdDownloadRefDocumentBody 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesProcessIdDownloadRefDocumentPost(processId: string, token?: string, processIdDownloadRefDocumentBody?: ProcessIdDownloadRefDocumentBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20016>;
-    public apiProcessesProcessIdDownloadRefDocumentPost(processId: string, token?: string, processIdDownloadRefDocumentBody?: ProcessIdDownloadRefDocumentBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20016>>;
-    public apiProcessesProcessIdDownloadRefDocumentPost(processId: string, token?: string, processIdDownloadRefDocumentBody?: ProcessIdDownloadRefDocumentBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20016>>;
+    public apiProcessesProcessIdDownloadRefDocumentPost(processId: string, token?: string, processIdDownloadRefDocumentBody?: ProcessIdDownloadRefDocumentBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20017>;
+    public apiProcessesProcessIdDownloadRefDocumentPost(processId: string, token?: string, processIdDownloadRefDocumentBody?: ProcessIdDownloadRefDocumentBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20017>>;
+    public apiProcessesProcessIdDownloadRefDocumentPost(processId: string, token?: string, processIdDownloadRefDocumentBody?: ProcessIdDownloadRefDocumentBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20017>>;
     public apiProcessesProcessIdDownloadRefDocumentPost(processId: string, token?: string, processIdDownloadRefDocumentBody?: ProcessIdDownloadRefDocumentBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (processId === null || processId === undefined) {
             throw new Error('Required parameter processId was null or undefined when calling apiProcessesProcessIdDownloadRefDocumentPost.');
@@ -737,7 +745,7 @@ export class ProcessesService {
         }
 
         let localVarPath = `/api/processes/${this.configuration.encodeParam({name: "processId", value: processId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/downloadRefDocument`;
-        return this.httpClient.request<InlineResponse20016>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20017>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: processIdDownloadRefDocumentBody,
@@ -757,9 +765,9 @@ export class ProcessesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesProcessIdGetRefDocumentGet(processId: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20015>>;
-    public apiProcessesProcessIdGetRefDocumentGet(processId: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20015>>>;
-    public apiProcessesProcessIdGetRefDocumentGet(processId: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20015>>>;
+    public apiProcessesProcessIdGetRefDocumentGet(processId: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20016>>;
+    public apiProcessesProcessIdGetRefDocumentGet(processId: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20016>>>;
+    public apiProcessesProcessIdGetRefDocumentGet(processId: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20016>>>;
     public apiProcessesProcessIdGetRefDocumentGet(processId: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (processId === null || processId === undefined) {
             throw new Error('Required parameter processId was null or undefined when calling apiProcessesProcessIdGetRefDocumentGet.');
@@ -800,7 +808,7 @@ export class ProcessesService {
         }
 
         let localVarPath = `/api/processes/${this.configuration.encodeParam({name: "processId", value: processId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/getRefDocument`;
-        return this.httpClient.request<Array<InlineResponse20015>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<InlineResponse20016>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -886,15 +894,15 @@ export class ProcessesService {
     }
 
     /**
-     * download payments instruction
+     * send payments instruction
      * @param token 
      * @param processesSendPaymentsInstructionBody 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse200>;
-    public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse200>>;
-    public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse200>>;
+    public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse400>;
+    public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse400>>;
+    public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse400>>;
     public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -941,7 +949,7 @@ export class ProcessesService {
         }
 
         let localVarPath = `/api/processes/sendPaymentsInstruction`;
-        return this.httpClient.request<InlineResponse200>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse400>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: processesSendPaymentsInstructionBody,
@@ -961,9 +969,9 @@ export class ProcessesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesSetRecordsPost(token?: string, processesSetRecordsBody?: ProcessesSetRecordsBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20019>;
-    public apiProcessesSetRecordsPost(token?: string, processesSetRecordsBody?: ProcessesSetRecordsBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20019>>;
-    public apiProcessesSetRecordsPost(token?: string, processesSetRecordsBody?: ProcessesSetRecordsBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20019>>;
+    public apiProcessesSetRecordsPost(token?: string, processesSetRecordsBody?: ProcessesSetRecordsBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20020>;
+    public apiProcessesSetRecordsPost(token?: string, processesSetRecordsBody?: ProcessesSetRecordsBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20020>>;
+    public apiProcessesSetRecordsPost(token?: string, processesSetRecordsBody?: ProcessesSetRecordsBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20020>>;
     public apiProcessesSetRecordsPost(token?: string, processesSetRecordsBody?: ProcessesSetRecordsBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -1010,7 +1018,7 @@ export class ProcessesService {
         }
 
         let localVarPath = `/api/processes/setRecords`;
-        return this.httpClient.request<InlineResponse20019>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20020>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: processesSetRecordsBody,
@@ -1030,9 +1038,9 @@ export class ProcessesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesTransmitPost(token?: string, processesTransmitBody?: ProcessesTransmitBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20020>;
-    public apiProcessesTransmitPost(token?: string, processesTransmitBody?: ProcessesTransmitBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20020>>;
-    public apiProcessesTransmitPost(token?: string, processesTransmitBody?: ProcessesTransmitBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20020>>;
+    public apiProcessesTransmitPost(token?: string, processesTransmitBody?: ProcessesTransmitBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20021>;
+    public apiProcessesTransmitPost(token?: string, processesTransmitBody?: ProcessesTransmitBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20021>>;
+    public apiProcessesTransmitPost(token?: string, processesTransmitBody?: ProcessesTransmitBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20021>>;
     public apiProcessesTransmitPost(token?: string, processesTransmitBody?: ProcessesTransmitBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -1079,7 +1087,7 @@ export class ProcessesService {
         }
 
         let localVarPath = `/api/processes/transmit`;
-        return this.httpClient.request<InlineResponse20020>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20021>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: processesTransmitBody,
@@ -1375,9 +1383,9 @@ export class ProcessesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesUpdateReasonRefundPost(token?: string, processesUpdateReasonRefundBody?: ProcessesUpdateReasonRefundBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20013>;
-    public apiProcessesUpdateReasonRefundPost(token?: string, processesUpdateReasonRefundBody?: ProcessesUpdateReasonRefundBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20013>>;
-    public apiProcessesUpdateReasonRefundPost(token?: string, processesUpdateReasonRefundBody?: ProcessesUpdateReasonRefundBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20013>>;
+    public apiProcessesUpdateReasonRefundPost(token?: string, processesUpdateReasonRefundBody?: ProcessesUpdateReasonRefundBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20014>;
+    public apiProcessesUpdateReasonRefundPost(token?: string, processesUpdateReasonRefundBody?: ProcessesUpdateReasonRefundBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20014>>;
+    public apiProcessesUpdateReasonRefundPost(token?: string, processesUpdateReasonRefundBody?: ProcessesUpdateReasonRefundBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20014>>;
     public apiProcessesUpdateReasonRefundPost(token?: string, processesUpdateReasonRefundBody?: ProcessesUpdateReasonRefundBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -1424,7 +1432,7 @@ export class ProcessesService {
         }
 
         let localVarPath = `/api/processes/updateReasonRefund`;
-        return this.httpClient.request<InlineResponse20013>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20014>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: processesUpdateReasonRefundBody,

@@ -12,6 +12,8 @@
 
 
 export interface InlineResponse20017 { 
+    blob?: string;
     ok?: boolean;
+    code?: number;
 }
 

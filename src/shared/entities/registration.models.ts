@@ -1,5 +1,4 @@
 import { FormControl } from '@angular/forms';
-import { TuiFileLike } from '@taiga-ui/kit';
 
 export const REGISTRATION_TOKEN: string = 'registrationToken';
 export const DEPARTMENT_ID: string = 'departmentId';
@@ -42,7 +41,7 @@ export interface PersonalInfoControls {
 }
 
 export interface UploadDocumentsControls {
-  files: FormControl<TuiFileLike[] | null>;
+  files: FormControl<File[] | null>;
 }
 
 export interface PaymentMethodControls {
@@ -66,7 +65,7 @@ export interface PersonalInfoFormValue {
 }
 
 export interface UploadDocumentFormValue {
-  files: TuiFileLike[] | null;
+  files: File[] | null;
 }
 
 export interface PaymentMethodFormValue {

@@ -12,7 +12,8 @@
 
 
 export interface InlineResponse20016 { 
-    blob?: string;
-    ok?: boolean;
+    file_name?: string;
+    file_type?: string;
+    file_date?: string;
 }
 

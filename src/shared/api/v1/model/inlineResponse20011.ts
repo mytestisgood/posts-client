@@ -14,5 +14,6 @@
 export interface InlineResponse20011 { 
     message?: string;
     ok?: boolean;
+    code?: number;
 }
 

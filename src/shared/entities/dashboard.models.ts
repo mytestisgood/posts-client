@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { TuiFileLike } from '@taiga-ui/kit';
+import { InlineResponse2006Items, StatusChat } from '@shared/api';
 
 export interface DashboardHeaderGroupControls {
   organization: FormControl<string | number | null>;
@@ -13,7 +13,7 @@ export interface DashboardChatAddFileGroupControls {
   cashRegister: FormControl<string | null>;
   employee: FormControl<string | null>;
   referenceContent: FormControl<string | null>;
-  file: FormControl<TuiFileLike[] | null>;
+  file: FormControl<File[] | null>;
 }
 
 export interface DashboardMessagesItem {
@@ -31,6 +31,7 @@ export interface DashboardMessages {
 }
 
 export interface DashboardChatItem {
+  status?: StatusChat;
   type: string;
   smallHeader: string;
   title: string;
@@ -44,6 +45,8 @@ export interface DashboardChatItem {
 export type DashboardDirection = 'forward' | 'back';
 
 export type DashboardStep = 'firstStep' | 'secondStep' | 'thirdStep' | 'fourthStep' | 'fifthStep';
+
+export type ProcessTableItems = InlineResponse2006Items & { isSelected: boolean };
 
 export enum DashboardStepEnum {
   FirstStep = 'firstStep',
