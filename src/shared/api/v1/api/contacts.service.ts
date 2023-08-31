@@ -21,9 +21,9 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { ContactsEmployerContactsBody } from '../model/contactsEmployerContactsBody';
 // @ts-ignore
-import { InlineResponse20026 } from '../model/inlineResponse20026';
+import { InlineResponse200 } from '../model/inlineResponse200';
 // @ts-ignore
-import { InlineResponse400 } from '../model/inlineResponse400';
+import { InlineResponse20028 } from '../model/inlineResponse20028';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -102,9 +102,9 @@ export class ContactsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiContactsEmployerContactsPost(token?: string, contactsEmployerContactsBody?: ContactsEmployerContactsBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20026>;
-    public apiContactsEmployerContactsPost(token?: string, contactsEmployerContactsBody?: ContactsEmployerContactsBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20026>>;
-    public apiContactsEmployerContactsPost(token?: string, contactsEmployerContactsBody?: ContactsEmployerContactsBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20026>>;
+    public apiContactsEmployerContactsPost(token?: string, contactsEmployerContactsBody?: ContactsEmployerContactsBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20028>;
+    public apiContactsEmployerContactsPost(token?: string, contactsEmployerContactsBody?: ContactsEmployerContactsBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20028>>;
+    public apiContactsEmployerContactsPost(token?: string, contactsEmployerContactsBody?: ContactsEmployerContactsBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20028>>;
     public apiContactsEmployerContactsPost(token?: string, contactsEmployerContactsBody?: ContactsEmployerContactsBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -151,7 +151,7 @@ export class ContactsService {
         }
 
         let localVarPath = `/api/contacts/employerContacts`;
-        return this.httpClient.request<InlineResponse20026>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20028>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: contactsEmployerContactsBody,

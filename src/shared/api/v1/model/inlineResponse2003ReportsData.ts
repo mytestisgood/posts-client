@@ -9,10 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { InlineResponse2003ReportsDataProcesses } from './inlineResponse2003ReportsDataProcesses';
 
 
 export interface InlineResponse2003ReportsData { 
-    processes?: Array<string>;
+    processes?: Array<InlineResponse2003ReportsDataProcesses>;
     compensation_open?: number;
     compensation_close?: number;
     files?: number;

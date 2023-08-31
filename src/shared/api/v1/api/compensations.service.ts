@@ -29,6 +29,8 @@ import { CompensationsUpdateSentStatusBody } from '../model/compensationsUpdateS
 // @ts-ignore
 import { EventCode } from '../model/eventCode';
 // @ts-ignore
+import { InlineResponse200 } from '../model/inlineResponse200';
+// @ts-ignore
 import { InlineResponse2007 } from '../model/inlineResponse2007';
 // @ts-ignore
 import { InlineResponse2008 } from '../model/inlineResponse2008';
@@ -36,6 +38,8 @@ import { InlineResponse2008 } from '../model/inlineResponse2008';
 import { InlineResponse2009 } from '../model/inlineResponse2009';
 // @ts-ignore
 import { InlineResponse400 } from '../model/inlineResponse400';
+// @ts-ignore
+import { InlineResponse4001 } from '../model/inlineResponse4001';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -274,9 +278,9 @@ export class CompensationsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiCompensationsPost(token?: string, apiCompensationsBody?: ApiCompensationsBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse400>;
-    public apiCompensationsPost(token?: string, apiCompensationsBody?: ApiCompensationsBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse400>>;
-    public apiCompensationsPost(token?: string, apiCompensationsBody?: ApiCompensationsBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse400>>;
+    public apiCompensationsPost(token?: string, apiCompensationsBody?: ApiCompensationsBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse200>;
+    public apiCompensationsPost(token?: string, apiCompensationsBody?: ApiCompensationsBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse200>>;
+    public apiCompensationsPost(token?: string, apiCompensationsBody?: ApiCompensationsBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse200>>;
     public apiCompensationsPost(token?: string, apiCompensationsBody?: ApiCompensationsBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -323,7 +327,7 @@ export class CompensationsService {
         }
 
         let localVarPath = `/api/compensations`;
-        return this.httpClient.request<InlineResponse400>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse200>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: apiCompensationsBody,
@@ -412,9 +416,9 @@ export class CompensationsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiCompensationsUpdateSentStatusPost(token?: string, compensationsUpdateSentStatusBody?: CompensationsUpdateSentStatusBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse400>;
-    public apiCompensationsUpdateSentStatusPost(token?: string, compensationsUpdateSentStatusBody?: CompensationsUpdateSentStatusBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse400>>;
-    public apiCompensationsUpdateSentStatusPost(token?: string, compensationsUpdateSentStatusBody?: CompensationsUpdateSentStatusBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse400>>;
+    public apiCompensationsUpdateSentStatusPost(token?: string, compensationsUpdateSentStatusBody?: CompensationsUpdateSentStatusBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse200>;
+    public apiCompensationsUpdateSentStatusPost(token?: string, compensationsUpdateSentStatusBody?: CompensationsUpdateSentStatusBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse200>>;
+    public apiCompensationsUpdateSentStatusPost(token?: string, compensationsUpdateSentStatusBody?: CompensationsUpdateSentStatusBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse200>>;
     public apiCompensationsUpdateSentStatusPost(token?: string, compensationsUpdateSentStatusBody?: CompensationsUpdateSentStatusBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -461,7 +465,7 @@ export class CompensationsService {
         }
 
         let localVarPath = `/api/compensations/updateSentStatus`;
-        return this.httpClient.request<InlineResponse400>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse200>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: compensationsUpdateSentStatusBody,

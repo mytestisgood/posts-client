@@ -21,9 +21,9 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { ApiUploadBody } from '../model/apiUploadBody';
 // @ts-ignore
-import { InlineResponse20029 } from '../model/inlineResponse20029';
+import { InlineResponse20031 } from '../model/inlineResponse20031';
 // @ts-ignore
-import { InlineResponse20030 } from '../model/inlineResponse20030';
+import { InlineResponse20032 } from '../model/inlineResponse20032';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -102,9 +102,9 @@ export class FilesMyHrService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiStatusGet(opswatId?: string, project?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20030>;
-    public apiStatusGet(opswatId?: string, project?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20030>>;
-    public apiStatusGet(opswatId?: string, project?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20030>>;
+    public apiStatusGet(opswatId?: string, project?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20032>;
+    public apiStatusGet(opswatId?: string, project?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20032>>;
+    public apiStatusGet(opswatId?: string, project?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20032>>;
     public apiStatusGet(opswatId?: string, project?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -148,7 +148,7 @@ export class FilesMyHrService {
         }
 
         let localVarPath = `/api/status`;
-        return this.httpClient.request<InlineResponse20030>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20032>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -168,9 +168,9 @@ export class FilesMyHrService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiUploadPost(project?: string, apiUploadBody?: ApiUploadBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20029>;
-    public apiUploadPost(project?: string, apiUploadBody?: ApiUploadBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20029>>;
-    public apiUploadPost(project?: string, apiUploadBody?: ApiUploadBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20029>>;
+    public apiUploadPost(project?: string, apiUploadBody?: ApiUploadBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20031>;
+    public apiUploadPost(project?: string, apiUploadBody?: ApiUploadBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20031>>;
+    public apiUploadPost(project?: string, apiUploadBody?: ApiUploadBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20031>>;
     public apiUploadPost(project?: string, apiUploadBody?: ApiUploadBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -217,7 +217,7 @@ export class FilesMyHrService {
         }
 
         let localVarPath = `/api/upload`;
-        return this.httpClient.request<InlineResponse20029>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20031>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: apiUploadBody,

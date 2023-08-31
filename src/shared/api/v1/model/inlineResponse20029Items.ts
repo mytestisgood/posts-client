@@ -9,65 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Comment } from './comment';
-import { StatusFeedback } from './statusFeedback';
-import { StatusProcess } from './statusProcess';
-import { DepositType } from './depositType';
-import { ProductType } from './productType';
-import { ManualStatus } from './manualStatus';
-import { SalaryLevel } from './salaryLevel';
-import { ProcessType } from './processType';
-import { ReasonRefund } from './reasonRefund';
-import { EmployeeStatus } from './employeeStatus';
-import { FileType } from './fileType';
-import { StatusEmployeeFeedBack } from './statusEmployeeFeedBack';
-import { DepositStatus } from './depositStatus';
+import { DocumentTypes } from './documentTypes';
 
 
 export interface InlineResponse20029Items { 
-    id?: number;
-    salary_month?: string;
-    updated_at?: string;
-    deposit_type?: DepositType;
-    salary_level?: SalaryLevel;
-    reason_refund?: ReasonRefund;
-    path_employee_declaration?: string;
-    deposit_status?: DepositStatus;
-    salary?: number;
-    employee_status?: EmployeeStatus;
-    employee_status_start_date?: string;
-    work_month_percentage?: number;
-    is_relevant?: boolean;
-    policy_or_account_number?: string;
-    working_days_in_month?: number;
-    amount?: number;
+    id?: string;
     name?: string;
-    personal_id?: string;
-    product_code?: string;
-    product_type?: ProductType;
-    company_name?: string;
-    company_id?: string;
-    process_date?: string;
-    deposit_month?: string;
-    deposit_date?: string;
+    ext?: string;
+    description?: string;
+    created_at?: string;
+    employer_name?: number;
     employer_id?: string;
-    employer_name?: string;
-    department_id?: string;
-    inquiries?: Array<string>;
-    comments?: Array<Comment>;
-    comment?: string;
-    reason?: string;
-    status?: StatusEmployeeFeedBack;
-    manual_status?: ManualStatus;
-    sent_file_name?: string;
-    group_thing_id?: number;
-    file_type?: FileType;
-    sent_group_id?: number;
-    status_sent_group?: StatusFeedback;
-    employee_id?: number;
-    file_status?: StatusProcess;
-    product_name?: string;
-    type?: ProcessType;
+    document_type?: DocumentTypes;
 }
 export namespace InlineResponse20029Items {
 }

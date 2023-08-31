@@ -21,11 +21,13 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { FeedbacksFeedbackBody } from '../model/feedbacksFeedbackBody';
 // @ts-ignore
-import { InlineResponse20019 } from '../model/inlineResponse20019';
+import { InlineResponse200 } from '../model/inlineResponse200';
 // @ts-ignore
-import { InlineResponse20033 } from '../model/inlineResponse20033';
+import { InlineResponse20035 } from '../model/inlineResponse20035';
 // @ts-ignore
-import { InlineResponse400 } from '../model/inlineResponse400';
+import { InlineResponse20036 } from '../model/inlineResponse20036';
+// @ts-ignore
+import { InlineResponse20037 } from '../model/inlineResponse20037';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -104,9 +106,9 @@ export class FeedBackService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiFeedbacksFeedbackPost(token?: string, feedbacksFeedbackBody?: FeedbacksFeedbackBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20019>;
-    public apiFeedbacksFeedbackPost(token?: string, feedbacksFeedbackBody?: FeedbacksFeedbackBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20019>>;
-    public apiFeedbacksFeedbackPost(token?: string, feedbacksFeedbackBody?: FeedbacksFeedbackBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20019>>;
+    public apiFeedbacksFeedbackPost(token?: string, feedbacksFeedbackBody?: FeedbacksFeedbackBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20036>;
+    public apiFeedbacksFeedbackPost(token?: string, feedbacksFeedbackBody?: FeedbacksFeedbackBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20036>>;
+    public apiFeedbacksFeedbackPost(token?: string, feedbacksFeedbackBody?: FeedbacksFeedbackBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20036>>;
     public apiFeedbacksFeedbackPost(token?: string, feedbacksFeedbackBody?: FeedbacksFeedbackBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -153,10 +155,80 @@ export class FeedBackService {
         }
 
         let localVarPath = `/api/feedbacks/feedback`;
-        return this.httpClient.request<InlineResponse20019>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20036>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: feedbacksFeedbackBody,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * get details feedBack
+     * @param processId 
+     * @param departmentId 
+     * @param token 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiFeedbacksProcessIdGetDetailsFeedBackGet(processId: string, departmentId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20037>;
+    public apiFeedbacksProcessIdGetDetailsFeedBackGet(processId: string, departmentId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20037>>;
+    public apiFeedbacksProcessIdGetDetailsFeedBackGet(processId: string, departmentId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20037>>;
+    public apiFeedbacksProcessIdGetDetailsFeedBackGet(processId: string, departmentId?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (processId === null || processId === undefined) {
+            throw new Error('Required parameter processId was null or undefined when calling apiFeedbacksProcessIdGetDetailsFeedBackGet.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (departmentId !== undefined && departmentId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>departmentId, 'departmentId');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+        if (token !== undefined && token !== null) {
+            localVarHeaders = localVarHeaders.set('Token', String(token));
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/feedbacks/${this.configuration.encodeParam({name: "processId", value: processId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/getDetailsFeedBack`;
+        return this.httpClient.request<InlineResponse20037>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -178,9 +250,9 @@ export class FeedBackService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiFeedbacksRecordsListGet(processId?: string, employerId?: string, departmentId?: string, organizationId?: string, page?: string, limit?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20033>;
-    public apiFeedbacksRecordsListGet(processId?: string, employerId?: string, departmentId?: string, organizationId?: string, page?: string, limit?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20033>>;
-    public apiFeedbacksRecordsListGet(processId?: string, employerId?: string, departmentId?: string, organizationId?: string, page?: string, limit?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20033>>;
+    public apiFeedbacksRecordsListGet(processId?: string, employerId?: string, departmentId?: string, organizationId?: string, page?: string, limit?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20035>;
+    public apiFeedbacksRecordsListGet(processId?: string, employerId?: string, departmentId?: string, organizationId?: string, page?: string, limit?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20035>>;
+    public apiFeedbacksRecordsListGet(processId?: string, employerId?: string, departmentId?: string, organizationId?: string, page?: string, limit?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20035>>;
     public apiFeedbacksRecordsListGet(processId?: string, employerId?: string, departmentId?: string, organizationId?: string, page?: string, limit?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -244,7 +316,7 @@ export class FeedBackService {
         }
 
         let localVarPath = `/api/feedbacks/recordsList`;
-        return this.httpClient.request<InlineResponse20033>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20035>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

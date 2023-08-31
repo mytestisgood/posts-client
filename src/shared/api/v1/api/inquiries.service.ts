@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { InlineResponse20022 } from '../model/inlineResponse20022';
+import { InlineResponse20024 } from '../model/inlineResponse20024';
 // @ts-ignore
 import { InlineResponse400 } from '../model/inlineResponse400';
 // @ts-ignore
@@ -104,9 +104,9 @@ export class InquiriesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiGenerals1InquiriesPost(token?: string, model1InquiriesBody?: Model1InquiriesBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20022>>;
-    public apiGenerals1InquiriesPost(token?: string, model1InquiriesBody?: Model1InquiriesBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20022>>>;
-    public apiGenerals1InquiriesPost(token?: string, model1InquiriesBody?: Model1InquiriesBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20022>>>;
+    public apiGenerals1InquiriesPost(token?: string, model1InquiriesBody?: Model1InquiriesBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20024>>;
+    public apiGenerals1InquiriesPost(token?: string, model1InquiriesBody?: Model1InquiriesBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20024>>>;
+    public apiGenerals1InquiriesPost(token?: string, model1InquiriesBody?: Model1InquiriesBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20024>>>;
     public apiGenerals1InquiriesPost(token?: string, model1InquiriesBody?: Model1InquiriesBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -153,7 +153,7 @@ export class InquiriesService {
         }
 
         let localVarPath = `/api/generals/1/inquiries`;
-        return this.httpClient.request<Array<InlineResponse20022>>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<InlineResponse20024>>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: model1InquiriesBody,

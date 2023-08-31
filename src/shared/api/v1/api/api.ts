@@ -1,3 +1,5 @@
+export * from './bank.service';
+import { BankService } from './bank.service';
 export * from './chat.service';
 import { ChatService } from './chat.service';
 export * from './comment.service';
@@ -34,4 +36,4 @@ export * from './signIn.service';
 import { SignInService } from './signIn.service';
 export * from './uploadFile.service';
 import { UploadFileService } from './uploadFile.service';
-export const APIS = [ChatService, CommentService, CompensationsService, ContactsService, FeedBackService, FilesService, FilesMyHrService, GroupThingService, HomeService, InquiriesService, LeadService, LeadingCompaniesService, MonthlyTransferBlockService, ProcessesService, ProductsService, RegisterService, SignInService, UploadFileService];
+export const APIS = [BankService, ChatService, CommentService, CompensationsService, ContactsService, FeedBackService, FilesService, FilesMyHrService, GroupThingService, HomeService, InquiriesService, LeadService, LeadingCompaniesService, MonthlyTransferBlockService, ProcessesService, ProductsService, RegisterService, SignInService, UploadFileService];

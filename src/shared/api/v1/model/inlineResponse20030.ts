@@ -12,8 +12,8 @@
 
 
 export interface InlineResponse20030 { 
-    message?: string;
-    opswatId?: string;
-    percentage?: number;
+    data?: Blob;
+    filename?: string;
+    ext?: string;
 }
 

@@ -12,8 +12,9 @@
 
 
 export interface InlineResponse20023 { 
-    code?: string;
-    id?: string;
-    name?: string;
+    ok?: boolean;
+    transmission_auto?: boolean;
+    success_transmission?: boolean;
+    code?: number;
 }
 

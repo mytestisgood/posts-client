@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { InlineResponse20028Data } from './inlineResponse20028Data';
 
 
 export interface InlineResponse20028 { 
-    data?: Blob;
-    filename?: string;
-    ext?: string;
+    ok?: boolean;
+    data?: Array<InlineResponse20028Data>;
 }
 

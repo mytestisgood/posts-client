@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { InlineResponse20038Employees } from './inlineResponse20038Employees';
 
 
 export interface InlineResponse20038 { 
-    block_sum?: number;
-    num_file?: number;
-    group_things_ids?: Array<string>;
-    sent?: boolean;
+    employees?: Array<InlineResponse20038Employees>;
+    products?: Array<InlineResponse20038Employees>;
+    employer_products?: Array<InlineResponse20038Employees>;
 }
 

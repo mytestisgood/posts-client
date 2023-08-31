@@ -13,6 +13,7 @@
 
 export interface InlineResponse20032 { 
     message?: string;
-    is_called?: boolean;
+    opswatId?: string;
+    percentage?: number;
 }
 

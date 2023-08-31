@@ -32,7 +32,7 @@ export class DashboardProcessesComponent {
     this.processesService.apiProcessesGet().pipe(
         map((response: InlineResponse2006) => {
           if (response?.items?.length) {
-            return response.items.map(item => ({...item, isSelected: false }));
+            return response.items.map(item => ({ ...item, isSelected: false }));
           }
           return null;
         }),

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormControlStatus, ReactiveFormsModule } from '@angular/forms';
-import { FilesMyHrService, InlineResponse20029 } from '@shared/api';
+import { FilesMyHrService, InlineResponse20031 } from '@shared/api';
 import { DestroyService } from '@shared/services';
 import { TuiLinkModule, TuiSvgModule } from '@taiga-ui/core';
 import { TuiFileState, TuiInputFilesModule, TuiMarkerIconModule } from '@taiga-ui/kit';
@@ -33,7 +33,7 @@ export class InputFileComponent implements OnInit {
 
   constructor(
     private readonly filesMyHrService: FilesMyHrService,
-    private readonly destroy$: DestroyService
+    private readonly destroy$: DestroyService,
   ) {
   }
 
@@ -42,18 +42,13 @@ export class InputFileComponent implements OnInit {
     this.control.valueChanges.pipe(
       switchMap(value => {
         if (value === null) {
-          return of()
+          return of();
         }
 
-        return this.filesMyHrService.apiUploadPost('smarti-dev', { file: value.at(-1) })
+        return this.filesMyHrService.apiUploadPost('smarti-dev', { file: value.at(-1) });
       }),
       takeUntil(this.destroy$),
-    ).subscribe((response: InlineResponse20029) => console.log(response));
-    // this.control.valueChanges.pipe(
-    //   switchMap(value => fileFromBlotToTextFormatHelper(value as File[])),
-    //   switchMap(value=> this.filesMyHrService.apiUploadPost(value)),
-    //   takeUntil(this.destroy$),
-    // ).subscribe((response: InlineResponse20029) => console.log(response));
+    ).subscribe((response: InlineResponse20031) => console.log(response));
     this.control.statusChanges.pipe(
       takeUntil(this.destroy$),
     ).subscribe((status: FormControlStatus) => {

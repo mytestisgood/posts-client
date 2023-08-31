@@ -21,6 +21,7 @@ export interface InlineResponse20020 {
     error_details?: string;
     is_null_company?: boolean;
     status?: StatusProcess;
+    code?: number;
 }
 export namespace InlineResponse20020 {
 }

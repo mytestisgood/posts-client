@@ -9,20 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Apigenerals1inquiriesReceivers } from './apigenerals1inquiriesReceivers';
 
 
 export interface InlineResponse20024 { 
     id?: string;
-    name?: string;
-    code?: string;
-    type?: string;
-    number_a_max?: string;
-    is_active?: boolean;
-    company_name?: string;
-    company_code?: string;
-    full_name?: string;
-    bank_name?: string;
-    bank_number?: string;
-    account?: string;
+    created_at?: string;
+    updated_at?: string;
+    reminder_date?: string;
+    content?: string;
+    has_documents?: boolean;
+    receivers?: Array<Apigenerals1inquiriesReceivers>;
 }
 

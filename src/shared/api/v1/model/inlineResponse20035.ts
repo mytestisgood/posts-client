@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { InlineResponse20035Other } from './inlineResponse20035Other';
 import { InlineResponse20035Items } from './inlineResponse20035Items';
 
 
@@ -16,5 +17,7 @@ export interface InlineResponse20035 {
     items?: Array<InlineResponse20035Items>;
     total?: number;
     lastPage?: number;
+    other?: InlineResponse20035Other;
+    code?: number;
 }
 

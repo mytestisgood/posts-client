@@ -12,22 +12,11 @@
 
 
 export interface InlineResponse20037 { 
-    id?: number;
-    employee_chr_id?: number;
-    original_employer_product_id?: number;
-    original_group_name?: string;
-    original_group_id?: number;
-    current_group_id?: number;
-    current_group_name?: string;
-    employee_name?: string;
-    identifier?: string;
-    product_code?: number;
-    product_name?: string;
-    employer_product_code?: number;
-    employer_product_name?: string;
-    current_product_name?: string;
-    current_product_code?: number;
-    current_employer_product_name?: string;
-    current_employer_product_code?: number;
+    count_employee?: number;
+    fix?: number;
+    failed?: number;
+    sent?: number;
+    not_sent?: number;
+    code?: number;
 }
 

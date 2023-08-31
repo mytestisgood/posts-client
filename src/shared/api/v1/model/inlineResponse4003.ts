@@ -12,6 +12,7 @@
 
 
 export interface InlineResponse4003 { 
-    result?: string;
+    message?: string;
+    ok?: boolean;
 }
 

@@ -43,15 +43,19 @@ import { InlineResponse20020 } from '../model/inlineResponse20020';
 // @ts-ignore
 import { InlineResponse20021 } from '../model/inlineResponse20021';
 // @ts-ignore
+import { InlineResponse20022 } from '../model/inlineResponse20022';
+// @ts-ignore
+import { InlineResponse20023 } from '../model/inlineResponse20023';
+// @ts-ignore
 import { InlineResponse2006 } from '../model/inlineResponse2006';
 // @ts-ignore
 import { InlineResponse400 } from '../model/inlineResponse400';
 // @ts-ignore
-import { InlineResponse4001 } from '../model/inlineResponse4001';
-// @ts-ignore
 import { InlineResponse4002 } from '../model/inlineResponse4002';
 // @ts-ignore
 import { InlineResponse4003 } from '../model/inlineResponse4003';
+// @ts-ignore
+import { InlineResponse4004 } from '../model/inlineResponse4004';
 // @ts-ignore
 import { ProcessIdDeleteRefDocumentBody } from '../model/processIdDeleteRefDocumentBody';
 // @ts-ignore
@@ -59,7 +63,11 @@ import { ProcessIdDownloadRefDocumentBody } from '../model/processIdDownloadRefD
 // @ts-ignore
 import { ProcessIdUploadsRefBody } from '../model/processIdUploadsRefBody';
 // @ts-ignore
+import { ProcessesCheckIsDateBody } from '../model/processesCheckIsDateBody';
+// @ts-ignore
 import { ProcessesDownloadPaymentsInstructionBody } from '../model/processesDownloadPaymentsInstructionBody';
+// @ts-ignore
+import { ProcessesIdAuthorizationReceiptCertificateBody } from '../model/processesIdAuthorizationReceiptCertificateBody';
 // @ts-ignore
 import { ProcessesSendPaymentsInstructionBody } from '../model/processesSendPaymentsInstructionBody';
 // @ts-ignore
@@ -147,6 +155,75 @@ export class ProcessesService {
             throw Error("key may not be null if value is not object or array");
         }
         return httpParams;
+    }
+
+    /**
+     * check is date
+     * @param token 
+     * @param processesCheckIsDateBody 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiProcessesCheckIsDatePost(token?: string, processesCheckIsDateBody?: ProcessesCheckIsDateBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20022>;
+    public apiProcessesCheckIsDatePost(token?: string, processesCheckIsDateBody?: ProcessesCheckIsDateBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20022>>;
+    public apiProcessesCheckIsDatePost(token?: string, processesCheckIsDateBody?: ProcessesCheckIsDateBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20022>>;
+    public apiProcessesCheckIsDatePost(token?: string, processesCheckIsDateBody?: ProcessesCheckIsDateBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+
+        let localVarHeaders = this.defaultHeaders;
+        if (token !== undefined && token !== null) {
+            localVarHeaders = localVarHeaders.set('Token', String(token));
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/processes/checkIsDate`;
+        return this.httpClient.request<InlineResponse20022>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: processesCheckIsDateBody,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
     /**
@@ -894,15 +971,88 @@ export class ProcessesService {
     }
 
     /**
+     * check is date
+     * @param processesId 
+     * @param token 
+     * @param processesIdAuthorizationReceiptCertificateBody 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiProcessesProcessesIdAuthorizationReceiptCertificatePost(processesId: string, token?: string, processesIdAuthorizationReceiptCertificateBody?: ProcessesIdAuthorizationReceiptCertificateBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20023>;
+    public apiProcessesProcessesIdAuthorizationReceiptCertificatePost(processesId: string, token?: string, processesIdAuthorizationReceiptCertificateBody?: ProcessesIdAuthorizationReceiptCertificateBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20023>>;
+    public apiProcessesProcessesIdAuthorizationReceiptCertificatePost(processesId: string, token?: string, processesIdAuthorizationReceiptCertificateBody?: ProcessesIdAuthorizationReceiptCertificateBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20023>>;
+    public apiProcessesProcessesIdAuthorizationReceiptCertificatePost(processesId: string, token?: string, processesIdAuthorizationReceiptCertificateBody?: ProcessesIdAuthorizationReceiptCertificateBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (processesId === null || processesId === undefined) {
+            throw new Error('Required parameter processesId was null or undefined when calling apiProcessesProcessesIdAuthorizationReceiptCertificatePost.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+        if (token !== undefined && token !== null) {
+            localVarHeaders = localVarHeaders.set('Token', String(token));
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/processes/${this.configuration.encodeParam({name: "processesId", value: processesId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/authorizationReceiptCertificate`;
+        return this.httpClient.request<InlineResponse20023>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: processesIdAuthorizationReceiptCertificateBody,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * send payments instruction
      * @param token 
      * @param processesSendPaymentsInstructionBody 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse400>;
-    public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse400>>;
-    public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse400>>;
+    public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse200>;
+    public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse200>>;
+    public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse200>>;
     public apiProcessesSendPaymentsInstructionPost(token?: string, processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -949,7 +1099,7 @@ export class ProcessesService {
         }
 
         let localVarPath = `/api/processes/sendPaymentsInstruction`;
-        return this.httpClient.request<InlineResponse400>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse200>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: processesSendPaymentsInstructionBody,

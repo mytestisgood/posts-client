@@ -14,5 +14,6 @@
 export interface InlineResponse2009 { 
     message?: string;
     list_exceptions?: Array<string>;
+    code?: number;
 }
 

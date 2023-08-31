@@ -78,7 +78,7 @@ export class DashboardChatWindowComponent {
         message: this.messageControl.value,
         employer_id: 0,
         opswatIds: '',
-      }
-    ).pipe(takeUntil(this.destroy$)).subscribe()
+      },
+    ).pipe(takeUntil(this.destroy$)).subscribe();
   }
 }

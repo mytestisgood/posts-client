@@ -17,7 +17,6 @@ import {
 export class DashboardHeaderComponent {
   constructor(private readonly router: Router) {}
 
-
   public redirectToMainPage(): void {
     this.router.navigate(['/']);
   }

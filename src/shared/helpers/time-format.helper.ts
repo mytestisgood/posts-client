@@ -16,7 +16,7 @@ export function formattedCurrentDateTo(format: DateFormatView): string {
 }
 
 export function formattedMonthAndYearDateTo(month: number, year: number, format: DateFormatView): string {
-  let dd: string = '01';
+  const dd: string = '01';
   let mm: string | number = month;
 
   if (month < 10) {

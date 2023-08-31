@@ -56,7 +56,7 @@ export class DashboardProcessTableComponent {
     if (!word) {
       return '';
     }
-    const newWord: string[]  = word.split(" ");
+    const newWord: string[]  = word.split(' ');
 
     return `<b>` + newWord[1] + `</b> <span>` + newWord[0] + `</span>`;
   }

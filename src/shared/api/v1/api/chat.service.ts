@@ -21,9 +21,11 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { ChatsSaveMessageChatBody } from '../model/chatsSaveMessageChatBody';
 // @ts-ignore
-import { InlineResponse20031 } from '../model/inlineResponse20031';
+import { InlineResponse200 } from '../model/inlineResponse200';
 // @ts-ignore
-import { InlineResponse20032 } from '../model/inlineResponse20032';
+import { InlineResponse20033 } from '../model/inlineResponse20033';
+// @ts-ignore
+import { InlineResponse20034 } from '../model/inlineResponse20034';
 // @ts-ignore
 import { InlineResponse400 } from '../model/inlineResponse400';
 
@@ -104,9 +106,9 @@ export class ChatService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiChatsChatIdGet(chatId: number, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20031>;
-    public apiChatsChatIdGet(chatId: number, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20031>>;
-    public apiChatsChatIdGet(chatId: number, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20031>>;
+    public apiChatsChatIdGet(chatId: number, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20033>;
+    public apiChatsChatIdGet(chatId: number, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20033>>;
+    public apiChatsChatIdGet(chatId: number, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20033>>;
     public apiChatsChatIdGet(chatId: number, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (chatId === null || chatId === undefined) {
             throw new Error('Required parameter chatId was null or undefined when calling apiChatsChatIdGet.');
@@ -147,7 +149,7 @@ export class ChatService {
         }
 
         let localVarPath = `/api/chats/${this.configuration.encodeParam({name: "chatId", value: chatId, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: undefined})}`;
-        return this.httpClient.request<InlineResponse20031>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20033>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -242,9 +244,9 @@ export class ChatService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiChatsSaveMessageChatPost(token?: string, chatsSaveMessageChatBody?: ChatsSaveMessageChatBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20032>;
-    public apiChatsSaveMessageChatPost(token?: string, chatsSaveMessageChatBody?: ChatsSaveMessageChatBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20032>>;
-    public apiChatsSaveMessageChatPost(token?: string, chatsSaveMessageChatBody?: ChatsSaveMessageChatBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20032>>;
+    public apiChatsSaveMessageChatPost(token?: string, chatsSaveMessageChatBody?: ChatsSaveMessageChatBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20034>;
+    public apiChatsSaveMessageChatPost(token?: string, chatsSaveMessageChatBody?: ChatsSaveMessageChatBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20034>>;
+    public apiChatsSaveMessageChatPost(token?: string, chatsSaveMessageChatBody?: ChatsSaveMessageChatBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20034>>;
     public apiChatsSaveMessageChatPost(token?: string, chatsSaveMessageChatBody?: ChatsSaveMessageChatBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -291,7 +293,7 @@ export class ChatService {
         }
 
         let localVarPath = `/api/chats/saveMessageChat`;
-        return this.httpClient.request<InlineResponse20032>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20034>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: chatsSaveMessageChatBody,

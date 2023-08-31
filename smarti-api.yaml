@@ -34,6 +34,7 @@ tags:
   - name: FeedBack
   - name: GroupThing
   - name: MonthlyTransferBlock
+  - name: Bank
 paths:
   /api/leads/createLead:
     post:
@@ -436,19 +437,28 @@ paths:
                   value:
                     message: success
                     reportsData:
-                      processes: []
-                      compensation_open: 0
-                      compensation_close: 0
-                      files: 0
-                      files_loading: 0
-                      files_transmitted: 0
-                      employees_zero_count: 0
-                      employees_no_zero_count: 0
-                      file_feedback_a_failed: 0
-                      file_not_defrayed: 0
-                      file_partially_paid: 0
-                      file_fully_defrayed: 0
-                      mtb_defrayed: 0
+                      processes:
+                        - id: 74902
+                          name: ss
+                          created_at: 2023-07-31
+                          status_process: error_loading
+                          department_id: 2
+                          employer_id: 2
+                          total: 0
+                          date: 2023-06-01
+                          employer_name: עמותת עטלף
+                      compensation_open: "0,"
+                      compensation_close: "0,"
+                      files: "0,"
+                      files_loading: "0,"
+                      files_transmitted: "0,"
+                      employees_zero_count: "0,"
+                      employees_no_zero_count: "0,"
+                      file_feedback_a_failed: "0,"
+                      file_not_defrayed: "0,"
+                      file_partially_paid: "0,"
+                      file_fully_defrayed: "0,"
+                      mtb_defrayed: "0,"
                       mtb_not_defrayed: 0
         "400":
           description: bad request
@@ -825,8 +835,10 @@ paths:
                     type: integer
                   created_at:
                     type: string
+                    format: date-time
                   updated_at:
                     type: string
+                    format: date-time
                   content:
                     type: string
                   subject:
@@ -857,8 +869,8 @@ paths:
                 "0":
                   value:
                     - id: "9,"
-                      created_at: "2021-08-1815,"
-                      updated_at: "2021-08-1815,"
+                      created_at: "2021-08-18 16:44:42.108967,"
+                      updated_at: "2021-08-18 16:44:42.108967,"
                       content: "123,"
                       subject: "כללי,"
                       subject_id: "10,"
@@ -998,51 +1010,56 @@ paths:
               examples:
                 "0":
                   value:
-                    - id: 52787
-                      created_at: 2023-04-20 19:32:48.001447
-                      updated_at: 2023-04-20 19:32:48.001447
-                      user_id: 3
-                      employer_name: עמותת עטלף
-                      employer_id: 2
-                      department_name: כללי
-                      department_id: 2
-                      employee_name: רחל פני דלפונו
-                      is_file: false
-                      identifier: "012246559"
-                      company_name: כלל חברה לביטוח
-                      company_id: 93
-                      alidity_date: 2023-03-31
-                      sending_method: email
-                      product_type: executive
-                      projected_balance: 0.0
-                      reported_balance: 0.0
-                      portal_balance: 0.0
-                      status: open
-                      contents: ""
-                      files: []
-                      error_sent_failed: ""
-                      answering_manufacturer: ""
-                      username: admin admin
-                      has_by_safebox: false
-                      has_file_feedback: false
-                      xml_name: 204000514855931EVENTS000006202206191107100000.TST
-                      inquiries: []
-                      comments:
-                        - id: 50997
-                          content: 13
-                          updated_at: 2023-08-07 12:46:20.563214
-                          username: מיכל שמש
-                      name: admin admin
+                    items:
+                      - id: 52787
+                        created_at: 2023-04-20 19:32:48.001447
+                        updated_at: 2023-04-20 19:32:48.001447
+                        user_id: 3
+                        employer_name: עמותת עטלף
+                        employer_id: 2
+                        department_name: כללי
+                        department_id: 2
+                        employee_name: רחל פני דלפונו
+                        is_file: false
+                        identifier: "012246559"
+                        company_name: כלל חברה לביטוח
+                        company_id: 93
+                        alidity_date: 2023-03-31
+                        sending_method: email
+                        product_type: executive
+                        projected_balance: 0.0
+                        reported_balance: 0.0
+                        portal_balance: 0.0
+                        status: open
+                        contents: ""
+                        files: []
+                        error_sent_failed: ""
+                        answering_manufacturer: ""
+                        username: admin admin
+                        has_by_safebox: false
+                        has_file_feedback: false
+                        xml_name: 204000514855931EVENTS000006202206191107100000.TST
+                        inquiries: []
+                        comments:
+                          - id: 50997
+                            content: 13
+                            updated_at: 2023-08-07 12:46:20.563214
+                            username: מיכל שמש
+                        name: admin admin
+                    total: "45,"
+                    lastPage: "3,"
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_400_1'
               examples:
                 "0":
                   value:
                     message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
     post:
@@ -1086,31 +1103,34 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: success
+                    code: 200
         "302":
           description: request to this employee already exists
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: request to this employee already exists
+                    code: 302
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: failure
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/compensations/downloadExampleFile:
@@ -1199,17 +1219,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               example:
                 message: true
+                code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               example:
                 message: failure
+                code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/compensations/send:
@@ -1251,14 +1273,16 @@ paths:
               example:
                 message: true
                 list_exceptions: []
+                code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               example:
                 message: failure
+                code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/leading_companies/getLeadingCompanies:
@@ -1526,7 +1550,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400_1'
+                $ref: '#/components/schemas/inline_response_400_2'
               example:
                 message: false
                 code: 400
@@ -1801,7 +1825,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400_2'
+                $ref: '#/components/schemas/inline_response_400_3'
               examples:
                 "0":
                   value:
@@ -2036,15 +2060,17 @@ paths:
                 $ref: '#/components/schemas/inline_response_200_18'
               example:
                 ok: true
+                code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400_2'
+                $ref: '#/components/schemas/inline_response_200_11'
               example:
                 message: Problem downloading file
                 ok: false
+                code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/downloadPaymentsInstruction:
@@ -2136,21 +2162,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: success
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: --error
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/setRecords:
@@ -2198,16 +2226,18 @@ paths:
                 error_details: ""
                 is_null_company: false
                 status: can_be_processed
+                code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: --error
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/transmit:
@@ -2246,11 +2276,108 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400_3'
+                $ref: '#/components/schemas/inline_response_400_4'
               examples:
                 "0":
                   value:
                     result: --error
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/processes/checkIsDate:
+    post:
+      tags:
+        - Processes
+      description: check is date
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/processes_checkIsDate_body'
+            example:
+              department_id: 2
+              processId: 74890
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_22'
+              example:
+                is_date: true
+                block_sum: 30729
+                num_file: 10
+                code: 200
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: --error
+                    code: 400
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/processes/{processesId}/authorizationReceiptCertificate:
+    post:
+      tags:
+        - Processes
+      description: check is date
+      parameters:
+        - name: processesId
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: 74896
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/processesId_authorizationReceiptCertificate_body'
+            example:
+              department_id: 2
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_23'
+              example:
+                ok: true
+                transmission_auto: false
+                success_transmission: true
+                code: 200
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                type: string
+              example: bad request
       servers:
         - url: https://api.xsmart-staging.com
   /api/generals/comment:
@@ -2533,7 +2660,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_22'
+                  $ref: '#/components/schemas/inline_response_200_24'
               examples:
                 "0":
                   value:
@@ -2579,7 +2706,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_23'
+                  $ref: '#/components/schemas/inline_response_200_25'
               examples:
                 "0":
                   value:
@@ -2634,34 +2761,37 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/inline_response_200_24'
+                $ref: '#/components/schemas/inline_response_200_26'
               examples:
                 "0":
                   value:
-                    - id: "103,"
-                      name: מקפת תקציבית
-                      code: 1304
-                      type: provident
-                      number_a_max: 1111
-                      is_active: true
-                      company_name: מגדל מקפת קרנות פנסיה וקופות גמל בע\"מ
-                      company_code: 512237744
-                      full_name: מקפת תקציבית 1304
-                      bank_name: בנק לאומי לישראל בע\"מ
-                      bank_number: 800
-                      account: 29920657
+                    items:
+                      - id: "103,"
+                        name: מקפת תקציבית
+                        code: 1304
+                        type: provident
+                        number_a_max: 1111
+                        is_active: true
+                        company_name: מגדל מקפת קרנות פנסיה וקופות גמל בע\"מ
+                        company_code: 512237744
+                        full_name: מקפת תקציבית 1304
+                        bank_name: בנק לאומי לישראל בע\"מ
+                        bank_number: 800
+                        account: 29920657
+                    total: 219
+                    lastPage: 15
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/products/productByCompany:
@@ -2804,7 +2934,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_25'
+                  $ref: '#/components/schemas/inline_response_200_27'
               example:
                 - id: "1"
                   name: null company
@@ -2879,7 +3009,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_26'
+                $ref: '#/components/schemas/inline_response_200_28'
               examples:
                 "0":
                   value:
@@ -2887,16 +3017,18 @@ paths:
                     data:
                       - id: "4100,"
                         name: michal ben michalb@smarti.co.il
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: failure
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/contacts/{type}/getEmailEmployerContact:
@@ -3004,7 +3136,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_27'
+                $ref: '#/components/schemas/inline_response_200_29'
               example:
                 items:
                   - id: "3746,"
@@ -3015,16 +3147,20 @@ paths:
                     employer_name: עמותת עטלף
                     employer_id: 2
                     document_type: authorization_protocol
+                total: 2
+                lastPage: 1
+                code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
     post:
@@ -3071,7 +3207,7 @@ paths:
                     message: error----
       servers:
         - url: https://api.xsmart-staging.com
-  /api/documents{documentId}:
+  /api/documents/{documentId}:
     get:
       tags:
         - Files
@@ -3107,7 +3243,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_28'
+                $ref: '#/components/schemas/inline_response_200_30'
               example:
                 data: UEsDBB
                 filename: aa.xlsx
@@ -3195,7 +3331,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_29'
+                $ref: '#/components/schemas/inline_response_200_31'
               example:
                 message: success
                 opswatId: bf4fded72a1542b6a3eb0d516630db6
@@ -3236,7 +3372,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_30'
+                $ref: '#/components/schemas/inline_response_200_32'
               example:
                 message: success
                 percentage: 100
@@ -3278,7 +3414,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_31'
+                $ref: '#/components/schemas/inline_response_200_33'
               example:
                 messages:
                   - id: 10
@@ -3300,16 +3436,18 @@ paths:
                   employer_name: עמותת עטלף
                   employer_id: 2
                 messages_count: 0
+                code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/chats/saveMessageChat:
@@ -3345,22 +3483,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_32'
+                $ref: '#/components/schemas/inline_response_200_34'
               examples:
                 "0":
                   value:
                     message: success
                     is_called: false
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/feedbacks/recordsList:
@@ -3431,7 +3571,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_33'
+                $ref: '#/components/schemas/inline_response_200_35'
               example:
                 items:
                   - id: 10056454
@@ -3476,16 +3616,18 @@ paths:
                 lastPage: 1
                 other:
                   error_types: []
+                code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/feedbacks/feedback:
@@ -3523,12 +3665,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_19'
+                $ref: '#/components/schemas/inline_response_200_36'
               example:
                 result:
                   data: UEsDBB
                   filename: Feedback.xlsx
                   ext: xlsx
+                  code: 200
         "400":
           description: bad request
           content:
@@ -3536,6 +3679,63 @@ paths:
               schema:
                 type: string
               example: "true"
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/feedbacks/{processId}/getDetailsFeedBack:
+    get:
+      tags:
+        - FeedBack
+      description: get details feedBack
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: 74811
+        - name: departmentId
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 2
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_37'
+              example:
+                count_employee: 20
+                fix: 0
+                failed: 0
+                sent: 0
+                not_sent: 49
+                code: 200
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: failure
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/mtb/entity:
@@ -3582,7 +3782,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_34'
+                $ref: '#/components/schemas/inline_response_200_38'
               example:
                 employees:
                   - id: 568301
@@ -3665,7 +3865,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_35'
+                $ref: '#/components/schemas/inline_response_200_39'
               example:
                 items:
                   - id: 10038422
@@ -3759,7 +3959,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_36'
+                $ref: '#/components/schemas/inline_response_200_40'
               example:
                 success: true
                 message: updated finish
@@ -3860,7 +4060,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_37'
+                  $ref: '#/components/schemas/inline_response_200_41'
               example:
                 - id: 92999
                   employee_chr_id: 513425
@@ -3974,7 +4174,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_38'
+                $ref: '#/components/schemas/inline_response_200_42'
               example:
                 num_file: 0
                 group_things_ids:
@@ -3990,6 +4190,115 @@ paths:
                 "0":
                   value:
                     message: error----
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/generals/banks:
+    get:
+      tags:
+        - Bank
+      description: get bank list
+      parameters:
+        - name: withBranches
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: boolean
+          example: true
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_43'
+              example:
+                id: "1"
+                name: בנק יהב לעובדי המדינה בע"מ 4
+                bank_branches:
+                  - id: "2"
+                    number: "7"
+                    bank_id: "1"
+                    name: מלחה ירושלים 7
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+              examples:
+                "0":
+                  value:
+                    message: failure
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/departments/getDepartmentBanks/{departmentId}:
+    get:
+      tags:
+        - Bank
+      description: get department banks
+      parameters:
+        - name: department_id
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: boolean
+          example: true
+        - name: departmentId
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: 2
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_43'
+              example:
+                id: "1"
+                name: בנק יהב לעובדי המדינה בע"מ 4
+                bank_branches:
+                  - id: "2"
+                    number: "7"
+                    bank_id: "1"
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+              examples:
+                "0":
+                  value:
+                    message: failure
       servers:
         - url: https://api.xsmart-staging.com
 components:
@@ -4490,97 +4799,17 @@ components:
     inline_response_200_7:
       type: object
       properties:
-        id:
-          type: integer
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        user_id:
-          type: integer
-        employer_name:
-          type: string
-        employer_id:
-          type: integer
-        department_name:
-          type: string
-        department_id:
-          type: integer
-        employee_name:
-          type: string
-        is_file:
-          type: boolean
-        identifier:
-          type: string
-        company_name:
-          type: string
-        company_id:
-          type: integer
-        alidity_date:
-          type: string
-        sending_method:
-          $ref: '#/components/schemas/SendingMethod'
-        product_type:
-          $ref: '#/components/schemas/ProductType'
-        projected_balance:
-          type: number
-          format: float
-        reported_balance:
-          type: number
-          format: float
-        portal_balance:
-          type: number
-          format: float
-        status:
-          $ref: '#/components/schemas/StatusCompensation'
-        contents:
-          type: string
-        closed_at:
-          type: string
-        files:
+        items:
           type: array
           items:
-            type: string
-        code_error:
-          $ref: '#/components/schemas/CodeError'
-        error_details:
+            $ref: '#/components/schemas/inline_response_200_7_items'
+    inline_response_400_1:
+      type: object
+      properties:
+        ex:
           type: string
-        code_error_file:
-          $ref: '#/components/schemas/CodeErrorFile'
-        error_details_file:
-          type: string
-        error_sent_failed:
-          type: string
-        feedback_level:
-          $ref: '#/components/schemas/FeedbackLevel'
-        answering_manufacturer:
-          type: string
-        username:
-          type: string
-        reporting_type:
-          $ref: '#/components/schemas/ReportingType'
-        has_by_safebox:
-          type: boolean
-        has_file_feedback:
-          type: boolean
-        xml_name:
-          type: string
-        extend_clearing:
-          type: string
-        inquiries:
-          type: array
-          items:
-            type: string
-        comments:
-          type: array
-          items:
-            $ref: '#/components/schemas/inline_response_200_7_comments'
-        name:
-          type: string
-        num_clearing:
+        code:
           type: integer
-        product_code:
-          type: string
     apicompensations_products_company:
       type: object
       properties:
@@ -4671,6 +4900,8 @@ components:
           type: array
           items:
             type: string
+        code:
+          type: integer
     inline_response_200_10:
       type: object
       properties:
@@ -4742,7 +4973,7 @@ components:
           type: boolean
         code:
           type: integer
-    inline_response_400_1:
+    inline_response_400_2:
       type: object
       properties:
         message:
@@ -4828,7 +5059,7 @@ components:
           type: integer
         lastPage:
           type: integer
-    inline_response_400_2:
+    inline_response_400_3:
       type: object
       properties:
         message:
@@ -4882,6 +5113,8 @@ components:
       properties:
         ok:
           type: boolean
+        code:
+          type: integer
     processes_downloadPaymentsInstruction_body:
       type: object
       properties:
@@ -4901,7 +5134,7 @@ components:
       type: object
       properties:
         result:
-          $ref: '#/components/schemas/inline_response_200_28'
+          $ref: '#/components/schemas/inline_response_200_30'
     processes_sendPaymentsInstruction_body:
       type: object
       properties:
@@ -4951,6 +5184,8 @@ components:
           type: boolean
         status:
           $ref: '#/components/schemas/StatusProcess'
+        code:
+          type: integer
     processes_transmit_body:
       type: object
       properties:
@@ -4963,11 +5198,45 @@ components:
       properties:
         result:
           type: boolean
-    inline_response_400_3:
+    inline_response_400_4:
       type: object
       properties:
         result:
           type: string
+    processes_checkIsDate_body:
+      type: object
+      properties:
+        processId:
+          type: integer
+        department_id:
+          type: string
+    inline_response_200_22:
+      type: object
+      properties:
+        is_date:
+          type: boolean
+        block_sum:
+          type: integer
+        num_file:
+          type: integer
+        code:
+          type: integer
+    processesId_authorizationReceiptCertificate_body:
+      type: object
+      properties:
+        department_id:
+          type: string
+    inline_response_200_23:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        transmission_auto:
+          type: boolean
+        success_transmission:
+          type: boolean
+        code:
+          type: integer
     apigeneralscomment_criteria:
       type: object
       properties:
@@ -5103,7 +5372,7 @@ components:
       properties:
         email:
           type: string
-    inline_response_200_22:
+    inline_response_200_24:
       type: object
       properties:
         id:
@@ -5122,7 +5391,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/apigenerals1inquiries_receivers'
-    inline_response_200_23:
+    inline_response_200_25:
       type: object
       properties:
         code:
@@ -5131,33 +5400,19 @@ components:
           type: string
         name:
           type: string
-    inline_response_200_24:
+    inline_response_200_26:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/inline_response_200_26_items'
+        total:
+          type: integer
+        lastPage:
+          type: integer
         code:
-          type: string
-        type:
-          type: string
-        number_a_max:
-          type: string
-        is_active:
-          type: boolean
-        company_name:
-          type: string
-        company_code:
-          type: string
-        full_name:
-          type: string
-        bank_name:
-          type: string
-        bank_number:
-          type: string
-        account:
-          type: string
+          type: integer
     apiproductsfullCompany_bank_account:
       type: object
       properties:
@@ -5210,7 +5465,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/apiproductsfullCompany_bank_account'
-    inline_response_200_25:
+    inline_response_200_27:
       type: object
       properties:
         id:
@@ -5238,7 +5493,7 @@ components:
           type: array
           items:
             type: string
-    inline_response_200_26:
+    inline_response_200_28:
       type: object
       properties:
         ok:
@@ -5246,14 +5501,20 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_10_items'
-    inline_response_200_27:
+            $ref: '#/components/schemas/inline_response_200_28_data'
+    inline_response_200_29:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_27_items'
+            $ref: '#/components/schemas/inline_response_200_29_items'
+        total:
+          type: integer
+        lastPage:
+          type: integer
+        code:
+          type: integer
     api_documents_body:
       type: object
       properties:
@@ -5268,7 +5529,7 @@ components:
           type: integer
         documentType:
           $ref: '#/components/schemas/DocumentTypes'
-    inline_response_200_28:
+    inline_response_200_30:
       type: object
       properties:
         data:
@@ -5284,14 +5545,14 @@ components:
         file:
           type: string
           format: binary
-    inline_response_200_29:
+    inline_response_200_31:
       type: object
       properties:
         message:
           type: string
         opswatId:
           type: string
-    inline_response_200_30:
+    inline_response_200_32:
       type: object
       properties:
         message:
@@ -5300,16 +5561,18 @@ components:
           type: string
         percentage:
           type: integer
-    inline_response_200_31:
+    inline_response_200_33:
       type: object
       properties:
         messages:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_31_messages'
+            $ref: '#/components/schemas/inline_response_200_33_messages'
         chat:
-          $ref: '#/components/schemas/inline_response_200_31_chat'
+          $ref: '#/components/schemas/inline_response_200_33_chat'
         messages_count:
+          type: integer
+        code:
           type: integer
     chats_saveMessageChat_body:
       type: object
@@ -5322,26 +5585,30 @@ components:
           type: integer
         employer_id:
           type: integer
-    inline_response_200_32:
+    inline_response_200_34:
       type: object
       properties:
         message:
           type: string
         is_called:
           type: boolean
-    inline_response_200_33:
+        code:
+          type: integer
+    inline_response_200_35:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_33_items'
+            $ref: '#/components/schemas/inline_response_200_35_items'
         total:
           type: integer
         lastPage:
           type: integer
         other:
-          $ref: '#/components/schemas/inline_response_200_33_other'
+          $ref: '#/components/schemas/inline_response_200_35_other'
+        code:
+          type: integer
     feedbacks_feedback_body:
       type: object
       properties:
@@ -5355,28 +5622,50 @@ components:
           type: string
         criteria:
           $ref: '#/components/schemas/CriteriaProcess'
-    inline_response_200_34:
+    inline_response_200_36:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/inline_response_200_30'
+        code:
+          type: integer
+    inline_response_200_37:
+      type: object
+      properties:
+        count_employee:
+          type: integer
+        fix:
+          type: integer
+        failed:
+          type: integer
+        sent:
+          type: integer
+        not_sent:
+          type: integer
+        code:
+          type: integer
+    inline_response_200_38:
       type: object
       properties:
         employees:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_34_employees'
+            $ref: '#/components/schemas/inline_response_200_38_employees'
         products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_34_employees'
+            $ref: '#/components/schemas/inline_response_200_38_employees'
         employer_products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_34_employees'
-    inline_response_200_35:
+            $ref: '#/components/schemas/inline_response_200_38_employees'
+    inline_response_200_39:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_35_items'
+            $ref: '#/components/schemas/inline_response_200_39_items'
         total:
           type: integer
         lastPage:
@@ -5400,7 +5689,7 @@ components:
           type: string
         confirmation:
           type: integer
-    inline_response_200_36:
+    inline_response_200_40:
       type: object
       properties:
         success:
@@ -5420,7 +5709,7 @@ components:
             type: integer
         criteria:
           $ref: '#/components/schemas/CriteriaProcess'
-    inline_response_200_37:
+    inline_response_200_41:
       type: object
       properties:
         id:
@@ -5478,7 +5767,7 @@ components:
             type: integer
         criteria:
           $ref: '#/components/schemas/apimtbuploadEmployeeDeclaration_criteria'
-    inline_response_200_38:
+    inline_response_200_42:
       type: object
       properties:
         block_sum:
@@ -5491,13 +5780,58 @@ components:
             type: string
         sent:
           type: boolean
+    apigeneralsbanks_bank_branches:
+      type: object
+      properties:
+        id:
+          type: string
+        number:
+          type: string
+        bank_id:
+          type: string
+        name:
+          type: string
+    inline_response_200_43:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        bank_branches:
+          type: array
+          items:
+            $ref: '#/components/schemas/apigeneralsbanks_bank_branches'
+    inline_response_200_3_reportsData_processes:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date
+        status_process:
+          $ref: '#/components/schemas/StatusProcess'
+        department_id:
+          type: integer
+        employer_id:
+          type: integer
+        total:
+          type: number
+        date:
+          type: string
+          format: date
+        employer_name:
+          type: string
     inline_response_200_3_reportsData:
       type: object
       properties:
         processes:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/inline_response_200_3_reportsData_processes'
         compensation_open:
           type: integer
         compensation_close:
@@ -5615,6 +5949,100 @@ components:
           type: string
         username:
           type: string
+    inline_response_200_7_items:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        user_id:
+          type: integer
+        employer_name:
+          type: string
+        employer_id:
+          type: integer
+        department_name:
+          type: string
+        department_id:
+          type: integer
+        employee_name:
+          type: string
+        is_file:
+          type: boolean
+        identifier:
+          type: string
+        company_name:
+          type: string
+        company_id:
+          type: integer
+        alidity_date:
+          type: string
+        sending_method:
+          $ref: '#/components/schemas/SendingMethod'
+        product_type:
+          $ref: '#/components/schemas/ProductType'
+        projected_balance:
+          type: number
+          format: float
+        reported_balance:
+          type: number
+          format: float
+        portal_balance:
+          type: number
+          format: float
+        status:
+          $ref: '#/components/schemas/StatusCompensation'
+        contents:
+          type: string
+        closed_at:
+          type: string
+        files:
+          type: array
+          items:
+            type: string
+        code_error:
+          $ref: '#/components/schemas/CodeError'
+        error_details:
+          type: string
+        code_error_file:
+          $ref: '#/components/schemas/CodeErrorFile'
+        error_details_file:
+          type: string
+        error_sent_failed:
+          type: string
+        feedback_level:
+          $ref: '#/components/schemas/FeedbackLevel'
+        answering_manufacturer:
+          type: string
+        username:
+          type: string
+        reporting_type:
+          $ref: '#/components/schemas/ReportingType'
+        has_by_safebox:
+          type: boolean
+        has_file_feedback:
+          type: boolean
+        xml_name:
+          type: string
+        extend_clearing:
+          type: string
+        inquiries:
+          type: array
+          items:
+            type: string
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/inline_response_200_7_comments'
+        name:
+          type: string
+        num_clearing:
+          type: integer
+        product_code:
+          type: string
     inline_response_200_10_items:
       type: object
       properties:
@@ -5680,7 +6108,43 @@ components:
           type: boolean
         request_open:
           type: string
-    inline_response_200_27_items:
+    inline_response_200_26_items:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        code:
+          type: string
+        type:
+          type: string
+        number_a_max:
+          type: string
+        is_active:
+          type: boolean
+        company_name:
+          type: string
+        company_code:
+          type: string
+        full_name:
+          type: string
+        bank_name:
+          type: string
+        bank_number:
+          type: string
+        account:
+          type: string
+    inline_response_200_28_data:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        code:
+          type: integer
+    inline_response_200_29_items:
       type: object
       properties:
         id:
@@ -5699,7 +6163,7 @@ components:
           type: string
         document_type:
           $ref: '#/components/schemas/DocumentTypes'
-    inline_response_200_31_messages:
+    inline_response_200_33_messages:
       type: object
       properties:
         id:
@@ -5716,7 +6180,7 @@ components:
           type: string
         is_files:
           type: boolean
-    inline_response_200_31_chat:
+    inline_response_200_33_chat:
       type: object
       properties:
         id:
@@ -5741,7 +6205,7 @@ components:
           type: string
         employer_id:
           type: integer
-    inline_response_200_33_items:
+    inline_response_200_35_items:
       type: object
       properties:
         id:
@@ -5838,21 +6302,21 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ProcessType'
-    inline_response_200_33_other:
+    inline_response_200_35_other:
       type: object
       properties:
         error_types:
           type: array
           items:
             type: integer
-    inline_response_200_34_employees:
+    inline_response_200_38_employees:
       type: object
       properties:
         id:
           type: string
         name:
           type: string
-    inline_response_200_35_transfer_clause:
+    inline_response_200_39_transfer_clause:
       type: object
       properties:
         clause_type:
@@ -5865,7 +6329,7 @@ components:
           type: integer
         id:
           type: integer
-    inline_response_200_35_items:
+    inline_response_200_39_items:
       type: object
       properties:
         id:
@@ -5946,7 +6410,7 @@ components:
         transfer_clause:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_35_transfer_clause'
+            $ref: '#/components/schemas/inline_response_200_39_transfer_clause'
         process_type:
           $ref: '#/components/schemas/ProcessType'
         is_change:

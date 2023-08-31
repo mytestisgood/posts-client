@@ -14,10 +14,11 @@ export function downloadFileHelper(filePath: string, fileName: string): void {
 export function fileFromBlotToTextFormatHelper(files: File[]): Observable<string> {
   const fileReader: FileReader = new FileReader();
   const file: File = files[0];
+
   fileReader.readAsText(file);
 
   return fromEvent(fileReader, 'load').pipe(
-    map(()=> {
+    map(() => {
       return fileReader.result;
     }),
   ) as Observable<string>;

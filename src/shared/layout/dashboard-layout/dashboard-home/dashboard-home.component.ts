@@ -77,15 +77,14 @@ export class DashboardHomeComponent {
   public onChangeYear(year: number): void {
     this.year = year;
     if (!this.month) {
-      return
+      return;
     }
 
     this.onReportsCompensationGet();
   }
 
-  public onReportsCompensationGet() {
+  public onReportsCompensationGet(): void {
     this.searchingDate = formattedMonthAndYearDateTo(this.month, this.year, 'yyyy-mm-dd');
-    console.log(this.searchingDate);
     this.compensationReport$ = this.homeService.apiReportsCompensationReportGet(
       undefined,
       this.searchingDate,

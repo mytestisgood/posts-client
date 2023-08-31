@@ -27,9 +27,11 @@ export class DashboardHomeTableComponent implements OnInit {
   @Input() public compensationReport!: InlineResponse2005 | null;
   @Output() public changeYear: EventEmitter<number> = new EventEmitter<number>();
   @Output() public changeMonth: EventEmitter<number> = new EventEmitter<number>();
-  protected readonly months: string[] = months;
-  public yearControl: FormControl = new FormControl;
   public monthControl: FormControl = new FormControl;
+  public yearControl: FormControl = new FormControl;
+  protected readonly months: string[] = months;
+
+  constructor(private readonly destroy$: DestroyService) {}
 
   public ngOnInit(): void {
     this.yearControl.valueChanges.pipe(
@@ -46,13 +48,11 @@ export class DashboardHomeTableComponent implements OnInit {
     ).subscribe();
   }
 
-  constructor(private readonly destroy$: DestroyService) {}
-
   public getMonthsFromDate(date: string | undefined): string {
     if (!date) {
       return '';
     }
-    const month: string[] = date.split("/");
+    const month: string[] = date.split('/');
 
     return month[1] + '-' + month[2];
   }

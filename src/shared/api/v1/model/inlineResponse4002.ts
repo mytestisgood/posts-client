@@ -12,7 +12,7 @@
 
 
 export interface InlineResponse4002 { 
-    message?: string;
-    ok?: boolean;
+    message?: boolean;
+    code?: number;
 }
 

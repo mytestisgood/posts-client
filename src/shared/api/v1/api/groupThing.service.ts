@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { InlineResponse20038 } from '../model/inlineResponse20038';
+import { InlineResponse20042 } from '../model/inlineResponse20042';
 // @ts-ignore
 import { InlineResponse400 } from '../model/inlineResponse400';
 
@@ -101,9 +101,9 @@ export class GroupThingService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesGetGroupThingInProcessGet(processId?: string, departmentId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20038>;
-    public apiProcessesGetGroupThingInProcessGet(processId?: string, departmentId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20038>>;
-    public apiProcessesGetGroupThingInProcessGet(processId?: string, departmentId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20038>>;
+    public apiProcessesGetGroupThingInProcessGet(processId?: string, departmentId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20042>;
+    public apiProcessesGetGroupThingInProcessGet(processId?: string, departmentId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20042>>;
+    public apiProcessesGetGroupThingInProcessGet(processId?: string, departmentId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20042>>;
     public apiProcessesGetGroupThingInProcessGet(processId?: string, departmentId?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -151,7 +151,7 @@ export class GroupThingService {
         }
 
         let localVarPath = `/api/processes/getGroupThingInProcess`;
-        return this.httpClient.request<InlineResponse20038>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20042>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

@@ -9,13 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { InlineResponse20031Messages } from './inlineResponse20031Messages';
-import { InlineResponse20031Chat } from './inlineResponse20031Chat';
 
 
 export interface InlineResponse20031 { 
-    messages?: Array<InlineResponse20031Messages>;
-    chat?: InlineResponse20031Chat;
-    messages_count?: number;
+    message?: string;
+    opswatId?: string;
 }
 

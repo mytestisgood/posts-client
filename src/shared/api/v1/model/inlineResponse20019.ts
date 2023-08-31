@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { InlineResponse20028 } from './inlineResponse20028';
+import { InlineResponse20030 } from './inlineResponse20030';
 
 
 export interface InlineResponse20019 { 
-    result?: InlineResponse20028;
+    result?: InlineResponse20030;
 }
 

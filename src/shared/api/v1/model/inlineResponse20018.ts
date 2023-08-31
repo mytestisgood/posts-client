@@ -13,5 +13,6 @@
 
 export interface InlineResponse20018 { 
     ok?: boolean;
+    code?: number;
 }
 
