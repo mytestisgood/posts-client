@@ -19,6 +19,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { FeedbacksChangeStatusBody } from '../model/feedbacksChangeStatusBody';
+// @ts-ignore
 import { FeedbacksFeedbackBody } from '../model/feedbacksFeedbackBody';
 // @ts-ignore
 import { InlineResponse200 } from '../model/inlineResponse200';
@@ -28,6 +30,8 @@ import { InlineResponse20035 } from '../model/inlineResponse20035';
 import { InlineResponse20036 } from '../model/inlineResponse20036';
 // @ts-ignore
 import { InlineResponse20037 } from '../model/inlineResponse20037';
+// @ts-ignore
+import { InlineResponse20038 } from '../model/inlineResponse20038';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -97,6 +101,75 @@ export class FeedBackService {
             throw Error("key may not be null if value is not object or array");
         }
         return httpParams;
+    }
+
+    /**
+     * feedBack
+     * @param token 
+     * @param feedbacksChangeStatusBody 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiFeedbacksChangeStatusPost(token?: string, feedbacksChangeStatusBody?: FeedbacksChangeStatusBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20037>;
+    public apiFeedbacksChangeStatusPost(token?: string, feedbacksChangeStatusBody?: FeedbacksChangeStatusBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20037>>;
+    public apiFeedbacksChangeStatusPost(token?: string, feedbacksChangeStatusBody?: FeedbacksChangeStatusBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20037>>;
+    public apiFeedbacksChangeStatusPost(token?: string, feedbacksChangeStatusBody?: FeedbacksChangeStatusBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+
+        let localVarHeaders = this.defaultHeaders;
+        if (token !== undefined && token !== null) {
+            localVarHeaders = localVarHeaders.set('Token', String(token));
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/feedbacks/changeStatus`;
+        return this.httpClient.request<InlineResponse20037>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: feedbacksChangeStatusBody,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
     /**
@@ -176,9 +249,9 @@ export class FeedBackService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiFeedbacksProcessIdGetDetailsFeedBackGet(processId: string, departmentId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20037>;
-    public apiFeedbacksProcessIdGetDetailsFeedBackGet(processId: string, departmentId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20037>>;
-    public apiFeedbacksProcessIdGetDetailsFeedBackGet(processId: string, departmentId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20037>>;
+    public apiFeedbacksProcessIdGetDetailsFeedBackGet(processId: string, departmentId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20038>;
+    public apiFeedbacksProcessIdGetDetailsFeedBackGet(processId: string, departmentId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20038>>;
+    public apiFeedbacksProcessIdGetDetailsFeedBackGet(processId: string, departmentId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20038>>;
     public apiFeedbacksProcessIdGetDetailsFeedBackGet(processId: string, departmentId?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (processId === null || processId === undefined) {
             throw new Error('Required parameter processId was null or undefined when calling apiFeedbacksProcessIdGetDetailsFeedBackGet.');
@@ -225,7 +298,7 @@ export class FeedBackService {
         }
 
         let localVarPath = `/api/feedbacks/${this.configuration.encodeParam({name: "processId", value: processId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/getDetailsFeedBack`;
-        return this.httpClient.request<InlineResponse20037>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<InlineResponse20038>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

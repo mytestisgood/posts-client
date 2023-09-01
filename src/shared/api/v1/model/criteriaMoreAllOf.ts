@@ -11,8 +11,9 @@
  */
 
 
-export interface CriteriaUpdateProcessAllOf { 
-    location?: boolean;
-    year?: string;
+export interface CriteriaMoreAllOf { 
+    organizationId?: string;
+    employerId?: number;
+    departmentId?: string;
 }
 

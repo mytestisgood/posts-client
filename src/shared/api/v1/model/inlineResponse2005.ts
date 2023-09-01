@@ -15,5 +15,6 @@ import { InlineResponse2005ReportsCompensation } from './inlineResponse2005Repor
 export interface InlineResponse2005 { 
     message?: string;
     reportsCompensation?: Array<InlineResponse2005ReportsCompensation>;
+    code?: number;
 }
 

@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { InlineResponse2003ReportsDataProcesses } from '@shared/api';
+import { getMonthAndYearFromStringDate, getYearFromStringDate } from '@shared/helpers';
 import { ButtonComponent } from '@shared/ui';
 
 @Component({
@@ -11,5 +13,9 @@ import { ButtonComponent } from '@shared/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LastPaymentComponent {
+  @Input() public lastPayment: Array<InlineResponse2003ReportsDataProcesses> | undefined;
 
+  public mainText: string = 'ספטמבר';
+  protected readonly getYearFromStringDate = getYearFromStringDate;
+  protected readonly getMonthAndDateFromStringDate = getMonthAndYearFromStringDate;
 }

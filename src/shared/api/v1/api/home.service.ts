@@ -19,6 +19,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { InlineResponse200 } from '../model/inlineResponse200';
+// @ts-ignore
 import { InlineResponse2003 } from '../model/inlineResponse2003';
 // @ts-ignore
 import { InlineResponse2004 } from '../model/inlineResponse2004';

@@ -240,6 +240,76 @@ export class FilesService {
     }
 
     /**
+     * is negative file
+     * @param employerId 
+     * @param employerId2 
+     * @param token 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiDocumentsEmployerIdIsNegativeFileTodoGet(employerId: string, employerId2?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<boolean>;
+    public apiDocumentsEmployerIdIsNegativeFileTodoGet(employerId: string, employerId2?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<boolean>>;
+    public apiDocumentsEmployerIdIsNegativeFileTodoGet(employerId: string, employerId2?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<boolean>>;
+    public apiDocumentsEmployerIdIsNegativeFileTodoGet(employerId: string, employerId2?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (employerId === null || employerId === undefined) {
+            throw new Error('Required parameter employerId was null or undefined when calling apiDocumentsEmployerIdIsNegativeFileTodoGet.');
+        }
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (employerId2 !== undefined && employerId2 !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>employerId2, 'employer_id');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+        if (token !== undefined && token !== null) {
+            localVarHeaders = localVarHeaders.set('Token', String(token));
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/documents/${this.configuration.encodeParam({name: "employerId", value: employerId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/isNegativeFile todo`;
+        return this.httpClient.request<boolean>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * get employer processes
      * @param checkUnitType 
      * @param employerId 

@@ -15,5 +15,6 @@ import { InlineResponse2003ReportsData } from './inlineResponse2003ReportsData';
 export interface InlineResponse2003 { 
     message?: string;
     reportsData?: InlineResponse2003ReportsData;
+    code?: number;
 }
 

@@ -7,6 +7,7 @@ api/chat.service.ts
 api/comment.service.ts
 api/compensations.service.ts
 api/contacts.service.ts
+api/exceptions.service.ts
 api/feedBack.service.ts
 api/files.service.ts
 api/filesMyHr.service.ts
@@ -28,7 +29,6 @@ index.ts
 model/accountType.ts
 model/apiCompensationsBody.ts
 model/apiDocumentsBody.ts
-model/apiUploadBody.ts
 model/apicompensationsProductsCompany.ts
 model/apicompensationsupdateSentStatusCriteria.ts
 model/apigenerals1inquiriesInquiry.ts
@@ -37,6 +37,7 @@ model/apigenerals1newInquiryInquiry.ts
 model/apigeneralsbanksBankBranches.ts
 model/apigeneralscommentCriteria.ts
 model/apimtbuploadEmployeeDeclarationCriteria.ts
+model/apiprocesseschangeFileToNegativeCriteria.ts
 model/apiprocessesunlockProcessFilesCriteria.ts
 model/apiproductsfullCompanyBankAccount.ts
 model/apiproductsfullCompanyProduct.ts
@@ -50,6 +51,8 @@ model/compensationsSendBody.ts
 model/compensationsUpdateSentStatusBody.ts
 model/contactsEmployerContactsBody.ts
 model/criteriaBase.ts
+model/criteriaMore.ts
+model/criteriaMoreAllOf.ts
 model/criteriaProcess.ts
 model/criteriaProcessAllOf.ts
 model/criteriaUpdateProcess.ts
@@ -62,6 +65,9 @@ model/employersCreateEmployerOutBody.ts
 model/employersCreateUserOutBody.ts
 model/eventCode.ts
 model/feedbackLevel.ts
+model/feedbacksChangeStatusBody.ts
+model/feedbacksChangeStatusBodyCriteria.ts
+model/feedbacksChangeStatusBodyCriteriaAllOf.ts
 model/feedbacksFeedbackBody.ts
 model/fileType.ts
 model/generalsCommentBody.ts
@@ -110,17 +116,18 @@ model/inlineResponse20035Other.ts
 model/inlineResponse20036.ts
 model/inlineResponse20037.ts
 model/inlineResponse20038.ts
-model/inlineResponse20038Employees.ts
 model/inlineResponse20039.ts
-model/inlineResponse20039Items.ts
-model/inlineResponse20039TransferClause.ts
+model/inlineResponse20039Employees.ts
 model/inlineResponse2003ReportsData.ts
 model/inlineResponse2003ReportsDataProcesses.ts
 model/inlineResponse2004.ts
 model/inlineResponse20040.ts
+model/inlineResponse20040Items.ts
+model/inlineResponse20040TransferClause.ts
 model/inlineResponse20041.ts
 model/inlineResponse20042.ts
 model/inlineResponse20043.ts
+model/inlineResponse20044.ts
 model/inlineResponse2005.ts
 model/inlineResponse2005ReportsCompensation.ts
 model/inlineResponse2006.ts
@@ -148,6 +155,7 @@ model/processIdDeleteRefDocumentBody.ts
 model/processIdDownloadRefDocumentBody.ts
 model/processIdUploadsRefBody.ts
 model/processType.ts
+model/processesChangeFileToNegativeBody.ts
 model/processesCheckIsDateBody.ts
 model/processesDownloadPaymentsInstructionBody.ts
 model/processesIdAuthorizationReceiptCertificateBody.ts

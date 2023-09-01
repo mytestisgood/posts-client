@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { InlineResponse20043 } from '../model/inlineResponse20043';
+import { InlineResponse20044 } from '../model/inlineResponse20044';
 // @ts-ignore
 import { InlineResponse400 } from '../model/inlineResponse400';
 
@@ -101,9 +101,9 @@ export class BankService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiDepartmentsGetDepartmentBanksDepartmentIdGet(departmentId2: string, departmentId?: boolean, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20043>>;
-    public apiDepartmentsGetDepartmentBanksDepartmentIdGet(departmentId2: string, departmentId?: boolean, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20043>>>;
-    public apiDepartmentsGetDepartmentBanksDepartmentIdGet(departmentId2: string, departmentId?: boolean, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20043>>>;
+    public apiDepartmentsGetDepartmentBanksDepartmentIdGet(departmentId2: string, departmentId?: boolean, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20044>>;
+    public apiDepartmentsGetDepartmentBanksDepartmentIdGet(departmentId2: string, departmentId?: boolean, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20044>>>;
+    public apiDepartmentsGetDepartmentBanksDepartmentIdGet(departmentId2: string, departmentId?: boolean, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20044>>>;
     public apiDepartmentsGetDepartmentBanksDepartmentIdGet(departmentId2: string, departmentId?: boolean, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (departmentId2 === null || departmentId2 === undefined) {
             throw new Error('Required parameter departmentId2 was null or undefined when calling apiDepartmentsGetDepartmentBanksDepartmentIdGet.');
@@ -150,7 +150,7 @@ export class BankService {
         }
 
         let localVarPath = `/api/departments/getDepartmentBanks/${this.configuration.encodeParam({name: "departmentId2", value: departmentId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
-        return this.httpClient.request<Array<InlineResponse20043>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<InlineResponse20044>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -170,9 +170,9 @@ export class BankService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiGeneralsBanksGet(withBranches?: boolean, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20043>>;
-    public apiGeneralsBanksGet(withBranches?: boolean, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20043>>>;
-    public apiGeneralsBanksGet(withBranches?: boolean, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20043>>>;
+    public apiGeneralsBanksGet(withBranches?: boolean, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<InlineResponse20044>>;
+    public apiGeneralsBanksGet(withBranches?: boolean, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<InlineResponse20044>>>;
+    public apiGeneralsBanksGet(withBranches?: boolean, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<InlineResponse20044>>>;
     public apiGeneralsBanksGet(withBranches?: boolean, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -216,7 +216,7 @@ export class BankService {
         }
 
         let localVarPath = `/api/generals/banks`;
-        return this.httpClient.request<Array<InlineResponse20043>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<InlineResponse20044>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

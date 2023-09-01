@@ -18,10 +18,6 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
-// @ts-ignore
-import { InlineResponse200 } from '../model/inlineResponse200';
-// @ts-ignore
-import { InlineResponse20043 } from '../model/inlineResponse20043';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -32,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class GroupThingService {
+export class ExceptionsService {
 
     protected basePath = 'https://virtserver.swaggerhub.com/smarti/smarti/1.0.0';
     public defaultHeaders = new HttpHeaders();
@@ -94,23 +90,22 @@ export class GroupThingService {
     }
 
     /**
-     * get groupThing in process
+     * find exception for employer
      * @param processId 
      * @param departmentId 
      * @param token 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiProcessesGetGroupThingInProcessGet(processId?: string, departmentId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20043>;
-    public apiProcessesGetGroupThingInProcessGet(processId?: string, departmentId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20043>>;
-    public apiProcessesGetGroupThingInProcessGet(processId?: string, departmentId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20043>>;
-    public apiProcessesGetGroupThingInProcessGet(processId?: string, departmentId?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public apiExceptionsFindExceptionForEmployerProcessIdGet(processId: string, departmentId?: string, token?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<boolean>;
+    public apiExceptionsFindExceptionForEmployerProcessIdGet(processId: string, departmentId?: string, token?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<boolean>>;
+    public apiExceptionsFindExceptionForEmployerProcessIdGet(processId: string, departmentId?: string, token?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<boolean>>;
+    public apiExceptionsFindExceptionForEmployerProcessIdGet(processId: string, departmentId?: string, token?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (processId === null || processId === undefined) {
+            throw new Error('Required parameter processId was null or undefined when calling apiExceptionsFindExceptionForEmployerProcessIdGet.');
+        }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (processId !== undefined && processId !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>processId, 'processId');
-        }
         if (departmentId !== undefined && departmentId !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>departmentId, 'department_id');
@@ -150,8 +145,8 @@ export class GroupThingService {
             }
         }
 
-        let localVarPath = `/api/processes/getGroupThingInProcess`;
-        return this.httpClient.request<InlineResponse20043>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/exceptions/findExceptionForEmployer/${this.configuration.encodeParam({name: "processId", value: processId, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
+        return this.httpClient.request<boolean>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

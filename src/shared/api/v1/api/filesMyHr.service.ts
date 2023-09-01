@@ -19,8 +19,6 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { ApiUploadBody } from '../model/apiUploadBody';
-// @ts-ignore
 import { InlineResponse20031 } from '../model/inlineResponse20031';
 // @ts-ignore
 import { InlineResponse20032 } from '../model/inlineResponse20032';
@@ -58,6 +56,19 @@ export class FilesMyHrService {
         this.encoder = this.configuration.encoder || new CustomHttpParameterCodec();
     }
 
+    /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (const consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // @ts-ignore
     private addToHttpParams(httpParams: HttpParams, value: any, key?: string): HttpParams {
@@ -164,14 +175,14 @@ export class FilesMyHrService {
     /**
      * upload file to myHr get the opswatId
      * @param project 
-     * @param apiUploadBody 
+     * @param file 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiUploadPost(project?: string, apiUploadBody?: ApiUploadBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20031>;
-    public apiUploadPost(project?: string, apiUploadBody?: ApiUploadBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20031>>;
-    public apiUploadPost(project?: string, apiUploadBody?: ApiUploadBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20031>>;
-    public apiUploadPost(project?: string, apiUploadBody?: ApiUploadBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public apiUploadPost(project?: string, file?: Blob, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20031>;
+    public apiUploadPost(project?: string, file?: Blob, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20031>>;
+    public apiUploadPost(project?: string, file?: Blob, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20031>>;
+    public apiUploadPost(project?: string, file?: Blob, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
         if (project !== undefined && project !== null) {
@@ -195,14 +206,27 @@ export class FilesMyHrService {
             localVarHttpContext = new HttpContext();
         }
 
-
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json'
+            'multipart/form-data'
         ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+
+        const canConsumeForm = this.canConsumeForm(consumes);
+
+        let localVarFormParams: { append(param: string, value: any): any; };
+        let localVarUseForm = false;
+        let localVarConvertFormParamsToString = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        // see https://stackoverflow.com/questions/4007969/application-x-www-form-urlencoded-or-multipart-form-data
+        localVarUseForm = canConsumeForm;
+        if (localVarUseForm) {
+            localVarFormParams = new FormData();
+        } else {
+            localVarFormParams = new HttpParams({encoder: this.encoder});
+        }
+
+        if (file !== undefined) {
+            localVarFormParams = localVarFormParams.append('file', <any>file) as any || localVarFormParams;
         }
 
         let responseType_: 'text' | 'json' | 'blob' = 'json';
@@ -220,7 +244,7 @@ export class FilesMyHrService {
         return this.httpClient.request<InlineResponse20031>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: apiUploadBody,
+                body: localVarConvertFormParamsToString ? localVarFormParams.toString() : localVarFormParams,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

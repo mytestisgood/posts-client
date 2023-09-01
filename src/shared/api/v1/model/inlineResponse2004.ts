@@ -14,5 +14,6 @@
 export interface InlineResponse2004 { 
     message?: string;
     reportsFeedback?: Array<string>;
+    code?: number;
 }
 

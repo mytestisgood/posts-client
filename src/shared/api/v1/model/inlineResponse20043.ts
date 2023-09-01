@@ -9,12 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ApigeneralsbanksBankBranches } from './apigeneralsbanksBankBranches';
 
 
 export interface InlineResponse20043 { 
-    id?: string;
-    name?: string;
-    bank_branches?: Array<ApigeneralsbanksBankBranches>;
+    block_sum?: number;
+    num_file?: number;
+    group_things_ids?: Array<string>;
+    sent?: boolean;
+    code?: number;
 }
 

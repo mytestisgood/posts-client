@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl } from '@angular/forms';
-import { InlineResponse2005 } from '@shared/api';
+import { InlineResponse2004 } from '@shared/api';
 import { months } from '@shared/entities';
 import { formattedFromTextToNumericMonth } from '@shared/helpers';
 import { DestroyService } from '@shared/services';
@@ -24,7 +24,7 @@ import { takeUntil, tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardHomeTableComponent implements OnInit {
-  @Input() public compensationReport!: InlineResponse2005 | null;
+  @Input() public feedbackEmployerReport!: InlineResponse2004 | null;
   @Output() public changeYear: EventEmitter<number> = new EventEmitter<number>();
   @Output() public changeMonth: EventEmitter<number> = new EventEmitter<number>();
   public monthControl: FormControl = new FormControl;

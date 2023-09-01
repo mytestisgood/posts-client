@@ -1,17 +1,21 @@
 <tui-files>
-  <tui-file
-    *ngFor="let file of control.valueChanges | async"
-    class="file-uploaded"
-    [file]="file"
-    [leftContent]="icon"
-    [showDelete]="false"
-    [state]="isLoading"
-  >
-    <div
-      class="close-circle-24 remove-file-icon cursor-pointer"
-      (click)="removeFile(file)"
-    ></div>
-  </tui-file>
+  <div *ngFor="let file of control.valueChanges | async">
+    <tui-file
+      [ngClass]="file.isLoading ? 'hidden' : 'block'"
+      class="file-uploaded"
+      [file]="file"
+      [leftContent]="icon"
+      [showDelete]="false"
+    >
+      <div
+        class="close-circle-24 remove-file-icon cursor-pointer"
+        (click)="removeFile(file)"
+      ></div>
+    </tui-file>
+    <ng-container *ngIf="file.isLoading">
+      <ng-container *ngTemplateOutlet="fileLoadingTemplate"></ng-container>
+    </ng-container>
+  </div>
 </tui-files>
 
 <div
@@ -82,4 +86,15 @@
 
 <ng-template #icon>
   <div class="document-icon-32"></div>
+</ng-template>
+
+<ng-template #fileLoadingTemplate>
+  <div class="loading-file-block box-shadow-big rounded-l bg-white h-22 flex flex-row justify-center items-center">
+    <div class="flex flex-row justify-center items-center gap-8">
+      <div class="block-32px">
+        <tui-loader></tui-loader>
+      </div>
+      <div class="bright-turquoise-text-500 paragraph-text">Uploading...</div>
+    </div>
+  </div>
 </ng-template>

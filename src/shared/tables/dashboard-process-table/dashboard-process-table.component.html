@@ -1,5 +1,8 @@
 <div class="flex flex-col justify-between h-full">
-  <div class="mt-10 ml-7-5 mr-10 inline-block flex-1">
+  <div
+    *ngIf="items?.length; else loadingTemplate"
+    class="mt-10 ml-7-5 mr-10 inline-block flex-1"
+  >
     <table class="tui-table tui-table_layout_fixed process-table">
       <tbody>
         <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-6">
@@ -139,3 +142,10 @@
     ></smarti-table-pagination>
   </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <smarti-loader
+    [size]="'xl'"
+    [paddingTop15percent]="true"
+  ></smarti-loader>
+</ng-template>

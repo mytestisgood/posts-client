@@ -1,10 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HomeService, InlineResponse2004, InlineResponse2005 } from '@shared/api';
+import {
+  HomeService,
+  InlineResponse2003,
+  InlineResponse2004,
+  InlineResponse2005,
+} from '@shared/api';
 import { REGISTRATION_TOKEN } from '@shared/entities';
-import { formattedCurrentDateTo, formattedMonthAndYearDateTo } from '@shared/helpers';
+import {
+  formattedCurrentDateTo,
+  formattedMonthAndYearDateTo,
+  getCurrentMonthLastDayDate,
+  getCurrentMonthStartDayDate,
+  getDayOfWeekAndCurrentDayDate,
+} from '@shared/helpers';
 import { DashboardHomeSmallTableComponent, DashboardHomeTableComponent } from '@shared/tables';
-import { ButtonComponent, InputYearComponent, SelectComponent } from '@shared/ui';
+import { ButtonComponent, InputYearComponent, LoaderComponent, SelectComponent } from '@shared/ui';
 import { LocalStorageService } from '@shared/web-api';
 import { Observable } from 'rxjs';
 import {
@@ -24,23 +35,24 @@ import { LastPaymentComponent } from './last-payment/last-payment.component';
     CommonModule, ButtonComponent, SelectComponent, InputYearComponent,
     LastPaymentComponent, DashboardHomeTableComponent, InquiriesComponent, FeedsComponent,
     BalanceForCompensationComponent, DashboardHomeSmallTableComponent,
-    DashboardNotificationComponent,
+    DashboardNotificationComponent, LoaderComponent,
   ],
   templateUrl: './dashboard-home.component.html',
   styleUrls: ['./dashboard-home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardHomeComponent {
+  public startDateCurrentMonth: string = getCurrentMonthStartDayDate('yyyy-mm-dd');
+  public endDateCurrentMonth: string = getCurrentMonthLastDayDate('yyyy-mm-dd');
   public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
+  public $employerReport: Observable<InlineResponse2003> = this.homeService.apiReportsEmployerReportPost(this.token, {
+    employerId: '1',
+    organizationId: '2',
+    startDate: this.startDateCurrentMonth,
+    endDate: this.endDateCurrentMonth,
+    salaryMonth: true,
+  });
   public chats$: Observable<Array<object>> = this.homeService.apiChatsGet(
-    undefined,
-    undefined,
-    undefined,
-    this.token,
-  );
-  public employerReport: Observable<InlineResponse2004> = this.homeService.apiReportsFeedbackEmployerReportGet(
-    undefined,
-    undefined,
     undefined,
     undefined,
     undefined,
@@ -56,9 +68,18 @@ export class DashboardHomeComponent {
     undefined,
     this.token,
   );
+  public feedbackEmployerReport$: Observable<InlineResponse2004> = this.homeService.apiReportsFeedbackEmployerReportGet(
+   new Date().getFullYear().toString(),
+    new Date().getMonth().toString(),
+    '',
+    '',
+    '',
+    this.token,
+  );
   public year!: number;
   public month!: number;
-  public searchingDate!: string;
+  public searchingDate!: string | undefined;
+  protected readonly getDayOfWeekAndCurrentDayDate = getDayOfWeekAndCurrentDayDate;
 
   constructor(
     private readonly homeService: HomeService,

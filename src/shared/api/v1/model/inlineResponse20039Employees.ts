@@ -11,8 +11,8 @@
  */
 
 
-export interface CriteriaUpdateProcessAllOf { 
-    location?: boolean;
-    year?: string;
+export interface InlineResponse20039Employees { 
+    id?: string;
+    name?: string;
 }
 

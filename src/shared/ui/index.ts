@@ -14,6 +14,7 @@ export * from './input-phone/input-phone.component';
 export * from './input-search/input-search.component';
 export * from './input-textarea/input-textarea.component';
 export * from './input-year/input-year.component';
+export * from './loader/loader.component';
 export * from './notification/notification.component';
 export * from './radio/radio.component';
 export * from './radio-block-payment/radio-block-payment.component';

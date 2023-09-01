@@ -64,6 +64,10 @@ tui-files {
   }
 }
 
+tui-files section.t-files {
+  overflow: initial!important;
+}
+
 tui-checkbox {
   width: 20px!important;
   height: 20px!important;

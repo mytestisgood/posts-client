@@ -6,19 +6,19 @@
       <div
         class="block-w64-h28 bright-turquoise-text-500 medium-text bg-neutrals-20 rounded-2ls px-4 py-2 text-center mt-2"
       >
-        4
+        {{ openCompensations }}
       </div>
     </div>
     <div>
       <div class="neutrals-text-300 paragraph-text text-center">סופקו</div>
       <div class="block-w64-h28 neutrals-text-950 medium-text bg-neutrals-20 rounded-2ls px-4 py-2 text-center mt-2">
-        5
+        {{ closedCompensations }}
       </div>
     </div>
     <div>
       <div class="pumpkin-text-500 paragraph-text text-center">סופקו</div>
       <div class="block-w64-h28 pumpkin-text-500 medium-text bg-neutrals-20 rounded-2ls px-4 py-2 text-center mt-2">
-        9
+        {{ (openCompensations ?? 0) + (closedCompensations ?? 0) }}
       </div>
     </div>
   </div>

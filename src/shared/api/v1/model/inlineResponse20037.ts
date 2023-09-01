@@ -12,11 +12,7 @@
 
 
 export interface InlineResponse20037 { 
-    count_employee?: number;
-    fix?: number;
-    failed?: number;
-    sent?: number;
-    not_sent?: number;
+    result?: string;
     code?: number;
 }
 

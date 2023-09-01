@@ -35,6 +35,7 @@ tags:
   - name: GroupThing
   - name: MonthlyTransferBlock
   - name: Bank
+  - name: Exceptions
 paths:
   /api/leads/createLead:
     post:
@@ -460,16 +461,18 @@ paths:
                       file_fully_defrayed: "0,"
                       mtb_defrayed: "0,"
                       mtb_not_defrayed: 0
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/reports/feedbackEmployerReport:
@@ -538,16 +541,18 @@ paths:
                   value:
                     message: success
                     reportsFeedback: []
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/reports/CompensationReport:
@@ -637,16 +642,18 @@ paths:
                         employee_identifier: "040626319"
                         employee_last_name: ישראל
                         product_type: provident
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes:
@@ -2380,6 +2387,55 @@ paths:
               example: bad request
       servers:
         - url: https://api.xsmart-staging.com
+  /api/processes/changeFileToNegative:
+    post:
+      tags:
+        - Processes
+      description: change file to negative
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/processes_changeFileToNegative_body'
+            example:
+              mtbs:
+                - 10056443
+              department_id: 2
+              comment: 111
+              criteria:
+                year: 2023
+                employerId: 2
+                organizationId: "1"
+                departmentId: "2"
+                page: 1
+                limit: 15
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_21'
+              example:
+                result: true
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                type: string
+              example: bad request
+      servers:
+        - url: https://api.xsmart-staging.com
   /api/generals/comment:
     post:
       tags:
@@ -3306,6 +3362,53 @@ paths:
               example: Successfully deleted
       servers:
         - url: https://api.xsmart-staging.com
+  /api/documents/{employerId}/isNegativeFile todo:
+    get:
+      tags:
+        - Files
+      description: is negative file
+      parameters:
+        - name: employerId
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: 2
+        - name: employer_id
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 2
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: boolean
+              example: true
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                type: boolean
+              example: true
+      servers:
+        - url: https://api.xsmart-staging.com
   /api/upload:
     post:
       tags:
@@ -3322,9 +3425,12 @@ paths:
           example: smarti-dev
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: '#/components/schemas/api_upload_body'
+            example:
+              file:
+                externalValue: http://example.com/examples/example.pdf
       responses:
         "200":
           description: ok
@@ -3681,6 +3787,58 @@ paths:
               example: "true"
       servers:
         - url: https://api.xsmart-staging.com
+  /api/feedbacks/changeStatus:
+    post:
+      tags:
+        - FeedBack
+      description: feedBack
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/feedbacks_changeStatus_body'
+            example:
+              content_type: groupthing
+              criteria:
+                departmentId: "2"
+                employerId: 2
+                organizationId: "1"
+                processId: "74429"
+                page: 1
+                limit: 15
+              ids:
+                - 578813
+              status: in_treatment_manufacturer
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_37'
+              example:
+                result: true
+                code: 200
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_37'
+              example:
+                result: false
+                code: 400
+      servers:
+        - url: https://api.xsmart-staging.com
   /api/feedbacks/{processId}/getDetailsFeedBack:
     get:
       tags:
@@ -3717,7 +3875,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_37'
+                $ref: '#/components/schemas/inline_response_200_38'
               example:
                 count_employee: 20
                 fix: 0
@@ -3782,27 +3940,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_38'
-              example:
-                employees:
-                  - id: 568301
-                    name: אביעד לוזונ 034996447
-                products:
-                  - id: 454
-                    name: הראל חברה לביטוח ביטוח מנהלים  0
-                employer_products:
-                  - id: 81534
-                    name: הראל חברה לביטוח ביטוח מנהלים  130
+                $ref: '#/components/schemas/inline_response_200_39'
+              examples:
+                "0":
+                  value:
+                    employees:
+                      - id: 568301
+                        name: אביעד לוזונ 034996447
+                    products:
+                      - id: 454
+                        name: הראל חברה לביטוח ביטוח מנהלים  0
+                    employer_products:
+                      - id: 81534
+                        name: הראל חברה לביטוח ביטוח מנהלים  130
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/mtb:
@@ -3865,60 +4027,64 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_39'
-              example:
-                items:
-                  - id: 10038422
-                    salary_month: 2017-01-01
-                    updated_at: 2023-01-10 17:58:15.806868
-                    deposit_type: regular
-                    salary_level: other
-                    is_employee_declaration: false
-                    deposit_status: wage_worker
-                    salary: 21000
-                    employee_status: daily
-                    employee_status_start_date: 2016-04-01
-                    work_month_percentage: 100
-                    is_relevant: true
-                    amount: 393
-                    employee_id: 568301
-                    department_id: 2
-                    first_name: אביעד
-                    last_name: לוזונ
-                    personal_id: "034996447"
-                    employer_product_code: "130"
-                    employer_company_id: 90
-                    employer_product_name: 'הראל חברה לביטוח ביטוח מנהלים '
-                    section14: false
-                    employer_product_type: executive
-                    product_code: 0
-                    product_id: 454
-                    company_id: 90
-                    company_name: הראל חברה לביטוח
-                    sum_ipi_employer: 393
-                    status: not_sent
-                    file_type: ongoing_payment
-                    defrayal_error: []
-                    transfer_clause:
-                      - clause_type: ipi_employer
-                        transfer_sum: 393
-                        transfer_percent: 1.87
-                        exempt_sum: 0
-                        id: 22071162
-                    process_type: employer_payment
-                    is_change: false
-                total: 1
-                lastPage: 1
+                $ref: '#/components/schemas/inline_response_200_40'
+              examples:
+                "0":
+                  value:
+                    items:
+                      - id: 10038422
+                        salary_month: 2017-01-01
+                        updated_at: 2023-01-10 17:58:15.806868
+                        deposit_type: regular
+                        salary_level: other
+                        is_employee_declaration: false
+                        deposit_status: wage_worker
+                        salary: 21000
+                        employee_status: daily
+                        employee_status_start_date: 2016-04-01
+                        work_month_percentage: 100
+                        is_relevant: true
+                        amount: 393
+                        employee_id: 568301
+                        department_id: 2
+                        first_name: אביעד
+                        last_name: לוזונ
+                        personal_id: "034996447"
+                        employer_product_code: "130"
+                        employer_company_id: 90
+                        employer_product_name: 'הראל חברה לביטוח ביטוח מנהלים '
+                        section14: false
+                        employer_product_type: executive
+                        product_code: 0
+                        product_id: 454
+                        company_id: 90
+                        company_name: הראל חברה לביטוח
+                        sum_ipi_employer: 393
+                        status: not_sent
+                        file_type: ongoing_payment
+                        defrayal_error: []
+                        transfer_clause:
+                          - clause_type: ipi_employer
+                            transfer_sum: 393
+                            transfer_percent: 1.87
+                            exempt_sum: 0
+                            id: 22071162
+                        process_type: employer_payment
+                        is_change: false
+                    total: 1
+                    lastPage: 1
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/mtb/createOrUpdateMtbGroup:
@@ -3940,39 +4106,45 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/mtb_createOrUpdateMtbGroup_body'
-            example:
-              ids:
-                - 580948
-              bank_account_id: 1532
-              product_id: 842
-              group_name: "44"
-              confirmation: 0
-              type: groupthing
-              criteria:
-                processId: 74886
-                department_id: 2
-                page: 1
-                limit: 15
+            examples:
+              "0":
+                value:
+                  ids:
+                    - 580948
+                  bank_account_id: 1532
+                  product_id: 842
+                  group_name: "44"
+                  confirmation: 0
+                  type: groupthing
+                  criteria:
+                    processId: 74886
+                    department_id: 2
+                    page: 1
+                    limit: 15
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_40'
+                $ref: '#/components/schemas/inline_response_200_41'
               example:
                 success: true
                 message: updated finish
                 groups_count: 1
                 mtbs_count: 2
+                code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-              example:
-                message: NoneType object has no attribute department_bank_account_id
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: NoneType object has no attribute department_bank_account_id
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/mtb/groupEmployees:
@@ -3994,32 +4166,40 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/mtb_groupEmployees_body'
-            example:
-              ids:
-                - 10056439
-                - 10056440
-              criteria:
-                processId: 74896
-                department_id: 2
-                page: 1
-                limit: 15
+            examples:
+              "0":
+                value:
+                  ids:
+                    - 10056439
+                    - 10056440
+                  criteria:
+                    processId: 74896
+                    department_id: 2
+                    page: 1
+                    limit: 15
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-              example:
-                message: success
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: success
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-              example:
-                message: error
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/mtb/groupHistory/{processId}:
@@ -4060,25 +4240,27 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_41'
-              example:
-                - id: 92999
-                  employee_chr_id: 513425
-                  original_employer_product_id: 81002
-                  original_group_name: כללי 2816
-                  original_group_id: 66926
-                  current_group_id: 66884
-                  current_group_name: הראל
-                  employee_name: טל ראובן ברמן
-                  identifier: "057187452"
-                  product_code: 0
-                  product_name: 'כלל חברה לביטוח ביטוח מנהלים '
-                  employer_product_code: 57
-                  employer_product_name: 'כלל א.כ.ע '
-                  current_product_name: מקפת תקציבית
-                  current_product_code: 1304
-                  current_employer_product_name: כלל א.כ.ע
-                  current_employer_product_code: 57
+                  $ref: '#/components/schemas/inline_response_200_42'
+              examples:
+                "0":
+                  value:
+                    - id: 92999
+                      employee_chr_id: 513425
+                      original_employer_product_id: 81002
+                      original_group_name: כללי 2816
+                      original_group_id: 66926
+                      current_group_id: 66884
+                      current_group_name: הראל
+                      employee_name: טל ראובן ברמן
+                      identifier: "057187452"
+                      product_code: 0
+                      product_name: 'כלל חברה לביטוח ביטוח מנהלים '
+                      employer_product_code: 57
+                      employer_product_name: 'כלל א.כ.ע '
+                      current_product_name: מקפת תקציבית
+                      current_product_code: 1304
+                      current_employer_product_name: כלל א.כ.ע
+                      current_employer_product_code: 57
         "400":
           description: bad request
           content:
@@ -4125,17 +4307,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-              example:
-                message: ok
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: ok
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-              example:
-                message: error
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/getGroupThingInProcess:
@@ -4174,22 +4362,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_42'
+                $ref: '#/components/schemas/inline_response_200_43'
               example:
                 num_file: 0
                 group_things_ids:
                   - 580862
                 sent: false
+                code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
+                $ref: '#/components/schemas/inline_response_200'
               examples:
                 "0":
                   value:
                     message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/generals/banks:
@@ -4222,15 +4412,17 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_43'
-              example:
-                id: "1"
-                name: בנק יהב לעובדי המדינה בע"מ 4
-                bank_branches:
-                  - id: "2"
-                    number: "7"
-                    bank_id: "1"
-                    name: מלחה ירושלים 7
+                  $ref: '#/components/schemas/inline_response_200_44'
+              examples:
+                "0":
+                  value:
+                    id: "1"
+                    name: בנק יהב לעובדי המדינה בע"מ 4
+                    bank_branches:
+                      - id: "2"
+                        number: "7"
+                        bank_id: "1"
+                        name: מלחה ירושלים 7
         "400":
           description: bad request
           content:
@@ -4281,14 +4473,16 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_43'
-              example:
-                id: "1"
-                name: בנק יהב לעובדי המדינה בע"מ 4
-                bank_branches:
-                  - id: "2"
-                    number: "7"
-                    bank_id: "1"
+                  $ref: '#/components/schemas/inline_response_200_44'
+              examples:
+                "0":
+                  value:
+                    id: "1"
+                    name: בנק יהב לעובדי המדינה בע"מ 4
+                    bank_branches:
+                      - id: "2"
+                        number: "7"
+                        bank_id: "1"
         "400":
           description: bad request
           content:
@@ -4299,6 +4493,53 @@ paths:
                 "0":
                   value:
                     message: failure
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/exceptions/findExceptionForEmployer/{processId}:
+    get:
+      tags:
+        - Exceptions
+      description: find exception for employer
+      parameters:
+        - name: department_id
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 2
+        - name: processId
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: 74896
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: boolean
+              example: true
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                type: boolean
+              example: false
       servers:
         - url: https://api.xsmart-staging.com
 components:
@@ -4589,6 +4830,17 @@ components:
         - notRelevant
     CriteriaUpdateProcess:
       allOf:
+        - $ref: '#/components/schemas/CriteriaMore'
+        - type: object
+          properties:
+            location:
+              type: boolean
+              example: false
+            year:
+              type: string
+              example: "2023"
+    CriteriaMore:
+      allOf:
         - $ref: '#/components/schemas/CriteriaBase'
         - type: object
           properties:
@@ -4601,12 +4853,6 @@ components:
             departmentId:
               type: string
               example: "2"
-            location:
-              type: boolean
-              example: false
-            year:
-              type: string
-              example: "2023"
     CriteriaProcess:
       allOf:
         - $ref: '#/components/schemas/CriteriaBase'
@@ -4767,6 +5013,8 @@ components:
           type: string
         reportsData:
           $ref: '#/components/schemas/inline_response_200_3_reportsData'
+        code:
+          type: integer
     inline_response_200_4:
       type: object
       properties:
@@ -4776,6 +5024,8 @@ components:
           type: array
           items:
             type: string
+        code:
+          type: integer
     inline_response_200_5:
       type: object
       properties:
@@ -4785,6 +5035,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/inline_response_200_5_reportsCompensation'
+        code:
+          type: integer
     inline_response_200_6:
       type: object
       properties:
@@ -5237,6 +5489,26 @@ components:
           type: boolean
         code:
           type: integer
+    apiprocesseschangeFileToNegative_criteria:
+      type: object
+      properties:
+        year:
+          type: integer
+        additionalProperties:
+          $ref: '#/components/schemas/CriteriaMore'
+    processes_changeFileToNegative_body:
+      type: object
+      properties:
+        mtbs:
+          type: array
+          items:
+            type: integer
+        department_id:
+          type: integer
+        comment:
+          type: integer
+        criteria:
+          $ref: '#/components/schemas/apiprocesseschangeFileToNegative_criteria'
     apigeneralscomment_criteria:
       type: object
       properties:
@@ -5629,7 +5901,34 @@ components:
           $ref: '#/components/schemas/inline_response_200_30'
         code:
           type: integer
+    feedbacks_changeStatus_body:
+      type: object
+      properties:
+        content_type:
+          type: string
+        criteria:
+          allOf:
+            - $ref: '#/components/schemas/CriteriaMore'
+            - type: object
+              properties:
+                organizationId:
+                  type: string
+                employerId:
+                  type: integer
+        ids:
+          type: array
+          items:
+            type: integer
+        status:
+          $ref: '#/components/schemas/ManualStatus'
     inline_response_200_37:
+      type: object
+      properties:
+        result:
+          type: string
+        code:
+          type: integer
+    inline_response_200_38:
       type: object
       properties:
         count_employee:
@@ -5644,31 +5943,35 @@ components:
           type: integer
         code:
           type: integer
-    inline_response_200_38:
+    inline_response_200_39:
       type: object
       properties:
         employees:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_38_employees'
+            $ref: '#/components/schemas/inline_response_200_39_employees'
         products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_38_employees'
+            $ref: '#/components/schemas/inline_response_200_39_employees'
         employer_products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_38_employees'
-    inline_response_200_39:
+            $ref: '#/components/schemas/inline_response_200_39_employees'
+        code:
+          type: integer
+    inline_response_200_40:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_39_items'
+            $ref: '#/components/schemas/inline_response_200_40_items'
         total:
           type: integer
         lastPage:
+          type: integer
+        code:
           type: integer
     mtb_createOrUpdateMtbGroup_body:
       type: object
@@ -5689,7 +5992,7 @@ components:
           type: string
         confirmation:
           type: integer
-    inline_response_200_40:
+    inline_response_200_41:
       type: object
       properties:
         success:
@@ -5700,6 +6003,8 @@ components:
           type: integer
         mtbs_count:
           type: integer
+        code:
+          type: integer
     mtb_groupEmployees_body:
       type: object
       properties:
@@ -5709,7 +6014,7 @@ components:
             type: integer
         criteria:
           $ref: '#/components/schemas/CriteriaProcess'
-    inline_response_200_41:
+    inline_response_200_42:
       type: object
       properties:
         id:
@@ -5767,7 +6072,7 @@ components:
             type: integer
         criteria:
           $ref: '#/components/schemas/apimtbuploadEmployeeDeclaration_criteria'
-    inline_response_200_42:
+    inline_response_200_43:
       type: object
       properties:
         block_sum:
@@ -5780,6 +6085,8 @@ components:
             type: string
         sent:
           type: boolean
+        code:
+          type: integer
     apigeneralsbanks_bank_branches:
       type: object
       properties:
@@ -5791,7 +6098,7 @@ components:
           type: string
         name:
           type: string
-    inline_response_200_43:
+    inline_response_200_44:
       type: object
       properties:
         id:
@@ -6309,14 +6616,14 @@ components:
           type: array
           items:
             type: integer
-    inline_response_200_38_employees:
+    inline_response_200_39_employees:
       type: object
       properties:
         id:
           type: string
         name:
           type: string
-    inline_response_200_39_transfer_clause:
+    inline_response_200_40_transfer_clause:
       type: object
       properties:
         clause_type:
@@ -6329,7 +6636,7 @@ components:
           type: integer
         id:
           type: integer
-    inline_response_200_39_items:
+    inline_response_200_40_items:
       type: object
       properties:
         id:
@@ -6410,7 +6717,7 @@ components:
         transfer_clause:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_39_transfer_clause'
+            $ref: '#/components/schemas/inline_response_200_40_transfer_clause'
         process_type:
           $ref: '#/components/schemas/ProcessType'
         is_change:

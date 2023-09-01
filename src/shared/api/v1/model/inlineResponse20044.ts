@@ -9,10 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ApigeneralsbanksBankBranches } from './apigeneralsbanksBankBranches';
 
 
-export interface CriteriaUpdateProcessAllOf { 
-    location?: boolean;
-    year?: string;
+export interface InlineResponse20044 { 
+    id?: string;
+    name?: string;
+    bank_branches?: Array<ApigeneralsbanksBankBranches>;
 }
 

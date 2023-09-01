@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { ProcessesService } from '@shared/api';
 import { ProcessTableItems } from '@shared/entities';
 import { DestroyService } from '@shared/services';
-import { InputCheckboxComponent, TablePaginationComponent } from '@shared/ui';
+import { InputCheckboxComponent, LoaderComponent, TablePaginationComponent } from '@shared/ui';
 import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-dashboard-process-table',
   standalone: true,
-  imports: [CommonModule, InputCheckboxComponent, TablePaginationComponent],
+  imports: [CommonModule, InputCheckboxComponent, TablePaginationComponent, LoaderComponent],
   templateUrl: './dashboard-process-table.component.html',
   styleUrls: ['./dashboard-process-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -11,8 +11,11 @@
  */
 
 
-export interface CriteriaUpdateProcessAllOf { 
-    location?: boolean;
-    year?: string;
+export interface FeedbacksChangeStatusBodyCriteria { 
+    page?: number;
+    limit?: number;
+    organizationId?: string;
+    employerId?: number;
+    departmentId?: string;
 }
 

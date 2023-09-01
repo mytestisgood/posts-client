@@ -44,6 +44,10 @@ body {
   display: inline-block;
 }
 
+.hidden {
+  display: none!important;
+}
+
 .items-center {
   align-items: center;
 }

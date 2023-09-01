@@ -9,10 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { CriteriaMore } from './criteriaMore';
 
 
-export interface CriteriaUpdateProcessAllOf { 
-    location?: boolean;
-    year?: string;
+export interface ApiprocesseschangeFileToNegativeCriteria { 
+    year?: number;
+    additionalProperties?: CriteriaMore;
 }
 

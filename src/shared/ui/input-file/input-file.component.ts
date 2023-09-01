@@ -1,10 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, FormControlStatus, ReactiveFormsModule } from '@angular/forms';
 import { FilesMyHrService, InlineResponse20031 } from '@shared/api';
+import { FileWithLoading } from '@shared/entities';
 import { DestroyService } from '@shared/services';
-import { TuiLinkModule, TuiSvgModule } from '@taiga-ui/core';
-import { TuiFileState, TuiInputFilesModule, TuiMarkerIconModule } from '@taiga-ui/kit';
+import { TuiLinkModule, TuiLoaderModule, TuiSvgModule } from '@taiga-ui/core';
+import { TuiInputFilesModule, TuiMarkerIconModule } from '@taiga-ui/kit';
 import { BehaviorSubject, of, switchMap, takeUntil } from 'rxjs';
 
 @Component({
@@ -17,6 +25,7 @@ import { BehaviorSubject, of, switchMap, takeUntil } from 'rxjs';
     TuiMarkerIconModule,
     TuiLinkModule,
     TuiSvgModule,
+    TuiLoaderModule,
   ],
   templateUrl: './input-file.component.html',
   styleUrls: ['./input-file.component.scss'],
@@ -26,14 +35,16 @@ export class InputFileComponent implements OnInit {
   @Input() public customWidth!: string;
   @Input() public customHeight!: string;
   @Input() public multiple: boolean = false;
-  @Input() public control: FormControl<File[] | null> = new FormControl([]);
+  @Input() public control: FormControl<FileWithLoading[] | null> = new FormControl([]);
   @Output() public fileUploaded: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  public isLoading: TuiFileState = 'loading';
+  public currentFile!: FileWithLoading;
+  public id!: string | undefined;
 
   constructor(
     private readonly filesMyHrService: FilesMyHrService,
     private readonly destroy$: DestroyService,
+    private readonly cdr: ChangeDetectorRef,
   ) {
   }
 
@@ -41,14 +52,26 @@ export class InputFileComponent implements OnInit {
     this.filesMyHrService.apiStatusGet();
     this.control.valueChanges.pipe(
       switchMap(value => {
-        if (value === null) {
+        if (value?.length === 0) {
           return of();
         }
 
-        return this.filesMyHrService.apiUploadPost('smarti-dev', { file: value.at(-1) });
+        this.currentFile = value?.at(-1) as FileWithLoading;
+
+        if (!this.currentFile?.isUploaded) {
+          this.currentFile.isLoading = true;
+          this.currentFile.isUploaded = true;
+        }
+
+        return this.filesMyHrService.apiUploadPost('smarti-dev', this.currentFile);
       }),
       takeUntil(this.destroy$),
-    ).subscribe((response: InlineResponse20031) => console.log(response));
+    )
+      .subscribe((response: InlineResponse20031) => {
+          this.id = response.opswatId;
+          this.currentFile.isLoading = false;
+          this.cdr.detectChanges();
+      });
     this.control.statusChanges.pipe(
       takeUntil(this.destroy$),
     ).subscribe((status: FormControlStatus) => {

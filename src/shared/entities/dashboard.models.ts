@@ -1,5 +1,6 @@
 import { FormControl } from '@angular/forms';
 import { InlineResponse2006Items, StatusChat } from '@shared/api';
+import { FileWithLoading } from './common.models';
 
 export interface DashboardHeaderGroupControls {
   organization: FormControl<string | number | null>;
@@ -13,7 +14,7 @@ export interface DashboardChatAddFileGroupControls {
   cashRegister: FormControl<string | null>;
   employee: FormControl<string | null>;
   referenceContent: FormControl<string | null>;
-  file: FormControl<File[] | null>;
+  file: FormControl<FileWithLoading[] | null>;
 }
 
 export interface DashboardMessagesItem {

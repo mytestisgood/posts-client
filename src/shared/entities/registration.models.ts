@@ -1,4 +1,5 @@
 import { FormControl } from '@angular/forms';
+import { FileWithLoading } from './common.models';
 
 export const REGISTRATION_TOKEN: string = 'registrationToken';
 export const DEPARTMENT_ID: string = 'departmentId';
@@ -41,7 +42,7 @@ export interface PersonalInfoControls {
 }
 
 export interface UploadDocumentsControls {
-  files: FormControl<File[] | null>;
+  files: FormControl<FileWithLoading[] | null>;
 }
 
 export interface PaymentMethodControls {

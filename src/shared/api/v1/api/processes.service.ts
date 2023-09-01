@@ -63,6 +63,8 @@ import { ProcessIdDownloadRefDocumentBody } from '../model/processIdDownloadRefD
 // @ts-ignore
 import { ProcessIdUploadsRefBody } from '../model/processIdUploadsRefBody';
 // @ts-ignore
+import { ProcessesChangeFileToNegativeBody } from '../model/processesChangeFileToNegativeBody';
+// @ts-ignore
 import { ProcessesCheckIsDateBody } from '../model/processesCheckIsDateBody';
 // @ts-ignore
 import { ProcessesDownloadPaymentsInstructionBody } from '../model/processesDownloadPaymentsInstructionBody';
@@ -155,6 +157,75 @@ export class ProcessesService {
             throw Error("key may not be null if value is not object or array");
         }
         return httpParams;
+    }
+
+    /**
+     * change file to negative
+     * @param token 
+     * @param processesChangeFileToNegativeBody 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public apiProcessesChangeFileToNegativePost(token?: string, processesChangeFileToNegativeBody?: ProcessesChangeFileToNegativeBody, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<InlineResponse20021>;
+    public apiProcessesChangeFileToNegativePost(token?: string, processesChangeFileToNegativeBody?: ProcessesChangeFileToNegativeBody, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<InlineResponse20021>>;
+    public apiProcessesChangeFileToNegativePost(token?: string, processesChangeFileToNegativeBody?: ProcessesChangeFileToNegativeBody, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<InlineResponse20021>>;
+    public apiProcessesChangeFileToNegativePost(token?: string, processesChangeFileToNegativeBody?: ProcessesChangeFileToNegativeBody, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+
+        let localVarHeaders = this.defaultHeaders;
+        if (token !== undefined && token !== null) {
+            localVarHeaders = localVarHeaders.set('Token', String(token));
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/processes/changeFileToNegative`;
+        return this.httpClient.request<InlineResponse20021>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: processesChangeFileToNegativeBody,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
     /**
