@@ -9,7 +9,7 @@ export * from './dashboard-home/feeds/feeds.component';
 export * from './dashboard-home/balance-for-compensation/balance-for-compensation.component';
 export * from './dashboard-processes';
 export * from './dashboard-employer/dashboard-employer.component';
-export * from './dashboard-balance/dashboard-balance.component';
+export * from './dashboard-compensations/dashboard-compensations.component';
 export * from './dashboard-documents/dashboard-documents.component';
 export * from './dashboard-cash-register/dashboard-cash-register.component';
 export * from './dashboard-inquiries/dashboard-inquiries.component';

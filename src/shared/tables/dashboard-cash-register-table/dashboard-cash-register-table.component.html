@@ -1,5 +1,8 @@
 <div class="flex flex-col justify-between h-full">
-  <div class="mt-4 ml-7-5 mr-10 inline-block flex-1">
+  <div
+    class="mt-4 ml-7-5 mr-10 inline-block flex-1"
+    *ngIf="allProducts?.length; else loadingTemplate"
+  >
     <table class="tui-table tui-table_layout_fixed cash-register-table">
       <tbody>
         <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-6">
@@ -53,24 +56,32 @@
           </th>
         </tr>
         <tr
-          *ngFor="let _ of ' '.repeat(7).split(''); let index = index"
+          *ngFor="let product of allProducts; let index = index"
           class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
         >
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">29920657</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">800</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">
-            בנק לאומי לישראל בע"מ
-          </td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">
-            512237744
-          </td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">1304</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">קופת גמל</td>
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">
-            מקפת תקציבית
+            {{ product.account }}
           </td>
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">
-            מגדל מקפת קרנות פנסיה וקופות גמל בע"מ
+            {{ product.bank_number }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">
+            {{ product.bank_name }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">
+            {{ product.company_name }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">
+            {{ product.code }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">
+            {{ product.name }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">
+            {{ product.full_name }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">
+            {{ product.company_name }}
           </td>
         </tr>
       </tbody>
@@ -83,3 +94,10 @@
     ></smarti-table-pagination>
   </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <smarti-loader
+    [size]="'xl'"
+    [paddingTop15percent]="true"
+  ></smarti-loader>
+</ng-template>

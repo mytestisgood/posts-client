@@ -13,6 +13,7 @@
         [customHeight]="'56px'"
         [typeClass]="'confirm'"
         [hasMessageIcon]="true"
+        (buttonClicked)="openAddFileDialog(addFileDialogTemplate)"
       ></smarti-button>
     </div>
     <div>
@@ -38,11 +39,19 @@
   </div>
   <div class="flex flex-row gap-6">
     <div class="w-full h-744 bg-white box-shadow-big mt-4 rounded-l mb-34">
-      <smarti-dashboard-chat-window [chat]="currentActiveChat()"></smarti-dashboard-chat-window>
+      <ng-container *ngIf="chat$ | async as chat">
+        <smarti-dashboard-chat-window [chat]="chat"></smarti-dashboard-chat-window>
+      </ng-container>
+      <ng-container *ngIf="isLoadingChatWindow">
+        <smarti-loader
+          [size]="'xl'"
+          [paddingTop30percent]="true"
+        ></smarti-loader>
+      </ng-container>
     </div>
     <div class="block-w632-h744 bg-white box-shadow-big mt-4 rounded-l mb-34">
       <smarti-dashboard-chat-list
-        [chatItems]="chatItems"
+        [chatItems]="chatItems$ | async"
         (changeCurrentChatId)="changeCurrentChatId($event)"
       ></smarti-dashboard-chat-list>
     </div>
@@ -50,3 +59,15 @@
 </div>
 
 <ng-template #customDropdownContent></ng-template>
+
+<ng-template
+  #addFileDialogTemplate
+  let-observer
+>
+  <smarti-create-new-chat-dialog
+    [observer]="observer"
+    (sendRequest)="onCreateNewChatSendRequest($event)"
+    [form]="createNewChatForm"
+    [token]="token"
+  ></smarti-create-new-chat-dialog>
+</ng-template>

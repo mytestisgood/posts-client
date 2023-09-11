@@ -9,15 +9,15 @@ const currentMonth: string = dateToday.toLocaleString('default', { month: 'short
 export function formattedCurrentDateTo(format: DateFormatView): string {
   const today: Date = new Date();
   const yyyy: number = today.getFullYear();
-  let mm: number | string = today.getMonth() + 1;
-  let dd: number | string = today.getDate();
+  const mm: number | string = today.getMonth() + 1;
+  const dd: number | string = today.getDate();
 
-  if (dd < 10) {
-    dd = '0' + dd;
-  }
-  if (mm < 10) {
-    mm = '0' + mm;
-  }
+  // if (dd < 10) {
+  //   dd = '0' + dd;
+  // }
+  // if (mm < 10) {
+  //   mm = '0' + mm;
+  // }
   return doFormatDate(format, dd, mm, yyyy);
 }
 
@@ -51,6 +51,23 @@ function doFormatDate(format: DateFormatView, dd: string | number, mm: string | 
       return newMm + '-' + yyyy;
     case 'yyyy-mm':
       return yyyy + '-' + newMm;
+  }
+}
+
+export function getCalendarDateFromStringDate(format: DateFormatView, date: string | undefined): string {
+  if (!date) {
+    return '';
+  }
+
+  const dateArray: string[] = date.split(' ');
+
+  switch (format) {
+    case 'dd-mm-yyyy':
+      return dateArray[0];
+    case 'yyyy-mm-dd':
+      return dateArray[0];
+    default:
+      return '';
   }
 }
 
@@ -91,6 +108,7 @@ export function getMonthAndYearFromStringDate(format: DateFormatView, date: stri
 export function formattedFromTextToNumericMonth(month: string): number {
   return months.indexOf(month) + 1;
 }
+
 export function getCurrentMonthStartDayDate(format: DateFormatView): string {
   const firstDay: Date = new Date(dateToday.getFullYear(), dateToday.getMonth(), 1);
 
@@ -105,4 +123,32 @@ export function getCurrentMonthLastDayDate(format: DateFormatView): string {
 
 export function getDayOfWeekAndCurrentDayDate(): string {
   return dayOfWeekName + ' ' + dateToday.getDay() + ' ' + currentMonth + ', ' + dateToday.getFullYear();
+}
+
+export function getDateFromStringIsoDate(format: DateFormatView, stringDate: string | undefined): string {
+  const date: Date = new Date(stringDate as string);
+  const yyyy: number = date.getFullYear();
+  let mm: number | string = date.getMonth() + 1;
+  let dd: number | string = date.getDate();
+
+  if (dd < 10) {
+    dd = '0' + dd;
+  }
+  if (mm < 10) {
+    mm = '0' + mm;
+  }
+  switch (format) {
+    case 'dd-mm-yyyy':
+      return dd + '-' + mm + '-' + yyyy;
+    case 'yyyy-mm-dd':
+      return yyyy + '-' + mm + '-' + dd;
+    default:
+      return '';
+  }
+}
+
+export function getTimeFromStringIsoDate(stringDate: string | undefined): string {
+  const date: Date = new Date(stringDate as string);
+
+  return date.getHours() + ':' + date.getMinutes();
 }

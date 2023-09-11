@@ -11,12 +11,4 @@ import { CommonModule } from '@angular/common';
 })
 export class InquiriesComponent {
   @Input() public chats!: Array<object> | null;
-
-  public getTimeFromChatDate(): void {
-
-  }
-
-  public getDateFromChatDate(): void {
-
-  }
 }

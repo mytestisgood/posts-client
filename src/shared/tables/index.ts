@@ -1,4 +1,4 @@
-export * from './dashboard-balance-table/dashboard-balance-table.component';
+export * from './dashboard-compensations-table/dashboard-compensations-table.component';
 export * from './dashboard-cash-register-table/dashboard-cash-register-table.component';
 export * from './dashboard-download-documents-grid-table/dashboard-download-documents-grid-table.component';
 export * from './dashboard-documents-table/dashboard-documents-table.component';

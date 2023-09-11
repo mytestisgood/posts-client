@@ -1,5 +1,8 @@
 <div class="flex flex-col justify-between h-full">
-  <div class="mt-4 ml-7-5 mr-10 inline-block flex-1">
+  <div
+    class="mt-4 ml-7-5 mr-10 inline-block flex-1"
+    *ngIf="items?.length; else loadingTemplate"
+  >
     <table class="tui-table tui-table_layout_fixed shield-table">
       <tbody>
         <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-6">
@@ -26,7 +29,7 @@
           <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 pr-6">מעסיק</th>
         </tr>
         <tr
-          *ngFor="let _ of ' '.repeat(4).split(''); let index = index"
+          *ngFor="let item of items; let index = index"
           class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
         >
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-left">
@@ -36,16 +39,20 @@
               [textFieldSize]="'s'"
             ></smarti-select>
           </td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">168</td>
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">
-            מבטחים החדשה
+            {{ item.product_code }}
           </td>
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">
-            024202640
+            {{ item.product_name }}
           </td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">יוסף וטר</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">
+            {{ item.identifier }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-center">
+            {{ item.employee_name }}
+          </td>
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">
-            הילוך שישי באר יעקב בע"מ
+            {{ item.employer_name }}
           </td>
         </tr>
       </tbody>
@@ -58,3 +65,10 @@
     ></smarti-table-pagination>
   </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <smarti-loader
+    [size]="'xl'"
+    [paddingTop15percent]="true"
+  ></smarti-loader>
+</ng-template>

@@ -1,6 +1,6 @@
 {
   "name": "smarti-client",
-  "version": "0.0.0",
+  "version": "1.0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -33,6 +33,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-rxjs": "^5.0.3",
     "eslint-plugin-unicorn": "^48.0.1",
+    "file-saver": "^2.0.5",
     "prettier": "^3.0.0",
     "prettier-plugin-organize-attributes": "^1.0.0",
     "rxjs": "~7.8.0",
@@ -52,6 +53,7 @@
     "@angular/compiler-cli": "^16.1.0",
     "@openapitools/openapi-generator-cli": "^2.7.0",
     "@types/dompurify": "2.2.3",
+    "@types/file-saver": "^2.0.5",
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",

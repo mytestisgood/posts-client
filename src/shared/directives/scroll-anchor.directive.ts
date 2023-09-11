@@ -1,8 +1,9 @@
-import { ScrollManagerDirective } from './scroll-manager.directive';
 import { Directive, HostListener, Input } from '@angular/core';
+import { ScrollManagerDirective } from './scroll-manager.directive';
 
 @Directive({
   selector: '[smartiScrollAnchor]',
+  standalone: true,
 })
 export class ScrollAnchorDirective {
   @Input('smartiScrollAnchor') public id!: string | number;
@@ -12,6 +13,5 @@ export class ScrollAnchorDirective {
     this.manager.scroll(this.id);
   }
 
-  constructor(private readonly manager: ScrollManagerDirective) {
-  }
+  constructor(private readonly manager: ScrollManagerDirective) {}
 }

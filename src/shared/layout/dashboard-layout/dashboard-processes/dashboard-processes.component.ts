@@ -30,13 +30,13 @@ export class DashboardProcessesComponent {
   public isCustomDropdownActive: boolean = false;
   public dashboardProcessItems$: Observable<ProcessTableItems[] | null> =
     this.processesService.apiProcessesGet().pipe(
-        map((response: InlineResponse2006) => {
-          if (response?.items?.length) {
-            return response.items.map(item => ({ ...item, isSelected: false }));
-          }
-          return null;
-        }),
-      );
+      map((response: InlineResponse2006) => {
+        if (response?.items?.length) {
+          return response.items.map(item => ({ ...item, isSelected: false }));
+        }
+        return null;
+      }),
+    );
   protected readonly months: string[] = months;
 
   constructor(

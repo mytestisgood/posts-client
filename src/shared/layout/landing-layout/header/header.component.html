@@ -1,14 +1,20 @@
 <!-- header for special offer -->
 <div class="all-headers">
-  <div class="bg-green">
+  <div
+    class="bg-green"
+    id="specialHeader"
+  >
     <div class="special-header flex justify-between items-center">
       <div class="flex justify-between gap-143px">
-        <div class="close-circle-24"></div>
+        <div
+          class="close-circle-24 cursor-pointer"
+          (click)="closeSpecialHeader()"
+        ></div>
         <div
           class="button-trial flex gap-2 items-center rounded-m border-neutrals-950 cursor-pointer"
           (click)="navigateToRegistrationPage()"
         >
-          <div class="barrow-left-dark-16"></div>
+          <div class="arrow-left-dark-16"></div>
           <div class="paragraph-text-extra">התחילו מסלול חינם</div>
         </div>
       </div>
@@ -52,6 +58,8 @@
         <a
           class="nav-block paragraph-text-light self-center cursor-pointer"
           smartiScrollAnchor="blog"
+          id="blog"
+          (click)="navigateFromContactToMainPage()"
         >
           בלוג
         </a>
@@ -59,6 +67,7 @@
         <a
           class="nav-block paragraph-text-light self-center cursor-pointer"
           smartiScrollAnchor="banner"
+          (click)="navigateFromContactToMainPage()"
         >
           אודות
         </a>
@@ -66,13 +75,13 @@
         <a
           class="nav-block paragraph-text-light self-center cursor-pointer"
           smartiScrollAnchor="about"
+          (click)="navigateFromContactToMainPage()"
         >
           פתרונות
         </a>
         <a
           class="logo-big-h33 margin-start-25 cursor-pointer"
           (click)="navigateToMainPage()"
-          smartiScrollAnchor="banner"
         ></a>
       </nav>
     </div>

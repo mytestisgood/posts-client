@@ -44,7 +44,10 @@
     </div>
   </div>
   <div class="w-full h-672 bg-white box-shadow-big mt-4 rounded-l mb-34">
-    <smarti-dashboard-employers-table></smarti-dashboard-employers-table>
+    <smarti-dashboard-employers-table
+      [items]="recordList$ | async"
+      [token]="token"
+    ></smarti-dashboard-employers-table>
   </div>
 </div>
 

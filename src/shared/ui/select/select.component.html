@@ -1,4 +1,4 @@
-<ng-container>
+<ng-container *ngIf="!isComboBoxMode; else comboBoxTemplate">
   <tui-select
     [tuiTextfieldSize]="textFieldSize"
     [style.width]="customWidth"
@@ -18,3 +18,26 @@
     ></tui-data-list-wrapper>
   </tui-select>
 </ng-container>
+
+<ng-template #comboBoxTemplate>
+  <tui-combo-box
+    [tuiTextfieldSize]="textFieldSize"
+    [style.width]="customWidth"
+    [formControl]="control"
+    [tuiDropdownDirection]="'bottom'"
+    [tuiTextfieldLabelOutside]="true"
+    [style.text-align]="'right'"
+    [stringify]="stringify"
+  >
+    {{ placeholder }}
+    <input tuiTextfield />
+    <tui-data-list-wrapper
+      [ngClass]="{
+        'big-mode': selectMode === 'big'
+      }"
+      *tuiDataList
+      [itemContent]="stringify | tuiStringifyContent"
+      [items]="comboBoxOptions | tuiFilterByInputWith: stringify"
+    ></tui-data-list-wrapper>
+  </tui-combo-box>
+</ng-template>

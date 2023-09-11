@@ -8,9 +8,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.0
+  version: 1.0.1
 servers:
-  - url: https://virtserver.swaggerhub.com/smarti/smarti/1.0.0
+  - url: https://virtserver.swaggerhub.com/smarti/smarti/1.0.1
     description: SwaggerHub API Auto Mocking
   - url: https://api.xsmart-staging.com
 tags:
@@ -36,6 +36,8 @@ tags:
   - name: MonthlyTransferBlock
   - name: Bank
   - name: Exceptions
+  - name: Menora
+  - name: Employees
 paths:
   /api/leads/createLead:
     post:
@@ -364,17 +366,18 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processes_uploadFile_body'
-            example:
-              value:
-                departmentId: 2
-                isDirect: false
-                month: 6
-                processName: upload file from
-                year: 2023
-                isEmployer: true
-                isDepartmentLink: false
-                opswatIds:
-                  - 74c32c54dcc84fd7a125496e32b755f2
+            examples:
+              "0":
+                value:
+                  departmentId: 2
+                  isDirect: false
+                  month: 6
+                  processName: upload file from
+                  year: 2023
+                  isEmployer: true
+                  isDepartmentLink: false
+                  opswatIds:
+                    - 74c32c54dcc84fd7a125496e32b755f2
       responses:
         "200":
           description: ok
@@ -805,6 +808,11 @@ paths:
           explode: true
           schema:
             type: string
+            enum:
+              - all
+              - open
+              - in_treatment
+              - close
           example: all
         - name: organizationId
           in: query
@@ -837,58 +845,22 @@ paths:
             application/json:
               schema:
                 type: array
-                properties:
-                  id:
-                    type: integer
-                  created_at:
-                    type: string
-                    format: date-time
-                  updated_at:
-                    type: string
-                    format: date-time
-                  content:
-                    type: string
-                  subject:
-                    type: string
-                  subject_id:
-                    type: integer
-                  tat_subject:
-                    type: string
-                  tat_subject_id:
-                    type: string
-                  status:
-                    $ref: '#/components/schemas/StatusChat'
-                  creator_name:
-                    type: string
-                  employer_name:
-                    type: string
-                  employer_id:
-                    type: integer
-                  employee_name:
-                    type: string
-                  new_messages:
-                    type: integer
-                  operator_name:
-                    type: string
                 items:
-                  type: object
+                  $ref: '#/components/schemas/inline_response_200_7'
               examples:
                 "0":
                   value:
-                    - id: "9,"
-                      created_at: "2021-08-18 16:44:42.108967,"
-                      updated_at: "2021-08-18 16:44:42.108967,"
-                      content: "123,"
-                      subject: "כללי,"
-                      subject_id: "10,"
-                      tat_subject: "null,"
-                      tat_subject_id: "null,"
-                      status: "open,"
-                      creator_name: "מיכל שמש,"
-                      employer_name: "עמותת עטלף,"
-                      employer_id: "2,"
-                      employee_name: "null,"
-                      new_messages: "1,"
+                    - id: 9
+                      created_at: 2021-08-18 16:44:42.108967
+                      updated_at: 2021-08-18 16:44:42.108967
+                      content: 123
+                      subject: כללי
+                      subject_id: 10
+                      status: open
+                      creator_name: מיכל שמש
+                      employer_name: עמותת עטלף
+                      employer_id: 2
+                      new_messages: 1
                       operator_name: יוסי גלקין
         "400":
           description: bad request
@@ -900,6 +872,59 @@ paths:
                 "0":
                   value:
                     message: failure
+      servers:
+        - url: https://api.xsmart-staging.com
+    post:
+      tags:
+        - Chat
+      description: create new chat
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_chats_body'
+            examples:
+              "0":
+                value:
+                  opswatIds:
+                    - 095a78aaeb6a49ff94ebad7e3acd2acf
+                  employer_id: 2
+                  chat:
+                    subject_id: 6
+                    salary_month: 2022-09-01
+                    content: new chat
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_8'
+              examples:
+                "0":
+                  value:
+                    message: success
+                    chat_id: 19
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error----
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/employers/getTypeLoad:
@@ -931,8 +956,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TypeLoad'
-              example:
-                value: file
+              example: file
         "400":
           description: bad request
           content:
@@ -1013,7 +1037,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_7'
+                $ref: '#/components/schemas/inline_response_200_9'
               examples:
                 "0":
                   value:
@@ -1172,7 +1196,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_8'
+                $ref: '#/components/schemas/inline_response_200_10'
               examples:
                 "0":
                   value:
@@ -1276,7 +1300,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_9'
+                $ref: '#/components/schemas/inline_response_200_11'
               example:
                 message: true
                 list_exceptions: []
@@ -1303,11 +1327,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_10'
-              example:
-                value:
-                  - name: ikea
-                    id: 1
+                $ref: '#/components/schemas/inline_response_200_12'
+              examples:
+                "0":
+                  value:
+                    items:
+                      - name: ikea
+                        id: 1
+                    code: 200
       servers:
         - url: https://xsmart-staging.com
     servers:
@@ -1378,11 +1405,12 @@ paths:
             schema:
               $ref: '#/components/schemas/processes_updateTypeProcess_body'
             example:
-              criteria:
-                $ref: '#/components/schemas/CriteriaUpdateProcess'
-              filesList:
-                - 74907
-              type: 6
+              valule:
+                criteria:
+                  $ref: '#/components/schemas/CriteriaUpdateProcess'
+                filesList:
+                  - 74907
+                type: 6
       responses:
         "200":
           description: ok
@@ -1423,35 +1451,41 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processes_updateDateAndReference_body'
-            example:
-              criteria:
-                $ref: '#/components/schemas/CriteriaUpdateProcess'
-              filesList:
-                - 74907
-              opswatIds:
-                - 120d4a7406444d9b9434273781a88624
-              deposit_date: 2023-08-14
+            examples:
+              "0":
+                value:
+                  criteria:
+                    $ref: '#/components/schemas/CriteriaUpdateProcess'
+                  filesList:
+                    - 74907
+                  opswatIds:
+                    - 120d4a7406444d9b9434273781a88624
+                  deposit_date: 2023-08-14
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
-              example:
-                ok: true
-                message: יעודכן בהצלחה
-                code: 200
+                $ref: '#/components/schemas/inline_response_200_13'
+              examples:
+                "0":
+                  value:
+                    ok: true
+                    message: יעודכן בהצלחה
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
-              example:
-                ok: false
-                message: יש לבדוק האם כל הקבצים בסטטוס נטען בהצלחה והאם נשלחו הנחיות
-                code: 400
+                $ref: '#/components/schemas/inline_response_200_13'
+              examples:
+                "0":
+                  value:
+                    ok: false
+                    message: יש לבדוק האם כל הקבצים בסטטוס נטען בהצלחה והאם נשלחו הנחיות
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/{processId}/downloadFileProcess:
@@ -1490,20 +1524,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_12'
-              example:
-                blobs:
-                  - 77u/77u/77u/PD
-                fileNames:
-                  - 003000580057529EMPONG000004202307040951480001.DAT
-                ok: true
-                code: 200
+                $ref: '#/components/schemas/inline_response_200_14'
+              examples:
+                "0":
+                  value:
+                    blobs:
+                      - 77u/77u/77u/PD
+                    fileNames:
+                      - 003000580057529EMPONG000004202307040951480001.DAT
+                    ok: true
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
+                $ref: '#/components/schemas/inline_response_200_13'
               examples:
                 "0":
                   value:
@@ -1591,14 +1627,16 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processes_update_body'
-            example:
-              criteria:
-                $ref: '#/components/schemas/CriteriaProcess'
-              file_id:
-                - 579774
-              params: false
-              processId: 74741
-              type: notRelevat
+            examples:
+              "0":
+                value:
+                  criteria:
+                    $ref: '#/components/schemas/CriteriaProcess'
+                  file_id:
+                    - 579774
+                  params: false
+                  processId: 74741
+                  type: notRelevat
       responses:
         "200":
           description: ok
@@ -1635,38 +1673,44 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processes_unlockProcessFiles_body'
-            example:
-              criteria:
-                processId: 74741
-                department_id: 2
-                page: 1
-                limit: 15
-                isCheckAll: true
-              comment: 12
-              processId: 74741
-              filesList: []
-              is_unlock: true
+            examples:
+              "0":
+                value:
+                  criteria:
+                    processId: 74741
+                    department_id: 2
+                    page: 1
+                    limit: 15
+                    isCheckAll: true
+                  comment: 12
+                  processId: 74741
+                  filesList: []
+                  is_unlock: true
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
-              example:
-                success: Message_Sent
-                authorized: false
-                part: false
+                $ref: '#/components/schemas/inline_response_200_15'
+              examples:
+                "0":
+                  value:
+                    success: Message_Sent
+                    authorized: false
+                    part: false
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
-              example:
-                success: false
-                authorized: false
-                part: false
+                $ref: '#/components/schemas/inline_response_200_15'
+              examples:
+                "0":
+                  value:
+                    success: false
+                    authorized: false
+                    part: false
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/updateReasonRefund:
@@ -1688,38 +1732,44 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processes_updateReasonRefund_body'
-            example:
-              criteria:
-                processId: 74741
-                department_id: 2
-                page: 1
-                limit: 15
-                isCheckAll: true
-              filesList: []
-              reason: wrong_product_type
+            examples:
+              "0":
+                value:
+                  criteria:
+                    processId: 74741
+                    department_id: 2
+                    page: 1
+                    limit: 15
+                    isCheckAll: true
+                  filesList: []
+                  reason: wrong_product_type
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_14'
-              example:
-                success: Message_Sent
-                authorized: false
-                part: false
-                code: 200
+                $ref: '#/components/schemas/inline_response_200_16'
+              examples:
+                "0":
+                  value:
+                    success: Message_Sent
+                    authorized: false
+                    part: false
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_14'
-              example:
-                success: false
-                authorized: false
-                part: false
-                code: 400
+                $ref: '#/components/schemas/inline_response_200_16'
+              examples:
+                "0":
+                  value:
+                    success: false
+                    authorized: false
+                    part: false
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/filesList:
@@ -1790,43 +1840,45 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_15'
-              example:
-                items:
-                  - file_type: ongoing_payment
-                    file_id: 579774
-                    company_name: הראל חברה לביטוח
-                    employer_products:
-                      - code: "130"
-                        name: 'הראל חברה לביטוח ביטוח מנהלים '
-                    product_type: executive
-                    product_code: "0"
-                    paid_account_number: "409120103"
-                    is_primary: true
-                    payment_identifier: "000"
-                    payment_additional_info:
-                      id: 1646
-                      account_number: "68450032"
-                      bank_id: "3"
-                      branch_id: "211"
-                      branch_number: "806"
-                      bank_number: "10"
-                      is_primary: true
-                      is_active: true
-                      branch_name: לב דיזנגוף
-                      bank_name: בנק לאומי לישראל בע"מ
-                      name: 10 בנק לאומי לישראל בע"מ 806 לב דיזנגוף 68450032
-                    payment_type: masav
-                    file_total: 393
-                    group_id: 67472
-                    status_sent: not_sent
-                    status: not_sent
-                    comments: []
-                    is_relevant: true
-                    in_process: false
-                    request_open: ""
-                total: 1
-                lastPage: 1
+                $ref: '#/components/schemas/inline_response_200_17'
+              examples:
+                "0":
+                  value:
+                    items:
+                      - file_type: ongoing_payment
+                        file_id: 579774
+                        company_name: הראל חברה לביטוח
+                        employer_products:
+                          - code: "130"
+                            name: 'הראל חברה לביטוח ביטוח מנהלים '
+                        product_type: executive
+                        product_code: "0"
+                        paid_account_number: "409120103"
+                        is_primary: true
+                        payment_identifier: "000"
+                        payment_additional_info:
+                          id: 1646
+                          account_number: "68450032"
+                          bank_id: "3"
+                          branch_id: "211"
+                          branch_number: "806"
+                          bank_number: "10"
+                          is_primary: true
+                          is_active: true
+                          branch_name: לב דיזנגוף
+                          bank_name: בנק לאומי לישראל בע"מ
+                          name: 10 בנק לאומי לישראל בע"מ 806 לב דיזנגוף 68450032
+                        payment_type: masav
+                        file_total: 393
+                        group_id: 67472
+                        status_sent: not_sent
+                        status: not_sent
+                        comments: []
+                        is_relevant: true
+                        in_process: false
+                        request_open: ""
+                    total: 1
+                    lastPage: 1
         "400":
           description: bad request
           content:
@@ -1904,11 +1956,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_16'
-              example:
-                - file_name: offer_monthly_payment august 2023.pdf
-                  file_type: .pdf
-                  file_date: 2023-08-20T07:04:28Z
+                  $ref: '#/components/schemas/inline_response_200_18'
+              examples:
+                "0":
+                  value:
+                    - file_name: offer_monthly_payment august 2023.pdf
+                      file_type: .pdf
+                      file_date: 2023-08-20T07:04:28Z
         "400":
           description: bad request
           content:
@@ -1946,10 +2000,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processId_uploadsRef_body'
-            example:
-              opswatIds:
-                - 242e0608c9a14b35acd46b8b90e7f8f2
-              department_id: 2
+            examples:
+              "0":
+                value:
+                  opswatIds:
+                    - 242e0608c9a14b35acd46b8b90e7f8f2
+                  department_id: 2
       responses:
         "200":
           description: ok
@@ -2002,30 +2058,36 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processId_downloadRefDocument_body'
-            example:
-              filename: offer_monthly_payment august 2023.pdf
-              department_id: 2
+            examples:
+              "0":
+                value:
+                  filename: offer_monthly_payment august 2023.pdf
+                  department_id: 2
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_17'
-              example:
-                blob: ywOYQa9D64rP9mwy9QSwM
-                ok: true
-                code: 200
+                $ref: '#/components/schemas/inline_response_200_19'
+              examples:
+                "0":
+                  value:
+                    blob: ywOYQa9D64rP9mwy9QSwM
+                    ok: true
+                    code: 200
         "400":
           description: bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
-              example:
-                message: Problem downloading file
-                ok: false
-                code: 400
+                $ref: '#/components/schemas/inline_response_200_13'
+              examples:
+                "0":
+                  value:
+                    message: Problem downloading file
+                    ok: false
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/{processId}/deleteRefDocument:
@@ -2055,16 +2117,18 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processId_deleteRefDocument_body'
-            example:
-              filename: offer_monthly_payment august 2023.pdf
-              department_id: 2
+            examples:
+              "0":
+                value:
+                  filename: offer_monthly_payment august 2023.pdf
+                  department_id: 2
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_18'
+                $ref: '#/components/schemas/inline_response_200_20'
               example:
                 ok: true
                 code: 200
@@ -2073,11 +2137,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
-              example:
-                message: Problem downloading file
-                ok: false
-                code: 400
+                $ref: '#/components/schemas/inline_response_200_13'
+              examples:
+                "0":
+                  value:
+                    message: Problem downloading file
+                    ok: false
+                    code: 400
       servers:
         - url: https://api.xsmart-staging.com
   /api/processes/downloadPaymentsInstruction:
@@ -2099,29 +2165,33 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processes_downloadPaymentsInstruction_body'
-            example:
-              criteria:
-                processId: 74890
-                department_id: 2
-                page: 1
-                limit: 15
-                isCheckAll: true
-              filesList: []
-              processId: 74890
-              isSendMax: false
-              department_id: 2
+            examples:
+              "0":
+                value:
+                  criteria:
+                    processId: 74890
+                    department_id: 2
+                    page: 1
+                    limit: 15
+                    isCheckAll: true
+                  filesList: []
+                  processId: 74890
+                  isSendMax: false
+                  department_id: 2
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_19'
-              example:
-                result:
-                  data: UEsDBB
-                  filename: Feedback.xlsx
-                  ext: xlsx
+                $ref: '#/components/schemas/inline_response_200_21'
+              examples:
+                "0":
+                  value:
+                    result:
+                      data: UEsDBB
+                      filename: Feedback.xlsx
+                      ext: xlsx
         "400":
           description: bad request
           content:
@@ -2150,19 +2220,21 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processes_sendPaymentsInstruction_body'
-            example:
-              criteria:
-                processId: 74890
-                department_id: 2
-                page: 1
-                limit: 15
-                isCheckAll: true
-              filesList: []
-              processId: 74890
-              isSendMax: false
-              department_id: 2
-              recipient:
-                - shoshi@smarti.co.il
+            examples:
+              "0":
+                value:
+                  criteria:
+                    processId: 74890
+                    department_id: 2
+                    page: 1
+                    limit: 15
+                    isCheckAll: true
+                  filesList: []
+                  processId: 74890
+                  isSendMax: false
+                  department_id: 2
+                  recipient:
+                    - shoshi@smarti.co.il
       responses:
         "200":
           description: ok
@@ -2207,33 +2279,37 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processes_setRecords_body'
-            example:
-              criteria:
-                processId: 74890
-                department_id: 2
-                page: 1
-                limit: 15
-                isCheckAll: true
-              filesList: []
-              processId: 74890
+            examples:
+              "0":
+                value:
+                  criteria:
+                    processId: 74890
+                    department_id: 2
+                    page: 1
+                    limit: 15
+                    isCheckAll: true
+                  filesList: []
+                  processId: 74890
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_20'
-              example:
-                reason_refund: false
-                group_things_ids:
-                  - 580946
-                num_file: 1
-                sum: 2202
-                sent: false
-                error_details: ""
-                is_null_company: false
-                status: can_be_processed
-                code: 200
+                $ref: '#/components/schemas/inline_response_200_22'
+              examples:
+                "0":
+                  value:
+                    reason_refund: false
+                    group_things_ids:
+                      - 580946
+                    num_file: 1
+                    sum: 2202
+                    sent: false
+                    error_details: ""
+                    is_null_company: false
+                    status: can_be_processed
+                    code: 200
         "400":
           description: bad request
           content:
@@ -2266,16 +2342,18 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processes_transmit_body'
-            example:
-              department_id: 2
-              processId: 74890
+            examples:
+              "0":
+                value:
+                  department_id: 2
+                  processId: 74890
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_21'
+                $ref: '#/components/schemas/inline_response_200_23'
               example:
                 result: false
         "400":
@@ -2318,12 +2396,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_22'
-              example:
-                is_date: true
-                block_sum: 30729
-                num_file: 10
-                code: 200
+                $ref: '#/components/schemas/inline_response_200_24'
+              examples:
+                "0":
+                  value:
+                    is_date: true
+                    block_sum: 30729
+                    num_file: 10
+                    code: 200
         "400":
           description: bad request
           content:
@@ -2372,12 +2452,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_23'
-              example:
-                ok: true
-                transmission_auto: false
-                success_transmission: true
-                code: 200
+                $ref: '#/components/schemas/inline_response_200_25'
+              examples:
+                "0":
+                  value:
+                    ok: true
+                    transmission_auto: false
+                    success_transmission: true
+                    code: 200
         "400":
           description: bad request
           content:
@@ -2406,25 +2488,27 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/processes_changeFileToNegative_body'
-            example:
-              mtbs:
-                - 10056443
-              department_id: 2
-              comment: 111
-              criteria:
-                year: 2023
-                employerId: 2
-                organizationId: "1"
-                departmentId: "2"
-                page: 1
-                limit: 15
+            examples:
+              "0":
+                value:
+                  mtbs:
+                    - 10056443
+                  department_id: 2
+                  comment: 111
+                  criteria:
+                    year: 2023
+                    employerId: 2
+                    organizationId: "1"
+                    departmentId: "2"
+                    page: 1
+                    limit: 15
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_21'
+                $ref: '#/components/schemas/inline_response_200_23'
               example:
                 result: true
         "400":
@@ -2716,7 +2800,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_24'
+                  $ref: '#/components/schemas/inline_response_200_26'
               examples:
                 "0":
                   value:
@@ -2762,7 +2846,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_25'
+                  $ref: '#/components/schemas/inline_response_200_27'
               examples:
                 "0":
                   value:
@@ -2817,7 +2901,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_26'
+                $ref: '#/components/schemas/inline_response_200_28'
               examples:
                 "0":
                   value:
@@ -2990,34 +3074,36 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_27'
-              example:
-                - id: "1"
-                  name: null company
-                  code: "0"
-                  product:
-                    - id: 1
-                      name: null product
+                  $ref: '#/components/schemas/inline_response_200_29'
+              examples:
+                "0":
+                  value:
+                    - id: "1"
+                      name: null company
                       code: "0"
-                      type: pension
-                      number_a_max: 0
-                      is_active: true
-                      company_id: "1"
-                      company_name: null company
-                      company_code: "0"
-                      bank_account:
+                      product:
                         - id: 1
-                          account_number: "0"
-                          bank_id: "32"
-                          branch_id: "1"
-                          branch_number: "1"
-                          bank_number: "1"
-                          is_primary: true
+                          name: null product
+                          code: "0"
+                          type: pension
+                          number_a_max: 0
                           is_active: true
-                          branch_name: null branch
-                          bank_name: null bank
-                          name: 1 null bank 1 null branch 0
-                      full_name: null product 0
+                          company_id: "1"
+                          company_name: null company
+                          company_code: "0"
+                          bank_account:
+                            - id: 1
+                              account_number: "0"
+                              bank_id: "32"
+                              branch_id: "1"
+                              branch_number: "1"
+                              bank_number: "1"
+                              is_primary: true
+                              is_active: true
+                              branch_name: null branch
+                              bank_name: null bank
+                              name: 1 null bank 1 null branch 0
+                          full_name: null product 0
         "400":
           description: bad request
           content:
@@ -3065,7 +3151,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_28'
+                $ref: '#/components/schemas/inline_response_200_30'
               examples:
                 "0":
                   value:
@@ -3144,7 +3230,7 @@ paths:
     get:
       tags:
         - Files
-      description: get employer processes
+      description: get employer documents
       parameters:
         - name: check_unit_type
           in: query
@@ -3192,11 +3278,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_29'
+                $ref: '#/components/schemas/inline_response_200_31'
               example:
                 items:
-                  - id: "3746,"
-                    name: פרוטוקול.pd"
+                  - id: 3746
+                    name: פרוטוקול.pdf
                     ext: .pdf
                     description: פרוטוקול
                     created_at: 04/12/2019
@@ -3237,12 +3323,14 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/api_documents_body'
-            example:
-              opswatIds:
-                - 2402e762316049f98479d42f4eff36bb
-              employer_id: 2
-              date: 2023-08-21
-              documentType: employer_deposition
+            examples:
+              "0":
+                value:
+                  opswatIds:
+                    - 2402e762316049f98479d42f4eff36bb
+                  employer_id: 2
+                  date: 2023-08-21
+                  documentType: employer_deposition
       responses:
         "200":
           description: ok
@@ -3299,11 +3387,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_30'
-              example:
-                data: UEsDBB
-                filename: aa.xlsx
-                ext: xlsx
+                $ref: '#/components/schemas/inline_response_200_32'
+              examples:
+                "0":
+                  value:
+                    data: UEsDBB
+                    filename: aa.xlsx
+                    ext: xlsx
         "400":
           description: bad request
           content:
@@ -3362,7 +3452,7 @@ paths:
               example: Successfully deleted
       servers:
         - url: https://api.xsmart-staging.com
-  /api/documents/{employerId}/isNegativeFile todo:
+  /api/documents/{employerId}/isNegativeFile:
     get:
       tags:
         - Files
@@ -3409,6 +3499,50 @@ paths:
               example: true
       servers:
         - url: https://api.xsmart-staging.com
+  /api/generals/downloadExampleFile:
+    post:
+      tags:
+        - Files
+      description: download example file
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/generals_downloadExampleFile_body'
+            example: downloadFiles/transfer_form_between_company.pdf
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_33'
+              example:
+                data: UEsDBB
+                filename: transfer_form_between_company.pdf
+                ext: pdf
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error----
+                    code: 400
+      servers:
+        - url: https://api.xsmart-staging.com
   /api/upload:
     post:
       tags:
@@ -3437,7 +3571,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_31'
+                $ref: '#/components/schemas/inline_response_200_34'
               example:
                 message: success
                 opswatId: bf4fded72a1542b6a3eb0d516630db6
@@ -3478,11 +3612,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_32'
-              example:
-                message: success
-                percentage: 100
-                opswatId: 11ef19fa506d40dfb35d18a9ed18de17
+                $ref: '#/components/schemas/inline_response_200_35'
+              examples:
+                "0":
+                  value:
+                    message: success
+                    percentage: 100
+                    opswatId: 11ef19fa506d40dfb35d18a9ed18de17
         "401":
           description: Unauthorized
           content:
@@ -3520,29 +3656,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_33'
-              example:
-                messages:
-                  - id: 10
-                    content: לחי
-                    username: ליאור ס
-                    myself: false
-                    created_at: 2021-08-18T14:17:02.201105
-                    updated_at: 2021-08-18T14:17:02.201120
-                    is_files: false
-                chat:
-                  id: 8
-                  created_at: 2021-08-18 14:17:02.195561
-                  updated_at: 2021-08-18 14:17:02.195587
-                  subject: מכתב/ הודעה מהקופה
-                  subject_id: 3
-                  tat_subject: ""
-                  status: in_treatment
-                  creator_name: ליאור ס
-                  employer_name: עמותת עטלף
-                  employer_id: 2
-                messages_count: 0
-                code: 200
+                $ref: '#/components/schemas/inline_response_200_36'
+              examples:
+                "0":
+                  value:
+                    messages:
+                      - id: 10
+                        content: לחי
+                        username: ליאור ס
+                        myself: false
+                        created_at: 2021-08-18T14:17:02.201105
+                        updated_at: 2021-08-18T14:17:02.201120
+                        is_files: false
+                    chat:
+                      id: 8
+                      created_at: 2021-08-18 14:17:02.195561
+                      updated_at: 2021-08-18 14:17:02.195587
+                      subject: מכתב/ הודעה מהקופה
+                      subject_id: 3
+                      tat_subject: ""
+                      status: in_treatment
+                      creator_name: ליאור ס
+                      employer_name: עמותת עטלף
+                      employer_id: 2
+                    messages_count: 0
+                    code: 200
         "400":
           description: bad request
           content:
@@ -3575,27 +3713,143 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/chats_saveMessageChat_body'
-            example:
-              description: Save message chat
-              value:
-                opswatIds:
-                  - 2402e762316049f98479d42f4eff36bb
-                message: 12
-                chat_id: 8
-                employer_id: 2
+            examples:
+              "0":
+                value:
+                  opswatIds:
+                    - 2402e762316049f98479d42f4eff36bb
+                  message: 12
+                  chat_id: 8
+                  employer_id: 2
       responses:
         "200":
           description: ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_34'
+                $ref: '#/components/schemas/inline_response_200_37'
               examples:
                 "0":
                   value:
                     message: success
                     is_called: false
                     code: 200
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error----
+                    code: 400
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/chats/getTatSubjects:
+    get:
+      tags:
+        - Chat
+      description: get tat subjects list
+      parameters:
+        - name: subject_id
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+          example: 4
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_38'
+              examples:
+                "0":
+                  value:
+                    - id: 2
+                      name: פרוטוקול
+                    - id: 3
+                      name: ייפוי כח
+                    - id: 4
+                      name: פרטי לקוח
+                    - id: 6
+                      name: טופס זיקה
+                    - id: 7
+                      name: פטור ממס
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error----
+                    code: 400
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/chats/getChatSubjects:
+    get:
+      tags:
+        - Chat
+      description: get chat subjects list
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_38'
+              examples:
+                "0":
+                  value:
+                    - id: 1
+                      name: הנהלת חשבונות
+                    - id: 2
+                      name: היזונים
+                    - id: 3
+                      name: מכתב/ הודעה מהקופה
+                    - id: 4
+                      name: מסמכים וטפסים
+                    - id: 5
+                      name: בירור הפקדות בגין עובד
+                    - id: 6
+                      name: אסמכתאות/ גבייה
+                    - id: 7
+                      name: דוחות ברמת מעסיק
+                    - id: 8
+                      name: דוחות ברמת עובד
+                    - id: 9
+                      name: החזר כספים
+                    - id: 10
+                      name: כללי
         "400":
           description: bad request
           content:
@@ -3677,7 +3931,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_35'
+                $ref: '#/components/schemas/inline_response_200_39'
               example:
                 items:
                   - id: 10056454
@@ -3771,13 +4025,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_36'
+                $ref: '#/components/schemas/inline_response_200_40'
               example:
                 result:
                   data: UEsDBB
                   filename: Feedback.xlsx
                   ext: xlsx
-                  code: 200
+                code: 200
         "400":
           description: bad request
           content:
@@ -3791,7 +4045,7 @@ paths:
     post:
       tags:
         - FeedBack
-      description: feedBack
+      description: feedBack change status
       parameters:
         - name: Token
           in: header
@@ -3824,7 +4078,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_37'
+                $ref: '#/components/schemas/inline_response_200_41'
               example:
                 result: true
                 code: 200
@@ -3833,7 +4087,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_37'
+                $ref: '#/components/schemas/inline_response_200_41'
               example:
                 result: false
                 code: 400
@@ -3875,7 +4129,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_38'
+                $ref: '#/components/schemas/inline_response_200_42'
               example:
                 count_employee: 20
                 fix: 0
@@ -3883,6 +4137,80 @@ paths:
                 sent: 0
                 not_sent: 49
                 code: 200
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: failure
+                    code: 400
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/feedbacks/getTransfer:
+    get:
+      tags:
+        - FeedBack
+      description: get details feedBack
+      parameters:
+        - name: mtbId
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 10023087
+        - name: sentGroupId
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            $ref: '#/components/schemas/StatusFileFeedback'
+          example: 475031
+        - name: status_sent_group
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: sent
+        - name: department_id
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 2
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_43'
+              example:
+                clause_type: compensation
+                transfer_sum: -5
+                exempt_sum: 0
+                id: 22038138
+                predicted_sum: 0
+                predicted_percent: 0
+                guid: F3333208-3855-4EFC-8FA4-C9896BEE9B1C
         "400":
           description: bad request
           content:
@@ -3940,7 +4268,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_39'
+                $ref: '#/components/schemas/inline_response_200_44'
               examples:
                 "0":
                   value:
@@ -4027,7 +4355,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_40'
+                $ref: '#/components/schemas/inline_response_200_45'
               examples:
                 "0":
                   value:
@@ -4127,7 +4455,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_41'
+                $ref: '#/components/schemas/inline_response_200_46'
               example:
                 success: true
                 message: updated finish
@@ -4240,7 +4568,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_42'
+                  $ref: '#/components/schemas/inline_response_200_47'
               examples:
                 "0":
                   value:
@@ -4362,7 +4690,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_43'
+                $ref: '#/components/schemas/inline_response_200_48'
               example:
                 num_file: 0
                 group_things_ids:
@@ -4412,7 +4740,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_44'
+                  $ref: '#/components/schemas/inline_response_200_49'
               examples:
                 "0":
                   value:
@@ -4473,7 +4801,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_44'
+                  $ref: '#/components/schemas/inline_response_200_49'
               examples:
                 "0":
                   value:
@@ -4542,6 +4870,161 @@ paths:
               example: false
       servers:
         - url: https://api.xsmart-staging.com
+  /api/menora:
+    get:
+      tags:
+        - Menora
+      description: get list of employees that choose menora
+      parameters:
+        - name: organizationId
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 10
+        - name: employerId
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 24
+        - name: departmentId
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 32
+        - name: page
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 1
+        - name: limit
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 15
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_50'
+              example:
+                items:
+                  - id: 65
+                    employer_name: מעוף משאבי אנוש
+                    employee_name: ספייה מסרי
+                    identifier: "207570615"
+                    product_name: מבטחים החדשה
+                    product_code: 168
+                total: 1
+                lastPage: 1
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: failure
+                    code: 400
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/employees/getEmployeesList:
+    get:
+      tags:
+        - Employees
+      description: get list of employees
+      parameters:
+        - name: organization_id
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 1
+        - name: employer_id
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 2
+        - name: department_id
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 2
+        - name: index
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+          example: 1
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_38'
+              example:
+                - id: 20244
+                  name: מוחמד גזאוי
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: failure
+                    code: 400
+      servers:
+        - url: https://api.xsmart-staging.com
 components:
   schemas:
     Src:
@@ -4559,6 +5042,19 @@ components:
         - close
         - in_treatment
         - open
+    subjectChat:
+      type: string
+      enum:
+        - bookkeeping
+        - feedback
+        - message_from_company
+        - documents
+        - deposits
+        - references
+        - employer_reports
+        - employee_reports
+        - refund
+        - general
     ProductType:
       type: string
       enum:
@@ -5051,10 +5547,77 @@ components:
     inline_response_200_7:
       type: object
       properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        content:
+          type: string
+        subject:
+          type: string
+        subject_id:
+          type: integer
+        tat_subject:
+          type: string
+        tat_subject_id:
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusChat'
+        creator_name:
+          type: string
+        employer_name:
+          type: string
+        employer_id:
+          type: integer
+        employee_name:
+          type: string
+        new_messages:
+          type: integer
+        operator_name:
+          type: string
+    apichats_chat:
+      type: object
+      properties:
+        subject_id:
+          type: integer
+        salary_month:
+          type: string
+          format: date
+        employee_id:
+          type: integer
+        tat_subject_id:
+          type: integer
+        content:
+          type: string
+    api_chats_body:
+      type: object
+      properties:
+        opswatIds:
+          type: string
+        message:
+          type: string
+        chat:
+          $ref: '#/components/schemas/apichats_chat'
+        employer_id:
+          type: integer
+    inline_response_200_8:
+      type: object
+      properties:
+        message:
+          type: string
+        chat_id:
+          type: integer
+    inline_response_200_9:
+      type: object
+      properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_7_items'
+            $ref: '#/components/schemas/inline_response_200_9_items'
     inline_response_400_1:
       type: object
       properties:
@@ -5101,7 +5664,7 @@ components:
       properties:
         comments:
           type: string
-    inline_response_200_8:
+    inline_response_200_10:
       type: object
       properties:
         data:
@@ -5143,7 +5706,7 @@ components:
             type: string
         criteria:
           $ref: '#/components/schemas/apicompensationsupdateSentStatus_criteria'
-    inline_response_200_9:
+    inline_response_200_11:
       type: object
       properties:
         message:
@@ -5154,13 +5717,15 @@ components:
             type: string
         code:
           type: integer
-    inline_response_200_10:
+    inline_response_200_12:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_10_items'
+            $ref: '#/components/schemas/inline_response_200_38'
+        code:
+          type: integer
     processes_updateProcess_body:
       type: object
       properties:
@@ -5200,7 +5765,7 @@ components:
             type: string
         deposit_date:
           type: string
-    inline_response_200_11:
+    inline_response_200_13:
       type: object
       properties:
         message:
@@ -5209,7 +5774,7 @@ components:
           type: boolean
         code:
           type: integer
-    inline_response_200_12:
+    inline_response_200_14:
       type: object
       properties:
         blobs:
@@ -5269,7 +5834,7 @@ components:
           $ref: '#/components/schemas/apiprocessesunlockProcessFiles_criteria'
         processId:
           type: integer
-    inline_response_200_13:
+    inline_response_200_15:
       type: object
       properties:
         success:
@@ -5289,7 +5854,7 @@ components:
           $ref: '#/components/schemas/ReasonRefund'
         criteria:
           $ref: '#/components/schemas/apiprocessesunlockProcessFiles_criteria'
-    inline_response_200_14:
+    inline_response_200_16:
       type: object
       properties:
         success:
@@ -5300,13 +5865,13 @@ components:
           type: boolean
         code:
           type: integer
-    inline_response_200_15:
+    inline_response_200_17:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_15_items'
+            $ref: '#/components/schemas/inline_response_200_17_items'
         total:
           type: integer
         lastPage:
@@ -5318,7 +5883,7 @@ components:
           type: string
         ok:
           type: boolean
-    inline_response_200_16:
+    inline_response_200_18:
       type: object
       properties:
         file_name:
@@ -5343,7 +5908,7 @@ components:
           type: string
         department_id:
           type: string
-    inline_response_200_17:
+    inline_response_200_19:
       type: object
       properties:
         blob:
@@ -5360,7 +5925,7 @@ components:
           type: string
         department_id:
           type: string
-    inline_response_200_18:
+    inline_response_200_20:
       type: object
       properties:
         ok:
@@ -5382,11 +5947,11 @@ components:
           type: string
         criteria:
           $ref: '#/components/schemas/apiprocessesunlockProcessFiles_criteria'
-    inline_response_200_19:
+    inline_response_200_21:
       type: object
       properties:
         result:
-          $ref: '#/components/schemas/inline_response_200_30'
+          $ref: '#/components/schemas/inline_response_200_32'
     processes_sendPaymentsInstruction_body:
       type: object
       properties:
@@ -5415,7 +5980,7 @@ components:
           $ref: '#/components/schemas/apiprocessesunlockProcessFiles_criteria'
         processId:
           type: integer
-    inline_response_200_20:
+    inline_response_200_22:
       type: object
       properties:
         reason_refund:
@@ -5445,7 +6010,7 @@ components:
           type: integer
         department_id:
           type: string
-    inline_response_200_21:
+    inline_response_200_23:
       type: object
       properties:
         result:
@@ -5462,7 +6027,7 @@ components:
           type: integer
         department_id:
           type: string
-    inline_response_200_22:
+    inline_response_200_24:
       type: object
       properties:
         is_date:
@@ -5478,7 +6043,7 @@ components:
       properties:
         department_id:
           type: string
-    inline_response_200_23:
+    inline_response_200_25:
       type: object
       properties:
         ok:
@@ -5644,7 +6209,7 @@ components:
       properties:
         email:
           type: string
-    inline_response_200_24:
+    inline_response_200_26:
       type: object
       properties:
         id:
@@ -5663,7 +6228,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/apigenerals1inquiries_receivers'
-    inline_response_200_25:
+    inline_response_200_27:
       type: object
       properties:
         code:
@@ -5672,13 +6237,13 @@ components:
           type: string
         name:
           type: string
-    inline_response_200_26:
+    inline_response_200_28:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_26_items'
+            $ref: '#/components/schemas/inline_response_200_28_items'
         total:
           type: integer
         lastPage:
@@ -5737,7 +6302,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/apiproductsfullCompany_bank_account'
-    inline_response_200_27:
+    inline_response_200_29:
       type: object
       properties:
         id:
@@ -5765,7 +6330,7 @@ components:
           type: array
           items:
             type: string
-    inline_response_200_28:
+    inline_response_200_30:
       type: object
       properties:
         ok:
@@ -5773,14 +6338,14 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_28_data'
-    inline_response_200_29:
+            $ref: '#/components/schemas/inline_response_200_30_data'
+    inline_response_200_31:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_29_items'
+            $ref: '#/components/schemas/inline_response_200_31_items'
         total:
           type: integer
         lastPage:
@@ -5801,12 +6366,27 @@ components:
           type: integer
         documentType:
           $ref: '#/components/schemas/DocumentTypes'
-    inline_response_200_30:
+    inline_response_200_32:
       type: object
       properties:
         data:
           type: string
           format: binary
+        filename:
+          type: string
+        ext:
+          type: string
+    generals_downloadExampleFile_body:
+      type: object
+      properties:
+        filename:
+          type: string
+    inline_response_200_33:
+      type: object
+      properties:
+        data:
+          type: string
+          format: base64
         filename:
           type: string
         ext:
@@ -5817,14 +6397,14 @@ components:
         file:
           type: string
           format: binary
-    inline_response_200_31:
+    inline_response_200_34:
       type: object
       properties:
         message:
           type: string
         opswatId:
           type: string
-    inline_response_200_32:
+    inline_response_200_35:
       type: object
       properties:
         message:
@@ -5833,15 +6413,15 @@ components:
           type: string
         percentage:
           type: integer
-    inline_response_200_33:
+    inline_response_200_36:
       type: object
       properties:
         messages:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_33_messages'
+            $ref: '#/components/schemas/inline_response_200_36_messages'
         chat:
-          $ref: '#/components/schemas/inline_response_200_33_chat'
+          $ref: '#/components/schemas/inline_response_200_36_chat'
         messages_count:
           type: integer
         code:
@@ -5857,7 +6437,7 @@ components:
           type: integer
         employer_id:
           type: integer
-    inline_response_200_34:
+    inline_response_200_37:
       type: object
       properties:
         message:
@@ -5866,19 +6446,26 @@ components:
           type: boolean
         code:
           type: integer
-    inline_response_200_35:
+    inline_response_200_38:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    inline_response_200_39:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_35_items'
+            $ref: '#/components/schemas/inline_response_200_39_items'
         total:
           type: integer
         lastPage:
           type: integer
         other:
-          $ref: '#/components/schemas/inline_response_200_35_other'
+          $ref: '#/components/schemas/inline_response_200_39_other'
         code:
           type: integer
     feedbacks_feedback_body:
@@ -5894,11 +6481,11 @@ components:
           type: string
         criteria:
           $ref: '#/components/schemas/CriteriaProcess'
-    inline_response_200_36:
+    inline_response_200_40:
       type: object
       properties:
         result:
-          $ref: '#/components/schemas/inline_response_200_30'
+          $ref: '#/components/schemas/inline_response_200_32'
         code:
           type: integer
     feedbacks_changeStatus_body:
@@ -5921,14 +6508,14 @@ components:
             type: integer
         status:
           $ref: '#/components/schemas/ManualStatus'
-    inline_response_200_37:
+    inline_response_200_41:
       type: object
       properties:
         result:
           type: string
         code:
           type: integer
-    inline_response_200_38:
+    inline_response_200_42:
       type: object
       properties:
         count_employee:
@@ -5943,30 +6530,82 @@ components:
           type: integer
         code:
           type: integer
-    inline_response_200_39:
+    inline_response_200_43:
+      type: object
+      properties:
+        clause_type:
+          $ref: '#/components/schemas/ClauseType'
+        transfer_sum:
+          type: integer
+        transfer_percent:
+          type: number
+        exempt_sum:
+          type: integer
+        id:
+          type: integer
+        predicted_sum:
+          type: integer
+        predicted_percent:
+          type: integer
+        guid:
+          type: string
+        previous_guid:
+          type: string
+        status:
+          type: string
+        error_type:
+          type: string
+        error_details:
+          type: string
+        expected_percent:
+          type: number
+        expected_sum:
+          type: number
+        exempt:
+          type: number
+        percent:
+          type: number
+        sum:
+          type: number
+        salary_calculated:
+          type: number
+        current_provision_rate_aca:
+          type: number
+        expected_update_date_aca_tariff:
+          type: string
+          format: date
+        future_provision_rate_aca:
+          type: number
+        licensee_name:
+          type: string
+        licensed_identifier:
+          type: string
+        email_address_licensee:
+          type: string
+    inline_response_200_44:
       type: object
       properties:
         employees:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_39_employees'
+            $ref: '#/components/schemas/inline_response_200_44_employees'
         products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_39_employees'
+            $ref: '#/components/schemas/inline_response_200_44_employees'
         employer_products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_39_employees'
+            $ref: '#/components/schemas/inline_response_200_44_employees'
         code:
           type: integer
-    inline_response_200_40:
+    inline_response_200_45:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_40_items'
+            $ref: '#/components/schemas/inline_response_200_45_items'
         total:
           type: integer
         lastPage:
@@ -5992,7 +6631,7 @@ components:
           type: string
         confirmation:
           type: integer
-    inline_response_200_41:
+    inline_response_200_46:
       type: object
       properties:
         success:
@@ -6014,7 +6653,7 @@ components:
             type: integer
         criteria:
           $ref: '#/components/schemas/CriteriaProcess'
-    inline_response_200_42:
+    inline_response_200_47:
       type: object
       properties:
         id:
@@ -6072,7 +6711,7 @@ components:
             type: integer
         criteria:
           $ref: '#/components/schemas/apimtbuploadEmployeeDeclaration_criteria'
-    inline_response_200_43:
+    inline_response_200_48:
       type: object
       properties:
         block_sum:
@@ -6098,7 +6737,7 @@ components:
           type: string
         name:
           type: string
-    inline_response_200_44:
+    inline_response_200_49:
       type: object
       properties:
         id:
@@ -6109,6 +6748,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/apigeneralsbanks_bank_branches'
+    inline_response_200_50:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/inline_response_200_50_items'
+        total:
+          type: integer
+        lastPage:
+          type: integer
+        code:
+          type: integer
     inline_response_200_3_reportsData_processes:
       type: object
       properties:
@@ -6245,7 +6897,7 @@ components:
           type: boolean
         type_upload:
           type: integer
-    inline_response_200_7_comments:
+    inline_response_200_9_comments:
       type: object
       properties:
         id:
@@ -6256,7 +6908,7 @@ components:
           type: string
         username:
           type: string
-    inline_response_200_7_items:
+    inline_response_200_9_items:
       type: object
       properties:
         id:
@@ -6343,28 +6995,21 @@ components:
         comments:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_7_comments'
+            $ref: '#/components/schemas/inline_response_200_9_comments'
         name:
           type: string
         num_clearing:
           type: integer
         product_code:
           type: string
-    inline_response_200_10_items:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-    inline_response_200_15_employer_products:
+    inline_response_200_17_employer_products:
       type: object
       properties:
         code:
           type: string
         name:
           type: string
-    inline_response_200_15_items:
+    inline_response_200_17_items:
       type: object
       properties:
         file_type:
@@ -6376,7 +7021,7 @@ components:
         employer_products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_15_employer_products'
+            $ref: '#/components/schemas/inline_response_200_17_employer_products'
         product_type:
           $ref: '#/components/schemas/ProductType'
         product_code:
@@ -6415,7 +7060,7 @@ components:
           type: boolean
         request_open:
           type: string
-    inline_response_200_26_items:
+    inline_response_200_28_items:
       type: object
       properties:
         id:
@@ -6442,7 +7087,7 @@ components:
           type: string
         account:
           type: string
-    inline_response_200_28_data:
+    inline_response_200_30_data:
       type: object
       properties:
         id:
@@ -6451,7 +7096,7 @@ components:
           type: string
         code:
           type: integer
-    inline_response_200_29_items:
+    inline_response_200_31_items:
       type: object
       properties:
         id:
@@ -6464,13 +7109,14 @@ components:
           type: string
         created_at:
           type: string
+          format: date
         employer_name:
           type: integer
         employer_id:
           type: string
         document_type:
           $ref: '#/components/schemas/DocumentTypes'
-    inline_response_200_33_messages:
+    inline_response_200_36_messages:
       type: object
       properties:
         id:
@@ -6487,7 +7133,7 @@ components:
           type: string
         is_files:
           type: boolean
-    inline_response_200_33_chat:
+    inline_response_200_36_chat:
       type: object
       properties:
         id:
@@ -6512,7 +7158,7 @@ components:
           type: string
         employer_id:
           type: integer
-    inline_response_200_35_items:
+    inline_response_200_39_items:
       type: object
       properties:
         id:
@@ -6609,21 +7255,21 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ProcessType'
-    inline_response_200_35_other:
+    inline_response_200_39_other:
       type: object
       properties:
         error_types:
           type: array
           items:
             type: integer
-    inline_response_200_39_employees:
+    inline_response_200_44_employees:
       type: object
       properties:
         id:
           type: string
         name:
           type: string
-    inline_response_200_40_transfer_clause:
+    inline_response_200_45_transfer_clause:
       type: object
       properties:
         clause_type:
@@ -6636,7 +7282,7 @@ components:
           type: integer
         id:
           type: integer
-    inline_response_200_40_items:
+    inline_response_200_45_items:
       type: object
       properties:
         id:
@@ -6717,8 +7363,23 @@ components:
         transfer_clause:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_40_transfer_clause'
+            $ref: '#/components/schemas/inline_response_200_45_transfer_clause'
         process_type:
           $ref: '#/components/schemas/ProcessType'
         is_change:
           type: boolean
+    inline_response_200_50_items:
+      type: object
+      properties:
+        id:
+          type: integer
+        employer_name:
+          type: string
+        employee_name:
+          type: string
+        identifier:
+          type: string
+        product_name:
+          type: string
+        product_code:
+          type: integer

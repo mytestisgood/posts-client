@@ -1,4 +1,7 @@
-<div class="p-6">
+<div
+  *ngIf="chatItems; else loadingTemplate"
+  class="p-6"
+>
   <smarti-tabs
     [firstButtonText]="'סגור'"
     [secondButtonText]="'בטיפול'"
@@ -11,19 +14,19 @@
     <ng-container [ngSwitch]="activeItemIndex">
       <ng-container *ngSwitchCase="0">
         <smarti-dashboard-chat-list-item
-          [chatsItems]="onFilteredChatItems('סגור')"
+          [chatsItems]="onFilteredChatItems('close')"
           (activeChatIdChange)="setChatActive($event)"
         ></smarti-dashboard-chat-list-item>
       </ng-container>
       <ng-container *ngSwitchCase="1">
         <smarti-dashboard-chat-list-item
-          [chatsItems]="onFilteredChatItems('בטיפול')"
+          [chatsItems]="onFilteredChatItems('in_treatment')"
           (activeChatIdChange)="setChatActive($event)"
         ></smarti-dashboard-chat-list-item>
       </ng-container>
       <ng-container *ngSwitchCase="2">
         <smarti-dashboard-chat-list-item
-          [chatsItems]="onFilteredChatItems('פתוח')"
+          [chatsItems]="onFilteredChatItems('open')"
           (activeChatIdChange)="setChatActive($event)"
         ></smarti-dashboard-chat-list-item>
       </ng-container>
@@ -36,3 +39,10 @@
     </ng-container>
   </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <smarti-loader
+    [size]="'xl'"
+    [paddingTop30percent]="true"
+  ></smarti-loader>
+</ng-template>

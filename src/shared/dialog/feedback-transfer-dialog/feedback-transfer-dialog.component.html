@@ -1,0 +1,98 @@
+<div>
+  <div class="flex flex-row justify-end">
+    <h3 class="mt-0 mb-0 medium neutrals-text-950">{{ companyName }}</h3>
+  </div>
+  <div class="flex flex-row justify-end mt-6 gap-6">
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">סכום שהתקבל</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.transfer_sum }}</div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">סכום</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.sum }}</div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">חודש שידור</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">
+        {{ transferData?.expected_update_date_aca_tariff }}
+      </div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">סוג מוצר</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.clause_type }}</div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">שם תהליך</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.licensee_name }}</div>
+    </div>
+  </div>
+
+  <div class="border-neutrals-100 w-full mt-4 mb-4"></div>
+
+  <div class="flex flex-row justify-end gap-6">
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">קוד אוצר</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.id }}</div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">תאריך הפקדה</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.exempt }}</div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">תאריך תשלום</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.exempt }}</div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">חשבון</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.licensed_identifier }}</div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">סניף בנק</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.status }}</div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">בנק</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.status }}</div>
+    </div>
+  </div>
+
+  <div class="border-neutrals-100 w-full mt-4 mb-4"></div>
+
+  <div class="flex flex-row justify-end gap-6">
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">שם קובץ שנשלח</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.guid }}</div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">פירוט שגיאה</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.error_details }}</div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">סטטוס</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">
+        {{ transferData?.current_provision_rate_aca }}
+      </div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">תאריך שידור</div>
+      <div class="neutrals-text-950 text-right paragraph-text-medium">{{ transferData?.exempt }}</div>
+    </div>
+  </div>
+
+  <div class="border-neutrals-100 w-full mt-4 mb-4"></div>
+
+  <div class="flex flex-row justify-end gap-6">
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">היזון מסכם</div>
+    </div>
+    <div class="flex flex-col gap-6 min-w-220px"></div>
+    <div class="flex flex-col gap-6 min-w-220px"></div>
+    <div class="flex flex-col gap-6 min-w-220px">
+      <div class="neutrals-text-950 text-right paragraph-text">היזון ראשוני</div>
+    </div>
+  </div>
+</div>
+<button
+  class="close-dialog-left close-cross-24 cursor-pointer"
+  (click)="closeDialog()"
+></button>

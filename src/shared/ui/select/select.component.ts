@@ -1,9 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InlineResponse20038 } from '@shared/api';
 import { TuiHostedDropdownModule, TuiSizeM, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiSizeL, TuiSizeS } from '@taiga-ui/core/types';
-import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
+import {
+  TuiComboBoxModule,
+  TuiDataListWrapperModule, TuiFilterByInputPipeModule,
+  TuiSelectModule,
+  TuiStringifyContentPipeModule,
+} from '@taiga-ui/kit';
 
 @Component({
   selector: 'smarti-select',
@@ -16,6 +22,9 @@ import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
     TuiTextfieldControllerModule,
     TuiDataListWrapperModule,
     TuiHostedDropdownModule,
+    TuiStringifyContentPipeModule,
+    TuiFilterByInputPipeModule,
+    TuiComboBoxModule,
   ],
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
@@ -24,8 +33,12 @@ import { TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
 export class SelectComponent {
   @Input() public customWidth!: string;
   @Input() public options!: string[];
+  @Input() public comboBoxOptions!: InlineResponse20038[];
   @Input() public selectMode!: 'big';
   @Input() public placeholder!: string;
-  @Input() public control: FormControl<string | null> = new FormControl();
+  @Input() public control: FormControl<string | InlineResponse20038 | null> = new FormControl();
   @Input() public textFieldSize: TuiSizeM | TuiSizeS | TuiSizeL = 'm';
+  @Input() public isComboBoxMode: boolean = false;
+
+  public readonly stringify = (item: InlineResponse20038 | null): string => `${item?.name}`;
 }

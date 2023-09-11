@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { DashboardDownloadDocumentsModel } from '@shared/entities';
 import { ButtonComponent, InputCheckboxComponent } from '@shared/ui';
 
 @Component({
@@ -11,19 +12,20 @@ import { ButtonComponent, InputCheckboxComponent } from '@shared/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardDownloadDocumentsGridTableComponent {
-  public items!: { isSelected: boolean }[] | null;
+  @Input() public items!: DashboardDownloadDocumentsModel[];
+  @Output() public downloadFileClicked: EventEmitter<DashboardDownloadDocumentsModel> = new EventEmitter();
   public isAllSelected: boolean = false;
 
   public checkRow(isSelected: boolean, index: number): void {
-    if (!this.items) {
-      return;
-    }
-
     this.items[index].isSelected = isSelected;
   }
 
-  public checkAll(): void {
-    this.isAllSelected = !this.isAllSelected;
-    this.items?.forEach(item => (item.isSelected = this.isAllSelected));
+  public selectAll(): void {
+    this.isAllSelected = true;
+    this.items?.every((item: DashboardDownloadDocumentsModel) => (item.isSelected = this.isAllSelected));
+  }
+
+  public onDownloadFile(file: DashboardDownloadDocumentsModel): void {
+    this.downloadFileClicked.next(file);
   }
 }

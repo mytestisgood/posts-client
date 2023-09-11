@@ -9,6 +9,7 @@
         [customButtonWidth]="'232px'"
         [customHeight]="'56px'"
         [typeClass]="'confirm'"
+        (buttonClicked)="downloadSelectedDocuments()"
       ></smarti-button>
     </div>
     <div class="flex flex-row self-end gap-6 pr-6">
@@ -16,10 +17,14 @@
         [placeholder]="'Search'"
         [customWidth]="'450px'"
         [customBorderBottom]="'1px solid #4F5F7A'"
+        [control]="controlSearch"
       ></smarti-input-search>
     </div>
   </div>
-  <div class="w-full h-672 bg-white box-shadow-big mt-4 rounded-l mb-34">
-    <smarti-dashboard-download-documents-grid-table></smarti-dashboard-download-documents-grid-table>
+  <div class="w-full h-fit-content bg-white box-shadow-big mt-4 rounded-l mb-34">
+    <smarti-dashboard-download-documents-grid-table
+      [items]="files"
+      (downloadFileClicked)="onDownloadFile($event)"
+    ></smarti-dashboard-download-documents-grid-table>
   </div>
 </div>

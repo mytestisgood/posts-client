@@ -13,7 +13,10 @@
     ></smarti-button>
   </div>
   <div class="w-full h-752 bg-white box-shadow-big mt-4 rounded-l mb-34">
-    <smarti-dashboard-documents-table></smarti-dashboard-documents-table>
+    <smarti-dashboard-documents-table
+      [documents]="documents$ | async"
+      (downloadFileEvent)="onDownloadFile($event)"
+    ></smarti-dashboard-documents-table>
   </div>
 </div>
 
@@ -21,43 +24,9 @@
   #addDocumentsDialogTemplate
   let-observer
 >
-  <div class="flex flex-col items-center">
-    <h3 class="medium neutrals-text-950 mb-0 mt-0">הוספת מסמך</h3>
-    <div class="mt-8">
-      <smarti-select
-        [placeholder]="'סוג מסמך'"
-        [customWidth]="'536px'"
-      ></smarti-select>
-    </div>
-    <div class="mt-8">
-      <smarti-input-field
-        [placeholder]="'Description'"
-        [customWidth]="'536px'"
-      ></smarti-input-field>
-    </div>
-    <div class="mt-8">
-      <div class="paragraph-text neutrals-text-950">העלה קובץ XML</div>
-      <smarti-input-file
-        [customWidth]="'536px'"
-        [customHeight]="'120px'"
-        [control]="filesControl"
-        [multiple]="false"
-        (fileUploaded)="fileUploaded($event)"
-      ></smarti-input-file>
-    </div>
-    <div class="mt-10">
-      <smarti-button
-        [text]="'Action'"
-        [customButtonWidth]="'232px'"
-        [customHeight]="'56px'"
-        [typeClass]="'confirm'"
-        [disabled]="!isDocumentUploaded"
-        (buttonClicked)="onAddFileClick(observer)"
-      ></smarti-button>
-    </div>
-  </div>
-  <button
-    class="close-dialog-left close-cross-24 cursor-pointer"
-    (click)="closeDialog(observer)"
-  ></button>
+  <smarti-add-documents-dialog
+    [observer]="observer"
+    [filesControl]="filesControl"
+    (sendRequest)="onSendRequest($event)"
+  ></smarti-add-documents-dialog>
 </ng-template>

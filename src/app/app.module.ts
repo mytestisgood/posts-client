@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingComponent } from '@pages';
 import { ApiModule } from '@shared/api';
-import { SharedModule } from '@shared/module';
 import { TUI_SANITIZER, TuiAlertModule, TuiDialogModule, TuiRootModule } from '@taiga-ui/core';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 
@@ -18,7 +17,6 @@ import { AppComponent } from './app.component';
   imports: [
     AppRoutingModule,
     LandingComponent,
-    SharedModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     TuiRootModule,

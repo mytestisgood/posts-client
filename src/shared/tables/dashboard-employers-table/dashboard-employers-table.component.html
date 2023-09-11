@@ -1,5 +1,8 @@
 <div class="flex flex-col justify-between h-full">
-  <div class="mt-10 ml-7-5 mr-10 inline-block flex-1">
+  <div
+    class="mt-10 ml-7-5 mr-10 inline-block flex-1"
+    *ngIf="items?.length; else loadingTemplate"
+  >
     <table class="tui-table tui-table_layout_fixed employee-table">
       <tbody>
         <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-6">
@@ -73,8 +76,9 @@
           </th>
         </tr>
         <tr
-          *ngFor="let _ of ' '.repeat(4).split(''); let index = index"
+          *ngFor="let item of items; let index = index"
           class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
+          (click)="openFeedbackTransferDialog(item.company_name, item.company_id, item.file_status)"
         >
           <td class="tui-table__td h-10 p-2 px-0 w-20">
             <div class="message-notify-icon-24 cursor-pointer margin-rl-auto"></div>
@@ -82,18 +86,32 @@
           <td class="tui-table__td h-10 p-2 px-0 w-20">
             <div class="info-circle-icon-24 cursor-pointer margin-rl-auto"></div>
           </td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">נפרע במלאו</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">22-07-22</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">245.66</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">1328</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">פנסיה</td>
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
-            אלטשולר שחם גמל ופנסיה בע"מ
+            {{ item.employee_status }}
           </td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">04-23</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">300948304</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">סזי מזרחי</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">סמי עבד אלהאדי</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ getDateFromStringDate("yyyy-mm-dd", item.updated_at) }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.process_date }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">{{ item.amount }}</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.product_code }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.product_type }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.company_name }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">{{ item.salary }}</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.personal_id }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.employer_name }}
+          </td>
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 w-9 px-2">
             <smarti-input-checkbox (changeEvent)="checkRow($event, index)"></smarti-input-checkbox>
           </td>
@@ -108,3 +126,10 @@
     ></smarti-table-pagination>
   </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <smarti-loader
+    [size]="'xl'"
+    [paddingTop15percent]="true"
+  ></smarti-loader>
+</ng-template>

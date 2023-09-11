@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LeadsDialogComponent } from '@shared/dialog';
-import { SharedModule } from '@shared/module';
+import { ScrollSectionDirective } from '@shared/directives';
 import { DestroyService } from '@shared/services';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
@@ -10,15 +10,24 @@ import { takeUntil } from 'rxjs';
 @Component({
   selector: 'smarti-about-layout',
   standalone: true,
-  imports: [CommonModule, SharedModule, LeadsDialogComponent],
+  imports: [CommonModule, LeadsDialogComponent, ScrollSectionDirective],
   templateUrl: './about-layout.component.html',
   styleUrls: ['./about-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutLayoutComponent {
-  public firstLeadDialogsDescription: string = 'Pension settlements provide a reliable source of ' +
-    'income during your golden years, allowing you to maintain your standard of living and enjoy ' +
-    'the fruits of your labor.';
+  public firstLeadDialogsDescription: string = 'הסדרי הפנסיה מספקים מקור הכנסה אמין במהלך שנות הזהב שלכם, ומאפשרים' +
+    ' לכם לשמור על רמת החיים שלכם וליהנות מפירות עמלכם.';
+  public secondLeadDialogsDescription: string = 'הסדרי הפנסיה מספקים מקור הכנסה אמין במהלך שנות הזהב שלכם, ומאפשרים' +
+    ' לכם לשמור על רמת החיים שלכם וליהנות מפירות עמלכם.';
+  public thirdLeadDialogsDescription: string = 'הסדרי הפנסיה מספקים מקור הכנסה אמין במהלך שנות הזהב שלכם, ומאפשרים' +
+    ' לכם לשמור על רמת החיים שלכם וליהנות מפירות עמלכם.';
+  public fourthLeadDialogsDescription: string = 'הסדרי הפנסיה מספקים מקור הכנסה אמין במהלך שנות הזהב שלכם, ומאפשרים' +
+    ' לכם לשמור על רמת החיים שלכם וליהנות מפירות עמלכם.';
+  public firstHeaderText: string = 'הכנה לטופס 161';
+  public secondHeaderText: string = 'הכנה לטופס 161';
+  public thirdHeaderText: string = 'מנהל תיק אישי';
+  public fourthHeaderText: string = 'הסדר פנסיה';
   constructor(
     @Inject(TuiDialogService)
     private readonly dialogs: TuiDialogService,

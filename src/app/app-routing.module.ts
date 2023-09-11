@@ -58,8 +58,8 @@ const routes: Routes = [
         loadComponent: () => import('@shared/layout').then(m => m.DashboardEmployerComponent),
       },
       {
-        path: 'balance',
-        loadComponent: () => import('@shared/layout').then(m => m.DashboardBalanceComponent),
+        path: 'compensations',
+        loadComponent: () => import('@shared/layout').then(m => m.DashboardCompensationsComponent),
       },
       {
         path: 'documents',
@@ -94,7 +94,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     BrowserModule, RouterModule.forRoot(
-      routes, { scrollPositionRestoration: 'enabled' },
+      routes, { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' },
     ),
   ],
   exports: [RouterModule],

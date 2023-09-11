@@ -5,8 +5,8 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { TuiSizeM, TuiTextfieldControllerModule } from '@taiga-ui/core';
-import { TuiSizeL, TuiSizeS } from '@taiga-ui/core/types';
+import { TuiModeModule, TuiSizeM, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiBrightness, TuiSizeL, TuiSizeS } from '@taiga-ui/core/types';
 import { TuiInputModule } from '@taiga-ui/kit';
 
 @Component({
@@ -17,6 +17,7 @@ import { TuiInputModule } from '@taiga-ui/kit';
     ReactiveFormsModule,
     TuiInputModule,
     TuiTextfieldControllerModule,
+    TuiModeModule,
   ],
   templateUrl: './input-field.component.html',
   styleUrls: ['./input-field.component.scss'],
@@ -29,4 +30,5 @@ export class InputFieldComponent {
   @Input() public control: FormControl<string | null> = new FormControl<string>('');
   @Input() public customHeight: string = '';
   @Input() public inputTextFieldSize: TuiSizeL | TuiSizeS | TuiSizeM = 'm';
+  @Input() public mode: TuiBrightness | null = null;
 }

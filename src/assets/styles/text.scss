@@ -22,6 +22,10 @@
   text-overflow: ellipsis;
 }
 
+.overflow-break-word {
+  overflow-wrap: break-word;
+}
+
 .bold-text {
   font-weight: bold !important;
 }

@@ -10,25 +10,27 @@
     <div
       class="block-w92-h32 flex justify-center items-center paragraph-text rounded-m"
       [ngClass]="{
-        'bg-neutrals-50 neutrals-text-500': chat.type === 'סגור',
-        'bg-green-success-100 green-success-500-text': chat.type === 'פתוח',
-        'bg-blue-base-50 blue-text-base-600': chat.type === 'בטיפול'
+        'bg-neutrals-50 neutrals-text-500': chat.status === 'close',
+        'bg-green-success-100 green-success-500-text': chat.status === 'open',
+        'bg-blue-base-50 blue-text-base-600': chat.status === 'in_treatment'
       }"
     >
-      {{ chat.type }}
+      {{ chatListItemStatus(chat.status) }}
     </div>
-    <div class="caption-text neutrals-text-300">{{ chat.date }}</div>
+    <div class="caption-text neutrals-text-300">{{ getDateFromStringDate("dd-mm-yyyy", chat.updated_at) }}</div>
   </div>
   <div class="flex flex-col mr-6 ml-4">
     <div class="flex flex-row gap-2 mt-2 self-end">
-      <div class="neutrals-text-950 caption-text">{{ chat.smallHeader }}</div>
+      <div class="neutrals-text-950 caption-text">{{ chat.subject }}</div>
       <div
         class="small-vertical-line"
-        [ngClass]="setLineColorClass(chat.smallHeader)"
+        [ngClass]="setLineColorClass(chat.subject)"
       ></div>
     </div>
-    <div class="neutrals-text-950 paragraph-text-medium self-end text-end h-6">{{ chat.title }}</div>
-    <div class="neutrals-text-950 paragraph-text self-end text-end h-12 mt-1">{{ chat.lastMessageText }}</div>
+    <div class="neutrals-text-950 paragraph-text-medium self-end text-end h-6">
+      {{ chat.creator_name }} - {{ chat.operator_name }}
+    </div>
+    <div class="neutrals-text-950 paragraph-text self-end text-end h-12 mt-1">{{ chat.content }}</div>
   </div>
 </div>
 

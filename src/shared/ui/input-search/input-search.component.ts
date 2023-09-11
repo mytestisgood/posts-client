@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { tuiIconSearchLarge } from '@taiga-ui/icons';
 import { TuiInputInlineModule, TuiInputModule } from '@taiga-ui/kit';
@@ -10,14 +10,14 @@ import { TuiInputInlineModule, TuiInputModule } from '@taiga-ui/kit';
   standalone: true,
   imports: [
     CommonModule, TuiInputModule, TuiTextfieldControllerModule, FormsModule,
-    TuiInputInlineModule,
+    TuiInputInlineModule, ReactiveFormsModule,
   ],
   templateUrl: './input-search.component.html',
   styleUrls: ['./input-search.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputSearchComponent {
-  @Input() public search!: string;
+  @Input() public control!: FormControl<string | null>;
   @Input() public customWidth!: string;
   @Input() public placeholder!: string;
   @Input() public customBorderBottom!: string;

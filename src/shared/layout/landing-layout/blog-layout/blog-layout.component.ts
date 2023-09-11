@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '@shared/module';
+import { ScrollSectionDirective } from '@shared/directives';
 
 @Component({
   selector: 'smarti-blog-layout',
   standalone: true,
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, ScrollSectionDirective],
   templateUrl: './blog-layout.component.html',
   styleUrls: ['./blog-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

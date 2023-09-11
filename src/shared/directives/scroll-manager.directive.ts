@@ -3,6 +3,7 @@ import { ScrollSectionDirective } from './scroll-section.directive';
 
 @Directive({
   selector: '[smartiScrollManager]',
+  standalone: true,
 })
 export class ScrollManagerDirective {
   private readonly sections: Map<string | number, ScrollSectionDirective> =

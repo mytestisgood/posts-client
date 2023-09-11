@@ -63,3 +63,8 @@
   color: $neutrals-950;
   background: $white;
 }
+
+.disabled-button {
+  pointer-events: none;
+  opacity: 0.4;
+}

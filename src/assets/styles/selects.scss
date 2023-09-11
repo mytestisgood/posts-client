@@ -10,7 +10,15 @@ tui-select-option {
   }
 }
 
-tui-select {
+tui-combo-box {
+  tui-primitive-textfield {
+    input {
+      padding-right: 24px!important;
+    }
+  }
+}
+
+tui-select, tui-combo-box {
   border-radius: 8px!important;
   direction: rtl!important;
 
@@ -28,7 +36,6 @@ tui-select {
     input {
       background: $white!important;
       margin-right: 0!important;
-      padding-right: 0!important;
       color: $neutrals-500!important;
       text-align: right!important;
       font-family: RubikMedium, sans-serif !important;
@@ -53,7 +60,7 @@ tui-select {
 }
 
 .big-mode {
-  tui-select {
+  tui-select, tui-combo-box {
     tui-primitive-textfield {
       margin-right: 0!important;
       padding-right: 0!important;

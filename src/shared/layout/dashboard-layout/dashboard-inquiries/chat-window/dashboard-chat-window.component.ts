@@ -1,24 +1,30 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ChatService } from '@shared/api';
-import { AddFileChatDialogComponent } from '@shared/dialog';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
-  DashboardChatAddFileGroupControls,
-  dashboardChatAddFileGroupMapper,
-  DashboardChatItem, REGISTRATION_TOKEN, setLineColorClass,
-} from '@shared/entities';
-import { downloadFileHelper, formattedCurrentDateTo } from '@shared/helpers';
+  ChatService,
+  FilesMyHrService,
+  InlineResponse20034,
+  InlineResponse20036,
+} from '@shared/api';
+import { CreateNewChatDialogComponent } from '@shared/dialog';
+import { REGISTRATION_TOKEN, setLineColorClass } from '@shared/entities';
+import {
+  downloadFileHelper,
+  formattedCurrentDateTo,
+  getDateFromStringIsoDate,
+  getTimeFromStringIsoDate,
+} from '@shared/helpers';
 import { DestroyService } from '@shared/services';
 import {
   ButtonComponent,
   InputFieldComponent,
-  InputFileComponent, InputTextareaComponent,
+  InputFileComponent,
+  InputTextareaComponent, LoaderComponent,
   SelectComponent,
 } from '@shared/ui';
 import { LocalStorageService } from '@shared/web-api';
-import { TuiDialogContext, TuiDialogService, TuiScrollbarModule } from '@taiga-ui/core';
-import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import { TuiScrollbarModule } from '@taiga-ui/core';
 import { takeUntil } from 'rxjs';
 
 @Component({
@@ -26,59 +32,77 @@ import { takeUntil } from 'rxjs';
   standalone: true,
   imports: [
     CommonModule, InputFieldComponent, TuiScrollbarModule, ButtonComponent,
-    InputFileComponent, SelectComponent, InputTextareaComponent, AddFileChatDialogComponent,
+    InputFileComponent, SelectComponent, InputTextareaComponent, CreateNewChatDialogComponent,
+    ReactiveFormsModule, LoaderComponent,
   ],
   templateUrl: './dashboard-chat-window.component.html',
   styleUrls: ['./dashboard-chat-window.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardChatWindowComponent {
-  @Input() public chat!: DashboardChatItem | undefined;
+  @Input() public chat!: InlineResponse20036 | null;
 
   public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
   public messageControl: FormControl = new FormControl();
-  public addAddFileForm: FormGroup<DashboardChatAddFileGroupControls> = dashboardChatAddFileGroupMapper();
+  public uploadedFileId!: string;
+  public isFileUploaded: boolean = true;
   protected readonly setLineColorClass = setLineColorClass;
+  protected readonly getTimeFromStringIsoDate = getTimeFromStringIsoDate;
 
   constructor(
-    private readonly dialogs: TuiDialogService,
     private readonly destroy$: DestroyService,
     private readonly chatService: ChatService,
     private readonly localStorageService: LocalStorageService,
-  ) {}
-  public dateChatMessages(messagesDate: string): string {
-    const formattedToday: string = formattedCurrentDateTo('dd-mm-yyyy');
+    private readonly filesMyHrService: FilesMyHrService,
+    private readonly changeDetectorRef: ChangeDetectorRef,
+  ) {
+  }
 
-    if (formattedToday === messagesDate) {
+  public dateChatMessages(messagesDate: string | undefined): string {
+    const formattedToday: string = formattedCurrentDateTo('dd-mm-yyyy');
+    const messageDateAsSting: string = getDateFromStringIsoDate('dd-mm-yyyy', messagesDate);
+
+    if (formattedToday === messageDateAsSting) {
       return 'today';
     }
 
-    return messagesDate;
+    return messageDateAsSting as string;
   }
 
-  public downloadPaymentExample(name: string | null): void {
+  public downloadPaymentExample(name: string | undefined): void {
     downloadFileHelper('/assets/files/דוגמה.xlsx', name ?? 'unnamed');
   }
 
-  public openAddFileDialog(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.dialogs.open(content, {
-      closeable: false,
-      dismissible: false,
-      size: 'auto',
-    }).pipe(takeUntil(this.destroy$)).subscribe();
-  }
-
-  public onAddFileSendRequest(): void {
-    this.addAddFileForm.markAsTouched();
-  }
-
-  public onSendMessage(): void {
+  public onSendMessage(chatId: string | undefined | number, employerId: string | undefined | number): void {
     this.chatService.apiChatsSaveMessageChatPost(this.token, {
-        chat_id: 0,
+        chat_id: chatId as number,
         message: this.messageControl.value,
-        employer_id: 0,
-        opswatIds: '',
+        employer_id: employerId as number,
+        opswatIds: this.uploadedFileId,
       },
     ).pipe(takeUntil(this.destroy$)).subscribe();
+  }
+
+  public addFileToMessage(): void {
+    document?.getElementById('fileId')?.click();
+  }
+
+  public onFileChangeEvent(event: Event): void {
+    const input: HTMLInputElement = event.target as HTMLInputElement;
+
+    if (!input.files?.length) {
+      return;
+    }
+
+    const file: File = input.files[0];
+
+    this.isFileUploaded = false;
+    this.filesMyHrService.apiUploadPost('smarti-dev', file).pipe(
+      takeUntil(this.destroy$),
+    ).subscribe((response: InlineResponse20034) => {
+      this.isFileUploaded = true;
+      this.uploadedFileId = response.opswatId as string;
+      this.changeDetectorRef.detectChanges();
+    });
   }
 }

@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardChatItem, setLineColorClass } from '@shared/entities';
+import { StatusChat } from '@shared/api';
+import { ChatListItems, setLineColorClass } from '@shared/entities';
+import { getCalendarDateFromStringDate } from '@shared/helpers';
 import { TuiHintModule } from '@taiga-ui/core';
 
 @Component({
@@ -12,12 +14,26 @@ import { TuiHintModule } from '@taiga-ui/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardChatListItemComponent {
-  @Input() public chatsItems!: DashboardChatItem[];
+  @Input() public chatsItems!: ChatListItems[] | null;
   @Output() public activeChatIdChange: EventEmitter<number> = new EventEmitter<number>();
 
+  protected readonly getDateFromStringDate = getCalendarDateFromStringDate;
   protected readonly setLineColorClass = setLineColorClass;
 
-  public chatActiveChange(id: number): void {
-    this.activeChatIdChange.next(id);
+  public chatActiveChange(id: number | undefined): void {
+    this.activeChatIdChange.next(id as number);
+  }
+
+  public chatListItemStatus(status: StatusChat | undefined): string {
+    switch (status) {
+      case 'open':
+        return 'פתוח';
+      case 'close':
+        return 'סגור';
+      case 'in_treatment':
+        return 'בטיפול';
+      default:
+        return '';
+    }
   }
 }

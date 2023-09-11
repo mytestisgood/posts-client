@@ -1,7 +1,7 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { ScrollManagerDirective } from '@shared/directives';
 import { FooterComponent, HeaderComponent } from '@shared/layout';
-import { SharedModule } from '@shared/module';
 import { ButtonComponent, ExpandComponent, InputFieldComponent } from '@shared/ui';
 
 @Component({
@@ -11,10 +11,10 @@ import { ButtonComponent, ExpandComponent, InputFieldComponent } from '@shared/u
     CommonModule,
     HeaderComponent,
     FooterComponent,
-    SharedModule,
     ButtonComponent,
     ExpandComponent,
     InputFieldComponent,
+    ScrollManagerDirective,
   ],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
