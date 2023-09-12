@@ -1,8 +1,33 @@
+import {
+  ActivationEnd,
+  ActivationStart,
+  ChildActivationEnd,
+  ChildActivationStart,
+  GuardsCheckEnd,
+  GuardsCheckStart,
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationSkipped,
+  NavigationStart,
+  ResolveEnd,
+  ResolveStart,
+  RouteConfigLoadEnd,
+  RouteConfigLoadStart,
+  RoutesRecognized,
+  Scroll,
+} from '@angular/router';
+
 export const SPECIAL_HEADER_TOKEN: string = 'specialHeaderToken';
 export const emailValidatorPattern: string = '^(?!^-)[\\w-]+(?:[\\.-][\\w-]+)*(?:[\\.+][\\w-]+)*@' +
   '\\w+(?:[\\.-]\\w+)*(?:\\.[A-Za-z]{2,4})+$';
 
 export type FileWithLoading = File & { isLoading: boolean, isUploaded: boolean };
+
+export type NavigationEvent = NavigationStart | NavigationEnd | NavigationCancel | NavigationError |
+  RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd |
+  ChildActivationStart | ChildActivationEnd | ActivationStart | ActivationEnd | Scroll | ResolveStart |
+  ResolveEnd | NavigationSkipped;
 
 export interface DialogConfig<T = unknown> {
   header?: string;

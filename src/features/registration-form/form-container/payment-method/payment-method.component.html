@@ -31,7 +31,16 @@
         [control]="selectControl"
       ></smarti-select>
     </div>
-    <div class="mt-56 flex justify-center mb-16">
+    <div class="mt-56 flex justify-start gap-171px mb-16">
+      <smarti-button
+        [customHeight]="'56px'"
+        [customButtonWidth]="'205px'"
+        [text]="'Go Back'"
+        [typeClass]="'white'"
+        [hasFromRightArrowLeftIcon]="true"
+        [customBorder]="'1px solid black'"
+        (buttonClicked)="doChangeStep('back')"
+      ></smarti-button>
       <smarti-button
         [customWidth]="'215px'"
         [typeClass]="'confirm'"

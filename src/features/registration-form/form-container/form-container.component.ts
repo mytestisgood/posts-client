@@ -74,6 +74,10 @@ export class FormContainerComponent implements OnInit {
           this.currentStepBs.next(RegistrationFormTypeEnum.VerifyEmailInfo);
           this.changingStep.next(RegistrationFormTypeEnum.VerifyEmailInfo);
         }
+        if (direction === RegistrationDirectionEnum.Back) {
+          this.currentStepBs.next(RegistrationFormTypeEnum.UploadDocumentInfo);
+          this.changingStep.next(RegistrationFormTypeEnum.UploadDocumentInfo);
+        }
         break;
       case RegistrationStepEnum.VerifyEmailStep:
         if (direction === RegistrationDirectionEnum.Forward) {

@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ScrollSectionDirective } from '@shared/directives';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import packageJson from '../../../../../package.json';
 
 @Component({
   selector: 'smarti-footer',
   standalone: true,
-  imports: [CommonModule, ScrollSectionDirective],
+  imports: [CommonModule],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

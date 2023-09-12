@@ -14,8 +14,9 @@ import { UploadFileService } from '@shared/api';
 import { ForwardRequestDialogComponent } from '@shared/dialog';
 import {
   DEPARTMENT_ID,
-  RegistrationDirection,
+  FileWithLoading,
   REGISTRATION_TOKEN,
+  RegistrationDirection,
   RegistrationFormValueType,
   UploadDocumentsControls,
   uploadingDocumentsFormMapper,
@@ -52,7 +53,7 @@ import { takeUntil } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UploadDocumentComponent implements OnInit {
-  @Input() public startingForm!: FormGroup;
+  @Input() public startingForm!: Array<FileWithLoading>;
   @Input() public currentFormStateValue!: RegistrationFormValueType;
   @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() public changeStep: EventEmitter<RegistrationDirection> = new EventEmitter<RegistrationDirection>();
@@ -77,7 +78,7 @@ export class UploadDocumentComponent implements OnInit {
 
   public ngOnInit(): void {
     if (this.startingForm) {
-      this.uploadDocumentsForm = this.startingForm;
+      this.uploadDocumentsForm.controls.files.setValue(this.startingForm);
     }
     this.subformInitialized.emit(this.uploadDocumentsForm);
     this.identifier = this.currentFormStateValue.personalInfo.companyId;

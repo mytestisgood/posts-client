@@ -12,7 +12,7 @@
         ></div>
         <div
           class="button-trial flex gap-2 items-center rounded-m border-neutrals-950 cursor-pointer"
-          (click)="navigateToRegistrationPage()"
+          (click)="navigateToPageWithoutAnchor(registrationLink)"
         >
           <div class="arrow-left-dark-16"></div>
           <div class="paragraph-text-extra">התחילו מסלול חינם</div>
@@ -34,7 +34,7 @@
           [customWidth]="'168px'"
           [customHeight]="'42px'"
           [paragraphTextExtra]="true"
-          (buttonClicked)="navigateToLoginPage()"
+          (buttonClicked)="navigateToPageWithoutAnchor(loginLink)"
         ></smarti-button>
         <smarti-button
           class="margin-start-6"
@@ -44,13 +44,13 @@
           [customHeight]="'42px'"
           [customBorder]="'1px solid white'"
           [paragraphTextExtra]="true"
-          (buttonClicked)="navigateToRegistrationPage()"
+          (buttonClicked)="navigateToPageWithoutAnchor(registrationLink)"
         ></smarti-button>
       </div>
       <nav class="flex">
         <a
           class="nav-block paragraph-text-light self-center cursor-pointer"
-          (click)="navigateToContactPage()"
+          (click)="navigateToPageWithoutAnchor(contactLink)"
         >
           צרו קשר
         </a>
@@ -58,8 +58,7 @@
         <a
           class="nav-block paragraph-text-light self-center cursor-pointer"
           smartiScrollAnchor="blog"
-          id="blog"
-          (click)="navigateFromContactToMainPage()"
+          (click)="navigateToPageWithAnchor(mainLink, 'blog')"
         >
           בלוג
         </a>
@@ -67,7 +66,7 @@
         <a
           class="nav-block paragraph-text-light self-center cursor-pointer"
           smartiScrollAnchor="banner"
-          (click)="navigateFromContactToMainPage()"
+          (click)="navigateToPageWithAnchor(mainLink, 'banner')"
         >
           אודות
         </a>
@@ -75,13 +74,13 @@
         <a
           class="nav-block paragraph-text-light self-center cursor-pointer"
           smartiScrollAnchor="about"
-          (click)="navigateFromContactToMainPage()"
+          (click)="navigateToPageWithAnchor(mainLink, 'about')"
         >
           פתרונות
         </a>
         <a
           class="logo-big-h33 margin-start-25 cursor-pointer"
-          (click)="navigateToMainPage()"
+          (click)="navigateToPageWithoutAnchor(mainLink)"
         ></a>
       </nav>
     </div>

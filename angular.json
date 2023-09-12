@@ -31,7 +31,8 @@
             },
             "allowedCommonJsDependencies": [
               "text-mask-core",
-              "dompurify"
+              "dompurify",
+              "file-saver"
             ],
             "outputPath": "dist/smarti-client",
             "index": "src/index.html",

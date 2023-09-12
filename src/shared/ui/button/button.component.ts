@@ -32,6 +32,7 @@ export class ButtonComponent {
   @Input() public hasMessageIcon: boolean = false;
   @Input() public hasSaveIcon: boolean = false;
   @Input() public isNeedZIndex: boolean = false;
+  @Input() public hasFromRightArrowLeftIcon: boolean = false;
   @Output() public buttonClicked: Subject<void> = new Subject();
 
   public clicked(): void {
