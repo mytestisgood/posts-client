@@ -18,7 +18,9 @@ import { debounceTime, takeUntil } from 'rxjs';
   selector: 'smarti-dashboard-download-documents',
   standalone: true,
   imports: [
-    CommonModule, ButtonComponent, InputSearchComponent,
+    CommonModule,
+    ButtonComponent,
+    InputSearchComponent,
     DashboardDownloadDocumentsGridTableComponent,
   ],
   templateUrl: './dashboard-download-documents.component.html',
