@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
+  DocumentTypes,
   FilesService,
   InlineResponse20031,
   InlineResponse20031Items,
@@ -63,9 +64,9 @@ export class DashboardDocumentsComponent {
 
   public onSendRequest(request: DashboardDocumentsAddDocument): void {
     this.filesService.apiDocumentsPost(this.token, {
-      description: request.documents,
+      description: request.description,
       date: formattedCurrentDateTo('yyyy-mm-dd'),
-      documentType: 'employer_deposition',
+      documentType: request.documents as DocumentTypes,
       employer_id: 0,
       opswatIds: request.opswatId,
     }).pipe(takeUntil(this.destroy$)).subscribe();

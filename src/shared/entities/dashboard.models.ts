@@ -1,5 +1,6 @@
 import { FormControl } from '@angular/forms';
 import {
+  DocumentTypes,
   InlineResponse20038,
   InlineResponse20039Items,
   InlineResponse2006Items,
@@ -51,6 +52,33 @@ export enum DashboardStepEnum {
   FifthStep = 'fifthStep',
 }
 
+export type DocumentTypesEmployerType = {
+  employer_deposition: string | DocumentTypes,
+  other: string | DocumentTypes,
+  employer_poa: string | DocumentTypes,
+  protocol_poa: string | DocumentTypes,
+  authorization_protocol: string | DocumentTypes,
+  employer_signature: string | DocumentTypes,
+};
+
+export const DocumentTypesConstEmployer: DocumentTypesEmployerType = {
+  employer_deposition: 'EmployerDeposition' as DocumentTypes,
+  other: 'Other' as DocumentTypes,
+  employer_poa: 'EmployerPoa' as DocumentTypes,
+  protocol_poa: 'ProtocolPoa' as DocumentTypes,
+  authorization_protocol: 'AuthorizationProtocol' as DocumentTypes,
+  employer_signature: 'EmployerSignature' as DocumentTypes,
+};
+
+export enum DocumentTypesEnumEmployer {
+  EmployerDeposition = 'הצהרת מעסיק',
+  Other = 'אחר',
+  EmployerPoa = 'יפוי כח',
+  ProtocolPoa = 'פרוטוקול ויפוי כח',
+  AuthorizationProtocol = 'פרוטוקול מורשה חתימה',
+  EmployerSignature = 'חתימת מעסיק (תמונה)',
+}
+
 export enum DashboardDirectionEnum {
   Forward = 'forward',
   Back = 'back'
@@ -100,7 +128,7 @@ export interface DashboardDocumentsDownloadFile {
 }
 
 export interface DashboardDocumentsAddDocument {
-  documents: string;
+  documents: DocumentTypes;
   description: string;
   opswatId: string;
 }

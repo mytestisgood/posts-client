@@ -7,8 +7,13 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FilesMyHrService, InlineResponse20034 } from '@shared/api';
-import { DashboardDocumentsAddDocument } from '@shared/entities';
+import { DocumentTypes, FilesMyHrService, InlineResponse20034 } from '@shared/api';
+import {
+  DashboardDocumentsAddDocument,
+  DocumentTypesConstEmployer,
+  DocumentTypesEnumEmployer,
+  getObjectKeyByValue,
+} from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import {
   ButtonComponent,
@@ -36,8 +41,9 @@ export class AddDocumentsDialogComponent {
 
   public isDocumentUploaded: boolean = false;
   public opswatId!: string;
+  public documentTypeControl: FormControl<string | null> = new FormControl();
   public descriptionControl: FormControl<string | null> = new FormControl<string | null>('');
-  public documentTypeControl: FormControl<string | null> = new FormControl<string | null>('');
+  public documentTypeOption: string[] = Object.values(DocumentTypesEnumEmployer);
 
   constructor(
     private readonly destroy$: DestroyService,
@@ -47,11 +53,16 @@ export class AddDocumentsDialogComponent {
   }
 
   public onAddFileClick(): void {
+    const documentType: DocumentTypesEnumEmployer = this.documentTypeControl.value as DocumentTypesEnumEmployer;
+    const documentTypeEnumControl: string = getObjectKeyByValue(DocumentTypesEnumEmployer, documentType);
+    const documentTypeControl: string = getObjectKeyByValue(DocumentTypesConstEmployer, documentTypeEnumControl);
+
     this.sendRequest.next({
-      documents: this.documentTypeControl.value as string,
+      documents: documentTypeControl as DocumentTypes,
       description: this.descriptionControl.value as string,
       opswatId: this.opswatId,
     });
+    this.filesControl.setValue([]);
     this.observer.complete();
   }
 
