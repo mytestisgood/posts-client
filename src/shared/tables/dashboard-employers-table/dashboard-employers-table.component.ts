@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  FeedBackService, InlineResponse20043,
+  FeedBackService, InlineResponse20044,
   StatusFileFeedback,
   StatusProcess,
 } from '@shared/api';
@@ -67,7 +67,7 @@ export class DashboardEmployersTableComponent {
       '',
       this.token,
     ).pipe(
-      switchMap((response: InlineResponse20043) => {
+      switchMap((response: InlineResponse20044) => {
         return this.dialogs.open(new PolymorpheusComponent(FeedbackTransferDialogComponent), {
           closeable: false,
           dismissible: false,

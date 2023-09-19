@@ -10,31 +10,39 @@ import {
   RegistrationComponent,
   ResetPasswordComponent,
 } from '@pages';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
+    canActivate: [LoginGuard],
   },
   {
     path: 'registration',
     component: RegistrationComponent,
+    canActivate: [LoginGuard],
   },
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [LoginGuard],
   },
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
+    canActivate: [LoginGuard],
   },
   {
     path: 'contact',
     component: ContactComponent,
+    canActivate: [LoginGuard],
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -86,6 +94,7 @@ const routes: Routes = [
   {
     path: '**',
     component: LandingComponent,
+    canActivate: [LoginGuard],
     pathMatch: 'full',
     children: [{ path: '', component: NotFoundComponent }],
   },

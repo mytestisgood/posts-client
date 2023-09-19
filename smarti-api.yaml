@@ -8,9 +8,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.1
+  version: 1.0.0
 servers:
-  - url: https://virtserver.swaggerhub.com/smarti/smarti/1.0.1
+  - url: https://virtserver.swaggerhub.com/smarti/smarti/1.0.0
     description: SwaggerHub API Auto Mocking
   - url: https://api.xsmart-staging.com
 tags:
@@ -38,6 +38,8 @@ tags:
   - name: Exceptions
   - name: Menora
   - name: Employees
+  - name: Organizations
+  - name: User
 paths:
   /api/leads/createLead:
     post:
@@ -196,6 +198,73 @@ paths:
                   value:
                     message: user exist
                     code: 204
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error
+                    code: 400
+      servers:
+        - url: https://api.xsmart-staging.com
+    servers:
+      - url: https://api.xsmart-staging.com
+  /api/login:
+    post:
+      tags:
+        - Sign In
+      description: login
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api_login_body'
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+              examples:
+                "0":
+                  value:
+                    token: eyJ0eXAiOiJK
+                    role: employer
+                    name: מיכל שמש
+                    module:
+                      - id: "1771"
+                        user_id: "321"
+                        name: user_management
+                        permission_type: all
+                    user:
+                      id: 321
+                      identifier: "315206912"
+                      role: employer
+                      first_name: מיכל
+                      last_name: שמש
+                      email: michalb@smarti.co.il
+                      phone: "0527192460"
+                      organization_group_id: 1
+                      is_registered: false
+                      name: מיכל שמש
+                      connect_type: email
+                      is_skip: false
+                      is_active: true
+                    organization_group_id: 1
         "400":
           description: bad request
           content:
@@ -384,7 +453,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_2'
+                $ref: '#/components/schemas/inline_response_200_3'
               examples:
                 "0":
                   value:
@@ -435,7 +504,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_3'
+                $ref: '#/components/schemas/inline_response_200_4'
               examples:
                 "0":
                   value:
@@ -538,7 +607,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_4'
+                $ref: '#/components/schemas/inline_response_200_5'
               examples:
                 "0":
                   value:
@@ -634,7 +703,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_5'
+                $ref: '#/components/schemas/inline_response_200_6'
               examples:
                 "0":
                   value:
@@ -743,7 +812,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_6'
+                $ref: '#/components/schemas/inline_response_200_7'
               examples:
                 "0":
                   value:
@@ -846,7 +915,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_7'
+                  $ref: '#/components/schemas/inline_response_200_8'
               examples:
                 "0":
                   value:
@@ -908,7 +977,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_8'
+                $ref: '#/components/schemas/inline_response_200_9'
               examples:
                 "0":
                   value:
@@ -1037,7 +1106,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_9'
+                $ref: '#/components/schemas/inline_response_200_10'
               examples:
                 "0":
                   value:
@@ -1196,7 +1265,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_10'
+                $ref: '#/components/schemas/inline_response_200_11'
               examples:
                 "0":
                   value:
@@ -1300,7 +1369,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
+                $ref: '#/components/schemas/inline_response_200_12'
               example:
                 message: true
                 list_exceptions: []
@@ -1327,7 +1396,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_12'
+                $ref: '#/components/schemas/inline_response_200_13'
               examples:
                 "0":
                   value:
@@ -1467,7 +1536,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/inline_response_200_14'
               examples:
                 "0":
                   value:
@@ -1479,7 +1548,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/inline_response_200_14'
               examples:
                 "0":
                   value:
@@ -1524,7 +1593,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_14'
+                $ref: '#/components/schemas/inline_response_200_15'
               examples:
                 "0":
                   value:
@@ -1539,7 +1608,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/inline_response_200_14'
               examples:
                 "0":
                   value:
@@ -1692,7 +1761,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_15'
+                $ref: '#/components/schemas/inline_response_200_16'
               examples:
                 "0":
                   value:
@@ -1704,7 +1773,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_15'
+                $ref: '#/components/schemas/inline_response_200_16'
               examples:
                 "0":
                   value:
@@ -1749,7 +1818,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_16'
+                $ref: '#/components/schemas/inline_response_200_17'
               examples:
                 "0":
                   value:
@@ -1762,7 +1831,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_16'
+                $ref: '#/components/schemas/inline_response_200_17'
               examples:
                 "0":
                   value:
@@ -1840,7 +1909,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_17'
+                $ref: '#/components/schemas/inline_response_200_18'
               examples:
                 "0":
                   value:
@@ -1956,7 +2025,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_18'
+                  $ref: '#/components/schemas/inline_response_200_19'
               examples:
                 "0":
                   value:
@@ -2069,7 +2138,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_19'
+                $ref: '#/components/schemas/inline_response_200_20'
               examples:
                 "0":
                   value:
@@ -2081,7 +2150,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/inline_response_200_14'
               examples:
                 "0":
                   value:
@@ -2128,7 +2197,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_20'
+                $ref: '#/components/schemas/inline_response_200_21'
               example:
                 ok: true
                 code: 200
@@ -2137,7 +2206,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/inline_response_200_14'
               examples:
                 "0":
                   value:
@@ -2184,7 +2253,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_21'
+                $ref: '#/components/schemas/inline_response_200_22'
               examples:
                 "0":
                   value:
@@ -2296,7 +2365,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_22'
+                $ref: '#/components/schemas/inline_response_200_23'
               examples:
                 "0":
                   value:
@@ -2353,7 +2422,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_23'
+                $ref: '#/components/schemas/inline_response_200_24'
               example:
                 result: false
         "400":
@@ -2396,7 +2465,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_24'
+                $ref: '#/components/schemas/inline_response_200_25'
               examples:
                 "0":
                   value:
@@ -2452,7 +2521,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_25'
+                $ref: '#/components/schemas/inline_response_200_26'
               examples:
                 "0":
                   value:
@@ -2508,7 +2577,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_23'
+                $ref: '#/components/schemas/inline_response_200_24'
               example:
                 result: true
         "400":
@@ -2800,7 +2869,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_26'
+                  $ref: '#/components/schemas/inline_response_200_27'
               examples:
                 "0":
                   value:
@@ -2846,7 +2915,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_27'
+                  $ref: '#/components/schemas/inline_response_200_28'
               examples:
                 "0":
                   value:
@@ -2901,7 +2970,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_28'
+                $ref: '#/components/schemas/inline_response_200_29'
               examples:
                 "0":
                   value:
@@ -3074,7 +3143,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_29'
+                  $ref: '#/components/schemas/inline_response_200_30'
               examples:
                 "0":
                   value:
@@ -3151,7 +3220,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_30'
+                $ref: '#/components/schemas/inline_response_200_31'
               examples:
                 "0":
                   value:
@@ -3278,7 +3347,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_31'
+                $ref: '#/components/schemas/inline_response_200_32'
               example:
                 items:
                   - id: 3746
@@ -3387,7 +3456,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_32'
+                $ref: '#/components/schemas/inline_response_200_33'
               examples:
                 "0":
                   value:
@@ -3525,7 +3594,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_33'
+                $ref: '#/components/schemas/inline_response_200_34'
               example:
                 data: UEsDBB
                 filename: transfer_form_between_company.pdf
@@ -3571,7 +3640,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_34'
+                $ref: '#/components/schemas/inline_response_200_35'
               example:
                 message: success
                 opswatId: bf4fded72a1542b6a3eb0d516630db6
@@ -3612,7 +3681,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_35'
+                $ref: '#/components/schemas/inline_response_200_36'
               examples:
                 "0":
                   value:
@@ -3656,7 +3725,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_36'
+                $ref: '#/components/schemas/inline_response_200_37'
               examples:
                 "0":
                   value:
@@ -3727,7 +3796,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_37'
+                $ref: '#/components/schemas/inline_response_200_38'
               examples:
                 "0":
                   value:
@@ -3777,7 +3846,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_38'
+                  $ref: '#/components/schemas/inline_response_200_39'
               examples:
                 "0":
                   value:
@@ -3826,7 +3895,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_38'
+                  $ref: '#/components/schemas/inline_response_200_39'
               examples:
                 "0":
                   value:
@@ -3931,7 +4000,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_39'
+                $ref: '#/components/schemas/inline_response_200_40'
               example:
                 items:
                   - id: 10056454
@@ -4025,7 +4094,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_40'
+                $ref: '#/components/schemas/inline_response_200_41'
               example:
                 result:
                   data: UEsDBB
@@ -4078,7 +4147,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_41'
+                $ref: '#/components/schemas/inline_response_200_42'
               example:
                 result: true
                 code: 200
@@ -4087,7 +4156,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_41'
+                $ref: '#/components/schemas/inline_response_200_42'
               example:
                 result: false
                 code: 400
@@ -4129,7 +4198,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_42'
+                $ref: '#/components/schemas/inline_response_200_43'
               example:
                 count_employee: 20
                 fix: 0
@@ -4202,7 +4271,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_43'
+                $ref: '#/components/schemas/inline_response_200_44'
               example:
                 clause_type: compensation
                 transfer_sum: -5
@@ -4268,7 +4337,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_44'
+                $ref: '#/components/schemas/inline_response_200_45'
               examples:
                 "0":
                   value:
@@ -4355,7 +4424,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_45'
+                $ref: '#/components/schemas/inline_response_200_46'
               examples:
                 "0":
                   value:
@@ -4455,7 +4524,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_46'
+                $ref: '#/components/schemas/inline_response_200_47'
               example:
                 success: true
                 message: updated finish
@@ -4568,7 +4637,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_47'
+                  $ref: '#/components/schemas/inline_response_200_48'
               examples:
                 "0":
                   value:
@@ -4690,7 +4759,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_48'
+                $ref: '#/components/schemas/inline_response_200_49'
               example:
                 num_file: 0
                 group_things_ids:
@@ -4740,7 +4809,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_49'
+                  $ref: '#/components/schemas/inline_response_200_50'
               examples:
                 "0":
                   value:
@@ -4801,7 +4870,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_49'
+                  $ref: '#/components/schemas/inline_response_200_50'
               examples:
                 "0":
                   value:
@@ -4930,7 +4999,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_50'
+                $ref: '#/components/schemas/inline_response_200_51'
               example:
                 items:
                   - id: 65
@@ -5008,7 +5077,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/inline_response_200_38'
+                  $ref: '#/components/schemas/inline_response_200_39'
               example:
                 - id: 20244
                   name: מוחמד גזאוי
@@ -5022,6 +5091,103 @@ paths:
                 "0":
                   value:
                     message: failure
+                    code: 400
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/organizations/getOrganizations:
+    get:
+      tags:
+        - Organizations
+      description: get list of organizations and employers
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_52'
+              examples:
+                "0":
+                  value:
+                    - id: "1"
+                      name: עמותת עטלף1
+                      organization_group_id: "1"
+                      employer:
+                        - id: 2
+                          name: עמותת עטלף
+                          identifier: "580057529"
+                          status: active
+                          priority_type: conservation
+                          department:
+                            - id: "2"
+                              name: כללי
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: failure
+                    code: 400
+      servers:
+        - url: https://api.xsmart-staging.com
+  /api/users/changeEmail:
+    post:
+      tags:
+        - User
+      description: change user email
+      parameters:
+        - name: Token
+          in: header
+          required: false
+          style: simple
+          explode: false
+          schema:
+            type: string
+          example: eyJ0e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users_changeEmail_body'
+            example:
+              email: exa@gmail.com
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: success
+                    code: 200
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error----
                     code: 400
       servers:
         - url: https://api.xsmart-staging.com
@@ -5324,6 +5490,41 @@ components:
         - refNumber
         - depositSum
         - notRelevant
+    PermissionType:
+      type: string
+      enum:
+        - read
+        - write
+        - all
+        - employer
+    PriorityType:
+      type: string
+      enum:
+        - standard
+        - conservation
+        - strategic
+        - on_process
+    statusEmployer:
+      type: string
+      enum:
+        - moved_association
+        - active
+        - inactive
+        - on_process
+    Roles:
+      type: string
+      enum:
+        - role_super_user
+        - role_admin
+        - role_operator
+        - role_employer
+        - role_service
+        - service_manager
+    ConnectType:
+      type: string
+      enum:
+        - sms
+        - email
     CriteriaUpdateProcess:
       allOf:
         - $ref: '#/components/schemas/CriteriaMore'
@@ -5447,6 +5648,30 @@ components:
           type: string
         departmentId:
           type: number
+    api_login_body:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    inline_response_200_2:
+      type: object
+      properties:
+        token:
+          type: string
+        role:
+          $ref: '#/components/schemas/Roles'
+        name:
+          type: string
+        module:
+          type: array
+          items:
+            $ref: '#/components/schemas/inline_response_200_2_module'
+        user:
+          $ref: '#/components/schemas/inline_response_200_2_user'
+        organization_group_id:
+          type: integer
     users_checkVerifyCode_body:
       type: object
       properties:
@@ -5475,7 +5700,7 @@ components:
           type: array
           items:
             type: string
-    inline_response_200_2:
+    inline_response_200_3:
       type: object
       properties:
         processId:
@@ -5502,16 +5727,16 @@ components:
           type: string
         salaryMonth:
           type: boolean
-    inline_response_200_3:
+    inline_response_200_4:
       type: object
       properties:
         message:
           type: string
         reportsData:
-          $ref: '#/components/schemas/inline_response_200_3_reportsData'
+          $ref: '#/components/schemas/inline_response_200_4_reportsData'
         code:
           type: integer
-    inline_response_200_4:
+    inline_response_200_5:
       type: object
       properties:
         message:
@@ -5522,7 +5747,7 @@ components:
             type: string
         code:
           type: integer
-    inline_response_200_5:
+    inline_response_200_6:
       type: object
       properties:
         message:
@@ -5530,21 +5755,21 @@ components:
         reportsCompensation:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_5_reportsCompensation'
+            $ref: '#/components/schemas/inline_response_200_6_reportsCompensation'
         code:
           type: integer
-    inline_response_200_6:
+    inline_response_200_7:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_6_items'
+            $ref: '#/components/schemas/inline_response_200_7_items'
         lastPage:
           type: integer
         total:
           type: integer
-    inline_response_200_7:
+    inline_response_200_8:
       type: object
       properties:
         id:
@@ -5604,20 +5829,20 @@ components:
           $ref: '#/components/schemas/apichats_chat'
         employer_id:
           type: integer
-    inline_response_200_8:
+    inline_response_200_9:
       type: object
       properties:
         message:
           type: string
         chat_id:
           type: integer
-    inline_response_200_9:
+    inline_response_200_10:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_9_items'
+            $ref: '#/components/schemas/inline_response_200_10_items'
     inline_response_400_1:
       type: object
       properties:
@@ -5664,7 +5889,7 @@ components:
       properties:
         comments:
           type: string
-    inline_response_200_10:
+    inline_response_200_11:
       type: object
       properties:
         data:
@@ -5706,7 +5931,7 @@ components:
             type: string
         criteria:
           $ref: '#/components/schemas/apicompensationsupdateSentStatus_criteria'
-    inline_response_200_11:
+    inline_response_200_12:
       type: object
       properties:
         message:
@@ -5717,13 +5942,13 @@ components:
             type: string
         code:
           type: integer
-    inline_response_200_12:
+    inline_response_200_13:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_38'
+            $ref: '#/components/schemas/inline_response_200_39'
         code:
           type: integer
     processes_updateProcess_body:
@@ -5765,7 +5990,7 @@ components:
             type: string
         deposit_date:
           type: string
-    inline_response_200_13:
+    inline_response_200_14:
       type: object
       properties:
         message:
@@ -5774,7 +5999,7 @@ components:
           type: boolean
         code:
           type: integer
-    inline_response_200_14:
+    inline_response_200_15:
       type: object
       properties:
         blobs:
@@ -5834,7 +6059,7 @@ components:
           $ref: '#/components/schemas/apiprocessesunlockProcessFiles_criteria'
         processId:
           type: integer
-    inline_response_200_15:
+    inline_response_200_16:
       type: object
       properties:
         success:
@@ -5854,7 +6079,7 @@ components:
           $ref: '#/components/schemas/ReasonRefund'
         criteria:
           $ref: '#/components/schemas/apiprocessesunlockProcessFiles_criteria'
-    inline_response_200_16:
+    inline_response_200_17:
       type: object
       properties:
         success:
@@ -5865,13 +6090,13 @@ components:
           type: boolean
         code:
           type: integer
-    inline_response_200_17:
+    inline_response_200_18:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_17_items'
+            $ref: '#/components/schemas/inline_response_200_18_items'
         total:
           type: integer
         lastPage:
@@ -5883,7 +6108,7 @@ components:
           type: string
         ok:
           type: boolean
-    inline_response_200_18:
+    inline_response_200_19:
       type: object
       properties:
         file_name:
@@ -5908,7 +6133,7 @@ components:
           type: string
         department_id:
           type: string
-    inline_response_200_19:
+    inline_response_200_20:
       type: object
       properties:
         blob:
@@ -5925,7 +6150,7 @@ components:
           type: string
         department_id:
           type: string
-    inline_response_200_20:
+    inline_response_200_21:
       type: object
       properties:
         ok:
@@ -5947,11 +6172,11 @@ components:
           type: string
         criteria:
           $ref: '#/components/schemas/apiprocessesunlockProcessFiles_criteria'
-    inline_response_200_21:
+    inline_response_200_22:
       type: object
       properties:
         result:
-          $ref: '#/components/schemas/inline_response_200_32'
+          $ref: '#/components/schemas/inline_response_200_33'
     processes_sendPaymentsInstruction_body:
       type: object
       properties:
@@ -5980,7 +6205,7 @@ components:
           $ref: '#/components/schemas/apiprocessesunlockProcessFiles_criteria'
         processId:
           type: integer
-    inline_response_200_22:
+    inline_response_200_23:
       type: object
       properties:
         reason_refund:
@@ -6010,7 +6235,7 @@ components:
           type: integer
         department_id:
           type: string
-    inline_response_200_23:
+    inline_response_200_24:
       type: object
       properties:
         result:
@@ -6027,7 +6252,7 @@ components:
           type: integer
         department_id:
           type: string
-    inline_response_200_24:
+    inline_response_200_25:
       type: object
       properties:
         is_date:
@@ -6043,7 +6268,7 @@ components:
       properties:
         department_id:
           type: string
-    inline_response_200_25:
+    inline_response_200_26:
       type: object
       properties:
         ok:
@@ -6209,7 +6434,7 @@ components:
       properties:
         email:
           type: string
-    inline_response_200_26:
+    inline_response_200_27:
       type: object
       properties:
         id:
@@ -6228,7 +6453,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/apigenerals1inquiries_receivers'
-    inline_response_200_27:
+    inline_response_200_28:
       type: object
       properties:
         code:
@@ -6237,13 +6462,13 @@ components:
           type: string
         name:
           type: string
-    inline_response_200_28:
+    inline_response_200_29:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_28_items'
+            $ref: '#/components/schemas/inline_response_200_29_items'
         total:
           type: integer
         lastPage:
@@ -6302,7 +6527,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/apiproductsfullCompany_bank_account'
-    inline_response_200_29:
+    inline_response_200_30:
       type: object
       properties:
         id:
@@ -6330,7 +6555,7 @@ components:
           type: array
           items:
             type: string
-    inline_response_200_30:
+    inline_response_200_31:
       type: object
       properties:
         ok:
@@ -6338,14 +6563,14 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_30_data'
-    inline_response_200_31:
+            $ref: '#/components/schemas/inline_response_200_31_data'
+    inline_response_200_32:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_31_items'
+            $ref: '#/components/schemas/inline_response_200_32_items'
         total:
           type: integer
         lastPage:
@@ -6366,7 +6591,7 @@ components:
           type: integer
         documentType:
           $ref: '#/components/schemas/DocumentTypes'
-    inline_response_200_32:
+    inline_response_200_33:
       type: object
       properties:
         data:
@@ -6381,7 +6606,7 @@ components:
       properties:
         filename:
           type: string
-    inline_response_200_33:
+    inline_response_200_34:
       type: object
       properties:
         data:
@@ -6397,14 +6622,14 @@ components:
         file:
           type: string
           format: binary
-    inline_response_200_34:
+    inline_response_200_35:
       type: object
       properties:
         message:
           type: string
         opswatId:
           type: string
-    inline_response_200_35:
+    inline_response_200_36:
       type: object
       properties:
         message:
@@ -6413,15 +6638,15 @@ components:
           type: string
         percentage:
           type: integer
-    inline_response_200_36:
+    inline_response_200_37:
       type: object
       properties:
         messages:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_36_messages'
+            $ref: '#/components/schemas/inline_response_200_37_messages'
         chat:
-          $ref: '#/components/schemas/inline_response_200_36_chat'
+          $ref: '#/components/schemas/inline_response_200_37_chat'
         messages_count:
           type: integer
         code:
@@ -6437,7 +6662,7 @@ components:
           type: integer
         employer_id:
           type: integer
-    inline_response_200_37:
+    inline_response_200_38:
       type: object
       properties:
         message:
@@ -6446,26 +6671,26 @@ components:
           type: boolean
         code:
           type: integer
-    inline_response_200_38:
+    inline_response_200_39:
       type: object
       properties:
         id:
           type: integer
         name:
           type: string
-    inline_response_200_39:
+    inline_response_200_40:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_39_items'
+            $ref: '#/components/schemas/inline_response_200_40_items'
         total:
           type: integer
         lastPage:
           type: integer
         other:
-          $ref: '#/components/schemas/inline_response_200_39_other'
+          $ref: '#/components/schemas/inline_response_200_40_other'
         code:
           type: integer
     feedbacks_feedback_body:
@@ -6481,11 +6706,11 @@ components:
           type: string
         criteria:
           $ref: '#/components/schemas/CriteriaProcess'
-    inline_response_200_40:
+    inline_response_200_41:
       type: object
       properties:
         result:
-          $ref: '#/components/schemas/inline_response_200_32'
+          $ref: '#/components/schemas/inline_response_200_33'
         code:
           type: integer
     feedbacks_changeStatus_body:
@@ -6508,14 +6733,14 @@ components:
             type: integer
         status:
           $ref: '#/components/schemas/ManualStatus'
-    inline_response_200_41:
+    inline_response_200_42:
       type: object
       properties:
         result:
           type: string
         code:
           type: integer
-    inline_response_200_42:
+    inline_response_200_43:
       type: object
       properties:
         count_employee:
@@ -6530,7 +6755,7 @@ components:
           type: integer
         code:
           type: integer
-    inline_response_200_43:
+    inline_response_200_44:
       type: object
       properties:
         clause_type:
@@ -6582,30 +6807,30 @@ components:
           type: string
         email_address_licensee:
           type: string
-    inline_response_200_44:
+    inline_response_200_45:
       type: object
       properties:
         employees:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_44_employees'
+            $ref: '#/components/schemas/apiorganizationsgetOrganizations_department'
         products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_44_employees'
+            $ref: '#/components/schemas/apiorganizationsgetOrganizations_department'
         employer_products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_44_employees'
+            $ref: '#/components/schemas/apiorganizationsgetOrganizations_department'
         code:
           type: integer
-    inline_response_200_45:
+    inline_response_200_46:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_45_items'
+            $ref: '#/components/schemas/inline_response_200_46_items'
         total:
           type: integer
         lastPage:
@@ -6631,7 +6856,7 @@ components:
           type: string
         confirmation:
           type: integer
-    inline_response_200_46:
+    inline_response_200_47:
       type: object
       properties:
         success:
@@ -6653,7 +6878,7 @@ components:
             type: integer
         criteria:
           $ref: '#/components/schemas/CriteriaProcess'
-    inline_response_200_47:
+    inline_response_200_48:
       type: object
       properties:
         id:
@@ -6711,7 +6936,7 @@ components:
             type: integer
         criteria:
           $ref: '#/components/schemas/apimtbuploadEmployeeDeclaration_criteria'
-    inline_response_200_48:
+    inline_response_200_49:
       type: object
       properties:
         block_sum:
@@ -6737,7 +6962,7 @@ components:
           type: string
         name:
           type: string
-    inline_response_200_49:
+    inline_response_200_50:
       type: object
       properties:
         id:
@@ -6748,20 +6973,102 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/apigeneralsbanks_bank_branches'
-    inline_response_200_50:
+    inline_response_200_51:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_50_items'
+            $ref: '#/components/schemas/inline_response_200_51_items'
         total:
           type: integer
         lastPage:
           type: integer
         code:
           type: integer
-    inline_response_200_3_reportsData_processes:
+    apiorganizationsgetOrganizations_department:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    apiorganizationsgetOrganizations_employer:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        identifier:
+          type: string
+        status:
+          $ref: '#/components/schemas/statusEmployer'
+        priority_type:
+          $ref: '#/components/schemas/PriorityType'
+        department:
+          type: array
+          items:
+            $ref: '#/components/schemas/apiorganizationsgetOrganizations_department'
+    inline_response_200_52:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        organization_group_id:
+          type: string
+        employer:
+          type: array
+          items:
+            $ref: '#/components/schemas/apiorganizationsgetOrganizations_employer'
+    users_changeEmail_body:
+      type: object
+      properties:
+        email:
+          type: string
+    inline_response_200_2_module:
+      type: object
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        name:
+          type: string
+        permission_type:
+          $ref: '#/components/schemas/PermissionType'
+    inline_response_200_2_user:
+      type: object
+      properties:
+        id:
+          type: integer
+        identifier:
+          type: string
+        role:
+          $ref: '#/components/schemas/Roles'
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        organization_group_id:
+          type: integer
+        is_registered:
+          type: boolean
+        name:
+          type: string
+        connect_type:
+          $ref: '#/components/schemas/ConnectType'
+        is_skip:
+          type: boolean
+        is_active:
+          type: boolean
+    inline_response_200_4_reportsData_processes:
       type: object
       properties:
         id:
@@ -6784,13 +7091,13 @@ components:
           format: date
         employer_name:
           type: string
-    inline_response_200_3_reportsData:
+    inline_response_200_4_reportsData:
       type: object
       properties:
         processes:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_3_reportsData_processes'
+            $ref: '#/components/schemas/inline_response_200_4_reportsData_processes'
         compensation_open:
           type: integer
         compensation_close:
@@ -6817,7 +7124,7 @@ components:
           type: integer
         mtb_not_defrayed:
           type: integer
-    inline_response_200_5_reportsCompensation:
+    inline_response_200_6_reportsCompensation:
       type: object
       properties:
         created_at:
@@ -6830,7 +7137,7 @@ components:
           type: string
         product_type:
           $ref: '#/components/schemas/ProductType'
-    inline_response_200_6_items:
+    inline_response_200_7_items:
       type: object
       properties:
         account_type:
@@ -6897,7 +7204,7 @@ components:
           type: boolean
         type_upload:
           type: integer
-    inline_response_200_9_comments:
+    inline_response_200_10_comments:
       type: object
       properties:
         id:
@@ -6908,7 +7215,7 @@ components:
           type: string
         username:
           type: string
-    inline_response_200_9_items:
+    inline_response_200_10_items:
       type: object
       properties:
         id:
@@ -6995,21 +7302,21 @@ components:
         comments:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_9_comments'
+            $ref: '#/components/schemas/inline_response_200_10_comments'
         name:
           type: string
         num_clearing:
           type: integer
         product_code:
           type: string
-    inline_response_200_17_employer_products:
+    inline_response_200_18_employer_products:
       type: object
       properties:
         code:
           type: string
         name:
           type: string
-    inline_response_200_17_items:
+    inline_response_200_18_items:
       type: object
       properties:
         file_type:
@@ -7021,7 +7328,7 @@ components:
         employer_products:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_17_employer_products'
+            $ref: '#/components/schemas/inline_response_200_18_employer_products'
         product_type:
           $ref: '#/components/schemas/ProductType'
         product_code:
@@ -7060,7 +7367,7 @@ components:
           type: boolean
         request_open:
           type: string
-    inline_response_200_28_items:
+    inline_response_200_29_items:
       type: object
       properties:
         id:
@@ -7087,7 +7394,7 @@ components:
           type: string
         account:
           type: string
-    inline_response_200_30_data:
+    inline_response_200_31_data:
       type: object
       properties:
         id:
@@ -7096,7 +7403,7 @@ components:
           type: string
         code:
           type: integer
-    inline_response_200_31_items:
+    inline_response_200_32_items:
       type: object
       properties:
         id:
@@ -7116,7 +7423,7 @@ components:
           type: string
         document_type:
           $ref: '#/components/schemas/DocumentTypes'
-    inline_response_200_36_messages:
+    inline_response_200_37_messages:
       type: object
       properties:
         id:
@@ -7133,7 +7440,7 @@ components:
           type: string
         is_files:
           type: boolean
-    inline_response_200_36_chat:
+    inline_response_200_37_chat:
       type: object
       properties:
         id:
@@ -7158,7 +7465,7 @@ components:
           type: string
         employer_id:
           type: integer
-    inline_response_200_39_items:
+    inline_response_200_40_items:
       type: object
       properties:
         id:
@@ -7255,21 +7562,14 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/ProcessType'
-    inline_response_200_39_other:
+    inline_response_200_40_other:
       type: object
       properties:
         error_types:
           type: array
           items:
             type: integer
-    inline_response_200_44_employees:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    inline_response_200_45_transfer_clause:
+    inline_response_200_46_transfer_clause:
       type: object
       properties:
         clause_type:
@@ -7282,7 +7582,7 @@ components:
           type: integer
         id:
           type: integer
-    inline_response_200_45_items:
+    inline_response_200_46_items:
       type: object
       properties:
         id:
@@ -7363,12 +7663,12 @@ components:
         transfer_clause:
           type: array
           items:
-            $ref: '#/components/schemas/inline_response_200_45_transfer_clause'
+            $ref: '#/components/schemas/inline_response_200_46_transfer_clause'
         process_type:
           $ref: '#/components/schemas/ProcessType'
         is_change:
           type: boolean
-    inline_response_200_50_items:
+    inline_response_200_51_items:
       type: object
       properties:
         id:

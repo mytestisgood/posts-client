@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
-  DashboardMenuComponent,
   DashboardHeaderComponent,
   DashboardHomeComponent,
+  DashboardMenuComponent,
   DashboardNotificationComponent,
 } from '@shared/layout';
 

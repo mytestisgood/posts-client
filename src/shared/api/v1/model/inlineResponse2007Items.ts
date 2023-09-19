@@ -9,58 +9,46 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ReportingType } from './reportingType';
-import { CodeErrorFile } from './codeErrorFile';
-import { StatusCompensation } from './statusCompensation';
-import { FeedbackLevel } from './feedbackLevel';
-import { InlineResponse2007Comments } from './inlineResponse2007Comments';
-import { ProductType } from './productType';
-import { CodeError } from './codeError';
-import { SendingMethod } from './sendingMethod';
+import { AccountType } from './accountType';
+import { ProcessType } from './processType';
+import { StatusFeedback } from './statusFeedback';
+import { StatusProcess } from './statusProcess';
+import { TransmissionProductAuto } from './transmissionProductAuto';
 
 
 export interface InlineResponse2007Items { 
-    id?: number;
+    account_type?: AccountType;
+    allowed_change_groups?: string;
+    allowed_fix_errors?: string;
+    allowed_show_exceptions?: string;
     created_at?: string;
-    updated_at?: string;
-    user_id?: number;
+    id?: number;
+    name?: string;
+    status?: string;
+    type?: ProcessType;
+    total?: number;
+    date?: number;
+    error_details?: string;
+    transmit_date?: string;
+    payment_instructions?: boolean;
+    is_references?: boolean;
+    status_feedback?: StatusFeedback;
+    is_exceptions?: boolean;
+    is_relevant?: boolean;
+    department_name?: string;
+    dep_id?: number;
+    organization_name?: string;
+    organization_id?: number;
     employer_name?: string;
     employer_id?: number;
-    department_name?: string;
-    department_id?: number;
-    employee_name?: string;
-    is_file?: boolean;
-    identifier?: string;
-    company_name?: string;
-    company_id?: number;
-    alidity_date?: string;
-    sending_method?: SendingMethod;
-    product_type?: ProductType;
-    projected_balance?: number;
-    reported_balance?: number;
-    portal_balance?: number;
-    status?: StatusCompensation;
-    contents?: string;
-    closed_at?: string;
-    files?: Array<string>;
-    code_error?: CodeError;
-    error_details?: string;
-    code_error_file?: CodeErrorFile;
-    error_details_file?: string;
-    error_sent_failed?: string;
-    feedback_level?: FeedbackLevel;
-    answering_manufacturer?: string;
-    username?: string;
-    reporting_type?: ReportingType;
-    has_by_safebox?: boolean;
-    has_file_feedback?: boolean;
-    xml_name?: string;
-    extend_clearing?: string;
-    inquiries?: Array<string>;
-    comments?: Array<InlineResponse2007Comments>;
-    name?: string;
-    num_clearing?: number;
-    product_code?: string;
+    operator_name?: string;
+    payment_instructions_auto?: TransmissionProductAuto;
+    transmission_product_auto?: TransmissionProductAuto;
+    status_process?: StatusProcess;
+    is_comment?: boolean;
+    count_inquiries?: number;
+    is_feedback_send?: boolean;
+    type_upload?: number;
 }
 export namespace InlineResponse2007Items {
 }

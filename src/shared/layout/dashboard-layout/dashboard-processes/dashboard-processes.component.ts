@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { InlineResponse2006Items, ProcessesService } from '@shared/api';
-import { DEPARTMENT_ID, months, ProcessTableItems, REGISTRATION_TOKEN } from '@shared/entities';
+import { InlineResponse2007Items, ProcessesService } from '@shared/api';
+import { DEPARTMENT_ID, months, ProcessTableItems, TOKEN } from '@shared/entities';
 import { DashboardProcessTableComponent } from '@shared/tables';
 import {
   ButtonComponent,
@@ -27,7 +27,7 @@ import { combineLatest, debounceTime, map, Observable, startWith } from 'rxjs';
 })
 export class DashboardProcessesComponent implements OnInit {
   public controlSearch: FormControl<string | null> = new FormControl<string>('');
-  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public departmentId: string = this.localStorageService.getItem(DEPARTMENT_ID) as string;
   public isCustomDropdownActive: boolean = false;
   public dashboardProcessItems$!: Observable<ProcessTableItems[] | null>;
@@ -46,7 +46,7 @@ export class DashboardProcessesComponent implements OnInit {
     ]).pipe(
       debounceTime(500),
       map(([query, response]) => {
-        const processTableItems: ProcessTableItems[] | null = (response.items as InlineResponse2006Items[])
+        const processTableItems: ProcessTableItems[] | null = (response.items as InlineResponse2007Items[])
           .map(item => ({ ...item, isSelected: false })) ?? null;
 
         return processTableItems.filter(res =>

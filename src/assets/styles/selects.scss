@@ -124,3 +124,9 @@ tui-select.no-border {
     outline: none!important;
   }
 }
+
+tui-hosted-dropdown.user-menu {
+  background: $neutrals-950!important;
+  border-radius: 36px!important;
+  padding: 12px!important;
+}

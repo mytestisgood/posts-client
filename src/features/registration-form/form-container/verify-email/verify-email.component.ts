@@ -20,8 +20,8 @@ import { ChangeEmailDialogComponent, SuccessDialogComponent } from '@shared/dial
 import {
   DEPARTMENT_ID,
   RegistrationDirection,
-  REGISTRATION_TOKEN,
   RegistrationFormValueType,
+  TOKEN,
   VerificationEmailControls,
   verifyEmailFormMapper,
 } from '@shared/entities';
@@ -55,7 +55,7 @@ export class VerifyEmailComponent implements OnInit {
   @Output() public changeStep: EventEmitter<RegistrationDirection> = new EventEmitter<RegistrationDirection>();
 
   public verifyEmailInfo: FormGroup<VerificationEmailControls> = verifyEmailFormMapper();
-  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public departmentId: number = Number(this.localStorageService.getItem(DEPARTMENT_ID));
   public currentEmail!: string;
   public control: FormControl = new FormControl();

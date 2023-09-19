@@ -9,57 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { SalaryLevel } from './salaryLevel';
-import { ProcessType } from './processType';
-import { ReasonRefund } from './reasonRefund';
-import { EmployeeStatus } from './employeeStatus';
-import { FileType } from './fileType';
-import { StatusEmployeeFeedBack } from './statusEmployeeFeedBack';
-import { DepositType } from './depositType';
-import { ProductType } from './productType';
-import { DepositStatus } from './depositStatus';
-import { InlineResponse20032TransferClause } from './inlineResponse20032TransferClause';
+import { DocumentTypes } from './documentTypes';
 
 
 export interface InlineResponse20032Items { 
-    id?: number;
-    salary_month?: string;
-    updated_at?: string;
-    deposit_type?: DepositType;
-    salary_level?: SalaryLevel;
-    reason_refund?: ReasonRefund;
-    is_employee_declaration?: boolean;
-    path_employee_declaration?: string;
-    deposit_status?: DepositStatus;
-    salary?: number;
-    employee_status?: EmployeeStatus;
-    employee_status_start_date?: string;
-    work_month_percentage?: number;
-    is_relevant?: boolean;
-    policy_or_account_number?: string;
-    working_days_in_month?: number;
-    amount?: number;
-    employee_id?: number;
-    department_id?: number;
-    first_name?: string;
-    last_name?: string;
-    personal_id?: string;
-    employer_product_code?: string;
-    employer_company_id?: number;
-    employer_product_name?: string;
-    section14?: boolean;
-    employer_product_type?: ProductType;
-    product_code?: number;
-    product_id?: number;
-    company_id?: number;
-    company_name?: string;
-    sum_ipi_employer?: number;
-    status?: StatusEmployeeFeedBack;
-    file_type?: FileType;
-    defrayal_error?: Array<string>;
-    transfer_clause?: Array<InlineResponse20032TransferClause>;
-    process_type?: ProcessType;
-    is_change?: boolean;
+    id?: string;
+    name?: string;
+    ext?: string;
+    description?: string;
+    created_at?: string;
+    employer_name?: number;
+    employer_id?: string;
+    document_type?: DocumentTypes;
 }
 export namespace InlineResponse20032Items {
 }

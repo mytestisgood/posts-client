@@ -4,11 +4,11 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   ChatService,
   FilesMyHrService,
-  InlineResponse20034,
-  InlineResponse20036,
+  InlineResponse20035,
+  InlineResponse20037,
 } from '@shared/api';
 import { CreateNewChatDialogComponent } from '@shared/dialog';
-import { REGISTRATION_TOKEN, setLineColorClass } from '@shared/entities';
+import { TOKEN, setLineColorClass } from '@shared/entities';
 import {
   downloadFileHelper,
   formattedCurrentDateTo,
@@ -40,9 +40,9 @@ import { takeUntil } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardChatWindowComponent {
-  @Input() public chat!: InlineResponse20036 | null;
+  @Input() public chat!: InlineResponse20037 | null;
 
-  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public messageControl: FormControl = new FormControl();
   public uploadedFileId!: string;
   public isFileUploaded: boolean = true;
@@ -99,7 +99,7 @@ export class DashboardChatWindowComponent {
     this.isFileUploaded = false;
     this.filesMyHrService.apiUploadPost('smarti-dev', file).pipe(
       takeUntil(this.destroy$),
-    ).subscribe((response: InlineResponse20034) => {
+    ).subscribe((response: InlineResponse20035) => {
       this.isFileUploaded = true;
       this.uploadedFileId = response.opswatId as string;
       this.changeDetectorRef.detectChanges();

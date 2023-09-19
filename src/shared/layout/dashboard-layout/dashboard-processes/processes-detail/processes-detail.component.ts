@@ -6,7 +6,7 @@ import {
   DashboardStep,
   DashboardStepEnum,
   DEPARTMENT_ID,
-  REGISTRATION_TOKEN,
+  TOKEN,
 } from '@shared/entities';
 import { LocalStorageService } from '@shared/web-api';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -54,7 +54,7 @@ export class ProcessesDetailComponent {
     new BehaviorSubject<DashboardStep>(DashboardStepEnum.FifthStep);
 
   public departmentId: number = Number(this.localStorageService.getItem(DEPARTMENT_ID));
-  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public readonly currentStepBs: BehaviorSubject<DashboardStep> =
     new BehaviorSubject<DashboardStep>(DashboardStepEnum.FirstStep);
   public currentStep$: Observable<DashboardStep> = this.currentStepBs.asObservable();

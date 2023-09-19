@@ -1,21 +1,24 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
-  FormControl, FormControlStatus,
+  FormControl,
+  FormControlStatus,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { emailValidatorPattern } from '@shared/entities';
-import { DestroyService } from '@shared/services';
+import { InlineResponse2002, SignInService } from '@shared/api';
+import { emailValidatorPattern, TOKEN } from '@shared/entities';
+import { DestroyService, LoginService } from '@shared/services';
 import {
   ButtonComponent,
   InputCheckboxComponent,
   InputFieldComponent,
   InputPasswordComponent,
 } from '@shared/ui';
+import { LocalStorageService } from '@shared/web-api';
 import { Observable, takeUntil, tap } from 'rxjs';
 
 interface LoginForm {
@@ -58,6 +61,9 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly destroy$: DestroyService,
+    private readonly signInService: SignInService,
+    private readonly localStorageService: LocalStorageService,
+    private readonly loginService: LoginService,
     ) {
   }
 
@@ -70,6 +76,19 @@ export class LoginFormComponent implements OnInit {
   }
 
   public doLogin(): void {
-    this.router.navigate(['/']);
+    this.signInService.apiLoginPost('',
+      {
+        email: this.loginForm.value.email as string,
+        password: this.loginForm.value.password as string,
+      },
+    ).pipe(
+      tap((response: InlineResponse2002) => {
+        this.localStorageService.setItem(TOKEN, response.token as string);
+        this.loginService.currentToken$.next(response.token as string);
+      }),
+      takeUntil(this.destroy$),
+    ).subscribe(() => {
+      this.router.navigate(['/dashboard'], { replaceUrl: true });
+    });
   }
 }

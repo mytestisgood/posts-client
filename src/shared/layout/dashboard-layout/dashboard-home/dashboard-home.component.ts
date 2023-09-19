@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   HomeService,
-  InlineResponse2003,
   InlineResponse2004,
   InlineResponse2005,
+  InlineResponse2006,
 } from '@shared/api';
-import { REGISTRATION_TOKEN } from '@shared/entities';
+import { TOKEN } from '@shared/entities';
 import {
   formattedCurrentDateTo,
   formattedMonthAndYearDateTo,
@@ -44,8 +44,8 @@ import { LastPaymentComponent } from './last-payment/last-payment.component';
 export class DashboardHomeComponent {
   public startDateCurrentMonth: string = getCurrentMonthStartDayDate('yyyy-mm-dd');
   public endDateCurrentMonth: string = getCurrentMonthLastDayDate('yyyy-mm-dd');
-  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
-  public $employerReport: Observable<InlineResponse2003> = this.homeService.apiReportsEmployerReportPost(this.token, {
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
+  public $employerReport: Observable<InlineResponse2004> = this.homeService.apiReportsEmployerReportPost(this.token, {
     employerId: '1',
     organizationId: '2',
     startDate: this.startDateCurrentMonth,
@@ -58,7 +58,7 @@ export class DashboardHomeComponent {
     undefined,
     this.token,
   );
-  public compensationReport$: Observable<InlineResponse2005> = this.homeService.apiReportsCompensationReportGet(
+  public compensationReport$: Observable<InlineResponse2006> = this.homeService.apiReportsCompensationReportGet(
     undefined,
     undefined,
     formattedCurrentDateTo('yyyy-mm-dd'),
@@ -68,7 +68,7 @@ export class DashboardHomeComponent {
     undefined,
     this.token,
   );
-  public feedbackEmployerReport$: Observable<InlineResponse2004> = this.homeService.apiReportsFeedbackEmployerReportGet(
+  public feedbackEmployerReport$: Observable<InlineResponse2005> = this.homeService.apiReportsFeedbackEmployerReportGet(
    new Date().getFullYear().toString(),
     new Date().getMonth().toString(),
     '',

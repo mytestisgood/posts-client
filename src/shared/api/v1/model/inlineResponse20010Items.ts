@@ -9,10 +9,60 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { CodeError } from './codeError';
+import { CodeErrorFile } from './codeErrorFile';
+import { FeedbackLevel } from './feedbackLevel';
+import { InlineResponse20010Comments } from './inlineResponse20010Comments';
+import { ProductType } from './productType';
+import { ReportingType } from './reportingType';
+import { SendingMethod } from './sendingMethod';
+import { StatusCompensation } from './statusCompensation';
 
 
 export interface InlineResponse20010Items { 
     id?: number;
+    created_at?: string;
+    updated_at?: string;
+    user_id?: number;
+    employer_name?: string;
+    employer_id?: number;
+    department_name?: string;
+    department_id?: number;
+    employee_name?: string;
+    is_file?: boolean;
+    identifier?: string;
+    company_name?: string;
+    company_id?: number;
+    alidity_date?: string;
+    sending_method?: SendingMethod;
+    product_type?: ProductType;
+    projected_balance?: number;
+    reported_balance?: number;
+    portal_balance?: number;
+    status?: StatusCompensation;
+    contents?: string;
+    closed_at?: string;
+    files?: Array<string>;
+    code_error?: CodeError;
+    error_details?: string;
+    code_error_file?: CodeErrorFile;
+    error_details_file?: string;
+    error_sent_failed?: string;
+    feedback_level?: FeedbackLevel;
+    answering_manufacturer?: string;
+    username?: string;
+    reporting_type?: ReportingType;
+    has_by_safebox?: boolean;
+    has_file_feedback?: boolean;
+    xml_name?: string;
+    extend_clearing?: string;
+    inquiries?: Array<string>;
+    comments?: Array<InlineResponse20010Comments>;
     name?: string;
+    num_clearing?: number;
+    product_code?: string;
 }
+export namespace InlineResponse20010Items {
+}
+
 

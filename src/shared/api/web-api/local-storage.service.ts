@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
-import { WINDOW } from './window.token';
+import { DEPARTMENT_ID, TOKEN } from '@shared/entities';
 import { LOCAL_STORAGE } from './local-storage.token';
+import { WINDOW } from './window.token';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,10 @@ export class LocalStorageService implements Storage {
 
   public key(index: number): string | null {
     return this.localStorage.key(index);
+  }
+
+  public removeToken(): void {
+    this.localStorage.removeItem(TOKEN);
+    this.localStorage.removeItem(DEPARTMENT_ID);
   }
 }

@@ -15,9 +15,9 @@ import { ForwardRequestDialogComponent } from '@shared/dialog';
 import {
   DEPARTMENT_ID,
   FileWithLoading,
-  REGISTRATION_TOKEN,
   RegistrationDirection,
   RegistrationFormValueType,
+  TOKEN,
   UploadDocumentsControls,
   uploadingDocumentsFormMapper,
 } from '@shared/entities';
@@ -62,7 +62,7 @@ export class UploadDocumentComponent implements OnInit {
   public isSendRequest: boolean = false;
   public isNotificationClosed: boolean = false;
   public departmentId: number = Number(this.localStorageService.getItem(DEPARTMENT_ID));
-  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public identifier!: string;
 
   constructor(

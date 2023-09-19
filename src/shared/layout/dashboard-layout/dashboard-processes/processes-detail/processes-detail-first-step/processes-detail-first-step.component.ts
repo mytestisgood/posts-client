@@ -10,8 +10,8 @@ import {
 import { FormControl } from '@angular/forms';
 import {
   FilesMyHrService,
-  InlineResponse2002,
-  InlineResponse20034,
+  InlineResponse2003,
+  InlineResponse20035,
   UploadFileService,
 } from '@shared/api';
 import { DashboardDirection, DashboardDirectionEnum } from '@shared/entities';
@@ -58,7 +58,7 @@ export class ProcessesDetailFirstStepComponent {
       opswatIds: this.opswatId,
     }).pipe(
       takeUntil(this.destroy$),
-    ).subscribe((result: InlineResponse2002) => {
+    ).subscribe((result: InlineResponse2003) => {
       this.dataSharingService.dashboardProcessUploadFileResult$.next(result);
       this.dataSharingService.isDashboardProcessFileUploaded$.next(true);
       this.changeStep.emit(direction);
@@ -68,7 +68,7 @@ export class ProcessesDetailFirstStepComponent {
   public fileUploaded(isUploaded: boolean): void {
     if (isUploaded) {
       this.filesMyHrService.apiUploadPost('smarti-dev', this.filesControl.value).pipe(
-        tap((response: InlineResponse20034) => {
+        tap((response: InlineResponse20035) => {
           this.opswatId.push(response.opswatId as string);
           this.isDocumentUploaded = isUploaded;
           this.changeDetectorRef.detectChanges();

@@ -9,16 +9,19 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { SalaryLevel } from './salaryLevel';
-import { ProcessType } from './processType';
-import { ReasonRefund } from './reasonRefund';
+import { Comment } from './comment';
+import { DepositStatus } from './depositStatus';
+import { DepositType } from './depositType';
 import { EmployeeStatus } from './employeeStatus';
 import { FileType } from './fileType';
-import { InlineResponse20040TransferClause } from './inlineResponse20040TransferClause';
-import { StatusEmployeeFeedBack } from './statusEmployeeFeedBack';
-import { DepositType } from './depositType';
+import { ManualStatus } from './manualStatus';
+import { ProcessType } from './processType';
 import { ProductType } from './productType';
-import { DepositStatus } from './depositStatus';
+import { ReasonRefund } from './reasonRefund';
+import { SalaryLevel } from './salaryLevel';
+import { StatusEmployeeFeedBack } from './statusEmployeeFeedBack';
+import { StatusFeedback } from './statusFeedback';
+import { StatusProcess } from './statusProcess';
 
 
 export interface InlineResponse20040Items { 
@@ -28,7 +31,6 @@ export interface InlineResponse20040Items {
     deposit_type?: DepositType;
     salary_level?: SalaryLevel;
     reason_refund?: ReasonRefund;
-    is_employee_declaration?: boolean;
     path_employee_declaration?: string;
     deposit_status?: DepositStatus;
     salary?: number;
@@ -39,27 +41,33 @@ export interface InlineResponse20040Items {
     policy_or_account_number?: string;
     working_days_in_month?: number;
     amount?: number;
-    employee_id?: number;
-    department_id?: number;
-    first_name?: string;
-    last_name?: string;
+    name?: string;
     personal_id?: string;
-    employer_product_code?: string;
-    employer_company_id?: number;
-    employer_product_name?: string;
-    section14?: boolean;
-    employer_product_type?: ProductType;
-    product_code?: number;
-    product_id?: number;
-    company_id?: number;
+    product_code?: string;
+    product_type?: ProductType;
     company_name?: string;
-    sum_ipi_employer?: number;
+    company_id?: string;
+    process_date?: string;
+    deposit_month?: string;
+    deposit_date?: string;
+    employer_id?: string;
+    employer_name?: string;
+    department_id?: string;
+    inquiries?: Array<string>;
+    comments?: Array<Comment>;
+    comment?: string;
+    reason?: string;
     status?: StatusEmployeeFeedBack;
+    manual_status?: ManualStatus;
+    sent_file_name?: string;
+    group_thing_id?: number;
     file_type?: FileType;
-    defrayal_error?: Array<string>;
-    transfer_clause?: Array<InlineResponse20040TransferClause>;
-    process_type?: ProcessType;
-    is_change?: boolean;
+    sent_group_id?: number;
+    status_sent_group?: StatusFeedback;
+    employee_id?: number;
+    file_status?: StatusProcess;
+    product_name?: string;
+    type?: ProcessType;
 }
 export namespace InlineResponse20040Items {
 }

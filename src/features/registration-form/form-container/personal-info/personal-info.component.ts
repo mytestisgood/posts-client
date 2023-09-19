@@ -10,12 +10,12 @@ import {
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { InlineResponse2001, RegisterService, SignInService } from '@shared/api';
 import {
-  RegistrationDirection,
+  DEPARTMENT_ID,
   PersonalInfoControls,
   personalInfoFormMapper,
-  REGISTRATION_TOKEN,
+  RegistrationDirection,
   RegistrationFormValueType,
-  DEPARTMENT_ID,
+  TOKEN,
 } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import {
@@ -80,7 +80,7 @@ export class PersonalInfoComponent implements OnInit {
       user_name: this.personalInfoForm.controls.yourName.value as string,
     }).pipe(
       switchMap((tokenResponse: InlineResponse2001) => {
-        this.localStorageService.setItem(REGISTRATION_TOKEN, tokenResponse?.token as string);
+        this.localStorageService.setItem(TOKEN, tokenResponse?.token as string);
         this.localStorageService.setItem(DEPARTMENT_ID, tokenResponse?.departmentId as string);
         this.subformInitialized.emit(this.personalInfoForm);
 

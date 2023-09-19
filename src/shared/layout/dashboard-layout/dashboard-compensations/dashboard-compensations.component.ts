@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CompensationsService } from '@shared/api';
-import { CompensationsListItems, REGISTRATION_TOKEN } from '@shared/entities';
+import { CompensationsListItems, TOKEN } from '@shared/entities';
 import { DashboardCompensationsTableComponent } from '@shared/tables';
 import {
   ButtonComponent,
@@ -27,7 +27,7 @@ import { combineLatest, debounceTime, map, Observable, startWith } from 'rxjs';
 })
 export class DashboardCompensationsComponent implements OnInit {
   public controlSearch: FormControl<string | null> = new FormControl<string>('');
-  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public isCustomDropdownActive: boolean = false;
   public compensations$!: Observable<CompensationsListItems[] | null>;
 

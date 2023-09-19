@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CustomUserAccordionComponent } from '@shared/ui';
+import { CustomUserMenuComponent } from '@shared/ui';
 
 describe('CustomUserAccordionComponent', () => {
-  let component: CustomUserAccordionComponent;
-  let fixture: ComponentFixture<CustomUserAccordionComponent>;
+  let component: CustomUserMenuComponent;
+  let fixture: ComponentFixture<CustomUserMenuComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CustomUserAccordionComponent],
+      imports: [CustomUserMenuComponent],
     });
-    fixture = TestBed.createComponent(CustomUserAccordionComponent);
+    fixture = TestBed.createComponent(CustomUserMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

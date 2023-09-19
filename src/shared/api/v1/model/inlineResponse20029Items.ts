@@ -9,20 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { DocumentTypes } from './documentTypes';
 
 
 export interface InlineResponse20029Items { 
     id?: string;
     name?: string;
-    ext?: string;
-    description?: string;
-    created_at?: string;
-    employer_name?: number;
-    employer_id?: string;
-    document_type?: DocumentTypes;
+    code?: string;
+    type?: string;
+    number_a_max?: string;
+    is_active?: boolean;
+    company_name?: string;
+    company_code?: string;
+    full_name?: string;
+    bank_name?: string;
+    bank_number?: string;
+    account?: string;
 }
-export namespace InlineResponse20029Items {
-}
-
 

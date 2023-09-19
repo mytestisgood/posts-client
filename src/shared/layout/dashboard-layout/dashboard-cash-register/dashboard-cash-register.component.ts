@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { InlineResponse20028Items, ProductsService } from '@shared/api';
-import { REGISTRATION_TOKEN } from '@shared/entities';
+import { InlineResponse20029Items, ProductsService } from '@shared/api';
+import { TOKEN } from '@shared/entities';
 import { DashboardCashRegisterTableComponent } from '@shared/tables';
 import {
   ButtonComponent,
@@ -26,9 +26,9 @@ import { combineLatest, debounceTime, map, Observable, startWith } from 'rxjs';
 })
 export class DashboardCashRegisterComponent implements OnInit {
   public controlSearch: FormControl<string | null> = new FormControl<string>('');
-  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public isCustomDropdownActive: boolean = false;
-  public allProducts$!: Observable<InlineResponse20028Items[] | null>;
+  public allProducts$!: Observable<InlineResponse20029Items[] | null>;
 
   constructor(
     private readonly localStorageService: LocalStorageService,
@@ -43,7 +43,7 @@ export class DashboardCashRegisterComponent implements OnInit {
     ]).pipe(
       debounceTime(500),
       map(([query, response]) => {
-        return (response?.items as InlineResponse20028Items[]).filter(res =>
+        return (response?.items as InlineResponse20029Items[]).filter(res =>
           (res.name as string).toLowerCase().indexOf(query?.toLowerCase() as string) > -1) ?? null;
       }),
     );

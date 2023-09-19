@@ -8,16 +8,16 @@ import {
   Output,
 } from '@angular/core';
 import {
-  InlineResponse2002,
-  InlineResponse20021,
-  InlineResponse20032,
+  ContactsService, InlineResponse20022,
+  InlineResponse2003,
+  InlineResponse20033,
   ProcessesService,
 } from '@shared/api';
 import { DashboardDirection, DashboardDirectionEnum } from '@shared/entities';
 import { toBlobAndSaveFile } from '@shared/helpers';
 import { DataSharingService, DestroyService } from '@shared/services';
 import { ButtonComponent } from '@shared/ui';
-import { takeUntil, tap } from 'rxjs';
+import { switchMap, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'smarti-processes-detail-second-step',
@@ -39,13 +39,14 @@ export class ProcessesDetailSecondStepComponent implements OnInit {
     private readonly processesService: ProcessesService,
     private readonly dataSharingService: DataSharingService,
     private readonly destroy$: DestroyService,
+    private readonly contactsService: ContactsService,
   ) {
   }
 
   public ngOnInit(): void {
     this.dataSharingService.dashboardProcessUploadFileResult$.pipe(
       takeUntil(this.destroy$),
-    ).subscribe((result: InlineResponse2002 | null) => {
+    ).subscribe((result: InlineResponse2003 | null) => {
       this.processId = Number(result?.processId);
     });
   }
@@ -70,27 +71,36 @@ export class ProcessesDetailSecondStepComponent implements OnInit {
         },
       },
     }).pipe(
-      tap((result: InlineResponse20021) => toBlobAndSaveFile(result?.result as InlineResponse20032)),
+      tap((result: InlineResponse20022) => toBlobAndSaveFile(result?.result as InlineResponse20033)),
       takeUntil(this.destroy$),
     ).subscribe();
   }
 
   public uploadPaymentExample(): void {
-    this.processesService.apiProcessesSendPaymentsInstructionPost(this.token, {
-      processId: this.processId,
-      recipient: ['shoshi@smarti.co.il'],
-      isSendMax: false,
-      filesList: [],
-      criteria: {
-        isCheckAll: true,
-        additionalProperties: {
+    this.contactsService.apiContactsTypeGetEmailEmployerContactGet(
+      this.departmentId.toString(),
+      '2',
+      '2',
+      this.token,
+    ).pipe(
+      switchMap(response => {
+        return this.processesService.apiProcessesSendPaymentsInstructionPost(this.token, {
           processId: this.processId,
-          department_id: this.departmentId,
-          limit: 1,
-          page: 15,
-        },
-      },
-    }).pipe(takeUntil(this.destroy$)).subscribe();
-    this.isFileUploaded = true;
+          recipient: response,
+          isSendMax: false,
+          filesList: [],
+          criteria: {
+            isCheckAll: true,
+            additionalProperties: {
+              processId: this.processId,
+              department_id: this.departmentId,
+              limit: 1,
+              page: 15,
+            },
+          },
+        });
+      }),
+      takeUntil(this.destroy$),
+    ).subscribe(() => this.isFileUploaded = true);
   }
 }

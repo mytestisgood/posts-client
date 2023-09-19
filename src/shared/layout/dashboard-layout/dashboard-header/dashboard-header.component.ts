@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {
   CustomGroupSelectComponent,
-  CustomUserAccordionComponent,
+  CustomUserMenuComponent,
 } from '@shared/ui';
 
 @Component({
   selector: 'smarti-dashboard-header',
   standalone: true,
-  imports: [CommonModule, CustomUserAccordionComponent, CustomGroupSelectComponent],
+  imports: [CommonModule, CustomUserMenuComponent, CustomGroupSelectComponent],
   templateUrl: './dashboard-header.component.html',
   styleUrls: ['./dashboard-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -106,6 +106,12 @@
   height: 20px;
 }
 
+.arrow-down-icon-24 {
+  background: url("/assets/svg/arrow-down-24.svg");
+  width: 20px;
+  height: 20px;
+}
+
 .close-circle-24 {
   background: url("/assets/svg/close-circle.svg");
   width: 24px;
@@ -266,4 +272,16 @@
   background: url("/assets/svg/information-black-icon.svg");
   width: 48px;
   height: 48px;
+}
+
+.user-square-icon {
+  background: url("/assets/svg/user-square.svg");
+  width: 24px;
+  height: 24px;
+}
+
+.logout-icon {
+  background: url("/assets/svg/logout.svg");
+  width: 12px;
+  height: 12px;
 }

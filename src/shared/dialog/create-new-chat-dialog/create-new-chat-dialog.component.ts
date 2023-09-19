@@ -4,8 +4,8 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
   ChatService,
   FilesMyHrService,
-  InlineResponse20034,
-  InlineResponse20038,
+  InlineResponse20035,
+  InlineResponse20039,
 } from '@shared/api';
 import { DashboardCreateNewChatGroupControls } from '@shared/entities';
 import { DestroyService } from '@shared/services';
@@ -37,9 +37,9 @@ export class CreateNewChatDialogComponent implements OnInit {
   public isDocumentUploaded: boolean = false;
   public hideDocumentType: boolean = true;
   public hideBlockWithCashAndEmployee: boolean = true;
-  public chatSubject$: Observable<InlineResponse20038[]> = this.chatService.apiChatsGetChatSubjectsGet(this.token);
-  public chatSubjectOption!: InlineResponse20038[];
-  public tatSubjectOption!: InlineResponse20038[];
+  public chatSubject$: Observable<InlineResponse20039[]> = this.chatService.apiChatsGetChatSubjectsGet(this.token);
+  public chatSubjectOption!: InlineResponse20039[];
+  public tatSubjectOption!: InlineResponse20039[];
 
   constructor(
     private readonly destroy$: DestroyService,
@@ -49,12 +49,12 @@ export class CreateNewChatDialogComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.chatSubject$.subscribe((response: InlineResponse20038[]) => this.chatSubjectOption = response);
+    this.chatSubject$.subscribe((response: InlineResponse20039[]) => this.chatSubjectOption = response);
     this.form.get('document')?.valueChanges.pipe(
-      switchMap((value: InlineResponse20038 | null) => {
+      switchMap((value: InlineResponse20039 | null) => {
         this.hideDocumentType = false;
         return this.chatService.apiChatsGetTatSubjectsGet(value?.id, this.token).pipe(
-          tap((response: InlineResponse20038[]) => this.tatSubjectOption = response),
+          tap((response: InlineResponse20039[]) => this.tatSubjectOption = response),
         );
       }),
       takeUntil(this.destroy$),
@@ -68,7 +68,7 @@ export class CreateNewChatDialogComponent implements OnInit {
     if (this.form.value.file) {
       this.filesMyHrService.apiUploadPost('smarti-dev', this.form.value.file[0] as File).pipe(
         takeUntil(this.destroy$),
-      ).subscribe((response: InlineResponse20034) => {
+      ).subscribe((response: InlineResponse20035) => {
         this.sendRequest.next(response.opswatId as string);
         this.observer.complete();
       });

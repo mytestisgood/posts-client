@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InlineResponse20031Items } from '@shared/api';
+import { InlineResponse20032Items } from '@shared/api';
 import { DashboardDocumentsDownloadFile } from '@shared/entities';
 import { InputCheckboxComponent, LoaderComponent, TablePaginationComponent } from '@shared/ui';
 import { Subject } from 'rxjs';
@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardDocumentsTableComponent {
-  @Input() public documents!: InlineResponse20031Items[] | null;
+  @Input() public documents!: InlineResponse20032Items[] | null;
   @Output() public downloadFileEvent: Subject<DashboardDocumentsDownloadFile> =
     new Subject<DashboardDocumentsDownloadFile>();
 

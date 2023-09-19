@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FilesService, InlineResponse20033 } from '@shared/api';
+import { FilesService, InlineResponse20034 } from '@shared/api';
 import {
   dashboardDownloadDocumentsMapper,
   DashboardDownloadDocumentsModel,
-  REGISTRATION_TOKEN,
+  TOKEN,
 } from '@shared/entities';
 import { toBlobAndSaveFile } from '@shared/helpers';
 import { DestroyService } from '@shared/services';
@@ -30,7 +30,7 @@ import { debounceTime, takeUntil } from 'rxjs';
 export class DashboardDownloadDocumentsComponent implements OnInit {
   public downloadDocuments: DashboardDownloadDocumentsModel[] = dashboardDownloadDocumentsMapper;
   public files!: DashboardDownloadDocumentsModel[];
-  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public controlSearch: FormControl<string | null> = new FormControl<string>('');
 
   constructor(
@@ -58,7 +58,7 @@ export class DashboardDownloadDocumentsComponent implements OnInit {
       this.token,
       { filename: file.name },
     ).pipe(takeUntil(this.destroy$))
-      .subscribe((response: InlineResponse20033) => toBlobAndSaveFile(response));
+      .subscribe((response: InlineResponse20034) => toBlobAndSaveFile(response));
   }
 
   public downloadSelectedDocuments(): void {
@@ -68,7 +68,7 @@ export class DashboardDownloadDocumentsComponent implements OnInit {
           this.token,
           { filename: item.name },
         ).pipe(takeUntil(this.destroy$))
-          .subscribe((response: InlineResponse20033) => toBlobAndSaveFile(response));
+          .subscribe((response: InlineResponse20034) => toBlobAndSaveFile(response));
       }
     });
   }

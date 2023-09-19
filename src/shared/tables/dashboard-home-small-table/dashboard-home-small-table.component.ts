@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InlineResponse2005 } from '@shared/api';
+import { InlineResponse2006 } from '@shared/api';
 import { ButtonComponent } from '@shared/ui';
 
 @Component({
@@ -12,5 +12,5 @@ import { ButtonComponent } from '@shared/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardHomeSmallTableComponent {
-  @Input() public compensationReport!: InlineResponse2005 | null;
+  @Input() public compensationReport!: InlineResponse2006 | null;
 }

@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FeedBackService, InlineResponse20039Items } from '@shared/api';
-import { RecordListItems, REGISTRATION_TOKEN } from '@shared/entities';
+import { FeedBackService, InlineResponse20040Items } from '@shared/api';
+import { RecordListItems, TOKEN } from '@shared/entities';
 import { DashboardEmployersTableComponent } from '@shared/tables';
 import { ButtonComponent, CustomDropdownComponent, InputSearchComponent } from '@shared/ui';
 import { LocalStorageService } from '@shared/web-api';
@@ -22,7 +22,7 @@ import { combineLatest, debounceTime, map, Observable, startWith } from 'rxjs';
 export class DashboardEmployerComponent implements OnInit {
   public controlSearch: FormControl<string | null> = new FormControl<string>('');
   public isCustomDropdownActive: boolean = false;
-  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public recordList$!: Observable<RecordListItems[] | null>;
 
   constructor(
@@ -38,8 +38,8 @@ export class DashboardEmployerComponent implements OnInit {
     ]).pipe(
       debounceTime(500),
       map(([query, response]) => {
-        const recordListItem: RecordListItems[] | null = (response.items as InlineResponse20039Items[])
-          .map((item: InlineResponse20039Items) => ({ ...item, isSelected: false })) ?? null;
+        const recordListItem: RecordListItems[] | null = (response.items as InlineResponse20040Items[])
+          .map((item: InlineResponse20040Items) => ({ ...item, isSelected: false })) ?? null;
 
         return recordListItem.filter(res =>
           (res.name as string).toLowerCase().indexOf(query?.toLowerCase() as string) > -1);

@@ -18,6 +18,8 @@ import {
   Scroll,
 } from '@angular/router';
 
+export const TOKEN: string = 'token';
+export const DEPARTMENT_ID: string = 'departmentId';
 export const SPECIAL_HEADER_TOKEN: string = 'specialHeaderToken';
 export const emailValidatorPattern: string = '^(?!^-)[\\w-]+(?:[\\.-][\\w-]+)*(?:[\\.+][\\w-]+)*@' +
   '\\w+(?:[\\.-]\\w+)*(?:\\.[A-Za-z]{2,4})+$';

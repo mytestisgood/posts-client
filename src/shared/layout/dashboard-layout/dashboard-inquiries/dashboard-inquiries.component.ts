@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ChatService, InlineResponse20036, InlineResponse2007 } from '@shared/api';
+import { ChatService, InlineResponse20037, InlineResponse2008 } from '@shared/api';
 import { CreateNewChatDialogComponent } from '@shared/dialog';
 import {
   ChatListItems,
   DashboardCreateNewChatGroupControls,
   dashboardCreateNewChatGroupMapper,
-  REGISTRATION_TOKEN,
+  TOKEN,
 } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { ButtonComponent, CustomDropdownComponent, LoaderComponent } from '@shared/ui';
@@ -30,7 +30,7 @@ import { DashboardChatWindowComponent } from './chat-window/dashboard-chat-windo
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardInquiriesComponent {
-  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public isCustomDropdownActive: boolean = false;
   public chatItems$: Observable<ChatListItems[]> = this.chatService.apiChatsGet(
     'all',
@@ -38,11 +38,11 @@ export class DashboardInquiriesComponent {
     '',
     this.token,
   ).pipe(
-    map((response: InlineResponse2007[]) => {
-      return response.map((item: InlineResponse2007): ChatListItems => ({ ...item, active: false }));
+    map((response: InlineResponse2008[]) => {
+      return response.map((item: InlineResponse2008): ChatListItems => ({ ...item, active: false }));
     }),
   );
-  public chat$!: Observable<InlineResponse20036 | null>;
+  public chat$!: Observable<InlineResponse20037 | null>;
   public createNewChatForm: FormGroup<DashboardCreateNewChatGroupControls> = dashboardCreateNewChatGroupMapper();
   public isLoadingChatWindow: boolean = false;
 
@@ -62,7 +62,7 @@ export class DashboardInquiriesComponent {
   public changeCurrentChatId(chatId: number): void {
     this.isLoadingChatWindow = true;
     this.chat$ = this.chatService.apiChatsChatIdGet(chatId, this.token).pipe(
-      map((response: InlineResponse20036) => {
+      map((response: InlineResponse20037) => {
         this.isLoadingChatWindow = false;
         return response ?? null;
       }),

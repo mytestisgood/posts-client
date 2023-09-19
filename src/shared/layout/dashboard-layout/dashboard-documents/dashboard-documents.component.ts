@@ -4,15 +4,15 @@ import { FormControl } from '@angular/forms';
 import {
   DocumentTypes,
   FilesService,
-  InlineResponse20031,
-  InlineResponse20031Items,
   InlineResponse20032,
+  InlineResponse20032Items,
+  InlineResponse20033,
 } from '@shared/api';
 import { AddDocumentsDialogComponent } from '@shared/dialog';
 import {
   DashboardDocumentsAddDocument,
   DashboardDocumentsDownloadFile,
-  REGISTRATION_TOKEN,
+  TOKEN,
 } from '@shared/entities';
 import { formattedCurrentDateTo, toBlobAndSaveFile } from '@shared/helpers';
 import { DestroyService } from '@shared/services';
@@ -41,14 +41,14 @@ import { map, Observable, takeUntil } from 'rxjs';
 })
 export class DashboardDocumentsComponent {
   public filesControl: FormControl = new FormControl();
-  public token: string = this.localStorageService.getItem(REGISTRATION_TOKEN) as string;
-  public documents$: Observable<InlineResponse20031Items[] | null> = this.filesService.apiDocumentsGet(
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
+  public documents$: Observable<InlineResponse20032Items[] | null> = this.filesService.apiDocumentsGet(
     true,
     '',
     '1',
     '10',
     this.token,
-  ).pipe(map((response: InlineResponse20031) => response?.items ?? null));
+  ).pipe(map((response: InlineResponse20032) => response?.items ?? null));
 
   constructor(
     @Inject(TuiDialogService)
@@ -65,7 +65,7 @@ export class DashboardDocumentsComponent {
   public onSendRequest(request: DashboardDocumentsAddDocument): void {
     this.filesService.apiDocumentsPost(this.token, {
       description: request.description,
-      date: formattedCurrentDateTo('yyyy-mm-dd'),
+      date: Number(formattedCurrentDateTo('yyyy-mm-dd')),
       documentType: request.documents as DocumentTypes,
       employer_id: 0,
       opswatIds: request.opswatId,
@@ -75,6 +75,6 @@ export class DashboardDocumentsComponent {
   public onDownloadFile(documentData: DashboardDocumentsDownloadFile): void {
     this.filesService.apiDocumentsDocumentIdGet(documentData.id, documentData.employerId, this.token).pipe(
       takeUntil(this.destroy$),
-    ).subscribe((response: InlineResponse20032) => toBlobAndSaveFile(response));
+    ).subscribe((response: InlineResponse20033) => toBlobAndSaveFile(response));
   }
 }

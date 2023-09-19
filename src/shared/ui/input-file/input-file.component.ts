@@ -8,7 +8,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormControlStatus, ReactiveFormsModule } from '@angular/forms';
-import { FilesMyHrService, InlineResponse20034 } from '@shared/api';
+import { FilesMyHrService, InlineResponse20035 } from '@shared/api';
 import { FileWithLoading } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { TuiLinkModule, TuiLoaderModule, TuiSvgModule } from '@taiga-ui/core';
@@ -67,7 +67,7 @@ export class InputFileComponent implements OnInit {
       }),
       takeUntil(this.destroy$),
     )
-      .subscribe((response: InlineResponse20034) => {
+      .subscribe((response: InlineResponse20035) => {
           this.id = response.opswatId;
           this.currentFile.isLoading = false;
           this.cdr.detectChanges();
