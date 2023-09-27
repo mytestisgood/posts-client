@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,9 +7,8 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormControl } from '@angular/forms';
-import { InlineResponse2005 } from '@shared/api';
+import { FeedbackEmployerReportGetResponse } from '@shared/api/models';
 import { months } from '@shared/entities';
 import { formattedFromTextToNumericMonth } from '@shared/helpers';
 import { DestroyService } from '@shared/services';
@@ -24,7 +24,7 @@ import { takeUntil, tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardHomeTableComponent implements OnInit {
-  @Input() public feedbackEmployerReport!: InlineResponse2005 | null;
+  @Input() public feedbackEmployerReport!: FeedbackEmployerReportGetResponse | null;
   @Output() public changeYear: EventEmitter<number> = new EventEmitter<number>();
   @Output() public changeMonth: EventEmitter<number> = new EventEmitter<number>();
   public monthControl: FormControl = new FormControl;

@@ -9,13 +9,18 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
-  RegistrationDirection,
   PaymentMethodControls,
   paymentMethodFormMapper,
+  RegistrationDirection,
   RegistrationFormValueType,
 } from '@shared/entities';
 import { DestroyService } from '@shared/services';
-import { ButtonComponent, InputFieldComponent, RadioComponent, SelectComponent } from '@shared/ui';
+import {
+  ButtonComponent,
+  InputFieldComponent,
+  RadioBlockComponent,
+  SelectComponent,
+} from '@shared/ui';
 import { takeUntil } from 'rxjs';
 import { PayBySmartiComponent } from './pay-by-smarti/pay-by-smarti.component';
 import { PayDirectlyComponent } from './pay-directly/pay-directly.component';
@@ -28,7 +33,7 @@ import { PayDirectlyComponent } from './pay-directly/pay-directly.component';
     ReactiveFormsModule,
     SelectComponent,
     ButtonComponent,
-    RadioComponent,
+    RadioBlockComponent,
     InputFieldComponent,
     PayBySmartiComponent,
     PayDirectlyComponent,

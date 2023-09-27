@@ -10,7 +10,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { UploadFileService } from '@shared/api';
+import { UploadFileService } from '@shared/api/services';
 import { ForwardRequestDialogComponent } from '@shared/dialog';
 import {
   DEPARTMENT_ID,
@@ -86,8 +86,10 @@ export class UploadDocumentComponent implements OnInit {
 
   public doChangeStep(direction: RegistrationDirection): void {
     this.subformInitialized.emit(this.uploadDocumentsForm);
-    this.uploadFileService.apiProcessesUploadFilePost(this.token, {})
-      .pipe(takeUntil(this.destroy$)).subscribe(() => this.changeStep.emit(direction));
+    this.uploadFileService.apiProcessesUploadFilePost({
+      token: this.token,
+      processesUploadFileBody: {},
+    }).pipe(takeUntil(this.destroy$)).subscribe(() => this.changeStep.emit(direction));
   }
 
   public downloadXlExample(): void {

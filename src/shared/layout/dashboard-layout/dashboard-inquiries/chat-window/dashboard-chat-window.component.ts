@@ -1,14 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import {
-  ChatService,
-  FilesMyHrService,
-  InlineResponse20035,
-  InlineResponse20037,
-} from '@shared/api';
+import { ChatIdGetResponse, UploadPostResponse } from '@shared/api/models';
+import { ChatService, FilesMyHrService } from '@shared/api/services';
 import { CreateNewChatDialogComponent } from '@shared/dialog';
-import { TOKEN, setLineColorClass } from '@shared/entities';
+import { setLineColorClass, TOKEN } from '@shared/entities';
 import {
   downloadFileHelper,
   formattedCurrentDateTo,
@@ -20,7 +16,8 @@ import {
   ButtonComponent,
   InputFieldComponent,
   InputFileComponent,
-  InputTextareaComponent, LoaderComponent,
+  InputTextareaComponent,
+  LoaderComponent,
   SelectComponent,
 } from '@shared/ui';
 import { LocalStorageService } from '@shared/web-api';
@@ -40,7 +37,7 @@ import { takeUntil } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardChatWindowComponent {
-  @Input() public chat!: InlineResponse20037 | null;
+  @Input() public chat!: ChatIdGetResponse | null;
 
   public token: string = this.localStorageService.getItem(TOKEN) as string;
   public messageControl: FormControl = new FormControl();
@@ -74,13 +71,15 @@ export class DashboardChatWindowComponent {
   }
 
   public onSendMessage(chatId: string | undefined | number, employerId: string | undefined | number): void {
-    this.chatService.apiChatsSaveMessageChatPost(this.token, {
+    this.chatService.apiChatsSaveMessageChatPost({
+      token: this.token,
+      chatsSaveMessageChatBody: {
         chat_id: chatId as number,
         message: this.messageControl.value,
         employer_id: employerId as number,
         opswatIds: this.uploadedFileId,
       },
-    ).pipe(takeUntil(this.destroy$)).subscribe();
+    }).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
   public addFileToMessage(): void {
@@ -97,9 +96,9 @@ export class DashboardChatWindowComponent {
     const file: File = input.files[0];
 
     this.isFileUploaded = false;
-    this.filesMyHrService.apiUploadPost('smarti-dev', file).pipe(
+    this.filesMyHrService.apiUploadPost({ file, project: 'smarti-dev' }).pipe(
       takeUntil(this.destroy$),
-    ).subscribe((response: InlineResponse20035) => {
+    ).subscribe((response: UploadPostResponse) => {
       this.isFileUploaded = true;
       this.uploadedFileId = response.opswatId as string;
       this.changeDetectorRef.detectChanges();

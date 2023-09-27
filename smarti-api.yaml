@@ -120,6 +120,66 @@ paths:
                     message: success
                     token: eyJ0eXAiOiJKV1QiLCJh
                     departmentId: 6848
+                    employerId: 2011
+                    code: 200
+        "204":
+          description: no_content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: identifier exist
+                    code: 204
+        "400":
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: error
+                    code: 400
+      servers:
+        - url: https://api.xsmart-staging.com
+    servers:
+      - url: https://api.xsmart-staging.com
+  /api/employers/createPaymentOut:
+    post:
+      tags:
+        - Register
+      description: update payment employer from register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/employers_createPaymentOut_body'
+            examples:
+              "0":
+                value:
+                  payBySmarti: true
+                  branchId: 1100
+                  departmentId: 6859
+                  employerId: 6574
+                  accountNumber: 1111
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                "0":
+                  value:
+                    message: success
+                    token: eyJ0eXAiOiJKV1QiLCJh
+                    departmentId: 6848
+                    employerId: 2011
                     code: 200
         "204":
           description: no_content
@@ -5633,8 +5693,23 @@ components:
           type: string
         departmentId:
           type: string
+        employerId:
+          type: string
         code:
           type: integer
+    employers_createPaymentOut_body:
+      type: object
+      properties:
+        payBySmarti:
+          type: boolean
+        branchId:
+          type: string
+        departmentId:
+          type: string
+        employerId:
+          type: string
+        accountNumber:
+          type: string
     employers_createUserOut_body:
       type: object
       properties:

@@ -1,18 +1,19 @@
-import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import {
-  FeedBackService, InlineResponse20044,
+  FeedbacksGetTransferResponse,
   StatusFileFeedback,
   StatusProcess,
-} from '@shared/api';
+} from '@shared/api/models';
+import { FeedBackService } from '@shared/api/services';
 import { FeedbackTransferDialogComponent } from '@shared/dialog';
 import { RecordListItems } from '@shared/entities';
 import { getCalendarDateFromStringDate } from '@shared/helpers';
 import { DestroyService } from '@shared/services';
 import { InputCheckboxComponent, LoaderComponent, TablePaginationComponent } from '@shared/ui';
 import { TuiDialogService } from '@taiga-ui/core';
-import { switchMap, takeUntil } from 'rxjs';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-dashboard-employers-table',
@@ -30,12 +31,14 @@ export class DashboardEmployersTableComponent {
   @Input() public token!: string;
 
   protected readonly getDateFromStringDate = getCalendarDateFromStringDate;
+
   constructor(
     @Inject(TuiDialogService)
     private readonly dialogs: TuiDialogService,
     private readonly destroy$: DestroyService,
     private readonly feedBackService: FeedBackService,
-  ) {}
+  ) {
+  }
 
   public get isSelectedAll(): boolean {
     return this.items?.every(item => item.isSelected) ?? false;
@@ -60,14 +63,13 @@ export class DashboardEmployersTableComponent {
   ): void {
     const newFileStatus: StatusFileFeedback = fileStatus as StatusFileFeedback;
 
-    this.feedBackService.apiFeedbacksGetTransferGet(
-      companyId,
-      newFileStatus,
-      '',
-      '',
-      this.token,
-    ).pipe(
-      switchMap((response: InlineResponse20044) => {
+    this.feedBackService.apiFeedbacksGetTransferGet({
+      token: this.token,
+      departmentId: companyId,
+      mtbId: '',
+      sentGroupId: newFileStatus,
+    }).pipe(
+      switchMap((response: FeedbacksGetTransferResponse) => {
         return this.dialogs.open(new PolymorpheusComponent(FeedbackTransferDialogComponent), {
           closeable: false,
           dismissible: false,

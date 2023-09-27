@@ -1,17 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LeadService, Src } from '@shared/api';
-import { emailValidatorPattern } from '@shared/entities';
+import { Src } from '@shared/api/models';
+import { LeadService } from '@shared/api/services';
+import { emailValidatorPattern, LeadsForm } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { ButtonComponent, InputFieldComponent } from '@shared/ui';
 import { takeUntil } from 'rxjs';
-
-interface LeadsForm {
-  name: FormControl<string | null>;
-  email: FormControl<string | null>;
-  phone: FormControl<string | null>;
-}
 
 @Component({
   selector: 'smarti-leads-dialog',

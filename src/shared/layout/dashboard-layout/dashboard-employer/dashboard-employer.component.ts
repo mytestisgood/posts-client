@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FeedBackService, InlineResponse20040Items } from '@shared/api';
+import { FeedbacksRecordsListItems } from '@shared/api/models';
+import { FeedBackService } from '@shared/api/services';
 import { RecordListItems, TOKEN } from '@shared/entities';
 import { DashboardEmployersTableComponent } from '@shared/tables';
 import { ButtonComponent, CustomDropdownComponent, InputSearchComponent } from '@shared/ui';
@@ -34,12 +35,16 @@ export class DashboardEmployerComponent implements OnInit {
   public ngOnInit(): void {
     this.recordList$ = combineLatest([
       this.controlSearch.valueChanges.pipe(startWith('')),
-      this.feedBackService.apiFeedbacksRecordsListGet('', '', '', '', '1', '4', this.token),
+      this.feedBackService.apiFeedbacksRecordsListGet({
+        token: this.token,
+        limit: '1',
+        page: '4',
+      }),
     ]).pipe(
       debounceTime(500),
       map(([query, response]) => {
-        const recordListItem: RecordListItems[] | null = (response.items as InlineResponse20040Items[])
-          .map((item: InlineResponse20040Items) => ({ ...item, isSelected: false })) ?? null;
+        const recordListItem: RecordListItems[] | null = (response.items as FeedbacksRecordsListItems[])
+          .map((item: FeedbacksRecordsListItems) => ({ ...item, isSelected: false })) ?? null;
 
         return recordListItem.filter(res =>
           (res.name as string).toLowerCase().indexOf(query?.toLowerCase() as string) > -1);

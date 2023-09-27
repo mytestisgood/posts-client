@@ -46,7 +46,6 @@ export class LandingLayoutComponent implements AfterViewInit {
     private readonly router: Router,
     private readonly destroy$: DestroyService,
   ) {
-
   }
 
   public ngAfterViewInit(): void {

@@ -8,11 +8,11 @@ import {
   Output,
 } from '@angular/core';
 import {
-  ContactsService, InlineResponse20022,
-  InlineResponse2003,
-  InlineResponse20033,
-  ProcessesService,
-} from '@shared/api';
+  DownloadPaymentsInstructionResponse,
+  FileDataExtResponse,
+  UploadFilePostResponse,
+} from '@shared/api/models';
+import { ContactsService, ProcessesService } from '@shared/api/services';
 import { DashboardDirection, DashboardDirectionEnum } from '@shared/entities';
 import { toBlobAndSaveFile } from '@shared/helpers';
 import { DataSharingService, DestroyService } from '@shared/services';
@@ -46,7 +46,7 @@ export class ProcessesDetailSecondStepComponent implements OnInit {
   public ngOnInit(): void {
     this.dataSharingService.dashboardProcessUploadFileResult$.pipe(
       takeUntil(this.destroy$),
-    ).subscribe((result: InlineResponse2003 | null) => {
+    ).subscribe((result: UploadFilePostResponse | null) => {
       this.processId = Number(result?.processId);
     });
   }
@@ -56,46 +56,49 @@ export class ProcessesDetailSecondStepComponent implements OnInit {
   }
 
   public downloadPaymentExample(): void {
-    this.processesService.apiProcessesDownloadPaymentsInstructionPost(this.token, {
-      processId: this.processId,
-      isSendMax: false,
-      filesList: [],
-      department_id: this.departmentId.toString(),
-      criteria: {
-        isCheckAll: true,
-        additionalProperties: {
-          processId: this.processId,
-          department_id: this.departmentId,
-          limit: 1,
-          page: 15,
+    this.processesService.apiProcessesDownloadPaymentsInstructionPost({
+      token: this.token,
+      processesDownloadPaymentsInstructionBody: {
+        processId: this.processId,
+        department_id: this.departmentId.toString(),
+        criteria: {
+          isCheckAll: true,
+          additionalProperties: {
+            processId: this.processId,
+            department_id: this.departmentId,
+            limit: 1,
+            page: 15,
+          },
         },
       },
     }).pipe(
-      tap((result: InlineResponse20022) => toBlobAndSaveFile(result?.result as InlineResponse20033)),
+      tap((result: DownloadPaymentsInstructionResponse) => toBlobAndSaveFile(result?.result as FileDataExtResponse)),
       takeUntil(this.destroy$),
     ).subscribe();
   }
 
   public uploadPaymentExample(): void {
-    this.contactsService.apiContactsTypeGetEmailEmployerContactGet(
-      this.departmentId.toString(),
-      '2',
-      '2',
-      this.token,
-    ).pipe(
+    this.contactsService.apiContactsTypeGetEmailEmployerContactGet({
+      token: this.token,
+      departmentId: this.departmentId.toString(),
+      type: '2',
+      employerId: '2',
+    }).pipe(
       switchMap(response => {
-        return this.processesService.apiProcessesSendPaymentsInstructionPost(this.token, {
-          processId: this.processId,
-          recipient: response,
-          isSendMax: false,
-          filesList: [],
-          criteria: {
-            isCheckAll: true,
-            additionalProperties: {
-              processId: this.processId,
-              department_id: this.departmentId,
-              limit: 1,
-              page: 15,
+        return this.processesService.apiProcessesSendPaymentsInstructionPost({
+          token: this.token,
+          processesSendPaymentsInstructionBody: {
+            processId: this.processId,
+            isSendMax: false,
+            recipient: response,
+            criteria: {
+              isCheckAll: true,
+              additionalProperties: {
+                processId: this.processId,
+                department_id: this.departmentId,
+                page: 1,
+                limit: 15,
+              },
             },
           },
         });

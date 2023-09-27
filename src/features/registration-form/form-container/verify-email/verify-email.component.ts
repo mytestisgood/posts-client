@@ -15,7 +15,8 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { InlineResponse200, SignInService } from '@shared/api';
+import { SuccessResponse } from '@shared/api/models';
+import { SignInService } from '@shared/api/services';
 import { ChangeEmailDialogComponent, SuccessDialogComponent } from '@shared/dialog';
 import {
   DEPARTMENT_ID,
@@ -84,11 +85,14 @@ export class VerifyEmailComponent implements OnInit {
   }
 
   public openSuccessDialog(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.signInService.apiUsersCheckVerifyCodePost(this.token, {
-      code: this.verifyEmailInfo.controls.emailVerifyCode.value as string,
-      departmentId: 6848,
+    this.signInService.apiUsersCheckVerifyCodePost({
+      token: this.token,
+      usersCheckVerifyCodeBody: {
+        code: this.verifyEmailInfo.controls.emailVerifyCode.value as string,
+        departmentId: 6848,
+      },
     }).pipe(
-      concatMap((result: InlineResponse200) => {
+      concatMap((result: SuccessResponse) => {
         if (result.message === 'success') {
           return this.dialogs.open(content, {
             closeable: false,

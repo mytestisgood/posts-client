@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,16 +7,15 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ButtonComponent, InputNumberComponent, RadioComponent } from '@shared/ui';
+import { ButtonComponent, InputNumberComponent, RadioBlockComponent } from '@shared/ui';
 
 type Direction = 'forward' | 'back';
 @Component({
   selector: 'smarti-verify-step',
   standalone: true,
-  imports: [CommonModule, RadioComponent, ButtonComponent, InputNumberComponent],
+  imports: [CommonModule, RadioBlockComponent, ButtonComponent, InputNumberComponent],
   templateUrl: './verify-step.component.html',
   styleUrls: ['./verify-step.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

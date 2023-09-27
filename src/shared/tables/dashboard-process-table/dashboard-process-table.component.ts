@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProcessesService } from '@shared/api';
+import { ProcessesService } from '@shared/api/services';
 import { ProcessTableItems } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { InputCheckboxComponent, LoaderComponent, TablePaginationComponent } from '@shared/ui';
@@ -66,7 +66,11 @@ export class DashboardProcessTableComponent {
       return;
     }
 
-    this.processesService.apiProcessesProcessIdDelete(id, this.departmentId, this.token).pipe(
+    this.processesService.apiProcessesProcessIdDelete({
+      token: this.token,
+      processId: id,
+      departmentId: this.departmentId,
+    }).pipe(
       takeUntil(this.destroy$),
     ).subscribe();
   }

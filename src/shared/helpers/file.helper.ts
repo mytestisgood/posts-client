@@ -1,4 +1,4 @@
-import { InlineResponse20033, InlineResponse20034 } from '@shared/api';
+import { FileDataExtResponse } from '@shared/api/models';
 import { saveAs } from 'file-saver';
 import { fromEvent, map, Observable } from 'rxjs';
 
@@ -26,7 +26,7 @@ export function fileFromBlotToTextFormatHelper(files: File[]): Observable<string
   ) as Observable<string>;
 }
 
-export function toBlobAndSaveFile(data: InlineResponse20033 | InlineResponse20034): void {
+export function toBlobAndSaveFile(data: FileDataExtResponse): void {
   const file: string = 'data:application/' + data.ext + ';base64,' + data.data;
   const blob: Blob = new Blob([file], { type: data.ext });
 

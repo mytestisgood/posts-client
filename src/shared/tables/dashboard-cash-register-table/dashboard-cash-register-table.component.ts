@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InlineResponse20029Items } from '@shared/api';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { AllProductsGetResponseItems } from '@shared/api/models';
 import { LoaderComponent, TablePaginationComponent } from '@shared/ui';
 
 @Component({
@@ -12,5 +12,5 @@ import { LoaderComponent, TablePaginationComponent } from '@shared/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardCashRegisterTableComponent {
-  @Input() public allProducts!: InlineResponse20029Items[] | null;
+  @Input() public allProducts!: AllProductsGetResponseItems[] | null;
 }

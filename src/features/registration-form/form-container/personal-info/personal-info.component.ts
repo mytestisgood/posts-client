@@ -8,7 +8,8 @@ import {
   Output,
 } from '@angular/core';
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { InlineResponse2001, RegisterService, SignInService } from '@shared/api';
+import { CreateEmployerOutResponse } from '@shared/api/models';
+import { RegisterService, SignInService } from '@shared/api/services';
 import {
   DEPARTMENT_ID,
   PersonalInfoControls,
@@ -79,12 +80,12 @@ export class PersonalInfoComponent implements OnInit {
       identifier: this.personalInfoForm.controls.companyId.value as string,
       user_name: this.personalInfoForm.controls.yourName.value as string,
     }).pipe(
-      switchMap((tokenResponse: InlineResponse2001) => {
+      switchMap((tokenResponse: CreateEmployerOutResponse) => {
         this.localStorageService.setItem(TOKEN, tokenResponse?.token as string);
         this.localStorageService.setItem(DEPARTMENT_ID, tokenResponse?.departmentId as string);
         this.subformInitialized.emit(this.personalInfoForm);
 
-        return this.signInService.apiUsersSendVerifyCodePost(tokenResponse?.token)
+        return this.signInService.apiUsersSendVerifyCodePost({ token: tokenResponse.token as string })
           .pipe(takeUntil(this.destroy$));
       }),
       takeUntil(this.destroy$),

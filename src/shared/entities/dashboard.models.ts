@@ -1,11 +1,11 @@
 import { FormControl } from '@angular/forms';
 import {
+  ChatResponse,
   DocumentTypes,
-  InlineResponse20039,
-  InlineResponse20040Items,
-  InlineResponse2007Items,
-  InlineResponse2008,
-} from '@shared/api';
+  FeedbacksRecordsListItems,
+  IdAndNameResponse,
+  ProcessResponseItems,
+} from '@shared/api/models';
 import { FileWithLoading } from './common.models';
 
 export interface DashboardHeaderGroupControls {
@@ -14,9 +14,14 @@ export interface DashboardHeaderGroupControls {
   department: FormControl<string | number | null>;
 }
 
+export interface DashboardHomeSwitcherControls {
+  dates: FormControl<string | null>;
+  salaryMonth: FormControl<string | null>;
+}
+
 export interface DashboardCreateNewChatGroupControls {
-  document: FormControl<InlineResponse20039 | null>;
-  documentType: FormControl<InlineResponse20039 | null>;
+  document: FormControl<IdAndNameResponse | null>;
+  documentType: FormControl<IdAndNameResponse | null>;
   cashRegister: FormControl<string | null>;
   employee: FormControl<string | null>;
   referenceContent: FormControl<string | null>;
@@ -39,10 +44,10 @@ export interface DashboardMessages {
 
 export type DashboardDirection = 'forward' | 'back';
 export type DashboardStep = 'firstStep' | 'secondStep' | 'thirdStep' | 'fourthStep' | 'fifthStep';
-export type ProcessTableItems = InlineResponse2007Items & { isSelected: boolean };
-export type RecordListItems = InlineResponse20040Items & { isSelected: boolean };
-export type CompensationsListItems = InlineResponse2007Items & { isSelected: boolean };
-export type ChatListItems = InlineResponse2008 & { active: boolean };
+export type ProcessTableItems = ProcessResponseItems & { isSelected: boolean };
+export type RecordListItems = FeedbacksRecordsListItems & { isSelected: boolean };
+export type CompensationsListItems = ProcessResponseItems & { isSelected: boolean };
+export type ChatListItems = ChatResponse & { active: boolean };
 
 export enum DashboardStepEnum {
   FirstStep = 'firstStep',

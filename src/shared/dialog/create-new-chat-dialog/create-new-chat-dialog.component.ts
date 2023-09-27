@@ -1,12 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import {
-  ChatService,
-  FilesMyHrService,
-  InlineResponse20035,
-  InlineResponse20039,
-} from '@shared/api';
+import { IdAndNameResponse, UploadPostResponse } from '@shared/api/models';
+import { ChatService, FilesMyHrService } from '@shared/api/services';
 import { DashboardCreateNewChatGroupControls } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import {
@@ -37,9 +33,11 @@ export class CreateNewChatDialogComponent implements OnInit {
   public isDocumentUploaded: boolean = false;
   public hideDocumentType: boolean = true;
   public hideBlockWithCashAndEmployee: boolean = true;
-  public chatSubject$: Observable<InlineResponse20039[]> = this.chatService.apiChatsGetChatSubjectsGet(this.token);
-  public chatSubjectOption!: InlineResponse20039[];
-  public tatSubjectOption!: InlineResponse20039[];
+  public chatSubject$: Observable<IdAndNameResponse[]> = this.chatService.apiChatsGetChatSubjectsGet(
+    { token: this.token },
+  );
+  public chatSubjectOption!: IdAndNameResponse[];
+  public tatSubjectOption!: IdAndNameResponse[];
 
   constructor(
     private readonly destroy$: DestroyService,
@@ -49,12 +47,15 @@ export class CreateNewChatDialogComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.chatSubject$.subscribe((response: InlineResponse20039[]) => this.chatSubjectOption = response);
+    this.chatSubject$.subscribe((response: IdAndNameResponse[]) => this.chatSubjectOption = response);
     this.form.get('document')?.valueChanges.pipe(
-      switchMap((value: InlineResponse20039 | null) => {
+      switchMap((value: IdAndNameResponse | null) => {
         this.hideDocumentType = false;
-        return this.chatService.apiChatsGetTatSubjectsGet(value?.id, this.token).pipe(
-          tap((response: InlineResponse20039[]) => this.tatSubjectOption = response),
+        return this.chatService.apiChatsGetTatSubjectsGet({
+          subjectId: value?.id,
+          token: this.token,
+        }).pipe(
+          tap((response: IdAndNameResponse[]) => this.tatSubjectOption = response),
         );
       }),
       takeUntil(this.destroy$),
@@ -66,9 +67,9 @@ export class CreateNewChatDialogComponent implements OnInit {
 
   public onAddFileClick(): void {
     if (this.form.value.file) {
-      this.filesMyHrService.apiUploadPost('smarti-dev', this.form.value.file[0] as File).pipe(
+      this.filesMyHrService.apiUploadPost({ project: 'smarti-dev', file: this.form.value.file[0] as File }).pipe(
         takeUntil(this.destroy$),
-      ).subscribe((response: InlineResponse20035) => {
+      ).subscribe((response: UploadPostResponse) => {
         this.sendRequest.next(response.opswatId as string);
         this.observer.complete();
       });

@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InlineResponse20039 } from '@shared/api';
+import { IdAndNameResponse } from '@shared/api/models';
 import { TuiHostedDropdownModule, TuiSizeM, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiSizeL, TuiSizeS } from '@taiga-ui/core/types';
 import {
   TuiComboBoxModule,
-  TuiDataListWrapperModule, TuiFilterByInputPipeModule,
+  TuiDataListWrapperModule,
+  TuiFilterByInputPipeModule,
   TuiSelectModule,
   TuiStringifyContentPipeModule,
 } from '@taiga-ui/kit';
@@ -33,12 +34,12 @@ import {
 export class SelectComponent {
   @Input() public customWidth!: string;
   @Input() public options!: string[];
-  @Input() public comboBoxOptions!: InlineResponse20039[];
+  @Input() public comboBoxOptions!: IdAndNameResponse[];
   @Input() public selectMode!: 'big';
   @Input() public placeholder!: string;
-  @Input() public control: FormControl<string | InlineResponse20039 | null> = new FormControl();
+  @Input() public control: FormControl<string | IdAndNameResponse | null> = new FormControl();
   @Input() public textFieldSize: TuiSizeM | TuiSizeS | TuiSizeL = 'm';
   @Input() public isComboBoxMode: boolean = false;
 
-  public readonly stringify = (item: InlineResponse20039 | null): string => `${item?.name}`;
+  public readonly stringify = (item: IdAndNameResponse | null): string => `${item?.name}`;
 }

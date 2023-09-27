@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InlineResponse20051, InlineResponse20051Items, MenoraService } from '@shared/api';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MenoraGetResponse, MenoraGetResponseItems } from '@shared/api/models';
+import { MenoraService } from '@shared/api/services';
 import { TOKEN } from '@shared/entities';
 import { DashboardShieldTableComponent } from '@shared/tables';
 import { ButtonComponent } from '@shared/ui';
@@ -17,14 +18,9 @@ import { map, Observable } from 'rxjs';
 })
 export class DashboardShieldComponent {
   public token: string = this.localStorageService.getItem(TOKEN) as string;
-  public menoraItems$: Observable<InlineResponse20051Items[] | null> = this.menoraService.apiMenoraGet(
-    '',
-    '',
-    '',
-    '',
-    '',
-    this.token,
-  ).pipe(map((response: InlineResponse20051) => response.items ?? null));
+  public menoraItems$: Observable<MenoraGetResponseItems[] | null> = this.menoraService.apiMenoraGet({
+    token: this.token,
+  }).pipe(map((response: MenoraGetResponse) => response.items ?? null));
   constructor(
     private readonly menoraService: MenoraService,
     private readonly localStorageService: LocalStorageService,

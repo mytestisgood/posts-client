@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { InlineResponse2003 } from '@shared/api';
+import { UploadFilePostResponse } from '@shared/api/models';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -7,6 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataSharingService {
   public isDashboardProcessFileUploaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public dashboardProcessUploadFileResult$: BehaviorSubject<InlineResponse2003 | null> =
-    new BehaviorSubject<InlineResponse2003 | null>(null);
+  public dashboardProcessUploadFileResult$: BehaviorSubject<UploadFilePostResponse | null> =
+    new BehaviorSubject<UploadFilePostResponse | null>(null);
 }

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { InlineResponse20029Items, ProductsService } from '@shared/api';
+import { AllProductsGetResponseItems } from '@shared/api/models';
+import { ProductsService } from '@shared/api/services';
 import { TOKEN } from '@shared/entities';
 import { DashboardCashRegisterTableComponent } from '@shared/tables';
 import {
@@ -28,7 +29,7 @@ export class DashboardCashRegisterComponent implements OnInit {
   public controlSearch: FormControl<string | null> = new FormControl<string>('');
   public token: string = this.localStorageService.getItem(TOKEN) as string;
   public isCustomDropdownActive: boolean = false;
-  public allProducts$!: Observable<InlineResponse20029Items[] | null>;
+  public allProducts$!: Observable<AllProductsGetResponseItems[] | null>;
 
   constructor(
     private readonly localStorageService: LocalStorageService,
@@ -39,11 +40,15 @@ export class DashboardCashRegisterComponent implements OnInit {
   public ngOnInit(): void {
     this.allProducts$ = combineLatest([
       this.controlSearch.valueChanges.pipe(startWith('')),
-      this.productsService.apiProductsAllProductsGet('1', '7', this.token),
+      this.productsService.apiProductsAllProductsGet({
+        token: this.token,
+        limit: '1',
+        page: '7',
+      }),
     ]).pipe(
       debounceTime(500),
       map(([query, response]) => {
-        return (response?.items as InlineResponse20029Items[]).filter(res =>
+        return (response?.items as AllProductsGetResponseItems[]).filter(res =>
           (res.name as string).toLowerCase().indexOf(query?.toLowerCase() as string) > -1) ?? null;
       }),
     );

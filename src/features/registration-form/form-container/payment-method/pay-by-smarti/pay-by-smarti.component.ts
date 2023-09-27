@@ -1,12 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ButtonComponent, InputFieldComponent, RadioComponent } from '@shared/ui';
-import {
-  RegistrationDirection,
-  PaymentMethodControls,
-  PaymentMethodTabs,
-} from '@shared/entities';
+import { PaymentMethodControls, PaymentMethodTabs, RegistrationDirection } from '@shared/entities';
+import { ButtonComponent, InputFieldComponent, RadioBlockComponent } from '@shared/ui';
 
 @Component({
   selector: 'smarti-pay-by-smarti',
@@ -16,7 +12,7 @@ import {
     ButtonComponent,
     InputFieldComponent,
     ReactiveFormsModule,
-    RadioComponent,
+    RadioBlockComponent,
   ],
   templateUrl: './pay-by-smarti.component.html',
   styleUrls: ['./pay-by-smarti.component.scss'],

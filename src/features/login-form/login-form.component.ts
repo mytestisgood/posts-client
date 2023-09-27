@@ -9,7 +9,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { InlineResponse2002, SignInService } from '@shared/api';
+import { SignInResponse } from '@shared/api/models';
+import { SignInService } from '@shared/api/services';
 import { emailValidatorPattern, TOKEN } from '@shared/entities';
 import { DestroyService, LoginService } from '@shared/services';
 import {
@@ -76,13 +77,14 @@ export class LoginFormComponent implements OnInit {
   }
 
   public doLogin(): void {
-    this.signInService.apiLoginPost('',
-      {
+    this.signInService.apiLoginPost({
+      token: '',
+      apiLoginBody: {
         email: this.loginForm.value.email as string,
         password: this.loginForm.value.password as string,
       },
-    ).pipe(
-      tap((response: InlineResponse2002) => {
+    }).pipe(
+      tap((response: SignInResponse) => {
         this.localStorageService.setItem(TOKEN, response.token as string);
         this.loginService.currentToken$.next(response.token as string);
       }),

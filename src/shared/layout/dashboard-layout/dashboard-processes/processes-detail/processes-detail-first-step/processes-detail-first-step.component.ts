@@ -8,12 +8,8 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {
-  FilesMyHrService,
-  InlineResponse2003,
-  InlineResponse20035,
-  UploadFileService,
-} from '@shared/api';
+import { UploadFilePostResponse, UploadPostResponse } from '@shared/api/models';
+import { FilesMyHrService, UploadFileService } from '@shared/api/services';
 import { DashboardDirection, DashboardDirectionEnum } from '@shared/entities';
 import { getCurrentMonth, getCurrentYear } from '@shared/helpers';
 import { DataSharingService, DestroyService } from '@shared/services';
@@ -47,18 +43,21 @@ export class ProcessesDetailFirstStepComponent {
   }
 
   public doChangeStep(direction: DashboardDirection): void {
-    this.uploadFileService.apiProcessesUploadFilePost(this.token, {
-      departmentId: this.departmentId.toString(),
-      isDepartmentLink: false,
-      isDirect: false,
-      isEmployer: true,
-      month: getCurrentMonth().toString(),
-      processName: 'upload file from',
-      year: getCurrentYear().toString(),
-      opswatIds: this.opswatId,
+    this.uploadFileService.apiProcessesUploadFilePost({
+      token: this.token,
+      processesUploadFileBody: {
+        departmentId: this.departmentId.toString(),
+        isDepartmentLink: false,
+        isDirect: false,
+        isEmployer: true,
+        month: getCurrentMonth().toString(),
+        processName: 'upload file from',
+        year: getCurrentYear().toString(),
+        opswatIds: this.opswatId,
+      },
     }).pipe(
       takeUntil(this.destroy$),
-    ).subscribe((result: InlineResponse2003) => {
+    ).subscribe((result: UploadFilePostResponse) => {
       this.dataSharingService.dashboardProcessUploadFileResult$.next(result);
       this.dataSharingService.isDashboardProcessFileUploaded$.next(true);
       this.changeStep.emit(direction);
@@ -67,8 +66,11 @@ export class ProcessesDetailFirstStepComponent {
 
   public fileUploaded(isUploaded: boolean): void {
     if (isUploaded) {
-      this.filesMyHrService.apiUploadPost('smarti-dev', this.filesControl.value).pipe(
-        tap((response: InlineResponse20035) => {
+      this.filesMyHrService.apiUploadPost({
+        file: this.filesControl.value,
+        project: 'smarti-dev',
+      }).pipe(
+        tap((response: UploadPostResponse) => {
           this.opswatId.push(response.opswatId as string);
           this.isDocumentUploaded = isUploaded;
           this.changeDetectorRef.detectChanges();

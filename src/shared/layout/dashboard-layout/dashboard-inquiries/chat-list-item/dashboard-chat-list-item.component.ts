@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StatusChat } from '@shared/api';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { StatusChat } from '@shared/api/models';
 import { ChatListItems, setLineColorClass } from '@shared/entities';
 import { getCalendarDateFromStringDate } from '@shared/helpers';
 import { TuiHintModule } from '@taiga-ui/core';

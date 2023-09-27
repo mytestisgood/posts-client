@@ -1,0 +1,13 @@
+<tui-radio-labeled
+  [formControl]="control"
+  [size]="size"
+  [item]="item"
+  (change)="changeValue(item)"
+>
+  <div
+    class="paragraph-text-extra mr-2"
+    [ngClass]="labelCustomClass"
+  >
+    {{ label }}
+  </div>
+</tui-radio-labeled>

@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InlineResponse20051Items } from '@shared/api';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MenoraGetResponseItems } from '@shared/api/models';
 import { LoaderComponent, SelectComponent, TablePaginationComponent } from '@shared/ui';
 
 @Component({
@@ -12,5 +12,5 @@ import { LoaderComponent, SelectComponent, TablePaginationComponent } from '@sha
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardShieldTableComponent {
-  @Input() public items!: InlineResponse20051Items[] | null;
+  @Input() public items!: MenoraGetResponseItems[] | null;
 }

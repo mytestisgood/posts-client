@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { CompensationsService } from '@shared/api';
+import { CompensationsService } from '@shared/api/services';
 import { CompensationsListItems, TOKEN } from '@shared/entities';
 import { DashboardCompensationsTableComponent } from '@shared/tables';
 import {
@@ -40,7 +40,12 @@ export class DashboardCompensationsComponent implements OnInit {
   public ngOnInit(): void {
     this.compensations$ = combineLatest([
       this.controlSearch.valueChanges.pipe(startWith('')),
-      this.compensationsService.apiCompensationsGet('', '', '', '9301', '1', '7', this.token),
+      this.compensationsService.apiCompensationsGet({
+        eventCode: '9301',
+        page: '1',
+        limit: '7',
+        token: this.token,
+      }),
     ]).pipe(
       debounceTime(500),
       map(([query, response]) => {

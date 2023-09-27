@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
-  HomeService,
-  InlineResponse2004,
-  InlineResponse2005,
-  InlineResponse2006,
-} from '@shared/api';
+  CompensationReportGetResponse,
+  EmployerReportResponse,
+  FeedbackEmployerReportGetResponse,
+} from '@shared/api/models';
+import { ChatService, HomeService } from '@shared/api/services';
 import { TOKEN } from '@shared/entities';
 import {
   formattedCurrentDateTo,
@@ -25,6 +25,9 @@ import {
   BalanceForCompensationComponent,
 } from './balance-for-compensation/balance-for-compensation.component';
 import { FeedsComponent } from './feeds/feeds.component';
+import {
+  HomeSwitchersFiltersComponent,
+} from './home-switchers-filters/home-switchers-filters.component';
 import { InquiriesComponent } from './inquiries/inquiries.component';
 import { LastPaymentComponent } from './last-payment/last-payment.component';
 
@@ -35,7 +38,7 @@ import { LastPaymentComponent } from './last-payment/last-payment.component';
     CommonModule, ButtonComponent, SelectComponent, InputYearComponent,
     LastPaymentComponent, DashboardHomeTableComponent, InquiriesComponent, FeedsComponent,
     BalanceForCompensationComponent, DashboardHomeSmallTableComponent,
-    DashboardNotificationComponent, LoaderComponent,
+    DashboardNotificationComponent, LoaderComponent, HomeSwitchersFiltersComponent,
   ],
   templateUrl: './dashboard-home.component.html',
   styleUrls: ['./dashboard-home.component.scss'],
@@ -45,37 +48,28 @@ export class DashboardHomeComponent {
   public startDateCurrentMonth: string = getCurrentMonthStartDayDate('yyyy-mm-dd');
   public endDateCurrentMonth: string = getCurrentMonthLastDayDate('yyyy-mm-dd');
   public token: string = this.localStorageService.getItem(TOKEN) as string;
-  public $employerReport: Observable<InlineResponse2004> = this.homeService.apiReportsEmployerReportPost(this.token, {
-    employerId: '1',
-    organizationId: '2',
-    startDate: this.startDateCurrentMonth,
-    endDate: this.endDateCurrentMonth,
-    salaryMonth: true,
+  public $employerReport: Observable<EmployerReportResponse> = this.homeService.apiReportsEmployerReportPost({
+    token: this.token,
+    reportsEmployerReportBody: {
+      employerId: '1',
+      organizationId: '2',
+      startDate: this.startDateCurrentMonth,
+      endDate: this.endDateCurrentMonth,
+      salaryMonth: true,
+    },
   });
-  public chats$: Observable<Array<object>> = this.homeService.apiChatsGet(
-    undefined,
-    undefined,
-    undefined,
-    this.token,
-  );
-  public compensationReport$: Observable<InlineResponse2006> = this.homeService.apiReportsCompensationReportGet(
-    undefined,
-    undefined,
-    formattedCurrentDateTo('yyyy-mm-dd'),
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    this.token,
-  );
-  public feedbackEmployerReport$: Observable<InlineResponse2005> = this.homeService.apiReportsFeedbackEmployerReportGet(
-   new Date().getFullYear().toString(),
-    new Date().getMonth().toString(),
-    '',
-    '',
-    '',
-    this.token,
-  );
+  public chats$: Observable<Array<object>> = this.chatService.apiChatsGet({ token: this.token });
+  public compensationReport$: Observable<CompensationReportGetResponse> =
+    this.homeService.apiReportsCompensationReportGet({
+    token: this.token,
+    startDate: formattedCurrentDateTo('yyyy-mm-dd'),
+  });
+  public feedbackEmployerReport$: Observable<FeedbackEmployerReportGetResponse> =
+    this.homeService.apiReportsFeedbackEmployerReportGet({
+      year: new Date().getFullYear().toString(),
+      month: new Date().getMonth().toString(),
+      token: this.token,
+    });
   public year!: number;
   public month!: number;
   public searchingDate!: string | undefined;
@@ -83,6 +77,7 @@ export class DashboardHomeComponent {
 
   constructor(
     private readonly homeService: HomeService,
+    private readonly chatService: ChatService,
     private readonly localStorageService: LocalStorageService,
   ) {}
 
@@ -106,15 +101,10 @@ export class DashboardHomeComponent {
 
   public onReportsCompensationGet(): void {
     this.searchingDate = formattedMonthAndYearDateTo(this.month, this.year, 'yyyy-mm-dd');
-    this.compensationReport$ = this.homeService.apiReportsCompensationReportGet(
-      undefined,
-      this.searchingDate,
-      this.searchingDate,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      this.token,
-    );
+    this.compensationReport$ = this.homeService.apiReportsCompensationReportGet({
+      token: this.token,
+      startDate: this.searchingDate,
+      endDate: this.searchingDate,
+    });
   }
 }

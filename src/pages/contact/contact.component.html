@@ -52,23 +52,29 @@
 </section>
 
 <ng-template #expandedTemplate>
-  <div class="flex flex-col justify-center contact-block items-center">
+  <div
+    class="flex flex-col justify-center contact-block items-center"
+    [formGroup]="leadsForm"
+  >
     <div class="mt-6">
       <smarti-input-field
         [placeholder]="'Your Name'"
         [customWidth]="'536px'"
+        [control]="leadsForm.controls.name"
       ></smarti-input-field>
     </div>
     <div class="mt-8">
       <smarti-input-field
         [placeholder]="'Email Address*'"
         [customWidth]="'536px'"
+        [control]="leadsForm.controls.email"
       ></smarti-input-field>
     </div>
     <div class="mt-8">
       <smarti-input-field
         [placeholder]="'Phone Number*'"
         [customWidth]="'536px'"
+        [control]="leadsForm.controls.phone"
       ></smarti-input-field>
     </div>
     <div class="mt-20 mb-14">
@@ -77,6 +83,7 @@
         [text]="'Send'"
         [customButtonWidth]="'232px'"
         (buttonClicked)="sendContactRequest()"
+        [disabled]="!leadsForm.valid"
       ></smarti-button>
     </div>
   </div>

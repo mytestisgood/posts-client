@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RegisterService } from '@shared/api';
-import { emailValidatorPattern } from '@shared/entities';
+import { RegisterService } from '@shared/api/services';
+import { emailValidatorPattern, TOKEN } from '@shared/entities';
 import { DestroyService } from '@shared/services';
-import { BehaviorSubject, takeUntil } from 'rxjs';
 import { ButtonComponent, InputFieldComponent, InputNumberComponent } from '@shared/ui';
+import { LocalStorageService } from '@shared/web-api';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 
 interface ForwardRequestForm {
   email: FormControl<string | null>;
@@ -34,6 +35,7 @@ export class ForwardRequestDialogComponent {
   @Input() public departmentId!: number;
   @Output() public requestSend: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
+  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public forwardRequestForm: FormGroup<ForwardRequestForm> = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -46,6 +48,7 @@ export class ForwardRequestDialogComponent {
   constructor(
     private readonly destroy$: DestroyService,
     private readonly registerService: RegisterService,
+    private readonly localStorageService: LocalStorageService,
   ) {
   }
 
@@ -54,12 +57,15 @@ export class ForwardRequestDialogComponent {
   }
 
   public sendRequest(): void {
-    this.registerService.apiEmployersCreateUserOutPost('1', {
-      email: this.forwardRequestForm.controls.email.value as string,
-      phone: this.forwardRequestForm.controls.phone.value as string,
-      user_name: this.forwardRequestForm.controls.userName.value as string,
-      identifier: this.identifier,
-      departmentId: this.departmentId,
+    this.registerService.apiEmployersCreateUserOutPost({
+      token: this.token,
+      employersCreateUserOutBody: {
+        email: this.forwardRequestForm.controls.email.value as string,
+        phone: this.forwardRequestForm.controls.phone.value as string,
+        user_name: this.forwardRequestForm.controls.userName.value as string,
+        identifier: this.identifier,
+        departmentId: this.departmentId,
+      },
     }).pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.requestSend.next(true);
       this.observer.complete();

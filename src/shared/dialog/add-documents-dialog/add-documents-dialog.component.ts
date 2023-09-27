@@ -7,7 +7,8 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DocumentTypes, FilesMyHrService, InlineResponse20035 } from '@shared/api';
+import { DocumentTypes, UploadPostResponse } from '@shared/api/models';
+import { FilesMyHrService } from '@shared/api/services';
 import {
   DashboardDocumentsAddDocument,
   DocumentTypesConstEmployer,
@@ -68,8 +69,8 @@ export class AddDocumentsDialogComponent {
 
   public fileUploaded(isUploaded: boolean): void {
     if (isUploaded) {
-      this.filesMyHrService.apiUploadPost('smarti-dev', this.filesControl.value).pipe(
-        tap((response: InlineResponse20035) => {
+      this.filesMyHrService.apiUploadPost({ project: 'smarti-dev', file: this.filesControl.value }).pipe(
+        tap((response: UploadPostResponse) => {
           this.opswatId = response.opswatId as string;
           this.isDocumentUploaded = isUploaded;
           this.changeDetectorRef.detectChanges();

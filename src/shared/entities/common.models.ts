@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import {
   ActivationEnd,
   ActivationStart,
@@ -54,4 +55,10 @@ export interface DashboardDownloadDocumentsModel {
 export enum SpecialHeaderTokenEnum {
   Show = 'show',
   Hidden = 'hidden',
+}
+
+export interface LeadsForm {
+  name: FormControl<string | null>;
+  email: FormControl<string | null>;
+  phone: FormControl<string | null>;
 }

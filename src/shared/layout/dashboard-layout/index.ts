@@ -7,6 +7,7 @@ export * from './dashboard-home/last-payment/last-payment.component';
 export * from './dashboard-home/inquiries/inquiries.component';
 export * from './dashboard-home/feeds/feeds.component';
 export * from './dashboard-home/balance-for-compensation/balance-for-compensation.component';
+export * from './dashboard-home/home-switchers-filters/home-switchers-filters.component';
 export * from './dashboard-processes';
 export * from './dashboard-employer/dashboard-employer.component';
 export * from './dashboard-compensations/dashboard-compensations.component';

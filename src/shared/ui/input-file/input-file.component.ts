@@ -8,7 +8,8 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormControlStatus, ReactiveFormsModule } from '@angular/forms';
-import { FilesMyHrService, InlineResponse20035 } from '@shared/api';
+import { UploadPostResponse } from '@shared/api/models';
+import { FilesMyHrService } from '@shared/api/services';
 import { FileWithLoading } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { TuiLinkModule, TuiLoaderModule, TuiSvgModule } from '@taiga-ui/core';
@@ -49,7 +50,6 @@ export class InputFileComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.filesMyHrService.apiStatusGet();
     this.control.valueChanges.pipe(
       switchMap(value => {
         if (value?.length === 0) {
@@ -63,11 +63,14 @@ export class InputFileComponent implements OnInit {
           this.currentFile.isUploaded = true;
         }
 
-        return this.filesMyHrService.apiUploadPost('smarti-dev', this.currentFile);
+        return this.filesMyHrService.apiUploadPost({
+          file: this.currentFile,
+          project: 'smarti-dev',
+        });
       }),
       takeUntil(this.destroy$),
     )
-      .subscribe((response: InlineResponse20035) => {
+      .subscribe((response: UploadPostResponse) => {
           this.id = response.opswatId;
           this.currentFile.isLoading = false;
           this.cdr.detectChanges();

@@ -1,13 +1,13 @@
 <div class="margin-rl-auto flex flex-col">
   <h3 class="mt-10 medium text-center neutrals-text-950">לטובת עדכון סיסמא,ניתן לשלוח קוד באמצעות</h3>
   <div class="mt-20 flex justify-center">
-    <smarti-radio
+    <smarti-radio-block
       [labelFirstText]="'כתובת מייל <b>name@mail.com</b>'"
       [labelSecondText]="'מספר טלפון <b>050****565</b>'"
       [items]="items"
       [radioValue]="radioValue"
       (chosenValue)="doChangeContent($event)"
-    ></smarti-radio>
+    ></smarti-radio-block>
   </div>
 
   <div

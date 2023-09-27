@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { LeadService } from '@shared/api';
+import { LeadService } from '@shared/api/services';
 import { DestroyService } from '@shared/services';
 import { ButtonComponent, InputFieldComponent } from '@shared/ui';
 import { takeUntil } from 'rxjs';

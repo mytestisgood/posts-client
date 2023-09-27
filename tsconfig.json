@@ -43,8 +43,11 @@
       "@shared/services": [
         "src/shared/services"
       ],
-      "@shared/api": [
-        "src/shared/api/v1"
+      "@shared/api/services": [
+        "src/shared/api/services"
+      ],
+      "@shared/api/models": [
+        "src/shared/api/models"
       ],
       "@shared/web-api": [
         "src/shared/api/web-api"

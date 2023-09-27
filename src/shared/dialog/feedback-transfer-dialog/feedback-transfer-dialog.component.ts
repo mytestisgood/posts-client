@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
-import { InlineResponse20044 } from '@shared/api';
+import { FeedbacksGetTransferResponse } from '@shared/api/models';
 import { DialogConfig } from '@shared/entities';
 import { TuiDialog } from '@taiga-ui/cdk';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
@@ -15,19 +15,19 @@ import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 })
 export class FeedbackTransferDialogComponent implements OnInit {
   @Input() public observer!: { complete: () => void };
-  public transferData!: InlineResponse20044 | null;
+  public transferData!: FeedbacksGetTransferResponse | null;
   public companyName!: string;
 
   constructor(
     @Inject(POLYMORPHEUS_CONTEXT)
     public context: TuiDialog<DialogConfig<{
-      transferData: InlineResponse20044 | null,
+      transferData: FeedbacksGetTransferResponse | null,
       companyName: string,
     }>, void>,
   ) {}
 
   public ngOnInit(): void {
-    this.transferData = this.context.data?.transferData as InlineResponse20044;
+    this.transferData = this.context.data?.transferData as FeedbacksGetTransferResponse;
     this.companyName = this.context.data?.companyName as string;
   }
 

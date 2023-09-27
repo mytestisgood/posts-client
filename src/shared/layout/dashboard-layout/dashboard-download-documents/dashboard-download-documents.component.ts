@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FilesService, InlineResponse20034 } from '@shared/api';
+import { FileDataExtResponse } from '@shared/api/models';
+import { FilesService } from '@shared/api/services';
 import {
   dashboardDownloadDocumentsMapper,
   DashboardDownloadDocumentsModel,
@@ -54,21 +55,21 @@ export class DashboardDownloadDocumentsComponent implements OnInit {
   }
 
   public onDownloadFile(file: DashboardDownloadDocumentsModel): void {
-    this.filesService.apiGeneralsDownloadExampleFilePost(
-      this.token,
-      { filename: file.name },
-    ).pipe(takeUntil(this.destroy$))
-      .subscribe((response: InlineResponse20034) => toBlobAndSaveFile(response));
+    this.filesService.apiGeneralsDownloadExampleFilePost({
+      token: this.token,
+      generalsDownloadExampleFileBody: { filename: file.name },
+    }).pipe(takeUntil(this.destroy$))
+      .subscribe((response: FileDataExtResponse) => toBlobAndSaveFile(response));
   }
 
   public downloadSelectedDocuments(): void {
     this.files.forEach((item: DashboardDownloadDocumentsModel) => {
       if (item.isSelected) {
-        this.filesService.apiGeneralsDownloadExampleFilePost(
-          this.token,
-          { filename: item.name },
-        ).pipe(takeUntil(this.destroy$))
-          .subscribe((response: InlineResponse20034) => toBlobAndSaveFile(response));
+        this.filesService.apiGeneralsDownloadExampleFilePost({
+          token: this.token,
+          generalsDownloadExampleFileBody: { filename: item.name },
+        }).pipe(takeUntil(this.destroy$))
+          .subscribe((response: FileDataExtResponse) => toBlobAndSaveFile(response));
       }
     });
   }

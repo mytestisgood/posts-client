@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { UploadFileService } from '@shared/api';
+import { UploadFileService } from '@shared/api/services';
 import { DataSharingService } from '@shared/services';
 import { combineLatest, of, switchMap } from 'rxjs';
 
@@ -24,11 +24,11 @@ export class ProcessesDetailInformationComponent {
     switchMap(([uploadFileResult, isFileUploaded]) => {
       if (uploadFileResult?.processId && isFileUploaded) {
         this.emptyData = false;
-        return this.uploadFileService.apiProcessesUploadFileGet(
-          this.departmentId.toString(),
-          uploadFileResult.processId,
-          this.token,
-        );
+        return this.uploadFileService.apiProcessesUploadFileGet({
+          token: this.token,
+          processId: uploadFileResult.processId,
+          departmentId: this.departmentId.toString(),
+        });
       }
 
       this.emptyData = true;

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { InlineResponse2007Items, ProcessesService } from '@shared/api';
+import { ProcessResponseItems } from '@shared/api/models';
+import { ProcessesService } from '@shared/api/services';
 import { DEPARTMENT_ID, months, ProcessTableItems, TOKEN } from '@shared/entities';
 import { DashboardProcessTableComponent } from '@shared/tables';
 import {
@@ -42,11 +43,14 @@ export class DashboardProcessesComponent implements OnInit {
   public ngOnInit(): void {
     this.dashboardProcessItems$ = combineLatest([
       this.controlSearch.valueChanges.pipe(startWith('')),
-      this.processesService.apiProcessesGet(),
+      this.processesService.apiProcessesGet({
+        token: this.token,
+        departmentId: this.departmentId,
+      }),
     ]).pipe(
       debounceTime(500),
       map(([query, response]) => {
-        const processTableItems: ProcessTableItems[] | null = (response.items as InlineResponse2007Items[])
+        const processTableItems: ProcessTableItems[] | null = (response.items as ProcessResponseItems[])
           .map(item => ({ ...item, isSelected: false })) ?? null;
 
         return processTableItems.filter(res =>

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ChatService, InlineResponse20037, InlineResponse2008 } from '@shared/api';
+import { ChatIdGetResponse, ChatResponse } from '@shared/api/models';
+import { ChatService } from '@shared/api/services';
 import { CreateNewChatDialogComponent } from '@shared/dialog';
 import {
   ChatListItems,
@@ -32,17 +33,15 @@ import { DashboardChatWindowComponent } from './chat-window/dashboard-chat-windo
 export class DashboardInquiriesComponent {
   public token: string = this.localStorageService.getItem(TOKEN) as string;
   public isCustomDropdownActive: boolean = false;
-  public chatItems$: Observable<ChatListItems[]> = this.chatService.apiChatsGet(
-    'all',
-    '',
-    '',
-    this.token,
-  ).pipe(
-    map((response: InlineResponse2008[]) => {
-      return response.map((item: InlineResponse2008): ChatListItems => ({ ...item, active: false }));
+  public chatItems$: Observable<ChatListItems[]> = this.chatService.apiChatsGet({
+    token: this.token,
+    status: 'all',
+  }).pipe(
+    map((response: ChatResponse[]) => {
+      return response.map((item): ChatListItems => ({ ...item, active: false }));
     }),
   );
-  public chat$!: Observable<InlineResponse20037 | null>;
+  public chat$!: Observable<ChatIdGetResponse | null>;
   public createNewChatForm: FormGroup<DashboardCreateNewChatGroupControls> = dashboardCreateNewChatGroupMapper();
   public isLoadingChatWindow: boolean = false;
 
@@ -61,8 +60,11 @@ export class DashboardInquiriesComponent {
 
   public changeCurrentChatId(chatId: number): void {
     this.isLoadingChatWindow = true;
-    this.chat$ = this.chatService.apiChatsChatIdGet(chatId, this.token).pipe(
-      map((response: InlineResponse20037) => {
+    this.chat$ = this.chatService.apiChatsChatIdGet({
+      chatId,
+      token: this.token,
+    }).pipe(
+      map((response: ChatIdGetResponse) => {
         this.isLoadingChatWindow = false;
         return response ?? null;
       }),
@@ -70,16 +72,19 @@ export class DashboardInquiriesComponent {
   }
 
   public onCreateNewChatSendRequest(opswatId: string): void {
-    this.chatService.apiChatsPost(this.token, {
-      chat: {
-        content: this.createNewChatForm.value.referenceContent as string,
-        employee_id: 0,
-        salary_month: '',
-        subject_id: this.createNewChatForm.value.document?.id,
-        tat_subject_id: this.createNewChatForm.value.documentType?.id,
+    this.chatService.apiChatsPost({
+      token: this.token,
+      apiChatsBody: {
+        chat: {
+          content: this.createNewChatForm.value.referenceContent as string,
+          employee_id: 0,
+          salary_month: '',
+          subject_id: this.createNewChatForm.value.document?.id,
+          tat_subject_id: this.createNewChatForm.value.documentType?.id,
+        },
+        opswatIds: opswatId,
+        employer_id: 0,
       },
-      employer_id: 0,
-      opswatIds: opswatId,
     }).pipe(takeUntil(this.destroy$)).subscribe();
   }
 

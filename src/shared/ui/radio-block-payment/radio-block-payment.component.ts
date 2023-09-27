@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TuiRadioBlockModule } from '@taiga-ui/kit';
 
@@ -29,10 +29,10 @@ export class RadioBlockPaymentComponent implements OnInit {
 
   public changeBorderStyleBlock(value: string): void {
     this.radioItemsValue.forEach(radioItem => {
-      document.getElementById(value + '-tui-radio-block')?.
+      document.getElementById(value + '-tui-radio-labeled-block-block')?.
       classList.add('border-bright-turquoise-500');
       if (radioItem !== value) {
-        document.getElementById(radioItem + '-tui-radio-block')?.
+        document.getElementById(radioItem + '-tui-radio-labeled-block-block')?.
         classList.remove('border-bright-turquoise-500');
       }
     });
