@@ -18,7 +18,7 @@ import {
   RegistrationFormValueType,
   TOKEN,
 } from '@shared/entities';
-import { DestroyService } from '@shared/services';
+import { DestroyService, LoginService } from '@shared/services';
 import {
   ButtonComponent,
   InputCheckboxComponent,
@@ -59,6 +59,7 @@ export class PersonalInfoComponent implements OnInit {
     private readonly registerService: RegisterService,
     private readonly signInService: SignInService,
     private readonly localStorageService: LocalStorageService,
+    private readonly loginService: LoginService,
   ) {}
 
   public ngOnInit(): void {
@@ -82,6 +83,7 @@ export class PersonalInfoComponent implements OnInit {
     }).pipe(
       switchMap((tokenResponse: CreateEmployerOutResponse) => {
         this.localStorageService.setItem(TOKEN, tokenResponse?.token as string);
+        this.loginService.currentToken$.next(tokenResponse?.token as string);
         this.localStorageService.setItem(DEPARTMENT_ID, tokenResponse?.departmentId as string);
         this.subformInitialized.emit(this.personalInfoForm);
 
