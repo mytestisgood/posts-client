@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UploadPostResponse } from '@shared/api/models';
 import { FilesMyHrService } from '@shared/api/services';
@@ -41,6 +48,7 @@ export class InputFileComponent implements OnInit {
   constructor(
     private readonly filesMyHrService: FilesMyHrService,
     private readonly destroy$: DestroyService,
+    private readonly cdr: ChangeDetectorRef,
   ) {
   }
 
@@ -48,6 +56,7 @@ export class InputFileComponent implements OnInit {
     this.control.statusChanges.pipe(
       switchMap(value => {
         if (this.control.value?.length === 0) {
+          this.fileUploaded.next({ status: false, id: null });
           return of();
         }
 
@@ -64,11 +73,13 @@ export class InputFileComponent implements OnInit {
       }),
       takeUntil(this.destroy$),
     ).subscribe((response: UploadPostResponse) => {
+      this.currentFile.isLoading = false;
       if (this.status === 'VALID' && this.control.value?.length) {
         this.fileUploaded.next({ status: true, id: response.opswatId as string });
       } else {
         this.fileUploaded.next({ status: false, id: null });
       }
+      this.cdr.detectChanges();
     });
   }
 

@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
     private readonly injector: Injector,
     private readonly loginService: LoginService,
   ) {}
-  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  public intercept(req: HttpRequest<Request>, next: HttpHandler): Observable<HttpEvent<Request>> {
     if (this.loginService.currentToken$.value) {
       const reqCopy = req.clone({
         headers: req.headers

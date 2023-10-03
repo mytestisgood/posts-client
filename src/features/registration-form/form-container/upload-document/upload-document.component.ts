@@ -114,6 +114,7 @@ export class UploadDocumentComponent implements OnInit {
     if (uploadedAndId.status && this.uploadDocumentsForm.controls.files.value) {
       this.opswatId.push(uploadedAndId.id as string);
     }
+    this.documentUploaded = uploadedAndId.status;
   }
 
   public requestSend(isSend: boolean): void {
