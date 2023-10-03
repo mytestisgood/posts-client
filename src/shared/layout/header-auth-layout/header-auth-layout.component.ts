@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { DestroyService, LoginService } from '@shared/services';
-import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-header-auth-layout',
@@ -18,11 +16,7 @@ export class HeaderAuthLayoutComponent {
   @Input() public leftBlockClickedText!: string;
   @Input() public redirectLink: string = '/';
 
-  constructor(
-    private readonly router: Router,
-    private readonly loginService: LoginService,
-    private readonly destroy$: DestroyService,
-  ) {
+  constructor(private readonly router: Router) {
   }
 
   public navigateToRegistrationPage(): void {
@@ -30,10 +24,6 @@ export class HeaderAuthLayoutComponent {
   }
 
   public navigateToMainPage(): void {
-    this.loginService.currentToken$.pipe(
-      takeUntil(this.destroy$),
-    ).subscribe(token => {
-      this.router.navigate([token ? '/login' : '/']);
-    });
+    this.router.navigate(['/']);
   }
 }
