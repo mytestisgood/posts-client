@@ -160,3 +160,17 @@ export function getCurrentMonth(): number {
 export function getCurrentYear(): number {
   return new Date().getFullYear();
 }
+
+export function getCurrentTimeAndReturnStringMessage(): string {
+  const today: number = new Date().getHours();
+
+  if (today >= 5 && today < 12) {
+    return 'Morning';
+  } else if (today >= 12 && today < 18) {
+    return 'Afternoon';
+  } else if (today >= 18 && today < 10) {
+    return 'Evening';
+  }
+
+  return 'Night';
+}

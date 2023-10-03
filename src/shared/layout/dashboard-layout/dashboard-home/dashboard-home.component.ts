@@ -4,18 +4,21 @@ import {
   CompensationReportGetResponse,
   EmployerReportResponse,
   FeedbackEmployerReportGetResponse,
+  UserResponse,
 } from '@shared/api/models';
 import { ChatService, HomeService } from '@shared/api/services';
-import { DashboardHeaderIds } from '@shared/entities';
+import { CURRENT_USER, DashboardHeaderIds } from '@shared/entities';
 import {
   formattedMonthAndYearDateTo,
   getCurrentMonthLastDayDate,
   getCurrentMonthStartDayDate,
+  getCurrentTimeAndReturnStringMessage,
   getDayOfWeekAndCurrentDayDate,
 } from '@shared/helpers';
 import { DataSharingService } from '@shared/services';
 import { DashboardHomeSmallTableComponent, DashboardHomeTableComponent } from '@shared/tables';
 import { ButtonComponent, InputYearComponent, LoaderComponent, SelectComponent } from '@shared/ui';
+import { LocalStorageService } from '@shared/web-api';
 import { filter, Observable, switchMap } from 'rxjs';
 import {
   DashboardNotificationComponent,
@@ -53,15 +56,20 @@ export class DashboardHomeComponent implements OnInit {
   public year!: number;
   public month!: number;
   public searchingDate!: string | undefined;
+  public userName!: string;
+  public dayMessage!: string;
   protected readonly getDayOfWeekAndCurrentDayDate = getDayOfWeekAndCurrentDayDate;
 
   constructor(
     private readonly homeService: HomeService,
     private readonly chatService: ChatService,
     private readonly dataSharingService: DataSharingService,
+    private readonly localStorageService: LocalStorageService,
   ) {}
 
   public ngOnInit(): void {
+    this.getDayInfo();
+    this.getUserName();
     this.employerReportData();
     this.chatsData();
     this.compensationReportData();
@@ -151,5 +159,16 @@ export class DashboardHomeComponent implements OnInit {
         });
       }),
     );
+  }
+
+  private getUserName(): void {
+    const currentUser: UserResponse = JSON
+      .parse(this.localStorageService.getItem(CURRENT_USER) as string) as UserResponse;
+
+    this.userName = currentUser.name as string;
+  }
+
+  private getDayInfo(): void {
+    this.dayMessage = getCurrentTimeAndReturnStringMessage();
   }
 }

@@ -11,7 +11,7 @@ import {
 import { Router } from '@angular/router';
 import { SignInResponse } from '@shared/api/models';
 import { SignInService } from '@shared/api/services';
-import { emailValidatorPattern, IS_LOGGED_IN, TOKEN } from '@shared/entities';
+import { CURRENT_USER, emailValidatorPattern, IS_LOGGED_IN, TOKEN } from '@shared/entities';
 import { DestroyService, LoginService } from '@shared/services';
 import {
   ButtonComponent,
@@ -86,6 +86,7 @@ export class LoginFormComponent implements OnInit {
         this.loginService.currentToken$.next(response.token as string);
         this.localStorageService.setItem(IS_LOGGED_IN, 'true');
         this.loginService.isUserLogin$.next('true');
+        this.localStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
       }),
       takeUntil(this.destroy$),
     ).subscribe(() => {

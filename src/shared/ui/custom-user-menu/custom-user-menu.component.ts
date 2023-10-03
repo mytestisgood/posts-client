@@ -26,7 +26,7 @@ export class CustomUserMenuComponent {
   }
 
   public logout(): void {
-    this.localStorageService.removeToken();
+    this.localStorageService.clear();
     this.LoginService.currentToken$.next(null);
     this.LoginService.isUserLogin$.next('false');
     if (!this.LoginService.isLogged) {

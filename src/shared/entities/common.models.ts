@@ -20,7 +20,7 @@ import {
 } from '@angular/router';
 
 export const TOKEN: string = 'token';
-
+export const CURRENT_USER = 'currentUser';
 export const IS_LOGGED_IN: string = 'isLoggedIn';
 export const DEPARTMENT_ID: string = 'departmentId';
 export const SPECIAL_HEADER_TOKEN: string = 'specialHeaderToken';
