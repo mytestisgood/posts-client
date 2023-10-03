@@ -14,6 +14,7 @@ import { UploadFileService } from '@shared/api/services';
 import { ForwardRequestDialogComponent } from '@shared/dialog';
 import {
   DEPARTMENT_ID,
+  FileUploadStatusAndId,
   FileWithLoading,
   RegistrationDirection,
   RegistrationFormValueType,
@@ -21,7 +22,7 @@ import {
   UploadDocumentsControls,
   uploadingDocumentsFormMapper,
 } from '@shared/entities';
-import { downloadFileHelper } from '@shared/helpers';
+import { downloadFileHelper, getCurrentMonth, getCurrentYear } from '@shared/helpers';
 import { DestroyService } from '@shared/services';
 import {
   ButtonComponent,
@@ -64,6 +65,7 @@ export class UploadDocumentComponent implements OnInit {
   public departmentId: number = Number(this.localStorageService.getItem(DEPARTMENT_ID));
   public token: string = this.localStorageService.getItem(TOKEN) as string;
   public identifier!: string;
+  public opswatId: Array<string> = [];
 
   constructor(
     @Inject(TuiDialogService)
@@ -87,8 +89,14 @@ export class UploadDocumentComponent implements OnInit {
   public doChangeStep(direction: RegistrationDirection): void {
     this.subformInitialized.emit(this.uploadDocumentsForm);
     this.uploadFileService.apiProcessesUploadFilePost({
-      token: this.token,
-      processesUploadFileBody: {},
+      departmentId: this.departmentId.toString(),
+      opswatIds: this.opswatId,
+      isDepartmentLink: false,
+      isDirect: false,
+      isEmployer: true,
+      month: getCurrentMonth().toString(),
+      processName: 'upload file from',
+      year: getCurrentYear().toString(),
     }).pipe(takeUntil(this.destroy$)).subscribe(() => this.changeStep.emit(direction));
   }
 
@@ -102,8 +110,10 @@ export class UploadDocumentComponent implements OnInit {
     }).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
-  public fileUploaded(isUploaded: boolean): void {
-    this.documentUploaded = isUploaded;
+  public fileUploaded(uploadedAndId: FileUploadStatusAndId): void {
+    if (uploadedAndId.status && this.uploadDocumentsForm.controls.files.value) {
+      this.opswatId.push(uploadedAndId.id as string);
+    }
   }
 
   public requestSend(isSend: boolean): void {

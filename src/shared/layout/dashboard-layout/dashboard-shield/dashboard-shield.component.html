@@ -12,6 +12,15 @@
     ></smarti-button>
   </div>
   <div class="w-full h-752 bg-white box-shadow-big mt-4 rounded-l mb-34">
-    <smarti-dashboard-shield-table [items]="menoraItems$ | async"></smarti-dashboard-shield-table>
+    <ng-container *ngIf="menoraItems$ | async as menoraItems; else loadingTemplate">
+      <smarti-dashboard-shield-table [items]="menoraItems"></smarti-dashboard-shield-table>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <smarti-loader
+    [size]="'xl'"
+    [paddingTop15percent]="true"
+  ></smarti-loader>
+</ng-template>

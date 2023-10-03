@@ -28,7 +28,6 @@ import { switchMap, takeUntil, tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProcessesDetailSecondStepComponent implements OnInit {
-  @Input() public token!: string;
   @Input() public departmentId!: number;
   @Output() public changeStep: EventEmitter<DashboardDirection> = new EventEmitter<DashboardDirection>();
   public isFileUploaded: boolean = false;
@@ -57,18 +56,15 @@ export class ProcessesDetailSecondStepComponent implements OnInit {
 
   public downloadPaymentExample(): void {
     this.processesService.apiProcessesDownloadPaymentsInstructionPost({
-      token: this.token,
-      processesDownloadPaymentsInstructionBody: {
-        processId: this.processId,
-        department_id: this.departmentId.toString(),
-        criteria: {
-          isCheckAll: true,
-          additionalProperties: {
-            processId: this.processId,
-            department_id: this.departmentId,
-            limit: 1,
-            page: 15,
-          },
+      processId: this.processId,
+      department_id: this.departmentId.toString(),
+      criteria: {
+        isCheckAll: true,
+        additionalProperties: {
+          processId: this.processId,
+          department_id: this.departmentId,
+          limit: 1,
+          page: 15,
         },
       },
     }).pipe(
@@ -79,26 +75,22 @@ export class ProcessesDetailSecondStepComponent implements OnInit {
 
   public uploadPaymentExample(): void {
     this.contactsService.apiContactsTypeGetEmailEmployerContactGet({
-      token: this.token,
       departmentId: this.departmentId.toString(),
       type: '2',
       employerId: '2',
     }).pipe(
       switchMap(response => {
         return this.processesService.apiProcessesSendPaymentsInstructionPost({
-          token: this.token,
-          processesSendPaymentsInstructionBody: {
-            processId: this.processId,
-            isSendMax: false,
-            recipient: response,
-            criteria: {
-              isCheckAll: true,
-              additionalProperties: {
-                processId: this.processId,
-                department_id: this.departmentId,
-                page: 1,
-                limit: 15,
-              },
+          processId: this.processId,
+          isSendMax: false,
+          recipient: response,
+          criteria: {
+            isCheckAll: true,
+            additionalProperties: {
+              processId: this.processId,
+              department_id: this.departmentId,
+              page: 1,
+              limit: 15,
             },
           },
         });

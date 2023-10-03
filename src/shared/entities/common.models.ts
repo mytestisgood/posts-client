@@ -20,6 +20,8 @@ import {
 } from '@angular/router';
 
 export const TOKEN: string = 'token';
+
+export const IS_LOGGED_IN: string = 'isLoggedIn';
 export const DEPARTMENT_ID: string = 'departmentId';
 export const SPECIAL_HEADER_TOKEN: string = 'specialHeaderToken';
 export const emailValidatorPattern: string = '^(?!^-)[\\w-]+(?:[\\.-][\\w-]+)*(?:[\\.+][\\w-]+)*@' +
@@ -42,6 +44,11 @@ export interface DialogConfig<T = unknown> {
   scrollable?: boolean;
   hostStyles?: string;
   showCloseButton?: boolean
+}
+
+export interface FileUploadStatusAndId {
+  status: boolean;
+  id: string | null;
 }
 
 export interface DashboardDownloadDocumentsModel {

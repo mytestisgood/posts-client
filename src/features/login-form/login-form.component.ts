@@ -11,7 +11,7 @@ import {
 import { Router } from '@angular/router';
 import { SignInResponse } from '@shared/api/models';
 import { SignInService } from '@shared/api/services';
-import { emailValidatorPattern, TOKEN } from '@shared/entities';
+import { emailValidatorPattern, IS_LOGGED_IN, TOKEN } from '@shared/entities';
 import { DestroyService, LoginService } from '@shared/services';
 import {
   ButtonComponent,
@@ -78,15 +78,14 @@ export class LoginFormComponent implements OnInit {
 
   public doLogin(): void {
     this.signInService.apiLoginPost({
-      token: '',
-      apiLoginBody: {
-        email: this.loginForm.value.email as string,
-        password: this.loginForm.value.password as string,
-      },
+      email: this.loginForm.value.email as string,
+      password: this.loginForm.value.password as string,
     }).pipe(
       tap((response: SignInResponse) => {
         this.localStorageService.setItem(TOKEN, response.token as string);
         this.loginService.currentToken$.next(response.token as string);
+        this.localStorageService.setItem(IS_LOGGED_IN, 'true');
+        this.loginService.isUserLogin$.next('true');
       }),
       takeUntil(this.destroy$),
     ).subscribe(() => {

@@ -10,10 +10,10 @@ import {
   MtbEntityGetResponse,
   MtbGetParameters,
   MtbGetResponse,
-  MtbGroupEmployeesParameters,
+  MtbGroupEmployeesBody,
   MtbGroupHistoryProcessIdGetParameters,
   MtbGroupHistoryProcessIdGetResponse,
-  MtbUploadEmployeeDeclarationParameters,
+  MtbUploadEmployeeDeclarationBody,
   SuccessResponse,
 } from '../models';
 
@@ -25,26 +25,26 @@ export class MonthlyTransferBlockService {
   }
 
   public apiMtbCreateOrUpdateMtbGroupPost(data: MtbCreateOrUpdateMtbGroupParameters): Observable<MtbCreateOrUpdateMtbGroupResponse> {
-    return this.http.post<MtbCreateOrUpdateMtbGroupResponse>(`${environment.authUrl}/api/mtb/createOrUpdateMtbGroup/`, data);
+    return this.http.post<MtbCreateOrUpdateMtbGroupResponse>(`${environment.authUrl}/api/mtb/createOrUpdateMtbGroup`, data);
   }
 
   public apiMtbEntityGet(data: MtbEntityGetParameters): Observable<MtbEntityGetResponse> {
-    return this.http.get<MtbEntityGetResponse>(`${environment.authUrl}/api/mtb/entity/`, { params: createObjectHttpParams(data) });
+    return this.http.get<MtbEntityGetResponse>(`${environment.authUrl}/api/mtb/entity`, { params: createObjectHttpParams(data) });
   }
 
   public apiMtbGet(data: MtbGetParameters): Observable<MtbGetResponse> {
-    return this.http.get<MtbGetResponse>(`${environment.authUrl}/api/mtb/`, { params: createObjectHttpParams(data) });
+    return this.http.get<MtbGetResponse>(`${environment.authUrl}/api/mtb`, { params: createObjectHttpParams(data) });
   }
 
-  public apiMtbGroupEmployeesPost(data: MtbGroupEmployeesParameters): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/mtb/groupEmployees/`, data);
+  public apiMtbGroupEmployeesPost(data: MtbGroupEmployeesBody): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/mtb/groupEmployees`, data);
   }
 
   public apiMtbGroupHistoryProcessIdGet(data: MtbGroupHistoryProcessIdGetParameters): Observable<Array<MtbGroupHistoryProcessIdGetResponse>> {
-    return this.http.get<Array<MtbGroupHistoryProcessIdGetResponse>>(`${environment.authUrl}/api/mtb/groupHistory/${data.processId}/`, { params: createObjectHttpParams(data) });
+    return this.http.get<Array<MtbGroupHistoryProcessIdGetResponse>>(`${environment.authUrl}/api/mtb/groupHistory/${data.processId}`, { params: createObjectHttpParams(data) });
   }
 
-  public apiMtbUploadEmployeeDeclarationPost(data: MtbUploadEmployeeDeclarationParameters): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/mtb/uploadEmployeeDeclaration/`, data);
+  public apiMtbUploadEmployeeDeclarationPost(data: MtbUploadEmployeeDeclarationBody): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/mtb/uploadEmployeeDeclaration`, data);
   }
 }

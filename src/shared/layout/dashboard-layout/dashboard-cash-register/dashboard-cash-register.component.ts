@@ -3,23 +3,27 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AllProductsGetResponseItems } from '@shared/api/models';
 import { ProductsService } from '@shared/api/services';
-import { TOKEN } from '@shared/entities';
 import { DashboardCashRegisterTableComponent } from '@shared/tables';
 import {
   ButtonComponent,
   CustomDropdownComponent,
   InputSearchComponent,
+  LoaderComponent,
   SelectComponent,
 } from '@shared/ui';
-import { LocalStorageService } from '@shared/web-api';
 import { combineLatest, debounceTime, map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'smarti-dashboard-cash-register',
   standalone: true,
   imports: [
-    CommonModule, ButtonComponent, CustomDropdownComponent, InputSearchComponent,
-    SelectComponent, DashboardCashRegisterTableComponent,
+    CommonModule,
+    ButtonComponent,
+    CustomDropdownComponent,
+    InputSearchComponent,
+    SelectComponent,
+    DashboardCashRegisterTableComponent,
+    LoaderComponent,
   ],
   templateUrl: './dashboard-cash-register.component.html',
   styleUrls: ['./dashboard-cash-register.component.scss'],
@@ -27,23 +31,18 @@ import { combineLatest, debounceTime, map, Observable, startWith } from 'rxjs';
 })
 export class DashboardCashRegisterComponent implements OnInit {
   public controlSearch: FormControl<string | null> = new FormControl<string>('');
-  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public isCustomDropdownActive: boolean = false;
   public allProducts$!: Observable<AllProductsGetResponseItems[] | null>;
 
-  constructor(
-    private readonly localStorageService: LocalStorageService,
-    private readonly productsService: ProductsService,
-  ) {
+  constructor(private readonly productsService: ProductsService) {
   }
 
   public ngOnInit(): void {
     this.allProducts$ = combineLatest([
       this.controlSearch.valueChanges.pipe(startWith('')),
       this.productsService.apiProductsAllProductsGet({
-        token: this.token,
-        limit: '1',
-        page: '7',
+        limit: '100',
+        page: '1',
       }),
     ]).pipe(
       debounceTime(500),

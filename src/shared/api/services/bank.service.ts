@@ -13,10 +13,10 @@ export class BankService {
   }
 
   public apiDepartmentsGetDepartmentBanksDepartmentIdGet(data: BanksDepartmentIdGetParameters): Observable<Array<BanksGetResponse>> {
-    return this.http.get<Array<BanksGetResponse>>(`${environment.authUrl}/api/departments/getDepartmentBanks/${data.departmentId}/`, { params: createObjectHttpParams(data) });
+    return this.http.get<Array<BanksGetResponse>>(`${environment.authUrl}/api/departments/getDepartmentBanks/${data.departmentId}`, { params: createObjectHttpParams(data) });
   }
 
   public apiGeneralsBanksGet(data: BanksGetParameters): Observable<Array<BanksGetResponse>> {
-    return this.http.get<Array<BanksGetResponse>>(`${environment.authUrl}/api/generals/banks/`, { params: createObjectHttpParams(data) });
+    return this.http.get<Array<BanksGetResponse>>(`${environment.authUrl}/api/generals/banks`, { params: createObjectHttpParams(data) });
   }
 }

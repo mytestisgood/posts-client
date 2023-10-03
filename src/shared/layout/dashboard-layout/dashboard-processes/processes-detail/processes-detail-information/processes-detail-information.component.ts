@@ -13,7 +13,6 @@ import { combineLatest, of, switchMap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProcessesDetailInformationComponent {
-  @Input() public token!: string;
   @Input() public departmentId!: number;
   public emptyData: boolean = false;
 
@@ -25,7 +24,6 @@ export class ProcessesDetailInformationComponent {
       if (uploadFileResult?.processId && isFileUploaded) {
         this.emptyData = false;
         return this.uploadFileService.apiProcessesUploadFileGet({
-          token: this.token,
           processId: uploadFileResult.processId,
           departmentId: this.departmentId.toString(),
         });

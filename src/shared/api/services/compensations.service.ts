@@ -4,14 +4,14 @@ import { environment } from '@environment';
 import { Observable } from 'rxjs';
 import { createObjectHttpParams } from '../../helpers/http.helper';
 import {
-  CompensationPostParameters,
+  ApiCompensationsBody,
+  CompensationsDownloadExampleFileBody,
   CompensationsEmployeeIdCompanyEmployeeGetParameters,
-  CompensationSendPostParameters,
   CompensationSendPostResponse,
   CompensationsGetParameters,
   CompensationsGetResponse,
-  CompensationsUpdateSentStatusParameters,
-  DownloadExampleFilePostParameters,
+  CompensationsSendBody,
+  CompensationsUpdateSentStatusBody,
   FileDataExeResponse,
   SuccessResponse,
 } from '../models';
@@ -23,27 +23,27 @@ export class CompensationsService {
   constructor(private http: HttpClient) {
   }
 
-  public apiCompensationsDownloadExampleFilePost(data: DownloadExampleFilePostParameters): Observable<FileDataExeResponse> {
-    return this.http.post<FileDataExeResponse>(`${environment.authUrl}/api/compensations/downloadExampleFile/`, data);
+  public apiCompensationsDownloadExampleFilePost(data: CompensationsDownloadExampleFileBody): Observable<FileDataExeResponse> {
+    return this.http.post<FileDataExeResponse>(`${environment.authUrl}/api/compensations/downloadExampleFile`, data);
   }
 
   public apiCompensationsGet(data: CompensationsGetParameters): Observable<CompensationsGetResponse> {
-    return this.http.get<CompensationsGetResponse>(`${environment.authUrl}/api/compensations/`, { params: createObjectHttpParams(data) });
+    return this.http.get<CompensationsGetResponse>(`${environment.authUrl}/api/compensations`, { params: createObjectHttpParams(data) });
   }
 
-  public apiCompensationsPost(data: CompensationPostParameters): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/compensations/`, data);
+  public apiCompensationsPost(data: ApiCompensationsBody): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/compensations`, data);
   }
 
-  public apiCompensationsSendPost(data: CompensationSendPostParameters): Observable<CompensationSendPostResponse> {
-    return this.http.post<CompensationSendPostResponse>(`${environment.authUrl}/api/compensations/send/`, data);
+  public apiCompensationsSendPost(data: CompensationsSendBody): Observable<CompensationSendPostResponse> {
+    return this.http.post<CompensationSendPostResponse>(`${environment.authUrl}/api/compensations/send`, data);
   }
 
-  public apiCompensationsUpdateSentStatusPost(data: CompensationsUpdateSentStatusParameters): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/compensations/updateSentStatus/`, data);
+  public apiCompensationsUpdateSentStatusPost(data: CompensationsUpdateSentStatusBody): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/compensations/updateSentStatus`, data);
   }
 
   public apiCompensationsEmployeeIdCompanyEmployeeGet(data: CompensationsEmployeeIdCompanyEmployeeGetParameters): Observable<Array<string>> {
-    return this.http.get<Array<string>>(`${environment.authUrl}/api/compensations/${data.employeeId}/companyEmployee/`, { params: createObjectHttpParams(data) });
+    return this.http.get<Array<string>>(`${environment.authUrl}/api/compensations/${data.employeeId}/companyEmployee`, { params: createObjectHttpParams(data) });
   }
 }

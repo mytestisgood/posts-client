@@ -27,7 +27,6 @@ export interface ProcessesParameters {
   organizationId?: string,
   employerId?: string,
   departmentId?: string,
-  token?: string
 }
 
 export interface ProcessResponse {
@@ -71,11 +70,6 @@ export interface ProcessResponseItems {
   type_upload?: number;
 }
 
-export interface DownloadPaymentsInstructionParameters {
-  token?: string,
-  processesDownloadPaymentsInstructionBody?: ProcessesDownloadPaymentsInstructionBody
-}
-
 export interface ProcessesDownloadPaymentsInstructionBody {
   filesList?: Array<number>;
   isSendMax?: boolean;
@@ -103,23 +97,11 @@ export interface DownloadPaymentsInstructionResponse {
 export interface ProcessIdDeleteParameters {
   processId: number,
   departmentId?: string,
-  token?: string
-}
-
-export interface ProcessIdDeleteRefDocumentPostParameters {
-  processId: string;
-  token?: string;
-  processIdDeleteRefDocumentBody?: ProcessIdDeleteRefDocumentBody;
 }
 
 export interface ProcessIdDeleteRefDocumentBody {
   filename?: string;
   department_id?: string;
-}
-
-export interface SendPaymentsInstructionParameters {
-  token?: string,
-  processesSendPaymentsInstructionBody?: ProcessesSendPaymentsInstructionBody
 }
 
 export interface ProcessesSendPaymentsInstructionBody {
@@ -128,11 +110,6 @@ export interface ProcessesSendPaymentsInstructionBody {
   isSendMax?: boolean;
   criteria?: ApiProcessesUnlockProcessFilesCriteria;
   recipient?: Array<string>;
-}
-
-export interface ChangeFileToNegativeParameters {
-  token?: string;
-  processesChangeFileToNegativeBody?: ProcessesChangeFileToNegativeBody;
 }
 
 export interface ProcessesChangeFileToNegativeBody {
@@ -147,11 +124,6 @@ export interface ApiProcessesChangeFileToNegativeCriteria {
   additionalProperties?: CriteriaMore;
 }
 
-export interface CheckIsDateParameters {
-  token?: string;
-  processesCheckIsDateBody?: ProcessesCheckIsDateBody;
-}
-
 export interface ProcessesCheckIsDateBody {
   processId?: number;
   department_id?: string;
@@ -164,11 +136,6 @@ export interface CheckIsDateResponse {
   code?: number;
 }
 
-export interface EmployerIdGetCommentBroadcastParameters {
-  employerId: string;
-  token?: string;
-}
-
 export interface ProcessesFilesListGetParameters {
   departmentId?: string;
   processId?: string;
@@ -176,7 +143,6 @@ export interface ProcessesFilesListGetParameters {
   isCheckAll?: boolean;
   page?: string;
   limit?: string;
-  token?: string;
 }
 
 export interface FilesListGetResponse {
@@ -213,7 +179,6 @@ export interface FilesListGetResponseItems {
 export interface ProcessIdDownloadFileGetParameters {
   processId: number;
   departmentId?: string;
-  token?: string;
 }
 
 export interface ProcessIdDownloadFileGetResponse {
@@ -221,12 +186,6 @@ export interface ProcessIdDownloadFileGetResponse {
   fileNames?: Array<string>;
   ok?: boolean;
   code?: number;
-}
-
-export interface ProcessIdDownloadRefDocumentParameters {
-  processId: string;
-  token?: string;
-  processIdDownloadRefDocumentBody?: ProcessIdDownloadRefDocumentBody;
 }
 
 export interface ProcessIdDownloadRefDocumentBody {
@@ -240,32 +199,15 @@ export interface ProcessIdDownloadRefDocumentResponse {
   code?: number;
 }
 
-export interface ProcessIdGetRefDocumentGeParameters {
-  processId: string;
-  token?: string;
-}
-
 export interface ProcessIdGetRefDocumentResponse {
   file_name?: string;
   file_type?: string;
   file_date?: string;
 }
 
-export interface ProcessIdUploadsRefParameters {
-  processId: string;
-  token?: string;
-  processIdUploadsRefBody?: ProcessIdUploadsRefBody;
-}
-
 export interface ProcessIdUploadsRefBody {
   opswatIds?: Array<string>;
   department_id?: string;
-}
-
-export interface ProcessesIdAuthorizationReceiptCertificateParameters {
-  processesId: string;
-  token?: string;
-  processesIdAuthorizationReceiptCertificateBody?: ProcessesIdAuthorizationReceiptCertificateBody;
 }
 
 export interface ProcessesIdAuthorizationReceiptCertificateBody {
@@ -277,11 +219,6 @@ export interface ProcessesIdAuthorizationReceiptCertificateResponse {
   transmission_auto?: boolean;
   success_transmission?: boolean;
   code?: number;
-}
-
-export interface ProcessesSetRecordsParameters {
-  token?: string;
-  processesSetRecordsBody?: ProcessesSetRecordsBody;
 }
 
 export interface ProcessesSetRecordsBody {
@@ -312,16 +249,6 @@ export interface ProcessesTransmitBody {
   department_id?: string;
 }
 
-export interface ProcessesTransmitParameters {
-  token?: string;
-  processesTransmitBody?: ProcessesTransmitBody;
-}
-
-export interface UnlockProcessFilesParameters {
-  token?: string;
-  processesUnlockProcessFilesBody?: ProcessesUnlockProcessFilesBody;
-}
-
 export interface ProcessesUnlockProcessFilesBody {
   filesList?: Array<number>;
   is_unlock?: boolean;
@@ -334,11 +261,6 @@ export interface ProcessesUnlockProcessFilesResponse {
   success?: string;
   authorized?: boolean;
   part?: boolean;
-}
-
-export interface UpdateDateAndReferenceParameters {
-  token?: string;
-  processesUpdateDateAndReferenceBody?: ProcessesUpdateDateAndReferenceBody;
 }
 
 export interface ProcessesUpdateDateAndReferenceBody {
@@ -365,10 +287,6 @@ export interface UpdateDateAndReferenceResponse {
   code?: number;
 }
 
-export interface ProcessesUpdateParameters {
-  token?: string;
-  processesUpdateBody?: ProcessesUpdateBody;
-}
 export interface ProcessesUpdateBody {
   file_id?: Array<number>;
   params?: boolean;
@@ -377,20 +295,10 @@ export interface ProcessesUpdateBody {
   processId?: number;
 }
 
-export interface UpdateProcessParameters {
-  token?: string;
-  processesUpdateProcessBody?: ProcessesUpdateProcessBody;
-}
-
 export interface ProcessesUpdateProcessBody {
   file_id?: Array<string>;
   type?: boolean;
   criteria?: CriteriaUpdateProcess;
-}
-
-export interface UpdateReasonRefundParameters {
-  token?: string;
-  processesUpdateReasonRefundBody?: ProcessesUpdateReasonRefundBody;
 }
 
 export interface ProcessesUpdateReasonRefundBody {
@@ -404,11 +312,6 @@ export interface UpdateReasonRefundResponse {
   authorized?: boolean;
   part?: boolean;
   code?: number;
-}
-
-export interface UpdateTypeProcessParameters {
-  token?: string;
-  processesUpdateTypeProcessBody?: ProcessesUpdateTypeProcessBody;
 }
 
 export interface ProcessesUpdateTypeProcessBody {

@@ -4,7 +4,6 @@ export interface MenoraGetParameters {
   departmentId?: string;
   page?: string;
   limit?: string;
-  token?: string;
 }
 
 export interface MenoraGetResponse {

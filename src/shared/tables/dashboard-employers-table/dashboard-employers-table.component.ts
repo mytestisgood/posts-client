@@ -9,8 +9,14 @@ import { FeedBackService } from '@shared/api/services';
 import { FeedbackTransferDialogComponent } from '@shared/dialog';
 import { RecordListItems } from '@shared/entities';
 import { getCalendarDateFromStringDate } from '@shared/helpers';
+import { NoElementsToShowComponent } from '@shared/layout';
 import { DestroyService } from '@shared/services';
-import { InputCheckboxComponent, LoaderComponent, TablePaginationComponent } from '@shared/ui';
+import {
+  ChangePageItemsValue,
+  InputCheckboxComponent,
+  LoaderComponent,
+  TablePaginationComponent,
+} from '@shared/ui';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { switchMap, takeUntil } from 'rxjs';
@@ -20,7 +26,7 @@ import { switchMap, takeUntil } from 'rxjs';
   standalone: true,
   imports: [
     CommonModule, InputCheckboxComponent, TablePaginationComponent,
-    FeedbackTransferDialogComponent, LoaderComponent,
+    FeedbackTransferDialogComponent, LoaderComponent, NoElementsToShowComponent,
   ],
   templateUrl: './dashboard-employers-table.component.html',
   styleUrls: ['./dashboard-employers-table.component.scss'],
@@ -28,8 +34,8 @@ import { switchMap, takeUntil } from 'rxjs';
 })
 export class DashboardEmployersTableComponent {
   @Input() public items!: RecordListItems[] | null;
-  @Input() public token!: string;
 
+  public itemsValue: ChangePageItemsValue = { firstValue: 0, lastValue: 4 };
   protected readonly getDateFromStringDate = getCalendarDateFromStringDate;
 
   constructor(
@@ -64,7 +70,6 @@ export class DashboardEmployersTableComponent {
     const newFileStatus: StatusFileFeedback = fileStatus as StatusFileFeedback;
 
     this.feedBackService.apiFeedbacksGetTransferGet({
-      token: this.token,
       departmentId: companyId,
       mtbId: '',
       sentGroupId: newFileStatus,
@@ -79,5 +84,11 @@ export class DashboardEmployersTableComponent {
       }),
       takeUntil(this.destroy$),
     ).subscribe();
+  }
+
+  public onChangeSliceOfPage(value: ChangePageItemsValue): void {
+    if (value.lastValue !== undefined) {
+      this.itemsValue = { firstValue: value.firstValue, lastValue: value.lastValue };
+    }
   }
 }

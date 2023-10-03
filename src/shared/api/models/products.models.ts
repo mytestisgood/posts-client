@@ -3,7 +3,6 @@ import { ProductType } from './common.models';
 export interface AllProductsGetParameters {
   page?: string;
   limit?: string;
-  token?: string;
 }
 
 export interface AllProductsGetResponse {
@@ -72,12 +71,10 @@ export interface ApiProductsFullCompanyBankAccount {
 export interface ProductsByCompanyGetParameters {
   cId?: string;
   eId?: string;
-  token?: string;
 }
 
 export interface CompensationsEmployeeIdCompanyParameters {
   employeeId: number;
   cId?: string;
   eId?: string;
-  token?: string;
 }

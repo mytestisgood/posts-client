@@ -1,20 +1,17 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { UploadFilePostResponse, UploadPostResponse } from '@shared/api/models';
-import { FilesMyHrService, UploadFileService } from '@shared/api/services';
-import { DashboardDirection, DashboardDirectionEnum } from '@shared/entities';
+import { UploadFilePostResponse } from '@shared/api/models';
+import { UploadFileService } from '@shared/api/services';
+import {
+  DashboardDirection,
+  DashboardDirectionEnum,
+  FileUploadStatusAndId,
+} from '@shared/entities';
 import { getCurrentMonth, getCurrentYear } from '@shared/helpers';
 import { DataSharingService, DestroyService } from '@shared/services';
 import { ButtonComponent, InputFileComponent } from '@shared/ui';
-import { takeUntil, tap } from 'rxjs';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-processes-detail-first-step',
@@ -25,7 +22,6 @@ import { takeUntil, tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProcessesDetailFirstStepComponent {
-  @Input() public token!: string;
   @Input() public departmentId!: number;
   @Output() public changeStep: EventEmitter<DashboardDirection> = new EventEmitter<DashboardDirection>();
   public filesControl: FormControl = new FormControl();
@@ -36,25 +32,20 @@ export class ProcessesDetailFirstStepComponent {
   constructor(
     private readonly destroy$: DestroyService,
     private readonly uploadFileService: UploadFileService,
-    private readonly filesMyHrService: FilesMyHrService,
-    private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly dataSharingService: DataSharingService,
   ) {
   }
 
   public doChangeStep(direction: DashboardDirection): void {
     this.uploadFileService.apiProcessesUploadFilePost({
-      token: this.token,
-      processesUploadFileBody: {
-        departmentId: this.departmentId.toString(),
-        isDepartmentLink: false,
-        isDirect: false,
-        isEmployer: true,
-        month: getCurrentMonth().toString(),
-        processName: 'upload file from',
-        year: getCurrentYear().toString(),
-        opswatIds: this.opswatId,
-      },
+      departmentId: this.departmentId.toString(),
+      isDepartmentLink: false,
+      isDirect: false,
+      isEmployer: true,
+      month: getCurrentMonth().toString(),
+      processName: 'upload file from',
+      year: getCurrentYear().toString(),
+      opswatIds: this.opswatId,
     }).pipe(
       takeUntil(this.destroy$),
     ).subscribe((result: UploadFilePostResponse) => {
@@ -64,19 +55,9 @@ export class ProcessesDetailFirstStepComponent {
     });
   }
 
-  public fileUploaded(isUploaded: boolean): void {
-    if (isUploaded) {
-      this.filesMyHrService.apiUploadPost({
-        file: this.filesControl.value,
-        project: 'smarti-dev',
-      }).pipe(
-        tap((response: UploadPostResponse) => {
-          this.opswatId.push(response.opswatId as string);
-          this.isDocumentUploaded = isUploaded;
-          this.changeDetectorRef.detectChanges();
-        }),
-        takeUntil(this.destroy$),
-      ).subscribe();
+  public fileUploaded(uploaded: FileUploadStatusAndId): void {
+    if (uploaded.status) {
+      this.opswatId.push(uploaded.id as string);
     }
   }
 }

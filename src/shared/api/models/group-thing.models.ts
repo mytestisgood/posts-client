@@ -1,7 +1,6 @@
 export interface GetGroupThingInProcessGetParameters {
   processId?: string;
   departmentId?: string;
-  token?: string;
 }
 
 export interface GetGroupThingInProcessGetResponse {

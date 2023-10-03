@@ -3,23 +3,32 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProcessesService } from '@shared/api/services';
 import { ProcessTableItems } from '@shared/entities';
+import { NoElementsToShowComponent } from '@shared/layout';
 import { DestroyService } from '@shared/services';
-import { InputCheckboxComponent, LoaderComponent, TablePaginationComponent } from '@shared/ui';
+import {
+  ChangePageItemsValue,
+  InputCheckboxComponent,
+  LoaderComponent,
+  TablePaginationComponent,
+} from '@shared/ui';
 import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-dashboard-process-table',
   standalone: true,
-  imports: [CommonModule, InputCheckboxComponent, TablePaginationComponent, LoaderComponent],
+  imports: [
+    CommonModule, InputCheckboxComponent, TablePaginationComponent, LoaderComponent,
+    NoElementsToShowComponent,
+  ],
   templateUrl: './dashboard-process-table.component.html',
   styleUrls: ['./dashboard-process-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardProcessTableComponent {
   @Input() public items!: ProcessTableItems[] | null;
-  @Input() public token!: string;
   @Input() public departmentId!: string;
 
+  public itemsValue: ChangePageItemsValue = { firstValue: 0, lastValue: 6 };
   constructor(
     private readonly router: Router,
     private readonly processesService: ProcessesService,
@@ -67,11 +76,16 @@ export class DashboardProcessTableComponent {
     }
 
     this.processesService.apiProcessesProcessIdDelete({
-      token: this.token,
       processId: id,
       departmentId: this.departmentId,
     }).pipe(
       takeUntil(this.destroy$),
     ).subscribe();
+  }
+
+  public changePageItemsValue(value: ChangePageItemsValue): void {
+    if (value.lastValue !== undefined) {
+      this.itemsValue = { firstValue: value.firstValue, lastValue: value.lastValue };
+    }
   }
 }

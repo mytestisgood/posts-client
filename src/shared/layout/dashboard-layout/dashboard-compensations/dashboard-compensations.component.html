@@ -48,9 +48,18 @@
     </div>
   </div>
   <div class="w-full h-752 bg-white box-shadow-big mt-4 rounded-l mb-34">
-    <smarti-dashboard-compensations-table [items]="compensations$ | async"></smarti-dashboard-compensations-table>
+    <ng-container *ngIf="compensations$ | async as compensations; else loadingTemplate">
+      <smarti-dashboard-compensations-table [items]="compensations"></smarti-dashboard-compensations-table>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <smarti-loader
+    [size]="'xl'"
+    [paddingTop15percent]="true"
+  ></smarti-loader>
+</ng-template>
 
 <ng-template #customDropdownContent>
   <div class="block-w608-h322 flex flex-col mt-6">

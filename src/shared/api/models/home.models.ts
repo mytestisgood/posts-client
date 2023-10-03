@@ -2,7 +2,6 @@ import { ProductType, StatusProcess } from './common.models';
 
 export interface GetTypeLoadParameters {
   organizationId?: string;
-  token?: string;
 }
 
 export interface CompensationReportGetParameters {
@@ -13,7 +12,6 @@ export interface CompensationReportGetParameters {
   organizationId?: string;
   employerId?: string;
   departmentId?: string;
-  token?: string;
 }
 
 export interface CompensationReportGetResponse {
@@ -28,11 +26,6 @@ export interface ReportsCompensationItems {
   employee_identifier?: string;
   employee_last_name?: string;
   product_type?: ProductType;
-}
-
-export interface EmployerReportParameters {
-  token?: string;
-  reportsEmployerReportBody?: EmployerReportBody;
 }
 
 export interface EmployerReportBody {
@@ -84,7 +77,6 @@ export interface FeedbackEmployerReportGetParameters {
   status?: string;
   organizationId?: string;
   employerId?: string;
-  token?: string;
 }
 
 export interface FeedbackEmployerReportGetResponse {

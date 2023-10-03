@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-between h-full">
   <div
     class="mt-4 ml-7-5 mr-10 inline-block flex-1"
-    *ngIf="items?.length; else loadingTemplate"
+    *ngIf="items?.length; else noDataTemplate"
   >
     <table class="tui-table tui-table_layout_fixed balance-table">
       <tbody>
@@ -94,76 +94,65 @@
             ></smarti-input-checkbox>
           </th>
         </tr>
-        <ng-container *ngIf="isHaveData; else emptyDataTableTemplate">
-          <tr
-            *ngFor="let item of items; let index = index"
-            class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
-          >
-            <td class="tui-table__td text-right paragraph-text neutrals-text-500 h-10 p-2 px-0">טרם</td>
-            <td class="tui-table__td h-10 p-2 px-0">
-              <div class="message-notify-icon-24 cursor-pointer margin-rl-auto"></div>
-            </td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">{{ item.status }}</td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">{{ item.name }}</td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
-              {{ item.transmit_date }}
-            </td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">--</td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
-              {{ item.account_type }}
-            </td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0 full-width">
-              {{ item.organization_name }}
-            </td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
-              {{ item.organization_id }}
-            </td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
-              {{ item.employer_name }}
-            </td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
-              {{ item.department_name }}
-            </td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
-              {{ item.organization_name }}
-            </td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
-              {{ item.operator_name }}
-            </td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">{{ item.date }}</td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">{{ item.date }}</td>
-            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 w-9 px-2">
-              <smarti-input-checkbox
-                class="flex justify-center"
-                (changeEvent)="checkRow($event, index)"
-              ></smarti-input-checkbox>
-            </td>
-          </tr>
-        </ng-container>
+        <tr
+          *ngFor="let item of items | slice: this.itemsValue.firstValue : this.itemsValue.lastValue; let index = index"
+          class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
+        >
+          <td class="tui-table__td text-right paragraph-text neutrals-text-500 h-10 p-2 px-0">טרם</td>
+          <td class="tui-table__td h-10 p-2 px-0">
+            <div class="message-notify-icon-24 cursor-pointer margin-rl-auto"></div>
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">{{ item.status }}</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">{{ item.name }}</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.transmit_date }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">--</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.account_type }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0 full-width">
+            {{ item.organization_name }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.organization_id }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.employer_name }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.department_name }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.organization_name }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">
+            {{ item.operator_name }}
+          </td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">{{ item.date }}</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-0">{{ item.date }}</td>
+          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 w-9 px-2">
+            <smarti-input-checkbox
+              class="flex justify-center"
+              (changeEvent)="checkRow($event, index)"
+            ></smarti-input-checkbox>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
-  <div class="flex flex-row justify-center mb-4">
+  <div
+    *ngIf="items?.length as total"
+    class="flex flex-row justify-center mb-4"
+  >
     <smarti-table-pagination
-      *ngIf="isHaveData"
-      [total]="140"
+      [total]="total"
       [items]="7"
+      (changePageItemsValue)="onChangeSliceOfPage($event)"
     ></smarti-table-pagination>
   </div>
-
-  <ng-template #emptyDataTableTemplate>
-    <tr>
-      <td colspan="16">
-        <h3 class="medium neutrals-text-500 mb-16 mt-28 text-center">אין פריטים לתצוגה.</h3>
-        <div class="laying-down-image margin-rl-auto"></div>
-      </td>
-    </tr>
-  </ng-template>
 </div>
 
-<ng-template #loadingTemplate>
-  <smarti-loader
-    [size]="'xl'"
-    [paddingTop15percent]="true"
-  ></smarti-loader>
+<ng-template #noDataTemplate>
+  <smarti-no-elements-to-show></smarti-no-elements-to-show>
 </ng-template>

@@ -1,8 +1,3 @@
-export interface CommentPostParameters {
-  token?: string;
-  generalsCommentBody?: GeneralsCommentBody;
-}
-
 export interface GeneralsCommentBody {
   content?: string;
   content_type?: string;
@@ -14,11 +9,6 @@ export interface GeneralsCommentBody {
   organization_id?: number;
   page?: number;
   ids?: Array<string>;
-}
-
-export interface GetCommentResponse {
-  token?: string;
-  generalsGetCommentsBody?: GeneralsGetCommentsBody;
 }
 
 export interface GeneralsGetCommentsBody {
@@ -49,6 +39,5 @@ export interface IdDeleteCommentBody {
 
 export interface DeleteCommentByIdParameters {
   id: number;
-  token?: string;
   idDeleteCommentBody?: IdDeleteCommentBody;
 }

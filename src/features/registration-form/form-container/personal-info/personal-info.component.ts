@@ -12,6 +12,7 @@ import { CreateEmployerOutResponse } from '@shared/api/models';
 import { RegisterService, SignInService } from '@shared/api/services';
 import {
   DEPARTMENT_ID,
+  IS_LOGGED_IN,
   PersonalInfoControls,
   personalInfoFormMapper,
   RegistrationDirection,
@@ -26,7 +27,7 @@ import {
   InputNumberComponent,
 } from '@shared/ui';
 import { LocalStorageService } from '@shared/web-api';
-import { Observable, switchMap, takeUntil } from 'rxjs';
+import { debounceTime, Observable, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'smarti-personal-info',
@@ -81,15 +82,18 @@ export class PersonalInfoComponent implements OnInit {
       identifier: this.personalInfoForm.controls.companyId.value as string,
       user_name: this.personalInfoForm.controls.yourName.value as string,
     }).pipe(
-      switchMap((tokenResponse: CreateEmployerOutResponse) => {
+      tap((tokenResponse: CreateEmployerOutResponse) => {
         this.localStorageService.setItem(TOKEN, tokenResponse?.token as string);
         this.loginService.currentToken$.next(tokenResponse?.token as string);
+        this.localStorageService.setItem(IS_LOGGED_IN, 'false');
+        this.loginService.isUserLogin$.next('false');
         this.localStorageService.setItem(DEPARTMENT_ID, tokenResponse?.departmentId as string);
         this.subformInitialized.emit(this.personalInfoForm);
-
-        return this.signInService.apiUsersSendVerifyCodePost({ token: tokenResponse.token as string })
-          .pipe(takeUntil(this.destroy$));
       }),
+      debounceTime(500),
+      // switchMap(() => {
+      //   return this.signInService.apiUsersSendVerifyCodePost().pipe(takeUntil(this.destroy$));
+      // }),
       takeUntil(this.destroy$),
     ).subscribe(() => this.changeStep.emit(direction));
   }

@@ -5,41 +5,39 @@ import { Observable } from 'rxjs';
 import { createObjectHttpParams } from '../../helpers/http.helper';
 import {
   BooleanResultResponse,
-  ChangeFileToNegativeParameters,
-  CheckIsDateParameters,
   CheckIsDateResponse,
-  DownloadPaymentsInstructionParameters,
   DownloadPaymentsInstructionResponse,
-  EmployerIdGetCommentBroadcastParameters,
   FilesListGetResponse,
+  ProcessesChangeFileToNegativeBody,
+  ProcessesCheckIsDateBody,
+  ProcessesDownloadPaymentsInstructionBody,
   ProcessesFilesListGetParameters,
-  ProcessesIdAuthorizationReceiptCertificateParameters,
+  ProcessesIdAuthorizationReceiptCertificateBody,
   ProcessesIdAuthorizationReceiptCertificateResponse,
   ProcessesParameters,
-  ProcessesSetRecordsParameters,
+  ProcessesSendPaymentsInstructionBody,
+  ProcessesSetRecordsBody,
   ProcessesSetRecordsResponse,
-  ProcessesTransmitParameters,
+  ProcessesTransmitBody,
+  ProcessesUnlockProcessFilesBody,
   ProcessesUnlockProcessFilesResponse,
-  ProcessesUpdateParameters,
+  ProcessesUpdateBody,
+  ProcessesUpdateDateAndReferenceBody,
+  ProcessesUpdateProcessBody,
+  ProcessesUpdateReasonRefundBody,
+  ProcessesUpdateTypeProcessBody,
   ProcessIdDeleteParameters,
-  ProcessIdDeleteRefDocumentPostParameters,
+  ProcessIdDeleteRefDocumentBody,
   ProcessIdDownloadFileGetParameters,
   ProcessIdDownloadFileGetResponse,
-  ProcessIdDownloadRefDocumentParameters,
+  ProcessIdDownloadRefDocumentBody,
   ProcessIdDownloadRefDocumentResponse,
-  ProcessIdGetRefDocumentGeParameters,
   ProcessIdGetRefDocumentResponse,
-  ProcessIdUploadsRefParameters,
+  ProcessIdUploadsRefBody,
   ProcessResponse,
-  SendPaymentsInstructionParameters,
   SuccessResponse,
-  UnlockProcessFilesParameters,
-  UpdateDateAndReferenceParameters,
   UpdateDateAndReferenceResponse,
-  UpdateProcessParameters,
-  UpdateReasonRefundParameters,
   UpdateReasonRefundResponse,
-  UpdateTypeProcessParameters,
 } from '../models';
 
 @Injectable({
@@ -49,91 +47,91 @@ export class ProcessesService {
   constructor(private http: HttpClient) {
   }
 
-  public apiProcessesChangeFileToNegativePost(data: ChangeFileToNegativeParameters): Observable<BooleanResultResponse> {
-    return this.http.post<BooleanResultResponse>(`${environment.authUrl}/api/processes/changeFileToNegative/`, data);
+  public apiProcessesChangeFileToNegativePost(data: ProcessesChangeFileToNegativeBody): Observable<BooleanResultResponse> {
+    return this.http.post<BooleanResultResponse>(`${environment.authUrl}/api/processes/changeFileToNegative`, data);
   }
 
-  public apiProcessesCheckIsDatePost(data: CheckIsDateParameters): Observable<CheckIsDateResponse> {
-    return this.http.post<CheckIsDateResponse>(`${environment.authUrl}/api/processes/checkIsDate/`, data);
+  public apiProcessesCheckIsDatePost(data: ProcessesCheckIsDateBody): Observable<CheckIsDateResponse> {
+    return this.http.post<CheckIsDateResponse>(`${environment.authUrl}/api/processes/checkIsDate`, data);
   }
 
-  public apiProcessesDownloadPaymentsInstructionPost(data: DownloadPaymentsInstructionParameters): Observable<DownloadPaymentsInstructionResponse> {
-    return this.http.post<DownloadPaymentsInstructionResponse>(`${environment.authUrl}/api/processes/downloadPaymentsInstruction/`, data);
+  public apiProcessesDownloadPaymentsInstructionPost(data: ProcessesDownloadPaymentsInstructionBody): Observable<DownloadPaymentsInstructionResponse> {
+    return this.http.post<DownloadPaymentsInstructionResponse>(`${environment.authUrl}/api/processes/downloadPaymentsInstruction`, data);
   }
 
-  public apiProcessesEmployerIdGetCommentBroadcastGet(data: EmployerIdGetCommentBroadcastParameters): Observable<string> {
-    return this.http.post<string>(`${environment.authUrl}/api/processes/${data.employerId}/getCommentBroadcast/`, data);
+  public apiProcessesEmployerIdGetCommentBroadcastGet(employerId: string): Observable<string> {
+    return this.http.post<string>(`${environment.authUrl}/api/processes/${employerId}/getCommentBroadcast`, {});
   }
 
   public apiProcessesFilesListGet(data: ProcessesFilesListGetParameters): Observable<FilesListGetResponse> {
-    return this.http.get<FilesListGetResponse>(`${environment.authUrl}/api/processes/filesList/`, { params: createObjectHttpParams(data) });
+    return this.http.get<FilesListGetResponse>(`${environment.authUrl}/api/processes/filesList`, { params: createObjectHttpParams(data) });
   }
 
   public apiProcessesGet(data: ProcessesParameters): Observable<ProcessResponse> {
-    return this.http.get<ProcessResponse>(`${environment.authUrl}/api/processes/`, { params: createObjectHttpParams(data) });
+    return this.http.get<ProcessResponse>(`${environment.authUrl}/api/processes`, { params: createObjectHttpParams(data) });
   }
 
   public apiProcessesProcessIdDelete(data: ProcessIdDeleteParameters): Observable<SuccessResponse> {
     return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/${data.processId}`, data);
   }
 
-  public apiProcessesProcessIdDeleteRefDocumentPost(data: ProcessIdDeleteRefDocumentPostParameters): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/${data.processId}/deleteRefDocument/`, data);
+  public apiProcessesProcessIdDeleteRefDocumentPost(processId: string, data: ProcessIdDeleteRefDocumentBody): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/${processId}/deleteRefDocument`, data);
   }
 
   public apiProcessesProcessIdDownloadFileProcessGet(data: ProcessIdDownloadFileGetParameters): Observable<ProcessIdDownloadFileGetResponse> {
-    return this.http.get<ProcessIdDownloadFileGetResponse>(`${environment.authUrl}/api/processes/${data.processId}/downloadFileProcess/`, { params: createObjectHttpParams(data) });
+    return this.http.get<ProcessIdDownloadFileGetResponse>(`${environment.authUrl}/api/processes/${data.processId}/downloadFileProcess`, { params: createObjectHttpParams(data) });
   }
 
-  public apiProcessesProcessIdDownloadRefDocumentPost(data: ProcessIdDownloadRefDocumentParameters): Observable<ProcessIdDownloadRefDocumentResponse> {
-    return this.http.post<ProcessIdDownloadRefDocumentResponse>(`${environment.authUrl}/api/processes/${data.processId}/downloadRefDocument/`, data);
+  public apiProcessesProcessIdDownloadRefDocumentPost(processId: string, data: ProcessIdDownloadRefDocumentBody): Observable<ProcessIdDownloadRefDocumentResponse> {
+    return this.http.post<ProcessIdDownloadRefDocumentResponse>(`${environment.authUrl}/api/processes/${processId}/downloadRefDocument`, data);
   }
 
-  public apiProcessesProcessIdGetRefDocumentGet(data: ProcessIdGetRefDocumentGeParameters): Observable<ProcessIdGetRefDocumentResponse> {
-    return this.http.get<ProcessIdGetRefDocumentResponse>(`${environment.authUrl}/api/processes/${data.processId}/getRefDocument/`, { params: createObjectHttpParams(data) });
+  public apiProcessesProcessIdGetRefDocumentGet(processId: string): Observable<ProcessIdGetRefDocumentResponse> {
+    return this.http.get<ProcessIdGetRefDocumentResponse>(`${environment.authUrl}/api/processes/${processId}/getRefDocument`);
   }
 
-  public apiProcessesProcessIdUploadsRefPost(data: ProcessIdUploadsRefParameters): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/${data.processId}/uploadsRef/`, data);
+  public apiProcessesProcessIdUploadsRefPost(processId: string, data: ProcessIdUploadsRefBody): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/${processId}/uploadsRef`, data);
   }
 
-  public apiProcessesProcessesIdAuthorizationReceiptCertificatePost(data: ProcessesIdAuthorizationReceiptCertificateParameters): Observable<ProcessesIdAuthorizationReceiptCertificateResponse> {
-    return this.http.post<ProcessesIdAuthorizationReceiptCertificateResponse>(`${environment.authUrl}/api/processes/${data.processesId}/authorizationReceiptCertificate/`, data);
+  public apiProcessesProcessesIdAuthorizationReceiptCertificatePost(processesId: string, data: ProcessesIdAuthorizationReceiptCertificateBody): Observable<ProcessesIdAuthorizationReceiptCertificateResponse> {
+    return this.http.post<ProcessesIdAuthorizationReceiptCertificateResponse>(`${environment.authUrl}/api/processes/${processesId}/authorizationReceiptCertificate`, data);
   }
 
-  public apiProcessesSendPaymentsInstructionPost(data: SendPaymentsInstructionParameters): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/sendPaymentsInstruction/`, data);
+  public apiProcessesSendPaymentsInstructionPost(data: ProcessesSendPaymentsInstructionBody): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/sendPaymentsInstruction`, data);
   }
 
-  public apiProcessesSetRecordsPost(data: ProcessesSetRecordsParameters): Observable<ProcessesSetRecordsResponse> {
-    return this.http.post<ProcessesSetRecordsResponse>(`${environment.authUrl}/api/processes/setRecords/`, data);
+  public apiProcessesSetRecordsPost(data: ProcessesSetRecordsBody): Observable<ProcessesSetRecordsResponse> {
+    return this.http.post<ProcessesSetRecordsResponse>(`${environment.authUrl}/api/processes/setRecords`, data);
   }
 
-  public apiProcessesTransmitPost(data: ProcessesTransmitParameters): Observable<BooleanResultResponse> {
-    return this.http.post<BooleanResultResponse>(`${environment.authUrl}/api/processes/transmit/`, data);
+  public apiProcessesTransmitPost(data: ProcessesTransmitBody): Observable<BooleanResultResponse> {
+    return this.http.post<BooleanResultResponse>(`${environment.authUrl}/api/processes/transmit`, data);
   }
 
-  public apiProcessesUnlockProcessFilesPost(data: UnlockProcessFilesParameters): Observable<ProcessesUnlockProcessFilesResponse> {
-    return this.http.post<ProcessesUnlockProcessFilesResponse>(`${environment.authUrl}/api/processes/unlockProcessFiles/`, data);
+  public apiProcessesUnlockProcessFilesPost(data: ProcessesUnlockProcessFilesBody): Observable<ProcessesUnlockProcessFilesResponse> {
+    return this.http.post<ProcessesUnlockProcessFilesResponse>(`${environment.authUrl}/api/processes/unlockProcessFiles`, data);
   }
 
-  public apiProcessesUpdateDateAndReferencePost(data: UpdateDateAndReferenceParameters): Observable<UpdateDateAndReferenceResponse> {
-    return this.http.post<UpdateDateAndReferenceResponse>(`${environment.authUrl}/api/processes/updateDateAndReference/`, data);
+  public apiProcessesUpdateDateAndReferencePost(data: ProcessesUpdateDateAndReferenceBody): Observable<UpdateDateAndReferenceResponse> {
+    return this.http.post<UpdateDateAndReferenceResponse>(`${environment.authUrl}/api/processes/updateDateAndReference`, data);
   }
 
-  public apiProcessesUpdatePost(data: ProcessesUpdateParameters): Observable<string> {
-    return this.http.post<string>(`${environment.authUrl}/api/processes/update/`, data);
+  public apiProcessesUpdatePost(data: ProcessesUpdateBody): Observable<string> {
+    return this.http.post<string>(`${environment.authUrl}/api/processes/update`, data);
   }
 
-  public apiProcessesUpdateProcessPost(data: UpdateProcessParameters): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/updateProcess/`, data);
+  public apiProcessesUpdateProcessPost(data: ProcessesUpdateProcessBody): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/updateProcess`, data);
   }
 
-  public apiProcessesUpdateReasonRefundPost(data: UpdateReasonRefundParameters): Observable<UpdateReasonRefundResponse> {
-    return this.http.post<UpdateReasonRefundResponse>(`${environment.authUrl}/api/processes/updateReasonRefund/`, data);
+  public apiProcessesUpdateReasonRefundPost(data: ProcessesUpdateReasonRefundBody): Observable<UpdateReasonRefundResponse> {
+    return this.http.post<UpdateReasonRefundResponse>(`${environment.authUrl}/api/processes/updateReasonRefund`, data);
   }
 
-  public apiProcessesUpdateTypeProcessPost(data: UpdateTypeProcessParameters): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/updateTypeProcess/`, data);
+  public apiProcessesUpdateTypeProcessPost(data: ProcessesUpdateTypeProcessBody): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/updateTypeProcess`, data);
   }
 }

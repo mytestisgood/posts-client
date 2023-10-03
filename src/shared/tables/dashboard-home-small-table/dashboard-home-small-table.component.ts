@@ -13,4 +13,9 @@ import { ButtonComponent } from '@shared/ui';
 })
 export class DashboardHomeSmallTableComponent {
   @Input() public compensationReport!: CompensationReportGetResponse | null;
+  public mode: 'left' | 'right' = 'right';
+
+  public changeTableMode(mode: 'left' | 'right'): void {
+    this.mode = mode;
+  }
 }

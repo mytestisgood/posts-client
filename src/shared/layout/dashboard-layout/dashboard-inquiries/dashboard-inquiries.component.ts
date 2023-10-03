@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ChatIdGetResponse, ChatResponse } from '@shared/api/models';
 import { ChatService } from '@shared/api/services';
@@ -8,14 +8,13 @@ import {
   ChatListItems,
   DashboardCreateNewChatGroupControls,
   dashboardCreateNewChatGroupMapper,
-  TOKEN,
+  DashboardHeaderIds,
 } from '@shared/entities';
-import { DestroyService } from '@shared/services';
+import { DataSharingService, DestroyService } from '@shared/services';
 import { ButtonComponent, CustomDropdownComponent, LoaderComponent } from '@shared/ui';
-import { LocalStorageService } from '@shared/web-api';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import { map, Observable, takeUntil } from 'rxjs';
+import { filter, map, Observable, switchMap, takeUntil } from 'rxjs';
 import { DashboardChatListComponent } from './chat-list/dashboard-chat-list.component';
 import { DashboardChatWindowComponent } from './chat-window/dashboard-chat-window.component';
 
@@ -30,17 +29,9 @@ import { DashboardChatWindowComponent } from './chat-window/dashboard-chat-windo
   styleUrls: ['./dashboard-inquiries.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardInquiriesComponent {
-  public token: string = this.localStorageService.getItem(TOKEN) as string;
+export class DashboardInquiriesComponent implements OnInit {
   public isCustomDropdownActive: boolean = false;
-  public chatItems$: Observable<ChatListItems[]> = this.chatService.apiChatsGet({
-    token: this.token,
-    status: 'all',
-  }).pipe(
-    map((response: ChatResponse[]) => {
-      return response.map((item): ChatListItems => ({ ...item, active: false }));
-    }),
-  );
+  public chatItems$!: Observable<ChatListItems[]>;
   public chat$!: Observable<ChatIdGetResponse | null>;
   public createNewChatForm: FormGroup<DashboardCreateNewChatGroupControls> = dashboardCreateNewChatGroupMapper();
   public isLoadingChatWindow: boolean = false;
@@ -49,9 +40,26 @@ export class DashboardInquiriesComponent {
     @Inject(TuiDialogService)
     private readonly dialogs: TuiDialogService,
     private readonly chatService: ChatService,
-    private readonly localStorageService: LocalStorageService,
     private readonly destroy$: DestroyService,
+    private readonly dataSharingService: DataSharingService,
   ) {
+  }
+
+  public ngOnInit(): void {
+    this.chatItems$ = this.dataSharingService.dashboardHeaderIds.pipe(
+      filter(value => !!value.organizationId),
+      switchMap((value: DashboardHeaderIds) => {
+        return this.chatService.apiChatsGet({
+          status: 'all',
+          organizationId: value.organizationId as string,
+          employerId: value.employerId as string,
+        }).pipe(
+          map((response: ChatResponse[]) => {
+            return response.map((item): ChatListItems => ({ ...item, active: false }));
+          }),
+        );
+      }),
+    );
   }
 
   public onCustomDropdownClick(): void {
@@ -60,10 +68,7 @@ export class DashboardInquiriesComponent {
 
   public changeCurrentChatId(chatId: number): void {
     this.isLoadingChatWindow = true;
-    this.chat$ = this.chatService.apiChatsChatIdGet({
-      chatId,
-      token: this.token,
-    }).pipe(
+    this.chat$ = this.chatService.apiChatsChatIdGet(chatId).pipe(
       map((response: ChatIdGetResponse) => {
         this.isLoadingChatWindow = false;
         return response ?? null;
@@ -72,19 +77,19 @@ export class DashboardInquiriesComponent {
   }
 
   public onCreateNewChatSendRequest(opswatId: string): void {
+    const employerId = this.dataSharingService.dashboardHeaderIds.value.employerId as string;
+
     this.chatService.apiChatsPost({
-      token: this.token,
-      apiChatsBody: {
-        chat: {
-          content: this.createNewChatForm.value.referenceContent as string,
-          employee_id: 0,
-          salary_month: '',
-          subject_id: this.createNewChatForm.value.document?.id,
-          tat_subject_id: this.createNewChatForm.value.documentType?.id,
-        },
-        opswatIds: opswatId,
-        employer_id: 0,
+      chat: {
+        content: this.createNewChatForm.value.referenceContent as string,
+        employee_id: 0,
+        salary_month: '',
+        subject_id: this.createNewChatForm.value.document?.id,
+        tat_subject_id: this.createNewChatForm.value.documentType?.id,
       },
+      opswatIds: opswatId,
+      employer_id: Number(employerId),
+      message: '',
     }).pipe(takeUntil(this.destroy$)).subscribe();
   }
 

@@ -2,7 +2,6 @@ import { StatusChat } from './common.models';
 
 export interface ChatIdGetParameters {
   chatId: number;
-  token?: string;
 }
 
 export interface ChatIdGetResponse {
@@ -40,7 +39,6 @@ export interface ChatsGetParameters {
   status?: 'all' | 'open' | 'in_treatment' | 'close';
   organizationId?: string;
   employerId?: string;
-  token?: string;
 }
 
 export interface ChatResponse {
@@ -63,12 +61,6 @@ export interface ChatResponse {
 
 export interface ChatsGetTatSubjectsGetParameters {
   subjectId?: number;
-  token?: string;
-}
-
-export interface ChatsPostParameters {
-  token?: string;
-  apiChatsBody?: ApiChatsBody;
 }
 
 export interface ApiChatsBody {
@@ -89,11 +81,6 @@ export interface ApiChatsChat {
 export interface ChatsPostResponse {
   message?: string;
   chat_id?: number;
-}
-
-export interface ChatsSaveMessageChatParameters {
-  token?: string;
-  chatsSaveMessageChatBody?: ChatsSaveMessageChatBody;
 }
 
 export interface ChatsSaveMessageChatBody {

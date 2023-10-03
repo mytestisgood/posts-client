@@ -11,7 +11,7 @@
         </h4>
       </div>
     </div>
-    <div *ngIf="$employerReport | async as employerReport; else loadingTemplate">
+    <div *ngIf="employerReport$ | async as employerReport; else loadingTemplate">
       <smarti-last-payment [lastPayment]="employerReport.reportsData?.processes"></smarti-last-payment>
       <div class="dashboard-info-grid grid mt-6 gap-6 bg-white">
         <div class="dashboard-info-grid__main box-shadow-big rounded-l">
@@ -47,8 +47,10 @@
 <div class="white-background-absolute-block"></div>
 
 <ng-template #loadingTemplate>
-  <smarti-loader
-    [size]="'xxl'"
-    [paddingTop30percent]="true"
-  ></smarti-loader>
+  <div class="w-1398px">
+    <smarti-loader
+      [size]="'xxl'"
+      [paddingTop30percent]="true"
+    ></smarti-loader>
+  </div>
 </ng-template>

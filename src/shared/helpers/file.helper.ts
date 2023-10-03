@@ -13,9 +13,8 @@ export function downloadFileHelper(filePath: string, fileName: string): void {
   link.remove();
 }
 
-export function fileFromBlotToTextFormatHelper(files: File[]): Observable<string> {
+export function fileFromBlotToTextFormatHelper(file: File): Observable<string> {
   const fileReader: FileReader = new FileReader();
-  const file: File = files[0];
 
   fileReader.readAsText(file);
 

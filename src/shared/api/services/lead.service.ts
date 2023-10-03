@@ -12,6 +12,6 @@ export class LeadService {
   }
 
   public apiLeadsCreateLeadPost(data: LeadsCreateLeadBody): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/leads/createLead/`, data);
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/leads/createLead`, data);
   }
 }

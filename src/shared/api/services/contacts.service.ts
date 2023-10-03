@@ -4,7 +4,7 @@ import { environment } from '@environment';
 import { Observable } from 'rxjs';
 import { createObjectHttpParams } from '../../helpers/http.helper';
 import {
-  EmployerContactsPostParameters,
+  ContactsEmployerContactsBody,
   EmployerContactsPostResponse,
   GetEmailEmployerContactGetParameters,
 } from '../models';
@@ -16,8 +16,8 @@ export class ContactsService {
   constructor(private http: HttpClient) {
   }
 
-  public apiContactsEmployerContactsPost(data: EmployerContactsPostParameters): Observable<EmployerContactsPostResponse> {
-    return this.http.post<EmployerContactsPostResponse>(`${environment.authUrl}/api/contacts/employerContacts/`, data);
+  public apiContactsEmployerContactsPost(data: ContactsEmployerContactsBody): Observable<EmployerContactsPostResponse> {
+    return this.http.post<EmployerContactsPostResponse>(`${environment.authUrl}/api/contacts/employerContacts`, data);
   }
 
   public apiContactsTypeGetEmailEmployerContactGet(data: GetEmailEmployerContactGetParameters): Observable<Array<string>> {

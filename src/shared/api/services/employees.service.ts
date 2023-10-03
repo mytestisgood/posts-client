@@ -13,6 +13,6 @@ export class EmployeesService {
   }
 
   public apiEmployeesGetEmployeesListGet(data: GetEmployeesListGetParameters): Observable<Array<IdAndNameResponse>> {
-    return this.http.get<Array<IdAndNameResponse>>(`${environment.authUrl}/api/employees/getEmployeesList/`, { params: createObjectHttpParams(data) });
+    return this.http.get<Array<IdAndNameResponse>>(`${environment.authUrl}/api/employees/getEmployeesList`, { params: createObjectHttpParams(data) });
   }
 }

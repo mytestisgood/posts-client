@@ -1,8 +1,3 @@
-export interface InquiriesPostParameters {
-  token?: string;
-  model1InquiriesBody?: Model1InquiriesBody;
-}
-
 export interface Model1InquiriesBody {
   inquiry?: InquiriesInquiry;
   employer_id?: number;
@@ -26,11 +21,6 @@ export interface InquiriesResponse {
 
 export interface InquiriesReceivers {
   email?: string;
-}
-
-export interface NewInquiryPostParameters {
-  token?: string;
-  model1NewInquiryBody?: Model1NewInquiryBody;
 }
 
 export interface Model1NewInquiryBody {

@@ -13,6 +13,6 @@ export class ExceptionsService {
   }
 
   public apiExceptionsFindExceptionForEmployerProcessIdGet(data: FindExceptionForEmployerProcessIdGet): Observable<boolean> {
-    return this.http.get<boolean>(`${environment.authUrl}/api/exceptions/findExceptionForEmployer/${data.processId}/`, { params: createObjectHttpParams(data) });
+    return this.http.get<boolean>(`${environment.authUrl}/api/exceptions/findExceptionForEmployer/${data.processId}`, { params: createObjectHttpParams(data) });
   }
 }

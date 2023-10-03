@@ -1,23 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   CompensationReportGetResponse,
   EmployerReportResponse,
   FeedbackEmployerReportGetResponse,
 } from '@shared/api/models';
 import { ChatService, HomeService } from '@shared/api/services';
-import { TOKEN } from '@shared/entities';
+import { DashboardHeaderIds } from '@shared/entities';
 import {
-  formattedCurrentDateTo,
   formattedMonthAndYearDateTo,
   getCurrentMonthLastDayDate,
   getCurrentMonthStartDayDate,
   getDayOfWeekAndCurrentDayDate,
 } from '@shared/helpers';
+import { DataSharingService } from '@shared/services';
 import { DashboardHomeSmallTableComponent, DashboardHomeTableComponent } from '@shared/tables';
 import { ButtonComponent, InputYearComponent, LoaderComponent, SelectComponent } from '@shared/ui';
-import { LocalStorageService } from '@shared/web-api';
-import { Observable } from 'rxjs';
+import { filter, Observable, switchMap } from 'rxjs';
 import {
   DashboardNotificationComponent,
 } from '../dashboard-notification/dashboard-notification.component';
@@ -44,32 +43,13 @@ import { LastPaymentComponent } from './last-payment/last-payment.component';
   styleUrls: ['./dashboard-home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardHomeComponent {
+export class DashboardHomeComponent implements OnInit {
   public startDateCurrentMonth: string = getCurrentMonthStartDayDate('yyyy-mm-dd');
   public endDateCurrentMonth: string = getCurrentMonthLastDayDate('yyyy-mm-dd');
-  public token: string = this.localStorageService.getItem(TOKEN) as string;
-  public $employerReport: Observable<EmployerReportResponse> = this.homeService.apiReportsEmployerReportPost({
-    token: this.token,
-    reportsEmployerReportBody: {
-      employerId: '1',
-      organizationId: '2',
-      startDate: this.startDateCurrentMonth,
-      endDate: this.endDateCurrentMonth,
-      salaryMonth: true,
-    },
-  });
-  public chats$: Observable<Array<object>> = this.chatService.apiChatsGet({ token: this.token });
-  public compensationReport$: Observable<CompensationReportGetResponse> =
-    this.homeService.apiReportsCompensationReportGet({
-    token: this.token,
-    startDate: formattedCurrentDateTo('yyyy-mm-dd'),
-  });
-  public feedbackEmployerReport$: Observable<FeedbackEmployerReportGetResponse> =
-    this.homeService.apiReportsFeedbackEmployerReportGet({
-      year: new Date().getFullYear().toString(),
-      month: new Date().getMonth().toString(),
-      token: this.token,
-    });
+  public employerReport$!: Observable<EmployerReportResponse>;
+  public chats$!: Observable<Array<object>>;
+  public compensationReport$!: Observable<CompensationReportGetResponse>;
+  public feedbackEmployerReport$!: Observable<FeedbackEmployerReportGetResponse>;
   public year!: number;
   public month!: number;
   public searchingDate!: string | undefined;
@@ -78,8 +58,15 @@ export class DashboardHomeComponent {
   constructor(
     private readonly homeService: HomeService,
     private readonly chatService: ChatService,
-    private readonly localStorageService: LocalStorageService,
+    private readonly dataSharingService: DataSharingService,
   ) {}
+
+  public ngOnInit(): void {
+    this.employerReportData();
+    this.chatsData();
+    this.compensationReportData();
+    this.feedbackEmployerReportData();
+  }
 
   public onChangeMonth(month: number): void {
     this.month = month;
@@ -102,9 +89,67 @@ export class DashboardHomeComponent {
   public onReportsCompensationGet(): void {
     this.searchingDate = formattedMonthAndYearDateTo(this.month, this.year, 'yyyy-mm-dd');
     this.compensationReport$ = this.homeService.apiReportsCompensationReportGet({
-      token: this.token,
       startDate: this.searchingDate,
       endDate: this.searchingDate,
     });
+  }
+
+  private chatsData(): void {
+    this.chats$ = this.dataSharingService.dashboardHeaderIds.pipe(
+      filter((value: DashboardHeaderIds) => !!value.organizationId),
+      switchMap((value: DashboardHeaderIds) => {
+        return this.chatService.apiChatsGet({
+          status: 'all',
+          employerId: value.employerId as string,
+          organizationId: value.organizationId as string,
+        });
+      }),
+    );
+  }
+
+  private employerReportData(): void {
+    this.employerReport$ = this.dataSharingService.dashboardHeaderIds.pipe(
+      filter((value: DashboardHeaderIds) => !!value.organizationId),
+      switchMap((value: DashboardHeaderIds) => {
+        return this.homeService.apiReportsEmployerReportPost({
+          startDate: this.startDateCurrentMonth,
+          endDate: this.endDateCurrentMonth,
+          salaryMonth: true,
+          organizationId: value.organizationId as string,
+          employerId: value.employerId as string,
+        });
+      }),
+    );
+  }
+
+  private compensationReportData(): void {
+    this.compensationReport$ = this.dataSharingService.dashboardHeaderIds.pipe(
+      filter((value: DashboardHeaderIds) => !!value.organizationId),
+      switchMap((value: DashboardHeaderIds) => {
+        return this.homeService.apiReportsCompensationReportGet({
+          startDate: this.startDateCurrentMonth,
+          endDate: this.endDateCurrentMonth,
+          organizationId: value.organizationId as string,
+          employerId: value.employerId as string,
+          departmentId: value.departmentId as string,
+          type: 'employee',
+          salaryMonth: true,
+        });
+      }),
+    );
+  }
+
+  private feedbackEmployerReportData(): void {
+    this.feedbackEmployerReport$ = this.dataSharingService.dashboardHeaderIds.pipe(
+      filter((value: DashboardHeaderIds) => !!value.organizationId),
+      switchMap((value: DashboardHeaderIds) => {
+        return this.homeService.apiReportsFeedbackEmployerReportGet({
+          year: new Date().getFullYear().toString(),
+          month: new Date().getMonth().toString(),
+          employerId: value.employerId as string,
+          organizationId: value.departmentId as string,
+        });
+      }),
+    );
   }
 }

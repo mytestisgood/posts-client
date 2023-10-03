@@ -4,9 +4,9 @@ import { environment } from '@environment';
 import { Observable } from 'rxjs';
 import {
   Comment,
-  CommentPostParameters,
   DeleteCommentByIdParameters,
-  GetCommentResponse,
+  GeneralsCommentBody,
+  GeneralsGetCommentsBody,
   SuccessResponseOnlyMessage,
 } from '../models';
 
@@ -17,15 +17,15 @@ export class CommentService {
   constructor(private readonly http: HttpClient) {
   }
 
-  public apiGeneralsCommentPost(data: CommentPostParameters): Observable<SuccessResponseOnlyMessage> {
-    return this.http.post<SuccessResponseOnlyMessage>(`${environment.authUrl}/api/generals/comment/`, data);
+  public apiGeneralsCommentPost(data: GeneralsCommentBody): Observable<SuccessResponseOnlyMessage> {
+    return this.http.post<SuccessResponseOnlyMessage>(`${environment.authUrl}/api/generals/comment`, data);
   }
 
-  public apiGeneralsGetCommentsPost(data: GetCommentResponse): Observable<Array<Comment>> {
-    return this.http.post<Array<Comment>>(`${environment.authUrl}/api/generals/getComments/`, data);
+  public apiGeneralsGetCommentsPost(data: GeneralsGetCommentsBody): Observable<Array<Comment>> {
+    return this.http.post<Array<Comment>>(`${environment.authUrl}/api/generals/getComments`, data);
   }
 
   public apiGeneralsIdDeleteCommentPost(data: DeleteCommentByIdParameters): Observable<SuccessResponseOnlyMessage> {
-    return this.http.post<SuccessResponseOnlyMessage>(`${environment.authUrl}/api/generals/${data.id}/deleteComment/`, data);
+    return this.http.post<SuccessResponseOnlyMessage>(`${environment.authUrl}/api/generals/${data.id}/deleteComment`, data);
   }
 }

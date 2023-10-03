@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-between h-full">
   <div
     class="mt-10 ml-7-5 mr-10 inline-block flex-1"
-    *ngIf="items?.length; else loadingTemplate"
+    *ngIf="items?.length; else noDataTemplate"
   >
     <table class="tui-table tui-table_layout_fixed employee-table">
       <tbody>
@@ -76,7 +76,7 @@
           </th>
         </tr>
         <tr
-          *ngFor="let item of items; let index = index"
+          *ngFor="let item of items | slice: this.itemsValue.firstValue : this.itemsValue.lastValue; let index = index"
           class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
           (click)="openFeedbackTransferDialog(item.company_name, item.company_id, item.file_status)"
         >
@@ -119,17 +119,18 @@
       </tbody>
     </table>
   </div>
-  <div class="flex flex-row justify-center mb-4">
+  <div
+    *ngIf="items?.length as total"
+    class="flex flex-row justify-center mb-4"
+  >
     <smarti-table-pagination
-      [total]="140"
+      [total]="total"
       [items]="4"
+      (changePageItemsValue)="onChangeSliceOfPage($event)"
     ></smarti-table-pagination>
   </div>
 </div>
 
-<ng-template #loadingTemplate>
-  <smarti-loader
-    [size]="'xl'"
-    [paddingTop15percent]="true"
-  ></smarti-loader>
+<ng-template #noDataTemplate>
+  <smarti-no-elements-to-show></smarti-no-elements-to-show>
 </ng-template>

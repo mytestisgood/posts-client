@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, Output } from '@angu
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IdAndNameResponse, UploadPostResponse } from '@shared/api/models';
 import { ChatService, FilesMyHrService } from '@shared/api/services';
-import { DashboardCreateNewChatGroupControls } from '@shared/entities';
+import { DashboardCreateNewChatGroupControls, FileUploadStatusAndId } from '@shared/entities';
+import { fileFromBlotToTextFormatHelper } from '@shared/helpers';
 import { DestroyService } from '@shared/services';
 import {
   ButtonComponent,
@@ -26,16 +27,13 @@ import { Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 })
 export class CreateNewChatDialogComponent implements OnInit {
   @Input() public form!: FormGroup<DashboardCreateNewChatGroupControls>;
-  @Input() public token!: string;
   @Input() public observer!: { complete: () => void };
   @Output() public sendRequest: Subject<string> = new Subject();
 
   public isDocumentUploaded: boolean = false;
   public hideDocumentType: boolean = true;
   public hideBlockWithCashAndEmployee: boolean = true;
-  public chatSubject$: Observable<IdAndNameResponse[]> = this.chatService.apiChatsGetChatSubjectsGet(
-    { token: this.token },
-  );
+  public chatSubject$: Observable<IdAndNameResponse[]> = this.chatService.apiChatsGetChatSubjectsGet();
   public chatSubjectOption!: IdAndNameResponse[];
   public tatSubjectOption!: IdAndNameResponse[];
 
@@ -51,9 +49,9 @@ export class CreateNewChatDialogComponent implements OnInit {
     this.form.get('document')?.valueChanges.pipe(
       switchMap((value: IdAndNameResponse | null) => {
         this.hideDocumentType = false;
+
         return this.chatService.apiChatsGetTatSubjectsGet({
           subjectId: value?.id,
-          token: this.token,
         }).pipe(
           tap((response: IdAndNameResponse[]) => this.tatSubjectOption = response),
         );
@@ -67,7 +65,8 @@ export class CreateNewChatDialogComponent implements OnInit {
 
   public onAddFileClick(): void {
     if (this.form.value.file) {
-      this.filesMyHrService.apiUploadPost({ project: 'smarti-dev', file: this.form.value.file[0] as File }).pipe(
+      fileFromBlotToTextFormatHelper(this.form.value.file[0] as File).pipe(
+        switchMap((value: string) => this.filesMyHrService.apiUploadPost({ file: value })),
         takeUntil(this.destroy$),
       ).subscribe((response: UploadPostResponse) => {
         this.sendRequest.next(response.opswatId as string);
@@ -76,8 +75,8 @@ export class CreateNewChatDialogComponent implements OnInit {
     }
   }
 
-  public fileUploaded(isUploaded: boolean): void {
-    this.isDocumentUploaded = isUploaded;
+  public fileUploaded(uploaded: FileUploadStatusAndId): void {
+    this.isDocumentUploaded = uploaded.status;
   }
 
   public closeDialog(): void {

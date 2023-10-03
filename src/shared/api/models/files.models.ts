@@ -3,19 +3,16 @@ import { DocumentTypes } from './common.models';
 export interface DocumentIdDeleteParameters {
   documentId: string;
   employerId?: string;
-  token?: string;
 }
 
 export interface DocumentIdGetParameters {
   documentId: string;
   employerId?: string;
-  token?: string;
 }
 
 export interface EmployerIdIsNegativeFileGetParameters {
   employerId: string;
   employerId2?: string;
-  token?: string;
 }
 
 export interface DocumentsGetParameters {
@@ -23,7 +20,6 @@ export interface DocumentsGetParameters {
   employerId?: string;
   page?: string;
   limit?: string;
-  token?: string;
 }
 
 export interface DocumentsGetResponse {
@@ -44,22 +40,12 @@ export interface DocumentsGetResponseItems {
   document_type?: DocumentTypes;
 }
 
-export interface DocumentsPostParameters {
-  token?: string;
-  apiDocumentsBody?: ApiDocumentsBody;
-}
-
 export interface ApiDocumentsBody {
   opswatIds?: string;
   description?: string;
   date?: number;
   employer_id?: number;
   documentType?: DocumentTypes;
-}
-
-export interface GeneralsDownloadExampleFileParameters {
-  token?: string;
-  generalsDownloadExampleFileBody?: GeneralsDownloadExampleFileBody;
 }
 
 export interface GeneralsDownloadExampleFileBody {

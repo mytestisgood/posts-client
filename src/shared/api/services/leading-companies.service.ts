@@ -12,6 +12,6 @@ export class LeadingCompaniesService {
   }
 
   public apiLeadingCompaniesGetLeadingCompaniesGet(): Observable<GetLeadingCompaniesResponse> {
-    return this.http.get<GetLeadingCompaniesResponse>(`${environment.authUrl}/api/leading_companies/getLeadingCompanies/`);
+    return this.http.get<GetLeadingCompaniesResponse>(`${environment.authUrl}/api/leading_companies/getLeadingCompanies`);
   }
 }

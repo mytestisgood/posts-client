@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-between h-full">
   <div
     class="mt-4 ml-7-5 mr-10 inline-block flex-1"
-    *ngIf="allProducts?.length; else loadingTemplate"
+    *ngIf="allProducts?.length; else noDataTemplate"
   >
     <table class="tui-table tui-table_layout_fixed cash-register-table">
       <tbody>
@@ -56,7 +56,10 @@
           </th>
         </tr>
         <tr
-          *ngFor="let product of allProducts; let index = index"
+          *ngFor="
+            let product of allProducts | slice: this.paginationValue.firstValue : this.paginationValue.lastValue;
+            let index = index
+          "
           class="tui-table__tr tui-table__tr_border_none mb-6 cursor-pointer"
         >
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 px-4 text-right">
@@ -87,17 +90,18 @@
       </tbody>
     </table>
   </div>
-  <div class="flex flex-row justify-center mb-4">
+  <div
+    *ngIf="allProducts?.length as total"
+    class="flex flex-row justify-center mb-4"
+  >
     <smarti-table-pagination
-      [total]="140"
+      [total]="total"
       [items]="7"
+      (changePageItemsValue)="onChangeSliceOfPage($event)"
     ></smarti-table-pagination>
   </div>
 </div>
 
-<ng-template #loadingTemplate>
-  <smarti-loader
-    [size]="'xl'"
-    [paddingTop15percent]="true"
-  ></smarti-loader>
+<ng-template #noDataTemplate>
+  <smarti-no-elements-to-show></smarti-no-elements-to-show>
 </ng-template>

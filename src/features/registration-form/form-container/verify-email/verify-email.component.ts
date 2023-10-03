@@ -86,11 +86,8 @@ export class VerifyEmailComponent implements OnInit {
 
   public openSuccessDialog(content: PolymorpheusContent<TuiDialogContext>): void {
     this.signInService.apiUsersCheckVerifyCodePost({
-      token: this.token,
-      usersCheckVerifyCodeBody: {
-        code: this.verifyEmailInfo.controls.emailVerifyCode.value as string,
-        departmentId: 6848,
-      },
+      code: this.verifyEmailInfo.controls.emailVerifyCode.value as string,
+      departmentId: 6848,
     }).pipe(
       concatMap((result: SuccessResponse) => {
         if (result.message === 'success') {

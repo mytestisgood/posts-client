@@ -21,11 +21,6 @@ export interface UsersCheckVerifyCodeBody {
   departmentId?: number;
 }
 
-export interface ChangeEmailParameters {
-  token?: string;
-  usersChangeEmailBody?: UsersChangeEmailBody;
-}
-
 export interface UsersChangeEmailBody {
   email?: string;
 }

@@ -13,6 +13,6 @@ export class MenoraService {
   }
 
   public apiMenoraGet(data: MenoraGetParameters): Observable<MenoraGetResponse> {
-    return this.http.get<MenoraGetResponse>(`${environment.authUrl}/api/menora/`, { params: createObjectHttpParams(data) });
+    return this.http.get<MenoraGetResponse>(`${environment.authUrl}/api/menora`, { params: createObjectHttpParams(data) });
   }
 }

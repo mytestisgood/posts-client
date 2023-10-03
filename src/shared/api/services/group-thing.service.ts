@@ -13,6 +13,6 @@ export class GroupThingService {
   }
 
   public apiProcessesGetGroupThingInProcessGet(data: GetGroupThingInProcessGetParameters): Observable<GetGroupThingInProcessGetResponse> {
-    return this.http.get<GetGroupThingInProcessGetResponse>(`${environment.authUrl}/api/processes/getGroupThingInProcess/`, { params: createObjectHttpParams(data) });
+    return this.http.get<GetGroupThingInProcessGetResponse>(`${environment.authUrl}/api/processes/getGroupThingInProcess`, { params: createObjectHttpParams(data) });
   }
 }

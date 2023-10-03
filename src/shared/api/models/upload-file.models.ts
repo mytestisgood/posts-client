@@ -1,12 +1,6 @@
 export interface UploadFileGetParameters {
   departmentId: string,
   processId: string,
-  token: string
-}
-
-export interface UploadFilePostParameters {
-  token: string;
-  processesUploadFileBody: ProcessesUploadFileBody;
 }
 
 export interface ProcessesUploadFileBody {

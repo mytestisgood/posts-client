@@ -6,11 +6,6 @@ export interface EmployersCreateEmployerOutBody {
   email?: string;
 }
 
-export interface EmployersCreateUserOutParameters {
-  token: string;
-  employersCreateUserOutBody: EmployersCreateUserOutBody;
-}
-
 export interface EmployersCreateUserOutBody {
   user_name?: string;
   phone?: string;

@@ -40,6 +40,7 @@ export class SelectComponent {
   @Input() public control: FormControl<string | IdAndNameResponse | null> = new FormControl();
   @Input() public textFieldSize: TuiSizeM | TuiSizeS | TuiSizeL = 'm';
   @Input() public isComboBoxMode: boolean = false;
+  @Input() public isNoBorderMode: boolean = false;
 
   public readonly stringify = (item: IdAndNameResponse | null): string => `${item?.name}`;
 }

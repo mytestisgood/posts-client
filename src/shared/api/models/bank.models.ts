@@ -1,7 +1,6 @@
 export interface BanksDepartmentIdGetParameters {
   departmentId2: string;
   departmentId?: boolean;
-  token?: string;
 }
 
 export interface BanksGetResponse {
@@ -19,5 +18,4 @@ export interface BankBranches {
 
 export interface BanksGetParameters {
   withBranches?: boolean;
-  token?: string;
 }

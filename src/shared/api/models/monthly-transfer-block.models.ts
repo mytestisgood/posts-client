@@ -116,11 +116,6 @@ export interface TransferClause {
   id?: number;
 }
 
-export interface MtbGroupEmployeesParameters {
-  token?: string;
-  mtbGroupEmployeesBody?: MtbGroupEmployeesBody;
-}
-
 export interface MtbGroupEmployeesBody {
   ids?: Array<number>;
   criteria?: CriteriaProcess;
@@ -129,7 +124,6 @@ export interface MtbGroupEmployeesBody {
 export interface MtbGroupHistoryProcessIdGetParameters {
   processId: string;
   departmentId?: string;
-  token?: string;
 }
 
 export interface MtbGroupHistoryProcessIdGetResponse {
@@ -150,11 +144,6 @@ export interface MtbGroupHistoryProcessIdGetResponse {
   current_product_code?: number;
   current_employer_product_name?: string;
   current_employer_product_code?: number;
-}
-
-export interface MtbUploadEmployeeDeclarationParameters {
-  token?: string;
-  mtbUploadEmployeeDeclarationBody?: MtbUploadEmployeeDeclarationBody;
 }
 
 export interface MtbUploadEmployeeDeclarationBody {

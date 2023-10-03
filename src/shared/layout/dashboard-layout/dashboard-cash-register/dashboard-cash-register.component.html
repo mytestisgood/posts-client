@@ -33,9 +33,18 @@
     </div>
   </div>
   <div class="w-full h-752 bg-white box-shadow-big mt-4 rounded-l mb-34">
-    <smarti-dashboard-cash-register-table [allProducts]="allProducts$ | async"></smarti-dashboard-cash-register-table>
+    <ng-container *ngIf="allProducts$ | async as allProducts; else loadingTemplate">
+      <smarti-dashboard-cash-register-table [allProducts]="allProducts"></smarti-dashboard-cash-register-table>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <smarti-loader
+    [size]="'xl'"
+    [paddingTop15percent]="true"
+  ></smarti-loader>
+</ng-template>
 
 <ng-template #customDropdownContent>
   <div class="block-w322-h178 flex flex-col mt-6">

@@ -13,10 +13,12 @@
     ></smarti-button>
   </div>
   <div class="w-full h-752 bg-white box-shadow-big mt-4 rounded-l mb-34">
-    <smarti-dashboard-documents-table
-      [documents]="documents$ | async"
-      (downloadFileEvent)="onDownloadFile($event)"
-    ></smarti-dashboard-documents-table>
+    <ng-container *ngIf="documents$ | async as documents; else loadingTemplate">
+      <smarti-dashboard-documents-table
+        [documents]="documents"
+        (downloadFileEvent)="onDownloadFile($event)"
+      ></smarti-dashboard-documents-table>
+    </ng-container>
   </div>
 </div>
 
@@ -29,4 +31,11 @@
     [filesControl]="filesControl"
     (sendRequest)="onSendRequest($event)"
   ></smarti-add-documents-dialog>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <smarti-loader
+    [size]="'xl'"
+    [paddingTop15percent]="true"
+  ></smarti-loader>
 </ng-template>

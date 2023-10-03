@@ -10,7 +10,6 @@ import {
   ProductsByCompanyGetParameters,
   ProductsCompaniesGetResponse,
   ProductsFullCompanyGetResponse,
-  TokenParameters,
 } from '../models';
 
 @Injectable({
@@ -21,22 +20,22 @@ export class ProductsService {
   }
 
   public apiProductsAllProductsGet(data: AllProductsGetParameters): Observable<AllProductsGetResponse> {
-    return this.http.get<AllProductsGetResponse>(`${environment.authUrl}/api/products/allProducts/`, { params: createObjectHttpParams(data) });
+    return this.http.get<AllProductsGetResponse>(`${environment.authUrl}/api/products/allProducts`, { params: createObjectHttpParams(data) });
   }
 
-  public apiProductsCompaniesGet(data: TokenParameters): Observable<ProductsCompaniesGetResponse> {
-    return this.http.get<ProductsCompaniesGetResponse>(`${environment.authUrl}/api/products/companies/`, { params: createObjectHttpParams(data) });
+  public apiProductsCompaniesGet(): Observable<ProductsCompaniesGetResponse> {
+    return this.http.get<ProductsCompaniesGetResponse>(`${environment.authUrl}/api/products/companies`);
   }
 
-  public apiProductsFullCompanyGet(data: TokenParameters): Observable<ProductsFullCompanyGetResponse> {
-    return this.http.get<ProductsFullCompanyGetResponse>(`${environment.authUrl}/api/products/fullCompany/`, { params: createObjectHttpParams(data) });
+  public apiProductsFullCompanyGet(): Observable<ProductsFullCompanyGetResponse> {
+    return this.http.get<ProductsFullCompanyGetResponse>(`${environment.authUrl}/api/products/fullCompany`);
   }
 
   public apiProductsProductByCompanyGet(data: ProductsByCompanyGetParameters): Observable<Array<string>> {
-    return this.http.get<Array<string>>(`${environment.authUrl}/api/products/productByCompany/`, { params: createObjectHttpParams(data) });
+    return this.http.get<Array<string>>(`${environment.authUrl}/api/products/productByCompany`, { params: createObjectHttpParams(data) });
   }
 
   public apiCompensationsEmployeeIdCompanyEmployeeGet(data: CompensationsEmployeeIdCompanyParameters) {
-    return this.http.get<Array<string>>(`${environment.authUrl}/api/compensations/${data.employeeId}/companyEmployee/`, { params: createObjectHttpParams(data) });
+    return this.http.get<Array<string>>(`${environment.authUrl}/api/compensations/${data.employeeId}/companyEmployee`, { params: createObjectHttpParams(data) });
   }
 }

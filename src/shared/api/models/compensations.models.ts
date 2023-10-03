@@ -10,11 +10,6 @@ import {
   StatusCompensation,
 } from './common.models';
 
-export interface DownloadExampleFilePostParameters {
-  token?: string;
-  compensationsDownloadExampleFileBody?: CompensationsDownloadExampleFileBody;
-}
-
 export interface CompensationsDownloadExampleFileBody {
   comments?: string;
 }
@@ -26,7 +21,6 @@ export interface CompensationsGetParameters {
   eventCode?: EventCode;
   page?: string;
   limit?: string;
-  token?: string;
 }
 
 export interface CompensationsGetResponse {
@@ -77,11 +71,6 @@ export interface CompensationsItems {
   product_code?: string;
 }
 
-export interface CompensationPostParameters {
-  token?: string;
-  apiCompensationsBody?: ApiCompensationsBody;
-}
-
 export interface ApiCompensationsBody {
   comments?: string;
   company0?: string;
@@ -107,11 +96,6 @@ export interface CompensationSendPostResponse {
   code?: number;
 }
 
-export interface CompensationSendPostParameters {
-  token?: string;
-  compensationsSendBody?: CompensationsSendBody;
-}
-
 export interface CompensationsSendBody {
   compensation_ids?: Array<string>;
   criteria?: ApiCompensationsUpdateSentStatusCriteria;
@@ -126,11 +110,6 @@ export interface ApiCompensationsUpdateSentStatusCriteria {
   limit?: number;
 }
 
-export interface CompensationsUpdateSentStatusParameters {
-  token?: string;
-  compensationsUpdateSentStatusBody?: CompensationsUpdateSentStatusBody;
-}
-
 export interface CompensationsUpdateSentStatusBody {
   compensation_ids?: Array<string>;
   criteria?: ApiCompensationsUpdateSentStatusCriteria;
@@ -138,6 +117,6 @@ export interface CompensationsUpdateSentStatusBody {
 
 export interface CompensationsEmployeeIdCompanyEmployeeGetParameters {
   employeeId: number;
-  cId?: string; eId?: string;
-  token?: string;
+  cId?: string;
+  eId?: string;
 }

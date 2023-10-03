@@ -1,6 +1,6 @@
 export * from './button/button.component';
 export * from './custom-dropdown/custom-dropdown.component';
-export * from './custom-group-select/custom-group-select.component';
+export * from './custom-group-select-dashboard-header/custom-group-select-dashboard-header.component';
 export * from './custom-user-menu/custom-user-menu.component';
 export * from './date-picker/date-picker.component';
 export * from './expand/expand.component';

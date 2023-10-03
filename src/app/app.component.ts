@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { TOKEN } from '@shared/entities';
+import { IS_LOGGED_IN, TOKEN } from '@shared/entities';
 import { DestroyService, LoginService } from '@shared/services';
 import { LocalStorageService } from '@shared/web-api';
 import { takeUntil, tap } from 'rxjs';
@@ -21,7 +21,10 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.LoginService.currentToken.pipe(
-      tap(() => this.LoginService.currentToken$.next(this.localStorageService.getItem(TOKEN))),
+      tap(() => {
+        this.LoginService.currentToken$.next(this.localStorageService.getItem(TOKEN));
+        this.LoginService.isUserLogin$.next(this.localStorageService.getItem(IS_LOGGED_IN));
+      }),
       takeUntil(this.destroy$),
     ).subscribe();
   }

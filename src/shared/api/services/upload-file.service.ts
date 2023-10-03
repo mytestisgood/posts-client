@@ -4,8 +4,8 @@ import { environment } from '@environment';
 import { Observable } from 'rxjs';
 import { createObjectHttpParams } from '../../helpers/http.helper';
 import {
+  ProcessesUploadFileBody,
   UploadFileGetParameters,
-  UploadFilePostParameters,
   UploadFilePostResponse,
 } from '../models';
 
@@ -17,10 +17,10 @@ export class UploadFileService {
   }
 
   public apiProcessesUploadFileGet(data: UploadFileGetParameters): Observable<Array<string>> {
-    return this.http.get<Array<string>>(`${environment.authUrl}/api/processes/uploadFile/`, { params: createObjectHttpParams(data) });
+    return this.http.get<Array<string>>(`${environment.authUrl}/api/processes/uploadFile`, { params: createObjectHttpParams(data) });
   }
 
-  public apiProcessesUploadFilePost(data: UploadFilePostParameters): Observable<UploadFilePostResponse> {
-    return this.http.post<UploadFilePostResponse>(`${environment.authUrl}/api/processes/uploadFile/`, data);
+  public apiProcessesUploadFilePost(data: ProcessesUploadFileBody): Observable<UploadFilePostResponse> {
+    return this.http.post<UploadFilePostResponse>(`${environment.authUrl}/api/processes/uploadFile`, data);
   }
 }

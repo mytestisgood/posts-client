@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="flex flex-row justify-between mt-4">
-    <div>
+    <smarti-custom-dropdown [customContent]="buttonCustomDropdownActive">
       <smarti-button
         [text]="'פעולות'"
         [customButtonWidth]="'232px'"
@@ -14,7 +14,7 @@
         [typeClass]="'confirm'"
         [hasArrowDownIconFromLeft]="true"
       ></smarti-button>
-    </div>
+    </smarti-custom-dropdown>
     <div class="flex flex-row self-end gap-6">
       <smarti-custom-dropdown
         [customContent]="customDropdownContent"
@@ -45,11 +45,47 @@
     </div>
   </div>
   <div class="w-full h-672 bg-white box-shadow-big mt-4 rounded-l mb-34">
-    <smarti-dashboard-employers-table
-      [items]="recordList$ | async"
-      [token]="token"
-    ></smarti-dashboard-employers-table>
+    <ng-container *ngIf="recordList$ | async as recordList; else loadingTemplate">
+      <smarti-dashboard-employers-table [items]="recordList"></smarti-dashboard-employers-table>
+    </ng-container>
   </div>
 </div>
 
+<ng-template #loadingTemplate>
+  <smarti-loader
+    [size]="'xl'"
+    [paddingTop15percent]="true"
+  ></smarti-loader>
+</ng-template>
+
 <ng-template #customDropdownContent></ng-template>
+<ng-template #buttonCustomDropdownActive>
+  <div class="block-w248-h160 p-2">
+    <ul class="list-style-type-none">
+      <li
+        class="paragraph-text neutrals-text-500 text-right pr-6 py-2 cursor-pointer list-hovered"
+        (click)="onButtonDropdownClick('type')"
+      >
+        שליחה
+      </li>
+      <li
+        class="paragraph-text neutrals-text-500 text-right pr-6 py-2 cursor-pointer list-hovered"
+        (click)="onButtonDropdownClick('type')"
+      >
+        שליחה כוללת
+      </li>
+      <li
+        class="paragraph-text neutrals-text-500 text-right pr-6 py-2 cursor-pointer list-hovered"
+        (click)="onButtonDropdownClick('type')"
+      >
+        שליחת תקולים
+      </li>
+      <li
+        class="paragraph-text neutrals-text-500 text-right pr-6 py-2 cursor-pointer list-hovered"
+        (click)="onButtonDropdownClick('type')"
+      >
+        הורדה לאקסל
+      </li>
+    </ul>
+  </div>
+</ng-template>

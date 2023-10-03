@@ -1,16 +1,10 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { FormControl, FormControlStatus, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Output } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UploadPostResponse } from '@shared/api/models';
 import { FilesMyHrService } from '@shared/api/services';
-import { FileWithLoading } from '@shared/entities';
+import { FileUploadStatusAndId, FileWithLoading } from '@shared/entities';
+import { fileFromBlotToTextFormatHelper } from '@shared/helpers';
 import { DestroyService } from '@shared/services';
 import { TuiLinkModule, TuiLoaderModule, TuiSvgModule } from '@taiga-ui/core';
 import { TuiInputFilesModule, TuiMarkerIconModule } from '@taiga-ui/kit';
@@ -37,51 +31,43 @@ export class InputFileComponent implements OnInit {
   @Input() public customHeight!: string;
   @Input() public multiple: boolean = false;
   @Input() public control: FormControl<FileWithLoading[] | null> = new FormControl([]);
-  @Output() public fileUploaded: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  @Output() public fileUploaded: BehaviorSubject<FileUploadStatusAndId> =
+    new BehaviorSubject<FileUploadStatusAndId>({ status: false, id: null });
 
   public currentFile!: FileWithLoading;
   public id!: string | undefined;
+  private status!: 'VALID' | 'INVALID' | 'PENDING' | 'DISABLED';
 
   constructor(
     private readonly filesMyHrService: FilesMyHrService,
     private readonly destroy$: DestroyService,
-    private readonly cdr: ChangeDetectorRef,
   ) {
   }
 
   public ngOnInit(): void {
-    this.control.valueChanges.pipe(
+    this.control.statusChanges.pipe(
       switchMap(value => {
-        if (value?.length === 0) {
+        if (this.control.value?.length === 0) {
           return of();
         }
 
-        this.currentFile = value?.at(-1) as FileWithLoading;
+        this.currentFile = this.control.value?.at(-1) as FileWithLoading;
 
         if (!this.currentFile?.isUploaded) {
           this.currentFile.isLoading = true;
           this.currentFile.isUploaded = true;
         }
-
-        return this.filesMyHrService.apiUploadPost({
-          file: this.currentFile,
-          project: 'smarti-dev',
-        });
+        this.status = value;
+        return fileFromBlotToTextFormatHelper(this.currentFile).pipe(
+          switchMap((value: string) => this.filesMyHrService.apiUploadPost({ file: value })),
+        );
       }),
       takeUntil(this.destroy$),
-    )
-      .subscribe((response: UploadPostResponse) => {
-          this.id = response.opswatId;
-          this.currentFile.isLoading = false;
-          this.cdr.detectChanges();
-      });
-    this.control.statusChanges.pipe(
-      takeUntil(this.destroy$),
-    ).subscribe((status: FormControlStatus) => {
-      if (status === 'VALID' && this.control.value?.length) {
-        this.fileUploaded.next(true);
+    ).subscribe((response: UploadPostResponse) => {
+      if (this.status === 'VALID' && this.control.value?.length) {
+        this.fileUploaded.next({ status: true, id: response.opswatId as string });
       } else {
-        this.fileUploaded.next(false);
+        this.fileUploaded.next({ status: false, id: null });
       }
     });
   }

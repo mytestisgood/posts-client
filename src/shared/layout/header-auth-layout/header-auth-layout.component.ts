@@ -33,7 +33,7 @@ export class HeaderAuthLayoutComponent {
     this.loginService.currentToken$.pipe(
       takeUntil(this.destroy$),
     ).subscribe(token => {
-      this.router.navigate([token ? '/dashboard' : '/']);
+      this.router.navigate([token ? '/login' : '/']);
     });
   }
 }

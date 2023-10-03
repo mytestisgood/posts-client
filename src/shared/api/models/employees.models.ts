@@ -3,5 +3,4 @@ export interface GetEmployeesListGetParameters {
   employerId?: string;
   departmentId?: string;
   index?: string;
-  token?: string;
 }

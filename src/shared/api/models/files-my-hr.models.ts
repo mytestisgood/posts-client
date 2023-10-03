@@ -9,11 +9,6 @@ export interface StatusGetResponse {
   percentage?: number;
 }
 
-export interface UploadPostParameters {
-  project?: string;
-  file?: Blob;
-}
-
 export interface UploadPostResponse {
   message?: string;
   opswatId?: string;

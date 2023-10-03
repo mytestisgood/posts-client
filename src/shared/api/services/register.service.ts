@@ -6,7 +6,7 @@ import {
   CreateEmployerOutResponse,
   EmployersCreateEmployerOutBody,
   EmployersCreatePaymentOutBody,
-  EmployersCreateUserOutParameters,
+  EmployersCreateUserOutBody,
   SuccessResponse,
 } from '../models';
 
@@ -18,14 +18,14 @@ export class RegisterService {
   }
 
   public apiEmployersCreateEmployerOutPost(data: EmployersCreateEmployerOutBody): Observable<CreateEmployerOutResponse> {
-    return this.http.post<CreateEmployerOutResponse>(`${environment.authUrl}/api/employers/createEmployerOut/`, data);
+    return this.http.post<CreateEmployerOutResponse>(`${environment.authUrl}/api/employers/createEmployerOut`, data);
   }
 
-  public apiEmployersCreateUserOutPost(data: EmployersCreateUserOutParameters): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/employers/createUserOut/`, data);
+  public apiEmployersCreateUserOutPost(data: EmployersCreateUserOutBody): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/employers/createUserOut`, data);
   }
 
   public apiEmployersCreatePaymentOut(data: EmployersCreatePaymentOutBody): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/employers/createPaymentOut/`, data)
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/employers/createPaymentOut`, data)
   }
 }

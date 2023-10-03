@@ -4,10 +4,13 @@
   </div>
   <div class="flex flex-row justify-between rounded-xls bg-neutrals-950 box-shadow-big w-full h-18">
     <div class="group-block self-center box-shadow-regular m-2 bg-white">
-      <smarti-custom-group-select
-        [customWidth]="'252px'"
-        [textFieldSize]="'s'"
-      ></smarti-custom-group-select>
+      <ng-container *ngIf="getOrganizations$ | async as data">
+        <smarti-custom-group-select-dashboard-header
+          [customWidth]="'252px'"
+          [textFieldSize]="'s'"
+          [data]="data"
+        ></smarti-custom-group-select-dashboard-header>
+      </ng-container>
     </div>
     <div
       class="logo-big-h33 self-center mr-8 cursor-pointer"

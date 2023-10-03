@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   DocumentsGetResponse,
@@ -12,50 +12,58 @@ import { AddDocumentsDialogComponent } from '@shared/dialog';
 import {
   DashboardDocumentsAddDocument,
   DashboardDocumentsDownloadFile,
-  TOKEN,
+  DashboardHeaderIds,
 } from '@shared/entities';
 import { formattedCurrentDateTo, toBlobAndSaveFile } from '@shared/helpers';
-import { DestroyService } from '@shared/services';
+import { DataSharingService, DestroyService } from '@shared/services';
 import { DashboardDocumentsTableComponent } from '@shared/tables';
 import {
   ButtonComponent,
   InputFieldComponent,
   InputFileComponent,
+  LoaderComponent,
   SelectComponent,
 } from '@shared/ui';
-import { LocalStorageService } from '@shared/web-api';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import { map, Observable, takeUntil } from 'rxjs';
+import { filter, map, Observable, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-dashboard-documents',
   standalone: true,
   imports: [
     CommonModule, ButtonComponent, DashboardDocumentsTableComponent, SelectComponent,
-    InputFieldComponent, InputFileComponent, AddDocumentsDialogComponent,
+    InputFieldComponent, InputFileComponent, AddDocumentsDialogComponent, LoaderComponent,
   ],
   templateUrl: './dashboard-documents.component.html',
   styleUrls: ['./dashboard-documents.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardDocumentsComponent {
+export class DashboardDocumentsComponent implements OnInit {
   public filesControl: FormControl = new FormControl();
-  public token: string = this.localStorageService.getItem(TOKEN) as string;
-  public documents$: Observable<DocumentsGetResponseItems[] | null> = this.filesService.apiDocumentsGet({
-    token: this.token,
-    checkUnitType: true,
-    page: '1',
-    limit: '10',
-  }).pipe(map((response: DocumentsGetResponse) => response?.items ?? null));
+  public documents$!: Observable<DocumentsGetResponseItems[] | null>;
 
   constructor(
     @Inject(TuiDialogService)
     private readonly dialogs: TuiDialogService,
     private readonly destroy$: DestroyService,
     private readonly filesService: FilesService,
-    private readonly localStorageService: LocalStorageService,
+    private readonly dataSharingService: DataSharingService,
   ) {
+  }
+
+  public ngOnInit(): void {
+    this.documents$ = this.dataSharingService.dashboardHeaderIds.pipe(
+      filter(value => !!value.employerId),
+      switchMap((value: DashboardHeaderIds) => {
+        return this.filesService.apiDocumentsGet({
+          checkUnitType: true,
+          page: '1',
+          limit: '100',
+          employerId: value.employerId as string,
+        }).pipe(map((response: DocumentsGetResponse) => response?.items ?? null));
+      }),
+    );
   }
 
   public openAddDocumentDialog(content: PolymorpheusContent<TuiDialogContext>): void {
@@ -64,20 +72,16 @@ export class DashboardDocumentsComponent {
 
   public onSendRequest(request: DashboardDocumentsAddDocument): void {
     this.filesService.apiDocumentsPost({
-      token: this.token,
-      apiDocumentsBody: {
-        description: request.description,
-        date: Number(formattedCurrentDateTo('yyyy-mm-dd')),
-        documentType: request.documents as DocumentTypes,
-        employer_id: 0,
-        opswatIds: request.opswatId,
-      },
+      description: request.description,
+      date: Number(formattedCurrentDateTo('yyyy-mm-dd')),
+      documentType: request.documents as DocumentTypes,
+      employer_id: 0,
+      opswatIds: request.opswatId,
     }).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
   public onDownloadFile(documentData: DashboardDocumentsDownloadFile): void {
     this.filesService.apiDocumentsDocumentIdGet({
-      token: this.token,
       documentId: documentData.id,
       employerId: documentData.employerId,
     }).pipe(

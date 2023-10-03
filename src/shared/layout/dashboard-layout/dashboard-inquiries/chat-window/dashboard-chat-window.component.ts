@@ -4,9 +4,10 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ChatIdGetResponse, UploadPostResponse } from '@shared/api/models';
 import { ChatService, FilesMyHrService } from '@shared/api/services';
 import { CreateNewChatDialogComponent } from '@shared/dialog';
-import { setLineColorClass, TOKEN } from '@shared/entities';
+import { setLineColorClass } from '@shared/entities';
 import {
   downloadFileHelper,
+  fileFromBlotToTextFormatHelper,
   formattedCurrentDateTo,
   getDateFromStringIsoDate,
   getTimeFromStringIsoDate,
@@ -20,9 +21,8 @@ import {
   LoaderComponent,
   SelectComponent,
 } from '@shared/ui';
-import { LocalStorageService } from '@shared/web-api';
 import { TuiScrollbarModule } from '@taiga-ui/core';
-import { takeUntil } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-dashboard-chat-window',
@@ -39,7 +39,6 @@ import { takeUntil } from 'rxjs';
 export class DashboardChatWindowComponent {
   @Input() public chat!: ChatIdGetResponse | null;
 
-  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public messageControl: FormControl = new FormControl();
   public uploadedFileId!: string;
   public isFileUploaded: boolean = true;
@@ -49,7 +48,6 @@ export class DashboardChatWindowComponent {
   constructor(
     private readonly destroy$: DestroyService,
     private readonly chatService: ChatService,
-    private readonly localStorageService: LocalStorageService,
     private readonly filesMyHrService: FilesMyHrService,
     private readonly changeDetectorRef: ChangeDetectorRef,
   ) {
@@ -72,13 +70,10 @@ export class DashboardChatWindowComponent {
 
   public onSendMessage(chatId: string | undefined | number, employerId: string | undefined | number): void {
     this.chatService.apiChatsSaveMessageChatPost({
-      token: this.token,
-      chatsSaveMessageChatBody: {
-        chat_id: chatId as number,
-        message: this.messageControl.value,
-        employer_id: employerId as number,
-        opswatIds: this.uploadedFileId,
-      },
+      chat_id: chatId as number,
+      message: this.messageControl.value,
+      employer_id: employerId as number,
+      opswatIds: this.uploadedFileId,
     }).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
@@ -96,8 +91,9 @@ export class DashboardChatWindowComponent {
     const file: File = input.files[0];
 
     this.isFileUploaded = false;
-    this.filesMyHrService.apiUploadPost({ file, project: 'smarti-dev' }).pipe(
-      takeUntil(this.destroy$),
+    fileFromBlotToTextFormatHelper(file).pipe(
+      switchMap((value: string) => this.filesMyHrService.apiUploadPost({ file: value })),
+    takeUntil(this.destroy$),
     ).subscribe((response: UploadPostResponse) => {
       this.isFileUploaded = true;
       this.uploadedFileId = response.opswatId as string;

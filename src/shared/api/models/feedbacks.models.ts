@@ -59,7 +59,6 @@ export interface FeedbacksGetTransferParameters {
   sentGroupId?: StatusFileFeedback;
   statusSentGroup?: string;
   departmentId?: string;
-  token?: string;
 }
 
 export interface FeedbacksGetTransferResponse {
@@ -92,7 +91,6 @@ export interface FeedbacksGetTransferResponse {
 export interface FeedbacksProcessIdGetDetailsParameters {
   processId: string;
   departmentId?: string;
-  token?: string;
 }
 
 export interface FeedbacksProcessIdGetDetailsResponse {
@@ -111,7 +109,6 @@ export interface FeedbacksRecordsListGetParameters {
   organizationId?: string;
   page?: string;
   limit?: string;
-  token?: string;
 }
 
 export interface FeedbacksRecordsListGetResponse {

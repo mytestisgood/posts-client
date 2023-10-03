@@ -16,6 +16,7 @@ export * from './lead.models';
 export * from './leading-companies.models';
 export * from './menora.models';
 export * from './monthly-transfer-block.models';
+export * from './organications.models';
 export * from './processes.models';
 export * from './products.models';
 export * from './register.models';

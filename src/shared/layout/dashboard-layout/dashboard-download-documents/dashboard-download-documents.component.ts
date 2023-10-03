@@ -6,13 +6,11 @@ import { FilesService } from '@shared/api/services';
 import {
   dashboardDownloadDocumentsMapper,
   DashboardDownloadDocumentsModel,
-  TOKEN,
 } from '@shared/entities';
 import { toBlobAndSaveFile } from '@shared/helpers';
 import { DestroyService } from '@shared/services';
 import { DashboardDownloadDocumentsGridTableComponent } from '@shared/tables';
 import { ButtonComponent, InputSearchComponent } from '@shared/ui';
-import { LocalStorageService } from '@shared/web-api';
 import { debounceTime, takeUntil } from 'rxjs';
 
 @Component({
@@ -31,12 +29,10 @@ import { debounceTime, takeUntil } from 'rxjs';
 export class DashboardDownloadDocumentsComponent implements OnInit {
   public downloadDocuments: DashboardDownloadDocumentsModel[] = dashboardDownloadDocumentsMapper;
   public files!: DashboardDownloadDocumentsModel[];
-  public token: string = this.localStorageService.getItem(TOKEN) as string;
   public controlSearch: FormControl<string | null> = new FormControl<string>('');
 
   constructor(
     private readonly filesService: FilesService,
-    private readonly localStorageService: LocalStorageService,
     private readonly destroy$: DestroyService,
     private readonly changeDetectorRef: ChangeDetectorRef,
   ) {
@@ -55,20 +51,14 @@ export class DashboardDownloadDocumentsComponent implements OnInit {
   }
 
   public onDownloadFile(file: DashboardDownloadDocumentsModel): void {
-    this.filesService.apiGeneralsDownloadExampleFilePost({
-      token: this.token,
-      generalsDownloadExampleFileBody: { filename: file.name },
-    }).pipe(takeUntil(this.destroy$))
+    this.filesService.apiGeneralsDownloadExampleFilePost({ filename: file.name }).pipe(takeUntil(this.destroy$))
       .subscribe((response: FileDataExtResponse) => toBlobAndSaveFile(response));
   }
 
   public downloadSelectedDocuments(): void {
     this.files.forEach((item: DashboardDownloadDocumentsModel) => {
       if (item.isSelected) {
-        this.filesService.apiGeneralsDownloadExampleFilePost({
-          token: this.token,
-          generalsDownloadExampleFileBody: { filename: item.name },
-        }).pipe(takeUntil(this.destroy$))
+        this.filesService.apiGeneralsDownloadExampleFilePost({ filename: item.name }).pipe(takeUntil(this.destroy$))
           .subscribe((response: FileDataExtResponse) => toBlobAndSaveFile(response));
       }
     });

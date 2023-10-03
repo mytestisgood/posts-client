@@ -9,14 +9,9 @@ import {
 import { FileWithLoading } from './common.models';
 
 export interface DashboardHeaderGroupControls {
-  organization: FormControl<string | number | null>;
-  employer: FormControl<string | number | null>;
-  department: FormControl<string | number | null>;
-}
-
-export interface DashboardHomeSwitcherControls {
-  dates: FormControl<string | null>;
-  salaryMonth: FormControl<string | null>;
+  organization: FormControl<string | IdAndNameResponse | null>;
+  employer: FormControl<string | IdAndNameResponse | null>;
+  department: FormControl<string | IdAndNameResponse | null>;
 }
 
 export interface DashboardCreateNewChatGroupControls {
@@ -26,20 +21,6 @@ export interface DashboardCreateNewChatGroupControls {
   employee: FormControl<string | null>;
   referenceContent: FormControl<string | null>;
   file: FormControl<FileWithLoading[] | null>;
-}
-
-export interface DashboardMessagesItem {
-  date: string;
-  messages: DashboardMessages[];
-}
-
-export interface DashboardMessages {
-  title: string;
-  text: string;
-  time: string;
-  isUserMessage: boolean;
-  haveFile: boolean;
-  file: string | null;
 }
 
 export type DashboardDirection = 'forward' | 'back';
@@ -56,6 +37,12 @@ export enum DashboardStepEnum {
   FourthStep = 'fourthStep',
   FifthStep = 'fifthStep',
 }
+
+export type DashboardHeaderIds = {
+  organizationId?: string | null;
+  employerId?: string | null;
+  departmentId?: string | null;
+};
 
 export type DocumentTypesEmployerType = {
   employer_deposition: string | DocumentTypes,
