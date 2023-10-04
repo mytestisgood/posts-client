@@ -21,34 +21,43 @@
     ></smarti-select>
   </div>
   <div class="mt-12 mr-6 ml-4 mb-6">
-    <table class="tui-table tui-table_layout_fixed">
-      <tbody>
-        <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-2">
-          <th class="tui-table__th text-right caption-text neutrals-text-500">סטטוס</th>
-          <th class="tui-table__th text-right caption-text neutrals-text-500">סוג מוצר</th>
-          <th class="tui-table__th text-right caption-text neutrals-text-500">חודש</th>
-          <th class="tui-table__th text-right caption-text neutrals-text-500">חברה מנהלת</th>
-          <th class="tui-table__th text-right caption-text neutrals-text-500">שם התהליך</th>
-        </tr>
-        <tr
-          *ngFor="let compensation of feedbackEmployerReport?.reportsFeedback"
-          class="tui-table__tr tui-table__tr_border_none mb-1"
-        >
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">—</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">
-            {{ compensation }}
-          </td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">
-            {{ getMonthsFromDate(compensation) }}
-          </td>
-          <td class="tui-table__td text-right paragraph-text neutrals-text-500 h-10 p-2">
-            {{ compensation + " " + compensation }}
-          </td>
-          <td class="tui-table__td text-right paragraph-text neutrals-text-500 h-10 p-2">
-            {{ compensation }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <ng-container *ngIf="feedbackEmployerReport?.reportsFeedback?.length; else noTableDataTemplate">
+      <table class="tui-table tui-table_layout_fixed">
+        <tbody>
+          <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20 mb-2">
+            <th class="tui-table__th text-right caption-text neutrals-text-500">סטטוס</th>
+            <th class="tui-table__th text-right caption-text neutrals-text-500">סוג מוצר</th>
+            <th class="tui-table__th text-right caption-text neutrals-text-500">חודש</th>
+            <th class="tui-table__th text-right caption-text neutrals-text-500">חברה מנהלת</th>
+            <th class="tui-table__th text-right caption-text neutrals-text-500">שם התהליך</th>
+          </tr>
+          <tr
+            *ngFor="let compensation of feedbackEmployerReport?.reportsFeedback"
+            class="tui-table__tr tui-table__tr_border_none mb-1"
+          >
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">—</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">
+              {{ compensation }}
+            </td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2">
+              {{ getMonthsFromDate(compensation) }}
+            </td>
+            <td class="tui-table__td text-right paragraph-text neutrals-text-500 h-10 p-2">
+              {{ compensation + " " + compensation }}
+            </td>
+            <td class="tui-table__td text-right paragraph-text neutrals-text-500 h-10 p-2">
+              {{ compensation }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #noTableDataTemplate>
+  <div class="flex flex-row justify-center gap-6 mt-25">
+    <div class="men-with-flower-icon m-6"></div>
+    <div class="medium-text self-center ml-10">אין בקשות פתוחות!</div>
+  </div>
+</ng-template>

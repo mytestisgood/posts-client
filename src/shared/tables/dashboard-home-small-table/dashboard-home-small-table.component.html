@@ -26,26 +26,35 @@
     </div>
   </div>
   <div class="mt-4">
-    <table class="tui-table">
-      <tbody>
-        <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20">
-          <th class="tui-table__th text-center caption-text neutrals-text-500">Product Type</th>
-          <th class="tui-table__th text-center caption-text neutrals-text-500">Created At</th>
-          <th class="tui-table__th text-center caption-text neutrals-text-500">Employee First Name</th>
-          <th class="tui-table__th text-center caption-text neutrals-text-500">Employee Last Name</th>
-          <th class="tui-table__th text-center caption-text neutrals-text-500">Employee Identifier</th>
-        </tr>
-        <tr
-          class="tui-table__tr tui-table__tr_border_none"
-          *ngFor="let report of compensationReport?.reportsCompensation"
-        >
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500">{{ report.product_type }}</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500">{{ report.created_at }}</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500">{{ report.employee_first_name }}</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500">{{ report.employee_last_name }}</td>
-          <td class="tui-table__td text-center paragraph-text neutrals-text-500">{{ report.employee_identifier }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <ng-container *ngIf="compensationReport?.reportsCompensation?.length; else noTableDataTemplate">
+      <table class="tui-table">
+        <tbody>
+          <tr class="tui-table__tr tui-table__tr_border_none bg-neutrals-20">
+            <th class="tui-table__th text-center caption-text neutrals-text-500">Product Type</th>
+            <th class="tui-table__th text-center caption-text neutrals-text-500">Created At</th>
+            <th class="tui-table__th text-center caption-text neutrals-text-500">Employee First Name</th>
+            <th class="tui-table__th text-center caption-text neutrals-text-500">Employee Last Name</th>
+            <th class="tui-table__th text-center caption-text neutrals-text-500">Employee Identifier</th>
+          </tr>
+          <tr
+            class="tui-table__tr tui-table__tr_border_none"
+            *ngFor="let report of compensationReport?.reportsCompensation"
+          >
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500">{{ report.product_type }}</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500">{{ report.created_at }}</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500">{{ report.employee_first_name }}</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500">{{ report.employee_last_name }}</td>
+            <td class="tui-table__td text-center paragraph-text neutrals-text-500">{{ report.employee_identifier }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #noTableDataTemplate>
+  <div class="flex flex-row justify-center gap-6">
+    <div class="men-with-flower-icon m-6"></div>
+    <div class="medium-text self-center ml-10">אין בקשות פתוחות!</div>
+  </div>
+</ng-template>

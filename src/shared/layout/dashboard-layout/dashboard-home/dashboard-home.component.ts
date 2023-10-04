@@ -19,7 +19,7 @@ import { DataSharingService } from '@shared/services';
 import { DashboardHomeSmallTableComponent, DashboardHomeTableComponent } from '@shared/tables';
 import { ButtonComponent, InputYearComponent, LoaderComponent, SelectComponent } from '@shared/ui';
 import { LocalStorageService } from '@shared/web-api';
-import { filter, Observable, switchMap } from 'rxjs';
+import { delay, filter, map, Observable, of, switchMap } from 'rxjs';
 import {
   DashboardNotificationComponent,
 } from '../dashboard-notification/dashboard-notification.component';
@@ -53,6 +53,10 @@ export class DashboardHomeComponent implements OnInit {
   public chats$!: Observable<Array<object>>;
   public compensationReport$!: Observable<CompensationReportGetResponse>;
   public feedbackEmployerReport$!: Observable<FeedbackEmployerReportGetResponse>;
+  public notifications$: Observable<[]> = of([]).pipe(
+    delay(500),
+    map(() => ([])),
+  );
   public year!: number;
   public month!: number;
   public searchingDate!: string | undefined;

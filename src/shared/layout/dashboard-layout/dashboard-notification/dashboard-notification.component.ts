@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ButtonComponent } from '@shared/ui';
 import {
   DashboardNotificationItemComponent,
@@ -14,4 +14,5 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardNotificationComponent {
+  @Input() public notifications!: [] | null;
 }
