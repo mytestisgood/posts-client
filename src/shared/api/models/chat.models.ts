@@ -60,7 +60,7 @@ export interface ChatResponse {
 }
 
 export interface ChatsGetTatSubjectsGetParameters {
-  subjectId?: number;
+  subject_id?: number;
 }
 
 export interface ApiChatsBody {

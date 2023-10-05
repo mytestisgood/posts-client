@@ -3,7 +3,11 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Src } from '@shared/api/models';
 import { LeadService } from '@shared/api/services';
-import { emailValidatorPattern, LeadsForm } from '@shared/entities';
+import {
+  emailValidatorPattern,
+  israelMobilePhoneValidatorPattern,
+  LeadsForm,
+} from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { ButtonComponent, InputFieldComponent } from '@shared/ui';
 import { takeUntil } from 'rxjs';
@@ -34,7 +38,7 @@ export class LeadsDialogComponent {
       Validators.required,
       Validators.pattern(emailValidatorPattern),
     ]),
-    phone: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required, Validators.pattern(israelMobilePhoneValidatorPattern)]),
   });
 
   constructor(

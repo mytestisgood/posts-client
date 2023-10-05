@@ -19,7 +19,7 @@ export class SignInService {
     return this.http.post<SuccessResponse>(`${environment.authUrl}/api/users/checkVerifyCode`, data);
   }
 
-  public apiUsersSendVerifyCodePost(): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/users/sendVerifyCode`, {});
+  public apiUsersSendVerifyCodeGet(): Observable<SuccessResponse> {
+    return this.http.get<SuccessResponse>(`${environment.authUrl}/api/users/sendVerifyCode`);
   }
 }

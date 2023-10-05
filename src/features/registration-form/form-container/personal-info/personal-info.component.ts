@@ -92,7 +92,7 @@ export class PersonalInfoComponent implements OnInit {
       }),
       debounceTime(500),
       // switchMap(() => {
-      //   return this.signInService.apiUsersSendVerifyCodePost().pipe(takeUntil(this.destroy$));
+      //   return this.signInService.apiUsersSendVerifyCodeGet().pipe(takeUntil(this.destroy$));
       // }),
       takeUntil(this.destroy$),
     ).subscribe(() => this.changeStep.emit(direction));

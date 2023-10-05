@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
-  CompensationReportGetResponse,
+  CompensationsGetResponse,
   EmployerReportResponse,
+  EventCode,
   FeedbackEmployerReportGetResponse,
   UserResponse,
 } from '@shared/api/models';
-import { ChatService, HomeService } from '@shared/api/services';
+import { ChatService, CompensationsService, HomeService } from '@shared/api/services';
 import { CURRENT_USER, DashboardHeaderIds } from '@shared/entities';
 import {
-  formattedMonthAndYearDateTo,
   getCurrentMonthLastDayDate,
   getCurrentMonthStartDayDate,
   getCurrentTimeAndReturnStringMessage,
@@ -51,7 +51,7 @@ export class DashboardHomeComponent implements OnInit {
   public endDateCurrentMonth: string = getCurrentMonthLastDayDate('yyyy-mm-dd');
   public employerReport$!: Observable<EmployerReportResponse>;
   public chats$!: Observable<Array<object>>;
-  public compensationReport$!: Observable<CompensationReportGetResponse>;
+  public compensationReport$!: Observable<CompensationsGetResponse>;
   public feedbackEmployerReport$!: Observable<FeedbackEmployerReportGetResponse>;
   public notifications$: Observable<[]> = of([]).pipe(
     delay(500),
@@ -69,6 +69,7 @@ export class DashboardHomeComponent implements OnInit {
     private readonly chatService: ChatService,
     private readonly dataSharingService: DataSharingService,
     private readonly localStorageService: LocalStorageService,
+    private readonly compensationsService: CompensationsService,
   ) {}
 
   public ngOnInit(): void {
@@ -85,8 +86,6 @@ export class DashboardHomeComponent implements OnInit {
     if (!this.year) {
       return;
     }
-
-    this.onReportsCompensationGet();
   }
 
   public onChangeYear(year: number): void {
@@ -94,16 +93,10 @@ export class DashboardHomeComponent implements OnInit {
     if (!this.month) {
       return;
     }
-
-    this.onReportsCompensationGet();
   }
 
-  public onReportsCompensationGet(): void {
-    this.searchingDate = formattedMonthAndYearDateTo(this.month, this.year, 'yyyy-mm-dd');
-    this.compensationReport$ = this.homeService.apiReportsCompensationReportGet({
-      startDate: this.searchingDate,
-      endDate: this.searchingDate,
-    });
+  public onChangeModeEventCode(eventCode: EventCode): void {
+    this.compensationReportData(eventCode);
   }
 
   private chatsData(): void {
@@ -134,18 +127,17 @@ export class DashboardHomeComponent implements OnInit {
     );
   }
 
-  private compensationReportData(): void {
+  private compensationReportData(eventCode?: string): void {
     this.compensationReport$ = this.dataSharingService.dashboardHeaderIds.pipe(
       filter((value: DashboardHeaderIds) => !!value.organizationId),
       switchMap((value: DashboardHeaderIds) => {
-        return this.homeService.apiReportsCompensationReportGet({
-          startDate: this.startDateCurrentMonth,
-          endDate: this.endDateCurrentMonth,
+        return this.compensationsService.apiCompensationsGet({
           organizationId: value.organizationId as string,
           employerId: value.employerId as string,
           departmentId: value.departmentId as string,
-          type: 'employee',
-          salaryMonth: true,
+          limit: '15',
+          page: '1',
+          eventCode: eventCode as EventCode ?? '9301',
         });
       }),
     );

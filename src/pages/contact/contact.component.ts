@@ -9,7 +9,11 @@ import {
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LeadService } from '@shared/api/services';
 import { ScrollManagerDirective } from '@shared/directives';
-import { emailValidatorPattern, LeadsForm } from '@shared/entities';
+import {
+  emailValidatorPattern,
+  israelMobilePhoneValidatorPattern,
+  LeadsForm,
+} from '@shared/entities';
 import { FooterComponent, HeaderComponent } from '@shared/layout';
 import { DestroyService } from '@shared/services';
 import { ButtonComponent, ExpandComponent, InputFieldComponent } from '@shared/ui';
@@ -40,7 +44,7 @@ export class ContactComponent implements AfterViewInit {
       Validators.required,
       Validators.pattern(emailValidatorPattern),
     ]),
-    phone: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required, Validators.pattern(israelMobilePhoneValidatorPattern)]),
   });
 
   constructor(

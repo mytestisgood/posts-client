@@ -55,6 +55,7 @@
         <div class="dashboard-info-grid__footer box-shadow-big rounded-l">
           <smarti-dashboard-home-small-table
             [compensationReport]="compensationReport$ | async"
+            (changeModeEventCode)="onChangeModeEventCode($event)"
           ></smarti-dashboard-home-small-table>
         </div>
       </div>

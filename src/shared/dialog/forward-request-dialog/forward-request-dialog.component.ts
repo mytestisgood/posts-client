@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RegisterService } from '@shared/api/services';
-import { emailValidatorPattern } from '@shared/entities';
+import { UserService } from '@shared/api/services';
+import { emailValidatorPattern, israelMobilePhoneValidatorPattern } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { ButtonComponent, InputFieldComponent, InputNumberComponent } from '@shared/ui';
 import { BehaviorSubject, takeUntil } from 'rxjs';
@@ -39,13 +39,13 @@ export class ForwardRequestDialogComponent {
       Validators.required,
       Validators.pattern(emailValidatorPattern),
     ]),
-    phone: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required, Validators.pattern(israelMobilePhoneValidatorPattern)]),
     userName: new FormControl(''),
   });
 
   constructor(
     private readonly destroy$: DestroyService,
-    private readonly registerService: RegisterService,
+    private readonly userService: UserService,
   ) {
   }
 
@@ -54,7 +54,7 @@ export class ForwardRequestDialogComponent {
   }
 
   public sendRequest(): void {
-    this.registerService.apiEmployersCreateUserOutPost({
+    this.userService.apiEmployersCreateUserOutPost({
       email: this.forwardRequestForm.controls.email.value as string,
       phone: this.forwardRequestForm.controls.phone.value as string,
       user_name: this.forwardRequestForm.controls.userName.value as string,

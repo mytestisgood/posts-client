@@ -13,10 +13,10 @@ export class FilesMyHrService {
   }
 
   public apiStatusGet(data: StatusGetParameters): Observable<StatusGetResponse> {
-    return this.http.get<StatusGetResponse>(`${environment.authUrl}/api/status`, { params: createObjectHttpParams(data) });
+    return this.http.get<StatusGetResponse>(`${environment.fileUploadUrl}/api/status`, { params: createObjectHttpParams(data) });
   }
 
   public apiUploadPost(data: { file: string }): Observable<UploadPostResponse> {
-    return this.http.post<UploadPostResponse>(`${environment.authUrl}/api/upload`, data);
+    return this.http.post<UploadPostResponse>(`${environment.fileUploadUrl}/api/upload`, data);
   }
 }

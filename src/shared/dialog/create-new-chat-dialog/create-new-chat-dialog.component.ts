@@ -51,7 +51,7 @@ export class CreateNewChatDialogComponent implements OnInit {
         this.hideDocumentType = false;
 
         return this.chatService.apiChatsGetTatSubjectsGet({
-          subjectId: value?.id,
+          subject_id: value?.id,
         }).pipe(
           tap((response: IdAndNameResponse[]) => this.tatSubjectOption = response),
         );
