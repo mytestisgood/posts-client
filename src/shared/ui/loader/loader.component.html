@@ -2,12 +2,14 @@
   class="relative"
   [ngClass]="{
     'pt-30percent': paddingTop30percent,
-    'pt-15percent': paddingTop15percent
+    'pt-15percent': paddingTop15percent,
+    'pt-5percent': paddingTop5percent
   }"
 >
   <tui-loader
     [size]="size"
     [overlay]="overlay"
     [inheritColor]="inheritColor"
+    [ngClass]="{ 'overflow-initial': overflowInitial }"
   ></tui-loader>
 </div>

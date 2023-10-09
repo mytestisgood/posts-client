@@ -174,3 +174,7 @@ export function getCurrentTimeAndReturnStringMessage(): string {
 
   return 'Night';
 }
+
+export function getLastDayOfMonths(): Date {
+  return new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0, 23, 59, 59);
+}

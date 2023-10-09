@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TuiLoaderModule } from '@taiga-ui/core';
 
 @Component({
@@ -16,4 +16,6 @@ export class LoaderComponent {
   @Input() public overlay: boolean = false;
   @Input() public paddingTop30percent: boolean = false;
   @Input() public paddingTop15percent: boolean = false;
+  @Input() public paddingTop5percent: boolean = false;
+  @Input() public overflowInitial: boolean = false;
 }

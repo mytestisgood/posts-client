@@ -1,6 +1,9 @@
-<div class="clock-block white-text">
+<div
+  *ngIf="isLoaded; else loadingTimerTemplate"
+  class="clock-block white-text"
+>
   <div class="clock-block__face bg-neutrals-950">
-    <h4 class="clock-block__face-time w-fit-content">00</h4>
+    <h4 class="clock-block__face-time w-fit-content">{{ timer.days }}</h4>
     <div class="clock-block__face-text caption-text-medium w-fit-content">ימים</div>
   </div>
   <div class="clock-block__divider">
@@ -8,7 +11,7 @@
     <div class="clock-block__divider-item rounded-full bg-neutrals-950"></div>
   </div>
   <div class="clock-block__face bg-neutrals-950">
-    <h4 class="clock-block__face-time w-fit-content">15</h4>
+    <h4 class="clock-block__face-time w-fit-content">{{ timer.hrs }}</h4>
     <div class="clock-block__face-text caption-text-medium w-fit-content">שעות</div>
   </div>
   <div class="clock-block__divider">
@@ -16,7 +19,7 @@
     <div class="clock-block__divider-item rounded-full bg-neutrals-950"></div>
   </div>
   <div class="clock-block__face bg-neutrals-950">
-    <h4 class="clock-block__face-time w-fit-content">35</h4>
+    <h4 class="clock-block__face-time w-fit-content">{{ timer.min }}</h4>
     <div class="clock-block__face-text caption-text-medium w-fit-content">דקות</div>
   </div>
   <div class="clock-block__divider">
@@ -24,7 +27,15 @@
     <div class="clock-block__divider-item rounded-full bg-neutrals-950"></div>
   </div>
   <div class="clock-block__face bg-neutrals-950">
-    <h4 class="clock-block__face-time w-fit-content">48</h4>
+    <h4 class="clock-block__face-time w-fit-content">{{ timer.sec }}</h4>
     <div class="clock-block__face-text caption-text-medium w-fit-content">שניות</div>
   </div>
 </div>
+
+<ng-template #loadingTimerTemplate>
+  <smarti-loader
+    [size]="'l'"
+    [paddingTop5percent]="true"
+    [overflowInitial]="true"
+  ></smarti-loader>
+</ng-template>

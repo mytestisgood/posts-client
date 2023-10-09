@@ -72,6 +72,26 @@ body {
   position: absolute;
 }
 
+.fixed {
+  position: fixed;
+}
+
+.t-0 {
+  top: 0;
+}
+
+.r-0 {
+  right: 0;
+}
+
+.l-0 {
+  left: 0;
+}
+
+.b-0 {
+  bottom: 0;
+}
+
 .dir-rtl {
   direction: rtl;
 }
@@ -103,4 +123,8 @@ router-outlet.router-flex + * {
 
 .list-style-type-none {
   list-style-type: none;
+}
+
+.overflow-initial {
+  overflow: initial !important;
 }

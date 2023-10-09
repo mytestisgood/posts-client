@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Input() public typeClass!: 'confirm' | 'interaction' | 'dark' | 'white';
+  @Input() public typeClass!: 'confirm' | 'interaction' | 'dark' | 'white' | 'rose' | 'blue';
   @Input() public text!: string;
   @Input() public iconName!: string;
   @Input() public customMargin!: string;

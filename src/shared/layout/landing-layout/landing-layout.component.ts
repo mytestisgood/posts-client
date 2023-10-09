@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router, Scroll } from '@angular/router';
 import { NavigationEvent } from '@shared/entities';
+import { MainLayoutPopupComponent } from '@shared/popup';
 import { DestroyService } from '@shared/services';
 import { filter, takeUntil } from 'rxjs';
 import { AboutLayoutComponent } from './about-layout/about-layout.component';
@@ -36,6 +37,7 @@ import {
     EmployeeManagementLayoutComponent,
     BlogLayoutComponent,
     QuestionsBannerLayoutComponent,
+    MainLayoutPopupComponent,
   ],
   templateUrl: './landing-layout.component.html',
   styleUrls: ['./landing-layout.component.scss'],

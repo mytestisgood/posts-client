@@ -16,7 +16,7 @@
   background: $bright-turquoise-500;
 }
 
-.confirm-button:hover, .confirm-buttonbutton:active{
+.confirm-button:hover, .confirm-button:active{
   background: $bright-turquoise-600;
 }
 
@@ -34,6 +34,32 @@
 }
 
 .white-button:disabled {
+  background: $neutrals-100;
+}
+
+.rose-button {
+  background: $rose-base-500;
+  color: $white;
+}
+
+.rose-button:hover, .rose-button:active{
+  background: $rose-600;
+}
+
+.rose-button:disabled {
+  background: $neutrals-100;
+}
+
+.blue-button {
+  background: $blue-base-600;
+  color: $white;
+}
+
+.blue-button:hover, .blue-button:active{
+  background: $blue-700;
+}
+
+.blue-button:disabled {
   background: $neutrals-100;
 }
 
