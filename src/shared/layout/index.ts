@@ -9,6 +9,7 @@ export * from './landing-layout/connect-now-layout/connect-now-layout.component'
 export * from './landing-layout/employee-management-layout/employee-management-layout.component';
 export * from './landing-layout/footer/footer.component';
 export * from './landing-layout/header/header.component';
+export * from './landing-layout/header-overlay-mobile/header-overlay-mobile.component';
 export * from './landing-layout/main-banner-layout/main-banner-layout.component';
 export * from './landing-layout/questions-banner-layout/questions-banner-layout.component';
 export * from './landing-layout/run-business-layout/run-business-layout.component';

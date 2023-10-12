@@ -27,7 +27,7 @@ import {
   InputNumberComponent,
 } from '@shared/ui';
 import { LocalStorageService } from '@shared/web-api';
-import { debounceTime, Observable, takeUntil, tap } from 'rxjs';
+import { debounceTime, Observable, switchMap, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'smarti-personal-info',
@@ -91,9 +91,9 @@ export class PersonalInfoComponent implements OnInit {
         this.subformInitialized.emit(this.personalInfoForm);
       }),
       debounceTime(500),
-      // switchMap(() => {
-      //   return this.signInService.apiUsersSendVerifyCodeGet().pipe(takeUntil(this.destroy$));
-      // }),
+      switchMap(() => {
+        return this.signInService.apiUsersSendVerifyCodeGet().pipe(takeUntil(this.destroy$));
+      }),
       takeUntil(this.destroy$),
     ).subscribe(() => this.changeStep.emit(direction));
   }

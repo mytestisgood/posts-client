@@ -16,7 +16,10 @@ export class FilesMyHrService {
     return this.http.get<StatusGetResponse>(`${environment.fileUploadUrl}/api/status`, { params: createObjectHttpParams(data) });
   }
 
-  public apiUploadPost(data: { file: string }): Observable<UploadPostResponse> {
-    return this.http.post<UploadPostResponse>(`${environment.fileUploadUrl}/api/upload`, data);
+  public apiUploadPost(data: { file: Blob }): Observable<UploadPostResponse> {
+    const formData = new FormData();
+    formData.append('file', data.file);
+
+    return this.http.post<UploadPostResponse>(`${environment.fileUploadUrl}/api/upload`, formData);
   }
 }

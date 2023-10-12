@@ -1,17 +1,17 @@
 <!-- header for special offer -->
-<div class="all-headers">
+<div class="sticky top-0 z-[1000]">
   <div
     class="bg-green"
     id="specialHeader"
   >
-    <div class="special-header flex justify-between items-center">
-      <div class="flex justify-between gap-143px">
+    <div class="mobile:hidden flex justify-between items-center mx-[140px] mt-0 h-[72px] lg-tablet:mx-4 tablet:mx-2">
+      <div class="flex justify-between gap-143px tablet:gap-6">
         <div
           class="close-circle-24 cursor-pointer"
           (click)="closeSpecialHeader()"
         ></div>
         <div
-          class="button-trial flex gap-2 items-center rounded-m border-neutrals-950 cursor-pointer"
+          class="py-0 px-8 tablet:px-2 h-[42px] flex gap-2 items-center rounded-m border-neutrals-950 cursor-pointer"
           (click)="navigateToPageWithoutAnchor(registrationLink)"
         >
           <div class="arrow-left-dark-16"></div>
@@ -23,10 +23,26 @@
 
       <h4 class="medium">מבצע: חודש ניסיון חינם</h4>
     </div>
+
+    <div class="gt-mobile:hidden flex flex-col">
+      <div
+        class="close-circle-24 cursor-pointer m-1"
+        (click)="closeSpecialHeader()"
+      ></div>
+      <div class="paragraph-text-extra text-center">התחילו מסלול חינם</div>
+      <div
+        class="py-0 tablet:px-2 flex gap-2 self-center border-b border-black mt-5 mb-3"
+        (click)="navigateToPageWithoutAnchor(registrationLink)"
+      >
+        <div class="arrow-left-dark-16"></div>
+        <div class="paragraph-text-extra">התחילו מסלול חינם</div>
+      </div>
+    </div>
   </div>
 
-  <div class="bg-header white-text bg-neutrals-950">
-    <div class="header flex justify-between items-center">
+  <!-- standard header -->
+  <div class="white-text bg-neutrals-950 lt-lg-tablet:hidden">
+    <div class="my-0 gt-lg-tablet:mx-[140px] mx-6 h-[72px] flex justify-between items-center">
       <div class="flex">
         <smarti-button
           [typeClass]="'confirm'"
@@ -49,14 +65,14 @@
       </div>
       <nav class="flex">
         <a
-          class="nav-block paragraph-text-light self-center cursor-pointer"
+          class="my-0 gt-lg-tablet:mx-[40px] mx-6 paragraph-text-light self-center cursor-pointer"
           (click)="navigateToPageWithoutAnchor(contactLink)"
         >
           צרו קשר
         </a>
         <!--      about-->
         <a
-          class="nav-block paragraph-text-light self-center cursor-pointer"
+          class="my-0 gt-lg-tablet:mx-[40px] mx-6 paragraph-text-light self-center cursor-pointer"
           smartiScrollAnchor="banner"
           (click)="navigateToPageWithAnchor(mainLink, 'banner')"
         >
@@ -64,7 +80,7 @@
         </a>
         <!--      solution-->
         <a
-          class="nav-block paragraph-text-light self-center cursor-pointer"
+          class="my-0 gt-lg-tablet:mx-[40px] mx-6 paragraph-text-light self-center cursor-pointer"
           smartiScrollAnchor="about"
           (click)="navigateToPageWithAnchor(mainLink, 'about')"
         >
@@ -77,4 +93,7 @@
       </nav>
     </div>
   </div>
+  <smarti-header-overlay-mobile
+    class="gt-tablet:hidden bg-neutrals-950 flex flex-row justify-between px-8 py-6"
+  ></smarti-header-overlay-mobile>
 </div>

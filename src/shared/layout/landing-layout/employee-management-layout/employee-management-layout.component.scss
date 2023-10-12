@@ -1,31 +1,4 @@
-.employee-management-right {
-  margin-top: 96px;
+.happy-man-image {
   background: url("/assets/img/happy-man.png");
-  width: 640px;
-  height: 640px;
-}
-
-.employee-management-left {
-  margin-top: 168px;
-
-  &__item {
-    width: 674px;
-    height: 88px;
-
-    &:hover {
-      opacity: 0.9;
-    }
-
-    &__button {
-      margin: 16px 0 16px 16px;
-      width: 124px;
-      height: 56px;
-    }
-
-    &__text {
-      width: 366px;
-      height: 71px;
-      margin: 8px 32px 8px 0;
-    }
-  }
+  background-size: cover;
 }

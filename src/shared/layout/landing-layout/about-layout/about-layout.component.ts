@@ -1,16 +1,17 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { LeadsDialogComponent } from '@shared/dialog';
 import { ScrollSectionDirective } from '@shared/directives';
 import { DestroyService } from '@shared/services';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { TuiCarouselModule } from '@taiga-ui/kit';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-about-layout',
   standalone: true,
-  imports: [CommonModule, LeadsDialogComponent, ScrollSectionDirective],
+  imports: [CommonModule, LeadsDialogComponent, ScrollSectionDirective, TuiCarouselModule],
   templateUrl: './about-layout.component.html',
   styleUrls: ['./about-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

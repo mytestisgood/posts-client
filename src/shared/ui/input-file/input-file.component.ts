@@ -11,7 +11,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UploadPostResponse } from '@shared/api/models';
 import { FilesMyHrService } from '@shared/api/services';
 import { FileUploadStatusAndId, FileWithLoading } from '@shared/entities';
-import { fileFromBlotToTextFormatHelper } from '@shared/helpers';
 import { DestroyService } from '@shared/services';
 import { TuiLinkModule, TuiLoaderModule, TuiSvgModule } from '@taiga-ui/core';
 import { TuiInputFilesModule, TuiMarkerIconModule } from '@taiga-ui/kit';
@@ -67,9 +66,7 @@ export class InputFileComponent implements OnInit {
           this.currentFile.isUploaded = true;
         }
         this.status = value;
-        return fileFromBlotToTextFormatHelper(this.currentFile).pipe(
-          switchMap((value: string) => this.filesMyHrService.apiUploadPost({ file: value })),
-        );
+        return this.filesMyHrService.apiUploadPost({ file: this.currentFile });
       }),
       takeUntil(this.destroy$),
     ).subscribe((response: UploadPostResponse) => {

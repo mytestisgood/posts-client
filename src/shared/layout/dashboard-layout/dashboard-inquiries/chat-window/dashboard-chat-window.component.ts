@@ -7,7 +7,6 @@ import { CreateNewChatDialogComponent } from '@shared/dialog';
 import { setLineColorClass } from '@shared/entities';
 import {
   downloadFileHelper,
-  fileFromBlotToTextFormatHelper,
   formattedCurrentDateTo,
   getDateFromStringIsoDate,
   getTimeFromStringIsoDate,
@@ -22,7 +21,7 @@ import {
   SelectComponent,
 } from '@shared/ui';
 import { TuiScrollbarModule } from '@taiga-ui/core';
-import { switchMap, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-dashboard-chat-window',
@@ -91,9 +90,8 @@ export class DashboardChatWindowComponent {
     const file: File = input.files[0];
 
     this.isFileUploaded = false;
-    fileFromBlotToTextFormatHelper(file).pipe(
-      switchMap((value: string) => this.filesMyHrService.apiUploadPost({ file: value })),
-    takeUntil(this.destroy$),
+    this.filesMyHrService.apiUploadPost({ file }).pipe(
+      takeUntil(this.destroy$),
     ).subscribe((response: UploadPostResponse) => {
       this.isFileUploaded = true;
       this.uploadedFileId = response.opswatId as string;

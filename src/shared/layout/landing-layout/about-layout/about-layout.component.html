@@ -4,41 +4,47 @@
   id="about"
 >
   <div class="smarti-heading-text bright-turquoise-text-500">אודות Smarti</div>
-  <div class="smarti-describing-text white-text">
+  <div class="smarti-describing-text my-0 mx-auto white-text">
     <div>בית תוכנה המתמחה בפתרונות סליקה פנסיונית</div>
     <div>ממשק ישיר מול חברות הביטוח ושירות זמין ואישי</div>
   </div>
 </div>
 
-<div class="about-block-forms flex justify-between">
-  <div
-    class="about-block-forms__item cursor-pointer"
-    (click)="openLeadsDialog(firstLeadsDialogTemplate)"
-  >
-    <div class="first-about-form-image"></div>
-    <h4 class="medium text-center mt-2 white-text">הצטרפות לפנסיה</h4>
-  </div>
-  <div
-    class="about-block-forms__item cursor-pointer"
-    (click)="openLeadsDialog(secondLeadsDialogTemplate)"
-  >
-    <div class="second-about-form-image"></div>
-    <h4 class="medium text-center mt-2 white-text">טופס 161 החדש</h4>
-  </div>
-  <div
-    class="about-block-forms__item cursor-pointer"
-    (click)="openLeadsDialog(thirdLeadsDialogTemplate)"
-  >
-    <div class="third-about-form-image"></div>
-    <h4 class="medium text-center mt-2 white-text">ניהול פנסיוני אישי</h4>
-  </div>
-  <div
-    class="about-block-forms__item cursor-pointer"
-    (click)="openLeadsDialog(fourthLeadsDialogTemplate)"
-  >
-    <div class="fourth-about-form-image"></div>
-    <h4 class="medium text-center mt-2 white-text">דוח שנתי</h4>
-  </div>
+<div class="mt-[104px] mx-auto mb-0 max-w-fit">
+  <tui-carousel [draggable]="true">
+    <div
+      *tuiItem
+      class="hover:opacity-90 cursor-pointer mx-4"
+      (click)="openLeadsDialog(firstLeadsDialogTemplate)"
+    >
+      <div class="first-about-form-image"></div>
+      <h4 class="medium text-center mt-2 white-text">הצטרפות לפנסיה</h4>
+    </div>
+    <div
+      *tuiItem
+      class="hover:opacity-90 cursor-pointer mx-4"
+      (click)="openLeadsDialog(secondLeadsDialogTemplate)"
+    >
+      <div class="second-about-form-image"></div>
+      <h4 class="medium text-center mt-2 white-text">טופס 161 החדש</h4>
+    </div>
+    <div
+      *tuiItem
+      class="hover:opacity-90 cursor-pointer mx-4"
+      (click)="openLeadsDialog(thirdLeadsDialogTemplate)"
+    >
+      <div class="third-about-form-image"></div>
+      <h4 class="medium text-center mt-2 white-text">ניהול פנסיוני אישי</h4>
+    </div>
+    <div
+      *tuiItem
+      class="hover:opacity-90 cursor-pointer mx-4"
+      (click)="openLeadsDialog(fourthLeadsDialogTemplate)"
+    >
+      <div class="fourth-about-form-image"></div>
+      <h4 class="medium text-center mt-2 white-text">דוח שנתי</h4>
+    </div>
+  </tui-carousel>
 </div>
 
 <ng-template

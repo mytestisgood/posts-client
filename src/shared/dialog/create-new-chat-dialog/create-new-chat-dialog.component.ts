@@ -4,7 +4,6 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IdAndNameResponse, UploadPostResponse } from '@shared/api/models';
 import { ChatService, FilesMyHrService } from '@shared/api/services';
 import { DashboardCreateNewChatGroupControls, FileUploadStatusAndId } from '@shared/entities';
-import { fileFromBlotToTextFormatHelper } from '@shared/helpers';
 import { DestroyService } from '@shared/services';
 import {
   ButtonComponent,
@@ -65,8 +64,7 @@ export class CreateNewChatDialogComponent implements OnInit {
 
   public onAddFileClick(): void {
     if (this.form.value.file) {
-      fileFromBlotToTextFormatHelper(this.form.value.file[0] as File).pipe(
-        switchMap((value: string) => this.filesMyHrService.apiUploadPost({ file: value })),
+      this.filesMyHrService.apiUploadPost({ file: this.form.value.file[0] }).pipe(
         takeUntil(this.destroy$),
       ).subscribe((response: UploadPostResponse) => {
         this.sendRequest.next(response.opswatId as string);

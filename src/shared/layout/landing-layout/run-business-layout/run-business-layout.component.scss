@@ -1,35 +1,9 @@
-.run-business {
-  display: inline-block;
-  width: 100%;
-  height: 744px;
-  margin-top: 160px;
+.gradient-rounded-background {
+  background: url("/assets/img/gradient-rounded.png");
+  background-size: cover;
+}
 
-  &__block {
-    margin: 160px 140px 0;
-    background: url("/assets/img/gradient-rounded.png");
-    height: 424px;
-    position: relative;
-
-    &__left {
-      background: url("/assets/img/application-image.png");
-      width: 613px;
-      height: 476px;
-      position: relative;
-      left: -80px;
-      top: -60px;
-    }
-
-    &__right {
-      width: 1088px;
-      margin-top: 55px;
-
-      &__header {
-        width: 380px;
-      }
-
-      &__description {
-        width: 777px;
-      }
-    }
-  }
+.application-image {
+  background: url("/assets/img/application-image.png");
+  background-size: cover;
 }

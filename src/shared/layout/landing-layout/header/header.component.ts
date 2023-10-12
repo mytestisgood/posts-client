@@ -1,18 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NavigationSkipped, Router, Scroll } from '@angular/router';
+import { Router } from '@angular/router';
 import { ClockFeatureComponent } from '@feature';
 import { ScrollAnchorDirective } from '@shared/directives';
-import { NavigationEvent, SPECIAL_HEADER_TOKEN, SpecialHeaderTokenEnum } from '@shared/entities';
-import { DestroyService } from '@shared/services';
+import { SPECIAL_HEADER_TOKEN, SpecialHeaderTokenEnum } from '@shared/entities';
+import { DestroyService, NavigationAnchorService } from '@shared/services';
 import { ButtonComponent } from '@shared/ui';
 import { LocalStorageService } from '@shared/web-api';
-import { filter, takeUntil } from 'rxjs';
+import {
+  HeaderOverlayMobileComponent,
+} from '../header-overlay-mobile/header-overlay-mobile.component';
 
 @Component({
   selector: 'smarti-header',
   standalone: true,
-  imports: [CommonModule, ClockFeatureComponent, ButtonComponent, ScrollAnchorDirective],
+  imports: [
+    CommonModule, ClockFeatureComponent, ButtonComponent, ScrollAnchorDirective,
+    HeaderOverlayMobileComponent,
+  ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +32,7 @@ export class HeaderComponent {
     private readonly router: Router,
     private readonly destroy$: DestroyService,
     private readonly localStorageService: LocalStorageService,
+    private readonly navigationAnchorService: NavigationAnchorService,
   ) {
     this.localStorageService.setItem(SPECIAL_HEADER_TOKEN, SpecialHeaderTokenEnum.Show);
   }
@@ -36,45 +42,7 @@ export class HeaderComponent {
   }
 
   public navigateToPageWithAnchor(link: string, anchor?: string): void {
-    const hash: string = window.location.hash.replace('#', '');
-
-    switch (this.router.url) {
-      case link:
-        if (anchor === undefined) {
-          this.router.navigate([this.mainLink]);
-        }
-        break;
-
-      case this.contactLink:
-        this.router.navigate([link], { fragment: anchor, replaceUrl: true });
-        if (anchor) {
-          this.scrollToElement(anchor as string);
-        }
-        break;
-
-      default:
-        if (anchor && hash !== '') {
-          location.hash = '';
-          this.router.events.pipe(
-            filter((e: NavigationEvent) => e instanceof Scroll),
-            takeUntil(this.destroy$),
-          ).subscribe((e: NavigationEvent) => {
-            if (!(!(e instanceof Scroll) || e.routerEvent instanceof NavigationSkipped) &&
-              e.routerEvent.url === '/main') {
-              this.scrollToElement(anchor as string);
-            }
-          });
-        }
-        break;
-    }
-  }
-
-  public scrollToElement(anchor: string): void {
-    const element: HTMLElement = document.getElementById(anchor) as HTMLElement;
-    const anchorOffset: 220 | 140 = anchor === 'about' ? 220 : 140;
-    const offsetValue: number = element?.offsetTop - anchorOffset;
-
-    window.scrollTo({ top: offsetValue, behavior: 'smooth' });
+    this.navigationAnchorService.navigateToPageWithAnchor(link, anchor);
   }
 
   public closeSpecialHeader(): void {
