@@ -8,8 +8,8 @@ import { filter, takeUntil } from 'rxjs';
 import { AboutLayoutComponent } from './about-layout/about-layout.component';
 import { BlogLayoutComponent } from './blog-layout/blog-layout.component';
 import {
-  CompanySliderLayoutComponent,
-} from './company-slider-layout/company-slider-layout.component';
+  CompanyCarouselLayoutComponent,
+} from './company-carousel-layout/company-carousel-layout.component';
 import { ConnectNowLayoutComponent } from './connect-now-layout/connect-now-layout.component';
 import {
   EmployeeManagementLayoutComponent,
@@ -32,7 +32,7 @@ import {
     AboutLayoutComponent,
     StartDayWithSmartiLayoutComponent,
     ConnectNowLayoutComponent,
-    CompanySliderLayoutComponent,
+    CompanyCarouselLayoutComponent,
     RunBusinessLayoutComponent,
     EmployeeManagementLayoutComponent,
     BlogLayoutComponent,

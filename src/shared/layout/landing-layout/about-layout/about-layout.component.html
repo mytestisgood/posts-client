@@ -10,41 +10,51 @@
   </div>
 </div>
 
-<div class="mt-[104px] mx-auto mb-0 max-w-fit">
-  <tui-carousel [draggable]="true">
+<div class="mt-12 about-carousel-custom-width:mx-auto mx-4 mb-0 flex flex-col gap-8 max-w-fit">
+  <div class="flex flex-row justify-between">
     <div
-      *tuiItem
-      class="hover:opacity-90 cursor-pointer mx-4"
+      class="lt-lg-tablet:hidden about-carousel-custom-width:hidden arrow-left-white-24 !w-8 !h-8 !bg-cover"
+      (click)="carouselMove('left')"
+    ></div>
+
+    <div
+      class="lt-lg-tablet:hidden about-carousel-custom-width:hidden arrow-right-white-24 !w-8 !h-8 !bg-cover"
+      (click)="carouselMove('right')"
+    ></div>
+  </div>
+  <div
+    #carouselAboutElement
+    class="gap-4 inline-flex justify-between items-center h-[380px] w-full overflow-x-scroll scroll-smooth bg-transparent"
+  >
+    <div
+      class="hover:opacity-90 cursor-pointer"
       (click)="openLeadsDialog(firstLeadsDialogTemplate)"
     >
       <div class="first-about-form-image"></div>
       <h4 class="medium text-center mt-2 white-text">הצטרפות לפנסיה</h4>
     </div>
     <div
-      *tuiItem
-      class="hover:opacity-90 cursor-pointer mx-4"
+      class="hover:opacity-90 cursor-pointer"
       (click)="openLeadsDialog(secondLeadsDialogTemplate)"
     >
       <div class="second-about-form-image"></div>
       <h4 class="medium text-center mt-2 white-text">טופס 161 החדש</h4>
     </div>
     <div
-      *tuiItem
-      class="hover:opacity-90 cursor-pointer mx-4"
+      class="hover:opacity-90 cursor-pointer"
       (click)="openLeadsDialog(thirdLeadsDialogTemplate)"
     >
       <div class="third-about-form-image"></div>
       <h4 class="medium text-center mt-2 white-text">ניהול פנסיוני אישי</h4>
     </div>
     <div
-      *tuiItem
-      class="hover:opacity-90 cursor-pointer mx-4"
+      class="hover:opacity-90 cursor-pointer"
       (click)="openLeadsDialog(fourthLeadsDialogTemplate)"
     >
       <div class="fourth-about-form-image"></div>
       <h4 class="medium text-center mt-2 white-text">דוח שנתי</h4>
     </div>
-  </tui-carousel>
+  </div>
 </div>
 
 <ng-template

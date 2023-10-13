@@ -4,7 +4,7 @@ export * from './registration-layout/registration-footer/registration-footer.com
 export * from './landing-layout/landing-layout.component';
 export * from './landing-layout/about-layout/about-layout.component';
 export * from './landing-layout/blog-layout/blog-layout.component';
-export * from './landing-layout/company-slider-layout/company-slider-layout.component';
+export * from './landing-layout/company-carousel-layout/company-carousel-layout.component';
 export * from './landing-layout/connect-now-layout/connect-now-layout.component';
 export * from './landing-layout/employee-management-layout/employee-management-layout.component';
 export * from './landing-layout/footer/footer.component';

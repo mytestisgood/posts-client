@@ -24,4 +24,5 @@ module.exports = {
     'gt-lg-tablet': {'raw': '(min-width: 1280px)'}, // 1280+
     'gt-sm-desktop': {'raw': '(min-width: 1440px)'}, // 1440+
     'gt-desktop': {'raw': '(min-width: 1980px)'}, // 1980+
+    'about-carousel-custom-width': { 'raw': '(min-width: 1672px)'}, // 1672+
 }
