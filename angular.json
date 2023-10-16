@@ -20,8 +20,11 @@
       "prefix": "smarti",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js"
+            },
             "stylePreprocessorOptions": {
               "includePaths": [
                 "node_modules",
