@@ -1,12 +1,9 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  HeaderAuthLayoutComponent,
-  RegistrationFooterComponent,
-} from '@shared/layout';
-import { ProgressBarComponent, ProgressBarObject, RegistrationFormComponent } from '@feature';
-
-type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailInfo';
+import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { ProgressBarComponent } from '@feature';
+import { registrationConfirmPaymentLink, registrationVerifyCodeLink } from '@shared/entities';
+import { HeaderAuthLayoutComponent, RegistrationFooterComponent } from '@shared/layout';
 
 @Component({
   selector: 'smarti-registration',
@@ -14,89 +11,36 @@ type Step = 'personalInfo' | 'loginInfo' | 'uploadDocumentInfo' | 'verifyEmailIn
   imports: [
     CommonModule,
     ProgressBarComponent,
-    RegistrationFormComponent,
     RegistrationFooterComponent,
     HeaderAuthLayoutComponent,
+    RouterOutlet,
   ],
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegistrationComponent implements AfterViewInit {
-  public changeImageStep: Step  = 'personalInfo';
+export class RegistrationComponent {
+  public currentUrl: string = this.router.url;
+  public isFirstTemplate: boolean = true;
 
-  public stepCounter: ProgressBarObject = {
-    one: 'fill',
-    two: 'fill',
-    three: 'none',
-    four: 'none',
-    five: 'none',
-    six: 'none',
-    seven: 'none',
-    eight: 'none',
-    nine: 'none',
-    ten: 'none',
-  };
+  constructor(
+    private readonly elementRef: ElementRef,
+    private readonly router: Router,
+  ) {
+    this.router.events.subscribe(val => {
+      if(val instanceof NavigationEnd) {
+        const isConfirmPaymentPage: boolean = this.router.url === registrationConfirmPaymentLink;
+        const isVerifyCodePage: boolean = this.router.url === registrationVerifyCodeLink;
 
-  public secondStepCounter: ProgressBarObject = {
-    one: 'fill',
-    two: 'fill',
-    three: 'fill',
-    four: 'fill',
-    five: 'fill',
-    six: 'none',
-    seven: 'none',
-    eight: 'none',
-    nine: 'none',
-    ten: 'none',
-  };
-
-  public thirdStepCounter: ProgressBarObject = {
-    one: 'fill',
-    two: 'fill',
-    three: 'fill',
-    four: 'fill',
-    five: 'fill',
-    six: 'fill',
-    seven: 'fill',
-    eight: 'fill',
-    nine: 'none',
-    ten: 'none',
-  };
-
-  public fourthStepCounter: ProgressBarObject = {
-    one: 'fill',
-    two: 'fill',
-    three: 'fill',
-    four: 'fill',
-    five: 'fill',
-    six: 'fill',
-    seven: 'fill',
-    eight: 'fill',
-    nine: 'fill',
-    ten: 'fill',
-  };
-
-  constructor(private readonly elementRef: ElementRef) {
-  }
-
-  public ngAfterViewInit(): void {
-    this.elementRef.nativeElement.ownerDocument
-      .body.style.backgroundColor = '#F7F9FC';
-  }
-
-  public doChangingImage(changingStep: string): void {
-    switch (changingStep) {
-      case 'personalInfo':
-        this.changeImageStep = changingStep;
-        break;
-      case 'uploadDocumentInfo':
-        this.stepCounter = this.secondStepCounter;
-        this.changeImageStep = changingStep;
-      break;
-      case 'verifyEmailInfo':
-        this.stepCounter = this.fourthStepCounter;
-        this.changeImageStep = changingStep;
-    }
+        this.isFirstTemplate = !(isConfirmPaymentPage || isVerifyCodePage);
+        if (this.isFirstTemplate) {
+          this.elementRef.nativeElement.ownerDocument.body.className = 'no-bg-image';
+          this.elementRef.nativeElement.ownerDocument
+            .body.style.backgroundColor = '#F7F9FC';
+        } else {
+          this.elementRef.nativeElement.ownerDocument.body.className = 'dashboard-bg-image';
+        }
+      }
+    });
   }
 }

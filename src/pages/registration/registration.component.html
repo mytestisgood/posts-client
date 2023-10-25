@@ -1,36 +1,27 @@
-<div class="bg-neutrals-20">
-  <smarti-header-auth-layout
-    [haveLeftBLock]="true"
-    [leftBlockText]="'יש לך חשבון?'"
-    [leftBlockClickedText]="'התחברות'"
-    [redirectLink]="'/login'"
-  ></smarti-header-auth-layout>
-  <div class="w-full-hd margin-0-auto">
-    <smarti-progress-bar [counter]="stepCounter"></smarti-progress-bar>
-    <div class="flex justify-between mt-2">
-      <div
-        [ngClass]="{
-          'first-head er-image': changeImageStep === 'personalInfo',
-          'second-header-image': changeImageStep === 'loginInfo' || changeImageStep === 'uploadDocumentInfo',
-          'third-header-image': changeImageStep === 'verifyEmailInfo'
-        }"
-      ></div>
-      <h1
-        *ngIf="changeImageStep !== 'verifyEmailInfo'; else verifyEmailInfoHeaderTemplate"
-        class="medium text-right self-center neutrals-text-950"
-      >
-        תודה שבחרתם Smarti
-      </h1>
-      <ng-template #verifyEmailInfoHeaderTemplate>
-        <h1 class="medium text-right self-center neutrals-text-950">אימות חשבון</h1>
-      </ng-template>
+<ng-container *ngIf="isFirstTemplate; else secondTemplate">
+  <ng-container *ngTemplateOutlet="firstTemplate"></ng-container>
+</ng-container>
+<ng-template #firstTemplate>
+  <div class="bg-neutrals-20">
+    <smarti-header-auth-layout
+      [haveLeftBLock]="true"
+      [leftBlockText]="'יש לך חשבון?'"
+      [leftBlockClickedText]="'התחברות'"
+      [redirectLink]="'/login'"
+    ></smarti-header-auth-layout>
+    <div class="w-full-hd margin-0-auto">
+      <smarti-progress-bar [currentUrl]="currentUrl"></smarti-progress-bar>
+      <div class="flex justify-between mt-2">
+        <div class="seated-woman-icon"></div>
+        <h1 class="medium text-right self-center neutrals-text-950 dir-rtl">תודה שבחרתם - Smarti</h1>
+      </div>
+      <div class="w-form-full-hd mt-2 mb-14 bg-white rounded-l box-shadow-big inline-grid">
+        <router-outlet></router-outlet>
+      </div>
     </div>
-    <smarti-registration-form
-      class="smarti-registration-form"
-      (changingStep)="doChangingImage($event)"
-    ></smarti-registration-form>
   </div>
-  <ng-container *ngIf="changeImageStep !== 'personalInfo'">
-    <smarti-registration-footer></smarti-registration-footer>
-  </ng-container>
-</div>
+</ng-template>
+
+<ng-template #secondTemplate>
+  <router-outlet></router-outlet>
+</ng-template>

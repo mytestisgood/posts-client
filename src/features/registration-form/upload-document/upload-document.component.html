@@ -1,0 +1,94 @@
+<div class="flex flex-col items-center">
+  <div
+    class="self-end mt-4 mr-7 regular-text neutrals-text-950 dir-rtl cursor-pointer"
+    (click)="navigateToRegistrationInfo()"
+  >
+    < חזרה אחורה
+  </div>
+  <h3 class="medium text-center mb-0 dir-rtl">
+    <div>אנא העלו קובץ שכר חודשי (xml)</div>
+  </h3>
+  <div
+    class="file-upload mt-[72px]"
+    [formGroup]="uploadDocumentsForm"
+  >
+    <smarti-input-file
+      [customWidth]="'536px'"
+      [customHeight]="'150px'"
+      [control]="uploadDocumentsForm.controls.files"
+      [isSampleFile]="true"
+      (fileUploaded)="fileUploaded($event)"
+      (sampleClicked)="onDownloadSample()"
+    ></smarti-input-file>
+    <div
+      *ngIf="!documentUploaded"
+      class="blue-custom-1-text paragraph-text underline text-left mt-2 cursor-pointer hover:opacity-90"
+      (click)="openSampleDialog(sampleDialogTemplate)"
+    >
+      קובץ לדוגמא
+    </div>
+  </div>
+  <div
+    *ngIf="!documentUploaded"
+    class="mt-24 flex flex-col justify-center self-center mb-[142px]"
+  >
+    <div class="neutrals-text-950 paragraph-text text-center">אין ברשותי את הקובץ</div>
+    <div
+      class="bright-turquoise-text-500 paragraph-text hover:opacity-90 cursor-pointer"
+      (click)="openForwardModal(dialogTemplate)"
+    >
+      אני רוצה לבקש מגורם אחר להעלות את הקובץ
+    </div>
+  </div>
+
+  <smarti-button
+    *ngIf="documentUploaded"
+    [typeClass]="'confirm'"
+    [customMargin]="'26px 0 64px'"
+    [text]="'המשך'"
+    (buttonClicked)="navigateToTransferMoney(successUploadTemplate)"
+  ></smarti-button>
+</div>
+<!-- TODO: don't have functional for aside process registration, after add need to remove "false" and connect to api -->
+<div
+  *ngIf="!documentUploaded && false"
+  class="neutrals-text-950 paragraph-text underline cursor-pointer text-right mb-4 mr-7 hover:opacity-90"
+  (click)="openDialogForAsideProcess(asideProcessDialogTemplate)"
+>
+  אמשיך את התהליך אח״כ
+</div>
+
+<ng-template
+  #dialogTemplate
+  let-observer
+>
+  <smarti-forward-request-dialog
+    class="w-[800px]"
+    [haveCloseIcon]="true"
+    [observer]="observer"
+    [departmentId]="departmentId"
+    [identifier]="identifier"
+    (requestSend)="requestSend()"
+  ></smarti-forward-request-dialog>
+</ng-template>
+
+<ng-template
+  #sampleDialogTemplate
+  let-observer
+>
+  <smarti-download-sample-dialog [observer]="observer"></smarti-download-sample-dialog>
+</ng-template>
+
+<ng-template
+  #asideProcessDialogTemplate
+  let-observer
+>
+  <smarti-aside-process-dialog [observer]="observer"></smarti-aside-process-dialog>
+</ng-template>
+
+<ng-template #successUploadTemplate>
+  <div class="flex flex-col gap-6 mt-6 mb-6">
+    <div class="uploading-loop-94-icon self-center"></div>
+    <h3 class="medium neutrals-text-950 mt-0 mb-0 self-center text-center w-[500px]">המערכת טוענת את הקובץ למערכת</h3>
+  </div>
+</ng-template>

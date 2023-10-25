@@ -27,3 +27,14 @@ export interface CreateEmployerOutResponse {
   departmentId?: string;
   code?: number;
 }
+
+export interface RegisterParameters {
+  password?: string;
+  isFromSignIn?: boolean;
+}
+
+export interface RegisterResponse {
+  code?: number;
+  message?: string;
+  token?: string;
+}

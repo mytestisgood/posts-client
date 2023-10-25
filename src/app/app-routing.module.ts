@@ -23,6 +23,41 @@ const routes: Routes = [
     path: 'registration',
     component: RegistrationComponent,
     canActivate: [LoginGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'info',
+        pathMatch: 'full',
+      },
+      {
+        path: 'info',
+        loadComponent: () => import('@shared/layout').then(m => m.RegistrationInfoComponent),
+      },
+      {
+        path: 'set-password',
+        loadComponent: () => import('@shared/layout').then(m => m.SetPasswordComponent),
+      },
+      {
+        path: 'upload-file',
+        loadComponent: () => import('@shared/layout').then(m => m.UploadFileComponent),
+      },
+      {
+        path: 'transfer-money',
+        loadComponent: () => import('@shared/layout').then(m => m.TransferMoneyComponent),
+      },
+      {
+        path: 'payment-instruction',
+        loadComponent: () => import('@shared/layout').then(m => m.PaymentInstructionComponent),
+      },
+      {
+        path: 'confirm-payment',
+        loadComponent: () => import('@shared/layout').then(m => m.ConfirmPaymentComponent),
+      },
+      {
+        path: 'verify-code',
+        loadComponent: () => import('@shared/layout').then(m => m.VerifyCodeComponent),
+      },
+    ],
   },
   {
     path: 'login',

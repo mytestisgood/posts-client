@@ -2,13 +2,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { emailValidatorPattern, israelMobilePhoneValidatorPattern } from './common.models';
 import {
   PaymentMethodControls,
-  PersonalInfoControls,
+  RegistrationInfoControls,
   UploadDocumentsControls,
   VerificationEmailControls,
 } from './registration.models';
 
-export function personalInfoFormMapper(): FormGroup<PersonalInfoControls> {
-  return new FormGroup<PersonalInfoControls>({
+export function registrationInfoFormMapper(): FormGroup<RegistrationInfoControls> {
+  return new FormGroup<RegistrationInfoControls>({
     companyName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     companyId: new FormControl('', [Validators.required, Validators.minLength(9)]),
     email: new FormControl('', [Validators.required, Validators.pattern(emailValidatorPattern) ]),

@@ -1,0 +1,42 @@
+<div class="flex flex-col mt-6 mb-6">
+  <h3 class="medium neutrals-text-950 text-center mt-0 mb-0 w-[680px] self-center">
+    כדי שתוכלו לחזור בדיוק למקום שבו הופסק התהליך יש לרשום את המייל שלכם
+  </h3>
+  <smarti-input-field
+    class="mt-16 self-center"
+    [customWidth]="'536px'"
+    [placeholder]="'כתובת אימייל*'"
+    [control]="email"
+  ></smarti-input-field>
+  <div class="w-[545px] footer-link-text neutrals-text-950 text-center self-center mt-14 dir-rtl">
+    <div>נשלח אליכם מייל עם לינק זמני שתקף</div>
+    <div>ל3 ימים בלבד. במידה ולא יהיה חיבור תוך 3 ימים, המידע עד כה יימחק</div>
+    <div>ויהיה צורך להתחיל את התהליך מהתחלה.</div>
+  </div>
+  <smarti-button
+    class="mt-12"
+    [text]="'שלחו לי מייל'"
+    [typeClass]="'confirm'"
+    [customButtonWidth]="'202px'"
+    [customHeight]="'56px'"
+    (buttonClicked)="sendRequest(successDialogTemplate)"
+  ></smarti-button>
+</div>
+<div
+  class="close-cross-24 close-dialog-left cursor-pointer"
+  (click)="closeDialog()"
+></div>
+
+<ng-template
+  #successDialogTemplate
+  let-observer
+>
+  <div class="flex flex-col gap-6 mt-6 mb-6">
+    <div class="success-notification-icon-114 self-center"></div>
+    <h3 class="medium neutrals-text-950 mt-0 mb-0 self-center text-center w-[285px]">המייל נשלח בהצלחה! נתראה</h3>
+  </div>
+  <div
+    class="close-cross-24 close-dialog-left cursor-pointer"
+    (click)="closeSecondDialog(observer)"
+  ></div>
+</ng-template>

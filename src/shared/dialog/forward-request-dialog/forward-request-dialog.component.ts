@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '@shared/api/services';
 import { emailValidatorPattern, israelMobilePhoneValidatorPattern } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { ButtonComponent, InputFieldComponent, InputNumberComponent } from '@shared/ui';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import { BehaviorSubject, takeUntil, tap, withLatestFrom } from 'rxjs';
 
 interface ForwardRequestForm {
   email: FormControl<string | null>;
@@ -46,6 +48,7 @@ export class ForwardRequestDialogComponent {
   constructor(
     private readonly destroy$: DestroyService,
     private readonly userService: UserService,
+    @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
   ) {
   }
 
@@ -53,16 +56,27 @@ export class ForwardRequestDialogComponent {
     this.observer.complete();
   }
 
-  public sendRequest(): void {
+  public sendRequest(content: PolymorpheusContent<TuiDialogContext>): void {
     this.userService.apiEmployersCreateUserOutPost({
       email: this.forwardRequestForm.controls.email.value as string,
       phone: this.forwardRequestForm.controls.phone.value as string,
       user_name: this.forwardRequestForm.controls.userName.value as string,
       identifier: this.identifier,
       departmentId: this.departmentId,
-    }).pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.requestSend.next(true);
-      this.observer.complete();
-    });
+    }).pipe(
+      tap(() => {
+        this.requestSend.next(true);
+        this.observer.complete();
+      }),
+      withLatestFrom(this.dialogs.open(content, {
+        closeable: false,
+        size: 'm',
+      })),
+      takeUntil(this.destroy$),
+    ).subscribe();
+  }
+
+  public closeSecondDialog(observer: { complete: () => void }): void {
+    observer.complete();
   }
 }

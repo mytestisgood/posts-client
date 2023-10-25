@@ -107,6 +107,10 @@ body {
   z-index: 10;
 }
 
+.z-initial {
+  z-index: initial;
+}
+
 router-outlet.router-flex + * {
   display: flex;
   flex: 1 1 auto;
@@ -151,4 +155,15 @@ router-outlet.router-flex + * {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.dashboard-bg-image {
+  background: url("/assets/img/dashboard-bg-image.png") no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.no-bg-image {
+  background: none;
 }

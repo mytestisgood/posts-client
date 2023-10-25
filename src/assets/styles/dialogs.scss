@@ -11,7 +11,11 @@ tui-dialog[data-size='m'] {
   width: 814px!important;
 }
 
-.close-dialog-position {
+tui-dialog[data-size='l'] {
+  width: 1088px!important;
+}
+
+.close-dialog-right {
   position: absolute;
   top: 24px;
   right: 24px;

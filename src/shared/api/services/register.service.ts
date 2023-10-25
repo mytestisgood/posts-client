@@ -6,6 +6,8 @@ import {
   CreateEmployerOutResponse,
   EmployersCreateEmployerOutBody,
   EmployersCreatePaymentOutBody,
+  RegisterParameters,
+  RegisterResponse,
   SuccessResponse,
 } from '../models';
 
@@ -22,5 +24,9 @@ export class RegisterService {
 
   public apiEmployersCreatePaymentOut(data: EmployersCreatePaymentOutBody): Observable<SuccessResponse> {
     return this.http.post<SuccessResponse>(`${environment.authUrl}/api/employers/createPaymentOut`, data)
+  }
+
+  public apiRegisterPost(data: RegisterParameters): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${environment.authUrl}/api/register`, data)
   }
 }

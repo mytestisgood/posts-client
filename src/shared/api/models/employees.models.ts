@@ -4,3 +4,19 @@ export interface GetEmployeesListGetParameters {
   departmentId?: string;
   index?: string;
 }
+
+export interface GetBankDetailsSmartiParameters {
+  department_id?: string
+}
+
+export interface GetBankDetailsSmartiResponse {
+  bank_details?: BankDetails,
+  code?: number,
+}
+
+export interface BankDetails {
+  number?: string,
+  branch_name?: string,
+  bank_name?: string,
+  name?: string
+}

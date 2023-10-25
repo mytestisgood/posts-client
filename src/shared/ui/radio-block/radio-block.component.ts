@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, TemplateRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { TuiHintModule } from '@taiga-ui/core';
 import { TuiRadioLabeledModule } from '@taiga-ui/kit';
 import { Subject } from 'rxjs';
 
 @Component({
   selector: 'smarti-radio-block',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TuiRadioLabeledModule],
+  imports: [CommonModule, ReactiveFormsModule, TuiRadioLabeledModule, TuiHintModule],
   templateUrl: './radio-block.component.html',
   styleUrls: ['./radio-block.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,6 +19,10 @@ export class RadioBlockComponent {
   @Input() public items!: { name: string }[];
   @Input() public isHorizontal: boolean = false;
   @Input() public customClass!: 'big';
+  @Input() public hasTooltipInfoFirstIcon: boolean = false;
+  @Input() public infoTooltipFirstText!: TemplateRef<HTMLElement>;
+  @Input() public hasTooltipInfoSecondIcon: boolean = false;
+  @Input() public infoTooltipSecondText!: TemplateRef<HTMLElement>;
   @Input() public radioValue: FormControl<{ name: string } | null> = new FormControl();
   @Output() public chosenValue: Subject<string> = new Subject<string>();
 

@@ -1,24 +1,13 @@
-.upload-button {
-  width: 181px;
-  height: 42px;
-  border: 0;
-}
-
-.drag-and-drop__svg {
-  background: url("/assets/svg/drag-and-drop.svg");
-  width: 40px;
-  height: 32px;
-}
-
 .file-uploaded {
-  height: 88px;
+  height: 122px;
   padding: 28px;
   margin-bottom: 8px;
+  direction: rtl;
 }
 
 .remove-file-icon {
   position: absolute;
-  right: 28px;
+  left: 28px;
 }
 
 .loading-file-block {

@@ -1,4 +1,5 @@
 import { FileDataExtResponse } from '@shared/api/models';
+import { FileWithLoading } from '@shared/entities';
 import { saveAs } from 'file-saver';
 import { fromEvent, map, Observable } from 'rxjs';
 
@@ -30,4 +31,8 @@ export function toBlobAndSaveFile(data: FileDataExtResponse): void {
   const blob: Blob = new Blob([file], { type: data.ext });
 
   return saveAs(blob, data.filename);
+}
+
+export function takeRight(arr: Array<File | FileWithLoading>, n = 1): File[] | FileWithLoading[] {
+  return arr.slice(arr.length - n, arr.length);
 }

@@ -1,26 +1,14 @@
 import { FormControl } from '@angular/forms';
 import { FileWithLoading } from './common.models';
 
-export enum RegistrationFormTypeEnum {
-  PersonalInfo = 'personalInfo',
-  UploadDocumentInfo = 'uploadDocumentInfo',
-  PaymentMethodInfo = 'paymentMethodInfo',
-  VerifyEmailInfo = 'verifyEmailInfo',
-}
+export const registrationInfoLink: string = '/registration/info';
+export const registrationSetPasswordLink: string = '/registration/set-password';
+export const registrationUploadFileLink: string = '/registration/upload-file';
+export const registrationTransferMoneyLink: string = '/registration/transfer-money';
+export const registrationPaymentInstructionLink: string = '/registration/payment-instruction';
+export const registrationConfirmPaymentLink: string = '/registration/confirm-payment';
+export const registrationVerifyCodeLink: string = '/registration/verify-code';
 
-export enum RegistrationDirectionEnum {
-  Forward = 'forward',
-  Back = 'back',
-}
-
-export enum RegistrationStepEnum {
-  PersonalInfoStep = 'personalInfoStep',
-  UploadDocumentStep = 'uploadDocumentStep',
-  PaymentMethodStep = 'paymentMethodStep',
-  VerifyEmailStep = 'verifyEmailStep',
-}
-
-export type RegistrationStep = 'personalInfo' | 'uploadDocumentInfo' | 'paymentMethodInfo' | 'verifyEmailInfo';
 export type RegistrationDirection = 'forward' | 'back';
 export type RegistrationFormValueType = {
   personalInfo: PersonalInfoFormValue,
@@ -29,7 +17,7 @@ export type RegistrationFormValueType = {
   verifyEmailInfo: VerificationEmailFormValue,
 };
 
-export interface PersonalInfoControls {
+export interface RegistrationInfoControls {
   companyName: FormControl<string | null>;
   companyId: FormControl<string | null>;
   yourName: FormControl<string | null>;
@@ -75,9 +63,4 @@ export interface PaymentMethodFormValue {
 
 export interface VerificationEmailFormValue {
   emailVerifyCode: string;
-}
-
-export enum PaymentMethodTabs {
-  Bank = 0,
-  InstitutionalNumber = 1,
 }

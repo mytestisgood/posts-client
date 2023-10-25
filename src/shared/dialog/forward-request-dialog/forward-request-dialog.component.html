@@ -1,6 +1,6 @@
-<div class="mt-14 mb-16 margin-0-auto">
-  <h3 class="medium neutrals-text-950 text-center forward-request-header margin-rl-auto dir-rtl">
-    העברת בקשה לגורם מורשה בארגון, מלא את פרטי איש הקשר:
+<div class="mt-4 mb-4 mx-auto">
+  <h3 class="medium neutrals-text-950 text-center w-[565px] mx-auto dir-rtl">
+    יש למלא את הפרטי איש הקשר אליו ברצונך להעביר בקשת העלאת הקובץ
   </h3>
   <div
     class="flex flex-col items-center mt-14 gap-8"
@@ -13,7 +13,7 @@
     ></smarti-input-field>
     <smarti-input-field
       [customWidth]="'536px'"
-      [placeholder]="'אימייל*'"
+      [placeholder]="'כתובת אימייל*'"
       [control]="forwardRequestForm.controls.email"
     ></smarti-input-field>
     <smarti-input-number
@@ -24,13 +24,30 @@
   </div>
   <smarti-button
     [typeClass]="'confirm'"
-    [text]="'העבר'"
-    [customMargin]="'80px auto 0'"
-    (buttonClicked)="sendRequest()"
+    [text]="'שלח'"
+    [customMargin]="'48px auto 0'"
+    (buttonClicked)="sendRequest(successSendRequestDialog)"
   ></smarti-button>
 </div>
 <button
   *ngIf="haveCloseIcon"
-  class="close-cross-24 close-dialog-position cursor-pointer"
+  class="close-cross-24 close-dialog-left cursor-pointer"
   (click)="closeDialog()"
 ></button>
+
+<ng-template
+  #successSendRequestDialog
+  let-observer
+>
+  <div class="flex flex-col gap-6 mt-6 mb-6">
+    <div class="success-notification-icon-114 self-center"></div>
+    <h3 class="medium neutrals-text-950 mt-0 mb-0 self-center text-center w-[500px]">
+      התהליך נשלח אל איש הקשר שביקשת נודיע לך כאשר התהליך יושלם
+    </h3>
+  </div>
+  <button
+    *ngIf="haveCloseIcon"
+    class="close-cross-24 close-dialog-left cursor-pointer"
+    (click)="closeSecondDialog(observer)"
+  ></button>
+</ng-template>

@@ -4,6 +4,7 @@
       [ngClass]="file.isLoading ? 'hidden' : 'block'"
       class="file-uploaded"
       [file]="file"
+      [showSize]="false"
       [leftContent]="icon"
       [showDelete]="false"
     >
@@ -18,20 +19,8 @@
   </div>
 </tui-files>
 
-<div
-  *ngIf="fileUploaded.value && multiple"
-  class="mt-10 paragraph-text text-center"
->
-  You can upload multi files here
-</div>
-<div
-  *ngIf="fileUploaded.value && multiple"
-  class="paragraph-text neutrals-text-950"
->
-  Attach more XML files
-</div>
 <tui-input-files
-  *ngIf="!fileUploaded.value || multiple"
+  *ngIf="!fileUploaded.value || !isSecondFileUpload"
   class="box-shadow-big"
   [formControl]="control"
   [style.width]="customWidth"
@@ -48,48 +37,62 @@
       *ngIf="dragged; else base"
       class="flex flex-col"
     >
-      <div class="flex gap-1">
-        <div class="drag-and-drop__svg"></div>
-        <div class="paragraph-text self-center neutrals-text-950">Drag & Drop file</div>
+      <div class="flex gap-4 mt-2">
+        <div class="paragraph-text self-end neutrals-text-950">באפשרותך לגרור קובץ לכאן</div>
+        <div class="drag-and-drop-icon"></div>
       </div>
-      <div class="caption-text neutrals-text-500">or</div>
+      <div class="caption-text neutrals-text-500 mt-1">או</div>
       <button
-        class="upload-button mt-2 text-center paragraph-text-extra rounded-l bright-turquoise-text-500 bg-neutrals-20 items-center flex gap-2 justify-center"
+        class="flex gap-2 justify-center items-center self-center mt-1 rounded-l bright-turquoise-text-500 bg-neutrals-20 border-0 py-3 px-8"
       >
+        <div class="text-center paragraph-text-extra">לבחור מכאן קובץ</div>
         <div class="upload-file-icon-16"></div>
-        <div>Browse files</div>
       </button>
     </div>
   </ng-template>
   <ng-template #base>
     <div class="flex flex-col">
-      <div class="flex gap-1">
-        <div class="drag-and-drop__svg"></div>
-        <div class="paragraph-text self-center neutrals-text-950">Drag & Drop file</div>
+      <div class="flex gap-4 mt-2">
+        <div class="paragraph-text self-end neutrals-text-950">באפשרותך לגרור קובץ לכאן</div>
+        <div class="drag-and-drop-icon"></div>
       </div>
-      <div class="caption-text neutrals-text-500">or</div>
+      <div class="caption-text neutrals-text-500 mt-1">או</div>
       <button
-        class="upload-button mt-2 text-center paragraph-text-extra rounded-l bright-turquoise-text-500 bg-neutrals-20 items-center flex gap-2 justify-center"
+        class="flex gap-2 justify-center items-center self-center mt-1 rounded-l bright-turquoise-text-500 bg-neutrals-20 border-0 py-3 px-8"
       >
+        <div class="text-center paragraph-text-extra">לבחור מכאן קובץ</div>
         <div class="upload-file-icon-16"></div>
-        <div>Browse files</div>
       </button>
     </div>
   </ng-template>
 </tui-input-files>
-<div
-  *ngIf="!fileUploaded.value && multiple"
-  class="mt-10 paragraph-text text-center"
->
-  You can upload multi files here
-</div>
 
+<div
+  *ngIf="isSecondFileUpload"
+  class="mx-auto mt-6 w-fit"
+>
+  <label
+    for="files"
+    class="underline paragraph-text neutrals-text-950 text-center cursor-pointer"
+  >
+    <input
+      #file
+      id="files"
+      type="file"
+      class="hidden"
+      [multiple]="true"
+      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+      (change)="uploadSecondFile(file)"
+    />
+    לצירוף קובץ נוסף
+  </label>
+</div>
 <ng-template #icon>
   <div class="document-icon-32"></div>
 </ng-template>
 
 <ng-template #fileLoadingTemplate>
-  <div class="loading-file-block box-shadow-big rounded-l bg-white h-22 flex flex-row justify-center items-center">
+  <div class="loading-file-block box-shadow-big rounded-l bg-white h-[122px] flex flex-row justify-center items-center">
     <div class="flex flex-row justify-center items-center gap-8">
       <div class="block-32px">
         <tui-loader></tui-loader>

@@ -38,6 +38,7 @@ tui-input, tui-input-password, tui-input-phone, tui-input-year, tui-input-date {
 
 tui-input-files {
   .t-description {
+    align-items: start!important;
     padding-top: 8px!important;
     padding-bottom: 8px!important;
   }
@@ -47,7 +48,13 @@ tui-files .file-uploaded {
   .t-preview {
     height: 32px!important;
     width: 32px!important;
-    margin-right: 28px!important;
+    margin-left: 12px!important;
+  }
+
+  .t-wrapper {
+    .t-text {
+      direction: ltr!important;
+    }
   }
 }
 

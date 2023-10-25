@@ -1,0 +1,64 @@
+<div class="flex flex-col items-center">
+  <div
+    class="self-end mt-4 mr-7 regular-text neutrals-text-950 dir-rtl cursor-pointer"
+    (click)="navigateToTransferMoney()"
+  >
+    < חזרה אחורה
+  </div>
+  <h3 class="medium neutrals-text-950 text center mt-0 mb-2">קבלת קובץ הנחיות לתשלום</h3>
+  <div
+    class="w-[674px] h-[112px] mt-[118px] pl-7 pr-6 box-shadow-regular rounded-l flex flex-row justify-between hover:opacity-80 cursor-pointer"
+    (click)="downloadPaymentExample()"
+  >
+    <div class="self-center download-arrow-down-inside-block-icon"></div>
+    <div class="flex flex-row gap-7">
+      <div class="self-center w-[326px]">
+        <div class="medium-text neutrals-text-950 dir-rtl">הורידו הנחיות לתשלום</div>
+        <div class="paragraph-text neutrals-text-300 dir-rtl">
+          בכדי לצפות בפרטי התשלום לחברות המנהלות וסכומי התשלום יש להוריד את הקובץ.
+        </div>
+      </div>
+      <div class="bg-bright-turquoise-100 payment-instruction-block flex items-center self-center justify-center">
+        <div class="payment-instructions-icon-48"></div>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-center mb-16 mt-[200px]">
+    <smarti-button
+      [customWidth]="'211px'"
+      [customHeight]="'56px'"
+      [typeClass]="'confirm'"
+      [text]="'תודה, קיבלתי'"
+      (buttonClicked)="navigateToConfirmPayment(successUploadTemplate)"
+    ></smarti-button>
+  </div>
+  <!-- TODO: don't have functional for aside process registration, after add need to remove "false" and connect to api -->
+  <div
+    *ngIf="false"
+    class="neutrals-text-950 paragraph-text underline cursor-pointer text-right mb-4 mr-7 hover:opacity-90"
+    (click)="openDialogForAsideProcess(asideProcessDialogTemplate)"
+  >
+    אמשיך את התהליך אח״כ
+  </div>
+</div>
+
+<ng-template
+  #successUploadTemplate
+  let-observer
+>
+  <div class="flex flex-col gap-6 mt-6 mb-6">
+    <div class="success-notification-icon-114 self-center"></div>
+    <h3 class="medium neutrals-text-950 mt-0 mb-0 self-center text-center w-[285px]">הנך מועבר לדף הבית</h3>
+  </div>
+  <div
+    class="close-cross-24 close-dialog-left cursor-pointer"
+    (click)="closeDialog(observer)"
+  ></div>
+</ng-template>
+
+<ng-template
+  #asideProcessDialogTemplate
+  let-observer
+>
+  <smarti-aside-process-dialog [observer]="observer"></smarti-aside-process-dialog>
+</ng-template>

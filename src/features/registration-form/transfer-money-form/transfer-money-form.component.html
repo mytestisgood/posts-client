@@ -1,0 +1,72 @@
+<div class="flex flex-col items-center">
+  <div
+    class="self-end mt-4 mr-7 regular-text neutrals-text-950 dir-rtl cursor-pointer"
+    (click)="navigateToUploadFile()"
+  >
+    < חזרה אחורה
+  </div>
+  <h3 class="medium text-center mb-0 dir-rtl">
+    <div>הנתונים שהתקבלו לפי הקובץ שנקלט:</div>
+  </h3>
+  <div class="mt-12 flex justify-around w-[658px] h-[80px] rounded-l bg-mint">
+    <div class="flex gap-2">
+      <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl">6230 ש״ח</div>
+      <div class="paragraph-text neutrals-text-950 self-center dir-rtl">סה״כ סכום לתשלום לקופות:</div>
+    </div>
+    <div class="flex gap-2">
+      <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl">50</div>
+      <div class="paragraph-text neutrals-text-950 self-center dir-rtl">מספר העובדים:</div>
+    </div>
+  </div>
+  <div class="flex flex-col mt-20 w-[658px]">
+    <div class="smarti-button-text font-semibold text-right dir-rtl">איך ברצונך להעביר את הכסף לקופות?</div>
+    <div class="dir-rtl mt-6">
+      <smarti-radio-block
+        [labelFirstText]="'אני רוצה לשלם דרך smarti'"
+        [labelSecondText]="'אני רוצה לשלם ישירות לקופות ולקבל קובץ הנחיות לתשלום'"
+        [items]="items"
+        [radioValue]="radioValue"
+        [hasTooltipInfoFirstIcon]="true"
+        [infoTooltipFirstText]="tooltipTextsTemplate"
+      ></smarti-radio-block>
+    </div>
+  </div>
+  <div class="mt-[180px] mx-auto mb-16">
+    <smarti-button
+      [customWidth]="'215px'"
+      [typeClass]="'confirm'"
+      [text]="'המשך'"
+      (buttonClicked)="navigateToNextPageOrOpenDialog(bankDetailsDialogTemplate)"
+    ></smarti-button>
+  </div>
+  <!-- TODO: don't have functional for aside process registration, after add need to remove "false" and connect to api -->
+  <div
+    *ngIf="false"
+    class="neutrals-text-950 paragraph-text underline cursor-pointer text-right mb-4 mr-7 hover:opacity-90"
+    (click)="openDialogForAsideProcess(asideProcessDialogTemplate)"
+  >
+    אמשיך את התהליך אח״כ
+  </div>
+</div>
+
+<ng-template
+  #asideProcessDialogTemplate
+  let-observer
+>
+  <smarti-aside-process-dialog [observer]="observer"></smarti-aside-process-dialog>
+</ng-template>
+
+<ng-template
+  #bankDetailsDialogTemplate
+  let-observer
+>
+  <smarti-bank-details-dialog
+    [observer]="observer"
+    [bankDetailsSmarti]="(getBankDetailsSmarti$ | async)?.bank_details"
+  ></smarti-bank-details-dialog>
+</ng-template>
+
+<ng-template #tooltipTextsTemplate>
+  <div>במידה ואופציה זו תיבחר, נצטרך לקבל את סך כל התשלום לכלל הקופות ואנחנו כבר נעשה את שאר העובדה.</div>
+  <div>כך תוכלו לחסוך עמלות מיותרות, טעויות וזמן חשוב.</div>
+</ng-template>
