@@ -9,8 +9,10 @@ import {
   ForwardRequestDialogComponent,
 } from '@shared/dialog';
 import {
-  DEPARTMENT_ID,
+  AllRegistrationSessionData,
   FileUploadStatusAndId,
+  FileWithLoading,
+  REGISTRATION_DATA,
   registrationSetPasswordLink,
   registrationTransferMoneyLink,
   TOKEN,
@@ -53,10 +55,12 @@ import { delay, takeUntil, tap, withLatestFrom } from 'rxjs';
 export class UploadDocumentComponent {
   public uploadDocumentsForm: FormGroup<UploadDocumentsControls> = uploadingDocumentsFormMapper();
   public documentUploaded: boolean = false;
-  public departmentId: number = Number(this.sessionStorageService.getItem(DEPARTMENT_ID));
   public token: string = this.sessionStorageService.getItem(TOKEN) as string;
   public identifier!: string;
   public opswatId: Array<string> = [];
+  public currentStorageData: AllRegistrationSessionData =
+    JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
+  public departmentId: number = Number(this.currentStorageData.departmentId);
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
@@ -108,7 +112,7 @@ export class UploadDocumentComponent {
 
   public navigateToTransferMoney(content: PolymorpheusContent<TuiDialogContext>): void {
     this.uploadFileService.apiProcessesUploadFilePost({
-      departmentId: this.departmentId.toString(),
+      departmentId: this.currentStorageData.departmentId,
       opswatIds: this.opswatId,
       isDepartmentLink: false,
       isDirect: false,
@@ -117,7 +121,11 @@ export class UploadDocumentComponent {
       processName: 'upload file from',
       year: getCurrentYear().toString(),
     }).pipe(
-      tap(() => this.router.navigate([registrationTransferMoneyLink])),
+      tap(() => {
+        this.currentStorageData.files = this.uploadDocumentsForm.value.files as FileWithLoading[];
+        this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
+        this.router.navigate([registrationTransferMoneyLink]);
+      }),
       withLatestFrom(this.dialogs.open(content, {
         closeable: false,
         size: 'm',

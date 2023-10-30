@@ -1,9 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AccountControls, paymentMethodFormMapper } from '@shared/entities';
+import {
+  AccountControls,
+  AllRegistrationSessionData,
+  paymentMethodFormMapper,
+  REGISTRATION_DATA,
+} from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { ButtonComponent, InputFieldComponent } from '@shared/ui';
+import { SessionStorageService } from '@shared/web-api';
 import { Observable, takeUntil } from 'rxjs';
 
 @Component({
@@ -20,8 +26,13 @@ export class AccountFormDialogComponent implements OnInit {
   public isDisabled: boolean = true;
   public accountFormChange$: Observable<FormControlStatus> = this.accountForm
     .statusChanges.pipe(takeUntil(this.destroy$));
+  private readonly currentStorageData: AllRegistrationSessionData =
+    JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
-constructor(private readonly destroy$: DestroyService) {
+constructor(
+  private readonly destroy$: DestroyService,
+  private readonly sessionStorageService: SessionStorageService,
+) {
 }
   public ngOnInit(): void {
     this.accountForm.updateValueAndValidity({ emitEvent: true });
@@ -31,6 +42,9 @@ constructor(private readonly destroy$: DestroyService) {
   }
 
   public sendRequest(): void {
+    this.currentStorageData.bankName = this.accountForm.value.bankName as string;
+    this.currentStorageData.accountNumber = this.accountForm.value.branchNumber as string;
+    this.currentStorageData.branchNumber = this.accountForm.value.branchNumber as string;
     this.observer.complete();
   }
 

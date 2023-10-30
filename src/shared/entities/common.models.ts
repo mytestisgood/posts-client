@@ -25,7 +25,6 @@ export const IS_LOGGED_IN: string = 'isLoggedIn';
 export const DEPARTMENT_ID: string = 'departmentId';
 export const REGISTRATION_DATA: string = 'registrationData';
 export const SPECIAL_HEADER_TOKEN: string = 'specialHeaderToken';
-export const IS_PAY_BY_SMARTI: string = 'isPayBySmarti';
 export const emailValidatorPattern: string = '^(?!^-)[\\w-]+(?:[\\.-][\\w-]+)*(?:[\\.+][\\w-]+)*@' +
   '\\w+(?:[\\.-]\\w+)*(?:\\.[A-Za-z]{2,4})+$';
 export const israelMobilePhoneValidatorPattern: string = '^05\\d([-]{0,1})\\d{7}$';

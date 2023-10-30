@@ -4,8 +4,10 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountFormDialogComponent } from '@shared/dialog';
 import {
+  AllRegistrationSessionData,
   FileUploadStatusAndId,
-  IS_PAY_BY_SMARTI,
+  FileWithLoading,
+  REGISTRATION_DATA,
   registrationVerifyCodeLink,
   UploadDocumentsControls,
   uploadingDocumentsFormMapper,
@@ -35,6 +37,8 @@ export class ConfirmPaymentFormComponent {
   public opswatId: Array<string> = [];
   public documentUploaded: boolean = false;
   public isDirectPayment: boolean = false;
+  private readonly currentStorageData: AllRegistrationSessionData =
+    JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
@@ -42,7 +46,7 @@ export class ConfirmPaymentFormComponent {
     private readonly destroy$: DestroyService,
     private readonly sessionStorageService: SessionStorageService,
   ) {
-    this.isDirectPayment = this.sessionStorageService.getItem(IS_PAY_BY_SMARTI) !== 'true';
+    this.isDirectPayment = this.currentStorageData.transferMoneyMode !== 'smarti';
   }
 
   public fileUploaded(uploadedAndId: FileUploadStatusAndId): void {
@@ -60,6 +64,8 @@ export class ConfirmPaymentFormComponent {
   }
 
   public navigateToVerifyCode(): void {
+    this.currentStorageData.paymentFiles = this.uploadDocumentsForm.value.files as FileWithLoading[];
+    this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
     this.router.navigate([registrationVerifyCodeLink]);
   }
 }

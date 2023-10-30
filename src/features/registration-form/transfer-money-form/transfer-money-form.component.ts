@@ -6,8 +6,8 @@ import { GetBankDetailsSmartiResponse } from '@shared/api/models';
 import { EmployeesService } from '@shared/api/services';
 import { AsideProcessDialogComponent, BankDetailsDialogComponent } from '@shared/dialog';
 import {
-  DEPARTMENT_ID,
-  IS_PAY_BY_SMARTI,
+  AllRegistrationSessionData,
+  REGISTRATION_DATA,
   registrationPaymentInstructionLink,
   registrationUploadFileLink,
 } from '@shared/entities';
@@ -45,7 +45,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransferMoneyFormComponent {
-  public departmentId: string = this.sessionStorageService.getItem(DEPARTMENT_ID) as string;
+  public readonly currentStorageData: AllRegistrationSessionData =
+    JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
+  public departmentId: string = this.currentStorageData.departmentId as string;
   public getBankDetailsSmarti$: Observable<GetBankDetailsSmartiResponse> =
     this.employeesService.apiEmployeesGetBankDetailsSmarti({ department_id: this.departmentId });
   public items: { name: string }[] = [{ name: 'smarti' }, { name: 'directly' }];
@@ -61,7 +63,8 @@ export class TransferMoneyFormComponent {
   }
 
   public navigateToNextPageOrOpenDialog(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.sessionStorageService.setItem(IS_PAY_BY_SMARTI, 'true');
+    this.currentStorageData.transferMoneyMode = this.radioValue.value?.name as string;
+    this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
     if (this.radioValue.value?.name === 'smarti') {
       this.dialogs.open(content, {
         closeable: false,
