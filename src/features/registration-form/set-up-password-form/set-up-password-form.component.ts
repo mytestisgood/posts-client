@@ -6,11 +6,13 @@ import { RegisterService } from '@shared/api/services';
 import {
   passwordValidatorPattern,
   registrationInfoLink,
-  registrationUploadFileLink,
+  registrationUploadFileLink, TOKEN,
 } from '@shared/entities';
-import { DestroyService } from '@shared/services';
+import { DestroyService, LoginService } from '@shared/services';
 import { ButtonComponent, InputPasswordComponent } from '@shared/ui';
-import { Observable, takeUntil } from 'rxjs';
+import { Observable, takeUntil, tap } from 'rxjs';
+import { RegisterResponse } from '@shared/api/models';
+import { LocalStorageService } from '@shared/web-api';
 
 @Component({
   selector: 'smarti-set-up-password-form',
@@ -29,9 +31,11 @@ export class SetUpPasswordFormComponent implements OnInit {
   );
 
   constructor(
+    private readonly localStorageService: LocalStorageService,
     private readonly router: Router,
     private readonly destroy$: DestroyService,
     private readonly registerService: RegisterService,
+    private readonly loginService: LoginService,
   ) {
   }
 
@@ -54,6 +58,10 @@ export class SetUpPasswordFormComponent implements OnInit {
       password: this.passwordControl.value as string,
       isFromSignIn: true,
     }).pipe(
+      // tap((registerResponse: RegisterResponse) => {
+      //   this.localStorageService.setItem(TOKEN, registerResponse?.token as string);
+      //   this.loginService.currentToken$.next(registerResponse?.token as string);
+      // }),
       takeUntil(this.destroy$),
     ).subscribe(() => this.router.navigate([registrationUploadFileLink]));
 

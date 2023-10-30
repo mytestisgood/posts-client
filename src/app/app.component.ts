@@ -20,12 +20,12 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.LoginService.currentToken.pipe(
-      tap(() => {
-        this.LoginService.currentToken$.next(this.localStorageService.getItem(TOKEN));
-        this.LoginService.isUserLogin$.next(this.localStorageService.getItem(IS_LOGGED_IN));
-      }),
-      takeUntil(this.destroy$),
-    ).subscribe();
+    // this.LoginService.currentToken.pipe(
+    //   tap(() => {
+    //     this.LoginService.currentToken$.next(this.localStorageService.getItem(TOKEN));
+    //     this.LoginService.isUserLogin$.next(this.localStorageService.getItem(IS_LOGGED_IN));
+    //   }),
+    //   takeUntil(this.destroy$),
+    // ).subscribe();
   }
 }
