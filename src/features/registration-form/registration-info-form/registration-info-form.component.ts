@@ -18,7 +18,7 @@ import {
   InputNumberComponent,
 } from '@shared/ui';
 import { SessionStorageService } from '@shared/web-api';
-import { debounceTime, Observable, switchMap, takeUntil, tap } from 'rxjs';
+import { debounceTime, Observable, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'smarti-registration-info-form',
@@ -77,9 +77,6 @@ export class RegistrationInfoFormComponent implements OnInit {
         }));
       }),
       debounceTime(500),
-      switchMap(() => {
-        return this.signInService.apiUsersSendVerifyCodeGet().pipe(takeUntil(this.destroy$));
-      }),
       takeUntil(this.destroy$),
     ).subscribe(() => this.router.navigate([registrationSetPasswordLink]));
   }
