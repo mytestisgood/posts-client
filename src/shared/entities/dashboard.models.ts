@@ -25,9 +25,9 @@ export interface DashboardCreateNewChatGroupControls {
 
 export type DashboardDirection = 'forward' | 'back';
 export type DashboardStep = 'firstStep' | 'secondStep' | 'thirdStep' | 'fourthStep' | 'fifthStep';
-export type ProcessTableItems = ProcessResponseItems & { isSelected: boolean };
-export type RecordListItems = FeedbacksRecordsListItems & { isSelected: boolean };
-export type CompensationsListItems = ProcessResponseItems & { isSelected: boolean };
+export type ProcessTableItems = ProcessResponseItems & { isSelected: FormControl<boolean | null> };
+export type RecordListItems = FeedbacksRecordsListItems & { isSelected: FormControl<boolean | null> };
+export type CompensationsListItems = ProcessResponseItems & { isSelected: FormControl<boolean | null> };
 export type ChatListItems = ChatResponse & { active: boolean };
 
 export enum DashboardStepEnum {

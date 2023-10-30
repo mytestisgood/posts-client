@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { CompensationsListItems } from '@shared/entities';
 import { NoElementsToShowComponent } from '@shared/layout';
 import {
@@ -24,21 +25,20 @@ export class DashboardCompensationsTableComponent {
   @Input() public items!: CompensationsListItems[] | null;
 
   public itemsValue: ChangePageItemsValue = { firstValue: 0, lastValue: 7 };
-
-  public get isSelectedAll(): boolean {
-    return this.items?.every(item => item.isSelected) ?? false;
-  }
+  public allSelectedValue: FormControl<boolean | null> = new FormControl<boolean>(false);
 
   public checkRow(isSelected: boolean, index: number): void {
     if (!this.items) {
       return;
     }
 
-    this.items[index].isSelected = isSelected;
+    this.items[index].isSelected.setValue(isSelected);
+    this.isSelectedAll(this.items.every(item => item.isSelected.value) ?? false);
   }
 
   public checkAll(isSelected: boolean): void {
-    this.items?.forEach(item => (item.isSelected = isSelected));
+    this.items?.forEach(item => (item.isSelected.setValue(isSelected)));
+    this.isSelectedAll(isSelected);
   }
 
   public onChangeSliceOfPage(value: ChangePageItemsValue): void {
@@ -46,4 +46,13 @@ export class DashboardCompensationsTableComponent {
       this.itemsValue = { firstValue: value.firstValue, lastValue: value.lastValue };
     }
   }
+
+  public isSelectedAll(isSelected: boolean): void {
+    if (isSelected) {
+      this.allSelectedValue.setValue(true);
+    } else {
+      this.allSelectedValue.setValue(false);
+    }
+  }
+
 }

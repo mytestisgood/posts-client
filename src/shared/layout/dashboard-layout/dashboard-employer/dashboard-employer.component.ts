@@ -56,9 +56,9 @@ export class DashboardEmployerComponent implements OnInit {
             debounceTime(500),
             map(([query, response]) => {
               const recordListItem: RecordListItems[] | null = (response.items as FeedbacksRecordsListItems[])
-                .map((item: FeedbacksRecordsListItems) => ({ ...item, isSelected: false })) ?? null;
+                .map((item: FeedbacksRecordsListItems) => ({ ...item, isSelected: new FormControl(false) })) ?? null;
 
-              return recordListItem.filter(res =>
+              return recordListItem?.filter(res =>
                 (res.name as string).toLowerCase().indexOf(query?.toLowerCase() as string) > -1);
             }),
           );

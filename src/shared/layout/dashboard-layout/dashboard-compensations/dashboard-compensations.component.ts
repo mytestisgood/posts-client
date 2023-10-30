@@ -57,9 +57,9 @@ export class DashboardCompensationsComponent implements OnInit {
             map(([query, response]) => {
               const compensationsListItems: CompensationsListItems[] | null =
                 (response.items as CompensationsListItems[]).map((item: CompensationsListItems) =>
-                  ({ ...item, isSelected: false }));
+                  ({ ...item, isSelected: new FormControl(false) }));
 
-              return compensationsListItems.filter((res: CompensationsListItems) =>
+              return compensationsListItems?.filter((res: CompensationsListItems) =>
                 (res.name as string).toLowerCase().indexOf(query?.toLowerCase() as string) > -1);
             }),
           );

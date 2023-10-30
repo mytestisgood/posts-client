@@ -8,7 +8,7 @@ import {
   DEPARTMENT_ID,
   TOKEN,
 } from '@shared/entities';
-import { LocalStorageService } from '@shared/web-api';
+import { SessionStorageService } from '@shared/web-api';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
   ProcessesDetailFifthStepComponent,
@@ -53,14 +53,14 @@ export class ProcessesDetailComponent {
   @Output() public changingStep: BehaviorSubject<DashboardStep> =
     new BehaviorSubject<DashboardStep>(DashboardStepEnum.FifthStep);
 
-  public departmentId: number = Number(this.localStorageService.getItem(DEPARTMENT_ID));
-  public token: string = this.localStorageService.getItem(TOKEN) as string;
+  public departmentId: number = Number(this.sessionStorageService.getItem(DEPARTMENT_ID));
+  public token: string = this.sessionStorageService.getItem(TOKEN) as string;
   public readonly currentStepBs: BehaviorSubject<DashboardStep> =
     new BehaviorSubject<DashboardStep>(DashboardStepEnum.FirstStep);
   public currentStep$: Observable<DashboardStep> = this.currentStepBs.asObservable();
   public dashboardStepEnum = DashboardStepEnum;
 
-  constructor(private readonly localStorageService: LocalStorageService) {
+  constructor(private readonly sessionStorageService: SessionStorageService) {
   }
 
   public changeStep(currentStep: string, direction: DashboardDirection): void {

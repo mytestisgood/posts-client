@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
   Inject,
   Input,
   OnInit,
@@ -39,10 +38,8 @@ export class InputFileComponent implements OnInit {
   @Input() public customWidth!: string;
   @Input() public customHeight!: string;
   @Input() public control: FormControl<FileWithLoading[] | null> = new FormControl([]);
-  @Input() public isSampleFile: boolean = false;
   @Output() public fileUploaded: BehaviorSubject<FileUploadStatusAndId> =
     new BehaviorSubject<FileUploadStatusAndId>({ status: false, id: null });
-  @Output() public sampleClicked: EventEmitter<null> = new EventEmitter();
   public currentFilesArray: FileWithLoading[] = [];
   public id!: string | undefined;
   public isSecondFileUpload: boolean = false;

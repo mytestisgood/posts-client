@@ -12,8 +12,7 @@ import { TuiCheckboxModule } from '@taiga-ui/kit';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputCheckboxComponent {
-  @Input() public checked: boolean = false;
-  @Input() public control: FormControl<boolean | null> = new FormControl<boolean | null>(null);
+  @Input() public control: FormControl<boolean | null> = new FormControl<boolean | null>(false);
   @Output() public changeEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public change(event: Event): void {

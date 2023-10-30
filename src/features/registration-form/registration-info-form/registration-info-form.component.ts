@@ -5,12 +5,10 @@ import { Router } from '@angular/router';
 import { CreateEmployerOutResponse } from '@shared/api/models';
 import { RegisterService, SignInService } from '@shared/api/services';
 import {
-  DEPARTMENT_ID,
-  IS_LOGGED_IN,
+  REGISTRATION_DATA,
   RegistrationInfoControls,
   registrationInfoFormMapper,
   registrationSetPasswordLink,
-  TOKEN,
 } from '@shared/entities';
 import { DestroyService, LoginService } from '@shared/services';
 import {
@@ -19,7 +17,7 @@ import {
   InputFieldComponent,
   InputNumberComponent,
 } from '@shared/ui';
-import { LocalStorageService } from '@shared/web-api';
+import { SessionStorageService } from '@shared/web-api';
 import { debounceTime, Observable, switchMap, takeUntil, tap } from 'rxjs';
 
 @Component({
@@ -47,7 +45,7 @@ export class RegistrationInfoFormComponent implements OnInit {
     private readonly destroy$: DestroyService,
     private readonly registerService: RegisterService,
     private readonly signInService: SignInService,
-    private readonly localStorageService: LocalStorageService,
+    private readonly sessionStorageService: SessionStorageService,
     private readonly loginService: LoginService,
     private readonly router: Router,
   ) {}
@@ -68,11 +66,15 @@ export class RegistrationInfoFormComponent implements OnInit {
       user_name: this.personalInfoForm.controls.yourName.value as string,
     }).pipe(
       tap((tokenResponse: CreateEmployerOutResponse) => {
-        this.localStorageService.setItem(TOKEN, tokenResponse?.token as string);
-        this.loginService.currentToken$.next(tokenResponse?.token as string);
-        this.localStorageService.setItem(IS_LOGGED_IN, 'false');
-        this.loginService.isUserLogin$.next('false');
-        this.localStorageService.setItem(DEPARTMENT_ID, tokenResponse?.departmentId as string);
+        this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify({
+          email: this.personalInfoForm.controls.email.value as string,
+          phone: this.personalInfoForm.controls.phone.value as string,
+          company_name: this.personalInfoForm.controls.companyName.value as string,
+          identifier: this.personalInfoForm.controls.companyId.value as string,
+          user_name: this.personalInfoForm.controls.yourName.value as string,
+          token: tokenResponse.token,
+          departmentId: tokenResponse.departmentId,
+        }));
       }),
       debounceTime(500),
       switchMap(() => {

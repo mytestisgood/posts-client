@@ -7,22 +7,22 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { ConfirmPaymentFormComponent } from '@feature';
-import { registrationConfirmPaymentLink } from '@shared/entities';
+import { LoginFormComponent } from '@feature';
+import { loginAfterRegistrationLink } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { takeUntil, withLatestFrom } from 'rxjs';
 
 @Component({
-  selector: 'smarti-confirm-payment',
+  selector: 'smarti-login-after-registration',
   standalone: true,
-  imports: [CommonModule, ConfirmPaymentFormComponent],
-  templateUrl: './confirm-payment.component.html',
-  styleUrls: ['./confirm-payment.component.scss'],
+  imports: [CommonModule, LoginFormComponent],
+  templateUrl: './login-after-registration.component.html',
+  styleUrls: ['./login-after-registration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConfirmPaymentComponent implements AfterViewInit {
-  @ViewChild('confirmPaymentDialog') public confirmPaymentDialog!: TuiDialogContext;
+export class LoginAfterRegistrationComponent implements AfterViewInit {
+  @ViewChild('loginFormTemplate') public loginFormTemplate!: TuiDialogContext;
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
@@ -32,20 +32,24 @@ export class ConfirmPaymentComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    this.dialogs.open(this.confirmPaymentDialog, {
+    this.dialogs.open(this.loginFormTemplate, {
       closeable: false,
       dismissible: false,
-      size: 'auto',
+      size: 'l',
     }).pipe(takeUntil(this.destroy$)).subscribe();
     this.router.events.pipe(
       withLatestFrom(this.dialogs),
       takeUntil(this.destroy$),
     ).subscribe(([event, dialogs]) => {
-      if(event instanceof NavigationEnd && this.router.url !== registrationConfirmPaymentLink && dialogs.length) {
+      if(event instanceof NavigationEnd && this.router.url !== loginAfterRegistrationLink && dialogs.length) {
         dialogs.forEach(dialog => {
           dialog.$implicit.complete();
         });
       }
     });
+  }
+
+  public navigateToMainPage(): void {
+    this.router.navigate(['/main']);
   }
 }

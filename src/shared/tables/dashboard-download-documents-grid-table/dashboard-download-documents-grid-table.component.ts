@@ -17,12 +17,12 @@ export class DashboardDownloadDocumentsGridTableComponent {
   public isAllSelected: boolean = false;
 
   public checkRow(isSelected: boolean, index: number): void {
-    this.items[index].isSelected = isSelected;
+    this.items[index].isSelected.setValue(isSelected);
   }
 
   public selectAll(): void {
     this.isAllSelected = true;
-    this.items?.every((item: DashboardDownloadDocumentsModel) => (item.isSelected = this.isAllSelected));
+    this.items?.forEach((item: DashboardDownloadDocumentsModel) => (item.isSelected.setValue(this.isAllSelected)));
   }
 
   public onDownloadFile(file: DashboardDownloadDocumentsModel): void {

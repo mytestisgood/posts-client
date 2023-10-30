@@ -57,6 +57,10 @@ const routes: Routes = [
         path: 'verify-code',
         loadComponent: () => import('@shared/layout').then(m => m.VerifyCodeComponent),
       },
+      {
+        path: 'login',
+        loadComponent: () => import('@shared/layout').then(m => m.LoginAfterRegistrationComponent),
+      },
     ],
   },
   {

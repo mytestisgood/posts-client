@@ -1,7 +1,7 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { emailValidatorPattern, israelMobilePhoneValidatorPattern } from './common.models';
 import {
-  PaymentMethodControls,
+  AccountControls,
   RegistrationInfoControls,
   UploadDocumentsControls,
   VerificationEmailControls,
@@ -30,11 +30,11 @@ export function verifyEmailFormMapper(): FormGroup<VerificationEmailControls> {
   });
 }
 
-export function paymentMethodFormMapper(): FormGroup<PaymentMethodControls> {
-  return new FormGroup<PaymentMethodControls>({
+export function paymentMethodFormMapper(): FormGroup<AccountControls> {
+  return new FormGroup<AccountControls>({
     accountNumber: new FormControl('', [Validators.required]),
     bankName: new FormControl('', [Validators.required]),
     branchNumber: new FormControl('', [Validators.required]),
-    codeNumber: new FormControl('', [Validators.required]),
+    codeNumber: new FormControl(''),
   });
 }

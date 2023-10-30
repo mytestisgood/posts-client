@@ -26,7 +26,7 @@ import {
   NotificationComponent,
   SelectComponent,
 } from '@shared/ui';
-import { LocalStorageService } from '@shared/web-api';
+import { SessionStorageService } from '@shared/web-api';
 import { TuiAlertService, TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { delay, takeUntil, tap, withLatestFrom } from 'rxjs';
@@ -53,8 +53,8 @@ import { delay, takeUntil, tap, withLatestFrom } from 'rxjs';
 export class UploadDocumentComponent {
   public uploadDocumentsForm: FormGroup<UploadDocumentsControls> = uploadingDocumentsFormMapper();
   public documentUploaded: boolean = false;
-  public departmentId: number = Number(this.localStorageService.getItem(DEPARTMENT_ID));
-  public token: string = this.localStorageService.getItem(TOKEN) as string;
+  public departmentId: number = Number(this.sessionStorageService.getItem(DEPARTMENT_ID));
+  public token: string = this.sessionStorageService.getItem(TOKEN) as string;
   public identifier!: string;
   public opswatId: Array<string> = [];
 
@@ -64,7 +64,7 @@ export class UploadDocumentComponent {
     private readonly fb: FormBuilder,
     private readonly changeDetectionRef: ChangeDetectorRef,
     private readonly destroy$: DestroyService,
-    private readonly localStorageService: LocalStorageService,
+    private readonly sessionStorageService: SessionStorageService,
     private readonly uploadFileService: UploadFileService,
     private readonly router: Router,
   ) {
@@ -90,10 +90,6 @@ export class UploadDocumentComponent {
 
   public navigateToRegistrationInfo(): void {
     this.router.navigate([registrationSetPasswordLink]);
-  }
-
-  public onDownloadSample(): void {
-    this.changeDetectionRef.detectChanges();
   }
 
   public openSampleDialog(content: PolymorpheusContent<TuiDialogContext>): void {

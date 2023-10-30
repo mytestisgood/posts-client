@@ -18,7 +18,7 @@ import {
 import { DataSharingService } from '@shared/services';
 import { DashboardHomeSmallTableComponent, DashboardHomeTableComponent } from '@shared/tables';
 import { ButtonComponent, InputYearComponent, LoaderComponent, SelectComponent } from '@shared/ui';
-import { LocalStorageService } from '@shared/web-api';
+import { SessionStorageService } from '@shared/web-api';
 import { delay, filter, map, Observable, of, switchMap } from 'rxjs';
 import {
   DashboardNotificationComponent,
@@ -68,7 +68,7 @@ export class DashboardHomeComponent implements OnInit {
     private readonly homeService: HomeService,
     private readonly chatService: ChatService,
     private readonly dataSharingService: DataSharingService,
-    private readonly localStorageService: LocalStorageService,
+    private readonly sessionStorageService: SessionStorageService,
     private readonly compensationsService: CompensationsService,
   ) {}
 
@@ -159,7 +159,7 @@ export class DashboardHomeComponent implements OnInit {
 
   private getUserName(): void {
     const currentUser: UserResponse = JSON
-      .parse(this.localStorageService.getItem(CURRENT_USER) as string) as UserResponse;
+      .parse(this.sessionStorageService.getItem(CURRENT_USER) as string) as UserResponse;
 
     this.userName = currentUser.name as string;
   }

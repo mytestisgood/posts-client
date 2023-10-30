@@ -5,7 +5,7 @@ export * from './registration-form/confirm-payment-form/confirm-payment-form.com
 export * from './registration-form/transfer-money-form/transfer-money-form.component';
 export * from './registration-form/payment-instruction-form/payment-instruction-form.component';
 export * from './registration-form/registration-info-form/registration-info-form.component';
-export * from './registration-form/verify-email/verify-email.component';
+export * from './registration-form/verify-email-form/verify-email-form.component';
 export * from './registration-form/upload-document/upload-document.component';
 export * from './registration-form/set-up-password-form/set-up-password-form.component';
 export * from './reset-password-form/reset-password-form.component';

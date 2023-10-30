@@ -63,9 +63,9 @@ export class DashboardProcessesComponent implements OnInit {
             debounceTime(500),
             map(([query, response]) => {
               const processTableItems: ProcessTableItems[] | null = (response.items as ProcessResponseItems[])
-                .map(item => ({ ...item, isSelected: false })) ?? null;
+                .map(item => ({ ...item, isSelected: new FormControl(false) })) ?? null;
 
-              return processTableItems.filter(res =>
+              return processTableItems?.filter(res =>
                 (res.name as string).toLowerCase().indexOf(query?.toLowerCase() as string) > -1);
             }),
           );

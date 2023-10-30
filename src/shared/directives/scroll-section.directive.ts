@@ -1,7 +1,7 @@
-import { SPECIAL_HEADER_TOKEN, SpecialHeaderTokenEnum } from '@shared/entities';
-import { LocalStorageService } from '@shared/web-api';
-import { ScrollManagerDirective } from './scroll-manager.directive';
 import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { SPECIAL_HEADER_TOKEN, SpecialHeaderTokenEnum } from '@shared/entities';
+import { SessionStorageService } from '@shared/web-api';
+import { ScrollManagerDirective } from './scroll-manager.directive';
 
 @Directive({
   selector: '[smartiScrollSection]',
@@ -10,12 +10,12 @@ import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular
 export class ScrollSectionDirective implements AfterViewInit, OnDestroy {
   @Input('smartiScrollSection') public id!: string | number;
 
-  public isSpecialHeaderShow: boolean = this.localStorageService
+  public isSpecialHeaderShow: boolean = this.sessionStorageService
     .getItem(SPECIAL_HEADER_TOKEN) === SpecialHeaderTokenEnum.Show;
   constructor(
     private readonly host: ElementRef<HTMLElement>,
     private readonly manager: ScrollManagerDirective,
-    private readonly localStorageService: LocalStorageService,
+    private readonly sessionStorageService: SessionStorageService,
   ) {}
 
   public ngAfterViewInit(): void {

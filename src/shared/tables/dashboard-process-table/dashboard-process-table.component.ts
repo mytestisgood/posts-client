@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProcessesService } from '@shared/api/services';
 import { ProcessTableItems } from '@shared/entities';
@@ -29,26 +30,34 @@ export class DashboardProcessTableComponent {
   @Input() public departmentId!: string;
 
   public itemsValue: ChangePageItemsValue = { firstValue: 0, lastValue: 6 };
+  public allSelectedValue: FormControl<boolean | null> = new FormControl<boolean>(false);
+
   constructor(
     private readonly router: Router,
     private readonly processesService: ProcessesService,
     private readonly destroy$: DestroyService,
   ) {}
 
-  public get isSelectedAll(): boolean {
-    return this.items?.every(item => item.isSelected) ?? false;
-  }
-
   public checkRow(isSelected: boolean, index: number): void {
     if (!this.items) {
       return;
     }
 
-    this.items[index].isSelected = isSelected;
+    this.items[index].isSelected.setValue(isSelected);
+    this.isSelectedAll(this.items.every(item => item.isSelected.value) ?? false);
   }
 
   public checkAll(isSelected: boolean): void {
-    this.items?.forEach(item => (item.isSelected = isSelected));
+    this.items?.forEach(item => (item.isSelected.setValue(isSelected)));
+    this.isSelectedAll(isSelected);
+  }
+
+  public isSelectedAll(isSelected: boolean): void {
+    if (isSelected) {
+      this.allSelectedValue.setValue(true);
+    } else {
+      this.allSelectedValue.setValue(false);
+    }
   }
 
   public openDetailInformation(): void {

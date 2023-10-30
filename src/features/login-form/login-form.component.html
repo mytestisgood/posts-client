@@ -1,13 +1,15 @@
-<div class="login-form mt-2 bg-white rounded-l box-shadow-big">
+<div class="mt-2">
   <form
     class="flex flex-col items-center mt-10"
     [formGroup]="loginForm"
   >
-    <h3 class="medium mt-10 mb-0 text-center neutrals-text-950">הכניסו כתובת מייל וסיסמא</h3>
+    <h3 class="medium mt-10 mb-0 text-center neutrals-text-950 dir-rtl">
+      ברוך שובך לsmarti, כדי להתחבר יש מלא את הפרטים הבאים:
+    </h3>
     <div class="mt-24">
       <smarti-input-field
         [customWidth]="'536px'"
-        [placeholder]="'מייל*'"
+        [placeholder]="'אימייל*'"
         [control]="loginForm.controls.email"
       ></smarti-input-field>
     </div>
