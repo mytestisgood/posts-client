@@ -1,4 +1,4 @@
-<div>
+<div [formGroup]="confirmPaymentForm">
   <div class="flex justify-center">
     <smarti-progress-bar [currentUrl]="currentUrl"></smarti-progress-bar>
   </div>
@@ -8,7 +8,7 @@
   <div class="neutrals-text-950 text-center paragraph-text">
     כעת יש לציין את תאריך הערך בו בוצע התשלום ולטעון את האסמכתא על התשלום
   </div>
-  <div class="mt-4 mx-auto flex justify-around w-[658px] h-[80px] rounded-l bg-mint">
+  <div class="mt-4 mx-auto flex justify-around w-[516px] h-[80px] rounded-l bg-mint">
     <div class="flex gap-2">
       <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl">6230 ש״ח</div>
       <div class="paragraph-text neutrals-text-950 self-center dir-rtl">סה״כ לתשלום:</div>
@@ -18,12 +18,18 @@
       <div class="paragraph-text neutrals-text-950 self-center dir-rtl">כמות עובדים:</div>
     </div>
   </div>
-  <div class="mt-8 mb-8"></div>
+  <div class="mt-8 mb-8 mx-auto w-fit">
+    <smarti-input-date
+      [placeholder]="'תאריך ערך*'"
+      [customWidth]="'252px'"
+      [control]="confirmPaymentForm.controls.date"
+    ></smarti-input-date>
+  </div>
   <div class="flex justify-center">
     <smarti-input-file
       [customWidth]="'536px'"
       [customHeight]="'150px'"
-      [control]="uploadDocumentsForm.controls.files"
+      [control]="confirmPaymentForm.controls.files"
       (fileUploaded)="fileUploaded($event)"
     ></smarti-input-file>
   </div>

@@ -2,6 +2,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { emailValidatorPattern, israelMobilePhoneValidatorPattern } from './common.models';
 import {
   AccountControls,
+  ConfirmPaymentControls,
   RegistrationInfoControls,
   UploadDocumentsControls,
   VerificationEmailControls,
@@ -21,6 +22,13 @@ export function registrationInfoFormMapper(): FormGroup<RegistrationInfoControls
 export function uploadingDocumentsFormMapper(): FormGroup<UploadDocumentsControls> {
   return new FormGroup<UploadDocumentsControls>({
     files: new FormControl(),
+  });
+}
+
+export function confirmPaymentFormMapper(): FormGroup<ConfirmPaymentControls> {
+  return new FormGroup<ConfirmPaymentControls>({
+    files: new FormControl(),
+    date: new FormControl(),
   });
 }
 

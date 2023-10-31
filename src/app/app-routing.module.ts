@@ -12,6 +12,7 @@ import {
 } from '@pages';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
+import { RegistrationGuard } from './guards/registration.guard';
 
 const routes: Routes = [
   {
@@ -36,26 +37,32 @@ const routes: Routes = [
       {
         path: 'set-password',
         loadComponent: () => import('@shared/layout').then(m => m.SetPasswordComponent),
+        canActivate: [RegistrationGuard],
       },
       {
         path: 'upload-file',
         loadComponent: () => import('@shared/layout').then(m => m.UploadFileComponent),
+        canActivate: [RegistrationGuard],
       },
       {
         path: 'transfer-money',
         loadComponent: () => import('@shared/layout').then(m => m.TransferMoneyComponent),
+        canActivate: [RegistrationGuard],
       },
       {
         path: 'payment-instruction',
         loadComponent: () => import('@shared/layout').then(m => m.PaymentInstructionComponent),
+        canActivate: [RegistrationGuard],
       },
       {
         path: 'confirm-payment',
         loadComponent: () => import('@shared/layout').then(m => m.ConfirmPaymentComponent),
+        canActivate: [RegistrationGuard],
       },
       {
         path: 'verify-code',
         loadComponent: () => import('@shared/layout').then(m => m.VerifyCodeComponent),
+        canActivate: [RegistrationGuard],
       },
       {
         path: 'login',

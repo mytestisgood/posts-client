@@ -1,22 +1,30 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Inject,
   Input,
-  OnInit,
   Output,
 } from '@angular/core';
-import { FormControl, FormControlStatus, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UploadPostResponse } from '@shared/api/models';
 import { FilesMyHrService } from '@shared/api/services';
 import { FileUploadStatusAndId, FileWithLoading } from '@shared/entities';
 import { takeRight } from '@shared/helpers';
-import { DestroyService } from '@shared/services';
-import { TuiAlertService, TuiLinkModule, TuiLoaderModule, TuiSvgModule } from '@taiga-ui/core';
+import { AlertsService, DestroyService } from '@shared/services';
+import { TuiLinkModule, TuiLoaderModule, TuiSvgModule } from '@taiga-ui/core';
 import { TuiInputFilesModule, TuiMarkerIconModule } from '@taiga-ui/kit';
-import { BehaviorSubject, catchError, forkJoin, Observable, of, switchMap, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  combineLatest,
+  forkJoin,
+  Observable,
+  of,
+  switchMap,
+  takeUntil,
+} from 'rxjs';
 
 @Component({
   selector: 'smarti-input-file',
@@ -34,7 +42,7 @@ import { BehaviorSubject, catchError, forkJoin, Observable, of, switchMap, takeU
   styleUrls: ['./input-file.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputFileComponent implements OnInit {
+export class InputFileComponent implements AfterViewInit {
   @Input() public customWidth!: string;
   @Input() public customHeight!: string;
   @Input() public control: FormControl<FileWithLoading[] | null> = new FormControl([]);
@@ -47,14 +55,14 @@ export class InputFileComponent implements OnInit {
   private status!: 'VALID' | 'INVALID' | 'PENDING' | 'DISABLED';
 
   constructor(
-    @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
     private readonly filesMyHrService: FilesMyHrService,
     private readonly destroy$: DestroyService,
     private readonly cdr: ChangeDetectorRef,
+    private readonly alertsService: AlertsService,
   ) {
   }
 
-  public ngOnInit(): void {
+  public ngAfterViewInit(): void {
     this.fileStatusChanges();
   }
 
@@ -71,28 +79,13 @@ export class InputFileComponent implements OnInit {
     this.control.updateValueAndValidity({ onlySelf: true, emitEvent: false });
   }
 
-  public showSuccessNotificationIcon(): void {
-    this.alerts.open('הקובץ נקלט בהצלחה', {
-      autoClose: true,
-      hasCloseButton: false,
-      status: 'success',
-      icon: '/assets/svg/success-notification-icon-32.svg',
-    }).pipe(takeUntil(this.destroy$)).subscribe();
-  }
-
-  public showErrorNotificationIcon(): void {
-    this.alerts.open('הקובץ לא נקלט. יש להעלות את הקובץ מחדש', {
-      autoClose: true,
-      hasCloseButton: false,
-      status: 'error',
-      icon: '/assets/svg/error-notification-icon-32.svg',
-    }).pipe(takeUntil(this.destroy$)).subscribe();
-  }
-
   private fileStatusChanges(): void {
-    this.control.statusChanges.pipe(
-      switchMap((value: FormControlStatus) => {
-        this.status = value;
+    combineLatest([
+      this.control.statusChanges,
+      this.control.valueChanges,
+    ]).pipe(
+      switchMap(([status]) => {
+        this.status = status;
         if (this.control.value) {
           if (this.control.value?.length > this.currentFilesIndex) {
             const uploadedFileLength = this.control.value?.length - this.currentFilesIndex;
@@ -120,25 +113,37 @@ export class InputFileComponent implements OnInit {
         return of();
       }),
       catchError((err) => {
-        this.showErrorNotificationIcon();
+        this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');
         return of(err);
       }),
       takeUntil(this.destroy$),
-    ).subscribe((response: UploadPostResponse[]) => {
-      if (this.status === 'VALID' && this.control.value?.length) {
-        response.forEach(res => {
-          const indexToUpdate = this.currentFilesArray.findIndex((item: FileWithLoading) => item.isLoading);
+    )
+      .subscribe((response: UploadPostResponse[]) => {
+        if (this.status === 'VALID' && this.control.value?.length && response.length) {
+          response.forEach(res => {
+            const indexToUpdate = this.currentFilesArray.findIndex((item: FileWithLoading) => item.isLoading);
 
-          this.currentFilesArray[indexToUpdate].isLoading = false;
-          this.showSuccessNotificationIcon();
-          this.fileUploaded.next({ status: true, id: res.opswatId as string });
-        });
-      } else {
-        this.showErrorNotificationIcon();
-        this.fileUploaded.next({ status: false, id: null });
-      }
-      this.cdr.detectChanges();
-    });
+            this.currentFilesArray[indexToUpdate].isLoading = false;
+            this.alertsService.showSuccessNotificationIcon('הקובץ נקלט בהצלחה');
+            this.fileUploaded.next({ status: true, id: res.opswatId as string });
+          });
+        } else {
+          this.currentFilesArray.forEach(file => {
+            if (file.isLoading) {
+              this.control.setValue(
+                this.control.value?.filter(current => current.index !==  file.index) ?? [],
+              );
+            }
+            this.fileUploaded.next({ status: false, id: null });
+          });
+          this.currentFilesArray = this.currentFilesArray.filter(file => !file.isLoading);
+          if (this.control.value?.length === 0) {
+            this.isSecondFileUpload = false;
+          }
+        }
+        this.control.updateValueAndValidity({ emitEvent: true });
+        this.cdr.detectChanges();
+      });
   }
 
   private fileIncrease(file: FileWithLoading): void {

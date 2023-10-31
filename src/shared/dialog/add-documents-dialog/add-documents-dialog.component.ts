@@ -7,8 +7,8 @@ import {
   DocumentTypesConstEmployer,
   DocumentTypesEnumEmployer,
   FileUploadStatusAndId,
-  getObjectKeyByValue,
 } from '@shared/entities';
+import { getObjectKeyByValue } from '@shared/helpers';
 import {
   ButtonComponent,
   InputFieldComponent,

@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UploadFileService } from '@shared/api/services';
@@ -15,7 +21,6 @@ import {
   REGISTRATION_DATA,
   registrationSetPasswordLink,
   registrationTransferMoneyLink,
-  TOKEN,
   UploadDocumentsControls,
   uploadingDocumentsFormMapper,
 } from '@shared/entities';
@@ -52,14 +57,13 @@ import { delay, takeUntil, tap, withLatestFrom } from 'rxjs';
   styleUrls: ['./upload-document.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UploadDocumentComponent {
+export class UploadDocumentComponent implements OnInit {
   public uploadDocumentsForm: FormGroup<UploadDocumentsControls> = uploadingDocumentsFormMapper();
   public documentUploaded: boolean = false;
-  public token: string = this.sessionStorageService.getItem(TOKEN) as string;
-  public identifier!: string;
   public opswatId: Array<string> = [];
   public currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
+  public identifier: string = this.currentStorageData?.companyId as string;
   public departmentId: number = Number(this.currentStorageData.departmentId);
 
   constructor(
@@ -74,6 +78,15 @@ export class UploadDocumentComponent {
   ) {
   }
 
+  public ngOnInit(): void {
+    if (this.currentStorageData.files?.length) {
+      this.uploadDocumentsForm.setValue({
+        files: this.currentStorageData.files,
+      });
+      this.uploadDocumentsForm.updateValueAndValidity({ emitEvent: true });
+    }
+  }
+
   public openForwardModal(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogs.open(content, {
       closeable: false,
@@ -86,6 +99,7 @@ export class UploadDocumentComponent {
       this.opswatId.push(uploadedAndId.id as string);
     }
     this.documentUploaded = uploadedAndId.status;
+    this.uploadDocumentsForm.updateValueAndValidity({ emitEvent: true });
   }
 
   public requestSend(): void {
@@ -123,6 +137,7 @@ export class UploadDocumentComponent {
     }).pipe(
       tap(() => {
         this.currentStorageData.files = this.uploadDocumentsForm.value.files as FileWithLoading[];
+        this.currentStorageData.finishFilesPage = true;
         this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
         this.router.navigate([registrationTransferMoneyLink]);
       }),

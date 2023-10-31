@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountFormDialogComponent } from '@shared/dialog';
 import {
   AllRegistrationSessionData,
+  ConfirmPaymentControls,
+  confirmPaymentFormMapper,
   FileUploadStatusAndId,
   FileWithLoading,
   REGISTRATION_DATA,
   registrationVerifyCodeLink,
-  UploadDocumentsControls,
-  uploadingDocumentsFormMapper,
 } from '@shared/entities';
 import { DestroyService } from '@shared/services';
-import { ButtonComponent, InputFileComponent } from '@shared/ui';
+import { ButtonComponent, InputDateComponent, InputFileComponent } from '@shared/ui';
 import { SessionStorageService } from '@shared/web-api';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
@@ -25,15 +25,15 @@ import { ProgressBarComponent } from '../../progress-bar/progress-bar.component'
   standalone: true,
   imports: [
     CommonModule, ProgressBarComponent, InputFileComponent, ButtonComponent,
-    AccountFormDialogComponent,
+    AccountFormDialogComponent, InputDateComponent, ReactiveFormsModule,
   ],
   templateUrl: './confirm-payment-form.component.html',
   styleUrls: ['./confirm-payment-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConfirmPaymentFormComponent {
+export class ConfirmPaymentFormComponent implements OnInit {
   public currentUrl: string = this.router.url;
-  public uploadDocumentsForm: FormGroup<UploadDocumentsControls> = uploadingDocumentsFormMapper();
+  public confirmPaymentForm: FormGroup<ConfirmPaymentControls> = confirmPaymentFormMapper();
   public opswatId: Array<string> = [];
   public documentUploaded: boolean = false;
   public isDirectPayment: boolean = false;
@@ -49,8 +49,18 @@ export class ConfirmPaymentFormComponent {
     this.isDirectPayment = this.currentStorageData.transferMoneyMode !== 'smarti';
   }
 
+  public ngOnInit(): void {
+    if (this.currentStorageData.paymentFiles?.length) {
+      this.confirmPaymentForm.setValue({
+        files: this.currentStorageData.paymentFiles,
+        date: this.currentStorageData.paymentDate,
+      });
+      this.confirmPaymentForm.updateValueAndValidity({ emitEvent: true });
+    }
+  }
+
   public fileUploaded(uploadedAndId: FileUploadStatusAndId): void {
-    if (uploadedAndId.status && this.uploadDocumentsForm.controls.files.value) {
+    if (uploadedAndId.status && this.confirmPaymentForm.controls.files.value) {
       this.opswatId.push(uploadedAndId.id as string);
     }
     this.documentUploaded = uploadedAndId.status;
@@ -64,7 +74,9 @@ export class ConfirmPaymentFormComponent {
   }
 
   public navigateToVerifyCode(): void {
-    this.currentStorageData.paymentFiles = this.uploadDocumentsForm.value.files as FileWithLoading[];
+    this.currentStorageData.paymentFiles = this.confirmPaymentForm.value.files as FileWithLoading[];
+    this.currentStorageData.paymentDate = this.confirmPaymentForm.value.date;
+    this.currentStorageData.finishConfirmPayment = true;
     this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
     this.router.navigate([registrationVerifyCodeLink]);
   }

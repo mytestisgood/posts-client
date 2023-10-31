@@ -19,14 +19,20 @@ export interface AllRegistrationSessionData {
   email?: string;
   phone?: string;
   acceptPrivacy?: boolean;
+  finishInfoPage?: boolean;
   password?: string;
+  finishPasswordPage?: boolean;
   files?: FileWithLoading[];
+  finishFilesPage?: boolean;
   transferMoneyMode?: string;
+  finishTransferMoneyMode?: boolean;
   paymentFiles?: FileWithLoading[];
+  paymentDate?: string;
   accountNumber?: string;
   bankName?: string;
   branchNumber?: string;
   codeNumber?: string;
+  finishConfirmPayment?: boolean;
 }
 
 export interface RegistrationInfoControls {
@@ -40,6 +46,11 @@ export interface RegistrationInfoControls {
 
 export interface UploadDocumentsControls {
   files: FormControl<FileWithLoading[] | null>;
+}
+
+export interface ConfirmPaymentControls {
+  files: FormControl<FileWithLoading[] | null>;
+  date: FormControl;
 }
 
 export interface AccountControls {
