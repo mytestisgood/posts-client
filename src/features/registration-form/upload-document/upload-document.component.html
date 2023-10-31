@@ -16,9 +16,7 @@
       [customWidth]="'536px'"
       [customHeight]="'150px'"
       [control]="uploadDocumentsForm.controls.files"
-      [isSampleFile]="true"
       (fileUploaded)="fileUploaded($event)"
-      (sampleClicked)="onDownloadSample()"
     ></smarti-input-file>
     <div
       *ngIf="!documentUploaded"

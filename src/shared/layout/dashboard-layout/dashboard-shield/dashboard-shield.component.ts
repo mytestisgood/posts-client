@@ -6,7 +6,7 @@ import { DashboardHeaderIds, TOKEN } from '@shared/entities';
 import { DataSharingService } from '@shared/services';
 import { DashboardShieldTableComponent } from '@shared/tables';
 import { ButtonComponent, LoaderComponent } from '@shared/ui';
-import { LocalStorageService } from '@shared/web-api';
+import { SessionStorageService } from '@shared/web-api';
 import { filter, map, Observable, switchMap } from 'rxjs';
 
 @Component({
@@ -18,12 +18,12 @@ import { filter, map, Observable, switchMap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardShieldComponent implements OnInit {
-  public token: string = this.localStorageService.getItem(TOKEN) as string;
+  public token: string = this.sessionStorageService.getItem(TOKEN) as string;
   public menoraItems$!: Observable<MenoraGetResponseItems[] | null>;
 
   constructor(
     private readonly menoraService: MenoraService,
-    private readonly localStorageService: LocalStorageService,
+    private readonly sessionStorageService: SessionStorageService,
     private readonly dataSharingService: DataSharingService,
   ) {}
 

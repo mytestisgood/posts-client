@@ -89,7 +89,7 @@
           <th class="tui-table__th text-right caption-text neutrals-text-500 h-6 py-0 px-2 w-9">
             <smarti-input-checkbox
               class="flex justify-center"
-              [checked]="isSelectedAll"
+              [control]="allSelectedValue"
               (changeEvent)="checkAll($event)"
             ></smarti-input-checkbox>
           </th>
@@ -134,6 +134,7 @@
           <td class="tui-table__td text-center paragraph-text neutrals-text-500 h-10 p-2 w-9 px-2">
             <smarti-input-checkbox
               class="flex justify-center"
+              [control]="item.isSelected"
               (changeEvent)="checkRow($event, index)"
             ></smarti-input-checkbox>
           </td>

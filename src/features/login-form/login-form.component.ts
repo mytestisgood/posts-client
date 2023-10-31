@@ -19,7 +19,7 @@ import {
   InputFieldComponent,
   InputPasswordComponent,
 } from '@shared/ui';
-import { LocalStorageService } from '@shared/web-api';
+import { SessionStorageService } from '@shared/web-api';
 import { Observable, takeUntil, tap } from 'rxjs';
 
 interface LoginForm {
@@ -63,7 +63,7 @@ export class LoginFormComponent implements OnInit {
     private readonly router: Router,
     private readonly destroy$: DestroyService,
     private readonly signInService: SignInService,
-    private readonly localStorageService: LocalStorageService,
+    private readonly sessionStorageService: SessionStorageService,
     private readonly loginService: LoginService,
     ) {
   }
@@ -82,11 +82,11 @@ export class LoginFormComponent implements OnInit {
       password: this.loginForm.value.password as string,
     }).pipe(
       tap((response: SignInResponse) => {
-        this.localStorageService.setItem(TOKEN, response.token as string);
+        this.sessionStorageService.setItem(TOKEN, response.token as string);
         this.loginService.currentToken$.next(response.token as string);
-        this.localStorageService.setItem(IS_LOGGED_IN, 'true');
+        this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
         this.loginService.isUserLogin$.next('true');
-        this.localStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
+        this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
       }),
       takeUntil(this.destroy$),
     ).subscribe(() => {

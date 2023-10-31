@@ -8,14 +8,26 @@ export const registrationTransferMoneyLink: string = '/registration/transfer-mon
 export const registrationPaymentInstructionLink: string = '/registration/payment-instruction';
 export const registrationConfirmPaymentLink: string = '/registration/confirm-payment';
 export const registrationVerifyCodeLink: string = '/registration/verify-code';
+export const loginAfterRegistrationLink: string = '/registration/login';
 
-export type RegistrationDirection = 'forward' | 'back';
-export type RegistrationFormValueType = {
-  personalInfo: PersonalInfoFormValue,
-  uploadDocumentInfo: UploadDocumentFormValue,
-  paymentMethodInfo: PaymentMethodFormValue,
-  verifyEmailInfo: VerificationEmailFormValue,
-};
+export interface AllRegistrationSessionData {
+  token?: string;
+  departmentId?: string;
+  companyName?: string;
+  companyId?: string;
+  yourName?: string;
+  email?: string;
+  phone?: string;
+  acceptPrivacy?: boolean;
+  password?: string;
+  files?: FileWithLoading[];
+  transferMoneyMode?: string;
+  paymentFiles?: FileWithLoading[];
+  accountNumber?: string;
+  bankName?: string;
+  branchNumber?: string;
+  codeNumber?: string;
+}
 
 export interface RegistrationInfoControls {
   companyName: FormControl<string | null>;
@@ -30,7 +42,7 @@ export interface UploadDocumentsControls {
   files: FormControl<FileWithLoading[] | null>;
 }
 
-export interface PaymentMethodControls {
+export interface AccountControls {
   accountNumber: FormControl<string | null>;
   bankName: FormControl<string | null>;
   branchNumber: FormControl<string | null>;
@@ -54,13 +66,9 @@ export interface UploadDocumentFormValue {
   files: File[] | null;
 }
 
-export interface PaymentMethodFormValue {
+export interface AccountFormValue {
   accountNumber: string;
   bankName: string;
   branchNumber: string;
   codeNumber: string;
-}
-
-export interface VerificationEmailFormValue {
-  emailVerifyCode: string;
 }

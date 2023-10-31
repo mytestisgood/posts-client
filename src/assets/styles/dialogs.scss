@@ -1,7 +1,7 @@
 tui-dialog{
   .t-content {
     background: $neutrals-20!important;
-    tui-input .t-content {
+    tui-input .t-content, tui-input-password .t-content {
       background: $white!important;
     }
   }

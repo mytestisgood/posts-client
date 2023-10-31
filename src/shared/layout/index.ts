@@ -1,6 +1,7 @@
 export * from './header-auth-layout/header-auth-layout.component';
 export * from './contact-us-footer-layout/contact-us-footer-layout.component';
 export * from './registration-layout/confirm-payment/confirm-payment.component';
+export * from './registration-layout/login-after-registration/login-after-registration.component';
 export * from './registration-layout/payment-instruction/payment-instruction.component';
 export * from './registration-layout/registration-footer/registration-footer.component';
 export * from './registration-layout/registration-info/registration-info.component';

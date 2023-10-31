@@ -1,0 +1,39 @@
+<div class="mt-6 flex flex-col justify-center items-center">
+  <h3 class="mt-0 mb-0 medium neutrals-text-950">יש להזין את פרטי החשבון שממנו עבר התשלום</h3>
+  <div
+    class="mt-20 flex flex-col gap-[30px]"
+    [formGroup]="accountForm"
+  >
+    <smarti-input-field
+      [customWidth]="'616px'"
+      [placeholder]="'מספר חשבון*'"
+      [control]="accountForm.controls.bankName"
+    ></smarti-input-field>
+    <smarti-input-field
+      [customWidth]="'616px'"
+      [placeholder]="'מספר חשבון*'"
+      [control]="accountForm.controls.accountNumber"
+    ></smarti-input-field>
+    <smarti-input-field
+      [customWidth]="'616px'"
+      [placeholder]="'מספר חשבון*'"
+      [control]="accountForm.controls.branchNumber"
+    ></smarti-input-field>
+  </div>
+  <div class="mt-[216px]">
+    <smarti-button
+      [typeClass]="'confirm'"
+      [customHeight]="'56px'"
+      [customWidth]="'147px'"
+      [disabled]="isDisabled"
+      [text]="'אישור'"
+      (buttonClicked)="sendRequest()"
+    ></smarti-button>
+  </div>
+</div>
+<button
+  class="close-dialog-right cursor-pointer dir-rtl paragraph-text"
+  (click)="closeDialog()"
+>
+  < חזרה אחורה
+</button>

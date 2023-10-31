@@ -23,6 +23,7 @@ export const TOKEN: string = 'token';
 export const CURRENT_USER = 'currentUser';
 export const IS_LOGGED_IN: string = 'isLoggedIn';
 export const DEPARTMENT_ID: string = 'departmentId';
+export const REGISTRATION_DATA: string = 'registrationData';
 export const SPECIAL_HEADER_TOKEN: string = 'specialHeaderToken';
 export const emailValidatorPattern: string = '^(?!^-)[\\w-]+(?:[\\.-][\\w-]+)*(?:[\\.+][\\w-]+)*@' +
   '\\w+(?:[\\.-]\\w+)*(?:\\.[A-Za-z]{2,4})+$';
@@ -57,7 +58,7 @@ export interface DashboardDownloadDocumentsModel {
   title: string,
   image: string,
   name: string,
-  isSelected: boolean,
+  isSelected: FormControl<boolean | null>,
   type?: string,
 }
 

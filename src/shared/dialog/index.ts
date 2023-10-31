@@ -1,3 +1,4 @@
+export * from './account-form-dialog/account-form-dialog.component';
 export * from './add-documents-dialog/add-documents-dialog.component';
 export * from './aside-process-dialog/aside-process-dialog.component';
 export * from './bank-details-dialog/bank-details-dialog.component';

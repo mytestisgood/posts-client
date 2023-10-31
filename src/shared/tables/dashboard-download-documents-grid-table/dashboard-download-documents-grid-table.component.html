@@ -29,8 +29,8 @@
           </div>
           <div>
             <smarti-input-checkbox
-              [checked]="item.isSelected"
               (changeEvent)="checkRow($event, index)"
+              [control]="item.isSelected"
             ></smarti-input-checkbox>
           </div>
         </div>

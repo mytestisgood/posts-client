@@ -6,7 +6,7 @@ import { ScrollAnchorDirective } from '@shared/directives';
 import { SPECIAL_HEADER_TOKEN, SpecialHeaderTokenEnum } from '@shared/entities';
 import { DestroyService, NavigationAnchorService } from '@shared/services';
 import { ButtonComponent } from '@shared/ui';
-import { LocalStorageService } from '@shared/web-api';
+import { SessionStorageService } from '@shared/web-api';
 import {
   HeaderOverlayMobileComponent,
 } from '../header-overlay-mobile/header-overlay-mobile.component';
@@ -31,10 +31,10 @@ export class HeaderComponent {
   constructor(
     private readonly router: Router,
     private readonly destroy$: DestroyService,
-    private readonly localStorageService: LocalStorageService,
+    private readonly sessionStorageService: SessionStorageService,
     private readonly navigationAnchorService: NavigationAnchorService,
   ) {
-    this.localStorageService.setItem(SPECIAL_HEADER_TOKEN, SpecialHeaderTokenEnum.Show);
+    this.sessionStorageService.setItem(SPECIAL_HEADER_TOKEN, SpecialHeaderTokenEnum.Show);
   }
 
   public navigateToPageWithoutAnchor(link: string): void {
@@ -48,7 +48,7 @@ export class HeaderComponent {
   public closeSpecialHeader(): void {
     const specialHeader: HTMLElement = document.getElementById('specialHeader') as HTMLElement;
 
-    this.localStorageService.setItem(SPECIAL_HEADER_TOKEN, SpecialHeaderTokenEnum.Hidden);
+    this.sessionStorageService.setItem(SPECIAL_HEADER_TOKEN, SpecialHeaderTokenEnum.Hidden);
     specialHeader.hidden = true;
   }
 }

@@ -4,15 +4,16 @@ import { FormControl, FormControlStatus, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from '@shared/api/services';
 import {
+  AllRegistrationSessionData,
   passwordValidatorPattern,
+  REGISTRATION_DATA,
   registrationInfoLink,
   registrationUploadFileLink, TOKEN,
 } from '@shared/entities';
 import { DestroyService, LoginService } from '@shared/services';
 import { ButtonComponent, InputPasswordComponent } from '@shared/ui';
+import { SessionStorageService } from '@shared/web-api';
 import { Observable, takeUntil, tap } from 'rxjs';
-import { RegisterResponse } from '@shared/api/models';
-import { LocalStorageService } from '@shared/web-api';
 
 @Component({
   selector: 'smarti-set-up-password-form',
@@ -29,13 +30,15 @@ export class SetUpPasswordFormComponent implements OnInit {
   public passwordControlChange$: Observable<FormControlStatus> = this.passwordControl.statusChanges.pipe(
     takeUntil(this.destroy$),
   );
+  private readonly currentStorageData: AllRegistrationSessionData =
+    JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
   constructor(
-    private readonly localStorageService: LocalStorageService,
     private readonly router: Router,
     private readonly destroy$: DestroyService,
     private readonly registerService: RegisterService,
     private readonly loginService: LoginService,
+    private readonly sessionStorageService: SessionStorageService,
   ) {
   }
 
@@ -58,10 +61,10 @@ export class SetUpPasswordFormComponent implements OnInit {
       password: this.passwordControl.value as string,
       isFromSignIn: true,
     }).pipe(
-      // tap((registerResponse: RegisterResponse) => {
-      //   this.localStorageService.setItem(TOKEN, registerResponse?.token as string);
-      //   this.loginService.currentToken$.next(registerResponse?.token as string);
-      // }),
+      tap(() => {
+        this.currentStorageData.password = this.passwordControl.value as string;
+        this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
+      }),
       takeUntil(this.destroy$),
     ).subscribe(() => this.router.navigate([registrationUploadFileLink]));
 
