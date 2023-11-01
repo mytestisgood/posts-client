@@ -35,6 +35,13 @@ constructor(
 ) {
 }
   public ngOnInit(): void {
+    this.accountForm.setValue({
+      accountNumber: this.currentStorageData?.accountNumber ?? '',
+      branchNumber: this.currentStorageData?.branchNumber ?? '',
+      bankName: this.currentStorageData?.bankName ?? '',
+      codeNumber: '',
+    });
+    this.isDisabled = !this.accountForm.valid;
     this.accountForm.updateValueAndValidity({ emitEvent: true });
     this.accountFormChange$.subscribe((isValid: FormControlStatus) =>
       this.isDisabled = !(isValid === 'VALID'),
@@ -43,8 +50,9 @@ constructor(
 
   public sendRequest(): void {
     this.currentStorageData.bankName = this.accountForm.value.bankName as string;
-    this.currentStorageData.accountNumber = this.accountForm.value.branchNumber as string;
+    this.currentStorageData.accountNumber = this.accountForm.value.accountNumber as string;
     this.currentStorageData.branchNumber = this.accountForm.value.branchNumber as string;
+    this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
     this.observer.complete();
   }
 

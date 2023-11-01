@@ -43,6 +43,11 @@ export class SetUpPasswordFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    if (this.currentStorageData.password?.length) {
+      this.passwordControl.setValue(this.currentStorageData.password);
+      this.passwordControl.updateValueAndValidity({ emitEvent: true });
+      this.isDisabled = !this.passwordControl.valid;
+    }
     this.passwordControlChange$.subscribe(status => {
       if (this.regexPassword.test(this.passwordControl.value as string)) {
         this.isDisabled = !(status === 'VALID');
@@ -63,6 +68,7 @@ export class SetUpPasswordFormComponent implements OnInit {
     }).pipe(
       tap(() => {
         this.currentStorageData.password = this.passwordControl.value as string;
+        this.currentStorageData.finishPasswordPage = true;
         this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
       }),
       takeUntil(this.destroy$),

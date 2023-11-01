@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GetBankDetailsSmartiResponse } from '@shared/api/models';
@@ -44,7 +44,7 @@ import {
   styleUrls: ['./transfer-money-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransferMoneyFormComponent {
+export class TransferMoneyFormComponent implements OnInit {
   public readonly currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
   public departmentId: string = this.currentStorageData.departmentId as string;
@@ -62,8 +62,20 @@ export class TransferMoneyFormComponent {
   ) {
   }
 
+  public ngOnInit(): void {
+    if (this.currentStorageData.transferMoneyMode?.length) {
+      if (this.currentStorageData.transferMoneyMode === 'smarti') {
+        this.radioValue.setValue(this.items[0]);
+      } else {
+        this.radioValue.setValue(this.items[1]);
+      }
+      this.radioValue.updateValueAndValidity({ emitEvent: true });
+    }
+  }
+
   public navigateToNextPageOrOpenDialog(content: PolymorpheusContent<TuiDialogContext>): void {
     this.currentStorageData.transferMoneyMode = this.radioValue.value?.name as string;
+    this.currentStorageData.finishTransferMoneyMode = true;
     this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
     if (this.radioValue.value?.name === 'smarti') {
       this.dialogs.open(content, {

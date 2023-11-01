@@ -10,7 +10,6 @@ import {
   REGISTRATION_DATA,
   RegistrationInfoControls,
   registrationInfoFormMapper,
-  registrationFormMapper,
   registrationSetPasswordLink, TOKEN,
 } from '@shared/entities';
 import { DestroyService } from '@shared/services';
@@ -43,7 +42,7 @@ export class RegistrationInfoFormComponent implements OnInit {
   public personalInfoForm: FormGroup<RegistrationInfoControls> = registrationInfoFormMapper();
   public personalInfoFormChange$: Observable<FormControlStatus> = this.personalInfoForm
     .statusChanges.pipe(takeUntil(this.destroy$));
-  public readonly currentStorageData: AllRegistrationSessionData =
+  private readonly currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
   constructor(
@@ -55,10 +54,15 @@ export class RegistrationInfoFormComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    if (this.currentStorageData) {
-      this.personalInfoForm = registrationFormMapper(this.currentStorageData);
-      this.isDisabled = false;
-    }
+    this.personalInfoForm.setValue({
+      email: this.currentStorageData?.email ?? '',
+      phone: this.currentStorageData?.phone ?? '',
+      identifier: this.currentStorageData?.identifier ?? '',
+      yourName: this.currentStorageData?.yourName ?? '',
+      companyName: this.currentStorageData?.companyName ?? '',
+      acceptPrivacy: this.currentStorageData?.acceptPrivacy ?? false,
+    });
+    this.isDisabled = !this.personalInfoForm.valid;
     this.personalInfoForm.updateValueAndValidity({ emitEvent: true });
     this.personalInfoFormChange$.subscribe((isValid: FormControlStatus) =>
       this.isDisabled = !(isValid === 'VALID'),
@@ -96,6 +100,18 @@ export class RegistrationInfoFormComponent implements OnInit {
       identifier: this.personalInfoForm.controls.identifier.value as string,
       yourName: this.personalInfoForm.controls.yourName.value as string,
       departmentId: tokenResponse.departmentId,
+      acceptPrivacy: this.personalInfoForm.controls.acceptPrivacy.value as boolean,
+      finishInfoPage: true,
     }));
+    //  this.currentStorageData.email = this.personalInfoForm.controls.email.value as string;
+    // this.currentStorageData.phone = this.personalInfoForm.controls.phone.value as string;
+    // this.currentStorageData.companyName = this.personalInfoForm.controls.companyName.value as string;
+    // this.currentStorageData.identifier = this.personalInfoForm.controls.identifier.value as string;
+    // this.currentStorageData.yourName = this.personalInfoForm.controls.yourName.value as string;
+    // this.currentStorageData.acceptPrivacy = this.personalInfoForm.controls.acceptPrivacy.value as boolean;
+    // this.currentStorageData.token = tokenResponse.token;
+    // this.currentStorageData.departmentId = tokenResponse.departmentId;
+    // this.currentStorageData.finishInfoPage = true;
+    // this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
   }
 }
