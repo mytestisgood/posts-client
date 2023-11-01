@@ -72,13 +72,13 @@ export class DashboardEmployersTableComponent {
 
   public openFeedbackTransferDialog(
     companyName: string | undefined,
-    companyId: string | undefined,
+    identifier: string | undefined,
     fileStatus: StatusProcess | undefined,
   ): void {
     const newFileStatus: StatusFileFeedback = fileStatus as StatusFileFeedback;
 
     this.feedBackService.apiFeedbacksGetTransferGet({
-      departmentId: companyId,
+      departmentId: identifier,
       mtbId: '',
       sentGroupId: newFileStatus,
     }).pipe(

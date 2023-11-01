@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '@shared/services';
+import { SessionStorageService } from '@shared/web-api';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard {
   constructor(
     private readonly router: Router,
-    private readonly loginService: LoginService,
+    private readonly sessionStorageService: SessionStorageService,
   ) {}
 
   public canActivate(): boolean {
-    if (this.loginService.isLogged) {
+    if (this.sessionStorageService.isLogged) {
       return true;
     }
 

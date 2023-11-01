@@ -14,7 +14,7 @@ export interface AllRegistrationSessionData {
   token?: string;
   departmentId?: string;
   companyName?: string;
-  companyId?: string;
+  identifier?: string;
   yourName?: string;
   email?: string;
   phone?: string;
@@ -31,7 +31,7 @@ export interface AllRegistrationSessionData {
 
 export interface RegistrationInfoControls {
   companyName: FormControl<string | null>;
-  companyId: FormControl<string | null>;
+  identifier: FormControl<string | null>;
   yourName: FormControl<string | null>;
   email: FormControl<string | null>;
   phone: FormControl<string | null>;
@@ -55,7 +55,7 @@ export interface VerificationEmailControls {
 
 export interface PersonalInfoFormValue {
   companyName: string;
-  companyId: string;
+  identifier: string;
   yourName: string;
   email: string;
   phone: string;

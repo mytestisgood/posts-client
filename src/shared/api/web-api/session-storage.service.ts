@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { DEPARTMENT_ID, TOKEN } from '@shared/entities';
+import {DEPARTMENT_ID, IS_LOGGED_IN, REGISTRATION_DATA, TOKEN} from '@shared/entities';
 import { SESSION_STORAGE } from './session-storage.token';
 import { WINDOW } from './window.token';
 
@@ -39,5 +39,9 @@ export class SessionStorageService implements Storage {
   public removeToken(): void {
     this.sessionStorage.removeItem(TOKEN);
     this.sessionStorage.removeItem(DEPARTMENT_ID);
+  }
+
+  public get isLogged(): boolean {
+    return Boolean(this.getItem(TOKEN) && this.getItem(IS_LOGGED_IN) === 'true');
   }
 }

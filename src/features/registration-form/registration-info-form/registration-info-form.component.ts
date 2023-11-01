@@ -5,12 +5,15 @@ import { Router } from '@angular/router';
 import { CreateEmployerOutResponse } from '@shared/api/models';
 import { RegisterService, SignInService } from '@shared/api/services';
 import {
+  AllRegistrationSessionData,
+  IS_LOGGED_IN,
   REGISTRATION_DATA,
   RegistrationInfoControls,
   registrationInfoFormMapper,
-  registrationSetPasswordLink,
+  registrationFormMapper,
+  registrationSetPasswordLink, TOKEN,
 } from '@shared/entities';
-import { DestroyService, LoginService } from '@shared/services';
+import { DestroyService } from '@shared/services';
 import {
   ButtonComponent,
   InputCheckboxComponent,
@@ -40,17 +43,22 @@ export class RegistrationInfoFormComponent implements OnInit {
   public personalInfoForm: FormGroup<RegistrationInfoControls> = registrationInfoFormMapper();
   public personalInfoFormChange$: Observable<FormControlStatus> = this.personalInfoForm
     .statusChanges.pipe(takeUntil(this.destroy$));
+  public readonly currentStorageData: AllRegistrationSessionData =
+    JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
   constructor(
     private readonly destroy$: DestroyService,
     private readonly registerService: RegisterService,
     private readonly signInService: SignInService,
     private readonly sessionStorageService: SessionStorageService,
-    private readonly loginService: LoginService,
     private readonly router: Router,
   ) {}
 
   public ngOnInit(): void {
+    if (this.currentStorageData) {
+      this.personalInfoForm = registrationFormMapper(this.currentStorageData);
+      this.isDisabled = false;
+    }
     this.personalInfoForm.updateValueAndValidity({ emitEvent: true });
     this.personalInfoFormChange$.subscribe((isValid: FormControlStatus) =>
       this.isDisabled = !(isValid === 'VALID'),
@@ -58,26 +66,36 @@ export class RegistrationInfoFormComponent implements OnInit {
   }
 
   public navigateToUploadFile(): void {
-    this.registerService.apiEmployersCreateEmployerOutPost({
+    if (!this.currentStorageData) {
+      this.registerService.apiEmployersCreateEmployerOutPost({
+        email: this.personalInfoForm.controls.email.value as string,
+        phone: this.personalInfoForm.controls.phone.value as string,
+        company_name: this.personalInfoForm.controls.companyName.value as string,
+        identifier: this.personalInfoForm.controls.identifier.value as string,
+        user_name: this.personalInfoForm.controls.yourName.value as string,
+      }).pipe(
+        tap((tokenResponse: CreateEmployerOutResponse) => {
+          this.setItemSessionStorage(tokenResponse);
+          this.sessionStorageService.setItem(TOKEN, tokenResponse.token as string);
+          this.sessionStorageService.setItem(IS_LOGGED_IN, 'false');
+
+        }),
+        debounceTime(500),
+        takeUntil(this.destroy$),
+      ).subscribe(() => this.router.navigate([registrationSetPasswordLink]));
+    } else { //update employer
+      this.router.navigate([registrationSetPasswordLink]);
+    }
+  }
+
+  private setItemSessionStorage(tokenResponse: CreateEmployerOutResponse): void {
+    this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify({
       email: this.personalInfoForm.controls.email.value as string,
       phone: this.personalInfoForm.controls.phone.value as string,
-      company_name: this.personalInfoForm.controls.companyName.value as string,
-      identifier: this.personalInfoForm.controls.companyId.value as string,
-      user_name: this.personalInfoForm.controls.yourName.value as string,
-    }).pipe(
-      tap((tokenResponse: CreateEmployerOutResponse) => {
-        this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify({
-          email: this.personalInfoForm.controls.email.value as string,
-          phone: this.personalInfoForm.controls.phone.value as string,
-          company_name: this.personalInfoForm.controls.companyName.value as string,
-          identifier: this.personalInfoForm.controls.companyId.value as string,
-          user_name: this.personalInfoForm.controls.yourName.value as string,
-          token: tokenResponse.token,
-          departmentId: tokenResponse.departmentId,
-        }));
-      }),
-      debounceTime(500),
-      takeUntil(this.destroy$),
-    ).subscribe(() => this.router.navigate([registrationSetPasswordLink]));
+      companyName: this.personalInfoForm.controls.companyName.value as string,
+      identifier: this.personalInfoForm.controls.identifier.value as string,
+      yourName: this.personalInfoForm.controls.yourName.value as string,
+      departmentId: tokenResponse.departmentId,
+    }));
   }
 }

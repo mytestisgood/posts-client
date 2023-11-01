@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '@shared/services';
 import { SessionStorageService } from '@shared/web-api';
 import { TuiHostedDropdownModule } from '@taiga-ui/core';
 
@@ -20,17 +19,12 @@ export class CustomUserMenuComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly LoginService: LoginService,
     private readonly sessionStorageService: SessionStorageService,
   ) {
   }
 
   public logout(): void {
     this.sessionStorageService.clear();
-    this.LoginService.currentToken$.next(null);
-    this.LoginService.isUserLogin$.next('false');
-    if (!this.LoginService.isLogged) {
-      this.router.navigate(['/']);
-    }
+    this.router.navigate(['/']);
   }
 }

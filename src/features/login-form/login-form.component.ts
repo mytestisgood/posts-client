@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { SignInResponse } from '@shared/api/models';
 import { SignInService } from '@shared/api/services';
 import { CURRENT_USER, emailValidatorPattern, IS_LOGGED_IN, TOKEN } from '@shared/entities';
-import { DestroyService, LoginService } from '@shared/services';
+import { DestroyService } from '@shared/services';
 import {
   ButtonComponent,
   InputCheckboxComponent,
@@ -64,7 +64,6 @@ export class LoginFormComponent implements OnInit {
     private readonly destroy$: DestroyService,
     private readonly signInService: SignInService,
     private readonly sessionStorageService: SessionStorageService,
-    private readonly loginService: LoginService,
     ) {
   }
 
@@ -83,9 +82,7 @@ export class LoginFormComponent implements OnInit {
     }).pipe(
       tap((response: SignInResponse) => {
         this.sessionStorageService.setItem(TOKEN, response.token as string);
-        this.loginService.currentToken$.next(response.token as string);
         this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
-        this.loginService.isUserLogin$.next('true');
         this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
       }),
       takeUntil(this.destroy$),

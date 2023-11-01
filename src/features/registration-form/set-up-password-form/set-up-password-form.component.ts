@@ -8,9 +8,9 @@ import {
   passwordValidatorPattern,
   REGISTRATION_DATA,
   registrationInfoLink,
-  registrationUploadFileLink, TOKEN,
+  registrationUploadFileLink,
 } from '@shared/entities';
-import { DestroyService, LoginService } from '@shared/services';
+import { DestroyService } from '@shared/services';
 import { ButtonComponent, InputPasswordComponent } from '@shared/ui';
 import { SessionStorageService } from '@shared/web-api';
 import { Observable, takeUntil, tap } from 'rxjs';
@@ -24,20 +24,20 @@ import { Observable, takeUntil, tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SetUpPasswordFormComponent implements OnInit {
+
   public passwordControl: FormControl<string | null> = new FormControl('', [Validators.required]);
   public isDisabled: boolean = true;
   public regexPassword: RegExp = new RegExp(passwordValidatorPattern);
   public passwordControlChange$: Observable<FormControlStatus> = this.passwordControl.statusChanges.pipe(
     takeUntil(this.destroy$),
   );
-  private readonly currentStorageData: AllRegistrationSessionData =
+  public readonly currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
   constructor(
     private readonly router: Router,
     private readonly destroy$: DestroyService,
     private readonly registerService: RegisterService,
-    private readonly loginService: LoginService,
     private readonly sessionStorageService: SessionStorageService,
   ) {
   }

@@ -1,7 +1,7 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { emailValidatorPattern, israelMobilePhoneValidatorPattern } from './common.models';
 import {
-  AccountControls,
+  AccountControls, AllRegistrationSessionData,
   RegistrationInfoControls,
   UploadDocumentsControls,
   VerificationEmailControls,
@@ -10,11 +10,22 @@ import {
 export function registrationInfoFormMapper(): FormGroup<RegistrationInfoControls> {
   return new FormGroup<RegistrationInfoControls>({
     companyName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    companyId: new FormControl('', [Validators.required, Validators.minLength(9)]),
+    identifier: new FormControl('', [Validators.required, Validators.minLength(9)]),
     email: new FormControl('', [Validators.required, Validators.pattern(emailValidatorPattern) ]),
     yourName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     phone: new FormControl('', [Validators.required, Validators.pattern(israelMobilePhoneValidatorPattern)]),
     acceptPrivacy: new FormControl(false, [Validators.requiredTrue]),
+  });
+}
+
+export function registrationFormMapper(currentStorageData: AllRegistrationSessionData): FormGroup<RegistrationInfoControls> {
+  return new FormGroup<RegistrationInfoControls>(<RegistrationInfoControls>{
+    companyName: new FormControl(currentStorageData.companyName, [Validators.required, Validators.minLength(3)]),
+    identifier: new FormControl(currentStorageData.identifier, [Validators.required, Validators.minLength(9)]),
+    email: new FormControl(currentStorageData.email, [Validators.required, Validators.pattern(emailValidatorPattern)]),
+    yourName: new FormControl(currentStorageData.yourName, [Validators.required, Validators.minLength(3)]),
+    phone: new FormControl(currentStorageData.phone, [Validators.required, Validators.pattern(israelMobilePhoneValidatorPattern)]),
+    acceptPrivacy: new FormControl(true, [Validators.requiredTrue]),
   });
 }
 
