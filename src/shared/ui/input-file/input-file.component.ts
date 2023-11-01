@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Input,
+  Input, OnInit,
   Output,
 } from '@angular/core';
 import { FormControl, FormControlStatus, ReactiveFormsModule } from '@angular/forms';
@@ -42,7 +42,7 @@ import {
   styleUrls: ['./input-file.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputFileComponent implements AfterViewInit {
+export class InputFileComponent implements OnInit {
   @Input() public customWidth!: string;
   @Input() public customHeight!: string;
   @Input() public control: FormControl<FileWithLoading[] | null> = new FormControl([]);
@@ -62,7 +62,7 @@ export class InputFileComponent implements AfterViewInit {
   ) {
   }
 
-  public ngAfterViewInit(): void {
+  public ngOnInit(): void {
     this.fileStatusChanges();
   }
 
@@ -82,7 +82,7 @@ export class InputFileComponent implements AfterViewInit {
     this.control.updateValueAndValidity({ onlySelf: true, emitEvent: false });
   }
 
-  private fileStatusChanges(): void {
+  private fileStatusChanges(): void { //llhh
     this.control.statusChanges.pipe(
       switchMap((value: FormControlStatus) => {
         this.status = value;
