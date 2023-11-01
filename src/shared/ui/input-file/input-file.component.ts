@@ -63,6 +63,7 @@ export class InputFileComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.control = new FormControl([]);
     this.fileStatusChanges();
   }
 
@@ -82,7 +83,7 @@ export class InputFileComponent implements OnInit {
     this.control.updateValueAndValidity({ onlySelf: true, emitEvent: false });
   }
 
-  private fileStatusChanges(): void { //llhh
+  private fileStatusChanges(): void {
     this.control.statusChanges.pipe(
       switchMap((value: FormControlStatus) => {
         this.status = value;
