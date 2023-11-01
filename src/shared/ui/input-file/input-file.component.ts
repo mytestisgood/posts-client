@@ -7,7 +7,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormControlStatus, ReactiveFormsModule } from '@angular/forms';
 import { UploadPostResponse } from '@shared/api/models';
 import { FilesMyHrService } from '@shared/api/services';
 import { FileUploadStatusAndId, FileWithLoading } from '@shared/entities';
@@ -70,6 +70,9 @@ export class InputFileComponent implements AfterViewInit {
     this.control.setValue(
       this.control.value?.filter(current => current.index !== file.index) ?? [],
     );
+    if (file.index !== null) {
+      this.currentFilesArray = this.currentFilesArray.filter(item => item.index !== file.index);
+    }
   }
 
   public uploadSecondFile(file: HTMLInputElement): void {
@@ -80,12 +83,9 @@ export class InputFileComponent implements AfterViewInit {
   }
 
   private fileStatusChanges(): void {
-    combineLatest([
-      this.control.statusChanges,
-      this.control.valueChanges,
-    ]).pipe(
-      switchMap(([status]) => {
-        this.status = status;
+    this.control.statusChanges.pipe(
+      switchMap((value: FormControlStatus) => {
+        this.status = value;
         if (this.control.value) {
           if (this.control.value?.length > this.currentFilesIndex) {
             const uploadedFileLength = this.control.value?.length - this.currentFilesIndex;
@@ -141,21 +141,23 @@ export class InputFileComponent implements AfterViewInit {
             this.isSecondFileUpload = false;
           }
         }
-        this.control.updateValueAndValidity({ emitEvent: true });
-        this.cdr.detectChanges();
+        // this.control.updateValueAndValidity({ emitEvent: true });
+        // this.cdr.detectChanges();
       });
   }
 
   private fileIncrease(file: FileWithLoading): void {
-    this.currentFilesIndex++;
-    this.currentFilesArray.push(file);
-    const index: number = this.currentFilesArray.length - 1;
+    // if (file.index === undefined || (file.index !== null && !this.currentFilesArray[file.index])) {
+      this.currentFilesIndex++;
+      this.currentFilesArray.push(file);
+      const index: number = this.currentFilesArray.length - 1;
 
-    this.isSecondFileUpload = true;
-    if (!this.currentFilesArray[index].isUploaded) {
-      this.currentFilesArray[index].isLoading = true;
-      this.currentFilesArray[index].isUploaded = true;
-      this.currentFilesArray[index].index = index;
-    }
+      this.isSecondFileUpload = true;
+      if (!this.currentFilesArray[index].isUploaded) {
+        this.currentFilesArray[index].isLoading = true;
+        this.currentFilesArray[index].isUploaded = true;
+        this.currentFilesArray[index].index = index;
+      }
+    // }
   }
 }
