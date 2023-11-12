@@ -43,7 +43,7 @@ export class ProcessesDetailFirstStepComponent {
       isDirect: false,
       isEmployer: true,
       month: getCurrentMonth().toString(),
-      processName: 'upload file from',
+      processName: null,
       year: getCurrentYear().toString(),
       opswatIds: this.opswatId,
     }).pipe(

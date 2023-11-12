@@ -16,7 +16,7 @@ export interface GetBankDetailsSmartiResponse {
 
 export interface BankDetails {
   number?: string,
-  branch_name?: string,
+  branch_number?: string,
   bank_name?: string,
   name?: string
 }

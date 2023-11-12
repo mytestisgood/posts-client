@@ -8,7 +8,7 @@ export const registrationTransferMoneyLink: string = '/registration/transfer-mon
 export const registrationPaymentInstructionLink: string = '/registration/payment-instruction';
 export const registrationConfirmPaymentLink: string = '/registration/confirm-payment';
 export const registrationVerifyCodeLink: string = '/registration/verify-code';
-export const loginAfterRegistrationLink: string = '/registration/login';
+export const loginAfterRegistrationLink: string = '/login';
 
 export interface AllRegistrationSessionData {
   token?: string;

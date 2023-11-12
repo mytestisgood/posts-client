@@ -115,9 +115,11 @@ export class UploadDocumentComponent implements OnInit {
     this.opswatId = this.opswatId.filter(id => id !== opsId);
   }
 
-  public requestSend(): void {
-    this.router.navigate([registrationTransferMoneyLink]);
-  }
+  // public requestSend(): void {
+  //   // this.sessionStorageService.clear();
+  //   // this.router.navigate(['/']);
+  //   this.router.navigate([loginAfterRegistrationLink]);
+  // }
 
   public navigateToRegistrationInfo(): void {
     this.router.navigate([registrationSetPasswordLink]);
@@ -145,12 +147,12 @@ export class UploadDocumentComponent implements OnInit {
       isDirect: false,
       isEmployer: true,
       month: getCurrentMonth().toString(),
-      processName: 'upload file from',
+      processName: null,
       year: getCurrentYear().toString(),
     }).pipe(
       tap((res) => {
         if (res?.processId) {
-          this.getUploadFile(res.processId)
+          this.getUploadFile(res.processId);
         } else {
           this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');
         }
@@ -189,17 +191,10 @@ export class UploadDocumentComponent implements OnInit {
         case 'error_loading':
         case 'loaded_with_errors': {
           this.sub.unsubscribe();
-          this.currentStorageData.files = this.uploadDocumentsForm.value.files as FileWithLoading[];
-          this.currentStorageData.finishFilesPage = true;
-          this.currentStorageData.processId = response.id;
-          this.currentStorageData.total = response.total;
-          this.currentStorageData.employeesCount = response.count_employee;
-          this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
-          this.router.navigate([registrationTransferMoneyLink]);
-          // this.alertsService.showErrorNotificationIcon('יש בעיה בקובץ הקובץ מעובר לטיפול מנהל תיק\n' +
-          //   'יצרו איתך תוך 24 שעות');
-          // this.sessionStorageService.clear();
-          // this.router.navigate([loginAfterRegistrationLink]);
+          this.alertsService.showErrorNotificationIcon('יש בעיה בקובץ הקובץ מעובר לטיפול מנהל תיק\n' +
+            'יצרו איתך תוך 24 שעות');
+          this.sessionStorageService.clear();
+          this.router.navigate([loginAfterRegistrationLink]);
           break;
         }
         case 'can_be_processed': {
@@ -212,7 +207,7 @@ export class UploadDocumentComponent implements OnInit {
               this.currentStorageData.employeesCount = response.count_employee;
               this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
               this.router.navigate([registrationTransferMoneyLink]);
-              } , 1000);
+              }, 1000);
           break;
         }
       }

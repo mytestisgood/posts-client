@@ -147,7 +147,7 @@ export interface ProcessesFilesListGetParameters {
 export interface ProcessDetails {
   id?: string;
   name?: string;
-  status?: string;
+  status?: string | null;
   type?: string;
   total?: number;
   date?: string;
