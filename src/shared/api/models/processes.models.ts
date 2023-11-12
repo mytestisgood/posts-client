@@ -94,7 +94,7 @@ export interface CriteriaProcess {
 }
 
 export interface DownloadPaymentsInstructionResponse {
-  result?: FileDataExtResponse;
+  result?: Array<FileDataExtResponse>;
 }
 
 export interface ProcessIdDeleteParameters {

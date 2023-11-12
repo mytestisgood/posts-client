@@ -31,8 +31,6 @@ export class PaymentInstructionFormComponent implements AfterViewInit {
   private readonly currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
-
-
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
     private readonly router: Router,
@@ -74,7 +72,12 @@ export class PaymentInstructionFormComponent implements AfterViewInit {
         page: 15,
       },
     }).pipe(
-      tap((result: DownloadPaymentsInstructionResponse) => toBlobAndSaveFile(result?.result as FileDataExtResponse)),
+      tap((result: DownloadPaymentsInstructionResponse) => {
+          (result as Array<FileDataExtResponse>).forEach(file => {
+            toBlobAndSaveFile(file as FileDataExtResponse);
+          });
+      },
+      ),
       takeUntil(this.destroy$),
     ).subscribe();  }
 
