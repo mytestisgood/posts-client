@@ -1,9 +1,9 @@
-import {CommonModule} from '@angular/common';
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {FormControlStatus, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
-import {CreateEmployerOutResponse} from '@shared/api/models';
-import {RegisterService, SignInService} from '@shared/api/services';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CreateEmployerOutResponse } from '@shared/api/models';
+import { RegisterService, SignInService } from '@shared/api/services';
 import {
   AllRegistrationSessionData,
   IS_LOGGED_IN,
@@ -12,15 +12,15 @@ import {
   registrationInfoFormMapper,
   registrationSetPasswordLink, TOKEN,
 } from '@shared/entities';
-import {AlertsService, DestroyService} from '@shared/services';
+import { AlertsService, DestroyService } from '@shared/services';
 import {
   ButtonComponent,
   InputCheckboxComponent,
   InputFieldComponent,
   InputNumberComponent,
 } from '@shared/ui';
-import {SessionStorageService} from '@shared/web-api';
-import {catchError, debounceTime, Observable, of, takeUntil, tap} from 'rxjs';
+import { SessionStorageService } from '@shared/web-api';
+import { catchError, debounceTime, Observable, of, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'smarti-registration-info-form',
@@ -65,7 +65,7 @@ export class RegistrationInfoFormComponent implements OnInit {
       acceptPrivacy: this.currentStorageData?.acceptPrivacy ?? false,
     });
     this.isDisabled = !this.personalInfoForm.valid;
-    this.personalInfoForm.updateValueAndValidity({emitEvent: true});
+    this.personalInfoForm.updateValueAndValidity({ emitEvent: true });
     this.personalInfoFormChange$.subscribe((isValid: FormControlStatus) =>
       this.isDisabled = !(isValid === 'VALID'),
     );
@@ -99,7 +99,7 @@ export class RegistrationInfoFormComponent implements OnInit {
         }),
         debounceTime(500),
         takeUntil(this.destroy$),
-      ).subscribe(() => this.router.navigate([registrationSetPasswordLink]))
+      ).subscribe(() => this.router.navigate([registrationSetPasswordLink]));
 
     } else { //update employer
       this.router.navigate([registrationSetPasswordLink]);
