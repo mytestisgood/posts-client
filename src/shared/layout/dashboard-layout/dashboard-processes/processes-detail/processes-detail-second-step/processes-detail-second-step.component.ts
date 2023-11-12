@@ -59,7 +59,12 @@ export class ProcessesDetailSecondStepComponent implements OnInit {
       processId: this.processId,
       department_id: this.departmentId.toString(),
     }).pipe(
-      tap((result: DownloadPaymentsInstructionResponse) => toBlobAndSaveFile(result?.result as FileDataExtResponse)),
+      tap((result: DownloadPaymentsInstructionResponse) => {
+          (result as Array<FileDataExtResponse>).forEach(file => {
+            toBlobAndSaveFile(file as FileDataExtResponse);
+          });
+        },
+      ),
       takeUntil(this.destroy$),
     ).subscribe();
   }
