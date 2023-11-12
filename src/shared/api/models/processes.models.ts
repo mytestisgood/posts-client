@@ -80,7 +80,10 @@ export interface ProcessesDownloadPaymentsInstructionBody {
 
 export interface ApiProcessesUnlockProcessFilesCriteria {
   isCheckAll?: boolean;
-  additionalProperties?: CriteriaProcess;
+  page?: number;
+  limit?: number;
+  department_id?: number;
+  processId?: number;
 }
 
 export interface CriteriaProcess {

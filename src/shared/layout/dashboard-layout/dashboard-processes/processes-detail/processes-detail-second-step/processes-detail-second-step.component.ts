@@ -58,15 +58,6 @@ export class ProcessesDetailSecondStepComponent implements OnInit {
     this.processesService.apiProcessesDownloadPaymentsInstructionPost({
       processId: this.processId,
       department_id: this.departmentId.toString(),
-      criteria: {
-        isCheckAll: true,
-        additionalProperties: {
-          processId: this.processId,
-          department_id: this.departmentId,
-          limit: 1,
-          page: 15,
-        },
-      },
     }).pipe(
       tap((result: DownloadPaymentsInstructionResponse) => toBlobAndSaveFile(result?.result as FileDataExtResponse)),
       takeUntil(this.destroy$),

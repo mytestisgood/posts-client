@@ -117,15 +117,5 @@ export class RegistrationInfoFormComponent implements OnInit {
       acceptPrivacy: this.personalInfoForm.controls.acceptPrivacy.value as boolean,
       finishInfoPage: true,
     }));
-    //  this.currentStorageData.email = this.personalInfoForm.controls.email.value as string;
-    // this.currentStorageData.phone = this.personalInfoForm.controls.phone.value as string;
-    // this.currentStorageData.companyName = this.personalInfoForm.controls.companyName.value as string;
-    // this.currentStorageData.identifier = this.personalInfoForm.controls.identifier.value as string;
-    // this.currentStorageData.yourName = this.personalInfoForm.controls.yourName.value as string;
-    // this.currentStorageData.acceptPrivacy = this.personalInfoForm.controls.acceptPrivacy.value as boolean;
-    // this.currentStorageData.token = tokenResponse.token;
-    // this.currentStorageData.departmentId = tokenResponse.departmentId;
-    // this.currentStorageData.finishInfoPage = true;
-    // this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
   }
 }

@@ -5,17 +5,17 @@ import { AsideProcessDialogComponent } from '@shared/dialog';
 import {
   AllRegistrationSessionData, REGISTRATION_DATA,
   registrationConfirmPaymentLink,
-  registrationTransferMoneyLink
+  registrationTransferMoneyLink,
 } from '@shared/entities';
-import {downloadFileHelper, toBlobAndSaveFile} from '@shared/helpers';
+import { toBlobAndSaveFile } from '@shared/helpers';
 import { DestroyService } from '@shared/services';
 import { ButtonComponent } from '@shared/ui';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import {takeUntil, tap} from 'rxjs';
-import {DownloadPaymentsInstructionResponse, FileDataExtResponse} from "@shared/api/models";
-import {ProcessesService} from "@shared/api/services";
-import {SessionStorageService} from "@shared/web-api";
+import { takeUntil, tap } from 'rxjs';
+import { DownloadPaymentsInstructionResponse, FileDataExtResponse } from '@shared/api/models';
+import { ProcessesService } from '@shared/api/services';
+import { SessionStorageService } from '@shared/web-api';
 
 @Component({
   selector: 'smarti-payment-instruction-form',
@@ -26,11 +26,11 @@ import {SessionStorageService} from "@shared/web-api";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaymentInstructionFormComponent implements AfterViewInit {
+
   private isNeedToNavigateAfterClose: boolean = false;
-  private currentStorageData: AllRegistrationSessionData =
+  private readonly currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
-  public processId: number = Number(this.currentStorageData.processId);
-  public departmentId: number = Number(this.currentStorageData.departmentId);
+
 
 
   constructor(
@@ -41,6 +41,7 @@ export class PaymentInstructionFormComponent implements AfterViewInit {
 
     private readonly destroy$: DestroyService,
   ) {
+
   }
 
   public ngAfterViewInit(): void {
@@ -63,16 +64,14 @@ export class PaymentInstructionFormComponent implements AfterViewInit {
 
   public downloadPaymentExample(): void {
     this.processesService.apiProcessesDownloadPaymentsInstructionPost({
-      processId: this.processId,
+      processId: Number(this.currentStorageData.processId),
       department_id: this.currentStorageData.departmentId,
       criteria: {
         isCheckAll: true,
-        additionalProperties: {
-          processId: this.processId,
-          department_id: this.departmentId,
-          limit: 1,
-          page: 15,
-        },
+        processId: Number(this.currentStorageData.processId),
+        department_id: Number(this.currentStorageData.departmentId),
+        limit: 1,
+        page: 15,
       },
     }).pipe(
       tap((result: DownloadPaymentsInstructionResponse) => toBlobAndSaveFile(result?.result as FileDataExtResponse)),
