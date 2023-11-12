@@ -39,7 +39,7 @@ export class ConfirmPaymentFormComponent implements OnInit {
   public opswatId: Array<string> = [];
   public documentUploaded: boolean = false;
   public isDirectPayment: boolean = false;
-  private readonly currentStorageData: AllRegistrationSessionData =
+  public readonly currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
   constructor(
