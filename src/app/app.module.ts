@@ -9,12 +9,14 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthHttpInterceptorProvider } from './auth-interceptor';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
+    CommonModule,
     AppRoutingModule,
     LandingComponent,
     ReactiveFormsModule,

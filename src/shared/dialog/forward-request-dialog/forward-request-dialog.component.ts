@@ -1,13 +1,13 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, Input, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserService } from '@shared/api/services';
-import { emailValidatorPattern, israelMobilePhoneValidatorPattern } from '@shared/entities';
-import { DestroyService } from '@shared/services';
-import { ButtonComponent, InputFieldComponent, InputNumberComponent } from '@shared/ui';
-import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import { BehaviorSubject, takeUntil, tap, withLatestFrom } from 'rxjs';
+import {CommonModule} from '@angular/common';
+import {ChangeDetectionStrategy, Component, Inject, Input, Output} from '@angular/core';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {UserService} from '@shared/api/services';
+import {emailValidatorPattern, israelMobilePhoneValidatorPattern} from '@shared/entities';
+import {AlertsService, DestroyService} from '@shared/services';
+import {ButtonComponent, InputFieldComponent, InputNumberComponent} from '@shared/ui';
+import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
+import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
+import {BehaviorSubject, takeUntil, tap, withLatestFrom, concatMap, map, of,switchMap} from 'rxjs';
 
 interface ForwardRequestForm {
   email: FormControl<string | null>;
@@ -48,6 +48,8 @@ export class ForwardRequestDialogComponent {
   constructor(
     private readonly destroy$: DestroyService,
     private readonly userService: UserService,
+    private readonly alertsService: AlertsService,
+
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
   ) {
   }
@@ -64,7 +66,7 @@ export class ForwardRequestDialogComponent {
       identifier: this.identifier,
       departmentId: this.departmentId,
     }).pipe(
-      tap(() => {
+      map((res) => {
         this.requestSend.next(true);
         this.observer.complete();
       }),

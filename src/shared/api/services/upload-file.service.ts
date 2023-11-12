@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { Observable } from 'rxjs';
+import {catchError, map, Observable, of} from 'rxjs';
 import { createObjectHttpParams } from '../../helpers/http.helper';
 import {
+  ProcessDetails,
   ProcessesUploadFileBody,
   UploadFileGetParameters,
   UploadFilePostResponse,
@@ -16,11 +17,13 @@ export class UploadFileService {
   constructor(private http: HttpClient) {
   }
 
-  public apiProcessesUploadFileGet(data: UploadFileGetParameters): Observable<Array<string>> {
-    return this.http.get<Array<string>>(`${environment.authUrl}/api/processes/uploadFile`, { params: createObjectHttpParams(data) });
+  public apiProcessesUploadFileGet(data: UploadFileGetParameters): Observable<ProcessDetails> {
+    return this.http.get<ProcessDetails>(`${environment.authUrl}/api/processes/uploadFile`, { params: createObjectHttpParams(data) });
   }
 
   public apiProcessesUploadFilePost(data: ProcessesUploadFileBody): Observable<UploadFilePostResponse> {
-    return this.http.post<UploadFilePostResponse>(`${environment.authUrl}/api/processes/uploadFile`, data);
+     return this.http.post<UploadFilePostResponse>(`${environment.authUrl}/api/processes/uploadFile`, data)
+       .pipe(map(result=> result),
+         catchError(err => {return of (err)}))
   }
 }

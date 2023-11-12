@@ -33,7 +33,7 @@ import {
 })
 export class SelectComponent {
   @Input() public customWidth!: string;
-  @Input() public options!: string[];
+  @Input() public options!: any[];
   @Input() public comboBoxOptions!: IdAndNameResponse[];
   @Input() public selectMode!: 'big';
   @Input() public placeholder!: string;

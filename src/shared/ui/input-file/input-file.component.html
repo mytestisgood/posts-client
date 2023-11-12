@@ -30,7 +30,7 @@
     tuiInputFiles
     [multiple]="true"
     type="file"
-    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/xml"
+    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .dat, .xml, .xlsx, .xls"
   />
   <ng-template let-dragged>
     <div
@@ -81,7 +81,7 @@
       type="file"
       class="hidden"
       [multiple]="true"
-      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .dat, .xml, .xlsx, .xls"
       (change)="uploadSecondFile(file)"
     />
     לצירוף קובץ נוסף

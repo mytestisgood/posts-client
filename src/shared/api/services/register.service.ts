@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { Observable } from 'rxjs';
+import {catchError, map, Observable, of} from 'rxjs';
 import {
   CreateEmployerOutResponse,
   EmployersCreateEmployerOutBody,
@@ -19,7 +19,9 @@ export class RegisterService {
   }
 
   public apiEmployersCreateEmployerOutPost(data: EmployersCreateEmployerOutBody): Observable<CreateEmployerOutResponse> {
-    return this.http.post<CreateEmployerOutResponse>(`${environment.authUrl}/api/employers/createEmployerOut`, data);
+    return this.http.post<CreateEmployerOutResponse>(`${environment.authUrl}/api/employers/createEmployerOut`, data)
+      // .pipe(map(result=> result),
+      //   catchError(err => {return of (err)}));
   }
 
   public apiEmployersCreatePaymentOut(data: EmployersCreatePaymentOutBody): Observable<SuccessResponse> {

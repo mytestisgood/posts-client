@@ -17,6 +17,7 @@
       [customHeight]="'150px'"
       [control]="uploadDocumentsForm.controls.files"
       (fileUploaded)="fileUploaded($event)"
+      (fileRemoved)="removeFile($event)"
     ></smarti-input-file>
     <div
       *ngIf="!documentUploaded"

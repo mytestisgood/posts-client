@@ -144,7 +144,44 @@ export interface ProcessesFilesListGetParameters {
   page?: string;
   limit?: string;
 }
+export interface ProcessDetails {
+  id?: string;
+  name?: string;
+  status?: string;
+  type?: string;
+  total?: number;
+  date?: string;
+  records_count?: number;
+  mtbs_count?: number;
+  groups_count?: number;
+  department_name?: string;
+  employer_name?: string;
+  employer_id?: number;
+  employer_identifier?: string;
+  percent?: number;
+  sent_status?: string;
+  count?: number;
+  dep_id?: number;
+  is_deposition?: boolean;
+  error?: string;
+  is_allowed_transmission_product_auto?: string;
+  is_allowed_references_auto?: string;
+  is_allowed_payment_instructions?: string;
+  is_allowed_feedback_auto?: string;
+  error_details?: string;
+  organization_id?: number;
+  payment_instructions?: boolean;
+  is_reference?: boolean;
+  is_null_company?: boolean;
+  is_exceptions?: boolean;
+  count_employee?: number;
+  allowed_show_exceptions?: boolean;
+  allowed_fix_errors?: boolean;
+  allowed_change_groups?: boolean;
+  is_feedback_send?: boolean;
+  account_type?: any
 
+}
 export interface FilesListGetResponse {
   items?: Array<FilesListGetResponseItems>;
   total?: number;
@@ -289,10 +326,10 @@ export interface UpdateDateAndReferenceResponse {
 
 export interface ProcessesUpdateBody {
   file_id?: Array<number>;
-  params?: boolean;
+  params?: any;
   type?: UpdateFileType;
   criteria?: CriteriaProcess;
-  processId?: number;
+  processId?: string;
 }
 
 export interface ProcessesUpdateProcessBody {

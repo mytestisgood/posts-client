@@ -25,7 +25,7 @@ export class ProcessesDetailInformationComponent {
         this.emptyData = false;
         return this.uploadFileService.apiProcessesUploadFileGet({
           processId: uploadFileResult.processId,
-          departmentId: this.departmentId.toString(),
+          department_id: this.departmentId.toString(),
         });
       }
 

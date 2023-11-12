@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { CreateEmployerOutResponse } from '@shared/api/models';
-import { RegisterService, SignInService } from '@shared/api/services';
+import {CommonModule} from '@angular/common';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {FormControlStatus, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
+import {CreateEmployerOutResponse} from '@shared/api/models';
+import {RegisterService, SignInService} from '@shared/api/services';
 import {
   AllRegistrationSessionData,
   IS_LOGGED_IN,
@@ -12,15 +12,15 @@ import {
   registrationInfoFormMapper,
   registrationSetPasswordLink, TOKEN,
 } from '@shared/entities';
-import { DestroyService } from '@shared/services';
+import {AlertsService, DestroyService} from '@shared/services';
 import {
   ButtonComponent,
   InputCheckboxComponent,
   InputFieldComponent,
   InputNumberComponent,
 } from '@shared/ui';
-import { SessionStorageService } from '@shared/web-api';
-import { debounceTime, Observable, takeUntil, tap } from 'rxjs';
+import {SessionStorageService} from '@shared/web-api';
+import {catchError, debounceTime, Observable, of, takeUntil, tap} from 'rxjs';
 
 @Component({
   selector: 'smarti-registration-info-form',
@@ -51,7 +51,9 @@ export class RegistrationInfoFormComponent implements OnInit {
     private readonly signInService: SignInService,
     private readonly sessionStorageService: SessionStorageService,
     private readonly router: Router,
-  ) {}
+    private readonly alertsService: AlertsService,
+  ) {
+  }
 
   public ngOnInit(): void {
     this.personalInfoForm.setValue({
@@ -63,7 +65,7 @@ export class RegistrationInfoFormComponent implements OnInit {
       acceptPrivacy: this.currentStorageData?.acceptPrivacy ?? false,
     });
     this.isDisabled = !this.personalInfoForm.valid;
-    this.personalInfoForm.updateValueAndValidity({ emitEvent: true });
+    this.personalInfoForm.updateValueAndValidity({emitEvent: true});
     this.personalInfoFormChange$.subscribe((isValid: FormControlStatus) =>
       this.isDisabled = !(isValid === 'VALID'),
     );
@@ -82,11 +84,23 @@ export class RegistrationInfoFormComponent implements OnInit {
           this.setItemSessionStorage(tokenResponse);
           this.sessionStorageService.setItem(TOKEN, tokenResponse.token as string);
           this.sessionStorageService.setItem(IS_LOGGED_IN, 'false');
-
+        }),
+        catchError((err) => {
+          if (err.error.message === 'user exists') {
+            this.alertsService.showErrorNotificationIcon('המשתמש שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
+          }
+          else if (err.error.message === 'identifier exists') {
+            this.alertsService.showErrorNotificationIcon('המעסיק שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
+          }
+          else {
+            this.alertsService.showErrorNotificationIcon('שגיאה');
+          }
+          return of(err);
         }),
         debounceTime(500),
         takeUntil(this.destroy$),
-      ).subscribe(() => this.router.navigate([registrationSetPasswordLink]));
+      ).subscribe(() => this.router.navigate([registrationSetPasswordLink]))
+
     } else { //update employer
       this.router.navigate([registrationSetPasswordLink]);
     }

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -6,9 +6,9 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UploadFileService } from '@shared/api/services';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
+import {UploadFileService} from '@shared/api/services';
 import {
   AsideProcessDialogComponent,
   DownloadSampleDialogComponent,
@@ -17,15 +17,15 @@ import {
 import {
   AllRegistrationSessionData,
   FileUploadStatusAndId,
-  FileWithLoading,
+  FileWithLoading, loginAfterRegistrationLink,
   REGISTRATION_DATA,
   registrationSetPasswordLink,
   registrationTransferMoneyLink,
   UploadDocumentsControls,
   uploadingDocumentsFormMapper,
 } from '@shared/entities';
-import { getCurrentMonth, getCurrentYear } from '@shared/helpers';
-import { DestroyService } from '@shared/services';
+import {getCurrentMonth, getCurrentYear} from '@shared/helpers';
+import {AlertsService, DestroyService} from '@shared/services';
 import {
   ButtonComponent,
   DatePickerComponent,
@@ -33,10 +33,13 @@ import {
   NotificationComponent,
   SelectComponent,
 } from '@shared/ui';
-import { SessionStorageService } from '@shared/web-api';
-import { TuiAlertService, TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import { delay, takeUntil, tap, withLatestFrom } from 'rxjs';
+import {SessionStorageService} from '@shared/web-api';
+import {TuiAlertService, TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
+import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
+import {delay, repeat, skipWhile, startWith, switchMap, take, takeUntil, tap, withLatestFrom} from 'rxjs';
+import {iif, of, interval, Subscription} from 'rxjs';
+import {ProcessDetails} from "@shared/api/models";
+
 
 @Component({
   selector: 'smarti-upload-document',
@@ -60,11 +63,16 @@ import { delay, takeUntil, tap, withLatestFrom } from 'rxjs';
 export class UploadDocumentComponent implements OnInit {
   public uploadDocumentsForm: FormGroup<UploadDocumentsControls> = uploadingDocumentsFormMapper();
   public documentUploaded: boolean = false;
+
   public opswatId: Array<string> = [];
   public currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
   public identifier: string = this.currentStorageData?.identifier as string;
   public departmentId: number = Number(this.currentStorageData.departmentId);
+  public inter = interval(5000);
+
+  public sub = new Subscription;
+  public process_details: ProcessDetails = {};
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
@@ -75,6 +83,7 @@ export class UploadDocumentComponent implements OnInit {
     private readonly sessionStorageService: SessionStorageService,
     private readonly uploadFileService: UploadFileService,
     private readonly router: Router,
+    private readonly alertsService: AlertsService,
   ) {
   }
 
@@ -83,7 +92,7 @@ export class UploadDocumentComponent implements OnInit {
       this.uploadDocumentsForm.setValue({
         files: this.currentStorageData.files,
       });
-      this.uploadDocumentsForm.updateValueAndValidity({ emitEvent: true });
+      this.uploadDocumentsForm.updateValueAndValidity({emitEvent: true});
     }
   }
 
@@ -99,7 +108,11 @@ export class UploadDocumentComponent implements OnInit {
       this.opswatId.push(uploadedAndId.id as string);
     }
     this.documentUploaded = uploadedAndId.status;
-    this.uploadDocumentsForm.updateValueAndValidity({ emitEvent: true });
+    this.uploadDocumentsForm.updateValueAndValidity({emitEvent: true});
+  }
+
+  public removeFile(opsId: string): void {
+    this.opswatId = this.opswatId.filter(id => id !== opsId);
   }
 
   public requestSend(): void {
@@ -135,11 +148,12 @@ export class UploadDocumentComponent implements OnInit {
       processName: 'upload file from',
       year: getCurrentYear().toString(),
     }).pipe(
-      tap(() => {
-        this.currentStorageData.files = this.uploadDocumentsForm.value.files as FileWithLoading[];
-        this.currentStorageData.finishFilesPage = true;
-        this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
-        this.router.navigate([registrationTransferMoneyLink]);
+      tap((res) => {
+        if (res?.processId) {
+          this.getUploadFile(res.processId)
+        } else {
+          this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');
+        }
       }),
       withLatestFrom(this.dialogs.open(content, {
         closeable: false,
@@ -148,5 +162,60 @@ export class UploadDocumentComponent implements OnInit {
       delay(2000),
       takeUntil(this.destroy$),
     ).subscribe();
+  }
+
+  public getUploadFile(processId: string): void {
+    this.sub = this.inter.pipe(
+      startWith(0),
+      switchMap(() =>
+        iif(() => processId !== undefined && processId !== null,
+          this.uploadFileService.apiProcessesUploadFileGet({
+            processId,
+            department_id: this.currentStorageData.departmentId as string,
+          }), of(null),
+        ),
+      )).subscribe(response => {
+      if (response) {
+        this.set_process(response);
+      }
+    });
+  }
+  public set_process(response: ProcessDetails): void {
+    this.process_details = response;
+    if (this.process_details.status !== null) {
+      switch (this.process_details.status) {
+        case 'loading':
+          break;
+        case 'error_loading':
+        case 'loaded_with_errors': {
+          this.sub.unsubscribe();
+          this.currentStorageData.files = this.uploadDocumentsForm.value.files as FileWithLoading[];
+          this.currentStorageData.finishFilesPage = true;
+          this.currentStorageData.processId = response.id;
+          this.currentStorageData.total = response.total;
+          this.currentStorageData.employeesCount = response.count_employee;
+          this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
+          this.router.navigate([registrationTransferMoneyLink]);
+          // this.alertsService.showErrorNotificationIcon('יש בעיה בקובץ הקובץ מעובר לטיפול מנהל תיק\n' +
+          //   'יצרו איתך תוך 24 שעות');
+          // this.sessionStorageService.clear();
+          // this.router.navigate([loginAfterRegistrationLink]);
+          break;
+        }
+        case 'can_be_processed': {
+          setTimeout(() => {
+            this.sub.unsubscribe();
+              this.currentStorageData.files = this.uploadDocumentsForm.value.files as FileWithLoading[];
+              this.currentStorageData.finishFilesPage = true;
+              this.currentStorageData.processId = response.id;
+              this.currentStorageData.total = response.total;
+              this.currentStorageData.employeesCount = response.count_employee;
+              this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
+              this.router.navigate([registrationTransferMoneyLink]);
+              } , 1000);
+          break;
+        }
+      }
+    }
   }
 }

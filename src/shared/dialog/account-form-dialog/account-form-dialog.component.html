@@ -4,22 +4,45 @@
     class="mt-20 flex flex-col gap-[30px]"
     [formGroup]="accountForm"
   >
-    <smarti-input-field
+    <smarti-select
+      [placeholder]="'בנק*'"
       [customWidth]="'616px'"
-      [placeholder]="'מספר חשבון*'"
+      [isComboBoxMode]="true"
+      [comboBoxOptions]="banks"
       [control]="accountForm.controls.bankName"
-    ></smarti-input-field>
+    ></smarti-select>
+<!--    <smarti-input-field-->
+<!--      [customWidth]="'616px'"-->
+<!--      [placeholder]="'מספר חשבון*'"-->
+<!--      [control]="accountForm.controls.accountNumber"-->
+<!--    ></smarti-input-field>-->
+    <smarti-select
+      [customWidth]="'616px'"
+      [placeholder]="'סניף*'"
+      [isComboBoxMode]="true"
+      [comboBoxOptions]="bank_branches"
+      [control]="accountForm.controls.branchNumber"
+    ></smarti-select>
     <smarti-input-field
       [customWidth]="'616px'"
       [placeholder]="'מספר חשבון*'"
       [control]="accountForm.controls.accountNumber"
     ></smarti-input-field>
-    <smarti-input-field
-      [customWidth]="'616px'"
-      [placeholder]="'מספר חשבון*'"
-      [control]="accountForm.controls.branchNumber"
-    ></smarti-input-field>
   </div>
+<!--  <div class="row pb-4" *ngIf="new_agent.payment_type=== 'masav'">-->
+<!--    <div class="col-6" >-->
+<!--      <bd-select name="bank_id"  [items]="banks" #bankIDSelect="ngModel"-->
+<!--                 [(ngModel)]="bank" placeholder="בנק"-->
+<!--                 (onSelect)="selectedBankBranch()" [required]="new_agent.payment_type === 'masav'"-->
+<!--                 class="bd-responsive" [error]="bankIDSelect.errors && form.submitted"></bd-select>-->
+<!--    </div>-->
+<!--    <div class="col-6">-->
+<!--      <bd-select name="branch_id"  [items]="bankBranchesDeposit" #branchIDSelect="ngModel"-->
+<!--                 [(ngModel)]="new_agent.bank_branch"  placeholder="סניף"-->
+<!--                 [required]="new_agent.payment_type === 'masav'"-->
+<!--                 class="bd-responsive" [error]="branchIDSelect.errors && form.submitted"></bd-select>-->
+<!--    </div>-->
+<!--  </div>-->
   <div class="mt-[216px]">
     <smarti-button
       [typeClass]="'confirm'"

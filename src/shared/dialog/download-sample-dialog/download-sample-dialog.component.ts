@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { downloadFileHelper } from '@shared/helpers';
+import {CommonModule} from '@angular/common';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {downloadFileHelper} from '@shared/helpers';
 
 @Component({
   selector: 'smarti-download-sample-dialog',
@@ -17,7 +17,7 @@ export class DownloadSampleDialogComponent {
     this.observer.complete();
   }
 
-  public downloadXlExample(): void {
-    downloadFileHelper('/assets/files/דוגמה.xlsx', 'דוגמה.xlsx');
+  public downloadXlExample(type: string): void {
+    type === 'xlsx' ? downloadFileHelper('/assets/files/דוגמה.xlsx', 'דוגמה.xlsx') : downloadFileHelper('/assets/files/דוגמה.dat', 'דוגמה.dat');
   }
 }

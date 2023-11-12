@@ -1,5 +1,5 @@
 export interface UploadFileGetParameters {
-  departmentId: string,
+  department_id: string,
   processId: string,
 }
 
@@ -18,4 +18,5 @@ export interface UploadFilePostResponse {
   processId?: string;
   date?: string;
   allowd?: boolean;
+  error?: boolean;
 }

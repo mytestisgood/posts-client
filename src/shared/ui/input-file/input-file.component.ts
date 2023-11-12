@@ -1,29 +1,29 @@
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component,
+  Component, EventEmitter,
   Input, OnInit,
   Output,
 } from '@angular/core';
-import { FormControl, FormControlStatus, ReactiveFormsModule } from '@angular/forms';
-import { UploadPostResponse } from '@shared/api/models';
-import { FilesMyHrService } from '@shared/api/services';
-import { FileUploadStatusAndId, FileWithLoading } from '@shared/entities';
-import { takeRight } from '@shared/helpers';
-import { AlertsService, DestroyService } from '@shared/services';
-import { TuiLinkModule, TuiLoaderModule, TuiSvgModule } from '@taiga-ui/core';
-import { TuiInputFilesModule, TuiMarkerIconModule } from '@taiga-ui/kit';
+import {FormControl, FormControlStatus, ReactiveFormsModule} from '@angular/forms';
+import {StatusGetParameters, UploadPostResponse} from '@shared/api/models';
+import {FilesMyHrService} from '@shared/api/services';
+import {FileUploadStatusAndId, FileWithLoading} from '@shared/entities';
+import {takeRight} from '@shared/helpers';
+import {AlertsService, DestroyService} from '@shared/services';
+import {TuiLinkModule, TuiLoaderModule, TuiSvgModule} from '@taiga-ui/core';
+import {TuiInputFilesModule, TuiMarkerIconModule} from '@taiga-ui/kit';
 import {
   BehaviorSubject,
   catchError,
-  combineLatest,
-  forkJoin,
+  combineLatest, delay,
+  forkJoin, interval,
   Observable,
-  of,
-  switchMap,
-  takeUntil,
+  of, repeat, retry, skipWhile,
+  switchMap, take,
+  takeUntil, takeWhile, tap, timeout,
 } from 'rxjs';
 
 @Component({
@@ -47,7 +47,8 @@ export class InputFileComponent implements OnInit {
   @Input() public customHeight!: string;
   @Input() public control: FormControl<FileWithLoading[] | null> = new FormControl([]);
   @Output() public fileUploaded: BehaviorSubject<FileUploadStatusAndId> =
-    new BehaviorSubject<FileUploadStatusAndId>({ status: false, id: null });
+    new BehaviorSubject<FileUploadStatusAndId>({status: false, id: null});
+  @Output() public fileRemoved = new EventEmitter<string>();
   public currentFilesArray: FileWithLoading[] = [];
   public id!: string | undefined;
   public isSecondFileUpload: boolean = false;
@@ -63,7 +64,7 @@ export class InputFileComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.control = new FormControl([]);
+    // this.control = new FormControl([]);
     this.fileStatusChanges();
   }
 
@@ -71,16 +72,17 @@ export class InputFileComponent implements OnInit {
     this.control.setValue(
       this.control.value?.filter(current => current.index !== file.index) ?? [],
     );
-    if (file.index !== null) {
-      this.currentFilesArray = this.currentFilesArray.filter(item => item.index !== file.index);
-    }
+    this.fileRemoved.next(file.opsId as string);
+    // if (file.index !== null) {
+    //   this.currentFilesArray = this.currentFilesArray.filter(item => item.index !== file.index);
+    // }
   }
 
   public uploadSecondFile(file: HTMLInputElement): void {
     const files: FileWithLoading[] = Array.from(file.files as FileList) as FileWithLoading[];
 
     this.control.setValue([...this.control.value as FileWithLoading[], ...files]);
-    this.control.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+    this.control.updateValueAndValidity({onlySelf: true, emitEvent: false});
   }
 
   private fileStatusChanges(): void {
@@ -95,14 +97,14 @@ export class InputFileComponent implements OnInit {
 
             takeArrayOfNewFiles.forEach(item => {
               this.fileIncrease(item as FileWithLoading);
-              arrUploaded$.push(this.filesMyHrService.apiUploadPost({ file: item }));
+              arrUploaded$.push(this.filesMyHrService.apiUploadPost({file: item}));
             });
 
             return forkJoin(arrUploaded$);
           }
           if (this.control.value?.length === 0) {
             this.currentFilesIndex--;
-            this.fileUploaded.next({ status: false, id: null });
+            this.fileUploaded.next({status: false, id: null});
             this.isSecondFileUpload = false;
             return of();
           }
@@ -123,19 +125,27 @@ export class InputFileComponent implements OnInit {
         if (this.status === 'VALID' && this.control.value?.length && response.length) {
           response.forEach(res => {
             const indexToUpdate = this.currentFilesArray.findIndex((item: FileWithLoading) => item.isLoading);
-
             this.currentFilesArray[indexToUpdate].isLoading = false;
-            this.alertsService.showSuccessNotificationIcon('הקובץ נקלט בהצלחה');
-            this.fileUploaded.next({ status: true, id: res.opswatId as string });
+            this.currentFilesArray[indexToUpdate].opsId = res.opswatId as string;
+            this.filesMyHrService.apiStatusGet({ opswatId: res.opswatId }).pipe(
+              repeat({ delay: 1000 }),
+              skipWhile((response) => response.message !== 'success' && response.percentage !== 100),
+              take(1),
+            ).subscribe(value => {
+              if (res.opswatId === value.opswatId) {
+                this.alertsService.showSuccessNotificationIcon('הקובץ נקלט בהצלחה');
+                this.fileUploaded.next({status: true, id: res.opswatId as string})
+              }
+            });
           });
         } else {
           this.currentFilesArray.forEach(file => {
             if (file.isLoading) {
               this.control.setValue(
-                this.control.value?.filter(current => current.index !==  file.index) ?? [],
+                this.control.value?.filter(current => current.index !== file.index) ?? [],
               );
             }
-            this.fileUploaded.next({ status: false, id: null });
+            this.fileUploaded.next({status: false, id: null});
           });
           this.currentFilesArray = this.currentFilesArray.filter(file => !file.isLoading);
           if (this.control.value?.length === 0) {
@@ -149,16 +159,16 @@ export class InputFileComponent implements OnInit {
 
   private fileIncrease(file: FileWithLoading): void {
     // if (file.index === undefined || (file.index !== null && !this.currentFilesArray[file.index])) {
-      this.currentFilesIndex++;
-      this.currentFilesArray.push(file);
-      const index: number = this.currentFilesArray.length - 1;
+    this.currentFilesIndex++;
+    this.currentFilesArray.push(file);
+    const index: number = this.currentFilesArray.length - 1;
 
-      this.isSecondFileUpload = true;
-      if (!this.currentFilesArray[index].isUploaded) {
-        this.currentFilesArray[index].isLoading = true;
-        this.currentFilesArray[index].isUploaded = true;
-        this.currentFilesArray[index].index = index;
-      }
+    this.isSecondFileUpload = true;
+    if (!this.currentFilesArray[index].isUploaded) {
+      this.currentFilesArray[index].isLoading = true;
+      this.currentFilesArray[index].isUploaded = true;
+      this.currentFilesArray[index].index = index;
+    }
     // }
   }
 }

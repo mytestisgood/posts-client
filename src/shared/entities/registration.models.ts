@@ -33,6 +33,10 @@ export interface AllRegistrationSessionData {
   branchNumber?: string;
   codeNumber?: string;
   finishConfirmPayment?: boolean;
+  total?: number;
+  employeesCount?: number;
+  processId?: string;
+
 }
 
 export interface RegistrationInfoControls {
@@ -57,7 +61,6 @@ export interface AccountControls {
   accountNumber: FormControl<string | null>;
   bankName: FormControl<string | null>;
   branchNumber: FormControl<string | null>;
-  codeNumber: FormControl<string | null>;
 }
 
 export interface VerificationEmailControls {

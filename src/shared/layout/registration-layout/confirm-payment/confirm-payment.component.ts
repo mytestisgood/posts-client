@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -17,6 +17,7 @@ import { takeUntil, withLatestFrom } from 'rxjs';
   selector: 'smarti-confirm-payment',
   standalone: true,
   imports: [CommonModule, ConfirmPaymentFormComponent],
+  providers: [DatePipe],
   templateUrl: './confirm-payment.component.html',
   styleUrls: ['./confirm-payment.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

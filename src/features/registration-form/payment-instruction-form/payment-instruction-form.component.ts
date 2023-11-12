@@ -2,13 +2,20 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AsideProcessDialogComponent } from '@shared/dialog';
-import { registrationConfirmPaymentLink, registrationTransferMoneyLink } from '@shared/entities';
-import { downloadFileHelper } from '@shared/helpers';
+import {
+  AllRegistrationSessionData, REGISTRATION_DATA,
+  registrationConfirmPaymentLink,
+  registrationTransferMoneyLink
+} from '@shared/entities';
+import {downloadFileHelper, toBlobAndSaveFile} from '@shared/helpers';
 import { DestroyService } from '@shared/services';
 import { ButtonComponent } from '@shared/ui';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import { takeUntil } from 'rxjs';
+import {takeUntil, tap} from 'rxjs';
+import {DownloadPaymentsInstructionResponse, FileDataExtResponse} from "@shared/api/models";
+import {ProcessesService} from "@shared/api/services";
+import {SessionStorageService} from "@shared/web-api";
 
 @Component({
   selector: 'smarti-payment-instruction-form',
@@ -20,10 +27,18 @@ import { takeUntil } from 'rxjs';
 })
 export class PaymentInstructionFormComponent implements AfterViewInit {
   private isNeedToNavigateAfterClose: boolean = false;
+  private currentStorageData: AllRegistrationSessionData =
+    JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
+  public processId: number = Number(this.currentStorageData.processId);
+  public departmentId: number = Number(this.currentStorageData.departmentId);
+
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
     private readonly router: Router,
+    private readonly processesService: ProcessesService,
+    private readonly sessionStorageService: SessionStorageService,
+
     private readonly destroy$: DestroyService,
   ) {
   }
@@ -47,8 +62,22 @@ export class PaymentInstructionFormComponent implements AfterViewInit {
   }
 
   public downloadPaymentExample(): void {
-    downloadFileHelper('/assets/files/דוגמה.xlsx', 'דוגמה.xlsx');
-  }
+    this.processesService.apiProcessesDownloadPaymentsInstructionPost({
+      processId: this.processId,
+      department_id: this.currentStorageData.departmentId,
+      criteria: {
+        isCheckAll: true,
+        additionalProperties: {
+          processId: this.processId,
+          department_id: this.departmentId,
+          limit: 1,
+          page: 15,
+        },
+      },
+    }).pipe(
+      tap((result: DownloadPaymentsInstructionResponse) => toBlobAndSaveFile(result?.result as FileDataExtResponse)),
+      takeUntil(this.destroy$),
+    ).subscribe();  }
 
   public navigateToConfirmPayment(content: PolymorpheusContent<TuiDialogContext>): void {
     this.isNeedToNavigateAfterClose = true;
