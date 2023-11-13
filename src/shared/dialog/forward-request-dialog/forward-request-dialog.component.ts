@@ -2,12 +2,14 @@ import {CommonModule} from '@angular/common';
 import {ChangeDetectionStrategy, Component, Inject, Input, Output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserService} from '@shared/api/services';
-import {emailValidatorPattern, israelMobilePhoneValidatorPattern} from '@shared/entities';
+import {emailValidatorPattern, israelMobilePhoneValidatorPattern, loginAfterRegistrationLink} from '@shared/entities';
 import {AlertsService, DestroyService} from '@shared/services';
 import {ButtonComponent, InputFieldComponent, InputNumberComponent} from '@shared/ui';
 import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
 import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
-import {BehaviorSubject, takeUntil, tap, withLatestFrom, concatMap, map, of,switchMap} from 'rxjs';
+import {BehaviorSubject, takeUntil, tap, withLatestFrom, concatMap, map, of, switchMap, Subscription} from 'rxjs';
+import {SessionStorageService} from "@shared/web-api";
+import {Router} from "@angular/router";
 
 interface ForwardRequestForm {
   email: FormControl<string | null>;
@@ -46,6 +48,8 @@ export class ForwardRequestDialogComponent {
   });
 
   constructor(
+    private readonly router: Router,
+    private readonly sessionStorageService: SessionStorageService,
     private readonly destroy$: DestroyService,
     private readonly userService: UserService,
     private readonly alertsService: AlertsService,
@@ -66,8 +70,7 @@ export class ForwardRequestDialogComponent {
       identifier: this.identifier,
       departmentId: this.departmentId,
     }).pipe(
-      map((res) => {
-        this.requestSend.next(true);
+      tap(() => {
         this.observer.complete();
       }),
       withLatestFrom(this.dialogs.open(content, {

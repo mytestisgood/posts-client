@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-
 @Component({
   selector: 'smarti-root',
   templateUrl: './app.component.html',

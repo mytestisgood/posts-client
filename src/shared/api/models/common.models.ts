@@ -83,9 +83,9 @@ export interface FileDataExeResponse {
 }
 
 export interface FileDataExtResponse {
-  data?: Blob;
-  filename?: string;
-  ext?: string;
+  data: string;
+  filename: string;
+  ext: string;
 }
 
 export interface IdAndNameResponse {

@@ -1,5 +1,5 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {BUSINESS_NUMBER_REGEX, emailValidatorPattern, israelMobilePhoneValidatorPattern} from './common.models';
+import { BUSINESS_NUMBER_REGEX, emailValidatorPattern, israelMobilePhoneValidatorPattern } from './common.models';
 import {
   AccountControls,
   ConfirmPaymentControls,
@@ -7,7 +7,6 @@ import {
   UploadDocumentsControls,
   VerificationEmailControls,
 } from './registration.models';
-import {IdAndNameResponse} from "@shared/api/models";
 
 export function registrationInfoFormMapper(): FormGroup<RegistrationInfoControls> {
   return new FormGroup<RegistrationInfoControls>({

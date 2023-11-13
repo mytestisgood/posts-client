@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BankDetails } from '@shared/api/models';
-import { registrationConfirmPaymentLink } from '@shared/entities';
+import { AllRegistrationSessionData, REGISTRATION_DATA, registrationConfirmPaymentLink } from '@shared/entities';
 import { DestroyService } from '@shared/services';
 import { ButtonComponent } from '@shared/ui';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { takeUntil } from 'rxjs';
+import { SessionStorageService } from '@shared/web-api';
 
 @Component({
   selector: 'smarti-bank-details-dialog',
@@ -20,11 +21,14 @@ import { takeUntil } from 'rxjs';
 export class BankDetailsDialogComponent implements AfterViewInit {
   @Input() public observer!: { complete: () => void };
   @Input() public bankDetailsSmarti!: BankDetails | undefined;
+  public readonly currentStorageData: AllRegistrationSessionData =
+    JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
   private isNeedToNavigateAfterClose: boolean = false;
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
     private readonly destroy$: DestroyService,
+    private readonly sessionStorageService: SessionStorageService,
     private readonly router: Router,
   ) {
   }

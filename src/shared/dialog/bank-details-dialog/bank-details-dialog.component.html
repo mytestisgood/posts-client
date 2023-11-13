@@ -2,11 +2,15 @@
   <h3 class="mt-0 mb-0 neutrals-text-950 text-center dir-rtl">סה״כ לתשלום:</h3>
   <div class="mt-12 flex justify-around w-[658px] h-[80px] rounded-l bg-mint self-center">
     <div class="flex gap-2">
-      <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl">6230 ש״ח</div>
+      <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl">
+        {{ currentStorageData.total }} ש״ח
+      </div>
       <div class="paragraph-text neutrals-text-950 self-center dir-rtl">סה״כ סכום לתשלום לקופות:</div>
     </div>
     <div class="flex gap-2">
-      <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl">50</div>
+      <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl">
+        {{ currentStorageData.employeesCount }}
+      </div>
       <div class="paragraph-text neutrals-text-950 self-center dir-rtl">מספר העובדים:</div>
     </div>
   </div>
@@ -21,7 +25,7 @@
       </div>
       <div class="flex flex-row">
         <div class="neutrals-text-950 medium-text !leading-10 dir-rtl w-[160px]">
-          {{ !isEmptyString(bankDetailsSmarti?.name) ? bankDetailsSmarti?.name : "-" }}
+          {{ currentStorageData.companyName }}
         </div>
         <div class="neutrals-text-950 regular-text dir-rtl self-center w-[120px]">שם החברה:</div>
       </div>
@@ -35,7 +39,7 @@
       </div>
       <div class="flex flex-row">
         <div class="neutrals-text-950 medium-text !leading-10 dir-rtl w-[160px]">
-          {{ !isEmptyString(bankDetailsSmarti?.branch_name) ? bankDetailsSmarti?.branch_name : "-" }}
+          {{ !isEmptyString(bankDetailsSmarti?.branch_number) ? bankDetailsSmarti?.branch_number : "-" }}
         </div>
         <div class="neutrals-text-950 regular-text dir-rtl self-center w-[120px]">מספר סניף:</div>
       </div>
@@ -43,7 +47,7 @@
   </div>
   <div class="flex justify-center mt-28">
     <smarti-button
-      [text]="'תודה, אעביר.'"
+      [text]="'.תודה, אעביר'"
       [typeClass]="'confirm'"
       [customButtonWidth]="'209px'"
       [customHeight]="'56px'"

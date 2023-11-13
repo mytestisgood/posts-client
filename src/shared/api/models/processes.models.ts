@@ -80,7 +80,10 @@ export interface ProcessesDownloadPaymentsInstructionBody {
 
 export interface ApiProcessesUnlockProcessFilesCriteria {
   isCheckAll?: boolean;
-  additionalProperties?: CriteriaProcess;
+  page?: number;
+  limit?: number;
+  department_id?: number;
+  processId?: number;
 }
 
 export interface CriteriaProcess {
@@ -91,7 +94,7 @@ export interface CriteriaProcess {
 }
 
 export interface DownloadPaymentsInstructionResponse {
-  result?: FileDataExtResponse;
+  result?: Array<FileDataExtResponse>;
 }
 
 export interface ProcessIdDeleteParameters {
@@ -147,7 +150,7 @@ export interface ProcessesFilesListGetParameters {
 export interface ProcessDetails {
   id?: string;
   name?: string;
-  status?: string;
+  status?: string | null;
   type?: string;
   total?: number;
   date?: string;

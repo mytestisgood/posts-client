@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { SignInResponse } from '@shared/api/models';
 import { SignInService } from '@shared/api/services';
 import { CURRENT_USER, emailValidatorPattern, IS_LOGGED_IN, TOKEN } from '@shared/entities';
-import { DestroyService } from '@shared/services';
+import {AlertsService, DestroyService} from '@shared/services';
 import {
   ButtonComponent,
   InputCheckboxComponent,
@@ -20,7 +20,7 @@ import {
   InputPasswordComponent,
 } from '@shared/ui';
 import { SessionStorageService } from '@shared/web-api';
-import { Observable, takeUntil, tap } from 'rxjs';
+import {catchError, Observable, of, takeUntil, tap} from 'rxjs';
 
 interface LoginForm {
   email: FormControl<string | null>
@@ -64,7 +64,8 @@ export class LoginFormComponent implements OnInit {
     private readonly destroy$: DestroyService,
     private readonly signInService: SignInService,
     private readonly sessionStorageService: SessionStorageService,
-    ) {
+    private readonly alertsService: AlertsService,
+  ) {
   }
 
   public ngOnInit(): void {
@@ -84,6 +85,15 @@ export class LoginFormComponent implements OnInit {
         this.sessionStorageService.setItem(TOKEN, response.token as string);
         this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
         this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
+      }),
+      catchError((err) => {
+        if (err.error.message === 'Unauthenticated: invalid email or password') {
+          this.alertsService.showErrorNotificationIcon('שם המשתמש או הסיסמה שגויים');
+        }
+        else {
+          this.alertsService.showErrorNotificationIcon('שגיאה');
+        }
+        return of(err);
       }),
       takeUntil(this.destroy$),
     ).subscribe(() => {

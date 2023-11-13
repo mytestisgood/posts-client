@@ -7,7 +7,7 @@ export interface ProcessesUploadFileBody {
   departmentId?: string;
   isDirect?: boolean;
   month?: string;
-  processName?: string;
+  processName?: string | null;
   year?: string;
   isEmployer?: boolean;
   isDepartmentLink?: boolean;
