@@ -53,6 +53,7 @@
         "src/shared/api/web-api"
       ]
     },
+    "strictPropertyInitialization": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,

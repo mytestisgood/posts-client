@@ -8,17 +8,17 @@ import {
   REGISTRATION_DATA,
 } from '@shared/entities';
 import {DestroyService} from '@shared/services';
-import {ButtonComponent, InputFieldComponent, SelectComponent} from '@shared/ui';
+import {ButtonComponent, InputFieldComponent} from '@shared/ui';
 import {SessionStorageService} from '@shared/web-api';
 import {map, Observable, of, switchMap, takeUntil, tap} from 'rxjs';
-import {BankService, RegisterService} from "@shared/api/services";
-import {BankBranches, BanksGetResponse, ChatResponse, IdAndNameResponse} from "@shared/api/models";
-import {createObject} from "rxjs/internal/util/createObject";
+import {BankService, RegisterService} from '@shared/api/services';
+import {BankBranches, BanksGetResponse, ChatResponse, IdAndNameResponse} from '@shared/api/models';
+
 
 @Component({
   selector: 'smarti-account-form-dialog',
   standalone: true,
-  imports: [CommonModule, InputFieldComponent, ReactiveFormsModule, ButtonComponent, SelectComponent],
+  imports: [CommonModule, InputFieldComponent, ReactiveFormsModule, ButtonComponent],
   templateUrl: './account-form-dialog.component.html',
   styleUrls: ['./account-form-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,7 +27,7 @@ export class AccountFormDialogComponent implements OnInit {
   @Input() public observer!: { complete: () => void };
   public accountForm: FormGroup<AccountControls> = paymentMethodFormMapper();
   public isDisabled: boolean = true;
-  public banks!: IdAndNameResponse[];
+  public banks!: [];
   public bank_branches!: IdAndNameResponse[];
   public banksWithBranch!: BanksGetResponse[];
   public accountFormChange$: Observable<FormControlStatus> = this.accountForm
@@ -67,7 +67,7 @@ export class AccountFormDialogComponent implements OnInit {
         if (value) {
           const banksc = this.banksWithBranch.find(item => item.name === value)?.bank_branches;
           if (banksc) {
-          console.log(banksc)
+            console.log(banksc)
             this.bank_branches = banksc.map((item): IdAndNameResponse => ({
               ...item,
               id: Number(item.id) as number,
@@ -93,7 +93,7 @@ export class AccountFormDialogComponent implements OnInit {
           name: item.name as string
         }));
       }),
-      tap((response: IdAndNameResponse[]) => this.banks = response),
+      // tap((response) => this.banks = response),
     ).subscribe();
     // banks => {
     //   this.banks = banks;
