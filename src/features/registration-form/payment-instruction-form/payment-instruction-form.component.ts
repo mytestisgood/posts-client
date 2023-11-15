@@ -25,8 +25,8 @@ import { SessionStorageService } from '@shared/web-api';
   styleUrls: ['./payment-instruction-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PaymentInstructionFormComponent implements AfterViewInit {
-  private isNeedToNavigateAfterClose: boolean = false;
+export class PaymentInstructionFormComponent  {
+  // private isNeedToNavigateAfterClose: boolean = false;
   private readonly currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
@@ -41,16 +41,16 @@ export class PaymentInstructionFormComponent implements AfterViewInit {
 
   }
 
-  public ngAfterViewInit(): void {
-    this.dialogs.pipe(
-      takeUntil(this.destroy$),
-    ).subscribe(dialogs => {
-      if (this.isNeedToNavigateAfterClose && !dialogs.length) {
-        this.isNeedToNavigateAfterClose = false;
-        this.router.navigate([registrationConfirmPaymentLink]);
-      }
-    });
-  }
+  // public ngAfterViewInit(): void {
+  //   this.dialogs.pipe(
+  //     takeUntil(this.destroy$),
+  //   ).subscribe(dialogs => {
+  //     if (this.isNeedToNavigateAfterClose && !dialogs.length) {
+  //       this.isNeedToNavigateAfterClose = false;
+  //       this.router.navigate([registrationConfirmPaymentLink]);
+  //     }
+  //   });
+  // }
 
   public openDialogForAsideProcess(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogs.open(content, {
@@ -81,14 +81,14 @@ export class PaymentInstructionFormComponent implements AfterViewInit {
     ).subscribe();  }
 
   public navigateToConfirmPayment(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.isNeedToNavigateAfterClose = true;
+    // this.isNeedToNavigateAfterClose = true;
     const dialogRef = this.dialogs.open(content, {
       closeable: false,
       size: 'm',
     }).pipe(takeUntil(this.destroy$)).subscribe();
     setTimeout(() => {
       dialogRef.closed = true;
-      this.isNeedToNavigateAfterClose = false;
+      this.router.navigate([registrationConfirmPaymentLink]);
     }, 3000);
   }
 

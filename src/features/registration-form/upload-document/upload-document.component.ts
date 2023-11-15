@@ -68,7 +68,7 @@ export class UploadDocumentComponent implements OnInit {
   public identifier: string = this.currentStorageData?.identifier as string;
   public departmentId: number = Number(this.currentStorageData.departmentId);
   public inter = interval(5000);
-
+  public time = 30000;
   public sub = new Subscription;
   public process_details: ProcessDetails = {};
 
@@ -150,16 +150,27 @@ export class UploadDocumentComponent implements OnInit {
     }).pipe(
       tap((res) => {
         if (res?.processId) {
+
           this.getUploadFile(res.processId);
         } else {
           this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');
         }
       }),
-      withLatestFrom(this.dialogs.open(content, {
-        closeable: false,
-        size: 'm',
-      })),
-      delay(10000),
+      switchMap(() => {
+        return this.dialogs.open(content, {
+          closeable: false,
+          size: 'm',
+        }).pipe(
+          delay(this.time),
+        );
+      }),
+      // withLatestFrom(this.dialogs.open(content, {
+      //   closeable: false,
+      //   size: 'm',
+      // }).pipe(
+      //   delay(this.time),
+      //   ),
+      // ),
       takeUntil(this.destroy$),
     ).subscribe();
   }
@@ -185,9 +196,11 @@ export class UploadDocumentComponent implements OnInit {
     if (this.process_details.status !== null) {
       switch (this.process_details.status) {
         case 'loading':
+          this.time = 2000;
           break;
         case 'error_loading':
         case 'loaded_with_errors': {
+          this.time = 0;
           this.sub.unsubscribe();
           this.alertsService.showErrorNotificationIcon('יש בעיה בקובץ הקובץ מעובר לטיפול מנהל תיק\n' +
             'יצרו איתך תוך 24 שעות');
@@ -196,6 +209,7 @@ export class UploadDocumentComponent implements OnInit {
           break;
         }
         case 'can_be_processed': {
+          this.time = 0;
           setTimeout(() => {
             this.sub.unsubscribe();
               this.currentStorageData.files = this.uploadDocumentsForm.value.files as FileWithLoading[];
