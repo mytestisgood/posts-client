@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -6,9 +6,9 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
-import {UploadFileService} from '@shared/api/services';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UploadFileService } from '@shared/api/services';
 import {
   AsideProcessDialogComponent,
   DownloadSampleDialogComponent,
@@ -24,8 +24,8 @@ import {
   UploadDocumentsControls,
   uploadingDocumentsFormMapper,
 } from '@shared/entities';
-import {getCurrentMonth, getCurrentYear} from '@shared/helpers';
-import {AlertsService, DestroyService} from '@shared/services';
+import { getCurrentMonth, getCurrentYear } from '@shared/helpers';
+import { AlertsService, DestroyService } from '@shared/services';
 import {
   ButtonComponent,
   DatePickerComponent,
@@ -33,13 +33,11 @@ import {
   NotificationComponent,
   SelectComponent,
 } from '@shared/ui';
-import {SessionStorageService} from '@shared/web-api';
-import {TuiAlertService, TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
-import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
-import {delay, repeat, skipWhile, startWith, switchMap, take, takeUntil, tap, withLatestFrom} from 'rxjs';
-import {iif, of, interval, Subscription} from 'rxjs';
-import {ProcessDetails} from "@shared/api/models";
-
+import { SessionStorageService } from '@shared/web-api';
+import { TuiAlertService, TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import { delay, startWith, switchMap, take, takeUntil, tap, withLatestFrom, iif, of, interval, Subscription } from 'rxjs';
+import { ProcessDetails } from '@shared/api/models';
 
 @Component({
   selector: 'smarti-upload-document',
@@ -92,7 +90,7 @@ export class UploadDocumentComponent implements OnInit {
       this.uploadDocumentsForm.setValue({
         files: this.currentStorageData.files,
       });
-      this.uploadDocumentsForm.updateValueAndValidity({emitEvent: true});
+      this.uploadDocumentsForm.updateValueAndValidity({ emitEvent: true });
     }
   }
 
@@ -108,7 +106,7 @@ export class UploadDocumentComponent implements OnInit {
       this.opswatId.push(uploadedAndId.id as string);
     }
     this.documentUploaded = uploadedAndId.status;
-    this.uploadDocumentsForm.updateValueAndValidity({emitEvent: true});
+    this.uploadDocumentsForm.updateValueAndValidity({ emitEvent: true });
   }
 
   public removeFile(opsId: string): void {
@@ -161,7 +159,7 @@ export class UploadDocumentComponent implements OnInit {
         closeable: false,
         size: 'm',
       })),
-      delay(2000),
+      delay(10000),
       takeUntil(this.destroy$),
     ).subscribe();
   }

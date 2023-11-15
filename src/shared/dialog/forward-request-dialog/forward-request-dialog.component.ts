@@ -7,7 +7,7 @@ import {AlertsService, DestroyService} from '@shared/services';
 import {ButtonComponent, InputFieldComponent, InputNumberComponent} from '@shared/ui';
 import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
 import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
-import {BehaviorSubject, takeUntil, tap, withLatestFrom, concatMap, map, of, switchMap, Subscription} from 'rxjs';
+import {BehaviorSubject, takeUntil, tap, withLatestFrom, concatMap, map, of,switchMap} from 'rxjs';
 import {SessionStorageService} from "@shared/web-api";
 import {Router} from "@angular/router";
 
@@ -53,7 +53,6 @@ export class ForwardRequestDialogComponent {
     private readonly destroy$: DestroyService,
     private readonly userService: UserService,
     private readonly alertsService: AlertsService,
-
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
   ) {
   }
@@ -70,8 +69,10 @@ export class ForwardRequestDialogComponent {
       identifier: this.identifier,
       departmentId: this.departmentId,
     }).pipe(
-      tap(() => {
-        this.observer.complete();
+      map((res) => {
+          this.observer.complete();
+          this.sessionStorageService.clear();
+          this.router.navigate([loginAfterRegistrationLink]);
       }),
       withLatestFrom(this.dialogs.open(content, {
         closeable: false,
