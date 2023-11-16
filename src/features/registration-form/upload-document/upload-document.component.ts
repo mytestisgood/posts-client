@@ -72,7 +72,6 @@ export class UploadDocumentComponent implements OnInit {
   public inter = interval(5000);
 
   public sub = new Subscription;
-  public process_details: ProcessDetails = {};
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
@@ -183,9 +182,8 @@ export class UploadDocumentComponent implements OnInit {
     });
   }
   public set_process(response: ProcessDetails): void {
-    this.process_details = response;
-    if (this.process_details.status !== null) {
-      switch (this.process_details.status) {
+    if (response.status !== null) {
+      switch (response.status) {
         case 'loading':
           break;
         case 'error_loading':

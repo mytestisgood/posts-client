@@ -1,21 +1,21 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { AsideProcessDialogComponent } from '@shared/dialog';
+import {CommonModule} from '@angular/common';
+import {AfterViewInit, ChangeDetectionStrategy, Component, Inject} from '@angular/core';
+import {Router} from '@angular/router';
+import {AsideProcessDialogComponent} from '@shared/dialog';
 import {
   AllRegistrationSessionData, REGISTRATION_DATA,
   registrationConfirmPaymentLink,
   registrationTransferMoneyLink,
 } from '@shared/entities';
-import { toBlobAndSaveFile } from '@shared/helpers';
-import { DestroyService } from '@shared/services';
-import { ButtonComponent } from '@shared/ui';
-import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import { takeUntil, tap } from 'rxjs';
-import { DownloadPaymentsInstructionResponse, FileDataExtResponse } from '@shared/api/models';
-import { ProcessesService } from '@shared/api/services';
-import { SessionStorageService } from '@shared/web-api';
+import {toBlobAndSaveFile} from '@shared/helpers';
+import {AlertsService, DestroyService} from '@shared/services';
+import {ButtonComponent} from '@shared/ui';
+import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
+import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
+import {catchError, debounceTime, delay, map, of, switchMap, take, takeUntil, tap, timer, withLatestFrom} from 'rxjs';
+import {DownloadPaymentsInstructionResponse, FileDataExtResponse} from '@shared/api/models';
+import {ProcessesService} from '@shared/api/services';
+import {SessionStorageService} from '@shared/web-api';
 
 @Component({
   selector: 'smarti-payment-instruction-form',
@@ -26,17 +26,18 @@ import { SessionStorageService } from '@shared/web-api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaymentInstructionFormComponent implements AfterViewInit {
-
+  public isDisabled: boolean = true;
+  public observer!: { complete: () => void };
   private isNeedToNavigateAfterClose: boolean = false;
   private readonly currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
   constructor(
-    @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
+    @Inject(TuiDialogService) private  readonly dialogs: TuiDialogService,
     private readonly router: Router,
     private readonly processesService: ProcessesService,
     private readonly sessionStorageService: SessionStorageService,
-
+    private readonly alertsService: AlertsService,
     private readonly destroy$: DestroyService,
   ) {
 
@@ -61,6 +62,7 @@ export class PaymentInstructionFormComponent implements AfterViewInit {
   }
 
   public downloadPaymentExample(): void {
+    this.isDisabled = false;
     this.processesService.apiProcessesDownloadPaymentsInstructionPost({
       processId: Number(this.currentStorageData.processId),
       department_id: this.currentStorageData.departmentId,
@@ -73,20 +75,38 @@ export class PaymentInstructionFormComponent implements AfterViewInit {
       },
     }).pipe(
       tap((result: DownloadPaymentsInstructionResponse) => {
-          (result as Array<FileDataExtResponse>).forEach(file => {
-            toBlobAndSaveFile(file as FileDataExtResponse);
-          });
-      },
+          if (result instanceof Array) {
+            (result as Array<FileDataExtResponse>).forEach(file => {
+              toBlobAndSaveFile(file as FileDataExtResponse);
+            });
+          } else {
+            if (result['message'] === 'the employer should be active') {
+              this.alertsService.showErrorNotificationIcon('מעסיק אינו פעיל');
+            } else if (result['message'] === 'Payment Type is null!') {
+              this.alertsService.showErrorNotificationIcon('לא ניתן להוריד הנחיות לתשלום לרשומות שלא מוגדר להם סוג תשלום');
+            } else {
+              this.alertsService.showErrorNotificationIcon(result.message as string);
+            }
+          }
+        },
       ),
+      catchError((err) => {
+        this.alertsService.showErrorNotificationIcon('שגיאה');
+        return of(err);
+      }),
       takeUntil(this.destroy$),
-    ).subscribe();  }
+    ).subscribe();
+  }
 
   public navigateToConfirmPayment(content: PolymorpheusContent<TuiDialogContext>): void {
     this.isNeedToNavigateAfterClose = true;
     this.dialogs.open(content, {
       closeable: false,
       size: 'm',
-    }).pipe(takeUntil(this.destroy$)).subscribe();
+    }).pipe(
+      switchMap(() => timer(5000).pipe(take(1)))
+    ).subscribe(() => {
+    });
   }
 
   public navigateToTransferMoney(): void {

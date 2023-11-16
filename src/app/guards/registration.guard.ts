@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Router} from '@angular/router';
 import {
   AllRegistrationSessionData,
   REGISTRATION_DATA,
@@ -11,9 +11,9 @@ import {
   registrationUploadFileLink,
   registrationVerifyCodeLink,
 } from '@shared/entities';
-import { SessionStorageService } from '@shared/web-api';
+import {SessionStorageService} from '@shared/web-api';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class RegistrationGuard {
   private currentStorageData!: AllRegistrationSessionData;
 
@@ -29,7 +29,6 @@ export class RegistrationGuard {
 
   private checkDataToOpenLink(route: string): boolean {
     const currentRoute: string = '/registration/' + route;
-    const isDirectlyPayment: boolean = this.currentStorageData?.transferMoneyMode === 'directly' ?? false;
 
     this.currentStorageData = JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
@@ -39,8 +38,10 @@ export class RegistrationGuard {
       return true;
     } else if (currentRoute === registrationTransferMoneyLink && this.currentStorageData?.finishFilesPage) {
       return true;
-    } else if (currentRoute === registrationPaymentInstructionLink && isDirectlyPayment) {
-      return true;
+    } else if (currentRoute === registrationPaymentInstructionLink) {
+      if (this.currentStorageData?.transferMoneyMode === 'directly' ?? false) {
+        return true;
+      }
     } else if (currentRoute === registrationConfirmPaymentLink && this.currentStorageData?.finishTransferMoneyMode) {
       return true;
     } else if (currentRoute === registrationVerifyCodeLink && this.currentStorageData?.finishConfirmPayment) {
