@@ -87,12 +87,13 @@ export class LoginFormComponent implements OnInit {
           this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
           this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
         } else {
-          this.alertsService.showErrorNotificationIcon('שם המשתמש או הסיסמה שגויים');
-          throwError(() => new Error('Unauthenticated: invalid email or password'));
+          throw new Error('Unauthenticated: invalid email or password');
+          // throwError(() => new Error('Unauthenticated: invalid email or password'));
         }
       }),
       catchError((err) => {
-        if (err.error.message === 'Unauthenticated: invalid email or password') {
+        const MESSAGE_ERROR = 'Unauthenticated: invalid email or password';
+        if ((err.error !== undefined && err.error.message === MESSAGE_ERROR) || err.message === MESSAGE_ERROR) {
           this.alertsService.showErrorNotificationIcon('שם המשתמש או הסיסמה שגויים');
         }
         else {
