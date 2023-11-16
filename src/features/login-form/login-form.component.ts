@@ -20,7 +20,7 @@ import {
   InputPasswordComponent,
 } from '@shared/ui';
 import { SessionStorageService } from '@shared/web-api';
-import {catchError, Observable, of, takeUntil, tap} from 'rxjs';
+import {catchError, Observable, of, takeUntil, tap, throwError} from 'rxjs';
 
 interface LoginForm {
   email: FormControl<string | null>
@@ -82,9 +82,14 @@ export class LoginFormComponent implements OnInit {
       password: this.loginForm.value.password as string,
     }).pipe(
       tap((response: SignInResponse) => {
-        this.sessionStorageService.setItem(TOKEN, response.token as string);
-        this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
-        this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
+        if (response.role === 'employer') {
+          this.sessionStorageService.setItem(TOKEN, response.token as string);
+          this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
+          this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
+        } else {
+          this.alertsService.showErrorNotificationIcon('שם המשתמש או הסיסמה שגויים');
+          throwError(() => new Error('Unauthenticated: invalid email or password'));
+        }
       }),
       catchError((err) => {
         if (err.error.message === 'Unauthenticated: invalid email or password') {
