@@ -24,6 +24,10 @@ export class RegisterService {
       //   catchError(err => {return of (err)}));
   }
 
+  public apiEmployersUpdateEmployerOut(data: EmployersCreateEmployerOutBody): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/employers/updateEmployerOut`, data)
+  }
+
   public apiEmployersCreatePaymentOut(data: EmployersCreatePaymentOutBody): Observable<SuccessResponse> {
     return this.http.post<SuccessResponse>(`${environment.authUrl}/api/employers/createPaymentOut`, data)
   }
