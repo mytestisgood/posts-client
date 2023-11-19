@@ -84,7 +84,10 @@
   <smarti-aside-process-dialog [observer]="observer"></smarti-aside-process-dialog>
 </ng-template>
 
-<ng-template #successUploadTemplate>
+<ng-template
+  #successUploadTemplate
+  let-observer
+>
   <div class="flex flex-col gap-6 mt-6 mb-6">
     <div class="uploading-loop-94-icon self-center"></div>
     <h3 class="medium neutrals-text-950 mt-0 mb-0 self-center text-center w-[500px]">המערכת טוענת את הקובץ למערכת</h3>

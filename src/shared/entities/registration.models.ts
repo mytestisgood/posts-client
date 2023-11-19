@@ -11,6 +11,8 @@ export const registrationVerifyCodeLink: string = '/registration/verify-code';
 export const loginAfterRegistrationLink: string = '/login';
 
 export interface AllRegistrationSessionData {
+  userId?: string;
+  employerId?: string;
   token?: string;
   departmentId?: string;
   companyName?: string;

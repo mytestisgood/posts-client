@@ -24,7 +24,7 @@ import { Observable, takeUntil, tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SetUpPasswordFormComponent implements OnInit {
-
+  public text_button = 'הרשמה';
   public passwordControl: FormControl<string | null> = new FormControl('', [Validators.required]);
   public isDisabled: boolean = true;
   public regexPassword: RegExp = new RegExp(passwordValidatorPattern);
@@ -47,6 +47,7 @@ export class SetUpPasswordFormComponent implements OnInit {
       this.passwordControl.setValue(this.currentStorageData.password);
       this.passwordControl.updateValueAndValidity({ emitEvent: true });
       this.isDisabled = !this.passwordControl.valid;
+      this.text_button = 'עדכון סיסמה';
     }
     this.passwordControlChange$.subscribe(status => {
       if (this.regexPassword.test(this.passwordControl.value as string)) {
@@ -62,6 +63,7 @@ export class SetUpPasswordFormComponent implements OnInit {
   }
 
   public setPassword(): void {
+    if (this.passwordControl.value !== this.currentStorageData.password) {
     this.registerService.apiRegisterPost({
       password: this.passwordControl.value as string,
       isFromSignIn: true,
@@ -73,6 +75,8 @@ export class SetUpPasswordFormComponent implements OnInit {
       }),
       takeUntil(this.destroy$),
     ).subscribe(() => this.router.navigate([registrationUploadFileLink]));
-
+    } else {
+      this.router.navigate([registrationUploadFileLink]);
+    }
   }
 }

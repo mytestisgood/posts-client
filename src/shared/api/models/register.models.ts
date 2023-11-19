@@ -4,6 +4,8 @@ export interface EmployersCreateEmployerOutBody {
   user_name?: string;
   phone?: string;
   email?: string;
+  employer_id?: string;
+  user_id?: string;
 }
 
 export interface EmployersCreateUserOutBody {
@@ -21,9 +23,11 @@ export interface EmployersCreatePaymentOutBody {
 }
 
 export interface CreateEmployerOutResponse {
+  userId?: string;
   message?: string;
   token?: string;
   departmentId?: string;
+  employerId?: string;
   code?: number;
 }
 

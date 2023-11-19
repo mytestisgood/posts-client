@@ -61,14 +61,13 @@ import { ProcessDetails } from '@shared/api/models';
 export class UploadDocumentComponent implements OnInit {
   public uploadDocumentsForm: FormGroup<UploadDocumentsControls> = uploadingDocumentsFormMapper();
   public documentUploaded: boolean = false;
-
+  public dialogRef: any;
   public opswatId: Array<string> = [];
   public currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
   public identifier: string = this.currentStorageData?.identifier as string;
   public departmentId: number = Number(this.currentStorageData.departmentId);
   public inter = interval(5000);
-  public time = 30000;
   public sub = new Subscription;
 
   constructor(
@@ -156,20 +155,12 @@ export class UploadDocumentComponent implements OnInit {
         }
       }),
       switchMap(() => {
-        return this.dialogs.open(content, {
+        this.dialogRef = this.dialogs.open(content, {
           closeable: false,
           size: 'm',
-        }).pipe(
-          delay(this.time),
-        );
+        }).pipe(takeUntil(this.destroy$)).subscribe();
+        return this.dialogRef;
       }),
-      // withLatestFrom(this.dialogs.open(content, {
-      //   closeable: false,
-      //   size: 'm',
-      // }).pipe(
-      //   delay(this.time),
-      //   ),
-      // ),
       takeUntil(this.destroy$),
     ).subscribe();
   }
@@ -194,11 +185,10 @@ export class UploadDocumentComponent implements OnInit {
     if (response.status !== null) {
       switch (response.status) {
         case 'loading':
-          this.time = 2000;
           break;
         // case 'error_loading':
         case 'loaded_with_errors': {
-          this.time = 0;
+          this.dialogRef.complete();
           this.sub.unsubscribe();
           this.alertsService.showErrorNotificationIcon('יש בעיה בקובץ הקובץ מעובר לטיפול מנהל תיק\n' +
             'יצרו איתך תוך 24 שעות');
@@ -208,7 +198,7 @@ export class UploadDocumentComponent implements OnInit {
         }
         case 'error_loading':
         case 'can_be_processed': {
-          this.time = 0;
+          this.dialogRef.complete();
           setTimeout(() => {
             this.sub.unsubscribe();
               this.currentStorageData.files = this.uploadDocumentsForm.value.files as FileWithLoading[];

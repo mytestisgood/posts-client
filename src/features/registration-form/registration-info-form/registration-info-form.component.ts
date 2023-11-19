@@ -46,6 +46,8 @@ import {catchError, debounceTime, distinctUntilChanged, first, Observable, of, s
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationInfoFormComponent implements OnInit {
+  public title = 'צור חשבון!' ;
+  public textButton = 'הירשם';
   public isDisabled: boolean = true;
   public personalInfoForm: FormGroup<RegistrationInfoControls> = registrationInfoFormMapper();
   public personalInfoFormChange$: Observable<FormControlStatus> = this.personalInfoForm
@@ -64,6 +66,11 @@ export class RegistrationInfoFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    if (this.currentStorageData) {
+      this.title = 'עדכון חשבון!';
+      this.textButton = 'עדכן';
+    }
+
     this.personalInfoForm.setValue({
       email: this.currentStorageData?.email ?? '',
       phone: this.currentStorageData?.phone ?? '',
@@ -109,18 +116,47 @@ export class RegistrationInfoFormComponent implements OnInit {
       ).subscribe(() => this.router.navigate([registrationSetPasswordLink]));
 
     } else { //update employer
-      this.router.navigate([registrationSetPasswordLink]);
+      this.registerService.apiEmployersUpdateEmployerOut({
+        email: this.personalInfoForm.controls.email.value as string,
+        phone: this.personalInfoForm.controls.phone.value as string,
+        company_name: this.personalInfoForm.controls.companyName.value as string,
+        identifier: this.personalInfoForm.controls.identifier.value as string,
+        user_name: this.personalInfoForm.controls.yourName.value as string,
+        employer_id: this.currentStorageData.employerId,
+        user_id: this.currentStorageData.userId,
+      }).pipe(
+        tap(() => {
+          this.setItemSessionStorage(null);
+        }),
+        catchError((err) => {
+          if (err.error.message === 'user exists') {
+            this.alertsService.showErrorNotificationIcon('המשתמש שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
+          } else if (err.error.message === 'employer doesnt exists') {
+            this.alertsService.showErrorNotificationIcon('מעסיק לא נמצא');
+          } else if (err.error.message === 'identifier exists') {
+            this.alertsService.showErrorNotificationIcon('המעסיק שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
+          }
+          else {
+            this.alertsService.showErrorNotificationIcon('שגיאה');
+          }
+          return of(err);
+        }),
+        debounceTime(500),
+        takeUntil(this.destroy$),
+      ).subscribe(() => this.router.navigate([registrationSetPasswordLink]));
     }
   }
 
-  private setItemSessionStorage(tokenResponse: CreateEmployerOutResponse): void {
+  private setItemSessionStorage(tokenResponse: CreateEmployerOutResponse | null): void {
     this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify({
       email: this.personalInfoForm.controls.email.value as string,
       phone: this.personalInfoForm.controls.phone.value as string,
       companyName: this.personalInfoForm.controls.companyName.value as string,
       identifier: this.personalInfoForm.controls.identifier.value as string,
       yourName: this.personalInfoForm.controls.yourName.value as string,
-      departmentId: tokenResponse.departmentId,
+      departmentId: tokenResponse === null ? this.currentStorageData.departmentId : tokenResponse?.departmentId,
+      employerId: tokenResponse === null ? this.currentStorageData.employerId : tokenResponse?.employerId,
+      userId: tokenResponse === null ? this.currentStorageData.userId : tokenResponse?.userId,
       acceptPrivacy: this.personalInfoForm.controls.acceptPrivacy.value as boolean,
       finishInfoPage: true,
     }));
