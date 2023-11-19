@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -6,9 +6,9 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
-import {UploadFileService} from '@shared/api/services';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UploadFileService } from '@shared/api/services';
 import {
   AsideProcessDialogComponent,
   DownloadSampleDialogComponent,
@@ -24,8 +24,8 @@ import {
   UploadDocumentsControls,
   uploadingDocumentsFormMapper,
 } from '@shared/entities';
-import {getCurrentMonth, getCurrentYear} from '@shared/helpers';
-import {AlertsService, DestroyService} from '@shared/services';
+import { getCurrentMonth, getCurrentYear } from '@shared/helpers';
+import { AlertsService, DestroyService } from '@shared/services';
 import {
   ButtonComponent,
   DatePickerComponent,
@@ -33,13 +33,11 @@ import {
   NotificationComponent,
   SelectComponent,
 } from '@shared/ui';
-import {SessionStorageService} from '@shared/web-api';
-import {TuiAlertService, TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
-import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
-import {delay, repeat, skipWhile, startWith, switchMap, take, takeUntil, tap, withLatestFrom} from 'rxjs';
-import {iif, of, interval, Subscription} from 'rxjs';
-import {ProcessDetails} from "@shared/api/models";
-
+import { SessionStorageService } from '@shared/web-api';
+import { TuiAlertService, TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import { delay, startWith, switchMap, take, takeUntil, tap, withLatestFrom, iif, of, interval, Subscription } from 'rxjs';
+import { ProcessDetails } from '@shared/api/models';
 
 @Component({
   selector: 'smarti-upload-document',
@@ -70,7 +68,7 @@ export class UploadDocumentComponent implements OnInit {
   public identifier: string = this.currentStorageData?.identifier as string;
   public departmentId: number = Number(this.currentStorageData.departmentId);
   public inter = interval(5000);
-
+  public time = 30000;
   public sub = new Subscription;
 
   constructor(
@@ -91,7 +89,7 @@ export class UploadDocumentComponent implements OnInit {
       this.uploadDocumentsForm.setValue({
         files: this.currentStorageData.files,
       });
-      this.uploadDocumentsForm.updateValueAndValidity({emitEvent: true});
+      this.uploadDocumentsForm.updateValueAndValidity({ emitEvent: true });
     }
   }
 
@@ -107,7 +105,7 @@ export class UploadDocumentComponent implements OnInit {
       this.opswatId.push(uploadedAndId.id as string);
     }
     this.documentUploaded = uploadedAndId.status;
-    this.uploadDocumentsForm.updateValueAndValidity({emitEvent: true});
+    this.uploadDocumentsForm.updateValueAndValidity({ emitEvent: true });
   }
 
   public removeFile(opsId: string): void {
@@ -151,16 +149,27 @@ export class UploadDocumentComponent implements OnInit {
     }).pipe(
       tap((res) => {
         if (res?.processId) {
+
           this.getUploadFile(res.processId);
         } else {
           this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');
         }
       }),
-      withLatestFrom(this.dialogs.open(content, {
-        closeable: false,
-        size: 'm',
-      })),
-      delay(2000),
+      switchMap(() => {
+        return this.dialogs.open(content, {
+          closeable: false,
+          size: 'm',
+        }).pipe(
+          delay(this.time),
+        );
+      }),
+      // withLatestFrom(this.dialogs.open(content, {
+      //   closeable: false,
+      //   size: 'm',
+      // }).pipe(
+      //   delay(this.time),
+      //   ),
+      // ),
       takeUntil(this.destroy$),
     ).subscribe();
   }
@@ -185,9 +194,11 @@ export class UploadDocumentComponent implements OnInit {
     if (response.status !== null) {
       switch (response.status) {
         case 'loading':
+          this.time = 2000;
           break;
-        case 'error_loading':
+        // case 'error_loading':
         case 'loaded_with_errors': {
+          this.time = 0;
           this.sub.unsubscribe();
           this.alertsService.showErrorNotificationIcon('יש בעיה בקובץ הקובץ מעובר לטיפול מנהל תיק\n' +
             'יצרו איתך תוך 24 שעות');
@@ -195,7 +206,9 @@ export class UploadDocumentComponent implements OnInit {
           this.router.navigate([loginAfterRegistrationLink]);
           break;
         }
+        case 'error_loading':
         case 'can_be_processed': {
+          this.time = 0;
           setTimeout(() => {
             this.sub.unsubscribe();
               this.currentStorageData.files = this.uploadDocumentsForm.value.files as FileWithLoading[];

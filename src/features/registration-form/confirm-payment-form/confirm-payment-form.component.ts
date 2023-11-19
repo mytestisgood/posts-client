@@ -1,5 +1,5 @@
 import {CommonModule, DatePipe} from '@angular/common';
-import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AccountFormDialogComponent} from '@shared/dialog';
@@ -9,7 +9,7 @@ import {
   confirmPaymentFormMapper,
   FileUploadStatusAndId,
   FileWithLoading, IS_LOGGED_IN,
-  REGISTRATION_DATA, registrationSetPasswordLink,
+  REGISTRATION_DATA, registrationConfirmPaymentLink, registrationSetPasswordLink,
   registrationVerifyCodeLink, TOKEN,
 } from '@shared/entities';
 import {AlertsService, DestroyService} from '@shared/services';
@@ -17,7 +17,7 @@ import {ButtonComponent, InputDateComponent, InputFileComponent} from '@shared/u
 import {SessionStorageService} from '@shared/web-api';
 import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
 import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
-import {catchError, debounceTime, forkJoin, of, takeUntil, tap} from 'rxjs';
+import {catchError, debounceTime, forkJoin, interval, map, of, takeUntil, takeWhile, tap, timer} from 'rxjs';
 import {ProgressBarComponent} from '../../progress-bar/progress-bar.component';
 import {ProcessesService} from "@shared/api/services";
 import {CreateEmployerOutResponse, ProcessesUpdateBody} from "@shared/api/models";
@@ -41,6 +41,7 @@ export class ConfirmPaymentFormComponent implements OnInit {
   public isDirectPayment: boolean = false;
   public readonly currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
+  public isDisabled: boolean = false;
 
   public processesUpdateBody: ProcessesUpdateBody = {};
   public updateProcessDate$ = this.processesService.apiProcessesUpdatePost(this.processesUpdateBody);
@@ -59,6 +60,7 @@ export class ConfirmPaymentFormComponent implements OnInit {
     public datePipe: DatePipe,
   ) {
     this.isDirectPayment = this.currentStorageData.transferMoneyMode !== 'smarti';
+    this.isDisabled = this.isDirectPayment;
   }
 
   public ngOnInit(): void {
@@ -71,6 +73,7 @@ export class ConfirmPaymentFormComponent implements OnInit {
     }
   }
 
+
   public fileUploaded(uploadedAndId: FileUploadStatusAndId): void {
     if (uploadedAndId.status && this.confirmPaymentForm.controls.files.value) {
       this.opswatId.push(uploadedAndId.id as string);
@@ -79,10 +82,23 @@ export class ConfirmPaymentFormComponent implements OnInit {
   }
 
   public openDialogAccountForm(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.dialogs.open(content, {
+    const dialogRef = this.dialogs.open(content, {
       closeable: false,
       size: 'l',
     }).pipe(takeUntil(this.destroy$)).subscribe();
+    interval(100).pipe(
+      map(() => {
+          if (dialogRef.closed) {
+            this.isDisabled = false;
+          }
+        },
+      ),
+      takeWhile(() => this.isDisabled),
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      // Perform actions when the dialog is open
+    });
+
   }
 
   public navigateToVerifyCode(): void {

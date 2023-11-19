@@ -1,21 +1,21 @@
-import {CommonModule} from '@angular/common';
-import {AfterViewInit, ChangeDetectionStrategy, Component, Inject} from '@angular/core';
-import {Router} from '@angular/router';
-import {AsideProcessDialogComponent} from '@shared/dialog';
+import { CommonModule } from '@angular/common';
+import {AfterViewInit, ChangeDetectionStrategy, Component, Inject, Input, ViewChild} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
+import { AsideProcessDialogComponent } from '@shared/dialog';
 import {
-  AllRegistrationSessionData, REGISTRATION_DATA,
+  AllRegistrationSessionData, loginAfterRegistrationLink, REGISTRATION_DATA,
   registrationConfirmPaymentLink,
   registrationTransferMoneyLink,
 } from '@shared/entities';
-import {toBlobAndSaveFile} from '@shared/helpers';
+import { toBlobAndSaveFile } from '@shared/helpers';
 import {AlertsService, DestroyService} from '@shared/services';
-import {ButtonComponent} from '@shared/ui';
-import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
-import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
-import {catchError, debounceTime, delay, map, of, switchMap, take, takeUntil, tap, timer, withLatestFrom} from 'rxjs';
-import {DownloadPaymentsInstructionResponse, FileDataExtResponse} from '@shared/api/models';
-import {ProcessesService} from '@shared/api/services';
-import {SessionStorageService} from '@shared/web-api';
+import { ButtonComponent } from '@shared/ui';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import {catchError, delay, of, takeUntil, tap, withLatestFrom} from 'rxjs';
+import { DownloadPaymentsInstructionResponse, FileDataExtResponse } from '@shared/api/models';
+import { ProcessesService } from '@shared/api/services';
+import { SessionStorageService } from '@shared/web-api';
 
 @Component({
   selector: 'smarti-payment-instruction-form',
@@ -25,10 +25,10 @@ import {SessionStorageService} from '@shared/web-api';
   styleUrls: ['./payment-instruction-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PaymentInstructionFormComponent implements AfterViewInit {
-  public isDisabled: boolean = true;
-  public observer!: { complete: () => void };
-  private isNeedToNavigateAfterClose: boolean = false;
+
+export class PaymentInstructionFormComponent  {
+  public isDisabled:boolean = true;
+  // private isNeedToNavigateAfterClose: boolean = false;
   private readonly currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
@@ -43,16 +43,16 @@ export class PaymentInstructionFormComponent implements AfterViewInit {
 
   }
 
-  public ngAfterViewInit(): void {
-    this.dialogs.pipe(
-      takeUntil(this.destroy$),
-    ).subscribe(dialogs => {
-      if (this.isNeedToNavigateAfterClose && !dialogs.length) {
-        this.isNeedToNavigateAfterClose = false;
-        this.router.navigate([registrationConfirmPaymentLink]);
-      }
-    });
-  }
+  // public ngAfterViewInit(): void {
+  //   this.dialogs.pipe(
+  //     takeUntil(this.destroy$),
+  //   ).subscribe(dialogs => {
+  //     if (this.isNeedToNavigateAfterClose && !dialogs.length) {
+  //       this.isNeedToNavigateAfterClose = false;
+  //       this.router.navigate([registrationConfirmPaymentLink]);
+  //     }
+  //   });
+  // }
 
   public openDialogForAsideProcess(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogs.open(content, {
@@ -99,14 +99,15 @@ export class PaymentInstructionFormComponent implements AfterViewInit {
   }
 
   public navigateToConfirmPayment(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.isNeedToNavigateAfterClose = true;
-    this.dialogs.open(content, {
+    // this.isNeedToNavigateAfterClose = true;
+    const dialogRef = this.dialogs.open(content, {
       closeable: false,
       size: 'm',
-    }).pipe(
-      switchMap(() => timer(5000).pipe(take(1)))
-    ).subscribe(() => {
-    });
+    }).pipe(takeUntil(this.destroy$)).subscribe();
+    setTimeout(() => {
+      dialogRef.closed = true;
+      this.router.navigate([registrationConfirmPaymentLink]);
+    }, 3000);
   }
 
   public navigateToTransferMoney(): void {
