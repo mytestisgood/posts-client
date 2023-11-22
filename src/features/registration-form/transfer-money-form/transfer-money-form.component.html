@@ -16,10 +16,7 @@
       <div class="paragraph-text neutrals-text-950 self-center dir-rtl">סה״כ סכום לתשלום לקופות:</div>
     </div>
     <div class="flex gap-2">
-      <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl">
-
-
-      </div>
+      <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl"></div>
       <div class="paragraph-text neutrals-text-950 self-center dir-rtl">מספר העובדים:</div>
     </div>
   </div>
@@ -58,7 +55,10 @@
   #asideProcessDialogTemplate
   let-observer
 >
-  <smarti-aside-process-dialog [observer]="observer"></smarti-aside-process-dialog>
+  <smarti-aside-process-dialog
+    [step]="'transfer_money'"
+    [observer]="observer"
+  ></smarti-aside-process-dialog>
 </ng-template>
 
 <ng-template

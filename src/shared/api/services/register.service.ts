@@ -7,9 +7,10 @@ import {
   EmployersCreateEmployerOutBody,
   EmployersCreatePaymentOutBody,
   RegisterParameters,
-  RegisterResponse,
+  RegisterResponse, SendEmailUserContinueProcessParameters, SendEmailUserContinueProcessResponse,
   SuccessResponse,
 } from '../models';
+import {AllRegistrationSessionData, UserProcessDataByStepResponse} from "@shared/entities";
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +35,13 @@ export class RegisterService {
 
   public apiRegisterPost(data: RegisterParameters): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${environment.authUrl}/api/register`, data)
+  }
+
+  public sendEmailUserContinueProcess(data: SendEmailUserContinueProcessParameters): Observable<SendEmailUserContinueProcessResponse> {
+    return this.http.post<SendEmailUserContinueProcessResponse>(`${environment.authUrl}/api/users/sendEmailUserContinueProcess`, data)
+  }
+
+  public getUserProcessDataByStep(): Observable<UserProcessDataByStepResponse> {
+    return this.http.get<UserProcessDataByStepResponse>(`${environment.authUrl}/api/users/getUserProcessDataByStep`)
   }
 }

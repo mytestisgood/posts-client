@@ -1,11 +1,13 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { DestroyService } from '@shared/services';
-import { ButtonComponent, InputFieldComponent } from '@shared/ui';
-import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import { takeUntil } from 'rxjs';
+import {CommonModule} from '@angular/common';
+import {ChangeDetectionStrategy, Component, Inject, Input} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {AlertsService, DestroyService} from '@shared/services';
+import {ButtonComponent, InputFieldComponent} from '@shared/ui';
+import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
+import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
+import {catchError, map, of, takeUntil, withLatestFrom} from 'rxjs';
+import {RegisterService} from "@shared/api/services";
+import {loginAfterRegistrationLink} from "@shared/entities";
 
 @Component({
   selector: 'smarti-aside-process-dialog',
@@ -17,11 +19,15 @@ import { takeUntil } from 'rxjs';
 })
 export class AsideProcessDialogComponent {
   @Input() public observer!: { complete: () => void };
-  public email!: FormControl<string | null>;
+  @Input() public step!: string;
+  public email: FormControl<string | null> = new FormControl('');
+
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
     private readonly destroy$: DestroyService,
+    private readonly alertsService: AlertsService,
+    private readonly registerService: RegisterService,
   ) {
   }
 
@@ -30,11 +36,23 @@ export class AsideProcessDialogComponent {
   }
 
   public sendRequest(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.observer.complete();
-    this.dialogs.open(content, {
-      closeable: false,
-      size: 'm',
-    }).pipe(takeUntil(this.destroy$)).subscribe();
+    this.registerService.sendEmailUserContinueProcess({step: this.step, email: this.email.value}).pipe(
+      map((res) => {
+        if (res.message === 'ok') {
+          this.observer.complete();
+          this.dialogs.open(content, {
+            closeable: false,
+            size: 'm',
+          });
+        }
+      }),
+      catchError((err) => {
+        this.alertsService.showErrorNotificationIcon('שגיאה');
+        return of(err);
+      }),
+      takeUntil(this.destroy$),
+    ).subscribe()
+    ;
   }
 
   public closeSecondDialog(observer: { complete: () => void }): void {

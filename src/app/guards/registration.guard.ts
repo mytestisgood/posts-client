@@ -24,21 +24,22 @@ export class RegistrationGuard {
   }
 
   public canActivate(route: ActivatedRouteSnapshot): boolean {
-    return this.checkDataToOpenLink(route.routeConfig?.path as string);
+    return this.checkDataToOpenLink(route.routeConfig?.path as string, route.queryParams);
   }
 
-  private checkDataToOpenLink(route: string): boolean {
+  private checkDataToOpenLink(route: string, queryParams: any): boolean {
     const currentRoute: string = '/registration/' + route;
+    const isContinue = queryParams.isContinue;
 
     this.currentStorageData = JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
-    if (currentRoute === registrationSetPasswordLink && this.currentStorageData?.finishInfoPage) {
+    if (currentRoute === registrationSetPasswordLink && this.currentStorageData?.finishInfoPage || isContinue) {
       return true;
-    } else if (currentRoute === registrationUploadFileLink && this.currentStorageData?.finishPasswordPage) {
+    } else if (currentRoute === registrationUploadFileLink && this.currentStorageData?.finishPasswordPage || isContinue) {
       return true;
-    } else if (currentRoute === registrationTransferMoneyLink && this.currentStorageData?.finishFilesPage) {
+    } else if (currentRoute === registrationTransferMoneyLink && this.currentStorageData?.finishFilesPage || isContinue) {
       return true;
-    } else if (currentRoute === registrationPaymentInstructionLink) {
+    } else if (currentRoute === registrationPaymentInstructionLink || isContinue) {
       if (this.currentStorageData?.transferMoneyMode === 'directly' ?? false) {
         return true;
       }

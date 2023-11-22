@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { FileWithLoading } from './common.models';
+import {FileWithLoading, IS_LOGGED_IN} from './common.models';
 
 export const registrationInfoLink: string = '/registration/info';
 export const registrationSetPasswordLink: string = '/registration/set-password';
@@ -88,3 +88,18 @@ export interface AccountFormValue {
   branchNumber: string;
   codeNumber: string;
 }
+ export interface UserProcessDataByStepResponse{
+   data?: UserProcessSessionData,
+   message?: string
+   token?: string
+
+ }
+
+export interface UserProcessSessionData{
+  registrationData?: AllRegistrationSessionData,
+  isLoggedIn?: string
+  specialHeaderToken?: string
+
+}
+
+

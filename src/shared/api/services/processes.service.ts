@@ -92,7 +92,10 @@ export class ProcessesService {
   }
 
   public apiProcessesProcessIdUploadsRefPost(processId: string, data: ProcessIdUploadsRefBody): Observable<SuccessResponse> {
-    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/${processId}/uploadsRef`, data);
+    const formData = new FormData();
+      formData.append('opswatIds', JSON.stringify(data.opswatIds!));
+    formData.append('department_id', data.department_id!);
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/${processId}/uploadsRef`, formData);
   }
 
   public apiProcessesProcessesIdAuthorizationReceiptCertificatePost(processesId: string, data: ProcessesIdAuthorizationReceiptCertificateBody): Observable<ProcessesIdAuthorizationReceiptCertificateResponse> {

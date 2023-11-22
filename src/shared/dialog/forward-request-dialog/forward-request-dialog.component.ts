@@ -7,7 +7,7 @@ import {AlertsService, DestroyService} from '@shared/services';
 import {ButtonComponent, InputFieldComponent, InputNumberComponent} from '@shared/ui';
 import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
 import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
-import {BehaviorSubject, takeUntil, tap, withLatestFrom, concatMap, map, of,switchMap} from 'rxjs';
+import {BehaviorSubject, takeUntil, tap, withLatestFrom, concatMap, map, of, switchMap, catchError} from 'rxjs';
 import {SessionStorageService} from "@shared/web-api";
 import {Router} from "@angular/router";
 
@@ -70,16 +70,29 @@ export class ForwardRequestDialogComponent {
       departmentId: this.departmentId,
     }).pipe(
       map((res) => {
+        if (res.code === 200) {
           this.observer.complete();
           this.sessionStorageService.clear();
           this.router.navigate([loginAfterRegistrationLink]);
+        }
       }),
       withLatestFrom(this.dialogs.open(content, {
         closeable: false,
         size: 'm',
       })),
+      catchError((err) => {
+        const MESSAGE_ERROR = 'user exist';
+        if ((err.error !== undefined && err.error.message === MESSAGE_ERROR) || err.message === MESSAGE_ERROR) {
+          this.alertsService.showErrorNotificationIcon('משתמש קיים');
+        }
+        else {
+          this.alertsService.showErrorNotificationIcon('שגיאה');
+        }
+        return of(err);
+      }),
       takeUntil(this.destroy$),
-    ).subscribe();
+    ).subscribe()
+    ;
   }
 
   public closeSecondDialog(observer: { complete: () => void }): void {

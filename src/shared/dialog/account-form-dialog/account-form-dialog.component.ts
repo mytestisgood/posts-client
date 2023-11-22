@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, Input, OnInit} from '@angular/core';
 import {FormControl, FormControlStatus, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {
   AccountControls,
@@ -13,7 +13,9 @@ import {SessionStorageService} from '@shared/web-api';
 import {map, Observable, of, switchMap, takeUntil, tap} from 'rxjs';
 import {BankService, RegisterService} from '@shared/api/services';
 import {BankBranches, BanksGetResponse, ChatResponse, IdAndNameResponse} from '@shared/api/models';
-
+import {POLYMORPHEUS_CONTEXT} from "@tinkoff/ng-polymorpheus";
+import {TuiDialogService} from "@taiga-ui/core";
+import {TUI_DIALOGS} from "@taiga-ui/cdk";
 
 @Component({
   selector: 'smarti-account-form-dialog',
@@ -22,6 +24,7 @@ import {BankBranches, BanksGetResponse, ChatResponse, IdAndNameResponse} from '@
   templateUrl: './account-form-dialog.component.html',
   styleUrls: ['./account-form-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TuiDialogService, { provide: TUI_DIALOGS, useExisting: TuiDialogService }],
 })
 export class AccountFormDialogComponent implements OnInit {
   @Input() public observer!: { complete: () => void };
@@ -36,6 +39,7 @@ export class AccountFormDialogComponent implements OnInit {
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
   constructor(
+    @Inject(POLYMORPHEUS_CONTEXT) private readonly configContext: any,
     private readonly destroy$: DestroyService,
     private readonly sessionStorageService: SessionStorageService,
     private readonly bankService: BankService,
@@ -101,6 +105,7 @@ export class AccountFormDialogComponent implements OnInit {
   }
 
   public sendRequest(): void {
+    // this.configContext.completeWith('j');
     this.currentStorageData.bankName = this.accountForm.value.bankName as string;
     this.currentStorageData.accountNumber = this.accountForm.value.accountNumber as string;
     this.currentStorageData.branchNumber = this.accountForm.value.branchNumber as string;

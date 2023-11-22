@@ -10,6 +10,7 @@ export class SessionStorageService implements Storage {
   constructor(
     @Inject(SESSION_STORAGE) private readonly sessionStorage: Storage,
     @Inject(WINDOW) private readonly windowRef: Window,
+
   ) {}
 
   public get length(): number {

@@ -148,7 +148,6 @@ export class UploadDocumentComponent implements OnInit {
     }).pipe(
       tap((res) => {
         if (res?.processId) {
-
           this.getUploadFile(res.processId);
         } else {
           this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');

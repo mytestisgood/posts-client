@@ -10,7 +10,7 @@ import {
 import {FormControl, FormControlStatus, ReactiveFormsModule} from '@angular/forms';
 import {StatusGetParameters, UploadPostResponse} from '@shared/api/models';
 import {FilesMyHrService} from '@shared/api/services';
-import {FileUploadStatusAndId, FileWithLoading} from '@shared/entities';
+import {FileUploadStatusAndId, FileWithLoading, loginAfterRegistrationLink} from '@shared/entities';
 import {takeRight} from '@shared/helpers';
 import {AlertsService, DestroyService} from '@shared/services';
 import {TuiLinkModule, TuiLoaderModule, TuiSvgModule} from '@taiga-ui/core';
@@ -64,7 +64,7 @@ export class InputFileComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    // this.control = new FormControl([]);
+    console.log(this.control.value)
     this.fileStatusChanges();
   }
 
@@ -88,6 +88,7 @@ export class InputFileComponent implements OnInit {
   private fileStatusChanges(): void {
     this.control.statusChanges.pipe(
       switchMap((value: FormControlStatus) => {
+        console.log(1)
         this.status = value;
         if (this.control.value) {
           if (this.control.value?.length > this.currentFilesIndex) {
