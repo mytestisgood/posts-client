@@ -10,10 +10,10 @@ import {
   registrationInfoLink,
   registrationUploadFileLink,
 } from '@shared/entities';
-import { DestroyService } from '@shared/services';
+import {AlertsService, DestroyService} from '@shared/services';
 import { ButtonComponent, InputPasswordComponent } from '@shared/ui';
 import { SessionStorageService } from '@shared/web-api';
-import { Observable, takeUntil, tap } from 'rxjs';
+import {catchError, EMPTY, Observable, takeUntil, tap} from 'rxjs';
 
 @Component({
   selector: 'smarti-set-up-password-form',
@@ -39,6 +39,7 @@ export class SetUpPasswordFormComponent implements OnInit {
     private readonly destroy$: DestroyService,
     private readonly registerService: RegisterService,
     private readonly sessionStorageService: SessionStorageService,
+    private readonly alertsService: AlertsService,
   ) {
   }
 
@@ -72,6 +73,21 @@ export class SetUpPasswordFormComponent implements OnInit {
         this.currentStorageData.password = this.passwordControl.value as string;
         this.currentStorageData.finishPasswordPage = true;
         this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
+      }),
+      catchError((err) => {
+        if (err.error.message === 'User already exists!') {
+          this.alertsService.showErrorNotificationIcon('המשתמש שהוזן כבר קיים');
+        } else if (err.error.message === 'Password selected') {
+          this.alertsService.showErrorNotificationIcon('סיסמה זו נבחרה בעבר');
+        } else if (err.error.message === 'No User Found') {
+          this.alertsService.showErrorNotificationIcon('המעסיק שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
+        } else if (err.error.message === 'Password expired') {
+          this.alertsService.showErrorNotificationIcon('תוקף הסיסמה פג');
+        }
+        else {
+          this.alertsService.showErrorNotificationIcon('שגיאה');
+        }
+        return EMPTY;
       }),
       takeUntil(this.destroy$),
     ).subscribe(() => this.router.navigate([registrationUploadFileLink]));

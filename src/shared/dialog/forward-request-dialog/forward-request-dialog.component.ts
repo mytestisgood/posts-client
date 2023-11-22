@@ -7,7 +7,7 @@ import {AlertsService, DestroyService} from '@shared/services';
 import {ButtonComponent, InputFieldComponent, InputNumberComponent} from '@shared/ui';
 import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
 import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
-import {BehaviorSubject, takeUntil, tap, withLatestFrom, concatMap, map, of,switchMap} from 'rxjs';
+import {BehaviorSubject, takeUntil, tap, withLatestFrom, concatMap, map, of, switchMap, catchError, EMPTY} from 'rxjs';
 import {SessionStorageService} from "@shared/web-api";
 import {Router} from "@angular/router";
 
@@ -73,6 +73,14 @@ export class ForwardRequestDialogComponent {
           this.observer.complete();
           this.sessionStorageService.clear();
           this.router.navigate([loginAfterRegistrationLink]);
+      }),
+      catchError((err) => {
+        if (err.error.message === 'user exist') {
+          this.alertsService.showErrorNotificationIcon('המשתמש שהוזן כבר קיים');
+        } else {
+          this.alertsService.showErrorNotificationIcon('שגיאה');
+        }
+        return EMPTY;
       }),
       withLatestFrom(this.dialogs.open(content, {
         closeable: false,
