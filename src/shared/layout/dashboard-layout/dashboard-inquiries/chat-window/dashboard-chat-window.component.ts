@@ -90,7 +90,7 @@ export class DashboardChatWindowComponent {
     const file: File = input.files[0];
 
     this.isFileUploaded = false;
-    this.filesMyHrService.apiUploadPost({ file }).pipe(
+    this.filesMyHrService.apiUploadPost({file}).pipe(
       takeUntil(this.destroy$),
     ).subscribe((response: UploadPostResponse) => {
       this.isFileUploaded = true;

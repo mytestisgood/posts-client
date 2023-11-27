@@ -53,11 +53,12 @@
         "src/shared/api/web-api"
       ]
     },
+    "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,

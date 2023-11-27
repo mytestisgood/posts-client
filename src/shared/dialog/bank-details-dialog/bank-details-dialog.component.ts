@@ -18,7 +18,7 @@ import { SessionStorageService } from '@shared/web-api';
   styleUrls: ['./bank-details-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BankDetailsDialogComponent implements AfterViewInit {
+export class BankDetailsDialogComponent  {
   @Input() public observer!: { complete: () => void };
   @Input() public bankDetailsSmarti!: BankDetails | undefined;
   public readonly currentStorageData: AllRegistrationSessionData =
@@ -33,14 +33,6 @@ export class BankDetailsDialogComponent implements AfterViewInit {
   ) {
   }
 
-  public ngAfterViewInit(): void {
-    this.dialogs.subscribe(dialog => {
-      if (this.isNeedToNavigateAfterClose && !dialog.length) {
-        this.isNeedToNavigateAfterClose = false;
-        this.router.navigate([registrationConfirmPaymentLink]);
-      }
-    });
-  }
 
   public closeDialog(): void {
     this.observer.complete();
@@ -49,10 +41,14 @@ export class BankDetailsDialogComponent implements AfterViewInit {
   public sendRequest(content: PolymorpheusContent<TuiDialogContext>): void {
     this.observer.complete();
     this.isNeedToNavigateAfterClose = true;
-    this.dialogs.open(content, {
+    const dialogRef = this.dialogs.open(content, {
       closeable: false,
       size: 'm',
     }).pipe(takeUntil(this.destroy$)).subscribe();
+    setTimeout(() => {
+      dialogRef.closed = true;
+      this.router.navigate([registrationConfirmPaymentLink]);
+    }, 3000);
   }
 
   public closeSecondDialog(observer: { complete: () => void }): void {

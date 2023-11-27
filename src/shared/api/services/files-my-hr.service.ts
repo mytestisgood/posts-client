@@ -4,6 +4,7 @@ import { environment } from '@environment';
 import { Observable } from 'rxjs';
 import { createObjectHttpParams } from '../../helpers/http.helper';
 import { StatusGetParameters, StatusGetResponse, UploadPostResponse } from '../models';
+import {FileWithLoading} from "@shared/entities";
 
 @Injectable({
   providedIn: 'root',

@@ -24,9 +24,7 @@
         <div class="neutrals-text-950 regular-text dir-rtl self-center w-[120px]">שם הבנק:</div>
       </div>
       <div class="flex flex-row">
-        <div class="neutrals-text-950 medium-text !leading-10 dir-rtl w-[160px]">
-          {{ currentStorageData.companyName }}
-        </div>
+        <div class="neutrals-text-950 medium-text !leading-10 dir-rtl w-[160px]">smarti</div>
         <div class="neutrals-text-950 regular-text dir-rtl self-center w-[120px]">שם החברה:</div>
       </div>
     </div>
@@ -60,16 +58,9 @@
   (click)="closeDialog()"
 ></div>
 
-<ng-template
-  #successDialogTemplate
-  let-observer
->
+<ng-template #successDialogTemplate>
   <div class="flex flex-col gap-6 mt-6 mb-6">
     <div class="success-notification-icon-114 self-center"></div>
     <h3 class="medium neutrals-text-950 mt-0 mb-0 self-center text-center w-[285px]">הנך מועבר לדף הבית</h3>
   </div>
-  <div
-    class="close-cross-24 close-dialog-left cursor-pointer"
-    (click)="closeSecondDialog(observer)"
-  ></div>
 </ng-template>

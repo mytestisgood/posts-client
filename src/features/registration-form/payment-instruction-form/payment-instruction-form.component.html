@@ -25,6 +25,7 @@
   </div>
   <div class="flex justify-center mb-16 mt-[200px]">
     <smarti-button
+      [disabled]="isDisabled"
       [customWidth]="'211px'"
       [customHeight]="'56px'"
       [typeClass]="'confirm'"
@@ -44,21 +45,24 @@
 
 <ng-template
   #successUploadTemplate
-  let-observer
 >
   <div class="flex flex-col gap-6 mt-6 mb-6">
     <div class="success-notification-icon-114 self-center"></div>
     <h3 class="medium neutrals-text-950 mt-0 mb-0 self-center text-center w-[285px]">הנך מועבר לדף הבית</h3>
   </div>
-  <div
-    class="close-cross-24 close-dialog-left cursor-pointer"
-    (click)="closeDialog(observer)"
-  ></div>
 </ng-template>
+<!--  <div-->
+<!--    class="close-cross-24 close-dialog-left cursor-pointer"-->
+<!--    (click)="closeDialog(observer)"-->
+<!--  ></div>-->
+
 
 <ng-template
   #asideProcessDialogTemplate
   let-observer
 >
-  <smarti-aside-process-dialog [observer]="observer"></smarti-aside-process-dialog>
+  <smarti-aside-process-dialog
+    [step]="'payment_instruction'"
+    [observer]="observer"
+  ></smarti-aside-process-dialog>
 </ng-template>

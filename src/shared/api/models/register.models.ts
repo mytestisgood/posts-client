@@ -41,3 +41,11 @@ export interface RegisterResponse {
   message?: string;
   token?: string;
 }
+
+export interface SendEmailUserContinueProcessParameters {
+  step?: string;
+  email: string | null;
+}
+export interface SendEmailUserContinueProcessResponse {
+  message?: string;
+}

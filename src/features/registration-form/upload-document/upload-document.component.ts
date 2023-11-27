@@ -3,8 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Inject,
-  OnInit,
+  Inject, OnDestroy, OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -68,8 +67,8 @@ export class UploadDocumentComponent implements OnInit {
   public identifier: string = this.currentStorageData?.identifier as string;
   public departmentId: number = Number(this.currentStorageData.departmentId);
   public inter = interval(5000);
+  public currentFilesArray: FileWithLoading[] = [];
   public sub = new Subscription;
-  public process_details: ProcessDetails = {};
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
@@ -85,12 +84,20 @@ export class UploadDocumentComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    if (this.currentStorageData.files?.length) {
-      this.uploadDocumentsForm.setValue({
-        files: this.currentStorageData.files,
-      });
-      this.uploadDocumentsForm.updateValueAndValidity({ emitEvent: true });
-    }
+    setTimeout(() => {
+      if (this.currentStorageData.files?.length) {
+        // this.currentStorageData.files?.forEach(item => {
+        //   const file = new File([], item.name,
+        //     {type: item?.type});
+        //   this.fileIncrease(file as FileWithLoading);
+        // });
+        this.uploadDocumentsForm.setValue({
+          files: this.currentStorageData.files,
+        });
+        // this.documentUploaded = true;
+        // this.uploadDocumentsForm.updateValueAndValidity({emitEvent: true});
+      }
+    }, 100);
   }
 
   public openForwardModal(content: PolymorpheusContent<TuiDialogContext>): void {
@@ -111,12 +118,6 @@ export class UploadDocumentComponent implements OnInit {
   public removeFile(opsId: string): void {
     this.opswatId = this.opswatId.filter(id => id !== opsId);
   }
-
-  // public requestSend(): void {
-  //   // this.sessionStorageService.clear();
-  //   // this.router.navigate(['/']);
-  //   this.router.navigate([loginAfterRegistrationLink]);
-  // }
 
   public navigateToRegistrationInfo(): void {
     this.router.navigate([registrationSetPasswordLink]);
@@ -149,7 +150,6 @@ export class UploadDocumentComponent implements OnInit {
     }).pipe(
       tap((res) => {
         if (res?.processId) {
-
           this.getUploadFile(res.processId);
         } else {
           this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');
@@ -183,9 +183,8 @@ export class UploadDocumentComponent implements OnInit {
     });
   }
   public set_process(response: ProcessDetails): void {
-    this.process_details = response;
-    if (this.process_details.status !== null) {
-      switch (this.process_details.status) {
+    if (response.status !== null) {
+      switch (response.status) {
         case 'loading':
           break;
         case 'error_loading':
@@ -202,7 +201,18 @@ export class UploadDocumentComponent implements OnInit {
           this.dialogRef.complete();
           setTimeout(() => {
             this.sub.unsubscribe();
-              this.currentStorageData.files = this.uploadDocumentsForm.value.files as FileWithLoading[];
+            this.currentStorageData.files = [];
+            this.uploadDocumentsForm.value.files?.forEach(file1 => {
+              this.currentStorageData.files?.push(<FileWithLoading>{
+                name: file1.name,
+                type: file1.type,
+                size: file1.size,
+                isLoading: file1?.isLoading,
+                isUploaded: file1?.isUploaded,
+                index: file1?.index,
+                opsId: file1?.opsId,
+              });
+            });
               this.currentStorageData.finishFilesPage = true;
               this.currentStorageData.processId = response.id;
               this.currentStorageData.total = response.total;
@@ -213,6 +223,16 @@ export class UploadDocumentComponent implements OnInit {
           break;
         }
       }
+    }
+  }
+
+  private fileIncrease(file: FileWithLoading): void {
+    this.currentFilesArray.push(file);
+    const index: number = this.currentFilesArray.length - 1;
+    if (!this.currentFilesArray[index].isUploaded) {
+      this.currentFilesArray[index].isLoading = true;
+      this.currentFilesArray[index].isUploaded = true;
+      this.currentFilesArray[index].index = index;
     }
   }
 }

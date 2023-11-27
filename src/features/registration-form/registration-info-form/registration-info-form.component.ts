@@ -1,6 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControlStatus,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateEmployerOutResponse } from '@shared/api/models';
 import { RegisterService, SignInService } from '@shared/api/services';
@@ -20,7 +24,7 @@ import {
   InputNumberComponent,
 } from '@shared/ui';
 import { SessionStorageService } from '@shared/web-api';
-import {catchError, debounceTime, EMPTY, Observable, of, takeUntil, tap} from 'rxjs';
+import { catchError, debounceTime, EMPTY, Observable, of, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'smarti-registration-info-form',
@@ -77,7 +81,6 @@ export class RegistrationInfoFormComponent implements OnInit {
       this.isDisabled = !(isValid === 'VALID'),
     );
   }
-
   public navigateToUploadFile(): void {
     if (!this.currentStorageData) {
       this.registerService.apiEmployersCreateEmployerOutPost({

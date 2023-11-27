@@ -4,30 +4,8 @@
     class="mt-20 flex flex-col gap-[30px]"
     [formGroup]="accountForm"
   >
-    <smarti-select
-      [placeholder]="'בנק*'"
-      [customWidth]="'616px'"
-      [isComboBoxMode]="true"
-      [comboBoxOptions]="banks"
-      [control]="accountForm.controls.bankName"
-    ></smarti-select>
-<!--    <smarti-input-field-->
-<!--      [customWidth]="'616px'"-->
-<!--      [placeholder]="'מספר חשבון*'"-->
-<!--      [control]="accountForm.controls.accountNumber"-->
-<!--    ></smarti-input-field>-->
-    <smarti-select
-      [customWidth]="'616px'"
-      [placeholder]="'סניף*'"
-      [isComboBoxMode]="true"
-      [comboBoxOptions]="bank_branches"
-      [control]="accountForm.controls.branchNumber"
-    ></smarti-select>
-    <smarti-input-field
-      [customWidth]="'616px'"
-      [placeholder]="'מספר חשבון*'"
-      [control]="accountForm.controls.accountNumber"
-    ></smarti-input-field>
+
+
   </div>
 <!--  <div class="row pb-4" *ngIf="new_agent.payment_type=== 'masav'">-->
 <!--    <div class="col-6" >-->

@@ -4,13 +4,13 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component, EventEmitter,
-  Input, OnInit,
+  Input, OnChanges, OnInit,
   Output,
 } from '@angular/core';
 import {FormControl, FormControlStatus, ReactiveFormsModule} from '@angular/forms';
 import {StatusGetParameters, UploadPostResponse} from '@shared/api/models';
 import {FilesMyHrService} from '@shared/api/services';
-import {FileUploadStatusAndId, FileWithLoading} from '@shared/entities';
+import {FileUploadStatusAndId, FileWithLoading, loginAfterRegistrationLink} from '@shared/entities';
 import {takeRight} from '@shared/helpers';
 import {AlertsService, DestroyService} from '@shared/services';
 import {TuiLinkModule, TuiLoaderModule, TuiSvgModule} from '@taiga-ui/core';
@@ -42,7 +42,8 @@ import {
   styleUrls: ['./input-file.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputFileComponent implements OnInit {
+export class InputFileComponent implements OnInit
+{
   @Input() public customWidth!: string;
   @Input() public customHeight!: string;
   @Input() public control: FormControl<FileWithLoading[] | null> = new FormControl([]);
@@ -64,7 +65,6 @@ export class InputFileComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    // this.control = new FormControl([]);
     this.fileStatusChanges();
   }
 
@@ -78,6 +78,10 @@ export class InputFileComponent implements OnInit {
     // }
   }
 
+  // public ngOnChanges(): void {
+  //   this.fileStatusChanges();
+  // }
+
   public uploadSecondFile(file: HTMLInputElement): void {
     const files: FileWithLoading[] = Array.from(file.files as FileList) as FileWithLoading[];
 
@@ -86,6 +90,7 @@ export class InputFileComponent implements OnInit {
   }
 
   private fileStatusChanges(): void {
+
     this.control.statusChanges.pipe(
       switchMap((value: FormControlStatus) => {
         this.status = value;
@@ -162,7 +167,6 @@ export class InputFileComponent implements OnInit {
     this.currentFilesIndex++;
     this.currentFilesArray.push(file);
     const index: number = this.currentFilesArray.length - 1;
-
     this.isSecondFileUpload = true;
     if (!this.currentFilesArray[index].isUploaded) {
       this.currentFilesArray[index].isLoading = true;
