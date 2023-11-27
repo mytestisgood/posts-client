@@ -44,7 +44,6 @@ export class ConfirmPaymentFormComponent implements OnInit {
   public isDisabled: boolean = false;
 
   public processesUpdateBody: ProcessesUpdateBody = {};
-  public updateProcessDate$ = this.processesService.apiProcessesUpdatePost(this.processesUpdateBody);
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
     private readonly router: Router,
@@ -101,12 +100,13 @@ export class ConfirmPaymentFormComponent implements OnInit {
     this.processesUpdateBody.type = 'date';
     this.processesUpdateBody.processId = this.currentStorageData.processId;
     this.processesUpdateBody.params = this.confirmPaymentForm.controls.date.value;
+    const updateProcessDate$ = this.processesService.apiProcessesUpdatePost(this.processesUpdateBody);
     const uploadsRef$ = this.processesService.apiProcessesProcessIdUploadsRefPost(this.currentStorageData.processId!, {
       opswatIds: this.opswatId,
       department_id: this.currentStorageData.departmentId,
     });
 
-    forkJoin([this.updateProcessDate$, uploadsRef$]).pipe(
+    forkJoin([updateProcessDate$, uploadsRef$]).pipe(
       tap((response) => {
         if (response) {
           this.currentStorageData.paymentFiles = this.confirmPaymentForm.value.files as FileWithLoading[];

@@ -44,7 +44,7 @@ export function uploadingDocumentsFormMapper(): FormGroup<UploadDocumentsControl
 export function confirmPaymentFormMapper(): FormGroup<ConfirmPaymentControls> {
   return new FormGroup<ConfirmPaymentControls>({
     files: new FormControl(),
-    date: new FormControl(),
+    date: new FormControl('', [Validators.required]),
   });
 }
 

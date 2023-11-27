@@ -5,7 +5,6 @@ import {IS_LOGGED_IN, REGISTRATION_DATA, TOKEN, UserProcessDataByStepResponse} f
 import {SessionStorageService} from "@shared/web-api";
 import {RegisterService} from "@shared/api/services";
 
-
 @Injectable()
 export class ContinueProcessResolve implements Resolve<any> {
 

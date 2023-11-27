@@ -140,32 +140,36 @@ export class UploadDocumentComponent implements OnInit {
   }
 
   public navigateToTransferMoney(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.uploadFileService.apiProcessesUploadFilePost({
-      departmentId: this.currentStorageData.departmentId,
-      opswatIds: this.opswatId,
-      isDepartmentLink: false,
-      isDirect: false,
-      isEmployer: true,
-      month: getCurrentMonth().toString(),
-      processName: null,
-      year: getCurrentYear().toString(),
-    }).pipe(
-      tap((res) => {
-        if (res?.processId) {
-          this.getUploadFile(res.processId);
-        } else {
-          this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');
-        }
-      }),
-      switchMap(() => {
-        this.dialogRef = this.dialogs.open(content, {
-          closeable: false,
-          size: 'm',
-        }).pipe(takeUntil(this.destroy$)).subscribe();
-        return this.dialogRef;
-      }),
-      takeUntil(this.destroy$),
-    ).subscribe();
+    if (!this.is_file) {
+      this.uploadFileService.apiProcessesUploadFilePost({
+        departmentId: this.currentStorageData.departmentId,
+        opswatIds: this.opswatId,
+        isDepartmentLink: false,
+        isDirect: false,
+        isEmployer: true,
+        month: getCurrentMonth().toString(),
+        processName: null,
+        year: getCurrentYear().toString(),
+      }).pipe(
+        tap((res) => {
+          if (res?.processId) {
+            this.getUploadFile(res.processId);
+          } else {
+            this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');
+          }
+        }),
+        switchMap(() => {
+          this.dialogRef = this.dialogs.open(content, {
+            closeable: false,
+            size: 'm',
+          }).pipe(takeUntil(this.destroy$)).subscribe();
+          return this.dialogRef;
+        }),
+        takeUntil(this.destroy$),
+      ).subscribe();
+    } else {
+      this.router.navigate([registrationTransferMoneyLink]);
+    }
   }
 
   public getUploadFile(processId: string): void {
