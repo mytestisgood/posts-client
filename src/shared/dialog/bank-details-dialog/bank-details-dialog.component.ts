@@ -33,7 +33,6 @@ export class BankDetailsDialogComponent  {
   ) {
   }
 
-
   public closeDialog(): void {
     this.observer.complete();
   }
@@ -46,7 +45,7 @@ export class BankDetailsDialogComponent  {
       size: 'm',
     }).pipe(takeUntil(this.destroy$)).subscribe();
     setTimeout(() => {
-      dialogRef.closed = true;
+      dialogRef.unsubscribe();
       this.router.navigate([registrationConfirmPaymentLink]);
     }, 3000);
   }

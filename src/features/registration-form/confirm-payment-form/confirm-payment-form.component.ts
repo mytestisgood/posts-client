@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {FormControlStatus, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountFormDialogComponent } from '@shared/dialog';
 import {
@@ -17,7 +17,19 @@ import { ButtonComponent, InputDateComponent, InputFileComponent } from '@shared
 import { SessionStorageService } from '@shared/web-api';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import { catchError, debounceTime, forkJoin, interval, map, of, takeUntil, takeWhile, tap, timer } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  forkJoin,
+  interval,
+  map,
+  Observable,
+  of,
+  takeUntil,
+  takeWhile,
+  tap,
+  timer
+} from 'rxjs';
 import { ProgressBarComponent } from '../../progress-bar/progress-bar.component';
 import { ProcessesService } from '@shared/api/services';
 import { CreateEmployerOutResponse, ProcessesUpdateBody } from '@shared/api/models';
@@ -39,6 +51,8 @@ export class ConfirmPaymentFormComponent implements OnInit {
   public opswatId: Array<string> = [];
   public documentUploaded: boolean = false;
   public isDirectPayment: boolean = false;
+  public confirmPaymentFormChange$: Observable<FormControlStatus> = this.confirmPaymentForm
+    .statusChanges.pipe(takeUntil(this.destroy$));
   public readonly currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
   public isDisabled: boolean = false;
@@ -65,6 +79,10 @@ export class ConfirmPaymentFormComponent implements OnInit {
       });
       this.confirmPaymentForm.updateValueAndValidity({ emitEvent: true });
     }
+    this.isDisabled = !this.confirmPaymentForm.valid;
+    this.confirmPaymentFormChange$.subscribe((isValid: FormControlStatus) =>
+      this.isDisabled = !(isValid === 'VALID'),
+    );
   }
 
   public fileUploaded(uploadedAndId: FileUploadStatusAndId): void {
@@ -95,31 +113,36 @@ export class ConfirmPaymentFormComponent implements OnInit {
   }
 
   public navigateToVerifyCode(): void {
-    // const dateFormat = this.datePipe.transform(this.confirmPaymentForm.controls.date.value, 'yyyy-MM-dd');
-    // const filesList = this.selectUnit.rows ? this.selectUnit.rows.checkedItems.map(item => item['file_id']) : null;
-    this.processesUpdateBody.type = 'date';
-    this.processesUpdateBody.processId = this.currentStorageData.processId;
-    this.processesUpdateBody.params = this.confirmPaymentForm.controls.date.value;
-    const updateProcessDate$ = this.processesService.apiProcessesUpdatePost(this.processesUpdateBody);
-    const uploadsRef$ = this.processesService.apiProcessesProcessIdUploadsRefPost(this.currentStorageData.processId!, {
-      opswatIds: this.opswatId,
-      department_id: this.currentStorageData.departmentId,
-    });
+    if (this.confirmPaymentForm.valid) {
+      // const dateFormat = this.datePipe.transform(this.confirmPaymentForm.controls.date.value, 'yyyy-MM-dd');
+      // const filesList = this.selectUnit.rows ? this.selectUnit.rows.checkedItems.map(item => item['file_id']) : null;
+      this.processesUpdateBody.type = 'date';
+      this.processesUpdateBody.processId = this.currentStorageData.processId;
+      this.processesUpdateBody.params = this.confirmPaymentForm.controls.date.value;
+      this.processesUpdateBody.inProcess = true;
+      const updateProcessDate$ = this.processesService.apiProcessesUpdatePost(this.processesUpdateBody);
+      if (this.opswatId.length > 0) {
+        const uploadsRef$ = this.processesService.apiProcessesProcessIdUploadsRefPost(this.currentStorageData.processId!, {
+          opswatIds: this.opswatId,
+          department_id: this.currentStorageData.departmentId,
+        });
+      }
 
-    forkJoin([updateProcessDate$, uploadsRef$]).pipe(
-      tap((response) => {
-        if (response) {
-          this.currentStorageData.paymentFiles = this.confirmPaymentForm.value.files as FileWithLoading[];
-          this.currentStorageData.paymentDate = this.confirmPaymentForm.value.date;
-          this.currentStorageData.finishConfirmPayment = true;
-          this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
-          this.router.navigate([registrationVerifyCodeLink]);
-        }
-      }),
-      catchError((err) => {
-        this.alertsService.showErrorNotificationIcon('שגיאה');
-        return of(err);
-      }),
-    ).subscribe(() => this.router.navigate([registrationVerifyCodeLink]));
+      forkJoin([updateProcessDate$]).pipe(
+        tap((response) => {
+          if (response) {
+            this.currentStorageData.paymentFiles = this.confirmPaymentForm.value.files as FileWithLoading[];
+            this.currentStorageData.paymentDate = this.confirmPaymentForm.value.date;
+            this.currentStorageData.finishConfirmPayment = true;
+            this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
+            this.router.navigate([registrationVerifyCodeLink]);
+          }
+        }),
+        catchError((err) => {
+          this.alertsService.showErrorNotificationIcon('שגיאה');
+          return of(err);
+        }),
+      ).subscribe();
+    }
   }
 }

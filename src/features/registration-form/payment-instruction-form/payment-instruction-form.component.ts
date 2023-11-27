@@ -105,7 +105,7 @@ export class PaymentInstructionFormComponent  {
       size: 'm',
     }).pipe(takeUntil(this.destroy$)).subscribe();
     setTimeout(() => {
-      dialogRef.closed = true;
+      dialogRef.unsubscribe();
       this.router.navigate([registrationConfirmPaymentLink]);
     }, 3000);
   }

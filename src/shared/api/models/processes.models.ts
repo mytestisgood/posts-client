@@ -335,6 +335,7 @@ export interface ProcessesUpdateBody {
   type?: UpdateFileType;
   criteria?: CriteriaProcess;
   processId?: string;
+  inProcess?: boolean;
 }
 
 export interface ProcessesUpdateProcessBody {
