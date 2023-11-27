@@ -14,3 +14,12 @@ export interface ApiLoginBody {
   email: string;
   password: string;
 }
+
+export enum StepUserEnum {
+  set_password = 'set-password',
+  upload_file = 'upload-file',
+  transfer_money = 'transfer-money',
+  payments_instruction = 'payments-instruction',
+  confirm_payment = 'confirm-payment',
+  finish = 'finish',
+}

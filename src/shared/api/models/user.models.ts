@@ -14,6 +14,7 @@ export interface UserResponse {
   connect_type?: ConnectType;
   is_skip?: boolean;
   is_active?: boolean;
+  step?:string;
 }
 
 export interface UsersCheckVerifyCodeBody {

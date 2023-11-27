@@ -9,9 +9,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SignInResponse } from '@shared/api/models';
+import {SignInResponse, StepUserEnum} from '@shared/api/models';
 import { SignInService } from '@shared/api/services';
-import { CURRENT_USER, emailValidatorPattern, IS_LOGGED_IN, TOKEN } from '@shared/entities';
+import {CURRENT_USER, DocumentTypesEnumEmployer, emailValidatorPattern, IS_LOGGED_IN, TOKEN} from '@shared/entities';
 import {AlertsService, DestroyService} from '@shared/services';
 import {
   ButtonComponent,
@@ -21,6 +21,8 @@ import {
 } from '@shared/ui';
 import { SessionStorageService } from '@shared/web-api';
 import {catchError, Observable, of, takeUntil, tap, throwError} from 'rxjs';
+import * as querystring from "querystring";
+import {getObjectKeyByValue} from "@shared/helpers";
 
 interface LoginForm {
   email: FormControl<string | null>
@@ -58,6 +60,7 @@ export class LoginFormComponent implements OnInit {
     tap((isValid: FormControlStatus) => this.isDisabled = !(isValid === 'VALID')),
     takeUntil(this.destroy$),
   );
+  public step: string[] = Object.values(StepUserEnum);
 
   constructor(
     private readonly router: Router,
@@ -81,16 +84,6 @@ export class LoginFormComponent implements OnInit {
       email: this.loginForm.value.email as string,
       password: this.loginForm.value.password as string,
     }).pipe(
-      tap((response: SignInResponse) => {
-        if (response.role === 'employer') {
-          this.sessionStorageService.setItem(TOKEN, response.token as string);
-          this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
-          this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
-        } else {
-          throw new Error('Unauthenticated: invalid email or password');
-          // throwError(() => new Error('Unauthenticated: invalid email or password'));
-        }
-      }),
       catchError((err) => {
         const MESSAGE_ERROR = 'Unauthenticated: invalid email or password';
         if ((err.error !== undefined && err.error.message === MESSAGE_ERROR) || err.message === MESSAGE_ERROR) {
@@ -102,8 +95,20 @@ export class LoginFormComponent implements OnInit {
         return of(err);
       }),
       takeUntil(this.destroy$),
-    ).subscribe(() => {
-      this.router.navigate(['/dashboard'], { replaceUrl: true });
+    ).subscribe((response:SignInResponse) => {
+      const step: StepUserEnum = response.user?.step as StepUserEnum;
+      if (response.role === 'employer') {
+      if(step=== 'finish'){
+        this.sessionStorageService.setItem(TOKEN, response.token as string);
+        this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
+        this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
+        this.router.navigate(['/dashboard'], { replaceUrl: true });
+      }
+      else this.router.navigate(['/registration/','upload-file'],{ queryParams: { 'isContinue': true , 'token': response.token as string}})
+      } else {
+        throw new Error('Unauthenticated: invalid email or password');
+        // throwError(() => new Error('Unauthenticated: invalid email or password'));
+      }
     });
   }
 }

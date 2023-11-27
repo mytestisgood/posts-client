@@ -17,7 +17,7 @@
     </div>
     <div class="flex gap-2">
       <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl">
-        {{ currentStorageData.employeesCount }} </div>
+        {{ currentStorageData.employeesCount }}</div>
       <div class="paragraph-text neutrals-text-950 self-center dir-rtl">מספר העובדים:</div>
     </div>
   </div>
@@ -42,9 +42,7 @@
       (buttonClicked)="navigateToNextPageOrOpenDialog(bankDetailsDialogTemplate)"
     ></smarti-button>
   </div>
-  <!-- TODO: don't have functional for aside process registration, after add need to remove "false" and connect to api -->
   <div
-    *ngIf="false"
     class="neutrals-text-950 paragraph-text underline cursor-pointer text-right mb-4 mr-7 hover:opacity-90"
     (click)="openDialogForAsideProcess(asideProcessDialogTemplate)"
   >

@@ -69,6 +69,7 @@ export class UploadDocumentComponent implements OnInit {
   public inter = interval(5000);
   public currentFilesArray: FileWithLoading[] = [];
   public sub = new Subscription;
+  public is_file = false;
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
@@ -86,16 +87,17 @@ export class UploadDocumentComponent implements OnInit {
   public ngOnInit(): void {
     setTimeout(() => {
       if (this.currentStorageData.files?.length) {
-        // this.currentStorageData.files?.forEach(item => {
-        //   const file = new File([], item.name,
-        //     {type: item?.type});
-        //   this.fileIncrease(file as FileWithLoading);
-        // });
+        this.currentStorageData.files?.forEach(item => {
+          const file = new File([], item.name,
+            {type: item?.type});
+          this.fileIncrease(file as FileWithLoading);
+        });
         this.uploadDocumentsForm.setValue({
-          files: this.currentStorageData.files,
+          files: this.currentFilesArray,
         });
         // this.documentUploaded = true;
-        // this.uploadDocumentsForm.updateValueAndValidity({emitEvent: true});
+        this.uploadDocumentsForm.updateValueAndValidity({emitEvent: true});
+        this.is_file = true;
       }
     }, 100);
   }

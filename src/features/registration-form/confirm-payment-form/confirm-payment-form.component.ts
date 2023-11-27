@@ -59,7 +59,6 @@ export class ConfirmPaymentFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    console.log(11)
     if (this.currentStorageData.paymentFiles?.length) {
       this.confirmPaymentForm.setValue({
         files: this.currentStorageData.paymentFiles,

@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouterModule, Routes} from '@angular/router';
 import {
   ContactComponent,
   DashboardComponent,
@@ -10,9 +10,10 @@ import {
   RegistrationComponent,
   ResetPasswordComponent,
 } from '@pages';
-import { AuthGuard } from './guards/auth.guard';
-import { LoginGuard } from './guards/login.guard';
-import { RegistrationGuard } from './guards/registration.guard';
+import {AuthGuard} from './guards/auth.guard';
+import {LoginGuard} from './guards/login.guard';
+import {RegistrationGuard} from './guards/registration.guard';
+import {ContinueProcessResolve} from "../shared/resolves/continueProcessData.resolve";
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
   {
     path: 'registration',
     component: RegistrationComponent,
+    resolve: {continueProcessData: ContinueProcessResolve},
     canActivate: [LoginGuard],
     children: [
       {
@@ -142,16 +144,17 @@ const routes: Routes = [
     component: LandingComponent,
     canActivate: [LoginGuard],
     pathMatch: 'full',
-    children: [{ path: '', component: NotFoundComponent }],
+    children: [{path: '', component: NotFoundComponent}],
   },
 ];
 
 @NgModule({
   imports: [
     BrowserModule, RouterModule.forRoot(
-      routes, { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' },
+      routes, {scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled'},
     ),
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

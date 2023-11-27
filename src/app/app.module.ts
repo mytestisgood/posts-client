@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthHttpInterceptorProvider } from './auth-interceptor';
 import { CommonModule } from '@angular/common';
+import {ContinueProcessResolve} from "../shared/resolves/continueProcessData.resolve";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CommonModule } from '@angular/common';
   ],
   bootstrap: [AppComponent],
   providers: [
+    ContinueProcessResolve,
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
     AuthHttpInterceptorProvider,
   ],

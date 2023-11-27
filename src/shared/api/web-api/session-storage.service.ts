@@ -1,12 +1,15 @@
-import { Inject, Injectable } from '@angular/core';
+import {Inject, Injectable, Output} from '@angular/core';
 import {DEPARTMENT_ID, IS_LOGGED_IN, REGISTRATION_DATA, TOKEN} from '@shared/entities';
 import { SESSION_STORAGE } from './session-storage.token';
 import { WINDOW } from './window.token';
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
 })
 export class SessionStorageService implements Storage {
+  public sessionStorageChange: Subject<boolean> = new Subject();
+
   constructor(
     @Inject(SESSION_STORAGE) private readonly sessionStorage: Storage,
     @Inject(WINDOW) private readonly windowRef: Window,
