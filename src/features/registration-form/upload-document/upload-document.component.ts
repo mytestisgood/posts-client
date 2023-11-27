@@ -18,7 +18,7 @@ import {
   AllRegistrationSessionData,
   FileUploadStatusAndId,
   FileWithLoading, loginAfterRegistrationLink,
-  REGISTRATION_DATA,
+  REGISTRATION_DATA, registrationInfoLink,
   registrationSetPasswordLink,
   registrationTransferMoneyLink,
   UploadDocumentsControls,
@@ -84,7 +84,6 @@ export class UploadDocumentComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    console.log(33)
     if (this.currentStorageData.files?.length) {
       this.uploadDocumentsForm.setValue({
         files: this.currentStorageData.files,
@@ -119,7 +118,9 @@ export class UploadDocumentComponent implements OnInit {
   // }
 
   public navigateToRegistrationInfo(): void {
-    this.router.navigate([registrationSetPasswordLink]);
+    if (this.currentStorageData.password==='can not change')
+    this.router.navigate([registrationInfoLink]);
+    else  this.router.navigate([registrationSetPasswordLink])
   }
 
   public openSampleDialog(content: PolymorpheusContent<TuiDialogContext>): void {

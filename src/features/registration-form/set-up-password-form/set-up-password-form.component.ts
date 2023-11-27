@@ -51,9 +51,11 @@ export class SetUpPasswordFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    console.log(1)
     const queryParams = this.route.snapshot.queryParams;
 
     if (!isEmpty(queryParams)) {
+      console.log(77777777)
       // this.registerService.getUserProcessDataByStep().pipe().subscribe();
       this.email = this.route.snapshot.queryParams['email'];
       this.sessionStorageService.setItem(TOKEN, this.route.snapshot.queryParams['token'] as string);
