@@ -47,27 +47,11 @@ export class RegistrationComponent {
         const isConfirmPaymentPage: boolean = this.router.url === registrationConfirmPaymentLink;
         const isVerifyCodePage: boolean = this.router.url === registrationVerifyCodeLink;
         const isContinue = this.route.snapshot.queryParams['isContinue'];
-
         if (isContinue) {
           this.sessionStorageService.setItem(TOKEN, this.route.snapshot.queryParams['token'] as string);
-          this.registerService.getUserProcessDataByStep().pipe(tap((tokenResponse: UserProcessDataByStepResponse) => {
-              this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(tokenResponse.data?.registrationData));
-              this.sessionStorageService.setItem(IS_LOGGED_IN, tokenResponse.data?.isLoggedIn as string);
-            }),
-            catchError((err) => {
-              if (err.error.message === 'user exists') {
-                this.alertsService.showErrorNotificationIcon('המשתמש שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
-              } else if (err.error.message === 'identifier exists') {
-                this.alertsService.showErrorNotificationIcon('המעסיק שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
-              } else {
-                this.alertsService.showErrorNotificationIcon('שגיאה');
-              }
-              return of(err);
-            })).subscribe();
-
+          this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.route.snapshot.data['continueProcessData'].data?.registrationData));
+          this.sessionStorageService.setItem(IS_LOGGED_IN, this.route.snapshot.data['continueProcessData'].data?.isLoggedIn as string);
         }
-
-
         this.isFirstTemplate = !(isConfirmPaymentPage || isVerifyCodePage);
         if (this.isFirstTemplate) {
           this.elementRef.nativeElement.ownerDocument.body.className = 'no-bg-image';

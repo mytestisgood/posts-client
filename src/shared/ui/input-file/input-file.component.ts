@@ -64,7 +64,6 @@ export class InputFileComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    console.log(this.control.value)
     this.fileStatusChanges();
   }
 
@@ -88,7 +87,6 @@ export class InputFileComponent implements OnInit {
   private fileStatusChanges(): void {
     this.control.statusChanges.pipe(
       switchMap((value: FormControlStatus) => {
-        console.log(1)
         this.status = value;
         if (this.control.value) {
           if (this.control.value?.length > this.currentFilesIndex) {
@@ -123,6 +121,7 @@ export class InputFileComponent implements OnInit {
       takeUntil(this.destroy$),
     )
       .subscribe((response: UploadPostResponse[]) => {
+        console.log(22222222222222);
         if (this.status === 'VALID' && this.control.value?.length && response.length) {
           response.forEach(res => {
             const indexToUpdate = this.currentFilesArray.findIndex((item: FileWithLoading) => item.isLoading);

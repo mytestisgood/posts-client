@@ -84,6 +84,7 @@ export class UploadDocumentComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    console.log(33)
     if (this.currentStorageData.files?.length) {
       this.uploadDocumentsForm.setValue({
         files: this.currentStorageData.files,
@@ -185,7 +186,7 @@ export class UploadDocumentComponent implements OnInit {
       switch (response.status) {
         case 'loading':
           break;
-        // case 'error_loading':
+        case 'error_loading':
         case 'loaded_with_errors': {
           this.dialogRef.complete();
           this.sub.unsubscribe();
@@ -195,7 +196,6 @@ export class UploadDocumentComponent implements OnInit {
           this.router.navigate([loginAfterRegistrationLink]);
           break;
         }
-        case 'error_loading':
         case 'can_be_processed': {
           this.dialogRef.complete();
           setTimeout(() => {
