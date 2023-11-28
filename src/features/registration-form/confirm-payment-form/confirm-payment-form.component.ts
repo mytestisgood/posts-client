@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import {FormControlStatus, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {AfterViewInit, ChangeDetectionStrategy, Component, Inject, Injector, OnInit} from '@angular/core';
+import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountFormDialogComponent } from '@shared/dialog';
 import {
@@ -16,7 +16,7 @@ import { AlertsService, DestroyService } from '@shared/services';
 import { ButtonComponent, InputDateComponent, InputFileComponent } from '@shared/ui';
 import { SessionStorageService } from '@shared/web-api';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import {PolymorpheusComponent, PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
 import {
   catchError,
   debounceTime,
@@ -28,7 +28,7 @@ import {
   takeUntil,
   takeWhile,
   tap,
-  timer
+  timer,
 } from 'rxjs';
 import { ProgressBarComponent } from '../../progress-bar/progress-bar.component';
 import { ProcessesService } from '@shared/api/services';
@@ -60,6 +60,7 @@ export class ConfirmPaymentFormComponent implements OnInit {
   public processesUpdateBody: ProcessesUpdateBody = {};
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
+    @Inject(Injector) private readonly injector: Injector,
     private readonly router: Router,
     private readonly destroy$: DestroyService,
     private readonly sessionStorageService: SessionStorageService,
@@ -93,10 +94,30 @@ export class ConfirmPaymentFormComponent implements OnInit {
   }
 
   public openDialogAccountForm(content: PolymorpheusContent<TuiDialogContext>): void {
-    const dialogRef = this.dialogs.open(content, {
-      closeable: false,
-      size: 'l',
-    }).pipe(takeUntil(this.destroy$)).subscribe();
+
+    const dialogRef = this.dialogs.open<number>(
+      new PolymorpheusComponent(AccountFormDialogComponent, this.injector),
+      {
+        data: 237,
+        dismissible: true,
+        label: 'Heading',
+      },
+    );
+    dialogRef.subscribe(aaa => {
+      alert(aaa);
+    });
+    // const dialogRef = this.dialogs.open(content, {
+    //   closeable: false,
+    //   size: 'l',
+    // }).pipe(takeUntil(this.destroy$)).subscribe({
+    //   next: data => {
+    //    alert({ data });
+    //   },
+    //   complete: () => {
+    //     console.info('Dialog closed');
+    //   },
+    // });
+
     // interval(100).pipe(
     //   map(() => {
     //       if (dialogRef.closed) {
@@ -121,6 +142,7 @@ export class ConfirmPaymentFormComponent implements OnInit {
       this.processesUpdateBody.params = this.confirmPaymentForm.controls.date.value;
       this.processesUpdateBody.inProcess = true;
       const updateProcessDate$ = this.processesService.apiProcessesUpdatePost(this.processesUpdateBody);
+
       if (this.opswatId.length > 0) {
         const uploadsRef$ = this.processesService.apiProcessesProcessIdUploadsRefPost(this.currentStorageData.processId!, {
           opswatIds: this.opswatId,

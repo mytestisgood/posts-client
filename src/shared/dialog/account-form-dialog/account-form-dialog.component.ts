@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormControlStatus, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
   AccountControls,
@@ -14,7 +14,7 @@ import { map, Observable, of, switchMap, takeUntil, tap } from 'rxjs';
 import { BankService, ChatService, RegisterService } from '@shared/api/services';
 import { BankBranches, BanksGetResponse, ChatResponse, IdAndNameResponse } from '@shared/api/models';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
-import { TuiDialogService } from '@taiga-ui/core';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { TUI_DIALOGS } from '@taiga-ui/cdk';
 
 @Component({
@@ -34,11 +34,12 @@ export class AccountFormDialogComponent implements OnInit {
   public bank_branches!: IdAndNameResponse[];
   public banksWithBranch!: BanksGetResponse[];
   // public chatSubject$: Observable<IdAndNameResponse[]> = this.accountForm.apiGeneralsBanksGet();
-
+  @Output() public resultEmitter: EventEmitter<any> = new EventEmitter<any>(); // Output to emit result
   public accountFormChange$: Observable<FormControlStatus> = this.accountForm
     .statusChanges.pipe(takeUntil(this.destroy$));
   private readonly currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
+  private readonly value: number | null = null;
 
   constructor(
     private readonly destroy$: DestroyService,
@@ -46,6 +47,8 @@ export class AccountFormDialogComponent implements OnInit {
     private readonly bankService: BankService,
     private readonly chatService: ChatService,
     private readonly registerService: RegisterService,
+    @Inject(POLYMORPHEUS_CONTEXT)
+    private readonly context: TuiDialogContext<number, number>,
   ) {
   }
 
@@ -100,14 +103,15 @@ export class AccountFormDialogComponent implements OnInit {
       accountNumber: this.currentStorageData.accountNumber,
       departmentId: this.currentStorageData.departmentId,
       payBySmarti: false,
-    }).pipe().subscribe(() => this.observer.complete());
+    }).pipe().subscribe(() =>
+      this.observer.complete());
   }
 
   public closeDialog(): void {
     this.observer.complete();
   }
 
-  selectedBankBranch() {
-
+  private get data(): number {
+    return this.context.data;
   }
 }
