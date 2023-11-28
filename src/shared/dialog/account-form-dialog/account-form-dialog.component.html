@@ -1,26 +1,80 @@
+<!--<div class="mt-6 flex flex-col justify-center items-center">-->
+<!--  <h3 class="mt-0 mb-0 medium neutrals-text-950">יש להזין את פרטי החשבון שממנו עבר התשלום</h3>-->
+<!--  <div-->
+<!--    class="mt-20 flex flex-col gap-[30px]"-->
+<!--    [formGroup]="accountForm"-->
+<!--  ></div>-->
+<!--  <div class="row pb-4">-->
+<!--      <div class="col-6" >-->
+<!--        <bd-select name="bank_id"  [items]="banks" #bankIDSelect="ngModel"-->
+<!--                   [(ngModel)]="bank" placeholder="בנק"-->
+<!--                   (onSelect)="selectedBankBranch()" [required]="new_agent.payment_type === 'masav'"-->
+<!--                   class="bd-responsive" [error]="bankIDSelect.errors && form.submitted"></bd-select>-->
+<!--      </div>-->
+<!--      <div class="col-6">-->
+<!--        <bd-select name="branch_id"  [items]="bankBranchesDeposit" #branchIDSelect="ngModel"-->
+<!--                   [(ngModel)]="new_agent.bank_branch"  placeholder="סניף"-->
+<!--                   [required]="new_agent.payment_type === 'masav'"-->
+<!--                   class="bd-responsive" [error]="branchIDSelect.errors && form.submitted"></bd-select>-->
+<!--      </div>-->
+<!--    <smarti-input-field-->
+<!--      [customWidth]="'616px'"-->
+<!--      [placeholder]="'מספר חשבון*'"-->
+<!--      [control]="accountForm.controls.accountNumber"-->
+<!--    ></smarti-input-field>-->
+<!--    </div>-->
+<!--  <div class="mt-[216px]">-->
+<!--    <smarti-button-->
+<!--      [typeClass]="'confirm'"-->
+<!--      [customHeight]="'56px'"-->
+<!--      [customWidth]="'147px'"-->
+<!--      [disabled]="isDisabled"-->
+<!--      [text]="'אישור'"-->
+<!--      (buttonClicked)="sendRequest()"-->
+<!--    ></smarti-button>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<button-->
+<!--  class="close-dialog-right cursor-pointer dir-rtl paragraph-text"-->
+<!--  (click)="closeDialog()"-->
+<!--&gt;-->
+<!--  < חזרה אחורה-->
+<!--</button>-->
+
 <div class="mt-6 flex flex-col justify-center items-center">
   <h3 class="mt-0 mb-0 medium neutrals-text-950">יש להזין את פרטי החשבון שממנו עבר התשלום</h3>
-  <div
+  <form
     class="mt-20 flex flex-col gap-[30px]"
     [formGroup]="accountForm"
   >
-
-
-  </div>
-<!--  <div class="row pb-4" *ngIf="new_agent.payment_type=== 'masav'">-->
-<!--    <div class="col-6" >-->
-<!--      <bd-select name="bank_id"  [items]="banks" #bankIDSelect="ngModel"-->
-<!--                 [(ngModel)]="bank" placeholder="בנק"-->
-<!--                 (onSelect)="selectedBankBranch()" [required]="new_agent.payment_type === 'masav'"-->
-<!--                 class="bd-responsive" [error]="bankIDSelect.errors && form.submitted"></bd-select>-->
-<!--    </div>-->
-<!--    <div class="col-6">-->
-<!--      <bd-select name="branch_id"  [items]="bankBranchesDeposit" #branchIDSelect="ngModel"-->
-<!--                 [(ngModel)]="new_agent.bank_branch"  placeholder="סניף"-->
-<!--                 [required]="new_agent.payment_type === 'masav'"-->
-<!--                 class="bd-responsive" [error]="branchIDSelect.errors && form.submitted"></bd-select>-->
-<!--    </div>-->
-<!--  </div>-->
+<!--    <smarti-select-->
+<!--      [placeholder]="'נושא הפניה'"-->
+<!--      [customWidth]="'536px'"-->
+<!--      [isComboBoxMode]="true"-->
+<!--      [comboBoxOptions]="chatSubjectOption"-->
+<!--      [control]="accountForm.controls.bankName"-->
+<!--    ></smarti-select>-->
+    <smarti-select
+      [placeholder]="'בנק'"
+      [customWidth]="'616px'"
+      [isComboBoxMode]="true"
+      [comboBoxOptions]="banks"
+      [control]="accountForm.controls.bankName"
+    ></smarti-select>
+    <smarti-select
+      [placeholder]="'סניף'"
+      [customWidth]="'616px'"
+      [isComboBoxMode]="true"
+      [comboBoxOptions]="bank_branches"
+      [control]="accountForm.controls.branchNumber"
+    ></smarti-select>
+    <smarti-input-number
+      [placeholder]="'מספר חשבון*'"
+      [customWidth]="'616px'"
+      [control]="accountForm.controls.accountNumber"
+      [maxLength]="10"
+    ></smarti-input-number>
+  </form>
   <div class="mt-[216px]">
     <smarti-button
       [typeClass]="'confirm'"
