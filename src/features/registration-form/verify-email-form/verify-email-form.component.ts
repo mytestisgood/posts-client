@@ -46,6 +46,7 @@ export class VerifyEmailFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.signInService.apiUsersSendVerifyCodeGet().pipe(takeUntil(this.destroy$)).subscribe();
     this.verifyEmailInfo.statusChanges.pipe(
       tap((isValid: FormControlStatus) => this.isDisabled = !(isValid === 'VALID')),
       takeUntil(this.destroy$),

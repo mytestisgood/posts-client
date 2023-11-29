@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component, EventEmitter,
-  Input, OnInit,
+  Input, OnChanges, OnInit,
   Output,
 } from '@angular/core';
 import {FormControl, FormControlStatus, ReactiveFormsModule} from '@angular/forms';
@@ -42,7 +42,8 @@ import {
   styleUrls: ['./input-file.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputFileComponent implements OnInit {
+export class InputFileComponent implements OnInit
+{
   @Input() public customWidth!: string;
   @Input() public customHeight!: string;
   @Input() public control: FormControl<FileWithLoading[] | null> = new FormControl([]);
@@ -77,6 +78,10 @@ export class InputFileComponent implements OnInit {
     // }
   }
 
+  // public ngOnChanges(): void {
+  //   this.fileStatusChanges();
+  // }
+
   public uploadSecondFile(file: HTMLInputElement): void {
     const files: FileWithLoading[] = Array.from(file.files as FileList) as FileWithLoading[];
 
@@ -85,6 +90,7 @@ export class InputFileComponent implements OnInit {
   }
 
   private fileStatusChanges(): void {
+
     this.control.statusChanges.pipe(
       switchMap((value: FormControlStatus) => {
         this.status = value;
@@ -121,7 +127,6 @@ export class InputFileComponent implements OnInit {
       takeUntil(this.destroy$),
     )
       .subscribe((response: UploadPostResponse[]) => {
-        console.log(22222222222222);
         if (this.status === 'VALID' && this.control.value?.length && response.length) {
           response.forEach(res => {
             const indexToUpdate = this.currentFilesArray.findIndex((item: FileWithLoading) => item.isLoading);
@@ -162,7 +167,6 @@ export class InputFileComponent implements OnInit {
     this.currentFilesIndex++;
     this.currentFilesArray.push(file);
     const index: number = this.currentFilesArray.length - 1;
-
     this.isSecondFileUpload = true;
     if (!this.currentFilesArray[index].isUploaded) {
       this.currentFilesArray[index].isLoading = true;

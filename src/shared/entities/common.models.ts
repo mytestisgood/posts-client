@@ -25,13 +25,15 @@ export const IS_LOGGED_IN: string = 'isLoggedIn';
 export const DEPARTMENT_ID: string = 'departmentId';
 export const REGISTRATION_DATA: string = 'registrationData';
 export const SPECIAL_HEADER_TOKEN: string = 'specialHeaderToken';
+export const fiveNumberRegex = '\\d{5,10}$';
 export const emailValidatorPattern: string = '^(?!^-)[\\w-]+(?:[\\.-][\\w-]+)*(?:[\\.+][\\w-]+)*@' +
   '\\w+(?:[\\.-]\\w+)*(?:\\.[A-Za-z]{2,4})+$';
 export const israelMobilePhoneValidatorPattern: string = '^05\\d([-]{0,1})\\d{7}$';
-export const BUSINESS_NUMBER_REGEX = '^IL\\d{9}$';
 export const passwordValidatorPattern: string = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})';
 
-export type FileWithLoading = File & { isLoading: boolean, isUploaded: boolean, index: number | null, opsId: string | null };
+export type FileWithLoading = File & {
+  isLoading: boolean,
+  isUploaded: boolean, index: number | undefined, opsId: string | null };
 
 export type NavigationEvent = NavigationStart | NavigationEnd | NavigationCancel | NavigationError |
   RoutesRecognized | GuardsCheckStart | GuardsCheckEnd | RouteConfigLoadStart | RouteConfigLoadEnd |

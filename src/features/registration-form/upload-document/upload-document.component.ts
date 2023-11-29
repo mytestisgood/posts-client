@@ -3,8 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Inject,
-  OnInit,
+  Inject, OnDestroy, OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -68,7 +67,9 @@ export class UploadDocumentComponent implements OnInit {
   public identifier: string = this.currentStorageData?.identifier as string;
   public departmentId: number = Number(this.currentStorageData.departmentId);
   public inter = interval(5000);
+  public currentFilesArray: FileWithLoading[] = [];
   public sub = new Subscription;
+  public is_file = false;
 
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
@@ -84,12 +85,21 @@ export class UploadDocumentComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    if (this.currentStorageData.files?.length) {
-      this.uploadDocumentsForm.setValue({
-        files: this.currentStorageData.files,
-      });
-      this.uploadDocumentsForm.updateValueAndValidity({ emitEvent: true });
-    }
+    setTimeout(() => {
+      if (this.currentStorageData.files?.length) {
+        this.currentStorageData.files?.forEach(item => {
+          const file = new File([], item.name,
+            {type: item?.type});
+          this.fileIncrease(file as FileWithLoading);
+        });
+        this.uploadDocumentsForm.setValue({
+          files: this.currentFilesArray,
+        });
+        // this.documentUploaded = true;
+        this.uploadDocumentsForm.updateValueAndValidity({emitEvent: true});
+        this.is_file = true;
+      }
+    }, 100);
   }
 
   public openForwardModal(content: PolymorpheusContent<TuiDialogContext>): void {
@@ -110,12 +120,6 @@ export class UploadDocumentComponent implements OnInit {
   public removeFile(opsId: string): void {
     this.opswatId = this.opswatId.filter(id => id !== opsId);
   }
-
-  // public requestSend(): void {
-  //   // this.sessionStorageService.clear();
-  //   // this.router.navigate(['/']);
-  //   this.router.navigate([loginAfterRegistrationLink]);
-  // }
 
   public navigateToRegistrationInfo(): void {
     if (this.currentStorageData.password==='can not change')
@@ -138,32 +142,36 @@ export class UploadDocumentComponent implements OnInit {
   }
 
   public navigateToTransferMoney(content: PolymorpheusContent<TuiDialogContext>): void {
-    this.uploadFileService.apiProcessesUploadFilePost({
-      departmentId: this.currentStorageData.departmentId,
-      opswatIds: this.opswatId,
-      isDepartmentLink: false,
-      isDirect: false,
-      isEmployer: true,
-      month: getCurrentMonth().toString(),
-      processName: null,
-      year: getCurrentYear().toString(),
-    }).pipe(
-      tap((res) => {
-        if (res?.processId) {
-          this.getUploadFile(res.processId);
-        } else {
-          this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');
-        }
-      }),
-      switchMap(() => {
-        this.dialogRef = this.dialogs.open(content, {
-          closeable: false,
-          size: 'm',
-        }).pipe(takeUntil(this.destroy$)).subscribe();
-        return this.dialogRef;
-      }),
-      takeUntil(this.destroy$),
-    ).subscribe();
+    if (!this.is_file) {
+      this.uploadFileService.apiProcessesUploadFilePost({
+        departmentId: this.currentStorageData.departmentId,
+        opswatIds: this.opswatId,
+        isDepartmentLink: false,
+        isDirect: false,
+        isEmployer: true,
+        month: getCurrentMonth().toString(),
+        processName: null,
+        year: getCurrentYear().toString(),
+      }).pipe(
+        tap((res) => {
+          if (res?.processId) {
+            this.getUploadFile(res.processId);
+          } else {
+            this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');
+          }
+        }),
+        switchMap(() => {
+          this.dialogRef = this.dialogs.open(content, {
+            closeable: false,
+            size: 'm',
+          }).pipe(takeUntil(this.destroy$)).subscribe();
+          return this.dialogRef;
+        }),
+        takeUntil(this.destroy$),
+      ).subscribe();
+    } else {
+      this.router.navigate([registrationTransferMoneyLink]);
+    }
   }
 
   public getUploadFile(processId: string): void {
@@ -201,7 +209,18 @@ export class UploadDocumentComponent implements OnInit {
           this.dialogRef.complete();
           setTimeout(() => {
             this.sub.unsubscribe();
-              this.currentStorageData.files = this.uploadDocumentsForm.value.files as FileWithLoading[];
+            this.currentStorageData.files = [];
+            this.uploadDocumentsForm.value.files?.forEach(file1 => {
+              this.currentStorageData.files?.push(<FileWithLoading>{
+                name: file1.name,
+                type: file1.type,
+                size: file1.size,
+                isLoading: file1?.isLoading,
+                isUploaded: file1?.isUploaded,
+                index: file1?.index,
+                opsId: file1?.opsId,
+              });
+            });
               this.currentStorageData.finishFilesPage = true;
               this.currentStorageData.processId = response.id;
               this.currentStorageData.total = response.total;
@@ -212,6 +231,16 @@ export class UploadDocumentComponent implements OnInit {
           break;
         }
       }
+    }
+  }
+
+  private fileIncrease(file: FileWithLoading): void {
+    this.currentFilesArray.push(file);
+    const index: number = this.currentFilesArray.length - 1;
+    if (!this.currentFilesArray[index].isUploaded) {
+      this.currentFilesArray[index].isLoading = true;
+      this.currentFilesArray[index].isUploaded = true;
+      this.currentFilesArray[index].index = index;
     }
   }
 }

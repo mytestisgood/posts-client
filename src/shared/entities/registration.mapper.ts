@@ -1,5 +1,5 @@
-import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
-import { emailValidatorPattern, israelMobilePhoneValidatorPattern} from './common.models';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { emailValidatorPattern, fiveNumberRegex, israelMobilePhoneValidatorPattern } from './common.models';
 import {
   AccountControls,
   ConfirmPaymentControls,
@@ -22,10 +22,12 @@ export function validIDValueValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const id = control.value;
     let isValid:boolean;
+
     if (id.length !== 9 || isNaN(id)) {  // Make sure ID is formatted properly
       isValid = false;
     }
     let sum = 0, incNum;
+
     for (let i = 0; i < id.length; i++) {
       incNum = Number(id[i]) * ((i % 2) + 1);  // Multiply number by 1 or 2
       sum += (incNum > 9) ? incNum - 9 : incNum;  // Sum the digits up and add to total
@@ -44,7 +46,7 @@ export function uploadingDocumentsFormMapper(): FormGroup<UploadDocumentsControl
 export function confirmPaymentFormMapper(): FormGroup<ConfirmPaymentControls> {
   return new FormGroup<ConfirmPaymentControls>({
     files: new FormControl(),
-    date: new FormControl(),
+    date: new FormControl(null, [Validators.required]),
   });
 }
 
@@ -56,8 +58,8 @@ export function verifyEmailFormMapper(): FormGroup<VerificationEmailControls> {
 
 export function paymentMethodFormMapper(): FormGroup<AccountControls> {
   return new FormGroup<AccountControls>({
-    accountNumber: new FormControl('', [Validators.required]),
-    bankName: new FormControl('', [Validators.required]),
-    branchNumber: new FormControl('', [Validators.required]),
+    accountNumber: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    bankName: new FormControl(null, [Validators.required]),
+    branchNumber: new FormControl(null, [Validators.required]),
   });
 }

@@ -16,11 +16,15 @@ export interface EmployersCreateUserOutBody {
   departmentId?: number;
 }
 export interface EmployersCreatePaymentOutBody {
+  departmentId?: string;
   payBySmarti?: boolean;
+}
+export interface EmployersUpdatePaymentOutBody {
   branchId?: string;
   departmentId?: string;
   accountNumber?: string;
 }
+
 
 export interface CreateEmployerOutResponse {
   userId?: string;

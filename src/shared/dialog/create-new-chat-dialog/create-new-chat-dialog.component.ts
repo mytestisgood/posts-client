@@ -64,7 +64,7 @@ export class CreateNewChatDialogComponent implements OnInit {
 
   public onAddFileClick(): void {
     if (this.form.value.file) {
-      this.filesMyHrService.apiUploadPost({ file: this.form.value.file[0] }).pipe(
+      this.filesMyHrService.apiUploadPost({file: this.form.value.file[0]}).pipe(
         takeUntil(this.destroy$),
       ).subscribe((response: UploadPostResponse) => {
         this.sendRequest.next(response.opswatId as string);

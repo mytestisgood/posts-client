@@ -1,8 +1,8 @@
-import {CommonModule} from '@angular/common';
-import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormControlStatus, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {RegisterService} from '@shared/api/services';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormControlStatus, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RegisterService } from '@shared/api/services';
 import {
   AllRegistrationSessionData,
   passwordValidatorPattern,
@@ -10,14 +10,14 @@ import {
   registrationInfoLink,
   registrationUploadFileLink, TOKEN,
 } from '@shared/entities';
-import {DestroyService} from '@shared/services';
-import {ButtonComponent, InputPasswordComponent} from '@shared/ui';
-import {SessionStorageService} from '@shared/web-api';
-import {Observable, takeUntil, tap} from 'rxjs';
-import {isEmpty} from "@shared/helpers";
-import {AsideProcessDialogComponent} from "@shared/dialog";
-import {PolymorpheusContent} from "@tinkoff/ng-polymorpheus";
-import {TuiDialogContext, TuiDialogService} from "@taiga-ui/core";
+import { AlertsService, DestroyService } from '@shared/services';
+import { ButtonComponent, InputPasswordComponent } from '@shared/ui';
+import { catchError, EMPTY, Observable, takeUntil, tap } from 'rxjs';
+import { SessionStorageService } from '@shared/web-api';
+import { isEmpty } from '@shared/helpers';
+import { AsideProcessDialogComponent } from '@shared/dialog';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'smarti-set-up-password-form',
@@ -47,6 +47,7 @@ export class SetUpPasswordFormComponent implements OnInit {
     private readonly destroy$: DestroyService,
     private readonly registerService: RegisterService,
     private readonly sessionStorageService: SessionStorageService,
+    private readonly alertsService: AlertsService,
   ) {
   }
 
@@ -56,7 +57,7 @@ export class SetUpPasswordFormComponent implements OnInit {
       this.email = this.currentStorageData.email;
       if (this.currentStorageData.password?.length) {
         this.passwordControl.setValue(this.currentStorageData.password);
-        this.passwordControl.updateValueAndValidity({emitEvent: true});
+        this.passwordControl.updateValueAndValidity({ emitEvent: true });
         this.isDisabled = !this.passwordControl.valid;
         this.text_button = 'עדכון סיסמה';
       }
@@ -85,21 +86,37 @@ export class SetUpPasswordFormComponent implements OnInit {
 
   public setPassword(): void {
     if (this.passwordControl.value !== this.currentStorageData.password) {
-      this.registerService.apiRegisterPost({
-        password: this.passwordControl.value as string,
-        isFromSignIn: true,
-      }).pipe(
-        tap(() => {
-          this.currentStorageData.password = this.passwordControl.value as string;
-          this.currentStorageData.finishPasswordPage = true;
-          this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
-        }),
-        takeUntil(this.destroy$),
-      ).subscribe(() => this.router.navigate([registrationUploadFileLink]));
+    this.registerService.apiRegisterPost({
+      password: this.passwordControl.value as string,
+      isFromSignIn: true,
+    }).pipe(
+      tap(() => {
+        this.currentStorageData.password = this.passwordControl.value as string;
+        this.currentStorageData.finishPasswordPage = true;
+        this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
+      }),
+      catchError((err) => {
+        if (err.error.message === 'User already exists!') {
+          this.alertsService.showErrorNotificationIcon('המשתמש שהוזן כבר קיים');
+        } else if (err.error.message === 'Password selected') {
+          this.alertsService.showErrorNotificationIcon('סיסמה זו נבחרה בעבר');
+        } else if (err.error.message === 'No User Found') {
+          this.alertsService.showErrorNotificationIcon('המעסיק שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
+        } else if (err.error.message === 'Password expired') {
+          this.alertsService.showErrorNotificationIcon('תוקף הסיסמה פג');
+        }
+        else {
+          this.alertsService.showErrorNotificationIcon('שגיאה');
+        }
+        return EMPTY;
+      }),
+      takeUntil(this.destroy$),
+    ).subscribe(() => this.router.navigate([registrationUploadFileLink]));
     } else {
       this.router.navigate([registrationUploadFileLink]);
     }
   }
+
   public openDialogForAsideProcess(content: PolymorpheusContent<TuiDialogContext>): void {
     this.dialogs.open(content, {
       closeable: false,

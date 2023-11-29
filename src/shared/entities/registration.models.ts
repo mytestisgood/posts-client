@@ -1,5 +1,6 @@
 import { FormControl } from '@angular/forms';
 import {FileWithLoading, IS_LOGGED_IN} from './common.models';
+import {IdAndNameResponse} from "@shared/api/models";
 
 export const registrationInfoLink: string = '/registration/info';
 export const registrationSetPasswordLink: string = '/registration/set-password';
@@ -61,8 +62,8 @@ export interface ConfirmPaymentControls {
 
 export interface AccountControls {
   accountNumber: FormControl<string | null>;
-  bankName: FormControl<string | null>;
-  branchNumber: FormControl<string | null>;
+  bankName: FormControl<IdAndNameResponse | null>;
+  branchNumber: FormControl<IdAndNameResponse | null>;
 }
 
 export interface VerificationEmailControls {

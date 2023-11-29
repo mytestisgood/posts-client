@@ -1,15 +1,27 @@
-import {CommonModule} from '@angular/common';
-import {ChangeDetectionStrategy, Component, Inject, Input, Output} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {UserService} from '@shared/api/services';
-import {emailValidatorPattern, israelMobilePhoneValidatorPattern, loginAfterRegistrationLink} from '@shared/entities';
-import {AlertsService, DestroyService} from '@shared/services';
-import {ButtonComponent, InputFieldComponent, InputNumberComponent} from '@shared/ui';
-import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
-import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
-import {BehaviorSubject, takeUntil, tap, withLatestFrom, concatMap, map, of, switchMap, catchError} from 'rxjs';
-import {SessionStorageService} from "@shared/web-api";
-import {Router} from "@angular/router";
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, Input, Output } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserService } from '@shared/api/services';
+import { emailValidatorPattern, israelMobilePhoneValidatorPattern, loginAfterRegistrationLink } from '@shared/entities';
+import { AlertsService, DestroyService } from '@shared/services';
+import { ButtonComponent, InputFieldComponent, InputNumberComponent } from '@shared/ui';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import {
+  BehaviorSubject,
+  takeUntil,
+  tap,
+  withLatestFrom,
+  concatMap,
+  map,
+  of,
+  switchMap,
+  catchError,
+  EMPTY,
+  debounceTime,
+} from 'rxjs';
+import { SessionStorageService } from '@shared/web-api';
+import { Router } from '@angular/router';
 
 interface ForwardRequestForm {
   email: FormControl<string | null>;
@@ -69,17 +81,14 @@ export class ForwardRequestDialogComponent {
       identifier: this.identifier,
       departmentId: this.departmentId,
     }).pipe(
-      map((res) => {
+      tap((res) => {
         if (res.code === 200) {
           this.observer.complete();
           this.sessionStorageService.clear();
+          this.alertsService.showSuccessNotificationIcon(' התהליך נשלח אל איש הקשר שביקשת נודיע לך כאשר התהליך יושלם');
           this.router.navigate([loginAfterRegistrationLink]);
         }
       }),
-      withLatestFrom(this.dialogs.open(content, {
-        closeable: false,
-        size: 'm',
-      })),
       catchError((err) => {
         const MESSAGE_ERROR = 'user exist';
         if ((err.error !== undefined && err.error.message === MESSAGE_ERROR) || err.message === MESSAGE_ERROR) {
@@ -88,11 +97,16 @@ export class ForwardRequestDialogComponent {
         else {
           this.alertsService.showErrorNotificationIcon('שגיאה');
         }
-        return of(err);
+        return EMPTY;
       }),
+      debounceTime(500),
       takeUntil(this.destroy$),
-    ).subscribe()
-    ;
+    ).subscribe(() => {
+      // this.dialogs.open(content, {
+      //   closeable: false,
+      //   size: 'm',
+      // });
+    });
   }
 
   public closeSecondDialog(observer: { complete: () => void }): void {

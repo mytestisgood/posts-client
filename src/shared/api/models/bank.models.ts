@@ -4,7 +4,7 @@ export interface BanksDepartmentIdGetParameters {
 }
 
 export interface BanksGetResponse {
-  id?: string;
+  id?: number;
   name?: string;
   bank_branches?: Array<BankBranches>;
 }

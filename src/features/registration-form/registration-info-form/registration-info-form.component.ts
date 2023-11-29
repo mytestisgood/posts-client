@@ -1,13 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
-  FormControl,
   FormControlStatus,
   FormGroup,
   ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateEmployerOutResponse } from '@shared/api/models';
@@ -28,7 +24,7 @@ import {
   InputNumberComponent,
 } from '@shared/ui';
 import { SessionStorageService } from '@shared/web-api';
-import {catchError, debounceTime, distinctUntilChanged, first, Observable, of, switchMap, takeUntil, tap} from 'rxjs';
+import { catchError, debounceTime, EMPTY, Observable, of, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'smarti-registration-info-form',
@@ -52,7 +48,7 @@ export class RegistrationInfoFormComponent implements OnInit {
   public personalInfoForm: FormGroup<RegistrationInfoControls> = registrationInfoFormMapper();
   public personalInfoFormChange$: Observable<FormControlStatus> = this.personalInfoForm
     .statusChanges.pipe(takeUntil(this.destroy$));
-  private readonly currentStorageData: AllRegistrationSessionData =
+  private currentStorageData: AllRegistrationSessionData =
     JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
   constructor(
@@ -139,7 +135,7 @@ export class RegistrationInfoFormComponent implements OnInit {
           else {
             this.alertsService.showErrorNotificationIcon('שגיאה');
           }
-          return of(err);
+          return EMPTY;
         }),
         debounceTime(500),
         takeUntil(this.destroy$),
@@ -148,17 +144,27 @@ export class RegistrationInfoFormComponent implements OnInit {
   }
 
   private setItemSessionStorage(tokenResponse: CreateEmployerOutResponse | null): void {
-    this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify({
-      email: this.personalInfoForm.controls.email.value as string,
-      phone: this.personalInfoForm.controls.phone.value as string,
-      companyName: this.personalInfoForm.controls.companyName.value as string,
-      identifier: this.personalInfoForm.controls.identifier.value as string,
-      yourName: this.personalInfoForm.controls.yourName.value as string,
-      departmentId: tokenResponse === null ? this.currentStorageData.departmentId : tokenResponse?.departmentId,
-      employerId: tokenResponse === null ? this.currentStorageData.employerId : tokenResponse?.employerId,
-      userId: tokenResponse === null ? this.currentStorageData.userId : tokenResponse?.userId,
-      acceptPrivacy: this.personalInfoForm.controls.acceptPrivacy.value as boolean,
-      finishInfoPage: true,
-    }));
+    if (tokenResponse === null) {
+      this.currentStorageData = JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
+      this.currentStorageData.email = this.personalInfoForm.controls.email.value as string;
+      this.currentStorageData.phone = this.personalInfoForm.controls.phone.value  as string;
+      this.currentStorageData.companyName = this.personalInfoForm.controls.companyName.value as string;
+      this.currentStorageData.identifier = this.personalInfoForm.controls.identifier.value as string;
+      this.currentStorageData.yourName = this.personalInfoForm.controls.yourName.value as string;
+      this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
+    } else {
+      this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify({
+        email: this.personalInfoForm.controls.email.value as string,
+        phone: this.personalInfoForm.controls.phone.value as string,
+        companyName: this.personalInfoForm.controls.companyName.value as string,
+        identifier: this.personalInfoForm.controls.identifier.value as string,
+        yourName: this.personalInfoForm.controls.yourName.value as string,
+        departmentId: tokenResponse?.departmentId,
+        employerId: tokenResponse?.employerId,
+        userId: tokenResponse?.userId,
+        acceptPrivacy: this.personalInfoForm.controls.acceptPrivacy.value as boolean,
+        finishInfoPage: true,
+      }));
+    }
   }
 }
