@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@environment';
+import { environment } from '../../../environments';
 import { Observable } from 'rxjs';
 import { ApiLoginBody, SignInResponse, SuccessResponse, UsersCheckVerifyCodeBody } from '../models';
 
