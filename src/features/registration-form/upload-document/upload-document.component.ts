@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UploadFileService } from '@shared/api/services';
+import {ProcessesService, UploadFileService} from '@shared/api/services';
 import {
   AsideProcessDialogComponent,
   DownloadSampleDialogComponent,
@@ -81,6 +81,8 @@ export class UploadDocumentComponent implements OnInit {
     private readonly uploadFileService: UploadFileService,
     private readonly router: Router,
     private readonly alertsService: AlertsService,
+    private readonly processesService: ProcessesService,
+
   ) {
   }
 
@@ -110,6 +112,9 @@ export class UploadDocumentComponent implements OnInit {
   }
 
   public fileUploaded(uploadedAndId: FileUploadStatusAndId): void {
+    if(this.is_file&&this.uploadDocumentsForm.controls.files.value?.length as number>1){
+      this.deleteFile()
+    }
     if (uploadedAndId.status && this.uploadDocumentsForm.controls.files.value) {
       this.opswatId.push(uploadedAndId.id as string);
     }
@@ -118,6 +123,9 @@ export class UploadDocumentComponent implements OnInit {
   }
 
   public removeFile(opsId: string): void {
+    if(this.is_file){
+      this.deleteFile()
+    }
     this.opswatId = this.opswatId.filter(id => id !== opsId);
   }
 
@@ -242,5 +250,20 @@ export class UploadDocumentComponent implements OnInit {
       this.currentFilesArray[index].isUploaded = true;
       this.currentFilesArray[index].index = index;
     }
+  }
+
+  private deleteFile(){
+    this.uploadDocumentsForm.controls.files.setValue(null)
+    this.processesService.apiDeleteProcess(this.currentStorageData.processId as string).pipe().subscribe(() =>{
+      delete this.currentStorageData.files;
+      delete this.currentStorageData.finishFilesPage;
+      delete this.currentStorageData.employeesCount;
+      delete this.currentStorageData.processId;
+      delete this.currentStorageData.total;
+      delete this.currentStorageData.finishConfirmPayment;
+      delete this.currentStorageData.paymentFiles;
+      const updatedDataString = JSON.stringify(this.currentStorageData);
+      sessionStorage.setItem('registrationData', updatedDataString)
+      });
   }
 }

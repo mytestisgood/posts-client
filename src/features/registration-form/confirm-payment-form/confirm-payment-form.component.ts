@@ -92,28 +92,21 @@ export class ConfirmPaymentFormComponent implements OnInit {
   }
 
   public openDialogAccountForm(content: PolymorpheusContent<TuiDialogContext>): void {
-
-    const dialogRef = this.dialogs.open<number>(
-      new PolymorpheusComponent(AccountFormDialogComponent, this.injector),
-      {
-        data: 237,
-        dismissible: true,
-      },
-    );
-    dialogRef.subscribe(aaa => {
-      alert(aaa);
-    });
-    // const dialogRef = this.dialogs.open(content, {
-    //   closeable: false,
-    //   size: 'l',
-    // }).pipe(takeUntil(this.destroy$)).subscribe({
-    //   next: data => {
-    //    alert({ data });
+    //
+    // const dialogRef = this.dialogs.open<number>(
+    //   new PolymorpheusComponent(AccountFormDialogComponent, this.injector),
+    //   {
+    //     data: 237,
+    //     dismissible: true,
     //   },
-    //   complete: () => {
-    //     console.info('Dialog closed');
-    //   },
+    // );
+    // dialogRef.subscribe(aaa => {
+    //   alert(aaa);
     // });
+    const dialogRef = this.dialogs.open(content, {
+      closeable: false,
+      size: 'l',
+    }).pipe(takeUntil(this.destroy$)).subscribe();
 
     // interval(100).pipe(
     //   map(() => {

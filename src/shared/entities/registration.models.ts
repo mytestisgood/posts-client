@@ -32,8 +32,8 @@ export interface AllRegistrationSessionData {
   paymentFiles?: FileWithLoading[];
   paymentDate?: string;
   accountNumber?: string;
-  bankName?: string;
-  branchNumber?: string;
+  bank?: IdAndNameResponse;
+  branch?: IdAndNameResponse;
   codeNumber?: string;
   finishConfirmPayment?: boolean;
   total?: number;

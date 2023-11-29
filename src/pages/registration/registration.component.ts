@@ -54,7 +54,6 @@ export class RegistrationComponent {
         if (isContinue) {
           this.sessionStorageService.setItem(TOKEN, this.route.snapshot.queryParams['token'] as string);
           this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.route.snapshot.data['continueProcessData'].data?.registrationData));
-          this.sessionStorageService.setItem(IS_LOGGED_IN, this.route.snapshot.data['continueProcessData'].data?.isLoggedIn as string);
         }
         this.isFirstTemplate = !(isConfirmPaymentPage || isVerifyCodePage);
         if (this.isFirstTemplate) {

@@ -53,6 +53,13 @@ export class AccountFormDialogComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    if (this.currentStorageData.accountNumber){
+      this.accountForm.setValue({
+        bankName:  this.currentStorageData.bank as IdAndNameResponse,
+        accountNumber: this.currentStorageData.accountNumber,
+        branchNumber:  this.currentStorageData.branch as IdAndNameResponse
+      })
+    }
     this.isDisabled = !this.accountForm.valid;
     this.accountForm.updateValueAndValidity({ emitEvent: true });
     this.accountFormChange$.subscribe((isValid: FormControlStatus) =>
@@ -71,7 +78,6 @@ export class AccountFormDialogComponent implements OnInit {
             this.accountForm.patchValue({
               branchNumber: null,
             });
-
           }
         }
         return of();
@@ -94,13 +100,12 @@ export class AccountFormDialogComponent implements OnInit {
 
   public sendRequest(): void {
     // this.configContext.completeWith('j');
-    this.currentStorageData.bankName = this.accountForm.value.bankName as string;
+    this.currentStorageData.bank = this.accountForm.value.bankName as IdAndNameResponse;
     this.currentStorageData.accountNumber = this.accountForm.value.accountNumber as string;
-    // this.currentStorageData.branchNumber = this.accountForm.value?.branchNumber?.id as string;
-    this.currentStorageData.branchNumber = (this.accountForm.value?.branchNumber?.id as unknown) as string;
+    this.currentStorageData.branch = this.accountForm.value?.branchNumber as IdAndNameResponse;
     this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
     this.registerService.apiEmployersUpdatePaymentOut({
-      branchId: this.currentStorageData.branchNumber,
+      branchId: this.accountForm.value.branchNumber?.id,
       accountNumber: this.currentStorageData.accountNumber,
       departmentId: this.currentStorageData.departmentId,
     }).pipe().subscribe(() =>

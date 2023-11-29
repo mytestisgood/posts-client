@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { createObjectHttpParams } from '../../helpers/http.helper';
 import {
   BooleanResultResponse,
-  CheckIsDateResponse,
+  CheckIsDateResponse, DocumentIdDeleteParameters,
   DownloadPaymentsInstructionResponse,
   FilesListGetResponse,
   ProcessesChangeFileToNegativeBody,
@@ -135,5 +135,8 @@ export class ProcessesService {
 
   public apiProcessesUpdateTypeProcessPost(data: ProcessesUpdateTypeProcessBody): Observable<SuccessResponse> {
     return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/updateTypeProcess`, data);
+  }
+  public apiDeleteProcess(processesId: string): Observable<string> {
+    return this.http.delete<string>(`${environment.authUrl}/api/processes/${processesId}?departmentId=7234`);
   }
 }

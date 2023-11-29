@@ -20,7 +20,7 @@ export interface EmployersCreatePaymentOutBody {
   payBySmarti?: boolean;
 }
 export interface EmployersUpdatePaymentOutBody {
-  branchId?: string;
+  branchId?: number;
   departmentId?: string;
   accountNumber?: string;
 }
