@@ -98,7 +98,7 @@ export class LoginFormComponent implements OnInit {
     ).subscribe((response:SignInResponse) => {
       const step: StepUserEnum = response.user?.step as StepUserEnum;
       if (response.role === 'employer') {
-      if(step=== 'finish'){
+      if(step === 'finish') {
         this.sessionStorageService.setItem(TOKEN, response.token as string);
         this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
         this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
