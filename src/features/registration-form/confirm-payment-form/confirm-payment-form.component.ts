@@ -1,8 +1,8 @@
-import { CommonModule, DatePipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AccountFormDialogComponent } from '@shared/dialog';
+import {CommonModule, DatePipe} from '@angular/common';
+import {AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AccountFormDialogComponent} from '@shared/dialog';
 import {
   AllRegistrationSessionData,
   ConfirmPaymentControls,
@@ -12,15 +12,27 @@ import {
   REGISTRATION_DATA, registrationConfirmPaymentLink, registrationSetPasswordLink,
   registrationVerifyCodeLink, TOKEN,
 } from '@shared/entities';
-import { AlertsService, DestroyService } from '@shared/services';
-import { ButtonComponent, InputDateComponent, InputFileComponent } from '@shared/ui';
-import { SessionStorageService } from '@shared/web-api';
-import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import { catchError, debounceTime, forkJoin, interval, map, of, takeUntil, takeWhile, tap, timer } from 'rxjs';
-import { ProgressBarComponent } from '../../progress-bar/progress-bar.component';
-import { ProcessesService } from '@shared/api/services';
-import { CreateEmployerOutResponse, ProcessesUpdateBody } from '@shared/api/models';
+import {AlertsService, DestroyService} from '@shared/services';
+import {ButtonComponent, InputDateComponent, InputFileComponent} from '@shared/ui';
+import {SessionStorageService} from '@shared/web-api';
+import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
+import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
+import {
+  catchError,
+  debounceTime,
+  forkJoin,
+  interval,
+  map,
+  of,
+  takeUntil,
+  takeWhile,
+  tap,
+  timer,
+  withLatestFrom
+} from 'rxjs';
+import {ProgressBarComponent} from '../../progress-bar/progress-bar.component';
+import {ProcessesService, RegisterService} from '@shared/api/services';
+import {CreateEmployerOutResponse, ProcessesUpdateBody} from '@shared/api/models';
 
 @Component({
   selector: 'smarti-confirm-payment-form',
@@ -45,6 +57,7 @@ export class ConfirmPaymentFormComponent implements OnInit {
 
   public processesUpdateBody: ProcessesUpdateBody = {};
   public updateProcessDate$ = this.processesService.apiProcessesUpdatePost(this.processesUpdateBody);
+
   constructor(
     @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
     private readonly router: Router,
@@ -52,6 +65,7 @@ export class ConfirmPaymentFormComponent implements OnInit {
     private readonly sessionStorageService: SessionStorageService,
     private readonly processesService: ProcessesService,
     private readonly alertsService: AlertsService,
+    private readonly registerService: RegisterService,
     public datePipe: DatePipe,
   ) {
     this.isDirectPayment = this.currentStorageData.transferMoneyMode !== 'smarti';
@@ -64,7 +78,7 @@ export class ConfirmPaymentFormComponent implements OnInit {
         files: this.currentStorageData.paymentFiles,
         date: this.currentStorageData.paymentDate,
       });
-      this.confirmPaymentForm.updateValueAndValidity({ emitEvent: true });
+      this.confirmPaymentForm.updateValueAndValidity({emitEvent: true});
     }
   }
 
@@ -120,6 +134,9 @@ export class ConfirmPaymentFormComponent implements OnInit {
         this.alertsService.showErrorNotificationIcon('שגיאה');
         return of(err);
       }),
-    ).subscribe(() => this.router.navigate([registrationVerifyCodeLink]));
+    ).subscribe(() => {
+      this.registerService.apiRegisterUpdateUserStep().pipe().
+      subscribe(() => this.router.navigate([registrationVerifyCodeLink]))
+    });
   }
 }

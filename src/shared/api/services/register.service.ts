@@ -10,7 +10,7 @@ import {
   RegisterResponse, SendEmailUserContinueProcessParameters, SendEmailUserContinueProcessResponse,
   SuccessResponse,
 } from '../models';
-import {AllRegistrationSessionData, UserProcessDataByStepResponse} from "@shared/entities";
+import {AllRegistrationSessionData, BaseResponse, UserProcessDataByStepResponse} from "@shared/entities";
 
 @Injectable({
   providedIn: 'root',
@@ -37,11 +37,15 @@ export class RegisterService {
     return this.http.post<RegisterResponse>(`${environment.authUrl}/api/register`, data)
   }
 
+
   public sendEmailUserContinueProcess(data: SendEmailUserContinueProcessParameters): Observable<SendEmailUserContinueProcessResponse> {
     return this.http.post<SendEmailUserContinueProcessResponse>(`${environment.authUrl}/api/users/sendEmailUserContinueProcess`, data)
   }
 
   public getUserProcessDataByStep(): Observable<UserProcessDataByStepResponse> {
     return this.http.get<UserProcessDataByStepResponse>(`${environment.authUrl}/api/users/getUserProcessDataByStep`)
+  }
+  public apiRegisterUpdateUserStep(): Observable<BaseResponse> {
+    return this.http.get<BaseResponse>(`${environment.authUrl}/api/users/updateUserStep`)
   }
 }

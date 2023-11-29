@@ -51,20 +51,8 @@ export class SetUpPasswordFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    console.log(1)
     const queryParams = this.route.snapshot.queryParams;
-
-    if (!isEmpty(queryParams)) {
-      console.log(77777777)
-      // this.registerService.getUserProcessDataByStep().pipe().subscribe();
-      this.email = this.route.snapshot.queryParams['email'];
-      this.sessionStorageService.setItem(TOKEN, this.route.snapshot.queryParams['token'] as string);
-      this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify({
-        email: this.email,
-        departmentId: this.route.snapshot.queryParams['departmentId'],
-      }));
-      this.currentStorageData = JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
-    } else {
+    if (isEmpty(queryParams)|| queryParams["isContinue"]) {
       this.email = this.currentStorageData.email;
       if (this.currentStorageData.password?.length) {
         this.passwordControl.setValue(this.currentStorageData.password);
@@ -72,6 +60,14 @@ export class SetUpPasswordFormComponent implements OnInit {
         this.isDisabled = !this.passwordControl.valid;
         this.text_button = 'עדכון סיסמה';
       }
+    } else {
+      this.email = this.route.snapshot.queryParams['email'];
+      this.sessionStorageService.setItem(TOKEN, this.route.snapshot.queryParams['token'] as string);
+      this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify({
+        email: this.email,
+        departmentId: this.route.snapshot.queryParams['departmentId'],
+      }));
+      this.currentStorageData = JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
     }
 
     this.passwordControlChange$.subscribe(status => {

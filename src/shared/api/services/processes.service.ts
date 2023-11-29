@@ -125,7 +125,6 @@ export class ProcessesService {
   public apiProcessesUpdatePost(data: ProcessesUpdateBody): Observable<string> {
     return this.http.post<string>(`${environment.authUrl}/api/processes/update`, data);
   }
-
   public apiProcessesUpdateProcessPost(data: ProcessesUpdateProcessBody): Observable<SuccessResponse> {
     return this.http.post<SuccessResponse>(`${environment.authUrl}/api/processes/updateProcess`, data);
   }

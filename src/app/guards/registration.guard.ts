@@ -34,7 +34,7 @@ export class RegistrationGuard {
     this.currentStorageData = JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
 
 
-    if (currentRoute === registrationSetPasswordLink && this.currentStorageData?.finishInfoPage || isContinue) {
+    if (currentRoute === registrationSetPasswordLink && this.currentStorageData?.finishInfoPage || queryParams) {
       return true;
     } else if (currentRoute === registrationUploadFileLink && this.currentStorageData?.finishPasswordPage || isContinue) {
       return true;

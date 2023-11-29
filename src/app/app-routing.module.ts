@@ -52,7 +52,7 @@ const routes: Routes = [
         canActivate: [RegistrationGuard],
       },
       {
-        path: 'payment-instruction',
+        path: 'payments-instruction',
         loadComponent: () => import('@shared/layout').then(m => m.PaymentInstructionComponent),
         canActivate: [RegistrationGuard],
       },

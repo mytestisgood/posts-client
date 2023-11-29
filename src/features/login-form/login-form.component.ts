@@ -1,28 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormControlStatus,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { Router } from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {FormControl, FormControlStatus, FormGroup, FormsModule, ReactiveFormsModule, Validators,} from '@angular/forms';
+import {Router} from '@angular/router';
 import {SignInResponse, StepUserEnum} from '@shared/api/models';
-import { SignInService } from '@shared/api/services';
-import {CURRENT_USER, DocumentTypesEnumEmployer, emailValidatorPattern, IS_LOGGED_IN, TOKEN} from '@shared/entities';
+import {SignInService} from '@shared/api/services';
+import {CURRENT_USER, emailValidatorPattern, IS_LOGGED_IN, TOKEN} from '@shared/entities';
 import {AlertsService, DestroyService} from '@shared/services';
-import {
-  ButtonComponent,
-  InputCheckboxComponent,
-  InputFieldComponent,
-  InputPasswordComponent,
-} from '@shared/ui';
-import { SessionStorageService } from '@shared/web-api';
-import {catchError, Observable, of, takeUntil, tap, throwError} from 'rxjs';
-import * as querystring from "querystring";
-import {getObjectKeyByValue} from "@shared/helpers";
+import {ButtonComponent, InputCheckboxComponent, InputFieldComponent, InputPasswordComponent,} from '@shared/ui';
+import {SessionStorageService} from '@shared/web-api';
+import {catchError, Observable, of, takeUntil, tap} from 'rxjs';
 
 interface LoginForm {
   email: FormControl<string | null>
@@ -56,11 +42,10 @@ export class LoginFormComponent implements OnInit {
     isRemember: new FormControl(false),
   });
   public isDisabled: boolean = true;
-  public loginFormChange$:Observable<FormControlStatus> = this.loginForm.statusChanges.pipe(
+  public loginFormChange$: Observable<FormControlStatus> = this.loginForm.statusChanges.pipe(
     tap((isValid: FormControlStatus) => this.isDisabled = !(isValid === 'VALID')),
     takeUntil(this.destroy$),
   );
-  public step: string[] = Object.values(StepUserEnum);
 
   constructor(
     private readonly router: Router,
@@ -88,23 +73,26 @@ export class LoginFormComponent implements OnInit {
         const MESSAGE_ERROR = 'Unauthenticated: invalid email or password';
         if ((err.error !== undefined && err.error.message === MESSAGE_ERROR) || err.message === MESSAGE_ERROR) {
           this.alertsService.showErrorNotificationIcon('שם המשתמש או הסיסמה שגויים');
-        }
-        else {
+        } else {
           this.alertsService.showErrorNotificationIcon('שגיאה');
         }
         return of(err);
       }),
       takeUntil(this.destroy$),
-    ).subscribe((response:SignInResponse) => {
-      const step: StepUserEnum = response.user?.step as StepUserEnum;
+    ).subscribe((response: SignInResponse) => {
+      const step = (response.user!.step ?? '')?.replace('_', '-');
       if (response.role === 'employer') {
-      if(step=== 'finish'){
-        this.sessionStorageService.setItem(TOKEN, response.token as string);
-        this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
-        this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
-        this.router.navigate(['/dashboard'], { replaceUrl: true });
-      }
-      else this.router.navigate(['/registration/','upload-file'],{ queryParams: { 'isContinue': true , 'token': response.token as string}})
+        if (step === 'finish') {
+          this.sessionStorageService.setItem(TOKEN, response.token as string);
+          this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
+          this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
+          this.router.navigate(['/dashboard'], {replaceUrl: true});
+        } else this.router.navigate(['./registration/', step], {
+          queryParams: {
+            'isContinue': true,
+            'token': response.token as string
+          }
+        })
       } else {
         throw new Error('Unauthenticated: invalid email or password');
         // throwError(() => new Error('Unauthenticated: invalid email or password'));
