@@ -1,12 +1,12 @@
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   Inject, OnDestroy, OnInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 import {ProcessesService, UploadFileService} from '@shared/api/services';
 import {
   AsideProcessDialogComponent,
@@ -23,8 +23,8 @@ import {
   UploadDocumentsControls,
   uploadingDocumentsFormMapper,
 } from '@shared/entities';
-import { getCurrentMonth, getCurrentYear } from '@shared/helpers';
-import { AlertsService, DestroyService } from '@shared/services';
+import {getCurrentMonth, getCurrentYear} from '@shared/helpers';
+import {AlertsService, DestroyService} from '@shared/services';
 import {
   ButtonComponent,
   DatePickerComponent,
@@ -32,11 +32,11 @@ import {
   NotificationComponent,
   SelectComponent,
 } from '@shared/ui';
-import { SessionStorageService } from '@shared/web-api';
-import { TuiAlertService, TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
-import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
-import { delay, startWith, switchMap, take, takeUntil, tap, withLatestFrom, iif, of, interval, Subscription } from 'rxjs';
-import { ProcessDetails } from '@shared/api/models';
+import {SessionStorageService} from '@shared/web-api';
+import {TuiAlertService, TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
+import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
+import {delay, startWith, switchMap, take, takeUntil, tap, withLatestFrom, iif, of, interval, Subscription} from 'rxjs';
+import {ProcessDetails} from '@shared/api/models';
 
 @Component({
   selector: 'smarti-upload-document',
@@ -82,7 +82,6 @@ export class UploadDocumentComponent implements OnInit {
     private readonly router: Router,
     private readonly alertsService: AlertsService,
     private readonly processesService: ProcessesService,
-
   ) {
   }
 
@@ -112,27 +111,24 @@ export class UploadDocumentComponent implements OnInit {
   }
 
   public fileUploaded(uploadedAndId: FileUploadStatusAndId): void {
-    if(this.is_file&&this.uploadDocumentsForm.controls.files.value?.length as number>1){
-      this.deleteFile()
-    }
     if (uploadedAndId.status && this.uploadDocumentsForm.controls.files.value) {
       this.opswatId.push(uploadedAndId.id as string);
     }
     this.documentUploaded = uploadedAndId.status;
-    this.uploadDocumentsForm.updateValueAndValidity({ emitEvent: true });
+    this.uploadDocumentsForm.updateValueAndValidity({emitEvent: true});
   }
 
   public removeFile(opsId: string): void {
-    if(this.is_file){
+    if (this.is_file) {
       this.deleteFile()
     }
     this.opswatId = this.opswatId.filter(id => id !== opsId);
   }
 
   public navigateToRegistrationInfo(): void {
-    if (this.currentStorageData.password==='can not change')
-    this.router.navigate([registrationInfoLink]);
-    else  this.router.navigate([registrationSetPasswordLink])
+    if (this.currentStorageData.password === 'can not change')
+      this.router.navigate([registrationInfoLink]);
+    else this.router.navigate([registrationSetPasswordLink])
   }
 
   public openSampleDialog(content: PolymorpheusContent<TuiDialogContext>): void {
@@ -198,6 +194,7 @@ export class UploadDocumentComponent implements OnInit {
       }
     });
   }
+
   public set_process(response: ProcessDetails): void {
     if (response.status !== null) {
       switch (response.status) {
@@ -229,13 +226,13 @@ export class UploadDocumentComponent implements OnInit {
                 opsId: file1?.opsId,
               });
             });
-              this.currentStorageData.finishFilesPage = true;
-              this.currentStorageData.processId = response.id;
-              this.currentStorageData.total = response.total;
-              this.currentStorageData.employeesCount = response.count_employee;
-              this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
-              this.router.navigate([registrationTransferMoneyLink]);
-              }, 1000);
+            this.currentStorageData.finishFilesPage = true;
+            this.currentStorageData.processId = response.id;
+            this.currentStorageData.total = response.total;
+            this.currentStorageData.employeesCount = response.count_employee;
+            this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.currentStorageData));
+            this.router.navigate([registrationTransferMoneyLink]);
+          }, 1000);
           break;
         }
       }
@@ -252,9 +249,11 @@ export class UploadDocumentComponent implements OnInit {
     }
   }
 
-  private deleteFile(){
-    this.uploadDocumentsForm.controls.files.setValue(null)
-    this.processesService.apiDeleteProcess(this.currentStorageData.processId as string).pipe().subscribe(() =>{
+  private deleteFile() {
+    this.uploadDocumentsForm.controls.files.setValue([])
+    this.opswatId = []
+    this.is_file = false
+    this.processesService.apiDeleteProcess(this.currentStorageData.processId as string).pipe().subscribe(() => {
       delete this.currentStorageData.files;
       delete this.currentStorageData.finishFilesPage;
       delete this.currentStorageData.employeesCount;
@@ -264,6 +263,6 @@ export class UploadDocumentComponent implements OnInit {
       delete this.currentStorageData.paymentFiles;
       const updatedDataString = JSON.stringify(this.currentStorageData);
       sessionStorage.setItem('registrationData', updatedDataString)
-      });
+    });
   }
 }
