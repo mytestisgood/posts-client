@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@environment';
+import { environment } from '../../../environments';
 import { Observable } from 'rxjs';
 import { createObjectHttpParams } from '../../helpers/http.helper';
 import { GetGroupThingInProcessGetParameters, GetGroupThingInProcessGetResponse } from '../models';
