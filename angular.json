@@ -34,7 +34,7 @@
               "dompurify",
               "file-saver"
             ],
-            "outputPath": "dist/smarti-client",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
