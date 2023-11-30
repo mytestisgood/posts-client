@@ -5,12 +5,12 @@ import {catchError, map, Observable, of} from 'rxjs';
 import {
   CreateEmployerOutResponse,
   EmployersCreateEmployerOutBody,
-  EmployersCreatePaymentOutBody,
+  EmployersCreatePaymentOutBody, EmployersUpdatePaymentOutBody,
   RegisterParameters,
   RegisterResponse, SendEmailUserContinueProcessParameters, SendEmailUserContinueProcessResponse,
   SuccessResponse,
 } from '../models';
-import {AllRegistrationSessionData, UserProcessDataByStepResponse} from "@shared/entities";
+import {AllRegistrationSessionData, BaseResponse, UserProcessDataByStepResponse} from "@shared/entities";
 
 @Injectable({
   providedIn: 'root',
@@ -33,9 +33,15 @@ export class RegisterService {
     return this.http.post<SuccessResponse>(`${environment.authUrl}/api/employers/createPaymentOut`, data)
   }
 
+  public apiEmployersUpdatePaymentOut(data: EmployersUpdatePaymentOutBody): Observable<SuccessResponse> {
+    return this.http.post<SuccessResponse>(`${environment.authUrl}/api/employers/updatePaymentOut`, data)
+  }
+
+
   public apiRegisterPost(data: RegisterParameters): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${environment.authUrl}/api/register`, data)
   }
+
 
   public sendEmailUserContinueProcess(data: SendEmailUserContinueProcessParameters): Observable<SendEmailUserContinueProcessResponse> {
     return this.http.post<SendEmailUserContinueProcessResponse>(`${environment.authUrl}/api/users/sendEmailUserContinueProcess`, data)
@@ -43,5 +49,8 @@ export class RegisterService {
 
   public getUserProcessDataByStep(): Observable<UserProcessDataByStepResponse> {
     return this.http.get<UserProcessDataByStepResponse>(`${environment.authUrl}/api/users/getUserProcessDataByStep`)
+  }
+  public apiRegisterUpdateUserStep(): Observable<BaseResponse> {
+    return this.http.get<BaseResponse>(`${environment.authUrl}/api/users/updateUserStep`)
   }
 }

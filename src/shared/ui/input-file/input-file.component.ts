@@ -46,6 +46,7 @@ export class InputFileComponent implements OnInit
 {
   @Input() public customWidth!: string;
   @Input() public customHeight!: string;
+  @Input() public is_previous_files: boolean;
   @Input() public control: FormControl<FileWithLoading[] | null> = new FormControl([]);
   @Output() public fileUploaded: BehaviorSubject<FileUploadStatusAndId> =
     new BehaviorSubject<FileUploadStatusAndId>({status: false, id: null});
@@ -83,10 +84,14 @@ export class InputFileComponent implements OnInit
   // }
 
   public uploadSecondFile(file: HTMLInputElement): void {
+    if(this.is_previous_files){
+      this.fileRemoved.next('');
+  }
+    else{
     const files: FileWithLoading[] = Array.from(file.files as FileList) as FileWithLoading[];
 
     this.control.setValue([...this.control.value as FileWithLoading[], ...files]);
-    this.control.updateValueAndValidity({onlySelf: true, emitEvent: false});
+    this.control.updateValueAndValidity({onlySelf: true, emitEvent: false});}
   }
 
   private fileStatusChanges(): void {

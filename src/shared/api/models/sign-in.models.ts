@@ -16,8 +16,8 @@ export interface ApiLoginBody {
 }
 
 export enum StepUserEnum {
-  set_password = 'set-password',
   upload_file = 'upload-file',
+  'set_password' = 'set_password',
   transfer_money = 'transfer-money',
   payments_instruction = 'payments-instruction',
   confirm_payment = 'confirm-payment',

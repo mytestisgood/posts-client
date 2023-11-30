@@ -57,6 +57,9 @@ export class ProgressBarComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
+    const index = this.currentUrl.indexOf('?')
+    if (index !== -1)
+      this.currentUrl = this.currentUrl.substring(0,index)
     switch (this.currentUrl) {
       case registrationInfoLink:
         this.updateCounter(2);

@@ -6,7 +6,7 @@ export const registrationInfoLink: string = '/registration/info';
 export const registrationSetPasswordLink: string = '/registration/set-password';
 export const registrationUploadFileLink: string = '/registration/upload-file';
 export const registrationTransferMoneyLink: string = '/registration/transfer-money';
-export const registrationPaymentInstructionLink: string = '/registration/payment-instruction';
+export const registrationPaymentInstructionLink: string = '/registration/payments-instruction';
 export const registrationConfirmPaymentLink: string = '/registration/confirm-payment';
 export const registrationVerifyCodeLink: string = '/registration/verify-code';
 export const loginAfterRegistrationLink: string = '/login';
@@ -32,8 +32,8 @@ export interface AllRegistrationSessionData {
   paymentFiles?: FileWithLoading[];
   paymentDate?: string;
   accountNumber?: string;
-  bankName?: string;
-  branchNumber?: string;
+  bank?: IdAndNameResponse;
+  branch?: IdAndNameResponse;
   codeNumber?: string;
   finishConfirmPayment?: boolean;
   total?: number;
@@ -102,3 +102,8 @@ export interface UserProcessSessionData{
   specialHeaderToken?: string
 
 }
+export interface BaseResponse{
+  code?:string,
+  message: string
+}
+

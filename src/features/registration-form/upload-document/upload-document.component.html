@@ -16,6 +16,7 @@
       [customWidth]="'536px'"
       [customHeight]="'150px'"
       [control]="uploadDocumentsForm.controls.files"
+      [is_previous_files]="is_file"
       (fileUploaded)="fileUploaded($event)"
       (fileRemoved)="removeFile($event)"
     ></smarti-input-file>

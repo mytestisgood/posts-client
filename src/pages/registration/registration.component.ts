@@ -44,13 +44,16 @@ export class RegistrationComponent {
   ) {
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
-        const isConfirmPaymentPage: boolean = this.router.url === registrationConfirmPaymentLink;
-        const isVerifyCodePage: boolean = this.router.url === registrationVerifyCodeLink;
+        const index = this.router.url.indexOf('?')
+        let url = this.router.url
+        if (index !== -1)
+          url = url.substring(0,index)
+        const isConfirmPaymentPage: boolean = url === registrationConfirmPaymentLink;
+        const isVerifyCodePage: boolean = url === registrationVerifyCodeLink;
         const isContinue = this.route.snapshot.queryParams['isContinue'];
         if (isContinue) {
           this.sessionStorageService.setItem(TOKEN, this.route.snapshot.queryParams['token'] as string);
           this.sessionStorageService.setItem(REGISTRATION_DATA, JSON.stringify(this.route.snapshot.data['continueProcessData'].data?.registrationData));
-          // this.sessionStorageService.setItem(IS_LOGGED_IN, this.route.snapshot.data['continueProcessData'].data?.isLoggedIn as string);
         }
         this.isFirstTemplate = !(isConfirmPaymentPage || isVerifyCodePage);
         if (this.isFirstTemplate) {
