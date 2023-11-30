@@ -67,7 +67,6 @@ export class ConfirmPaymentFormComponent implements OnInit {
     public datePipe: DatePipe,
   ) {
     this.isDirectPayment = this.currentStorageData.transferMoneyMode !== 'smarti';
-    this.isDisabled = this.isDirectPayment;
   }
 
   public ngOnInit(): void {
@@ -80,7 +79,7 @@ export class ConfirmPaymentFormComponent implements OnInit {
     }
     this.isDisabled = !this.confirmPaymentForm.valid;
     this.confirmPaymentFormChange$.subscribe((isValid: FormControlStatus) =>
-      this.isDisabled = !(isValid === 'VALID'),
+      this.isDisabled = !(isValid === 'VALID') || (this.isDirectPayment&&!this.currentStorageData.accountNumber),
     );
   }
 
