@@ -105,7 +105,7 @@ export class RegistrationInfoFormComponent implements OnInit {
           else {
             this.alertsService.showErrorNotificationIcon('שגיאה');
           }
-          return of(err);
+          return EMPTY;
         }),
         debounceTime(500),
         takeUntil(this.destroy$),
