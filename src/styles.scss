@@ -168,3 +168,6 @@ router-outlet.router-flex + * {
   background: none;
 }
 
+tui-hint {
+  min-width: 50px!important;
+}
