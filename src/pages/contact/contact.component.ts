@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -6,18 +6,18 @@ import {
   Component,
   ElementRef,
 } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LeadService } from '@shared/api/services';
-import { ScrollManagerDirective } from '@shared/directives';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {LeadService} from '@shared/api/services';
+import {ScrollManagerDirective} from '@shared/directives';
 import {
   emailValidatorPattern,
   israelMobilePhoneValidatorPattern,
   LeadsForm,
 } from '@shared/entities';
-import { FooterComponent, HeaderComponent } from '@shared/layout';
-import { DestroyService } from '@shared/services';
-import { ButtonComponent, ExpandComponent, InputFieldComponent } from '@shared/ui';
-import { takeUntil } from 'rxjs';
+import {FooterComponent, HeaderComponent} from '@shared/layout';
+import {AlertsService, DestroyService} from '@shared/services';
+import {ButtonComponent, ExpandComponent, InputFieldComponent, InputNumberComponent} from '@shared/ui';
+import {takeUntil} from 'rxjs';
 
 @Component({
   selector: 'smarti-contact',
@@ -31,6 +31,7 @@ import { takeUntil } from 'rxjs';
     InputFieldComponent,
     ScrollManagerDirective,
     ReactiveFormsModule,
+    InputNumberComponent,
   ],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
@@ -49,11 +50,13 @@ export class ContactComponent implements AfterViewInit {
 
   constructor(
     private readonly elementRef: ElementRef,
+    private readonly alertsService: AlertsService,
     private readonly destroy$: DestroyService,
     private readonly leadService: LeadService,
     private readonly changeDetectorRef: ChangeDetectorRef,
   ) {
   }
+
   public ngAfterViewInit(): void {
     this.elementRef.nativeElement.ownerDocument
       .body.style.backgroundColor = '#F7F9FC';
@@ -68,9 +71,14 @@ export class ContactComponent implements AfterViewInit {
       email: this.leadsForm.controls.email.value as string,
       phone: this.leadsForm.controls.phone.value as string,
       name: this.leadsForm.controls.name.value as string,
-    }).pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.isExpanded = !this.isExpanded;
-      this.changeDetectorRef.detectChanges();
+    }).pipe(takeUntil(this.destroy$)).subscribe(res => {
+      if (res.message == 'ok') {
+        this.alertsService.showSuccessNotificationIcon('המייל נשלח בהצלחה')
+        this.isExpanded = !this.isExpanded;
+        this.changeDetectorRef.detectChanges();
+      } else {
+        this.alertsService.showErrorNotificationIcon('שגיאה')
+      }
     });
   }
 }

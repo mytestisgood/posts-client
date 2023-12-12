@@ -20,12 +20,12 @@
     >
       <div
         class="company-list-item rounded-l border-neutrals-800 bg-neutrals-950"
-        *ngFor="let _ of ' '.repeat(8).split('')"
+        *ngFor="let company of companies$"
       >
-        <div class="company-list-item__image"></div>
+        <div class="company-list-item__image" [style.background-image]="'url(' + company?.smallImag + ')'"></div>
         <div class="flex justify-end gap-3-5">
-          <div class="medium-text mt-2 dir-rtl white-text">Company name</div>
-          <div class="company-list-item__logo rounded-l"></div>
+          <div class="medium-text mt-2 dir-rtl white-text">{{company?.name}}</div>
+          <div class="company-list-item__logo rounded-l" [style.background]="'url(' + company?.smallImag + ')'"></div>
         </div>
       </div>
     </div>

@@ -9,10 +9,10 @@ import {
   VerificationEmailControls,
   verifyEmailFormMapper,
 } from '@shared/entities';
-import { DestroyService } from '@shared/services';
+import {AlertsService, DestroyService} from '@shared/services';
 import { ButtonComponent, InputNumberComponent } from '@shared/ui';
 import { TuiDialogService } from '@taiga-ui/core';
-import { takeUntil, tap } from 'rxjs';
+import {catchError, of, takeUntil, tap} from 'rxjs';
 
 @Component({
   selector: 'smarti-verify-email-form',
@@ -41,6 +41,8 @@ export class VerifyEmailFormComponent implements OnInit {
     private readonly dialogs: TuiDialogService,
     private readonly destroy$: DestroyService,
     private readonly signInService: SignInService,
+    private readonly alertsService: AlertsService,
+
     private readonly router: Router,
   ) {
   }
@@ -62,7 +64,17 @@ export class VerifyEmailFormComponent implements OnInit {
       code: this.verifyEmailInfo.controls.emailVerifyCode.value as string,
       departmentId: this.departmentId,
     }).pipe(
+      tap(res => {
+        if (res.message=='success'){
+          this.router.navigate([loginAfterRegistrationLink])        }
+      }),
+      catchError((err) => {
+        if(err.error.message=='code not valid'){
+          this.alertsService.showErrorNotificationIcon('קוד לא תקין')
+        }
+        return of(err);
+      }),
       takeUntil(this.destroy$),
-    ).subscribe(() => this.router.navigate([loginAfterRegistrationLink]));
+    ).subscribe();
   }
 }

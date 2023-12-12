@@ -21,7 +21,7 @@
       (fileRemoved)="removeFile($event)"
     ></smarti-input-file>
     <div
-      *ngIf="!documentUploaded"
+      *ngIf="!uploadDocumentsForm.controls.files.dirty"
       class="blue-custom-1-text paragraph-text underline text-left mt-2 cursor-pointer hover:opacity-90"
       (click)="openSampleDialog(sampleDialogTemplate)"
     >

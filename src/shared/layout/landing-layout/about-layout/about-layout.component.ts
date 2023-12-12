@@ -19,7 +19,7 @@ export class AboutLayoutComponent {
   @ViewChild('carouselAboutElement') public carouselAboutElement!: ElementRef;
 
   public firstLeadDialogsDescription: string = 'הסדרי הפנסיה מספקים מקור הכנסה אמין במהלך שנות הזהב שלכם, ומאפשרים' +
-    ' לכם לשמור על רמת החיים שלכם וליהנות מפירות עמלכם.';
+    ' לכם לשמור על רמת החיים שלכם וליהנות מפירות עמל .כם';
   public secondLeadDialogsDescription: string = 'הסדרי הפנסיה מספקים מקור הכנסה אמין במהלך שנות הזהב שלכם, ומאפשרים' +
     ' לכם לשמור על רמת החיים שלכם וליהנות מפירות עמלכם.';
   public thirdLeadDialogsDescription: string = 'הסדרי הפנסיה מספקים מקור הכנסה אמין במהלך שנות הזהב שלכם, ומאפשרים' +

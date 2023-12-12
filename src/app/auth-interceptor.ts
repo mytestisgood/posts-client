@@ -9,6 +9,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SessionStorageService } from '@shared/web-api';
 import { TOKEN } from '@shared/entities';
+import {TUI_DIALOGS_CLOSE} from "@taiga-ui/core";
 
 @Injectable()
 
@@ -38,4 +39,7 @@ export const AuthHttpInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
   useClass: AuthInterceptor,
   multi: true,
+};
+export const AuthHttterceptorProvider = {
+  provide: TUI_DIALOGS_CLOSE,
 };

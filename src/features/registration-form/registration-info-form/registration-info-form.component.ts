@@ -1,30 +1,30 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {
   FormControlStatus,
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { CreateEmployerOutResponse } from '@shared/api/models';
-import { RegisterService, SignInService } from '@shared/api/services';
+import {Router} from '@angular/router';
+import {CreateEmployerOutResponse} from '@shared/api/models';
+import {RegisterService, SignInService} from '@shared/api/services';
 import {
   AllRegistrationSessionData,
-  IS_LOGGED_IN,
+  IS_LOGGED_IN, loginAfterRegistrationLink,
   REGISTRATION_DATA,
   RegistrationInfoControls,
   registrationInfoFormMapper,
   registrationSetPasswordLink, TOKEN,
 } from '@shared/entities';
-import { AlertsService, DestroyService } from '@shared/services';
+import {AlertsService, DestroyService} from '@shared/services';
 import {
   ButtonComponent,
   InputCheckboxComponent,
   InputFieldComponent,
   InputNumberComponent,
 } from '@shared/ui';
-import { SessionStorageService } from '@shared/web-api';
-import { catchError, debounceTime, EMPTY, Observable, of, takeUntil, tap } from 'rxjs';
+import {SessionStorageService} from '@shared/web-api';
+import {catchError, debounceTime, EMPTY, Observable, of, takeUntil, tap} from 'rxjs';
 
 @Component({
   selector: 'smarti-registration-info-form',
@@ -42,7 +42,7 @@ import { catchError, debounceTime, EMPTY, Observable, of, takeUntil, tap } from 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationInfoFormComponent implements OnInit {
-  public title = 'צור חשבון!' ;
+  public title = 'צור חשבון!';
   public textButton = 'הירשם';
   public isDisabled: boolean = true;
   public personalInfoForm: FormGroup<RegistrationInfoControls> = registrationInfoFormMapper();
@@ -76,11 +76,12 @@ export class RegistrationInfoFormComponent implements OnInit {
       acceptPrivacy: this.currentStorageData?.acceptPrivacy ?? false,
     });
     this.isDisabled = !this.personalInfoForm.valid;
-    this.personalInfoForm.updateValueAndValidity({ emitEvent: true });
+    this.personalInfoForm.updateValueAndValidity({emitEvent: true});
     this.personalInfoFormChange$.subscribe((isValid: FormControlStatus) =>
       this.isDisabled = !(isValid === 'VALID'),
     );
   }
+
   public navigateToUploadFile(): void {
     if (!this.currentStorageData) {
       this.registerService.apiEmployersCreateEmployerOutPost({
@@ -94,22 +95,25 @@ export class RegistrationInfoFormComponent implements OnInit {
           this.setItemSessionStorage(tokenResponse);
           this.sessionStorageService.setItem(TOKEN, tokenResponse.token as string);
           this.sessionStorageService.setItem(IS_LOGGED_IN, 'false');
+          if (tokenResponse.message == 'success') {
+            this.router.navigate([registrationSetPasswordLink])
+          }
         }),
         catchError((err) => {
           if (err.error.message === 'user exists') {
             this.alertsService.showErrorNotificationIcon('המשתמש שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
-          }
-          else if (err.error.message === 'identifier exists') {
+            this.router.navigate([loginAfterRegistrationLink])
+          } else if (err.error.message === 'identifier exists') {
             this.alertsService.showErrorNotificationIcon('המעסיק שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
-          }
-          else {
+            this.router.navigate([loginAfterRegistrationLink])
+          } else {
             this.alertsService.showErrorNotificationIcon('שגיאה');
           }
           return of(err);
         }),
         debounceTime(500),
         takeUntil(this.destroy$),
-      ).subscribe(() => this.router.navigate([registrationSetPasswordLink]));
+      ).subscribe();
 
     } else { //update employer
       this.registerService.apiEmployersUpdateEmployerOut({
@@ -131,8 +135,7 @@ export class RegistrationInfoFormComponent implements OnInit {
             this.alertsService.showErrorNotificationIcon('מעסיק לא נמצא');
           } else if (err.error.message === 'identifier exists') {
             this.alertsService.showErrorNotificationIcon('המעסיק שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
-          }
-          else {
+          } else {
             this.alertsService.showErrorNotificationIcon('שגיאה');
           }
           return EMPTY;
@@ -147,7 +150,7 @@ export class RegistrationInfoFormComponent implements OnInit {
     if (tokenResponse === null) {
       this.currentStorageData = JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string);
       this.currentStorageData.email = this.personalInfoForm.controls.email.value as string;
-      this.currentStorageData.phone = this.personalInfoForm.controls.phone.value  as string;
+      this.currentStorageData.phone = this.personalInfoForm.controls.phone.value as string;
       this.currentStorageData.companyName = this.personalInfoForm.controls.companyName.value as string;
       this.currentStorageData.identifier = this.personalInfoForm.controls.identifier.value as string;
       this.currentStorageData.yourName = this.personalInfoForm.controls.yourName.value as string;

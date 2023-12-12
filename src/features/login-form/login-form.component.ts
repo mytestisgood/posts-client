@@ -94,6 +94,7 @@ export class LoginFormComponent implements OnInit {
           }
         })
       } else {
+        this.alertsService.showErrorNotificationIcon('שגיאה')
         throw new Error('Unauthenticated: invalid email or password');
         // throwError(() => new Error('Unauthenticated: invalid email or password'));
       }

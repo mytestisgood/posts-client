@@ -42,13 +42,17 @@ export class AccountFormDialogComponent implements OnInit {
   private readonly value: number | null = null;
 
   constructor(
+    @Inject(TuiDialogService) private readonly dialogs: TuiDialogService,
+
+    @Inject(POLYMORPHEUS_CONTEXT)
+    private readonly context: TuiDialogContext<number, number>,
+
     private readonly destroy$: DestroyService,
     private readonly sessionStorageService: SessionStorageService,
     private readonly bankService: BankService,
     private readonly chatService: ChatService,
     private readonly registerService: RegisterService,
-    @Inject(POLYMORPHEUS_CONTEXT)
-    private readonly context: TuiDialogContext<number, number>,
+
   ) {
   }
 
@@ -99,6 +103,8 @@ export class AccountFormDialogComponent implements OnInit {
   }
 
   public sendRequest(): void {
+    // this.context.$implicit.complete();
+
     // this.configContext.completeWith('j');
     this.currentStorageData.bank = this.accountForm.value.bankName as IdAndNameResponse;
     this.currentStorageData.accountNumber = this.accountForm.value.accountNumber as string;

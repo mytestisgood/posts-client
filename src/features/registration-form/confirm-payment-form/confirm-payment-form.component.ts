@@ -79,7 +79,8 @@ export class ConfirmPaymentFormComponent implements OnInit {
     }
     this.isDisabled = !this.confirmPaymentForm.valid;
     this.confirmPaymentFormChange$.subscribe((isValid: FormControlStatus) =>
-      this.isDisabled = !(isValid === 'VALID') || (this.isDirectPayment&&!this.currentStorageData.accountNumber),
+      // this.isDisabled = !(isValid === 'VALID') || (this.isDirectPayment&&!this.currentStorageData.accountNumber),
+      this.isDisabled = !(isValid === 'VALID') ,
     );
   }
 
@@ -91,6 +92,7 @@ export class ConfirmPaymentFormComponent implements OnInit {
   }
 
   public openDialogAccountForm(content: PolymorpheusContent<TuiDialogContext>): void {
+
     //
     // const dialogRef = this.dialogs.open<number>(
     //   new PolymorpheusComponent(AccountFormDialogComponent, this.injector),
