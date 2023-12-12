@@ -1,5 +1,5 @@
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { emailValidatorPattern, fiveNumberRegex, israelMobilePhoneValidatorPattern } from './common.models';
+import {emailValidatorPattern, fiveNumberRegex, israelMobilePhoneValidatorPattern, onlyLetters} from './common.models';
 import {
   AccountControls,
   ConfirmPaymentControls,
@@ -10,10 +10,10 @@ import {
 
 export function registrationInfoFormMapper(): FormGroup<RegistrationInfoControls> {
   return new FormGroup<RegistrationInfoControls>({
-    companyName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    companyName: new FormControl('', [Validators.required, Validators.minLength(3) && Validators.pattern(onlyLetters)]),
     identifier: new FormControl('', [Validators.required, validIDValueValidator()]),
     email: new FormControl('', [Validators.required, Validators.pattern(emailValidatorPattern) ]),
-    yourName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    yourName: new FormControl('', [Validators.required, Validators.minLength(3) && Validators.pattern(onlyLetters)]),
     phone: new FormControl('', [Validators.required, Validators.pattern(israelMobilePhoneValidatorPattern)]),
     acceptPrivacy: new FormControl(false, [Validators.requiredTrue]),
   });

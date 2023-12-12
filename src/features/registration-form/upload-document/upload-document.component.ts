@@ -7,19 +7,19 @@ import {
 } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
-import {ProcessesService, UploadFileService} from '@shared/api/services';
+import {ProcessesService, SignInService, UploadFileService} from '@shared/api/services';
 import {
   AsideProcessDialogComponent,
   DownloadSampleDialogComponent,
   ForwardRequestDialogComponent,
 } from '@shared/dialog';
 import {
-  AllRegistrationSessionData,
+  AllRegistrationSessionData, CURRENT_USER,
   FileUploadStatusAndId,
-  FileWithLoading, loginAfterRegistrationLink,
+  FileWithLoading, IS_LOGGED_IN, loginAfterRegistrationLink,
   REGISTRATION_DATA, registrationInfoLink,
   registrationSetPasswordLink,
-  registrationTransferMoneyLink,
+  registrationTransferMoneyLink, TOKEN,
   UploadDocumentsControls,
   uploadingDocumentsFormMapper,
 } from '@shared/entities';
@@ -35,8 +35,21 @@ import {
 import {SessionStorageService} from '@shared/web-api';
 import {TuiAlertService, TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
 import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
-import {delay, startWith, switchMap, take, takeUntil, tap, withLatestFrom, iif, of, interval, Subscription} from 'rxjs';
-import {ProcessDetails} from '@shared/api/models';
+import {
+  delay,
+  startWith,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
+  withLatestFrom,
+  iif,
+  of,
+  interval,
+  Subscription,
+  catchError
+} from 'rxjs';
+import {ProcessDetails, SignInResponse} from '@shared/api/models';
 
 @Component({
   selector: 'smarti-upload-document',
@@ -77,6 +90,7 @@ export class UploadDocumentComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly changeDetectionRef: ChangeDetectorRef,
     private readonly destroy$: DestroyService,
+    private readonly signInService: SignInService,
     private readonly sessionStorageService: SessionStorageService,
     private readonly uploadFileService: UploadFileService,
     private readonly router: Router,
@@ -206,8 +220,7 @@ export class UploadDocumentComponent implements OnInit {
           this.sub.unsubscribe();
           this.alertsService.showErrorNotificationIcon('יש בעיה בקובץ הקובץ מעובר לטיפול מנהל תיק\n' +
             'יצרו איתך תוך 24 שעות');
-          this.sessionStorageService.clear();
-          this.router.navigate([loginAfterRegistrationLink]);
+          this.doLogin()
           break;
         }
         case 'can_be_processed': {
@@ -263,6 +276,24 @@ export class UploadDocumentComponent implements OnInit {
       delete this.currentStorageData.paymentFiles;
       const updatedDataString = JSON.stringify(this.currentStorageData);
       sessionStorage.setItem('registrationData', updatedDataString)
+    });
+  }
+
+  public doLogin(): void {
+    this.signInService.apiLoginPost({
+      email: this.currentStorageData.email as string,
+      password: this.currentStorageData.password as string,
+    }).pipe(
+      catchError((err) => {
+        this.alertsService.showErrorNotificationIcon('שגיאה');
+        return of(err);
+      }),
+      takeUntil(this.destroy$),
+    ).subscribe((response: SignInResponse) => {
+      this.sessionStorageService.setItem(TOKEN, response.token as string);
+      this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
+      this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
+      this.router.navigate(['/dashboard'], {replaceUrl: true});
     });
   }
 }

@@ -13,7 +13,7 @@ export class AlertsService {
   }
   public showSuccessNotificationIcon(message: string): void {
     this.alerts.open(message, {
-      autoClose: true,
+      autoClose: 5000,
       hasCloseButton: false,
       status: 'success',
       icon: '/assets/svg/success-notification-icon-32.svg',
@@ -22,7 +22,7 @@ export class AlertsService {
 
   public showErrorNotificationIcon(message: string): void {
     this.alerts.open(message, {
-      autoClose: true,
+      autoClose: 5000,
       hasCloseButton: false,
       status: 'error',
       icon: '/assets/svg/error-notification-icon-32.svg',

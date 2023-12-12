@@ -106,10 +106,11 @@ export class RegistrationInfoFormComponent implements OnInit {
           } else if (err.error.message === 'identifier exists') {
             this.alertsService.showErrorNotificationIcon('המעסיק שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
             this.router.navigate([loginAfterRegistrationLink])
-          } else {
+          }
+          else {
             this.alertsService.showErrorNotificationIcon('שגיאה');
           }
-          return of(err);
+          return EMPTY;
         }),
         debounceTime(500),
         takeUntil(this.destroy$),
@@ -130,14 +131,13 @@ export class RegistrationInfoFormComponent implements OnInit {
         }),
         catchError((err) => {
           if (err.error.message === 'user exists') {
-            this.alertsService.showErrorNotificationIcon('המשתמש שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
+            this.alertsService.showErrorNotificationIcon('המשתמש שהוזן כבר קיים - ניתן להתחבר דרך דף התחברות');
           } else if (err.error.message === 'employer doesnt exists') {
             this.alertsService.showErrorNotificationIcon('מעסיק לא נמצא');
           } else if (err.error.message === 'identifier exists') {
             this.alertsService.showErrorNotificationIcon('המעסיק שהוזן כבר קיים- ניתן להתחבר דרך דף התחברות');
           } else {
-            this.alertsService.showErrorNotificationIcon('שגיאה');
-          }
+            this.alertsService.showErrorNotificationIcon('שגיאה');}
           return EMPTY;
         }),
         debounceTime(500),
