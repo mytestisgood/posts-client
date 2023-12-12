@@ -11,7 +11,7 @@ import {
 export function registrationInfoFormMapper(): FormGroup<RegistrationInfoControls> {
   return new FormGroup<RegistrationInfoControls>({
     companyName: new FormControl('', [Validators.required, Validators.minLength(3) && Validators.pattern(onlyLetters)]),
-    identifier: new FormControl('', [Validators.required, validIDValueValidator()]),
+    identifier: new FormControl('', [Validators.required,  validIDValueValidator()]),
     email: new FormControl('', [Validators.required, Validators.pattern(emailValidatorPattern) ]),
     yourName: new FormControl('', [Validators.required, Validators.minLength(3) && Validators.pattern(onlyLetters)]),
     phone: new FormControl('', [Validators.required, Validators.pattern(israelMobilePhoneValidatorPattern)]),
@@ -23,9 +23,11 @@ export function validIDValueValidator(): ValidatorFn {
     const id = control.value;
     let isValid:boolean;
 
-    if (id.length !== 9 || isNaN(id)) {  // Make sure ID is formatted properly
+    if (id.length !== 9 || isNaN(id) || id === '000000000') {  // Make sure ID is formatted properly
       isValid = false;
+      return isValid ? null : { invalidValue: true };
     }
+
     let sum = 0, incNum;
 
     for (let i = 0; i < id.length; i++) {

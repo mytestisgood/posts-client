@@ -120,7 +120,7 @@ export class UploadDocumentComponent implements OnInit {
 
   public removeFile(opsId: string): void {
     if (this.is_file) {
-      this.deleteFile()
+      this.deleteFile();
     }
     this.opswatId = this.opswatId.filter(id => id !== opsId);
   }

@@ -3,7 +3,7 @@
     <smarti-progress-bar [currentUrl]="currentUrl"></smarti-progress-bar>
   </div>
   <h3 class="medium text-center mb-0 dir-rtl mt-6">
-    <div>כל הכבוד:</div>
+    <div>כל הכבוד!</div>
   </h3>
   <div class="neutrals-text-950 text-center paragraph-text">
     כעת יש לציין את תאריך הערך בו בוצע התשלום ולטעון את האסמכתא על התשלום
@@ -31,6 +31,7 @@
   </div>
   <div class="flex justify-center">
     <smarti-input-file
+      [accept]="'.pdf'"
       [customWidth]="'536px'"
       [customHeight]="'150px'"
       [control]="confirmPaymentForm.controls.files"
@@ -58,7 +59,7 @@
 
 <ng-template #smartiPaymentTemplate>
   <div class="neutrals-text-950 paragraph-text text-center mt-8">
-    הנני מאשר כי פרטי התשלום המוצגים נבדקו מול תוכנות השכר והינם תקינים.
+    .הנני מאשר כי פרטי התשלום המוצגים נבדקו מול תוכנות השכר והינם תקינים
   </div>
 </ng-template>
 
