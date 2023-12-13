@@ -24,7 +24,7 @@ export function validIDValueValidator(): ValidatorFn {
     let isValid:boolean;
 
     if (id.length !== 9 || isNaN(id)) {  // Make sure ID is formatted properly
-      isValid = false;
+      return { invalidValue: true };
     }
     let sum = 0, incNum;
 

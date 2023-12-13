@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments';
 import { Observable } from 'rxjs';
 import { ApiLoginBody, SignInResponse, SuccessResponse, UsersCheckVerifyCodeBody } from '../models';
+import {createObjectHttpParams} from "@shared/helpers";
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +22,9 @@ export class SignInService {
 
   public apiUsersSendVerifyCodeGet(): Observable<SuccessResponse> {
     return this.http.get<SuccessResponse>(`${environment.authUrl}/api/users/sendVerifyCode`);
+  }
+
+  public apiForgotPasswordGet(emailOrPhone: any): Observable<SuccessResponse> {
+    return this.http.get<SuccessResponse>(`${environment.authUrl}/api/forgotPassword`,{ params: createObjectHttpParams(emailOrPhone) });
   }
 }

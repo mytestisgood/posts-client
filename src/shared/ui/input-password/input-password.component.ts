@@ -29,6 +29,7 @@ export class InputPasswordComponent {
   @Output() public outputValue: Subject<string> = new Subject<string>();
 
   public onValidatePasswordValue(): void {
+    console.log(222, this.control.valid)
     if (this.control.valid) {
       this.outputValue.next(this.control.value as string);
     } else {

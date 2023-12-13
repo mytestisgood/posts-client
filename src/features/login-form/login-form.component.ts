@@ -71,9 +71,12 @@ export class LoginFormComponent implements OnInit {
     }).pipe(
       catchError((err) => {
         const MESSAGE_ERROR = 'Unauthenticated: invalid email or password';
+        const MESSAGE_PROCESS_TREATMENT= 'process is in treatment';
         if ((err.error !== undefined && err.error.message === MESSAGE_ERROR) || err.message === MESSAGE_ERROR) {
           this.alertsService.showErrorNotificationIcon('שם המשתמש או הסיסמה שגויים');
-        } else {
+        }else if ((err.error !== undefined && err.error.message === MESSAGE_PROCESS_TREATMENT) || err.message === MESSAGE_PROCESS_TREATMENT) {
+          this.alertsService.showErrorNotificationIcon('יש בעיה בקובץ שהעלית. הקובץ הועבר לטיפול מנהל תיק. ייצרו איתך קשר בהקדם האפשרי');}
+        else {
           this.alertsService.showErrorNotificationIcon('שגיאה');
         }
         return of(err);

@@ -1,5 +1,5 @@
 <div [ngClass]="{ 'flex justify-between': isHorizontal, 'big-radio': customClass === 'big' }">
-  <tui-radio-labeled
+  <tui-radio-labeled class="dir-rtl"
     [formControl]="radioValue"
     [item]="items[0]"
     (change)="changeValue(items[0].name)"
@@ -17,7 +17,7 @@
       </div>
     </div>
   </tui-radio-labeled>
-  <tui-radio-labeled
+  <tui-radio-labeled class="dir-rtl"
     [ngClass]="{
       'mt-0': isHorizontal,
       'mt-6': !isHorizontal

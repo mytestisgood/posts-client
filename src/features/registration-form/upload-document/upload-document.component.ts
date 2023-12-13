@@ -91,6 +91,7 @@ export class UploadDocumentComponent implements OnInit {
     private readonly changeDetectionRef: ChangeDetectorRef,
     private readonly destroy$: DestroyService,
     private readonly signInService: SignInService,
+
     private readonly sessionStorageService: SessionStorageService,
     private readonly uploadFileService: UploadFileService,
     private readonly router: Router,
@@ -220,7 +221,8 @@ export class UploadDocumentComponent implements OnInit {
           this.sub.unsubscribe();
           this.alertsService.showErrorNotificationIcon('יש בעיה בקובץ הקובץ מעובר לטיפול מנהל תיק\n' +
             'יצרו איתך תוך 24 שעות');
-          this.doLogin()
+          this.sessionStorageService.clear();
+          this.router.navigate(['/']);
           break;
         }
         case 'can_be_processed': {
@@ -279,21 +281,4 @@ export class UploadDocumentComponent implements OnInit {
     });
   }
 
-  public doLogin(): void {
-    this.signInService.apiLoginPost({
-      email: this.currentStorageData.email as string,
-      password: this.currentStorageData.password as string,
-    }).pipe(
-      catchError((err) => {
-        this.alertsService.showErrorNotificationIcon('שגיאה');
-        return of(err);
-      }),
-      takeUntil(this.destroy$),
-    ).subscribe((response: SignInResponse) => {
-      this.sessionStorageService.setItem(TOKEN, response.token as string);
-      this.sessionStorageService.setItem(CURRENT_USER, JSON.stringify(response.user));
-      this.sessionStorageService.setItem(IS_LOGGED_IN, 'true');
-      this.router.navigate(['/dashboard'], {replaceUrl: true});
-    });
-  }
 }

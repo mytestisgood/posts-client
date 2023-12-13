@@ -24,10 +24,9 @@ export class VerifyStepComponent implements OnInit {
   @Input() public startingForm!: FormGroup;
   @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
-
   public verifyStepForm!: FormGroup;
   public items: { name: string }[] = [{ name: 'email' }, { name: 'phone' }];
-  public radioValue: FormControl<{ name: string } | null> = new FormControl();
+  public radioValue: FormControl<{ name: string } | null> = new FormControl({name: 'phone'});
   public isModeChosen: boolean = false;
   public isDisabled: boolean = true;
 
@@ -48,6 +47,9 @@ export class VerifyStepComponent implements OnInit {
   public doChangeContent(mode: string): void {
     if (mode === 'email' || mode === 'phone') {
       this.isModeChosen = true;
+      if(mode==='email'){
+
+      }
     }
   }
 

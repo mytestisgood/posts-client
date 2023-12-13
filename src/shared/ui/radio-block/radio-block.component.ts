@@ -4,11 +4,12 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TuiHintModule } from '@taiga-ui/core';
 import { TuiRadioLabeledModule } from '@taiga-ui/kit';
 import { Subject } from 'rxjs';
+import {InputNumberComponent} from "../input-number/input-number.component";
 
 @Component({
   selector: 'smarti-radio-block',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TuiRadioLabeledModule, TuiHintModule],
+  imports: [CommonModule, ReactiveFormsModule, TuiRadioLabeledModule, TuiHintModule, InputNumberComponent],
   templateUrl: './radio-block.component.html',
   styleUrls: ['./radio-block.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,20 +1,12 @@
 <div class="margin-rl-auto flex flex-col">
-  <h3 class="mt-10 medium text-center neutrals-text-950">לטובת עדכון סיסמא,ניתן לשלוח קוד באמצעות</h3>
-  <div class="mt-20 flex justify-center">
-    <smarti-radio-block
-      [labelFirstText]="'כתובת מייל <b>name@mail.com</b>'"
-      [labelSecondText]="'מספר טלפון <b>050****565</b>'"
-      [items]="items"
-      [radioValue]="radioValue"
-      (chosenValue)="doChangeContent($event)"
-    ></smarti-radio-block>
-  </div>
-
+  <h3 class="mt-10 medium text-center neutrals-text-950">לטובת עדכון סיסמא</h3>
   <div
-    *ngIf="isModeChosen"
     class="flex justify-center flex-col mt-12"
   >
-    <div class="regular-text text-center neutrals-text-950 mb-4">Please enter OTP code</div>
+    <div
+      class="regular-text text-center neutrals-text-950 mb-4">
+      אנא הזן/י קוד שהתקבל
+    </div>
     <div class="self-center">
       <smarti-input-number
         [centerVerify]="true"
@@ -23,9 +15,9 @@
         (inputFilled)="changeButtonStatus($event)"
       ></smarti-input-number>
     </div>
-    <div class="mt-14 bright-turquoise-text-500 text-underline text-center paragraph-text-medium cursor-pointer">
-      שלח קוד מחדש
-    </div>
+<!--    <div class="mt-14 bright-turquoise-text-500 text-underline text-center paragraph-text-medium cursor-pointer">-->
+<!--      שלח קוד מחדש-->
+<!--    </div>-->
   </div>
 
   <div
@@ -35,7 +27,7 @@
     <smarti-button
       [customButtonWidth]="'431px'"
       [typeClass]="'confirm'"
-      [text]="'אישור ואיפוס סיסמא '"
+      [text]="'המשך'"
       [disabled]="isDisabled"
       (buttonClicked)="doChangeStep('forward')"
     ></smarti-button>
@@ -43,8 +35,7 @@
       class="usual-button-no-size go-back cursor-pointer smarti-button-text rounded-m flex gap-2 items-center justify-center"
       (click)="redirectToLogin()"
     >
-      <div>חזרה</div>
-      <div class="arrow-left-dark-16"></div>
+      <div>חזרה >  </div>
     </button>
   </div>
 </div>

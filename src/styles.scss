@@ -171,3 +171,7 @@ router-outlet.router-flex + * {
 tui-hint {
   min-width: 50px!important;
 }
+input:focus-visible {
+  border: none;
+  outline: none; /* Optionally, remove the outline as well */
+}

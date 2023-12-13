@@ -125,6 +125,12 @@ export class ConfirmPaymentFormComponent implements OnInit {
   }
 
   public navigateToVerifyCode(): void {
+    if(this.currentStorageData.transferMoneyMode=='directly'){
+      const accountNumber = JSON.parse(this.sessionStorageService.getItem(REGISTRATION_DATA) as string).accountNumber
+      if(!accountNumber){
+        return this.alertsService.showErrorNotificationIcon('נא הזינו פרטי בנק')
+      }
+    }
     if (this.confirmPaymentForm.valid) {
       const observablesArray = [this.updateProcessDate$];
       this.processesUpdateBody.type = 'date';

@@ -14,5 +14,5 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResetPasswordFormComponent {
-  @Output() public changingStep: BehaviorSubject<string> = new BehaviorSubject<string>('verifyStep');
+  @Output() public changingStep: BehaviorSubject<string> = new BehaviorSubject<string>('chooseVerifyType');
 }
