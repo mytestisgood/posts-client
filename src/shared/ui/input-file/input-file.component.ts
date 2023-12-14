@@ -14,14 +14,14 @@ import {FileUploadStatusAndId, FileWithLoading, loginAfterRegistrationLink} from
 import {takeRight} from '@shared/helpers';
 import {AlertsService, DestroyService} from '@shared/services';
 import {TuiLinkModule, TuiLoaderModule, TuiSvgModule} from '@taiga-ui/core';
-import {TuiInputFilesModule, TuiMarkerIconModule} from '@taiga-ui/kit';
+import {TuiFileLike, TuiInputFilesModule, TuiMarkerIconModule} from '@taiga-ui/kit';
 import {
   BehaviorSubject,
   catchError,
   combineLatest, delay,
   forkJoin, interval,
   Observable,
-  of, repeat, retry, skipWhile,
+  of, repeat, retry, skipWhile, Subject,
   switchMap, take,
   takeUntil, takeWhile, tap, timeout,
 } from 'rxjs';
@@ -45,6 +45,7 @@ import {
 export class InputFileComponent implements OnInit
 {
   @Input() public customWidth!: string;
+  @Input() public accept = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .dat, .xml, .xlsx, .xls';
   @Input() public customHeight!: string;
   @Input() public is_previous_files: boolean;
   @Input() public control: FormControl<FileWithLoading[] | null> = new FormControl([]);
@@ -56,6 +57,7 @@ export class InputFileComponent implements OnInit
   public isSecondFileUpload: boolean = false;
   public currentFilesIndex: number = 0;
   private status!: 'VALID' | 'INVALID' | 'PENDING' | 'DISABLED';
+  private rejectedFiles$: any;
 
   constructor(
     private readonly filesMyHrService: FilesMyHrService,

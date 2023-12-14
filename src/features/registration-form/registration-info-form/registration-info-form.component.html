@@ -38,9 +38,9 @@
     ></smarti-input-number>
   </div>
   <div class="personal-info mt-8 flex gap-4">
-    <div class="personal-info__text paragraph-text-medium text-right neutrals-text-950 margin-left-160">
-      <div>קראתי והסכמתי לתנאי השימוש ומדיניות</div>
-      <div>
+    <div (click)="openTermsOfUse(termsOfUse)" class="cursor-pointer text-underline personal-info__text paragraph-text-medium text-right neutrals-text-950 margin-left-160">
+      <div >קראתי והסכמתי לתנאי השימוש ומדיניות</div>
+      <div >
         <span>Smarti</span>
         הפרטיות של
       </div>
@@ -55,3 +55,7 @@
     [disabled]="isDisabled"
   ></smarti-button>
 </form>
+
+<ng-template #termsOfUse>
+  <smarti-terms-of-use></smarti-terms-of-use>
+</ng-template>

@@ -52,15 +52,17 @@ export class LeadsDialogComponent {
   }
 
   public sendRequest(): void {
-    this.leadService.apiLeadsCreateLeadPost({
-      email: this.leadsForm.controls.email.value as string,
-      name: this.leadsForm.controls.name.value as string,
-      phone: this.leadsForm.controls.phone.value as string,
-      src: this.leadType,
-      friend_name: this.friendName,
-      friend_email: this.friendEmail,
-    })
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.observer.complete());
+    if(this.leadsForm.valid) {
+      this.leadService.apiLeadsCreateLeadPost({
+        email: this.leadsForm.controls.email.value as string,
+        name: this.leadsForm.controls.name.value as string,
+        phone: this.leadsForm.controls.phone.value as string,
+        src: this.leadType,
+        friend_name: this.friendName,
+        friend_email: this.friendEmail,
+      })
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => this.observer.complete());
+    }
   }
 }

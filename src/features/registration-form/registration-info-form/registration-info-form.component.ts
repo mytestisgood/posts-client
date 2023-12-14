@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
 import {
   FormControlStatus,
   FormGroup,
@@ -25,6 +25,9 @@ import {
 } from '@shared/ui';
 import {SessionStorageService} from '@shared/web-api';
 import {catchError, debounceTime, EMPTY, Observable, of, takeUntil, tap} from 'rxjs';
+import {TermsOfUseComponent} from "../../../pages/registration/terms-of-use/terms-of-use.component";
+import {TuiDialogContext, TuiDialogService} from "@taiga-ui/core";
+import {PolymorpheusContent} from "@tinkoff/ng-polymorpheus";
 
 @Component({
   selector: 'smarti-registration-info-form',
@@ -36,6 +39,7 @@ import {catchError, debounceTime, EMPTY, Observable, of, takeUntil, tap} from 'r
     InputCheckboxComponent,
     ButtonComponent,
     InputNumberComponent,
+    TermsOfUseComponent,
   ],
   templateUrl: './registration-info-form.component.html',
   styleUrls: ['./registration-info-form.component.scss'],
@@ -54,6 +58,8 @@ export class RegistrationInfoFormComponent implements OnInit {
   constructor(
     private readonly destroy$: DestroyService,
     private readonly registerService: RegisterService,
+    @Inject(TuiDialogService) private  readonly dialogs: TuiDialogService,
+
     private readonly signInService: SignInService,
     private readonly sessionStorageService: SessionStorageService,
     private readonly router: Router,
@@ -170,4 +176,10 @@ export class RegistrationInfoFormComponent implements OnInit {
       }));
     }
   }
+
+  openTermsOfUse(content: PolymorpheusContent<TuiDialogContext>){
+    this.dialogs.open(content, {
+      closeable: false,
+      size: 'm',
+    }).pipe(takeUntil(this.destroy$)).subscribe();}
 }

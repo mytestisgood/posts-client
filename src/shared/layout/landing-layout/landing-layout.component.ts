@@ -55,11 +55,11 @@ export class LandingLayoutComponent implements AfterViewInit {
       filter((e: NavigationEvent) => e instanceof Scroll),
       takeUntil(this.destroy$),
     ).subscribe(() => {
-      const tree = this.router.parseUrl(this.router.url);
+      const tree = this.router.parseUrl(decodeURIComponent(this.router.url));
       const element: HTMLElement = document.querySelector('#' + tree.fragment) as HTMLElement;
 
       if (element) {
-        const anchorOffset: 220 | 140 = tree.fragment === 'about' ? 220 : 140;
+        const anchorOffset: 220 | 140 = tree.fragment === 'solutions' ? 220 : 140;
         const offsetValue: number = element.offsetTop - anchorOffset;
 
         if (tree.fragment && element) {

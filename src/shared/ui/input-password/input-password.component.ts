@@ -2,7 +2,12 @@ import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
-import { TuiInputModule, TuiInputPasswordModule } from '@taiga-ui/kit';
+import {
+  TUI_INPUT_PASSWORD_DEFAULT_OPTIONS,
+  TUI_INPUT_PASSWORD_OPTIONS,
+  TuiInputModule,
+  TuiInputPasswordModule
+} from '@taiga-ui/kit';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -14,6 +19,18 @@ import { Subject } from 'rxjs';
     TuiInputPasswordModule,
     TuiTextfieldControllerModule,
     TuiInputModule,
+  ],
+  providers: [
+    {
+      provide: TUI_INPUT_PASSWORD_OPTIONS,
+      useValue: {
+        ...TUI_INPUT_PASSWORD_DEFAULT_OPTIONS,
+        icons: {
+          hide: 'tuiIconEyeOff',
+          show: 'tuiIconEye',
+        },
+      },
+    },
   ],
   templateUrl: './input-password.component.html',
   styleUrls: ['./input-password.component.scss'],
