@@ -8,12 +8,6 @@ export interface GetLeadingCompaniesResponse {
 export interface LeadCompany {
   id?: string;
   name?: string;
-  bigImag?: Image;
-  smallImag?: string;
-}
-
-export interface Image {
-  filename?: string;
-  ext?: string;
-  data?: string;
+  bigImg?: string;
+  smallImg?: string;
 }

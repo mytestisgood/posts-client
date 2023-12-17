@@ -1,23 +1,24 @@
 <div class="mt-4 mb-4 mx-auto">
-  <h3 class="medium neutrals-text-950 text-center w-[565px] mx-auto dir-rtl">
-    יש למלא את פרטי איש הקשר אליו ברצונך להעביר את בקשת העלאת הקובץ
-  </h3>
+  <div class="medium neutrals-text-950 text-center  mx-auto dir-rtl" [ngClass]="{}">
+    יש למלא את פרטי איש הקשר
+  <div class="medium neutrals-text-950 text-center mx-auto dir-rtl" >אליו ברצונך להעביר את בקשת העלאת הקובץ</div>
+  </div>
   <div
     class="flex flex-col items-center mt-14 gap-8"
     [formGroup]="forwardRequestForm"
   >
     <smarti-input-field
-      [customWidth]="'536px'"
+      [customWidth]="customWidth"
       [placeholder]="'שם מלא'"
       [control]="forwardRequestForm.controls.userName"
     ></smarti-input-field>
     <smarti-input-field
-      [customWidth]="'536px'"
+      [customWidth]="customWidth"
       [placeholder]="'כתובת אימייל*'"
       [control]="forwardRequestForm.controls.email"
     ></smarti-input-field>
     <smarti-input-number
-      [customWidth]="'536px'"
+      [customWidth]="customWidth"
       [placeholder]="'מספר טלפון*'"
       [control]="forwardRequestForm.controls.phone"
     ></smarti-input-number>

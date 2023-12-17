@@ -9,11 +9,11 @@
     <div>אנא העלו קובץ שכר חודשי (xml)</div>
   </h3>
   <div
-    class="file-upload mt-[72px]"
+    class="file-upload  gt-lg-tablet:mt-[72px] lt-lg-tablet:mt-7"
     [formGroup]="uploadDocumentsForm"
   >
     <smarti-input-file
-      [customWidth]="'536px'"
+      [customWidth]="customWidth"
       [customHeight]="'150px'"
       [control]="uploadDocumentsForm.controls.files"
       [is_previous_files]="is_file"
@@ -61,7 +61,7 @@
   let-observer
 >
   <smarti-forward-request-dialog
-    class="w-[800px]"
+    class="gt-lg-tablet:w-[800px] lt-lg-tablet:w-[100%]"
     [haveCloseIcon]="true"
     [observer]="observer"
     [departmentId]="departmentId"

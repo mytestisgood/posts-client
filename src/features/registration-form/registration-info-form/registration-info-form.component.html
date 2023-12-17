@@ -1,44 +1,44 @@
 <form
   class="flex flex-col items-center mt-10" [formGroup]="personalInfoForm">
   <h3 class="medium mt-10 mb-0 text-center neutrals-text-950 dir-rtl">{{ title }}</h3>
-  <div class="personal-info mt-8">
+  <div class="mt-8">
     <smarti-input-field
-      [customWidth]="'536px'"
+      [customWidth]="customWidth"
       [placeholder]="'שם החברה*'"
       [control]="personalInfoForm.controls.companyName"
     ></smarti-input-field>
   </div>
-  <div class="personal-info mt-8">
+  <div class="mt-8">
     <smarti-input-number
       [placeholder]="'ח.פ.*'"
       [control]="personalInfoForm.controls.identifier"
       [maxLength]="9"
-      [customWidth]="'536px'"
+      [customWidth]="customWidth"
     ></smarti-input-number>
   </div>
-  <div class="personal-info mt-8">
+  <div class="mt-8">
     <smarti-input-field
-      [customWidth]="'536px'"
+      [customWidth]="customWidth"
       [placeholder]="'שם מלא*'"
       [control]="personalInfoForm.controls.yourName"
     ></smarti-input-field>
   </div>
-  <div class="personal-info mt-8">
+  <div class="mt-8">
     <smarti-input-field
       [placeholder]="'כתובת אימייל*'"
-      [customWidth]="'536px'"
+      [customWidth]="customWidth"
       [control]="personalInfoForm.controls.email"
     ></smarti-input-field>
   </div>
-  <div class="personal-info mt-8">
+  <div class="mt-8">
     <smarti-input-number
-      [customWidth]="'536px'"
+      [customWidth]="customWidth"
       [placeholder]="'מספר טלפון*'"
       [control]="personalInfoForm.controls.phone"
     ></smarti-input-number>
   </div>
-  <div class="personal-info mt-8 flex gap-4">
-    <div (click)="openTermsOfUse(termsOfUse)" class="cursor-pointer text-underline personal-info__text paragraph-text-medium text-right neutrals-text-950 margin-left-160">
+  <div class="mt-8 flex gap-4">
+    <div (click)="openTermsOfUse(termsOfUse)" class="cursor-pointer text-underline paragraph-text-medium text-right neutrals-text-950" [ngClass]="{'margin-left-230':!isMobile}">
       <div >קראתי והסכמתי לתנאי השימוש ומדיניות</div>
       <div >
         <span>Smarti</span>

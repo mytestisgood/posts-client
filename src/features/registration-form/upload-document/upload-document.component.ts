@@ -50,6 +50,8 @@ import {
   catchError
 } from 'rxjs';
 import {ProcessDetails, SignInResponse} from '@shared/api/models';
+import {isMobile} from '@shared/helpers';
+
 
 @Component({
   selector: 'smarti-upload-document',
@@ -71,6 +73,8 @@ import {ProcessDetails, SignInResponse} from '@shared/api/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UploadDocumentComponent implements OnInit {
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '320px': '536px'
   public uploadDocumentsForm: FormGroup<UploadDocumentsControls> = uploadingDocumentsFormMapper();
   public documentUploaded: boolean = false;
   public dialogRef: any;

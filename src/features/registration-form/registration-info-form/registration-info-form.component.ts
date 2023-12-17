@@ -28,6 +28,7 @@ import {catchError, debounceTime, EMPTY, Observable, of, takeUntil, tap} from 'r
 import {TermsOfUseComponent} from "../../../pages/registration/terms-of-use/terms-of-use.component";
 import {TuiDialogContext, TuiDialogService} from "@taiga-ui/core";
 import {PolymorpheusContent} from "@tinkoff/ng-polymorpheus";
+import {isMobile} from '@shared/helpers';
 
 @Component({
   selector: 'smarti-registration-info-form',
@@ -46,6 +47,8 @@ import {PolymorpheusContent} from "@tinkoff/ng-polymorpheus";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationInfoFormComponent implements OnInit {
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '320px': '536px'
   public title = 'צור חשבון!';
   public textButton = 'הירשם';
   public isDisabled: boolean = true;

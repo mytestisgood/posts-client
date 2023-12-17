@@ -85,3 +85,15 @@
 .max-w-81 {
   max-width: 324px;
 }
+
+@media screen and (max-width: 1024px) {
+  .w-full-hd{
+    width: 100% !important;
+  }
+  .w-input-full-hd {
+    width: 320px !important;
+  }
+  .w-form-full-hd{
+    width: 100% !important;
+  }
+}

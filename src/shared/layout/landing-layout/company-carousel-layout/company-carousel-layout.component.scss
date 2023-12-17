@@ -1,9 +1,9 @@
 .company-list-item {
   width: 260px;
-  height: 288px;
+  height: 300px;
 
   &__image {
-    background: url("/assets/img/cafe-first.png");
+    //background: url("/assets/img/cafe-first.png");
     border-radius: 16px 16px 0 0;
     width: 260px;
     height: 200px;
@@ -15,6 +15,7 @@
     height: 96px;
     margin-inline-end: 8px;
     margin-bottom: 8px;
+    margin-top: -8px;
   }
 }
 

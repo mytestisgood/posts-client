@@ -22,6 +22,8 @@ import {
 } from 'rxjs';
 import { SessionStorageService } from '@shared/web-api';
 import { Router } from '@angular/router';
+import {isMobile} from '@shared/helpers';
+
 
 interface ForwardRequestForm {
   email: FormControl<string | null>;
@@ -49,6 +51,8 @@ export class ForwardRequestDialogComponent {
   @Input() public identifier!: string;
   @Input() public departmentId!: number;
   @Output() public requestSend: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '320px': '536px'
 
   public forwardRequestForm: FormGroup<ForwardRequestForm> = new FormGroup({
     email: new FormControl('', [

@@ -15,6 +15,7 @@ import {catchError, of, tap} from "rxjs";
 import {CreateEmployerOutResponse} from "@shared/api/models";
 import {AlertsService} from "@shared/services";
 import {SessionStorageService} from "@shared/web-api";
+import {isMobile} from '@shared/helpers';
 
 @Component({
   selector: 'smarti-registration',
@@ -32,6 +33,8 @@ import {SessionStorageService} from "@shared/web-api";
 })
 export class RegistrationComponent {
   public currentUrl: string = this.router.url;
+  public isMobile = isMobile
+
   public isFirstTemplate: boolean = true;
 
   constructor(

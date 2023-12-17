@@ -9,6 +9,7 @@ import {AlertsService, DestroyService} from '@shared/services';
 import {ButtonComponent, InputCheckboxComponent, InputFieldComponent, InputPasswordComponent,} from '@shared/ui';
 import {SessionStorageService} from '@shared/web-api';
 import {catchError, Observable, of, takeUntil, tap} from 'rxjs';
+import {isMobile} from '@shared/helpers';
 
 interface LoginForm {
   email: FormControl<string | null>
@@ -33,6 +34,8 @@ interface LoginForm {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent implements OnInit {
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '320px': '536px'
   public loginForm: FormGroup<LoginForm> = new FormGroup<LoginForm>({
     email: new FormControl('', [
       Validators.required,

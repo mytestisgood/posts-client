@@ -11,11 +11,11 @@
     ></smarti-header-auth-layout>
     <div class="w-full-hd margin-0-auto">
       <smarti-progress-bar [currentUrl]="currentUrl"></smarti-progress-bar>
-      <div class="flex justify-between mt-2">
-        <div class="seated-woman-icon"></div>
-        <h1 class="medium text-right self-center neutrals-text-950 dir-rtl">תודה שבחרתם - Smarti</h1>
+      <div class="flex justify-between mt-2" [ngClass]="{'justify-evenly':isMobile}">
+        <div class="seated-woman-icon lt-lg-tablet:hidden"></div>
+        <h1 class="medium text-right self-center neutrals-text-950 dir-rtl lt-lg-tablet:" [ngClass]="{'f-35':isMobile}">תודה שבחרתם - Smarti</h1>
       </div>
-      <div class="w-form-full-hd mt-2 mb-14 bg-white rounded-l box-shadow-big inline-grid">
+      <div class="w-form-full-hd mt-2 mb-14 bg-white rounded-l box-shadow-big">
         <router-outlet></router-outlet>
       </div>
     </div>

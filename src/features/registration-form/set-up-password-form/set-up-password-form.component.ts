@@ -18,6 +18,8 @@ import { isEmpty } from '@shared/helpers';
 import { AsideProcessDialogComponent } from '@shared/dialog';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import {isMobile} from '@shared/helpers';
+
 
 @Component({
   selector: 'smarti-set-up-password-form',
@@ -28,6 +30,8 @@ import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SetUpPasswordFormComponent implements OnInit {
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '320px': '536px'
   public text_button = 'הרשמה';
   public passwordControl: FormControl<string | null> = new FormControl('', [Validators.required]);
   public isDisabled: boolean = true;

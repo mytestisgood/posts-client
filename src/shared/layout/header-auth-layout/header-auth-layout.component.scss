@@ -7,3 +7,8 @@
     height: 33px;
   }
 }
+@media screen and (max-width: 1024px) {
+  .auth-header {
+    margin: 5px 10px 0;
+  }
+}
