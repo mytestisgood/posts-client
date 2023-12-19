@@ -15,7 +15,7 @@ import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
 import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
 import {catchError, EMPTY, takeUntil, tap} from 'rxjs';
 import {RegisterService, SignInService} from "@shared/api/services";
-import {REGISTRATION_DATA, registrationUploadFileLink} from "@shared/entities";
+import {isMobile} from '@shared/helpers';
 
 type Direction = 'forward' | 'back';
 
@@ -33,6 +33,9 @@ type Direction = 'forward' | 'back';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SetNewPasswordComponent {
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '320px': '536px'
+  public customButtonWidth = this.isMobile? '220px': '256px'
   @Input() public startingForm!: FormGroup;
   @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
@@ -58,9 +61,9 @@ export class SetNewPasswordComponent {
       password: this.passwordControl.value as string,
     }).pipe(catchError((err) => {
         if (err.error.message === 'Password selected') {
-          this.alertsService.showErrorNotificationIcon('סיסמה זו נבחרה בעבר');
+           this.alertsService.showErrorNotificationIcon('סיסמה זו נבחרה בעבר');
         } else if (err.error.message === 'Password expired') {
-          this.alertsService.showErrorNotificationIcon('תוקף הסיסמה פג');
+           this.alertsService.showErrorNotificationIcon('תוקף הסיסמה פג');
         } else {
           this.alertsService.showErrorNotificationIcon('שגיאה');
         }

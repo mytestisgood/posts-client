@@ -10,6 +10,8 @@ import {
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ButtonComponent, InputNumberComponent, RadioBlockComponent } from '@shared/ui';
+import {isMobile} from '@shared/helpers';
+
 
 type Direction = 'forward' | 'back';
 @Component({
@@ -21,6 +23,10 @@ type Direction = 'forward' | 'back';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerifyStepComponent implements OnInit {
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '320px': '536px'
+  public customButtonWidth = this.isMobile? '250px': '431px'
+
   @Input() public startingForm!: FormGroup;
   @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();

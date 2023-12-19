@@ -13,6 +13,8 @@ import {AlertsService, DestroyService} from '@shared/services';
 import { ButtonComponent, InputNumberComponent } from '@shared/ui';
 import { TuiDialogService } from '@taiga-ui/core';
 import {catchError, of, takeUntil, tap} from 'rxjs';
+import {isMobile} from '@shared/helpers';
+
 
 @Component({
   selector: 'smarti-verify-email-form',
@@ -30,6 +32,8 @@ import {catchError, of, takeUntil, tap} from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerifyEmailFormComponent implements OnInit {
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '320px': '536px'
   @Input() public currentEmail!: string;
   @Input() public token!: string;
   @Input() public departmentId!: number;

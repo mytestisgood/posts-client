@@ -179,16 +179,18 @@ export class UploadDocumentComponent implements OnInit {
         tap((res) => {
           if (res?.processId) {
             this.getUploadFile(res.processId);
-          } else {
-            this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');
           }
         }),
-        switchMap(() => {
+        switchMap(res => {
+          if (res?.processId) {
           this.dialogRef = this.dialogs.open(content, {
             closeable: false,
             size: 'm',
           }).pipe(takeUntil(this.destroy$)).subscribe();
           return this.dialogRef;
+          } else {
+           return  this.alertsService.showErrorNotificationIcon('הקובץ לא נקלט. יש להעלות את הקובץ מחדש');
+          }
         }),
         takeUntil(this.destroy$),
       ).subscribe();

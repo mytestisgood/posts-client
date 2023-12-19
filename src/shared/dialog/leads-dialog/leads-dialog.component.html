@@ -7,7 +7,7 @@
   class="flex gap-12-5"
   [formGroup]="leadsForm"
 >
-  <div class="flex flex-col leads-form-block-width bg-white mb-6 mt-8">
+  <div class="flex flex-col lt-lg-tablet:text-center leads-form-block-width bg-white mb-6 mt-8">
     <h3
       class="medium mt-20 dir-rtl neutrals-text-950 mb-1 margin-rl-auto w-header-leads"
       [innerHTML]="headerFormText"
@@ -18,21 +18,21 @@
     ></div>
     <div class="mt-12 margin-rl-auto">
       <smarti-input-field
-        [customWidth]="'398px'"
+        [customWidth]="customWidth"
         [placeholder]="'שם מלא*'"
         [control]="leadsForm.controls.name"
       ></smarti-input-field>
     </div>
     <div class="mt-8 margin-rl-auto">
       <smarti-input-field
-        [customWidth]="'398px'"
+        [customWidth]="customWidth"
         [placeholder]="'כתובת מייל*'"
         [control]="leadsForm.controls.email"
       ></smarti-input-field>
     </div>
     <div class="mt-8 margin-rl-auto">
       <smarti-input-field
-        [customWidth]="'398px'"
+        [customWidth]="customWidth"
         [placeholder]="'מספר טלפון*'"
         [control]="leadsForm.controls.phone"
       ></smarti-input-field>
@@ -46,7 +46,7 @@
       ></smarti-button>
     </div>
   </div>
-  <div class="mt-16 mr-18">
+  <div class="mt-16 mr-18 lt-lg-tablet:hidden">
     <div
       class="right-side-img"
       [style.background]="'url(' + backgroundImage + ')'"

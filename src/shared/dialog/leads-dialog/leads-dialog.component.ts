@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Src } from '@shared/api/models';
 import { LeadService } from '@shared/api/services';
+import {isMobile} from '@shared/helpers';
+
 import {
   emailValidatorPattern,
   israelMobilePhoneValidatorPattern,
@@ -21,6 +23,8 @@ import { takeUntil } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeadsDialogComponent {
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '220px': '398px'
   @Input() public observer!: { complete: () => void };
   @Input() public haveCloseIcon: boolean = false;
   @Input() public headerFormText!: string;

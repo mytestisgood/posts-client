@@ -1,13 +1,16 @@
-.pay-directly-block {
-  width: 674px;
-  height: 112px;
-
-  &__text {
-    width: 364px;
+@media screen and (max-width: 1024px) {
+  .regular-text {
+    font-family: Rubik, sans-serif;
+    font-size: 16px !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
   }
-}
-
-.payment-instruction-block {
-  width: 64px;
-  height: 64px;
+  h3{
+    font-family: Rubik, sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px;
+  }
 }

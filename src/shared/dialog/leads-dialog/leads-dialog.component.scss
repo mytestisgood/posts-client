@@ -7,3 +7,8 @@
   height: 336px;
   border-radius: 0 16px 16px 16px;
 }
+@media screen and (max-width: 1024px) {
+  .w-header-leads {
+    width: 100%;
+  }
+}

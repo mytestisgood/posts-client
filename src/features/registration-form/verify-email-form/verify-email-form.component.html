@@ -6,12 +6,12 @@
     <div class="regular-text dir-rtl mt-6">יש לכתוב את קוד האימות שנשלח למייל כאן:</div>
   </div>
   <div
-    class="margin-rl-auto neutrals-text-950 text-center mt-20"
+    class="margin-rl-auto neutrals-text-950 text-center gt-lg-tablet:mt-20 lt-lg-tablet:mt-8"
     [formGroup]="verifyEmailInfo"
   >
     <smarti-input-number
       [centerVerify]="true"
-      [customWidth]="'536px'"
+      [customWidth]="customWidth"
       [control]="verifyEmailInfo.controls.emailVerifyCode"
       [maxLength]="6"
     ></smarti-input-number>

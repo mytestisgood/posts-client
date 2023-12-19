@@ -7,7 +7,7 @@ import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
 import {PolymorpheusContent} from '@tinkoff/ng-polymorpheus';
 import {catchError, map, of, takeUntil, withLatestFrom} from 'rxjs';
 import {RegisterService} from "@shared/api/services";
-import {loginAfterRegistrationLink} from "@shared/entities";
+import {isMobile} from '@shared/helpers';
 
 @Component({
   selector: 'smarti-aside-process-dialog',
@@ -18,6 +18,9 @@ import {loginAfterRegistrationLink} from "@shared/entities";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AsideProcessDialogComponent {
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '320px': '536px'
+  public customButtonWidth = this.isMobile? '220px': '180px'
   @Input() public observer!: { complete: () => void };
   @Input() public step!: string;
   public email: FormControl<string | null> = new FormControl('');

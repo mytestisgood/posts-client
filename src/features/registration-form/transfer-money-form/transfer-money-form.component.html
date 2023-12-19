@@ -5,25 +5,24 @@
   >
     < חזרה אחורה
   </div>
-  <h3 class="medium text-center mb-0 dir-rtl">
-    <div>הנתונים שהתקבלו לפי הקובץ שנקלט:</div>
-  </h3>
-  <div class="mt-12 flex justify-around w-[658px] h-[80px] rounded-l bg-mint">
-    <div class="flex gap-2">
+    <h3 class="medium text-center mb-0 dir-rtl mx-4">הנתונים שהתקבלו לפי הקובץ שנקלט:</h3>
+  <div class="mt-12 flex justify-around gt-lg-tablet:w-[658px] lt-lg-tablet:w-[80%] h-[80px] rounded-l bg-mint lt-lg-tablet:pt-2">
+    <div class="flex gap-2 lt-lg-tablet:flex-col dir-rtl">
+      <div class="paragraph-text neutrals-text-950 self-center ">סה״כ סכום לתשלום לקופות:</div>
       <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl">
 
         {{ currentStorageData.total | number: "1.2-2" }}ש״ח
       </div>
-      <div class="paragraph-text neutrals-text-950 self-center dir-rtl">סה״כ סכום לתשלום לקופות:</div>
     </div>
-    <div class="flex gap-2">
-      <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl">
-        {{ currentStorageData.employeesCount }}</div>
+    <div class="flex gap-2 lt-lg-tablet:flex-col dir-rtl">
       <div class="paragraph-text neutrals-text-950 self-center dir-rtl">מספר העובדים:</div>
+      <div class="medium-text leading-10 text-center neutrals-text-950 self-center dir-rtl">
+        {{ currentStorageData.employeesCount }}
+      </div>
     </div>
   </div>
-  <div class="flex flex-col mt-20 w-[658px]">
-    <div class="smarti-button-text font-semibold text-right dir-rtl">איך ברצונך להעביר את הכסף לקופות?</div>
+  <div class="flex flex-col mt-20 gt-lg-tablet:w-[658px] lt-lg-tablet:w-[80%]">
+    <div class="smarti-button-text font-semibold text-right dir-rtl text-nowrap">איך ברצונך להעביר את הכסף לקופות?</div>
     <div class="dir-rtl mt-6">
       <smarti-radio-block
         [labelFirstText]="'אני רוצה לשלם דרך smarti'"
@@ -35,7 +34,7 @@
       ></smarti-radio-block>
     </div>
   </div>
-  <div class="mt-[180px] mx-auto mb-16">
+  <div class="gt-lg-tablet:mt-[180px] lt-lg-tablet:mt-14 mx-auto mb-16">
     <smarti-button
       [customWidth]="'215px'"
       [typeClass]="'confirm'"

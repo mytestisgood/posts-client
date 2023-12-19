@@ -9,6 +9,8 @@ import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { takeUntil } from 'rxjs';
 import { SessionStorageService } from '@shared/web-api';
+import {isMobile} from '@shared/helpers';
+
 
 @Component({
   selector: 'smarti-bank-details-dialog',
@@ -19,6 +21,8 @@ import { SessionStorageService } from '@shared/web-api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BankDetailsDialogComponent  {
+  public isMobile = isMobile
+
   @Input() public observer!: { complete: () => void };
   @Input() public bankDetailsSmarti!: BankDetails | undefined;
   public readonly currentStorageData: AllRegistrationSessionData =

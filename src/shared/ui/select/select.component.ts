@@ -32,7 +32,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent {
-  @Input() public customWidth!: string;
+  @Input() public   customWidth!: string;
   @Input() public options!: any[];
   @Input() public comboBoxOptions!: IdAndNameResponse[];
   @Input() public selectMode!: 'big';

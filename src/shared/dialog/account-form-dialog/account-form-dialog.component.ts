@@ -15,7 +15,7 @@ import { BankService, ChatService, RegisterService } from '@shared/api/services'
 import { BankBranches, BanksGetResponse, ChatResponse, IdAndNameResponse } from '@shared/api/models';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
-import { TUI_DIALOGS } from '@taiga-ui/cdk';
+import {isMobile} from '@shared/helpers';
 
 @Component({
   selector: 'smarti-account-form-dialog',
@@ -27,6 +27,8 @@ import { TUI_DIALOGS } from '@taiga-ui/cdk';
   providers: [TuiDialogService, { provide: POLYMORPHEUS_CONTEXT, useExisting: TuiDialogService }],
 })
 export class AccountFormDialogComponent implements OnInit {
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '320px': '616px'
   @Input() public observer!: { complete: () => void };
   public accountForm: FormGroup<AccountControls> = paymentMethodFormMapper();
   public isDisabled: boolean = true;

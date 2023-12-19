@@ -7,6 +7,8 @@ import {Observable, takeUntil, tap} from "rxjs";
 import {DestroyService} from "@shared/services";
 import {emailValidatorPattern, israelMobilePhoneValidatorPattern} from "@shared/entities";
 import {SignInService} from "@shared/api/services";
+import {isMobile} from '@shared/helpers';
+
 
 type Direction = 'forward' | 'back';
 
@@ -20,6 +22,9 @@ type Direction = 'forward' | 'back';
 })
 export class ChooseVerifyTypeComponent implements OnInit {
   @Input() public startingForm!: FormGroup;
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '320px': '536px'
+  public customButtonWidth = this.isMobile? '250px': '431px'
   @Output() public subformInitialized: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Output() public changeStep: EventEmitter<Direction> = new EventEmitter<Direction>();
   public verifyStepForm!: FormGroup;

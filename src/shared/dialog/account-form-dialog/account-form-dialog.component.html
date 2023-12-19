@@ -41,7 +41,7 @@
 <!--  < חזרה אחורה-->
 <!--</button>-->
 
-<div class="mt-6 flex flex-col justify-center items-center">
+<div class="mt-6 flex flex-col justify-center items-center text-center">
   <h3 class="mt-0 mb-0 medium neutrals-text-950">יש להזין את פרטי החשבון שממנו עבר התשלום</h3>
   <form
     class="mt-20 flex flex-col gap-[30px]"
@@ -56,26 +56,26 @@
 <!--    ></smarti-select>-->
     <smarti-select
       [placeholder]="'בנק'"
-      [customWidth]="'616px'"
+      [customWidth]="customWidth"
       [isComboBoxMode]="true"
       [comboBoxOptions]="banks"
       [control]="accountForm.controls.bankName"
     ></smarti-select>
     <smarti-select
       [placeholder]="'סניף'"
-      [customWidth]="'616px'"
+      [customWidth]="customWidth"
       [isComboBoxMode]="true"
       [comboBoxOptions]="bank_branches"
       [control]="accountForm.controls.branchNumber"
     ></smarti-select>
     <smarti-input-number
       [placeholder]="'מספר חשבון*'"
-      [customWidth]="'616px'"
+      [customWidth]="customWidth"
       [control]="accountForm.controls.accountNumber"
       [maxLength]="10"
     ></smarti-input-number>
   </form>
-  <div class="mt-[216px]">
+  <div class="gt-lg-tablet:mt-[216px] lt-lg-tablet:mt-28">
     <smarti-button
       [typeClass]="'confirm'"
       [customHeight]="'56px'"

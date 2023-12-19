@@ -28,6 +28,8 @@ import {
 import { ProgressBarComponent } from '../../progress-bar/progress-bar.component';
 import { ProcessesService, RegisterService } from '@shared/api/services';
 import { ProcessesUpdateBody } from '@shared/api/models';
+import {isMobile} from '@shared/helpers';
+
 
 @Component({
   selector: 'smarti-confirm-payment-form',
@@ -41,6 +43,8 @@ import { ProcessesUpdateBody } from '@shared/api/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmPaymentFormComponent implements OnInit {
+  public isMobile = isMobile
+  public customWidth = this.isMobile? '320px': '536px'
   public currentUrl: string = this.router.url;
   public confirmPaymentForm: FormGroup<ConfirmPaymentControls> = confirmPaymentFormMapper();
   public opswatId: Array<string> = [];
@@ -78,8 +82,9 @@ export class ConfirmPaymentFormComponent implements OnInit {
       this.confirmPaymentForm.updateValueAndValidity({ emitEvent: true });
     }
     this.isDisabled = !this.confirmPaymentForm.valid;
+      console.log(this.isDirectPayment&&this.currentStorageData.accountNumber==undefined);
     this.confirmPaymentFormChange$.subscribe((isValid: FormControlStatus) =>
-      this.isDisabled = !(isValid === 'VALID' && this.isDirectPayment && this.currentStorageData.accountNumber !== '' && this.currentStorageData.accountNumber !== '0000000'),
+      this.isDisabled = isValid !== 'VALID',
   );
   }
 

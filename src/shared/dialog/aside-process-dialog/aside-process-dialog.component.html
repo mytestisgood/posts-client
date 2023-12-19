@@ -1,10 +1,10 @@
 <div class="flex flex-col mt-6 mb-6">
-  <h3 class="medium neutrals-text-950 text-center mt-0 mb-0 w-[680px] self-center">
+  <h3 class="medium neutrals-text-950 text-center mt-0 mb-0 gt-lg-tablet:w-[680px] lt-lg-tablet:w-[100%] self-center">
     כדי שתוכלו לחזור בדיוק למקום שבו הופסק התהליך יש לרשום את המייל שלכם
   </h3>
   <smarti-input-field
     class="mt-16 self-center"
-    [customWidth]="'536px'"
+    [customWidth]="customWidth"
     [placeholder]="'כתובת אימייל*'"
     [control]="email"
   ></smarti-input-field>
@@ -17,7 +17,7 @@
     class="mt-12"
     [text]="'שלחו לי מייל'"
     [typeClass]="'confirm'"
-    [customButtonWidth]="'202px'"
+    [customButtonWidth]="customButtonWidth"
     [customHeight]="'56px'"
     (buttonClicked)="sendRequest(successDialogTemplate)"
   ></smarti-button>

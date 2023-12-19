@@ -1,8 +1,8 @@
 <div class="mt-4 mb-4 mx-auto">
-  <div class="medium neutrals-text-950 text-center  mx-auto dir-rtl" [ngClass]="{}">
+  <h3 class="medium neutrals-text-950 text-center  mx-auto dir-rtl" [ngClass]="{'f-22': isMobile}">
     יש למלא את פרטי איש הקשר
-  <div class="medium neutrals-text-950 text-center mx-auto dir-rtl" >אליו ברצונך להעביר את בקשת העלאת הקובץ</div>
-  </div>
+  </h3>
+  <h3 class="medium neutrals-text-950 text-center mx-auto dir-rtl" [ngClass]="{'f-22': isMobile}">אליו ברצונך להעביר את בקשת העלאת הקובץ</h3>
   <div
     class="flex flex-col items-center mt-14 gap-8"
     [formGroup]="forwardRequestForm"

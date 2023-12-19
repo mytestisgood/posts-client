@@ -10,7 +10,7 @@
     <div class="self-center">
       <smarti-input-number
         [centerVerify]="true"
-        [customWidth]="'536px'"
+        [customWidth]="customWidth"
         [maxLength]="6"
         (inputFilled)="changeButtonStatus($event)"
       ></smarti-input-number>
@@ -21,11 +21,11 @@
   </div>
 
   <div
-    class="mb-16 mt-10 flex justify-end gap-70 mr-14"
+    class="mb-16 mt-10 flex justify-end gap-70 gt-lg-tablet:mr-14 lt-lg-tablet:px-2"
     [ngClass]="isModeChosen ? 'mt-10' : 'mt-64'"
   >
     <smarti-button
-      [customButtonWidth]="'431px'"
+      [customButtonWidth]="customButtonWidth"
       [typeClass]="'confirm'"
       [text]="'המשך'"
       [disabled]="isDisabled"

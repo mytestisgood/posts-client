@@ -7,23 +7,23 @@
   </div>
   <h3 class="medium neutrals-text-950 text center mt-0 mb-2">קבלת קובץ הנחיות לתשלום</h3>
   <div
-    class="w-[674px] h-[112px] mt-[118px] pl-7 pr-6 box-shadow-regular rounded-l flex flex-row justify-between hover:opacity-80 cursor-pointer"
+    class="gt-lg-tablet:w-[674px] lt-lg-tablet:w-[calc(100%-10%)]  h-[112px] gt-lg-tablet:mt-[118px] lt-lg-tablet:mt-12  pl-7 pr-6 box-shadow-regular rounded-l flex flex-row justify-between hover:opacity-80 cursor-pointer"
     (click)="downloadPaymentExample()"
   >
     <div class="self-center download-arrow-down-inside-block-icon"></div>
     <div class="flex flex-row gap-7">
-      <div class="self-center w-[326px]">
+      <div class="self-center gt-lg-tablet:w-[326px] lt-lg-tablet:w-[250px]">
         <div class="medium-text neutrals-text-950 dir-rtl">הורידו הנחיות לתשלום</div>
         <div class="paragraph-text neutrals-text-300 dir-rtl">
           בכדי לצפות בפרטי התשלום לחברות המנהלות וסכומי התשלום יש להוריד את הקובץ.
         </div>
       </div>
-      <div class="bg-bright-turquoise-100 payment-instruction-block flex items-center self-center justify-center">
+      <div class="bg-bright-turquoise-100 payment-instruction-block flex items-center self-center justify-center lt-lg-tablet:hidden">
         <div class="payment-instructions-icon-48"></div>
       </div>
     </div>
   </div>
-  <div class="flex justify-center mb-16 mt-[200px]">
+  <div class="flex justify-center mb-16 gt-lg-tablet:mt-[200px] lt-lg-tablet:mt-28">
     <smarti-button
       [disabled]="isDisabled"
       [customWidth]="'211px'"
