@@ -3,25 +3,27 @@
   <div
     class="flex flex-row gap-4 mt-8 w-[calc(100%-10%)] gt-desktop:justify-center lt-lg-tablet:flex-col lt-lg-tablet:w-[calc(100%-32px)]"
   >
-    <smarti-input-field
+    <smarti-input-number
       class="w-full gt-tablet:ml-4 gt-desktop:w-[536px]"
       [placeholder]="'טלפון*'"
-      [control]="phone"
-    ></smarti-input-field>
+      [maxLength]="10"
+      [control]="leadsForm.controls.phone"
+    ></smarti-input-number>
     <smarti-input-field
       class="w-full gt-desktop:w-[536px]"
       [placeholder]="'מייל*'"
-      [control]="email"
+      [control]="leadsForm.controls.email"
     ></smarti-input-field>
     <smarti-input-field
       class="w-full gt-tablet:ml-4mr-4 gt-desktop:w-[536px]"
       [placeholder]="'שם מלא*'"
-      [control]="name"
+      [control]="leadsForm.controls.name"
     ></smarti-input-field>
   </div>
 
   <smarti-button
     class="mt-12"
+    [disabled]="!leadsForm.valid"
     [text]="'צרו קשר'"
     [typeClass]="'interaction'"
     [textColor]="'white'"

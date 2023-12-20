@@ -31,11 +31,12 @@
       ></smarti-input-field>
     </div>
     <div class="mt-8 margin-rl-auto">
-      <smarti-input-field
+      <smarti-input-number
         [customWidth]="customWidth"
         [placeholder]="'מספר טלפון*'"
+        [maxLength]="10"
         [control]="leadsForm.controls.phone"
-      ></smarti-input-field>
+      ></smarti-input-number>
     </div>
     <div class="mt-20 mb-14 flex justify-center">
       <smarti-button
@@ -43,6 +44,7 @@
         [text]="'שלח'"
         [customButtonWidth]="'232px'"
         (buttonClicked)="sendRequest()"
+        [disabled]="!leadsForm.valid"
       ></smarti-button>
     </div>
   </div>

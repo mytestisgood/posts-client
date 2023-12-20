@@ -26,6 +26,8 @@ export const DEPARTMENT_ID: string = 'departmentId';
 export const REGISTRATION_DATA: string = 'registrationData';
 export const SPECIAL_HEADER_TOKEN: string = 'specialHeaderToken';
 export const fiveNumberRegex = '\\d{5,10}$';
+export const NAME_REGEX = '^[".,a-zA-Zא-ת\\s\'\-]+$';
+
 export const onlyLetters = '^[a-z\u0590-\u05fe]+$';
 export const emailValidatorPattern: string = '^(?!^-)[\\w-]+(?:[\\.-][\\w-]+)*(?:[\\.+][\\w-]+)*@' +
   '\\w+(?:[\\.-]\\w+)*(?:\\.[A-Za-z]{2,4})+$';

@@ -8,16 +8,16 @@ import {isMobile} from '@shared/helpers';
 import {
   emailValidatorPattern,
   israelMobilePhoneValidatorPattern,
-  LeadsForm,
+  LeadsForm, NAME_REGEX,
 } from '@shared/entities';
 import { DestroyService } from '@shared/services';
-import { ButtonComponent, InputFieldComponent } from '@shared/ui';
+import {ButtonComponent, InputFieldComponent, InputNumberComponent} from '@shared/ui';
 import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'smarti-leads-dialog',
   standalone: true,
-  imports: [CommonModule, InputFieldComponent, ButtonComponent, ReactiveFormsModule],
+  imports: [CommonModule, InputFieldComponent, ButtonComponent, ReactiveFormsModule, InputNumberComponent],
   templateUrl: './leads-dialog.component.html',
   styleUrls: ['./leads-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,7 +37,7 @@ export class LeadsDialogComponent {
   @Input() public friendEmail!: string;
 
   public leadsForm: FormGroup<LeadsForm> = new FormGroup({
-    name: new FormControl(''),
+    name: new FormControl('', [Validators.minLength(3), Validators.pattern(NAME_REGEX)]),
     email: new FormControl('', [
       Validators.required,
       Validators.pattern(emailValidatorPattern),

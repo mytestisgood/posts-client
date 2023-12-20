@@ -12,7 +12,7 @@ import {ScrollManagerDirective} from '@shared/directives';
 import {
   emailValidatorPattern,
   israelMobilePhoneValidatorPattern,
-  LeadsForm,
+  LeadsForm, NAME_REGEX,
 } from '@shared/entities';
 import {FooterComponent, HeaderComponent} from '@shared/layout';
 import {AlertsService, DestroyService} from '@shared/services';
@@ -40,7 +40,7 @@ import {takeUntil} from 'rxjs';
 export class ContactComponent implements AfterViewInit {
   public isExpanded: boolean = false;
   public leadsForm: FormGroup<LeadsForm> = new FormGroup({
-    name: new FormControl(''),
+    name: new FormControl('', [Validators.minLength(3), Validators.pattern(NAME_REGEX)]),
     email: new FormControl('', [
       Validators.required,
       Validators.pattern(emailValidatorPattern),
@@ -68,6 +68,7 @@ export class ContactComponent implements AfterViewInit {
 
   public sendContactRequest(): void {
     this.leadService.apiLeadsCreateLeadPost({
+      src: 'contact_us',
       email: this.leadsForm.controls.email.value as string,
       phone: this.leadsForm.controls.phone.value as string,
       name: this.leadsForm.controls.name.value as string,
