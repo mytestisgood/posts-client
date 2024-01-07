@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ScrollManagerDirective } from '@shared/directives';
-import { FooterComponent, HeaderComponent, LandingLayoutComponent } from '@shared/layout';
-import { MainLayoutPopupComponent } from '@shared/popup';
+import {ListComponent} from "../list/list.component";
 
 @Component({
   selector: 'smarti-landing',
@@ -9,13 +8,9 @@ import { MainLayoutPopupComponent } from '@shared/popup';
   styleUrls: ['./landing.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    HeaderComponent,
-    FooterComponent,
-    LandingLayoutComponent,
-    MainLayoutPopupComponent,
-    ScrollManagerDirective,
-  ],
+    imports: [
+        ScrollManagerDirective,
+    ],
 })
 export class LandingComponent {
 
